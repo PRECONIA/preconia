@@ -1,0 +1,172 @@
+{
+  "forfaits": {
+    "A": {
+      "code": "4954096",
+      "price": 600,
+      "label": "Forfait A — dossier & membres supérieurs"
+    },
+    "B": {
+      "code": "4947601",
+      "price": 600,
+      "label": "Forfait B — siège & membres inférieurs"
+    }
+  },
+  "regions": [
+    {
+      "name": "Cervico-céphalique",
+      "forfait": "A",
+      "items": [
+        {
+          "name": "Base d'appui cervico-céphalique",
+          "desc": "Appui-tête simple, réglable, escamotable/amovible."
+        },
+        {
+          "name": "Appuis cervico-céphaliques latéraux",
+          "desc": "Inclinaison latérale du rachis cervical."
+        },
+        {
+          "name": "Appui cervico-céphalique antérieur",
+          "desc": "Flexion antérieure ; appui frontal ou sous-maxillaire."
+        }
+      ]
+    },
+    {
+      "name": "Thoraco-lombaire",
+      "forfait": "A",
+      "items": [
+        {
+          "name": "Dossier de base rigide",
+          "desc": "Soutien sagittal du rachis, réglable."
+        },
+        {
+          "name": "Dossier de positionnement souple",
+          "desc": "Sangles réglables, matériau de confort."
+        },
+        {
+          "name": "Appuis thoraciques latéraux",
+          "desc": "Inclinaison latérale du tronc."
+        },
+        {
+          "name": "Ceinture de maintien thoracique",
+          "desc": "Plastron / harnais / brassière (hors contention)."
+        },
+        {
+          "name": "Biseaux dorso-lombaire / thoracique / sacro-lombaire",
+          "desc": "Rotation, cyphose ou lordose."
+        }
+      ]
+    },
+    {
+      "name": "Épaule",
+      "forfait": "A",
+      "items": [
+        {
+          "name": "Accoudoir de positionnement (gouttière d'avant-bras)",
+          "desc": "Abduction et rétropulsion d'épaule."
+        },
+        {
+          "name": "Butée latérale du coude",
+          "desc": "Abduction-adduction de l'épaule."
+        },
+        {
+          "name": "Butée postérieure du coude",
+          "desc": "Rétropulsion de l'épaule."
+        }
+      ]
+    },
+    {
+      "name": "Poignet",
+      "forfait": "A",
+      "items": [
+        {
+          "name": "Sangle de poignet",
+          "desc": "Flexion, escamotable."
+        },
+        {
+          "name": "Pommeau ergonomique",
+          "desc": "Prono-supination, première commissure."
+        }
+      ]
+    },
+    {
+      "name": "Bassin",
+      "forfait": "B",
+      "items": [
+        {
+          "name": "Biseau pelvien",
+          "desc": "Obliquité pelvienne."
+        },
+        {
+          "name": "Stabilisateurs pelviens latéraux",
+          "desc": "Déviation latérale du bassin."
+        },
+        {
+          "name": "Ceinture pelvienne",
+          "desc": "Rétro- ou antéversion (hors contention)."
+        },
+        {
+          "name": "Butée tibiale (bassin)",
+          "desc": "Rotation pelvienne."
+        }
+      ]
+    },
+    {
+      "name": "Hanches",
+      "forfait": "B",
+      "items": [
+        {
+          "name": "Butée d'abduction",
+          "desc": "Correction d'une adduction."
+        },
+        {
+          "name": "Butée d'adduction",
+          "desc": "Correction d'une abduction."
+        },
+        {
+          "name": "Biseau / butée crurale",
+          "desc": "Flexion-extension des hanches."
+        },
+        {
+          "name": "Cale talonnière latérale",
+          "desc": "Rotation interne ou externe."
+        }
+      ]
+    },
+    {
+      "name": "Genou",
+      "forfait": "B",
+      "items": [
+        {
+          "name": "Butée talonnière postérieure",
+          "desc": "Correction d'une flexion."
+        },
+        {
+          "name": "Butée tibiale (appui-mollet)",
+          "desc": "Correction d'une extension."
+        },
+        {
+          "name": "Sangle de coup de pied",
+          "desc": "Souple, réglable."
+        }
+      ]
+    },
+    {
+      "name": "Base de siège",
+      "forfait": "B",
+      "items": [
+        {
+          "name": "Coussin de base de positionnement",
+          "desc": "Support des éléments de posture."
+        },
+        {
+          "name": "Base rigide de positionnement",
+          "desc": "Non cumulable avec la base rigide du VPH."
+        },
+        {
+          "name": "Insert anti-escarre",
+          "desc": "Régions sacro-ischiatiques (titre I)."
+        }
+      ]
+    }
+  ]
+}

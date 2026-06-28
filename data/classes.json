@@ -1,0 +1,20 @@
+[
+  {
+    "value": "A",
+    "label": "Classe A",
+    "route": false,
+    "desc": "Compact et manœuvrable. Usage essentiellement intérieur ; franchissement d'obstacles extérieurs non requis."
+  },
+  {
+    "value": "B",
+    "label": "Classe B",
+    "route": true,
+    "desc": "Compact et manœuvrable au domicile, et capable de franchir certains obstacles extérieurs. Soumis au code de la route."
+  },
+  {
+    "value": "C",
+    "label": "Classe C",
+    "route": true,
+    "desc": "Grande taille, longues distances et franchissement d'obstacles extérieurs ; usage non nécessairement domestique. Soumis au code de la route."
+  }
+]

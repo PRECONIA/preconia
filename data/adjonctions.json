@@ -1,0 +1,239 @@
+{
+  "groups": {
+    "aap": "Aide à la propulsion (AAP) — non cumulable avec un électrique",
+    "conduite": "Conduite, basculement & roues",
+    "option": "Confort, sécurité & options"
+  },
+  "items": [
+    {
+      "code": "4925054",
+      "group": "aap",
+      "name": "AAP — dispositif d'assistance électrique, commande accompagnant",
+      "price": 3500,
+      "compat": [
+        "FRM",
+        "FRMA",
+        "FRMC",
+        "FRMP",
+        "FRMV",
+        "FRMS"
+      ],
+      "exclusiveGroup": "aap"
+    },
+    {
+      "code": "4929796",
+      "group": "aap",
+      "name": "AAP — kit de propulsion électrique, commande utilisateur",
+      "price": 6000,
+      "compat": [
+        "FRM",
+        "FRMA",
+        "FRMC",
+        "FRMP",
+        "FRMV",
+        "FRMS"
+      ],
+      "exclusiveGroup": "aap"
+    },
+    {
+      "code": "4978547",
+      "group": "conduite",
+      "name": "Système de conduite à double main courante",
+      "price": 271.23,
+      "compat": [
+        "FRM",
+        "FRMA",
+        "FRMC",
+        "FRMP",
+        "FRMV",
+        "FRMS"
+      ]
+    },
+    {
+      "code": "4928928",
+      "group": "conduite",
+      "name": "Système de conduite à levier latéral",
+      "price": 1345,
+      "compat": [
+        "FRM",
+        "FRMA",
+        "FRMC",
+        "FRMP",
+        "FRMV",
+        "FRMS"
+      ]
+    },
+    {
+      "code": "4938766",
+      "group": "conduite",
+      "name": "Levier de basculement",
+      "price": 25,
+      "compat": [
+        "FRM",
+        "FRMA",
+        "FRMC",
+        "FRMP",
+        "FRMV",
+        "FRMS"
+      ]
+    },
+    {
+      "code": "4904626",
+      "group": "conduite",
+      "name": "DREEFT — paire de roues avec freinage intégré",
+      "price": null,
+      "tbd": true,
+      "compat": [
+        "FRM",
+        "FRMA",
+        "FRMC",
+        "FRMP",
+        "FRMV",
+        "FRMS"
+      ]
+    },
+    {
+      "code": "4954630",
+      "group": "option",
+      "name": "Supplément appui-tête réglable",
+      "price": 160,
+      "compat": [
+        "FRM",
+        "FRMA",
+        "FRMC",
+        "FRMP",
+        "FRMV",
+        "FRMS",
+        "FRE",
+        "FREP",
+        "FREV",
+        "POU_MRE"
+      ]
+    },
+    {
+      "code": "4970497",
+      "group": "option",
+      "name": "Tablette complète",
+      "price": 132,
+      "compat": [
+        "FRM",
+        "FRMA",
+        "FRMC",
+        "FRMP",
+        "FRMV",
+        "FRMS",
+        "FRE",
+        "FREP",
+        "FREV",
+        "POU_MRE"
+      ]
+    },
+    {
+      "code": "4987500",
+      "group": "option",
+      "name": "Support d'oxygénothérapie / ventilation assistée",
+      "price": 500,
+      "compat": [
+        "FRM",
+        "FRMA",
+        "FRMC",
+        "FRMP",
+        "FRMV",
+        "FRMS",
+        "FRE",
+        "FREP",
+        "FREV"
+      ]
+    },
+    {
+      "code": "4965183",
+      "group": "option",
+      "name": "Boîtier de commande personnalisé",
+      "price": 1500,
+      "compat": [
+        "FRE",
+        "FREP",
+        "FREV"
+      ]
+    },
+    {
+      "code": "4941700",
+      "group": "option",
+      "name": "Supplément élévation « électrique » (lift)",
+      "price": 1500,
+      "compat": [
+        "FRE",
+        "FREP",
+        "FREV"
+      ]
+    },
+    {
+      "code": "4937991",
+      "group": "option",
+      "name": "Repose-jambe électrique (droit et gauche)",
+      "price": 1250,
+      "compat": [
+        "FRE",
+        "FREP",
+        "FREV"
+      ]
+    },
+    {
+      "code": "4902165",
+      "group": "option",
+      "name": "Supplément fauteuil bariatrique (électrique / scooter)",
+      "price": 700,
+      "compat": [
+        "FRE",
+        "FREP",
+        "FREV",
+        "SCO"
+      ]
+    },
+    {
+      "code": "4922720",
+      "group": "option",
+      "name": "Supplément fauteuil bariatrique (FRM)",
+      "price": null,
+      "tbd": true,
+      "compat": [
+        "FRM"
+      ]
+    },
+    {
+      "code": "4936922",
+      "group": "option",
+      "name": "Harnais 4 points ou plus",
+      "price": null,
+      "tbd": true,
+      "compat": [
+        "POU_MRE"
+      ]
+    },
+    {
+      "code": "4960062",
+      "group": "option",
+      "name": "Supplément spécifique sur devis",
+      "devis": true,
+      "compat": [
+        "FRM",
+        "FRMC",
+        "FRMA",
+        "FRMP",
+        "FRMV",
+        "FRE",
+        "FREP",
+        "FREV"
+      ]
+    },
+    {
+      "code": "4938720",
+      "group": "option",
+      "name": "Supplément sur devis (fauteuil sportif)",
+      "devis": true,
+      "compat": [
+        "FRMS"
+      ]
+    }
+  ]
+}

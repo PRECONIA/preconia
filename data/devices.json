@@ -1,0 +1,403 @@
+{
+  "prescribers": {
+    "large": "Tout médecin ou ergothérapeute (n'exerçant ni comme fournisseur, ni pour son compte)",
+    "spe": "Prescripteur compétent : médecin MPR, DU appareillage, ou médecin spécialiste (hors médecine générale) en établissement/service",
+    "pluri": "Équipe pluridisciplinaire constituée au minimum d'un médecin MPR"
+  },
+  "modes": {
+    "ACHAT": {
+      "label": "Achat",
+      "condition": "Incapacité permanente ou longue (> 6 mois)."
+    },
+    "LCD": {
+      "label": "Location courte durée",
+      "condition": "Handicap temporaire estimé < 3 mois. Max 6 mois de facturation sur 12 mois glissants."
+    },
+    "LLD": {
+      "label": "Location longue durée",
+      "condition": "Location pour les besoins de positionnement / verticalisation."
+    }
+  },
+  "devices": [
+    {
+      "code": "FMP",
+      "family": "Manuel non modulaire",
+      "name": "Fauteuil manuel pliant",
+      "electric": false,
+      "modular": false,
+      "fiche": false,
+      "dap": false,
+      "presc": "large",
+      "modes": [
+        "ACHAT",
+        "LCD"
+      ],
+      "indications": [
+        "Incapacité de marche partielle ou totale",
+        "Assise souple, usage standard",
+        "Propulsion bilatérale par main courante ou à pousser"
+      ],
+      "ft": [
+        "Châssis pliant, appui de bascule accompagnant",
+        "Toile souple (siège et dossier), démontable",
+        "Mains courantes section > 200 mm²"
+      ]
+    },
+    {
+      "code": "FMPR",
+      "family": "Manuel non modulaire",
+      "name": "Fauteuil manuel pliant rigide",
+      "electric": false,
+      "modular": false,
+      "fiche": false,
+      "dap": false,
+      "presc": "large",
+      "modes": [
+        "ACHAT",
+        "LCD"
+      ],
+      "indications": [
+        "Incapacité de marche partielle ou totale",
+        "Besoin de maintien : structure d'assise et dossier rigides",
+        "Soutien du corps inclinable (mécanique assisté)"
+      ],
+      "ft": [
+        "Dossier et siège à structure rigide (coussin amovible)",
+        "Soutien du corps inclinable (vérins)",
+        "Repose-jambes réglables et pivotants"
+      ]
+    },
+    {
+      "code": "FRM",
+      "family": "Manuel modulaire",
+      "name": "Fauteuil roulant manuel",
+      "electric": false,
+      "modular": true,
+      "fiche": true,
+      "dap": false,
+      "presc": "large",
+      "modes": [
+        "ACHAT",
+        "LCD"
+      ],
+      "indications": [
+        "Incapacité de marche partielle ou totale permanente",
+        "Configuration modulaire standard, réglages de base",
+        "À pousser ou autopropulser"
+      ],
+      "ft": [
+        "Châssis modulaire, réglages de base",
+        "Support compatible adjonctions",
+        "Mains courantes démontables"
+      ]
+    },
+    {
+      "code": "FRMA",
+      "family": "Manuel modulaire",
+      "name": "Fauteuil roulant manuel actif",
+      "electric": false,
+      "modular": true,
+      "fiche": true,
+      "dap": true,
+      "presc": "spe",
+      "modes": [
+        "ACHAT"
+      ],
+      "tarif": 6276,
+      "indications": [
+        "Utilisateur expérimenté, maniabilité autonome",
+        "Transferts et franchissements, usage intérieur et extérieur",
+        "Réglages supérieurs au FRM (dynamique)"
+      ],
+      "ft": [
+        "Châssis non pliant à cadre rigide",
+        "Réglages fins (centre de gravité, carrossage)",
+        "Poids total ≤ 10 kg"
+      ]
+    },
+    {
+      "code": "FRMS",
+      "family": "Manuel modulaire",
+      "name": "Fauteuil roulant manuel sport",
+      "electric": false,
+      "modular": true,
+      "fiche": true,
+      "dap": true,
+      "presc": "pluri",
+      "modes": [
+        "ACHAT"
+      ],
+      "tarif": 2400,
+      "indications": [
+        "Incapacité de marche",
+        "Pratique confirmée d'une activité sportive (hors professionnelle)",
+        "Réglages supérieurs au FRM dédiés à la discipline"
+      ],
+      "ft": [
+        "Châssis non pliant dédié",
+        "Repose-pieds fixes, carrossage prononcé",
+        "Configuration selon la discipline"
+      ]
+    },
+    {
+      "code": "FRMC",
+      "family": "Manuel modulaire",
+      "name": "Fauteuil manuel multi-configurable",
+      "electric": false,
+      "modular": true,
+      "fiche": true,
+      "dap": true,
+      "presc": "spe",
+      "modes": [
+        "ACHAT"
+      ],
+      "tarif": 3303.53,
+      "indications": [
+        "Incapacité de marche partielle ou totale permanente",
+        "Efficience de propulsion et mobilité",
+        "Réglages supérieurs au FRM, multi-configurable"
+      ],
+      "ft": [
+        "Châssis pliant ou non, hautement réglable",
+        "Optimisation du rendement de propulsion",
+        "Compatible adjonctions"
+      ]
+    },
+    {
+      "code": "FRMP",
+      "family": "Manuel modulaire",
+      "name": "Fauteuil manuel de positionnement",
+      "electric": false,
+      "modular": true,
+      "fiche": true,
+      "dap": true,
+      "presc": "spe",
+      "modes": [
+        "ACHAT",
+        "LLD"
+      ],
+      "indications": [
+        "Pas ou peu de déficit des membres supérieurs, pas ou peu d'incapacité à l'effort",
+        "Besoins d'installation et de changement de position",
+        "Tenir compte de l'environnement et des habitudes de vie"
+      ],
+      "ft": [
+        "Inclinaison d'assise / dossier (changements de position)",
+        "Réglages supérieurs au FRM",
+        "Compatible PAP"
+      ]
+    },
+    {
+      "code": "FRMV",
+      "family": "Manuel modulaire",
+      "name": "Fauteuil manuel verticalisateur",
+      "electric": false,
+      "modular": true,
+      "fiche": true,
+      "dap": true,
+      "presc": "pluri",
+      "modes": [
+        "ACHAT",
+        "LLD"
+      ],
+      "indications": [
+        "Besoin de verticalisation régulière",
+        "Capacités fonctionnelles ne permettant pas de se verticaliser seul",
+        "Prévention des complications de l'immobilité"
+      ],
+      "ft": [
+        "Passage assis → debout, soutien postérieur du corps",
+        "Réglages supérieurs au FRM",
+        "Favorise la participation sociale"
+      ]
+    },
+    {
+      "code": "FRE",
+      "family": "Électrique",
+      "name": "Fauteuil roulant électrique standard",
+      "electric": true,
+      "modular": true,
+      "fiche": true,
+      "dap": true,
+      "presc": "pluri",
+      "modes": [
+        "ACHAT",
+        "LCD"
+      ],
+      "indications": [
+        "Impossibilité de propulser un VPH manuel ou podal (déficience ou environnement)",
+        "Capacités cognitives et physiques de maîtrise du FRE",
+        "Fonctionnement des membres supérieurs et capacités visuelles suffisants"
+      ],
+      "ft": [
+        "Moteur(s) électrique(s), débrayage en cas de panne",
+        "Boîtier de commande réglable, positionnable D/G",
+        "Système(s) de maintien de la personne"
+      ]
+    },
+    {
+      "code": "FREP",
+      "family": "Électrique",
+      "name": "Fauteuil électrique multi-position",
+      "electric": true,
+      "modular": true,
+      "fiche": true,
+      "dap": true,
+      "presc": "pluri",
+      "modes": [
+        "ACHAT",
+        "LLD"
+      ],
+      "indications": [
+        "Impossibilité de propulser un VPH manuel ou podal",
+        "Besoin de maintien et de positionnement (perte de tonus)",
+        "Exception : commande pour l'accompagnant si capacités insuffisantes"
+      ],
+      "ft": [
+        "Réglages de positionnement supérieurs au FRE",
+        "Modules de maintien postural",
+        "Commande accompagnant possible (exception)"
+      ]
+    },
+    {
+      "code": "FREV",
+      "family": "Électrique",
+      "name": "Fauteuil électrique verticalisateur",
+      "electric": true,
+      "modular": true,
+      "fiche": true,
+      "dap": true,
+      "presc": "pluri",
+      "modes": [
+        "ACHAT",
+        "LLD"
+      ],
+      "indications": [
+        "Verticalisation régulière, rétractions musculo-tendineuses des membres inférieurs",
+        "Ne peut se verticaliser seul ni par système mécanique",
+        "Mode assis/debout (± positions couchées intermédiaires)"
+      ],
+      "ft": [
+        "Verticalisation motorisée, soutien postérieur",
+        "Réglages supérieurs au FRE",
+        "Commande accompagnant possible (exception)"
+      ]
+    },
+    {
+      "code": "POU_S",
+      "family": "Poussette",
+      "name": "Poussette standard",
+      "electric": false,
+      "modular": false,
+      "fiche": false,
+      "dap": false,
+      "presc": "large",
+      "modes": [
+        "ACHAT"
+      ],
+      "child": true,
+      "indications": [
+        "Enfant de moins de 18 ans",
+        "Incapacité de marche partielle ou totale, permanente ou longue (> 6 mois)"
+      ],
+      "ft": [
+        "Dispositif de poussée pour l'accompagnant",
+        "Toile souple, châssis pliant ou non",
+        "Palette(s) repose-pieds"
+      ]
+    },
+    {
+      "code": "POU_MRE",
+      "family": "Poussette",
+      "name": "Poussette modulaire / évolutive",
+      "electric": false,
+      "modular": true,
+      "fiche": true,
+      "dap": false,
+      "presc": "pluri",
+      "modes": [
+        "ACHAT",
+        "LLD"
+      ],
+      "child": true,
+      "indications": [
+        "Enfant de moins de 18 ans",
+        "Besoin de maintien et de positionnement (perte de tonus)",
+        "Impossibilité d'utiliser un autre VPH ou contraintes environnementales"
+      ],
+      "ft": [
+        "Assise évolutive suivant la croissance",
+        "Modules de positionnement",
+        "Compatible PAP"
+      ]
+    },
+    {
+      "code": "SCO",
+      "family": "Scooter",
+      "name": "Scooter",
+      "electric": false,
+      "modular": false,
+      "fiche": true,
+      "dap": true,
+      "presc": "pluri",
+      "modes": [
+        "ACHAT"
+      ],
+      "indications": [
+        "Limitation sévère et durable de la marche",
+        "Marche possible sur quelques mètres, équilibre assis sans aide, transferts autonomes",
+        "Membres supérieurs, cognition et perception suffisants"
+      ],
+      "ft": [
+        "≥ 3 roues, plancher + assise rigide",
+        "Moteur(s) électrique(s), colonne inclinable",
+        "Classes A+/B avec éclairage code de la route"
+      ]
+    },
+    {
+      "code": "BASE",
+      "family": "Base",
+      "name": "Base roulante",
+      "electric": false,
+      "modular": false,
+      "fiche": false,
+      "dap": false,
+      "presc": "large",
+      "modes": [
+        "ACHAT"
+      ],
+      "indications": [
+        "Incapacité de marche partielle ou totale",
+        "Uniquement si installation dans un système de soutien du corps sur moulage thermoformable haute température"
+      ],
+      "ft": [
+        "Base manuelle (accompagnant/autopropulsion) ou support",
+        "Reçoit un siège-coque moulé",
+        "Dispositif réfléchissant"
+      ]
+    },
+    {
+      "code": "CYC",
+      "family": "Cycle",
+      "name": "Cycle / tricycle adapté",
+      "electric": false,
+      "modular": false,
+      "fiche": true,
+      "dap": false,
+      "presc": "pluri",
+      "modes": [
+        "ACHAT"
+      ],
+      "indications": [
+        "Déficience motrice acquise ou congénitale, autonomie de déplacement réduite",
+        "Incapacité de marche partielle ou totale",
+        "Tricycle adapté au tronc et aux membres inférieurs"
+      ],
+      "ft": [
+        "Propulsion podale et/ou manuelle",
+        "Dossier/siège selon configuration",
+        "Fixations de pieds proposées"
+      ]
+    }
+  ]
+}

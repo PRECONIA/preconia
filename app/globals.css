@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+/* Charte PRECONIA — tokens exposés comme utilitaires Tailwind v4 (bg-petrol, text-ink…).
+   Un seul accent fort : l'ambre, réservé aux signaux DAP et code de la route. */
+@theme {
+  --color-ink: #16212b;
+  --color-ink-soft: #4c5c68;
+  --color-paper: #eaeeef;
+  --color-card: #ffffff;
+  --color-line: #d3dbdd;
+  --color-line-soft: #e3e9ea;
+  --color-petrol: #0c6b66;
+  --color-petrol-deep: #073f3c;
+  --color-petrol-tint: #e0efed;
+  --color-amber: #9c4a06;
+  --color-amber-tint: #f6eadc;
+
+  --font-sans: var(--font-hanken), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+}
+
+body {
+  background: linear-gradient(180deg, #eff3f3, #e6eced);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}

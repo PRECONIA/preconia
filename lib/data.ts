@@ -1,0 +1,58 @@
+import devicesRaw from "@/data/devices.json";
+import adjonctionsRaw from "@/data/adjonctions.json";
+import papRaw from "@/data/pap.json";
+import classesRaw from "@/data/classes.json";
+import besoinsRaw from "@/data/besoins.json";
+import metaRaw from "@/data/meta.json";
+
+import {
+  DevicesFileSchema,
+  AdjonctionsFileSchema,
+  PapFileSchema,
+  ClassesFileSchema,
+  BesoinsFileSchema,
+  MetaSchema,
+} from "./schemas";
+import type { Device, Presc } from "./types";
+
+/* Chargement + validation de la donnée au niveau module.
+   Si un JSON est invalide → `parse` lève → échec de `next build` et des tests.
+   (couvre l'item HANDOFF « schéma de validation des JSON au build ».) */
+
+const devicesFile = DevicesFileSchema.parse(devicesRaw);
+const adjonctionsFile = AdjonctionsFileSchema.parse(adjonctionsRaw);
+const papFile = PapFileSchema.parse(papRaw);
+
+export const devices = devicesFile.devices;
+export const prescribers = devicesFile.prescribers as Record<Presc, string>;
+export const modes = devicesFile.modes;
+
+export const adjonctions = adjonctionsFile.items;
+export const adjGroups = adjonctionsFile.groups;
+
+export const papRegions = papFile.regions;
+export const papForfaits = papFile.forfaits;
+
+export const classes = ClassesFileSchema.parse(classesRaw);
+export const besoins = BesoinsFileSchema.parse(besoinsRaw);
+export const meta = MetaSchema.parse(metaRaw);
+
+/* Index pratique code → device. */
+export const deviceByCode: Record<string, Device> = Object.fromEntries(
+  devices.map((d) => [d.code, d]),
+);
+
+/* --- cohérence inter-fichiers (non exprimable dans un seul schéma) --- */
+function assert(cond: boolean, msg: string): void {
+  if (!cond) throw new Error(`[PRECONIA data] ${msg}`);
+}
+
+for (const a of adjonctions) {
+  assert(a.group in adjGroups, `adjonction ${a.code} : groupe inconnu « ${a.group} »`);
+  for (const code of a.compat) {
+    assert(code in deviceByCode, `adjonction ${a.code} : compat « ${code} » absent de devices.json`);
+  }
+}
+for (const region of papRegions) {
+  assert(region.forfait in papForfaits, `région PAP « ${region.name} » : forfait ${region.forfait} sans définition`);
+}

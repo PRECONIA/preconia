@@ -1,0 +1,88 @@
+{
+  "appliesWhen": "device.fiche === true",
+  "fields": [
+    {
+      "id": "classe",
+      "label": "Classe du fauteuil électrique",
+      "when": "device.electric",
+      "source": "classes.json"
+    },
+    {
+      "id": "depl",
+      "label": "Types de déplacements",
+      "when": "!device.electric",
+      "options": [
+        {
+          "v": "int",
+          "t": "Intérieur"
+        },
+        {
+          "v": "mixte",
+          "t": "Intérieur + extérieur"
+        },
+        {
+          "v": "ext",
+          "t": "Extérieur / tout-terrain"
+        }
+      ]
+    },
+    {
+      "id": "cotes",
+      "label": "Côtes ou terrains accidentés fréquents",
+      "options": [
+        {
+          "v": "oui",
+          "t": "Oui"
+        },
+        {
+          "v": "non",
+          "t": "Non"
+        }
+      ]
+    },
+    {
+      "id": "cognition",
+      "label": "Capacités cognitives permettant la conduite du VPH",
+      "options": [
+        {
+          "v": "oui",
+          "t": "Oui"
+        },
+        {
+          "v": "non",
+          "t": "Non"
+        }
+      ],
+      "effect": "Si device.electric && cognition==='non' → suggérer commande accompagnant (FREP/FREV)."
+    },
+    {
+      "id": "conduiteAuto",
+      "label": "Conduite d'un véhicule motorisé par l'usager",
+      "options": [
+        {
+          "v": "oui",
+          "t": "Oui"
+        },
+        {
+          "v": "non",
+          "t": "Non"
+        }
+      ],
+      "effect": "Si 'oui' → active le modulateur véhicule aménagé (assise basse / Low Rider, ISO 7176-19, arrimage)."
+    },
+    {
+      "id": "projet",
+      "label": "Projet",
+      "options": [
+        {
+          "v": "premiere",
+          "t": "Première acquisition"
+        },
+        {
+          "v": "renouv",
+          "t": "Renouvellement / cumul"
+        }
+      ]
+    }
+  ]
+}
