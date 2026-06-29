@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Hanken_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -34,6 +34,17 @@ export const metadata: Metadata = {
     title: "PRECONIA — Aide à la préconisation des VPH",
     description: DESCRIPTION,
   },
+  appleWebApp: {
+    capable: true,
+    title: "PRECONIA",
+    statusBarStyle: "default",
+  },
+  // compat iOS plus anciens (mode standalone) en plus du standard mobile-web-app-capable
+  other: { "apple-mobile-web-app-capable": "yes" },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#0C6B66",
 };
 
 export default function RootLayout({
