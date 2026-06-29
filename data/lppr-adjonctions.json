@@ -1,0 +1,1156 @@
+{
+  "source": "Nomenclature LPPR — base CNAM (codage.ext.cnamts.fr), chapitre Adjonctions & PAP (6 sous-catégories)",
+  "lastUpdated": "2026-06-25",
+  "products": [
+    {
+      "code": "4936922",
+      "label": "VPH, ADJONCTION, HARNAIS 4 POINTS OU PLUS POUR POU_MRE",
+      "category": "Adjonctions VPH modulaire"
+    },
+    {
+      "code": "4965705",
+      "label": "VPH, ADJONCTION, CEINTURE DE MAINTIEN 2 POINTS POUR POU",
+      "category": "Adjonctions VPH modulaire"
+    },
+    {
+      "code": "4987500",
+      "label": "VPH, ADJ, SUPPORT D OXYGÉNOTHÉRAPIE ET/OU D APPAREIL DE VENTILATION ASSISTÉE",
+      "category": "Adjonctions VPH modulaire"
+    },
+    {
+      "code": "9903293",
+      "label": "VPH, ADJ, SUPPORT D OXYGÉNO. ET/OU DAPP DE VENTILATION ASSISTÉE,VERMEIREN",
+      "category": "Adjonctions VPH modulaire"
+    },
+    {
+      "code": "9903904",
+      "label": "VPH, ADJ, SUPPORT D OXYGÉNO. ET/OU D APP DE VENTILATION ASSISTÉE,DPZ SERVICES",
+      "category": "Adjonctions VPH modulaire"
+    },
+    {
+      "code": "9913096",
+      "label": "VPH, ADJ, SUPPORT D OXYGÉNO. ET/OU D APP DE VENTILATION ASSISTÉE,SCHUCHMANN",
+      "category": "Adjonctions VPH modulaire"
+    },
+    {
+      "code": "9915675",
+      "label": "VPH, ADJONCTION, HARNAIS 4 POINTS OU PLUS POUR POU_MRE,SUNRISE MED",
+      "category": "Adjonctions VPH modulaire"
+    },
+    {
+      "code": "9921799",
+      "label": "VPH, ADJ, SUPPORT D OXYGÉNO. ET/OU D APP DE VENTILATION ASSISTÉE,LIFE MOBILITY",
+      "category": "Adjonctions VPH modulaire"
+    },
+    {
+      "code": "9934112",
+      "label": "VPH, ADJONCTION, HARNAIS 4 POINTS OU PLUS POUR POU_MRE,CREE",
+      "category": "Adjonctions VPH modulaire"
+    },
+    {
+      "code": "9935809",
+      "label": "VPH, ADJ, SUPPORT D OXYGÉNO. ET/OU D APP DE VENTILATION ASSISTÉE,DIETZ POWER BV",
+      "category": "Adjonctions VPH modulaire"
+    },
+    {
+      "code": "9937381",
+      "label": "VPH, ADJ, SUPPORT D OXYGÉNO. ET/OU D APP DE VENTILATION ASSISTÉE,PRIDE MOBILITY",
+      "category": "Adjonctions VPH modulaire"
+    },
+    {
+      "code": "9939693",
+      "label": "VPH, ADJONCTION, HARNAIS 4 POINTS OU PLUS POUR POU_MRE,PRIDE MOBILITY",
+      "category": "Adjonctions VPH modulaire"
+    },
+    {
+      "code": "9945334",
+      "label": "VPH, ADJ, SUPPORT D OXYGÉNO. ET/OU D APP DE VENTILATION ASSISTÉE,SUNRISE MED",
+      "category": "Adjonctions VPH modulaire"
+    },
+    {
+      "code": "9946606",
+      "label": "VPH, ADJ, SUPPORT D OXYGÉNO. ET/OU D APP DE VENTILATION ASSISTÉE,OTTO BOCK",
+      "category": "Adjonctions VPH modulaire"
+    },
+    {
+      "code": "9946807",
+      "label": "VPH, ADJONCTION, CEINTURE DE MAINTIEN 2 POINTS POUR POU,JOHN GMBH",
+      "category": "Adjonctions VPH modulaire"
+    },
+    {
+      "code": "9947089",
+      "label": "VPH, ADJONCTION, HARNAIS 4 POINTS OU PLUS POUR POU_MRE,RUPIANI",
+      "category": "Adjonctions VPH modulaire"
+    },
+    {
+      "code": "9962344",
+      "label": "VPH, ADJ, SUPPORT D OXYGÉNO. ET/OU D APP DE VENTILATION ASSISTÉE,PERMOBIL",
+      "category": "Adjonctions VPH modulaire"
+    },
+    {
+      "code": "9962440",
+      "label": "VPH, ADJ, SUPPORT D OXYGÉNO. ET/OU D APP DE VENTILATION ASSISTÉE,MEYRA NETTI",
+      "category": "Adjonctions VPH modulaire"
+    },
+    {
+      "code": "9963450",
+      "label": "VPH, ADJONCTION, HARNAIS 4 POINTS OU PLUS POUR POU_MRE,OTTO BOCK",
+      "category": "Adjonctions VPH modulaire"
+    },
+    {
+      "code": "9972845",
+      "label": "VPH, ADJ, SUPPORT DOXYGÉNO. ET/OU D APP DE VENTILATION ASSISTÉE,CREE",
+      "category": "Adjonctions VPH modulaire"
+    },
+    {
+      "code": "9978316",
+      "label": "VPH, ADJONCTION, HARNAIS 4 POINTS OU PLUS POUR POU_MRE,JOHN GMBH",
+      "category": "Adjonctions VPH modulaire"
+    },
+    {
+      "code": "9982186",
+      "label": "VPH, ADJ, SUPPORT D OXYGÉNOTHÉRAPIE ET/OU DAPP DE VENTILATION ASSISTÉE,INVACARE",
+      "category": "Adjonctions VPH modulaire"
+    },
+    {
+      "code": "9985718",
+      "label": "VPH, ADJONCTION, HARNAIS 4 POINTS OU PLUS POUR POU_MRE,VERMEIREN",
+      "category": "Adjonctions VPH modulaire"
+    },
+    {
+      "code": "9986273",
+      "label": "VPH, ADJONCTION, CEINTURE DE MAINTIEN 2 POINTS POUR POU,CREE",
+      "category": "Adjonctions VPH modulaire"
+    },
+    {
+      "code": "9991653",
+      "label": "VPH, ADJONCTION, CEINTURE DE MAINTIEN 2 POINTS POUR POU,OTTO BOCK",
+      "category": "Adjonctions VPH modulaire"
+    },
+    {
+      "code": "4937991",
+      "label": "VPH, ADJONCTION, REPOSE-JAMBE ÉLECTRIQUE DROIT ET GAUCHE POUR FRE",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "4947601",
+      "label": "VPH, ADJONCTION, PAP FORFAIT B ADJONCTIONS MEMBRE INFÉRIEUR",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "4954096",
+      "label": "VPH, ADJONCTION, PAP, FORFAIT A ADJONCTIONS MEMBRE SUPÉRIEUR",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "4954630",
+      "label": "VPH, ADJONCTION, SUPPLÉMENT APPUI-TÊTE RÉGLABLE",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "4970497",
+      "label": "VPH, ADJONCTION, TABLETTE COMPLÈTE",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9901029",
+      "label": "VPH, ADJONCTION, PAP, FORFAIT A ADJONCTIONS MEMBRE SUPÉRIEUR,DPZ SERVICES",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9901667",
+      "label": "VPH, ADJONCTION, PAP FORFAIT B ADJONCTIONS MEMBRE INFÉRIEUR,DPZ SERVICES",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9902141",
+      "label": "VPH, ADJONCTION, PAP FORFAIT B ADJONCTIONS MEMBRE INFÉRIEUR,RECFRANCE",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9903695",
+      "label": "VPH, ADJONCTION, PAP FORFAIT B ADJONCTIONS MEMBRE INFÉRIEUR,ELOFLEX",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9904393",
+      "label": "VPH, ADJONCTION, TABLETTE COMPLÈTE,PERMOBIL",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9905122",
+      "label": "VPH, ADJONCTION, PAP, FORFAIT A ADJONCTIONS MEMBRE SUPÉRIEUR,PERMOBIL",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9905139",
+      "label": "VPH, ADJONCTION, SUPPLÉMENT APPUI-TÊTE RÉGLABLE,RUPIANI",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9906297",
+      "label": "VPH, ADJONCTION, REPOSE-JAMBE ÉLEC. DROIT+GAUCHE,FRE FREP FREV,DIETZ POWER BV",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9907150",
+      "label": "VPH, ADJONCTION, PAP FORFAIT B ADJONCTIONS MEMBRE INFÉRIEUR,DRIVE DEVILBISS",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9908391",
+      "label": "VPH, ADJONCTION, PAP FORFAIT B ADJONCTIONS MEMBRE INFÉRIEUR,PHYSIPRO",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9909189",
+      "label": "VPH, ADJONCTION, REPOSE-JAMBE ÉLEC. DROIT+GAUCHE,FRE FREP FREV,PERMOBIL",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9913245",
+      "label": "VPH, ADJONCTION, SUPPLÉMENT APPUI-TÊTE RÉGLABLE,INVACARE",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9913630",
+      "label": "VPH, ADJONCTION, PAP, FORFAIT A ADJONCTIONS MEMBRE SUPÉRIEUR,ACEKARE",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9913699",
+      "label": "VPH, ADJONCTION, PAP FORFAIT B ADJONCTIONS MEMBRE INFÉRIEUR,RUPIANI",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9913819",
+      "label": "VPH, ADJONCTION, TABLETTE COMPLÈTE,4POWER4",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9915356",
+      "label": "VPH, ADJONCTION, PAP FORFAIT B ADJONCTIONS MEMBRE INFÉRIEUR,PROT VIRGINIE",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9917533",
+      "label": "VPH, ADJONCTION, PAP, FORFAIT A ADJONCTIONS MEMBRE SUPÉRIEUR,EUROMOVE",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9917562",
+      "label": "VPH, ADJONCTION, PAP, FORFAIT A ADJONCTIONS MEMBRE SUPÉRIEUR,WINNCARE FRANCE",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9917935",
+      "label": "VPH, ADJONCTION, TABLETTE COMPLÈTE,SCHUCHMANN",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9919259",
+      "label": "VPH, ADJONCTION, PAP FORFAIT B ADJONCTIONS MEMBRE INFÉRIEUR,WINNCARE FRANCE",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9919874",
+      "label": "VPH, ADJONCTION, SUPPLÉMENT APPUI-TÊTE RÉGLABLE,EUROMOVE",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9919934",
+      "label": "VPH, ADJONCTION, SUPPLÉMENT APPUI-TÊTE RÉGLABLE,SCHUCHMANN",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9919986",
+      "label": "VPH, ADJONCTION, SUPPLÉMENT APPUI-TÊTE RÉGLABLE,IDENTITES 49",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9920311",
+      "label": "VPH, ADJONCTION, PAP FORFAIT B ADJONCTIONS MEMBRE INFÉRIEUR,ERGOCONCEPT",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9921233",
+      "label": "VPH, ADJONCTION, SUPPLÉMENT APPUI-TÊTE RÉGLABLE,4POWER4",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9921865",
+      "label": "VPH, ADJONCTION, SUPPLÉMENT APPUI-TÊTE RÉGLABLE,SUNRISE MED",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9922008",
+      "label": "VPH, ADJONCTION, PAP, FORFAIT A ADJONCTIONS MEMBRE SUPÉRIEUR,JOHN GMBH",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9922913",
+      "label": "VPH, ADJONCTION, PAP FORFAIT B ADJONCTIONS MEMBRE INFÉRIEUR,VERMEIREN",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9922920",
+      "label": "VPH, ADJONCTION, SUPPLÉMENT APPUI-TÊTE RÉGLABLE,VERMEIREN",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9925544",
+      "label": "VPH, ADJONCTION, PAP FORFAIT B ADJONCTIONS MEMBRE INFÉRIEUR,LIFE MOBILITY",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9927046",
+      "label": "VPH, ADJONCTION, PAP, FORFAIT A ADJONCTIONS MEMBRE SUPÉRIEUR,DIETZ POWER BV",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9928755",
+      "label": "VPH, ADJONCTION, SUPPLÉMENT APPUI-TÊTE RÉGLABLE,PHYSIPRO",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9929364",
+      "label": "VPH, ADJONCTION, REPOSE-JAMBE ÉLEC. DROIT+GAUCHE,FRE FREP FREV,OTTO BOCK",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9929507",
+      "label": "VPH, ADJONCTION, TABLETTE COMPLÈTE,VERMEIREN",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9929571",
+      "label": "VPH, ADJONCTION, PAP FORFAIT B ADJONCTIONS MEMBRE INFÉRIEUR,MEYRA NETTI",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9929909",
+      "label": "VPH, ADJONCTION, SUPPLÉMENT APPUI-TÊTE RÉGLABLE,MEYRA NETTI",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9932136",
+      "label": "VPH, ADJONCTION, PAP FORFAIT B ADJONCTIONS MEMBRE INFÉRIEUR,JANTON",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9934282",
+      "label": "VPH, ADJONCTION, REPOSE-JAMBE ÉLECTRIQUE DROIT ET GAUCHE-FRE FREP FREV,INVACARE",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9935637",
+      "label": "VPH, ADJONCTION, PAP, FORFAIT A ADJONCTIONS MEMBRE SUPÉRIEUR,REHASENSE",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9936430",
+      "label": "VPH, ADJONCTION, REPOSE-JAMBE ÉLEC. DROIT+GAUCHE,FRE FREP FREV,LIFE MOBILITY",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9936542",
+      "label": "VPH, ADJONCTION, PAP, FORFAIT A ADJONCTIONS MEMBRE SUPÉRIEUR,SUNRISE MED",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9937346",
+      "label": "VPH, ADJONCTION, SUPPLÉMENT APPUI-TÊTE RÉGLABLE,JOHN GMBH",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9937412",
+      "label": "VPH, ADJONCTION, PAP FORFAIT B ADJONCTIONS MEMBRE INFÉRIEUR,SCHUCHMANN",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9937790",
+      "label": "VPH, ADJONCTION, PAP, FORFAIT A ADJONCTIONS MEMBRE SUPÉRIEUR,MEYRA NETTI",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9940012",
+      "label": "VPH, ADJONCTION, PAP, FORFAIT A ADJONCTIONS MEMBRE SUPÉRIEUR,AMYMAT",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9940118",
+      "label": "VPH, ADJONCTION, PAP FORFAIT B ADJONCTIONS MEMBRE INFÉRIEUR,SUNRISE MED",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9942577",
+      "label": "VPH, ADJONCTION, TABLETTE COMPLÈTE,AMYMAT",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9942940",
+      "label": "VPH, ADJONCTION, PAP, FORFAIT A ADJONCTIONS MEMBRE SUPÉRIEUR,RUPIANI",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9943192",
+      "label": "VPH, ADJONCTION, PAP, FORFAIT A ADJONCTIONS MEMBRE SUPÉRIEUR,ERGOCONCEPT",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9943329",
+      "label": "VPH, ADJONCTION, SUPPLÉMENT APPUI-TÊTE RÉGLABLE,CREE",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9943424",
+      "label": "VPH, ADJONCTION, SUPPLÉMENT APPUI-TÊTE RÉGLABLE,DRIVE DEVILBISS",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9944688",
+      "label": "VPH, ADJONCTION, PAP FORFAIT B ADJONCTIONS MEMBRE INFÉRIEUR,JOHN GMBH",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9944808",
+      "label": "VPH, ADJONCTION, REPOSE-JAMBE ÉLEC. DROIT+GAUCHE,FRE FREP FREV,SKS ROLTEC",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9944949",
+      "label": "VPH, ADJONCTION, PAP FORFAIT B ADJONCTIONS MEMBRE INFÉRIEUR,DIETZ POWER BV",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9945618",
+      "label": "VPH, ADJONCTION, PAP FORFAIT B ADJONCTIONS MEMBRE INFÉRIEUR,CREE",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9945914",
+      "label": "VPH, ADJONCTION, SUPPLÉMENT APPUI-TÊTE RÉGLABLE,ERGOFLIX",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9946641",
+      "label": "VPH, ADJONCTION, TABLETTE COMPLÈTE,RUPIANI",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9947184",
+      "label": "VPH, ADJONCTION, TABLETTE COMPLÈTE,INVACARE",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9947600",
+      "label": "VPH, ADJONCTION, TABLETTE COMPLÈTE,MEYRA NETTI",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9947847",
+      "label": "VPH, ADJONCTION, REPOSE-JAMBE ÉLEC. DROIT+GAUCHE,FRE FREP FREV,VERMEIREN",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9947971",
+      "label": "VPH, ADJONCTION, PAP, FORFAIT A ADJONCTIONS MEMBRE SUPÉRIEUR,DRIVE DEVILBISS",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9949303",
+      "label": "VPH, ADJONCTION, PAP FORFAIT B ADJONCTIONS MEMBRE INFÉRIEUR,OTTO BOCK",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9949510",
+      "label": "VPH, ADJONCTION, PAP FORFAIT B ADJONCTIONS MEMBRE INFÉRIEUR,4POWER4",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9950654",
+      "label": "VPH, ADJONCTION, PAP, FORFAIT A ADJONCTIONS MEMBRE SUPÉRIEUR,JANTON",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9951441",
+      "label": "VPH, ADJONCTION, REPOSE-JAMBE ÉLEC. DROIT+GAUCHE,FRE FREP FREV,PRIDE MOBILITY",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9952653",
+      "label": "VPH, ADJONCTION, PAP, FORFAIT A ADJONCTIONS MEMBRE SUPÉRIEUR,CREE",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9954675",
+      "label": "VPH, ADJONCTION, PAP, FORFAIT A ADJONCTIONS MEMBRE SUPÉRIEUR,IDENTITES 49",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9956349",
+      "label": "VPH, ADJONCTION, PAP, FORFAIT A ADJONCTIONS MEMBRE SUPÉRIEUR,4POWER4",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9956697",
+      "label": "VPH, ADJONCTION, PAP, FORFAIT A ADJONCTIONS MEMBRE SUPÉRIEUR,SKS ROLTEC",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9958006",
+      "label": "VPH, ADJONCTION, PAP, FORFAIT A ADJONCTIONS MEMBRE SUPÉRIEUR,AMI AUTONOMIE",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9958800",
+      "label": "VPH, ADJONCTION, PAP FORFAIT B ADJONCTIONS MEMBRE INFÉRIEUR,SKS ROLTEC",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9959106",
+      "label": "VPH, ADJONCTION, SUPPLÉMENT APPUI-TÊTE RÉGLABLE,DPZ SERVICES",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9959230",
+      "label": "VPH, ADJONCTION, SUPPLÉMENT APPUI-TÊTE RÉGLABLE,DIETZ POWER BV",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9961008",
+      "label": "VPH, ADJONCTION, PAP, FORFAIT A ADJONCTIONS MEMBRE SUPÉRIEUR,VERMEIREN",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9961592",
+      "label": "VPH, ADJONCTION, TABLETTE COMPLÈTE,DIETZ POWER BV",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9961764",
+      "label": "VPH, ADJONCTION, PAP FORFAIT B ADJONCTIONS MEMBRE INFÉRIEUR,AMYMAT",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9962700",
+      "label": "VPH, ADJONCTION, REPOSE-JAMBE ÉLEC. DROIT+GAUCHE,FRE FREP FREV,NEW LIVE MOBIL",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9963094",
+      "label": "VPH, ADJONCTION, PAP FORFAIT B ADJONCTIONS MEMBRE INFÉRIEUR,AMI AUTONOMIE",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9965118",
+      "label": "VPH, ADJONCTION, SUPPLÉMENT APPUI-TÊTE RÉGLABLE,PRIDE MOBILITY",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9965957",
+      "label": "VPH, ADJONCTION, TABLETTE COMPLÈTE,OTTO BOCK",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9967985",
+      "label": "VPH, ADJONCTION, PAP, FORFAIT A ADJONCTIONS MEMBRE SUPÉRIEUR,RECFRANCE",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9968105",
+      "label": "VPH, ADJONCTION, SUPPLÉMENT APPUI-TÊTE RÉGLABLE,PERMOBIL",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9968387",
+      "label": "VPH, ADJONCTION, TABLETTE COMPLÈTE,SKS ROLTEC",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9968803",
+      "label": "VPH, ADJONCTION, TABLETTE COMPLÈTE,PHYSIPRO",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9969688",
+      "label": "VPH, ADJONCTION, SUPPLÉMENT APPUI-TÊTE RÉGLABLE,AMYMAT",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9972319",
+      "label": "VPH, ADJONCTION, SUPPLÉMENT APPUI-TÊTE RÉGLABLE,SKS ROLTEC",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9974241",
+      "label": "VPH, ADJONCTION, TABLETTE COMPLÈTE,PRIDE MOBILITY",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9976866",
+      "label": "VPH, ADJONCTION, SUPPLÉMENT APPUI-TÊTE RÉGLABLE,ERGOCONCEPT",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9977848",
+      "label": "VPH, ADJONCTION, PAP FORFAIT B ADJONCTIONS MEMBRE INFÉRIEUR,INVACARE",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9979379",
+      "label": "VPH, ADJONCTION, PAP FORFAIT B ADJONCTIONS MEMBRE INFÉRIEUR,PRIDE MOBILITY",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9980187",
+      "label": "VPH, ADJONCTION, PAP FORFAIT B ADJONCTIONS MEMBRE INFÉRIEUR,PERMOBIL",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9981399",
+      "label": "VPH, ADJONCTION, PAP, FORFAIT A ADJONCTIONS MEMBRE SUPÉRIEUR,INVACARE",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9981749",
+      "label": "VPH, ADJONCTION, PAP, FORFAIT A ADJONCTIONS MEMBRE SUPÉRIEUR,NEW LIVE MOBIL",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9981873",
+      "label": "VPH, ADJONCTION, REPOSE-JAMBE ÉLEC. DROIT+GAUCHE,FRE FREP FREV,4POWER4",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9982298",
+      "label": "VPH, ADJONCTION, TABLETTE COMPLÈTE,LIFE MOBILITY",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9982878",
+      "label": "VPH, ADJONCTION, PAP, FORFAIT A ADJONCTIONS MEMBRE SUPÉRIEUR,PRIDE MOBILITY",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9983435",
+      "label": "VPH, ADJONCTION, SUPPLÉMENT APPUI-TÊTE RÉGLABLE,NEW LIVE MOBIL",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9987717",
+      "label": "VPH, ADJONCTION, REPOSE-JAMBE ÉLEC. DROIT+GAUCHE,FRE FREP FREV,SUNRISE MED",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9988250",
+      "label": "VPH, ADJONCTION, SUPPLÉMENT APPUI-TÊTE RÉGLABLE,OTTO BOCK",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9989076",
+      "label": "VPH, ADJONCTION, PAP FORFAIT B ADJONCTIONS MEMBRE INFÉRIEUR,NEW LIVE MOBIL",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9989573",
+      "label": "VPH, ADJONCTION, PAP, FORFAIT A ADJONCTIONS MEMBRE SUPÉRIEUR,SCHUCHMANN",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9990010",
+      "label": "VPH, ADJONCTION, PAP, FORFAIT A ADJONCTIONS MEMBRE SUPÉRIEUR,PHYSIPRO",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9990620",
+      "label": "VPH, ADJONCTION, PAP FORFAIT B ADJONCTIONS MEMBRE INFÉRIEUR,EUROMOVE",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9992530",
+      "label": "VPH, ADJONCTION, SUPPLÉMENT APPUI-TÊTE RÉGLABLE,LIFE MOBILITY",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9992552",
+      "label": "VPH, ADJONCTION, REPOSE-JAMBE ÉLEC. DROIT+GAUCHE,FRE FREP FREV,MEYRA NETTI",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9992641",
+      "label": "VPH, ADJONCTION, PAP, FORFAIT A ADJONCTIONS MEMBRE SUPÉRIEUR,LIFE MOBILITY",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9995042",
+      "label": "VPH, ADJONCTION, TABLETTE COMPLÈTE,SUNRISE MED",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9995958",
+      "label": "VPH, ADJONCTION, SUPPLÉMENT APPUI-TÊTE RÉGLABLE,ACEKARE",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9998980",
+      "label": "VPH, ADJONCTION, TABLETTE COMPLÈTE,NEW LIVE MOBIL",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9999525",
+      "label": "VPH, ADJONCTION, PAP, FORFAIT A ADJONCTIONS MEMBRE SUPÉRIEUR,OTTO BOCK",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "4918568",
+      "label": "ADJONCTION, BOITIER DE COMMANDE PERSONNALISÉ, LOGOSILVER, TOPCHAIR-S",
+      "category": "Adjonctions en nom de marque"
+    },
+    {
+      "code": "4998768",
+      "label": "ADJONCTION, HARNAIS 6 POINTS, LOGOSILVER, TOPCHAIR-S",
+      "category": "Adjonctions en nom de marque"
+    },
+    {
+      "code": "4904626",
+      "label": "VPH, ADJONCTION, PAIRE DE ROUES AVEC DISP. DE FREINAGE INTÉGRÉ, MOTION, DREEFT",
+      "category": "Adjonctions fauteuil manuel modulaire"
+    },
+    {
+      "code": "4922720",
+      "label": "VPH FRM, SUPPLÉMENT POUR FAUTEUIL ROULANT BARIATRIQUE",
+      "category": "Adjonctions fauteuil manuel modulaire"
+    },
+    {
+      "code": "4925054",
+      "label": "VPH, ADJ, ACHAT PRODUIT AAP COMMANDE UNIQUEMENT PAR L ACCOMPAGNANT",
+      "category": "Adjonctions fauteuil manuel modulaire"
+    },
+    {
+      "code": "4928928",
+      "label": "VPH, ADJ, SYSTÈME DE CONDUITE À LEVIER LATÉRAL POUR FRM FRMC FRMA FRMS FRMP FRMV",
+      "category": "Adjonctions fauteuil manuel modulaire"
+    },
+    {
+      "code": "4929796",
+      "label": "VPH, ADJ, ACHAT KIT PROPULS ÉLEC COMMANDE UNIQUEMNT PAR UTILISATEUR",
+      "category": "Adjonctions fauteuil manuel modulaire"
+    },
+    {
+      "code": "4938766",
+      "label": "VPH, ADJONCTION, LEVIER DE BASCULEMENT POUR FRM, FRMC, FRMA, FRMS, FRMP ET FRMV",
+      "category": "Adjonctions fauteuil manuel modulaire"
+    },
+    {
+      "code": "4978547",
+      "label": "VPH, ADJ, SYSTÈME CONDUITE DOUBLE MAIN COURANTE : FRM FRMC FRMA FRMS FRMP FRMV",
+      "category": "Adjonctions fauteuil manuel modulaire"
+    },
+    {
+      "code": "9904364",
+      "label": "VPH FRM, SUPPLÉMENT POUR FAUTEUIL ROULANT BARIATRIQUE,OTTO BOCK",
+      "category": "Adjonctions fauteuil manuel modulaire"
+    },
+    {
+      "code": "9909427",
+      "label": "VPH, ADJ., ACHAT DISPOSITIF ASSISTANCE ÉLEC,COM PAR ACCOMPAGNANT,BENOIT SYSTEMES",
+      "category": "Adjonctions fauteuil manuel modulaire"
+    },
+    {
+      "code": "9910666",
+      "label": "VPH, ADJ., ACHAT KIT PROP. ÉLEC., COMMANDE PAR UTILISATEUR,EUROMOVE",
+      "category": "Adjonctions fauteuil manuel modulaire"
+    },
+    {
+      "code": "9912139",
+      "label": "VPH, ADJ., ACHAT DISPOSITIF ASSISTANCE ÉLEC,COM PAR ACCOMPAGNANT,INVACARE",
+      "category": "Adjonctions fauteuil manuel modulaire"
+    },
+    {
+      "code": "9912790",
+      "label": "VPH, ADJ, CONDUITE DBL MAIN COURANT FRM FRMC FRMA FRMS FRMP FRMV,MEYRA NETTI",
+      "category": "Adjonctions fauteuil manuel modulaire"
+    },
+    {
+      "code": "9915770",
+      "label": "VPH, ADJ, CONDUITE DBL MAIN COURANT FRM FRMC FRMA FRMS FRMP FRMV,AMYMAT",
+      "category": "Adjonctions fauteuil manuel modulaire"
+    },
+    {
+      "code": "9916150",
+      "label": "VPH, ADJ., LEVIER DE BASCULEMENT - FRM FRMC FRMA FRMS FRMP FRMV,PERMOBIL",
+      "category": "Adjonctions fauteuil manuel modulaire"
+    },
+    {
+      "code": "9916456",
+      "label": "VPH, ADJ,SYST CONDUITE DBLE MAIN COURANT -FRM FRMC FRMA FRMS FRMP FRMV,INVACARE",
+      "category": "Adjonctions fauteuil manuel modulaire"
+    },
+    {
+      "code": "9918159",
+      "label": "VPH FRM, SUPPLÉMENT POUR FAUTEUIL ROULANT BARIATRIQUE,MEYRA NETTI",
+      "category": "Adjonctions fauteuil manuel modulaire"
+    },
+    {
+      "code": "9918981",
+      "label": "VPH, ADJ., LEVIER DE BASCULEMENT - FRM FRMC FRMA FRMS FRMP FRMV,VERMEIREN",
+      "category": "Adjonctions fauteuil manuel modulaire"
+    },
+    {
+      "code": "9920535",
+      "label": "VPH FRM, SUPPLÉMENT POUR FAUTEUIL ROULANT BARIATRIQUE,GT CONCEPT",
+      "category": "Adjonctions fauteuil manuel modulaire"
+    },
+    {
+      "code": "9922215",
+      "label": "VPH, ADJ., LEVIER DE BASCULEMENT - FRM FRMC FRMA FRMS FRMP FRMV,MEYRA NETTI",
+      "category": "Adjonctions fauteuil manuel modulaire"
+    },
+    {
+      "code": "9923930",
+      "label": "VPH, ADJ., LEVIER DE BASCULEMENT - FRM FRMC FRMA FRMS FRMP FRMV,DPZ SERVICES",
+      "category": "Adjonctions fauteuil manuel modulaire"
+    },
+    {
+      "code": "9925886",
+      "label": "VPH, ADJ, CONDUITE DBL MAIN COURANT FRM FRMC FRMA FRMS FRMP FRMV,VERMEIREN",
+      "category": "Adjonctions fauteuil manuel modulaire"
+    },
+    {
+      "code": "9928258",
+      "label": "VPH, ADJ, CONDUITE DBL MAIN COURANT FRM FRMC FRMA FRMS FRMP FRMV,OTTO BOCK",
+      "category": "Adjonctions fauteuil manuel modulaire"
+    },
+    {
+      "code": "9935070",
+      "label": "VPH, ADJ, CONDUITE DBL MAIN COURANT FRM FRMC FRMA FRMS FRMP FRMV,SUNRISE MED",
+      "category": "Adjonctions fauteuil manuel modulaire"
+    },
+    {
+      "code": "9935838",
+      "label": "VPH, ADJ., ACHAT KIT PROP. ÉLEC., COMMANDE PAR UTILISATEUR,VERMEIREN",
+      "category": "Adjonctions fauteuil manuel modulaire"
+    },
+    {
+      "code": "9939977",
+      "label": "VPH FRM, SUPPLÉMENT POUR FAUTEUIL ROULANT BARIATRIQUE,VERMEIREN",
+      "category": "Adjonctions fauteuil manuel modulaire"
+    },
+    {
+      "code": "9943335",
+      "label": "VPH FRM, SUPPLÉMENT POUR FAUTEUIL ROULANT BARIATRIQUE,SKSROLTEC",
+      "category": "Adjonctions fauteuil manuel modulaire"
+    },
+    {
+      "code": "9946865",
+      "label": "VPH FRM, SUPPLÉMENT POUR FAUTEUIL ROULANT BARIATRIQUE,DPZ SERVICES",
+      "category": "Adjonctions fauteuil manuel modulaire"
+    },
+    {
+      "code": "9952854",
+      "label": "VPH, ADJ., LEVIER DE BASCULEMENT - FRM FRMC FRMA FRMS FRMP FRMV,LIFE MOBILITY",
+      "category": "Adjonctions fauteuil manuel modulaire"
+    },
+    {
+      "code": "9963390",
+      "label": "VPH, ADJ., LEVIER DE BASCULEMENT - FRM FRMC FRMA FRMS FRMP FRMV,PRIDE MOBILITY",
+      "category": "Adjonctions fauteuil manuel modulaire"
+    },
+    {
+      "code": "9964219",
+      "label": "VPH, ADJ., ACHAT KIT PROP. ÉLEC., COMMANDE PAR UTILISATEUR,INVACARE",
+      "category": "Adjonctions fauteuil manuel modulaire"
+    },
+    {
+      "code": "9964774",
+      "label": "VPH, ADJ, CONDUITE DBL MAIN COURANT FRM FRMC FRMA FRMS FRMP FRMV,DPZ SERVICES",
+      "category": "Adjonctions fauteuil manuel modulaire"
+    },
+    {
+      "code": "9966566",
+      "label": "VPH FRM, SUPPLÉMENT POUR FAUTEUIL ROULANT BARIATRIQUE,AMYMAT",
+      "category": "Adjonctions fauteuil manuel modulaire"
+    },
+    {
+      "code": "9968714",
+      "label": "VPH, ADJ., LEVIER DE BASCULEMENT - FRM FRMC FRMA FRMS FRMP FRMV,SUNRISE MED",
+      "category": "Adjonctions fauteuil manuel modulaire"
+    },
+    {
+      "code": "9978859",
+      "label": "VPH, ADJ., LEVIER DE BASCULEMENT - FRM FRMC FRMA FRMS FRMP FRMV,REHASENSE",
+      "category": "Adjonctions fauteuil manuel modulaire"
+    },
+    {
+      "code": "9979126",
+      "label": "VPH, ADJONCTION, LEVIER DE BASCULEMENT - FRM FRMC FRMA FRMS FRMP FRMV,INVACARE",
+      "category": "Adjonctions fauteuil manuel modulaire"
+    },
+    {
+      "code": "9979600",
+      "label": "VPH, ADJ., ACHAT KIT PROP. ÉLEC., COMMANDE PAR UTILISATEUR,SUNRISE MED",
+      "category": "Adjonctions fauteuil manuel modulaire"
+    },
+    {
+      "code": "9982677",
+      "label": "VPH, ADJ., ACHAT KIT PROP. ÉLEC., COMMANDE PAR UTILISATEUR,BENOIT SYSTEMES",
+      "category": "Adjonctions fauteuil manuel modulaire"
+    },
+    {
+      "code": "9984340",
+      "label": "VPH, ADJ, CONDUITE DBL MAIN COURANT FRM FRMC FRMA FRMS FRMP FRMV,LIFE MOBILITY",
+      "category": "Adjonctions fauteuil manuel modulaire"
+    },
+    {
+      "code": "9986439",
+      "label": "VPH FRM, SUPPLÉMENT POUR FAUTEUIL ROULANT BARIATRIQUE,SUNRISE MED",
+      "category": "Adjonctions fauteuil manuel modulaire"
+    },
+    {
+      "code": "9988697",
+      "label": "VPH, ADJ., LEVIER DE BASCULEMENT - FRM FRMC FRMA FRMS FRMP FRMV,OTTO BOCK",
+      "category": "Adjonctions fauteuil manuel modulaire"
+    },
+    {
+      "code": "9992517",
+      "label": "VPH, ADJ, SYST DE CONDUITE LEVIER LATÉRAL-FRM FRMC FRMA FRMS FRMP FRMV,INVACARE",
+      "category": "Adjonctions fauteuil manuel modulaire"
+    },
+    {
+      "code": "9995600",
+      "label": "VPH, ADJ, CONDUITE DBL MAIN COURANT FRM FRMC FRMA FRMS FRMP FRMV,PERMOBIL",
+      "category": "Adjonctions fauteuil manuel modulaire"
+    },
+    {
+      "code": "9998193",
+      "label": "VPH FRM, SUPPLÉMENT POUR FAUTEUIL ROULANT BARIATRIQUE,INVACARE",
+      "category": "Adjonctions fauteuil manuel modulaire"
+    },
+    {
+      "code": "4902165",
+      "label": "VPH, ADJ, SUPPLÉMENT POUR FAUTEUIL ROULANT BARIATRIQUE POUR FRE FREP FREV SCO",
+      "category": "Adjonctions fauteuil électrique modulaire"
+    },
+    {
+      "code": "4941700",
+      "label": "VPH, ADJ, SUPPLÉMENT POUR ÉLÉVATION ÉLECTRIQUE (LIFT) POUR FRE, FREP ET FREV",
+      "category": "Adjonctions fauteuil électrique modulaire"
+    },
+    {
+      "code": "4965183",
+      "label": "VPH, ADJONCTION, BOÎTIER DE COMMANDE PERSONNALISÉ POUR FRE, FREP ET FREV",
+      "category": "Adjonctions fauteuil électrique modulaire"
+    },
+    {
+      "code": "9901650",
+      "label": "VPH, ADJ., BOÎTIER DE COMMANDE PERSONNALISÉ POUR FRE, FREP,FREV,VERMEIREN",
+      "category": "Adjonctions fauteuil électrique modulaire"
+    },
+    {
+      "code": "9914871",
+      "label": "VPH, ADJONCTION, SUPP. ÉLÉVATION ÉLECTRIQUE (LIFT) FRE FREP FREV,NEW LIVE MOBIL",
+      "category": "Adjonctions fauteuil électrique modulaire"
+    },
+    {
+      "code": "9921517",
+      "label": "VPH, ADJ., BOÎTIER DE COMMANDE PERSONNALISÉ POUR FRE, FREP,FREV,PRIDE MOBILITY",
+      "category": "Adjonctions fauteuil électrique modulaire"
+    },
+    {
+      "code": "9923901",
+      "label": "VPH, ADJ, SUPP. FAUTEUIL ROULANT BARIATRIQUE FRE FREP FREV SCO,PRIDE MOBILITY",
+      "category": "Adjonctions fauteuil électrique modulaire"
+    },
+    {
+      "code": "9928790",
+      "label": "VPH, ADJ., BOÎTIER DE COMMANDE PERSONNALISÉ POUR FRE, FREP,FREV,SUNRISE MED",
+      "category": "Adjonctions fauteuil électrique modulaire"
+    },
+    {
+      "code": "9928838",
+      "label": "VPH, ADJONCTION, SUPPLÉMENT ÉLÉVATION ÉLECTRIQUE (LIFT) - FRE FREP FREV,INVACARE",
+      "category": "Adjonctions fauteuil électrique modulaire"
+    },
+    {
+      "code": "9930798",
+      "label": "VPH, ADJ., BOÎTIER DE COMMANDE PERSONNALISÉ POUR FRE, FREP,FREV,4POWER4",
+      "category": "Adjonctions fauteuil électrique modulaire"
+    },
+    {
+      "code": "9931065",
+      "label": "VPH, ADJONCTION, SUPP. ÉLÉVATION ÉLECTRIQUE (LIFT) FRE FREP FREV,ACEKARE",
+      "category": "Adjonctions fauteuil électrique modulaire"
+    },
+    {
+      "code": "9932455",
+      "label": "VPH, ADJ., BOÎTIER DE COMMANDE PERSONNALISÉ POUR FRE, FREP,FREV,ERGOFLIX",
+      "category": "Adjonctions fauteuil électrique modulaire"
+    },
+    {
+      "code": "9938305",
+      "label": "VPH, ADJONCTION, SUPP. ÉLÉVATION ÉLECTRIQUE (LIFT) FRE FREP FREV,MEYRA NETTI",
+      "category": "Adjonctions fauteuil électrique modulaire"
+    },
+    {
+      "code": "9938392",
+      "label": "VPH, ADJONCTION, SUPP. ÉLÉVATION ÉLECTRIQUE (LIFT) FRE FREP FREV,PRIDE MOBILITY",
+      "category": "Adjonctions fauteuil électrique modulaire"
+    },
+    {
+      "code": "9938624",
+      "label": "VPH, ADJONCTION, SUPP. ÉLÉVATION ÉLECTRIQUE (LIFT) FRE FREP FREV,PERMOBIL",
+      "category": "Adjonctions fauteuil électrique modulaire"
+    },
+    {
+      "code": "9942590",
+      "label": "VPH, ADJ, SUPPLÉMENT FAUTEUIL ROULANT BARIATRIQUE -FRE FREP FREV SCO,INVACARE",
+      "category": "Adjonctions fauteuil électrique modulaire"
+    },
+    {
+      "code": "9946776",
+      "label": "VPH, ADJONCTION, SUPP. ÉLÉVATION ÉLECTRIQUE (LIFT) FRE FREP FREV,4POWER4",
+      "category": "Adjonctions fauteuil électrique modulaire"
+    },
+    {
+      "code": "9948893",
+      "label": "VPH, ADJ., BOÎTIER DE COMMANDE PERSONNALISÉ POUR FRE, FREP,FREV,ELOFLEX",
+      "category": "Adjonctions fauteuil électrique modulaire"
+    },
+    {
+      "code": "9953428",
+      "label": "VPH, ADJ, SUPP. FAUTEUIL ROULANT BARIATRIQUE FRE FREP FREV SCO,DIETZ POWER BV",
+      "category": "Adjonctions fauteuil électrique modulaire"
+    },
+    {
+      "code": "9957840",
+      "label": "VPH, ADJ, SUPP. FAUTEUIL ROULANT BARIATRIQUE FRE FREP FREV SCO,VERMEIREN",
+      "category": "Adjonctions fauteuil électrique modulaire"
+    },
+    {
+      "code": "9959320",
+      "label": "VPH, ADJ, SUPP. FAUTEUIL ROULANT BARIATRIQUE FRE FREP FREV SCO,MEYRA NETTI",
+      "category": "Adjonctions fauteuil électrique modulaire"
+    },
+    {
+      "code": "9963830",
+      "label": "VPH, ADJONCTION, SUPP. ÉLÉVATION ÉLECTRIQUE (LIFT) FRE FREP FREV,SUNRISE MED",
+      "category": "Adjonctions fauteuil électrique modulaire"
+    },
+    {
+      "code": "9965928",
+      "label": "VPH, ADJ., BOÎTIER DE COMMANDE PERSONNALISÉ POUR FRE, FREP,FREV,DIETZ POWER BV",
+      "category": "Adjonctions fauteuil électrique modulaire"
+    },
+    {
+      "code": "9967867",
+      "label": "VPH, ADJONCTION, SUPP. ÉLÉVATION ÉLECTRIQUE (LIFT) FRE FREP FREV,LIFE MOBILITY",
+      "category": "Adjonctions fauteuil électrique modulaire"
+    },
+    {
+      "code": "9968938",
+      "label": "VPH, ADJ, SUPP. FAUTEUIL ROULANT BARIATRIQUE FRE FREP FREV SCO,LIFE MOBILITY",
+      "category": "Adjonctions fauteuil électrique modulaire"
+    },
+    {
+      "code": "9972064",
+      "label": "VPH, ADJ., BOÎTIER DE COMMANDE PERSONNALISÉ POUR FRE, FREP,FREV,OTTO BOCK",
+      "category": "Adjonctions fauteuil électrique modulaire"
+    },
+    {
+      "code": "9972414",
+      "label": "VPH, ADJ., BOÎTIER DE COMMANDE PERSONNALISÉ POUR FRE, FREP,FREV,ACEKARE",
+      "category": "Adjonctions fauteuil électrique modulaire"
+    },
+    {
+      "code": "9973572",
+      "label": "VPH, ADJ, SUPP. FAUTEUIL ROULANT BARIATRIQUE FRE FREP FREV SCO,SUNRISE MED",
+      "category": "Adjonctions fauteuil électrique modulaire"
+    },
+    {
+      "code": "9974318",
+      "label": "VPH, ADJ., BOÎTIER DE COMMANDE PERSONNALISÉ POUR FRE, FREP,FREV,NEW LIVE MOBIL",
+      "category": "Adjonctions fauteuil électrique modulaire"
+    },
+    {
+      "code": "9975401",
+      "label": "VPH, ADJ., BOÎTIER DE COMMANDE PERSONNALISÉ POUR FRE, FREP,FREV,PROT VIRGINIE",
+      "category": "Adjonctions fauteuil électrique modulaire"
+    },
+    {
+      "code": "9976524",
+      "label": "VPH, ADJ., BOÎTIER DE COMMANDE PERSONNALISÉ POUR FRE, FREP,FREV,PERMOBIL",
+      "category": "Adjonctions fauteuil électrique modulaire"
+    },
+    {
+      "code": "9976725",
+      "label": "VPH, ADJONCTION, SUPP. ÉLÉVATION ÉLECTRIQUE (LIFT) FRE FREP FREV,VERMEIREN",
+      "category": "Adjonctions fauteuil électrique modulaire"
+    },
+    {
+      "code": "9977771",
+      "label": "VPH, ADJ., BOÎTIER DE COMMANDE PERSONNALISÉ POUR FRE, FREP,FREV,SKS ROLTEC",
+      "category": "Adjonctions fauteuil électrique modulaire"
+    },
+    {
+      "code": "9978983",
+      "label": "VPH, ADJONCTION, SUPP. ÉLÉVATION ÉLECTRIQUE (LIFT) FRE FREP FREV,SKS ROLTEC",
+      "category": "Adjonctions fauteuil électrique modulaire"
+    },
+    {
+      "code": "9979706",
+      "label": "VPH, ADJ., BOÎTIER DE COMMANDE PERSONNALISÉ POUR FRE, FREP,FREV,CEL REHAB",
+      "category": "Adjonctions fauteuil électrique modulaire"
+    },
+    {
+      "code": "9979988",
+      "label": "VPH, ADJ., BOÎTIER DE COMMANDE PERSONNALISÉ POUR FRE, FREP,FREV,ERGOCONCEPT",
+      "category": "Adjonctions fauteuil électrique modulaire"
+    },
+    {
+      "code": "9980394",
+      "label": "VPH, ADJ., BOÎTIER DE COMMANDE PERSONNALISÉ POUR FRE, FREP,FREV,MEYRA NETTI",
+      "category": "Adjonctions fauteuil électrique modulaire"
+    },
+    {
+      "code": "9982714",
+      "label": "VPH, ADJ., BOÎTIER DE COMMANDE PERSONNALISÉ POUR FRE, FREP,FREV,LIFE MOBILITY",
+      "category": "Adjonctions fauteuil électrique modulaire"
+    },
+    {
+      "code": "9982884",
+      "label": "VPH, ADJ, BOÎTIER DE COMMANDE PERSONNALISÉ POUR FRE, FREP ET FREV,INVACARE",
+      "category": "Adjonctions fauteuil électrique modulaire"
+    },
+    {
+      "code": "9993250",
+      "label": "VPH, ADJONCTION, SUPP. ÉLÉVATION ÉLECTRIQUE (LIFT) FRE FREP FREV,DIETZ POWER BV",
+      "category": "Adjonctions fauteuil électrique modulaire"
+    },
+    {
+      "code": "9993669",
+      "label": "VPH, ADJ, SUPP. FAUTEUIL ROULANT BARIATRIQUE FRE FREP FREV SCO,OTTO BOCK",
+      "category": "Adjonctions fauteuil électrique modulaire"
+    },
+    {
+      "code": "9995125",
+      "label": "VPH, ADJONCTION, SUPP. ÉLÉVATION ÉLECTRIQUE (LIFT) FRE FREP FREV,OTTO BOCK",
+      "category": "Adjonctions fauteuil électrique modulaire"
+    },
+    {
+      "code": "9999710",
+      "label": "VPH, ADJ., BOÎTIER DE COMMANDE PERSONNALISÉ POUR FRE, FREP,FREV,AMYMAT",
+      "category": "Adjonctions fauteuil électrique modulaire"
+    },
+    {
+      "code": "4938720",
+      "label": "VPH, SUPPLÉMENT SUR DEVIS POUR FAUTEUIL MANUEL SPORTIF",
+      "category": "Suppléments sur devis"
+    },
+    {
+      "code": "4960062",
+      "label": "VPH, ADJ SPÉ, SUP SUR DEVIS POUR FRM FRMC FRMA FRMP FRMV FRE FREP FREV",
+      "category": "Suppléments sur devis"
+    }
+  ]
+}

@@ -1,7 +1,7 @@
-import { adjGroups, adjonctions, lpprProducts, papForfaits } from "./data";
+import { lpprAdjProducts, lpprProducts } from "./data";
 
 /* Moteur de recherche du catalogue LPPR — recherche par dénomination, code LPP, type ou marque.
-   Indexe pour l'instant : les produits VPH scrappés, les adjonctions et les forfaits PAP.
+   Indexe les produits scrappés de la base CNAM : VPH (achat neuf) + adjonctions + PAP.
    Conçu pour s'étendre (tout produit porteur d'un code LPP ou d'un libellé). */
 
 export type CatalogKind = "vph" | "adjonction" | "pap";
@@ -28,31 +28,41 @@ export function normalize(s: string): string {
     .replace(/[\u0300-\u036f]/g, "");
 }
 
-function deburrUpper(s: string): string {
-  return s
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .toUpperCase();
+/* --- détection de marque ---
+   Les libellés CNAM séparent les segments descriptifs par « , » (virgule + espace) et
+   collent la marque par « ,MARQUE » (sans espace). On extrait donc en priorité ce dernier
+   segment collé (haute précision), puis on rattrape les marques séparées par « , » à l'aide
+   d'un dictionnaire construit sur l'ensemble des marques collées des deux bases. */
+
+function colleeBrand(label: string): string | null {
+  const m = label.match(/,([^\s,][^,]*)$/);
+  return m ? m[1].trim() : null;
 }
 
-/* Termes descriptifs : si le dernier segment du libellé en contient un, ce n'est pas une marque
-   (c'est un « code mère » générique). Sinon, le dernier segment est la marque commerciale. */
-const DESCRIPTIVE_TERMS = [
-  "MODULAIR", "PROPULS", "MANUEL", "ELEC", "MOTEUR", "POUSSER", "CLASSE", "MULTI", "POSITION",
-  "VERTICALISAT", "RIGIDE", "SPORT", "ACTIF", "STANDARD", "ROULANTE", "POUSSETTE", "SCOOTER",
-  "CYCLE", "CONFIGURABL", "EVOLUTIV", "REGLABL", "ROUES", "NON-MODUL", "BASE",
-];
+const BRAND_SET = new Set<string>();
+for (const p of [...lpprProducts, ...lpprAdjProducts]) {
+  const b = colleeBrand(p.label);
+  if (b) BRAND_SET.add(normalize(b));
+}
 
-/** Sépare la marque (dernier segment, sans terme descriptif) du reste du libellé LPPR. */
+/** Sépare la marque du reste du libellé LPPR. */
 export function parseLpprBrand(label: string): { name: string; brand: string | null } {
+  const collee = colleeBrand(label);
+  if (collee) {
+    const idx = label.lastIndexOf(",");
+    return { name: label.slice(0, idx).trim(), brand: collee };
+  }
+  // rattrapage : dernier segment séparé par « , » mais reconnu comme marque connue.
   const segs = label.split(",").map((s) => s.trim());
-  const cand = segs[segs.length - 1] ?? "";
-  const norm = deburrUpper(cand);
-  const isDescriptive = DESCRIPTIVE_TERMS.some((k) => norm.includes(k));
-  if (cand && segs.length > 1 && !isDescriptive) {
-    return { name: segs.slice(0, -1).join(", "), brand: cand };
+  const last = segs[segs.length - 1] ?? "";
+  if (segs.length > 1 && BRAND_SET.has(normalize(last))) {
+    return { name: segs.slice(0, -1).join(", "), brand: last };
   }
   return { name: label, brand: null };
+}
+
+function kindOfAdj(label: string): CatalogKind {
+  return /PAP\s+FORFAIT/i.test(label) ? "pap" : "adjonction";
 }
 
 /** Catalogue unifié, construit une fois au chargement du module. */
@@ -61,20 +71,10 @@ export const catalog: CatalogEntry[] = [
     const { name, brand } = parseLpprBrand(p.label);
     return { code: p.code, label: name, brand, kind: "vph" as const, category: p.category };
   }),
-  ...adjonctions.map((a) => ({
-    code: a.code,
-    label: a.name,
-    brand: null,
-    kind: "adjonction" as const,
-    category: adjGroups[a.group] ?? "Adjonction",
-  })),
-  ...Object.values(papForfaits).map((f) => ({
-    code: f.code,
-    label: f.label,
-    brand: null,
-    kind: "pap" as const,
-    category: "Positionnement (PAP)",
-  })),
+  ...lpprAdjProducts.map((p) => {
+    const { name, brand } = parseLpprBrand(p.label);
+    return { code: p.code, label: name, brand, kind: kindOfAdj(p.label), category: p.category };
+  }),
 ];
 
 interface Indexed extends CatalogEntry {

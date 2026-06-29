@@ -4,6 +4,7 @@ import papRaw from "@/data/pap.json";
 import classesRaw from "@/data/classes.json";
 import besoinsRaw from "@/data/besoins.json";
 import lpprRaw from "@/data/lppr.json";
+import lpprAdjRaw from "@/data/lppr-adjonctions.json";
 import metaRaw from "@/data/meta.json";
 
 import {
@@ -42,6 +43,9 @@ export const meta = MetaSchema.parse(metaRaw);
 const lpprFile = LpprFileSchema.parse(lpprRaw);
 export const lpprProducts = lpprFile.products;
 export const lpprMeta = { source: lpprFile.source, lastUpdated: lpprFile.lastUpdated };
+
+const lpprAdjFile = LpprFileSchema.parse(lpprAdjRaw);
+export const lpprAdjProducts = lpprAdjFile.products;
 
 /* Index pratique code → device. */
 export const deviceByCode: Record<string, Device> = Object.fromEntries(
