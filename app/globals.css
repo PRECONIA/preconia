@@ -51,9 +51,10 @@ body {
   }
 }
 
-/* roue de fauteuil en arrière-plan (bas-gauche) */
+/* roue arrière du fauteuil (tourne autour de son propre centre) */
 .pc-wheel-spin {
-  transform-origin: 50% 50%;
+  transform-box: fill-box;
+  transform-origin: center;
   animation: pc-spin 18s linear infinite;
 }
 /* titre : entrée en fondu montant + accent « IA » qui respire */
