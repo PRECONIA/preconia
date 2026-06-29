@@ -21,6 +21,7 @@ import {
 import { adaptedCode, brandsForBases, hasBrandVariant } from "@/lib/rules";
 import { eur } from "@/lib/format";
 import { RechercheLpp } from "@/components/preconia/RechercheLpp";
+import { Logo } from "@/components/preconia/Logo";
 import type { Adjonction, BesoinField, Device } from "@/lib/types";
 import { useWalker } from "@/lib/walker/WalkerProvider";
 import {
@@ -99,13 +100,18 @@ export function WalkerShell() {
   return (
     <div className="relative z-10 mx-auto max-w-[790px] px-5 pb-16 pt-8">
       <header>
-        <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-petrol">
-          Aide à la préconisation VPH · Médecine physique &amp; réadaptation
+        <div className="pc-wordmark-rise flex items-center gap-3.5">
+          <Logo className="h-12 w-12 shrink-0 drop-shadow-sm sm:h-14 sm:w-14" />
+          <div>
+            <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-petrol">
+              Aide à la préconisation VPH · Médecine physique &amp; réadaptation
+            </div>
+            <div className="text-[30px] font-bold leading-none tracking-tight">
+              PRECON<span className="pc-accent-breathe inline-block text-petrol">IA</span>
+            </div>
+          </div>
         </div>
-        <div className="pc-wordmark-rise my-1 text-[30px] font-bold tracking-tight">
-          PRECON<span className="pc-accent-breathe inline-block text-petrol">IA</span>
-        </div>
-        <p className="max-w-[60ch] text-sm leading-relaxed text-ink-soft">
+        <p className="mt-3 max-w-[60ch] text-sm leading-relaxed text-ink-soft">
           Du profil fonctionnel au dispositif, à sa classe, ses adjonctions facturables (codes LPPR)
           et son positionnement — d&apos;après la nomenclature VPH 2025 et les fiches 2026.
         </p>
