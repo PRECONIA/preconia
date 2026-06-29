@@ -112,6 +112,17 @@ export const AdjonctionBrandsFileSchema = z.object({
   groups: z.array(AdjonctionBrandGroupSchema),
 });
 
+/* --- device-lpp.json (code LPP « mère » + tarif par type de fauteuil, scrappé des fiches CNAM) --- */
+export const DeviceLppEntrySchema = z.object({
+  code: z.string(),
+  tarif: z.number().nullable(),
+});
+export const DeviceLppFileSchema = z.object({
+  source: z.string(),
+  lastUpdated: z.string(),
+  byType: z.record(z.string(), DeviceLppEntrySchema),
+});
+
 /* --- meta.json --- */
 export const MetaSchema = z.object({
   source: z.string(),

@@ -1,4 +1,13 @@
-import type { Adjonction, Classe, ClasseValue, Device, Forfait, PapForfait, PapRegion } from "./types";
+import type {
+  Adjonction,
+  Classe,
+  ClasseValue,
+  Device,
+  DeviceLppEntry,
+  Forfait,
+  PapForfait,
+  PapRegion,
+} from "./types";
 
 /* Fonctions pures des INVARIANTS du CLAUDE.md — isolées, sans état, testables.
    Le cœur de décision vit ici, découplé de l'UI (longévité : réutilisable en PWA / extension). */
@@ -101,6 +110,21 @@ export function adaptedCode(baseCode: string, brand: string | null, map: BrandMa
 /** Vrai si un code mère possède une variante pour la marque donnée. */
 export function hasBrandVariant(baseCode: string, brand: string | null, map: BrandMap): boolean {
   return !!brand && !!map.get(baseCode)?.[brand];
+}
+
+/** Code LPP « mère » + tarif du fauteuil sélectionné. Pour l'électrique (FRE/FREP) et le
+ *  scooter, le code dépend de la classe (FRE-C, FREP-A…). Retourne null si non résolu. */
+export function deviceLpp(
+  device: Device,
+  classe: ClasseValue | null,
+  byType: Record<string, DeviceLppEntry>,
+): DeviceLppEntry | null {
+  let token: string = device.code;
+  if (device.code === "FRE" || device.code === "FREP" || device.code === "SCO") {
+    if (!classe) return null;
+    token = `${device.code}-${classe}`;
+  }
+  return byType[token] ?? null;
 }
 
 /** Marques disponibles (triées) parmi un ensemble de codes mères — pour peupler le sélecteur. */

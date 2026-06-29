@@ -11,6 +11,7 @@ import {
   adjGroups,
   besoins,
   classes,
+  deviceLppByType,
   devices,
   meta,
   modes as modeLabels,
@@ -18,7 +19,7 @@ import {
   papRegions,
   prescribers,
 } from "@/lib/data";
-import { adaptedCode, brandsForBases, hasBrandVariant } from "@/lib/rules";
+import { adaptedCode, brandsForBases, deviceLpp, hasBrandVariant } from "@/lib/rules";
 import { eur } from "@/lib/format";
 import { RechercheLpp } from "@/components/preconia/RechercheLpp";
 import { Logo } from "@/components/preconia/Logo";
@@ -74,8 +75,12 @@ export function WalkerShell() {
   ];
   const availableBrands = brandsForBases(brandBases, adjBrandMap);
 
-  // Tous les codes LPP de la fiche finale (forfaits PAP + adjonctions, adaptés à la marque).
+  // Code LPP + tarif du fauteuil sélectionné (selon le type et, pour l'électrique, la classe).
+  const devLpp = device ? deviceLpp(device, answers.classe, deviceLppByType) : null;
+
+  // Tous les codes LPP de la fiche finale : fauteuil + forfaits PAP + adjonctions (adaptés marque).
   const lpprCodes = [
+    ...(devLpp && device ? [{ code: devLpp.code, label: device.name }] : []),
     ...forfaits.map((f) => ({
       code: adaptedCode(papForfaits[f].code, brand, adjBrandMap),
       label: papForfaits[f].label,
@@ -301,6 +306,25 @@ export function WalkerShell() {
               title="Adjonctions & positionnement"
               hint={`Sélection compatible avec le ${device.code}. Codes LPPR et tarifs TTC indicatifs.`}
             >
+              {devLpp && (
+                <div className="mb-5 rounded-xl border-2 border-orange-400 bg-orange-100/60 p-4">
+                  <div className="mb-1.5 text-sm font-semibold text-orange-800">
+                    Fauteuil sélectionné · code LPP
+                  </div>
+                  <div className="flex items-center justify-between gap-3">
+                    <span className="flex min-w-0 items-center gap-2">
+                      <span className="shrink-0 rounded bg-orange-200/70 px-1.5 py-0.5 font-mono text-[12px] font-semibold text-orange-800">
+                        {devLpp.code}
+                      </span>
+                      <span className="truncate text-sm text-ink">{device.name}</span>
+                    </span>
+                    <span className="shrink-0 font-mono text-sm font-semibold text-orange-800">
+                      {devLpp.tarif != null ? eur(devLpp.tarif) : "tarif n.c."}
+                    </span>
+                  </div>
+                </div>
+              )}
+
               {availableBrands.length > 0 && (
                 <div className="mb-5 rounded-xl border-2 border-petrol bg-petrol-tint/50 p-4">
                   <label htmlFor="vehicleBrand" className="mb-1.5 block text-sm font-semibold text-petrol-deep">
@@ -436,11 +460,6 @@ export function WalkerShell() {
                     Classe {answers.classe}
                   </span>
                 )}
-                {device.tarif && (
-                  <span className="font-mono text-sm font-semibold text-petrol-deep">
-                    {eur(device.tarif)} <span className="font-normal text-ink-soft">base</span>
-                  </span>
-                )}
               </div>
               <div className="mt-3 text-lg font-semibold">{device.name}</div>
 
@@ -472,11 +491,26 @@ export function WalkerShell() {
                 </Flag>
               )}
 
-              {(selectedAdj.length > 0 || forfaits.length > 0) && (
+              {(devLpp || selectedAdj.length > 0 || forfaits.length > 0) && (
                 <div className="my-4">
                   <h4 className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-ink-soft">
-                    Adjonctions &amp; forfaits PAP
+                    Codes LPP &amp; tarifs
                   </h4>
+                  {devLpp && (
+                    <div className="flex items-baseline justify-between gap-3 border-b border-line-soft py-1.5 text-sm">
+                      <span className="flex min-w-0 items-baseline gap-2">
+                        <span className="shrink-0 rounded bg-orange-100 px-1.5 py-0.5 font-mono text-[11px] font-semibold text-orange-800">
+                          {devLpp.code}
+                        </span>
+                        <span>
+                          {device.name} <span className="text-ink-soft">· dispositif</span>
+                        </span>
+                      </span>
+                      <span className="font-mono text-orange-800">
+                        {devLpp.tarif != null ? eur(devLpp.tarif) : "n.c."}
+                      </span>
+                    </div>
+                  )}
                   {forfaits.map((f) => (
                     <Line
                       key={f}
@@ -494,7 +528,17 @@ export function WalkerShell() {
                       open={!!(a.devis || a.tbd)}
                     />
                   ))}
-                  <Subtotal costs={costs} />
+                  {(selectedAdj.length > 0 || forfaits.length > 0) && <Subtotal costs={costs} />}
+                  {devLpp?.tarif != null && (
+                    <div className="mt-2 flex items-center justify-between rounded-lg bg-ink/5 px-4 py-3">
+                      <b className="text-sm text-ink">
+                        Total indicatif{costs.hasOpen ? " (hors devis / à préciser)" : ""}
+                      </b>
+                      <span className="font-mono text-base font-semibold text-ink">
+                        {eur(devLpp.tarif + costs.subtotal)}
+                      </span>
+                    </div>
+                  )}
                   <button
                     onClick={copyCodes}
                     className={`mt-3 w-full justify-center ${primary} py-3`}

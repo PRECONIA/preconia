@@ -1,0 +1,94 @@
+{
+  "source": "Nomenclature LPPR — base CNAM (cgi-fiche), tarif du code mère par type de VPH",
+  "lastUpdated": "2026-06-25",
+  "byType": {
+    "BASE": {
+      "code": "4507210",
+      "tarif": 1125.0
+    },
+    "CYC": {
+      "code": "4540153",
+      "tarif": 1679.48
+    },
+    "FMP": {
+      "code": "4544151",
+      "tarif": 360.53
+    },
+    "FMPR": {
+      "code": "4530982",
+      "tarif": 780.17
+    },
+    "FRE-A": {
+      "code": "4544777",
+      "tarif": 3161.21
+    },
+    "FRE-B": {
+      "code": "4545512",
+      "tarif": 3882.08
+    },
+    "FRE-C": {
+      "code": "4551435",
+      "tarif": 4852.6
+    },
+    "FREP-A": {
+      "code": "4518410",
+      "tarif": 8140.57
+    },
+    "FREP-B": {
+      "code": "9527944",
+      "tarif": 11680.5
+    },
+    "FREP-C": {
+      "code": "4567229",
+      "tarif": 14638.75
+    },
+    "FREV": {
+      "code": "9557595",
+      "tarif": 21069.25
+    },
+    "FRM": {
+      "code": "4592457",
+      "tarif": 443.64
+    },
+    "FRMA": {
+      "code": "4521687",
+      "tarif": 6276.0
+    },
+    "FRMC": {
+      "code": "4594077",
+      "tarif": 3303.53
+    },
+    "FRMP": {
+      "code": "4551530",
+      "tarif": 2753.0
+    },
+    "FRMS": {
+      "code": "4520972",
+      "tarif": 2400.0
+    },
+    "FRMV": {
+      "code": "4544910",
+      "tarif": 11077.5
+    },
+    "POU_MRE": {
+      "code": "4567040",
+      "tarif": 2587.0
+    },
+    "POU_S": {
+      "code": "4505889",
+      "tarif": 1300.0
+    },
+    "SCO-A": {
+      "code": "4541193",
+      "tarif": 1300.0
+    },
+    "SCO-B": {
+      "code": "4515072",
+      "tarif": 2100.0
+    },
+    "SCO-C": {
+      "code": "4568000",
+      "tarif": 3800.0
+    }
+  }
+}

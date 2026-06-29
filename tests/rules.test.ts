@@ -1,10 +1,18 @@
 import { describe, expect, it } from "vitest";
-import { adjBrandMap, adjonctions, deviceByCode, papForfaits, papRegions } from "@/lib/data";
+import {
+  adjBrandMap,
+  adjonctions,
+  deviceByCode,
+  deviceLppByType,
+  papForfaits,
+  papRegions,
+} from "@/lib/data";
 import {
   adaptedCode,
   brandsForBases,
   computeSubtotal,
   deriveForfaits,
+  deviceLpp,
   filterAdjonctions,
   hasBrandVariant,
   hasOpenItems,
@@ -124,5 +132,30 @@ describe("adaptation du code LPP à la marque", () => {
     expect(hasBrandVariant(base, brands[0], adjBrandMap)).toBe(true);
     expect(hasBrandVariant(base, null, adjBrandMap)).toBe(false);
     expect(hasBrandVariant("4904626", brands[0], adjBrandMap)).toBe(false);
+  });
+});
+
+describe("deviceLpp (code LPP + tarif du fauteuil)", () => {
+  it("manuel : token = code, tarif présent (FRM/FRMA validés)", () => {
+    const frm = deviceLpp(deviceByCode.FRM, null, deviceLppByType);
+    expect(frm?.code).toBeTruthy();
+    expect(typeof frm?.tarif).toBe("number");
+    expect(deviceLpp(deviceByCode.FRMA, null, deviceLppByType)?.tarif).toBe(6276);
+  });
+
+  it("électrique FRE : dépend de la classe (FRE-A ≠ FRE-C)", () => {
+    const a = deviceLpp(deviceByCode.FRE, "A", deviceLppByType);
+    const c = deviceLpp(deviceByCode.FRE, "C", deviceLppByType);
+    expect(a?.code).toBeTruthy();
+    expect(c?.code).toBeTruthy();
+    expect(a?.code).not.toBe(c?.code);
+  });
+
+  it("FRE sans classe → null", () => {
+    expect(deviceLpp(deviceByCode.FRE, null, deviceLppByType)).toBeNull();
+  });
+
+  it("FREV : pas de classe requise", () => {
+    expect(deviceLpp(deviceByCode.FREV, null, deviceLppByType)?.code).toBeTruthy();
   });
 });
