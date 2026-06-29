@@ -27,6 +27,8 @@ export interface Answers {
   classe: ClasseValue | null;
   /** Aptitude à conduire le fauteuil (électrique) : "non" → conduite par tierce personne. */
   aptitude: OuiNon | null;
+  /** Marque du fauteuil (étape adjonctions) : adapte les codes LPP des adjonctions / PAP. */
+  vehicleBrand: string | null;
 }
 
 export interface WalkerState {

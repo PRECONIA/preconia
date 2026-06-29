@@ -63,6 +63,10 @@ describe("walkerReducer — SET_ANSWER", () => {
     const s = walkerReducer(initialState, { type: "SET_ANSWER", field: "classe", value: "C" });
     expect(s.answers.classe).toBe("C");
   });
+  it("enregistre la marque du fauteuil", () => {
+    const s = walkerReducer(initialState, { type: "SET_ANSWER", field: "vehicleBrand", value: "INVACARE" });
+    expect(s.answers.vehicleBrand).toBe("INVACARE");
+  });
 });
 
 describe("walkerReducer — TOGGLE_ADJ / TOGGLE_PAP / RESET", () => {

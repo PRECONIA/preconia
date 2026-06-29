@@ -99,6 +99,19 @@ export const LpprFileSchema = z.object({
   products: z.array(LpprProductSchema),
 });
 
+/* --- adjonction-brands.json (correspondance code mère → variantes de marque, dérivée du
+   regroupement par ordre de page de la base CNAM ; sert à adapter le code LPP à la marque) --- */
+export const AdjonctionBrandGroupSchema = z.object({
+  base: z.string(),
+  function: z.string(),
+  byBrand: z.record(z.string(), z.string()),
+});
+export const AdjonctionBrandsFileSchema = z.object({
+  source: z.string(),
+  lastUpdated: z.string(),
+  groups: z.array(AdjonctionBrandGroupSchema),
+});
+
 /* --- meta.json --- */
 export const MetaSchema = z.object({
   source: z.string(),

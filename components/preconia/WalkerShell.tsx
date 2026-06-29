@@ -6,6 +6,7 @@
    PapPanel, ResultCard, synthèse copiable) est volontairement reporté à la session UI. */
 
 import {
+  adjBrandMap,
   adjGroups,
   besoins,
   classes,
@@ -16,6 +17,7 @@ import {
   papRegions,
   prescribers,
 } from "@/lib/data";
+import { adaptedCode, brandsForBases, hasBrandVariant } from "@/lib/rules";
 import { eur } from "@/lib/format";
 import { RechercheLpp } from "@/components/preconia/RechercheLpp";
 import type { Adjonction, BesoinField, Device } from "@/lib/types";
@@ -61,6 +63,14 @@ export function WalkerShell() {
   const forfaits = selectForfaits(state);
   const costs = selectCosts(state);
   const route = selectRoute(state);
+
+  // Marque du fauteuil → adapte les codes LPP (adjonctions compatibles + forfaits PAP).
+  const brand = answers.vehicleBrand;
+  const brandBases = [
+    ...compatAdj.map((a) => a.code),
+    ...(device?.modular ? [papForfaits.A.code, papForfaits.B.code] : []),
+  ];
+  const availableBrands = brandsForBases(brandBases, adjBrandMap);
 
   return (
     <div className="mx-auto max-w-[790px] px-5 pb-16 pt-8">
@@ -255,6 +265,28 @@ export function WalkerShell() {
               title="Adjonctions & positionnement"
               hint={`Sélection compatible avec le ${device.code}. Codes LPPR et tarifs TTC indicatifs.`}
             >
+              {availableBrands.length > 0 && (
+                <div className="mb-5">
+                  <label htmlFor="vehicleBrand" className="mb-1.5 block text-sm font-semibold">
+                    Marque du fauteuil
+                    <span className="ml-1.5 font-normal text-ink-soft">· adapte les codes LPP</span>
+                  </label>
+                  <select
+                    id="vehicleBrand"
+                    value={brand ?? ""}
+                    onChange={(e) => setAnswer("vehicleBrand", e.target.value || null)}
+                    className="w-full rounded-lg border border-line bg-card px-3 py-2.5 text-sm outline-none focus:border-petrol"
+                  >
+                    <option value="">Générique (code mère)</option>
+                    {availableBrands.map((b) => (
+                      <option key={b} value={b}>
+                        {b}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
+
               <h3 className="mb-3 mt-1 text-lg font-semibold tracking-tight">Adjonctions facturables</h3>
 
               {compatAdj.length === 0 && (
@@ -281,7 +313,14 @@ export function WalkerShell() {
                       >
                         <span>
                           <b className="block">{item.name}</b>
-                          <span className="font-mono text-[11px] text-ink-soft">{item.code}</span>
+                          <span className="inline-flex items-center gap-1.5">
+                            <span className="rounded bg-petrol-tint px-1.5 py-0.5 font-mono text-[11px] font-semibold text-petrol-deep">
+                              {adaptedCode(item.code, brand, adjBrandMap)}
+                            </span>
+                            {brand && !hasBrandVariant(item.code, brand, adjBrandMap) && (
+                              <span className="text-[10px] text-ink-soft">générique</span>
+                            )}
+                          </span>
                         </span>
                         <span
                           className={`whitespace-nowrap font-mono text-sm font-semibold ${
@@ -351,6 +390,11 @@ export function WalkerShell() {
                 <span className="rounded-full bg-petrol-tint px-3 py-1 text-xs font-semibold text-petrol-deep">
                   {device.family}
                 </span>
+                {answers.vehicleBrand && (
+                  <span className="rounded-full bg-orange-100 px-3 py-1 text-xs font-semibold text-orange-700">
+                    {answers.vehicleBrand}
+                  </span>
+                )}
                 {device.electric && answers.classe && (
                   <span className="rounded-full bg-petrol-tint px-3 py-1 text-xs font-semibold text-petrol-deep">
                     Classe {answers.classe}
@@ -400,10 +444,21 @@ export function WalkerShell() {
                     Adjonctions &amp; forfaits PAP
                   </h4>
                   {forfaits.map((f) => (
-                    <Line key={f} code={papForfaits[f].code} label={papForfaits[f].label} value={eur(papForfaits[f].price)} />
+                    <Line
+                      key={f}
+                      code={adaptedCode(papForfaits[f].code, brand, adjBrandMap)}
+                      label={papForfaits[f].label}
+                      value={eur(papForfaits[f].price)}
+                    />
                   ))}
                   {selectedAdj.map((a) => (
-                    <Line key={a.code} code={a.code} label={a.name} value={priceLabel(a)} open={!!(a.devis || a.tbd)} />
+                    <Line
+                      key={a.code}
+                      code={adaptedCode(a.code, brand, adjBrandMap)}
+                      label={a.name}
+                      value={priceLabel(a)}
+                      open={!!(a.devis || a.tbd)}
+                    />
                   ))}
                   <Subtotal costs={costs} />
                 </div>

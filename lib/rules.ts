@@ -88,3 +88,27 @@ export function classeRoute(classeValue: ClasseValue | null, classes: Classe[]):
   if (!classeValue) return false;
   return classes.find((c) => c.value === classeValue)?.route ?? false;
 }
+
+/* --- adaptation du code LPP à la marque du fauteuil (mapping CNAM code mère → variantes) --- */
+export type BrandMap = Map<string, Record<string, string>>;
+
+/** Code LPP adapté à la marque : la variante de marque si elle existe, sinon le code mère. */
+export function adaptedCode(baseCode: string, brand: string | null, map: BrandMap): string {
+  if (!brand) return baseCode;
+  return map.get(baseCode)?.[brand] ?? baseCode;
+}
+
+/** Vrai si un code mère possède une variante pour la marque donnée. */
+export function hasBrandVariant(baseCode: string, brand: string | null, map: BrandMap): boolean {
+  return !!brand && !!map.get(baseCode)?.[brand];
+}
+
+/** Marques disponibles (triées) parmi un ensemble de codes mères — pour peupler le sélecteur. */
+export function brandsForBases(baseCodes: string[], map: BrandMap): string[] {
+  const set = new Set<string>();
+  for (const code of baseCodes) {
+    const m = map.get(code);
+    if (m) Object.keys(m).forEach((b) => set.add(b));
+  }
+  return [...set].sort((a, b) => a.localeCompare(b));
+}

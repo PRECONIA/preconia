@@ -5,6 +5,7 @@ import classesRaw from "@/data/classes.json";
 import besoinsRaw from "@/data/besoins.json";
 import lpprRaw from "@/data/lppr.json";
 import lpprAdjRaw from "@/data/lppr-adjonctions.json";
+import adjBrandsRaw from "@/data/adjonction-brands.json";
 import metaRaw from "@/data/meta.json";
 
 import {
@@ -14,6 +15,7 @@ import {
   ClassesFileSchema,
   BesoinsFileSchema,
   LpprFileSchema,
+  AdjonctionBrandsFileSchema,
   MetaSchema,
 } from "./schemas";
 import type { Device, Presc } from "./types";
@@ -46,6 +48,13 @@ export const lpprMeta = { source: lpprFile.source, lastUpdated: lpprFile.lastUpd
 
 const lpprAdjFile = LpprFileSchema.parse(lpprAdjRaw);
 export const lpprAdjProducts = lpprAdjFile.products;
+
+const adjBrandsFile = AdjonctionBrandsFileSchema.parse(adjBrandsRaw);
+export const adjBrandGroups = adjBrandsFile.groups;
+/** code mère LPP → { marque → code LPP de la variante }. */
+export const adjBrandMap: Map<string, Record<string, string>> = new Map(
+  adjBrandGroups.map((g) => [g.base, g.byBrand]),
+);
 
 /* Index pratique code → device. */
 export const deviceByCode: Record<string, Device> = Object.fromEntries(

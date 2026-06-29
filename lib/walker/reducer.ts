@@ -9,6 +9,7 @@ export const initialAnswers: Answers = {
   device: null,
   classe: null,
   aptitude: null,
+  vehicleBrand: null,
 };
 
 export const initialState: WalkerState = {
@@ -47,6 +48,7 @@ export function walkerReducer(state: WalkerState, action: Action): WalkerState {
       const answers: Answers = {
         ...state.answers,
         device: action.code,
+        vehicleBrand: null,
         ...(action.mob ? { mob: action.mob } : {}),
       };
       const next = needsBesoins(device) ? "besoins" : "adj";

@@ -1,9 +1,12 @@
 import { describe, expect, it } from "vitest";
-import { adjonctions, deviceByCode, papForfaits, papRegions } from "@/lib/data";
+import { adjBrandMap, adjonctions, deviceByCode, papForfaits, papRegions } from "@/lib/data";
 import {
+  adaptedCode,
+  brandsForBases,
   computeSubtotal,
   deriveForfaits,
   filterAdjonctions,
+  hasBrandVariant,
   hasOpenItems,
   needsBesoins,
   selectedAdjonctions,
@@ -97,5 +100,29 @@ describe("selectedAdjonctions", () => {
   it("retourne les adjonctions cochées", () => {
     const sel = selectedAdjonctions({ "4938766": true }, adjonctions);
     expect(sel.map((a) => a.code)).toEqual(["4938766"]);
+  });
+});
+
+describe("adaptation du code LPP à la marque", () => {
+  const base = "4954630"; // supplément appui-tête réglable — possède des variantes de marque
+  const brands = brandsForBases([base], adjBrandMap);
+
+  it("le code mère expose des marques disponibles", () => {
+    expect(brands.length).toBeGreaterThan(0);
+  });
+
+  it("renvoie la variante de marque si elle existe, sinon le code mère (jamais inventé)", () => {
+    const b = brands[0];
+    const variant = adaptedCode(base, b, adjBrandMap);
+    expect(variant).toBe(adjBrandMap.get(base)![b]);
+    expect(variant).not.toBe(base);
+    expect(adaptedCode(base, "MARQUE_INEXISTANTE", adjBrandMap)).toBe(base);
+    expect(adaptedCode(base, null, adjBrandMap)).toBe(base);
+  });
+
+  it("hasBrandVariant : vrai si variante, faux sinon (ex. DREEFT sans variante)", () => {
+    expect(hasBrandVariant(base, brands[0], adjBrandMap)).toBe(true);
+    expect(hasBrandVariant(base, null, adjBrandMap)).toBe(false);
+    expect(hasBrandVariant("4904626", brands[0], adjBrandMap)).toBe(false);
   });
 });
