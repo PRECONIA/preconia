@@ -14,10 +14,26 @@ const mono = JetBrains_Mono({
   display: "swap",
 });
 
+const DESCRIPTION =
+  "Du profil fonctionnel à la catégorie LPPR, ses adjonctions facturables et son positionnement. Aide à la décision non opposable (MPR).";
+
 export const metadata: Metadata = {
+  metadataBase: new URL("https://preconia.vercel.app"),
   title: "PRECONIA — Aide à la préconisation des VPH",
-  description:
-    "Du profil fonctionnel à la catégorie LPPR, ses adjonctions facturables et son positionnement. Aide à la décision non opposable (MPR).",
+  description: DESCRIPTION,
+  openGraph: {
+    title: "PRECONIA — Aide à la préconisation des VPH",
+    description: DESCRIPTION,
+    url: "https://preconia.vercel.app",
+    siteName: "PRECONIA",
+    locale: "fr_FR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "PRECONIA — Aide à la préconisation des VPH",
+    description: DESCRIPTION,
+  },
 };
 
 export default function RootLayout({
