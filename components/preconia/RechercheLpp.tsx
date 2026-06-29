@@ -32,7 +32,7 @@ export function RechercheLpp() {
           </span>
         </div>
         <p className="mb-3 mt-1 text-xs text-ink-soft">
-          Par dénomination ou code LPP (fauteuils, adjonctions, positionnement).
+          Par dénomination, type, marque ou code LPP (fauteuils, adjonctions, positionnement).
         </p>
 
         <input
@@ -57,10 +57,17 @@ export function RechercheLpp() {
                       <span className="block text-sm leading-snug">{r.label}</span>
                       <span className="mt-0.5 block text-[11px] text-ink-soft">{r.category}</span>
                     </span>
-                    <span
-                      className={`mt-0.5 shrink-0 rounded px-1.5 py-0.5 text-[10px] font-semibold ${KIND_STYLE[r.kind]}`}
-                    >
-                      {KIND_LABEL[r.kind]}
+                    <span className="mt-0.5 flex shrink-0 flex-col items-end gap-1">
+                      <span
+                        className={`rounded px-1.5 py-0.5 text-[10px] font-semibold ${KIND_STYLE[r.kind]}`}
+                      >
+                        {KIND_LABEL[r.kind]}
+                      </span>
+                      {r.brand && (
+                        <span className="rounded bg-orange-100 px-1.5 py-0.5 text-[10px] font-semibold text-orange-700">
+                          {r.brand}
+                        </span>
+                      )}
                     </span>
                   </li>
                 ))}

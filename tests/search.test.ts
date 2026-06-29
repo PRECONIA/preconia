@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { catalog, normalize, searchCatalog } from "@/lib/search";
+import { catalog, normalize, parseLpprBrand, searchCatalog } from "@/lib/search";
 
 describe("catalogue de recherche", () => {
   it("indexe les VPH scrappés + adjonctions + forfaits PAP", () => {
@@ -42,5 +42,36 @@ describe("searchCatalog", () => {
 
   it("respecte la limite de résultats", () => {
     expect(searchCatalog("vph", 5).length).toBeLessThanOrEqual(5);
+  });
+
+  it("trouve par marque et expose la vignette marque", () => {
+    const r = searchCatalog("invacare");
+    expect(r.length).toBeGreaterThan(0);
+    expect(r[0]?.brand).toBe("INVACARE");
+  });
+});
+
+describe("parseLpprBrand", () => {
+  it("extrait la marque collée (sans espace après la virgule)", () => {
+    expect(
+      parseLpprBrand("VPH, ACHAT NEUF, FMPR, NON-MODUL., MANUEL/POUSSER,INVACARE").brand,
+    ).toBe("INVACARE");
+  });
+  it("extrait la marque précédée d'une virgule + espace", () => {
+    expect(
+      parseLpprBrand("VPH, ACHAT NEUF, FREV, MODULAIRE ÉLECTRIQUE DE VERTICALISATION, SKS ROLTEC")
+        .brand,
+    ).toBe("SKS ROLTEC");
+  });
+  it("ne confond pas une description avec une marque (code mère)", () => {
+    const r = parseLpprBrand("VPH, ACHAT NEUF, FRE-C, MODULAIRE À PROPULSION PAR MOTEUR ÉLECTRIQUE - CLASSE C");
+    expect(r.brand).toBeNull();
+  });
+});
+
+describe("vignettes marque dans le catalogue", () => {
+  it("au moins 100 produits VPH portent une marque", () => {
+    const branded = catalog.filter((e) => e.kind === "vph" && e.brand);
+    expect(branded.length).toBeGreaterThanOrEqual(100);
   });
 });

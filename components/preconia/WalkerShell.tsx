@@ -252,9 +252,11 @@ export function WalkerShell() {
           {/* ---------------- ADJONCTIONS + PAP ---------------- */}
           {stage === "adj" && device && (
             <Step
-              title="Adjonctions facturables"
+              title="Adjonctions & positionnement"
               hint={`Sélection compatible avec le ${device.code}. Codes LPPR et tarifs TTC indicatifs.`}
             >
+              <h3 className="mb-3 mt-1 text-lg font-semibold tracking-tight">Adjonctions facturables</h3>
+
               {compatAdj.length === 0 && (
                 <p className="rounded-lg bg-petrol-tint/40 px-3 py-2 text-sm text-ink-soft">
                   Aucune adjonction facturable répertoriée pour ce dispositif.
@@ -294,9 +296,9 @@ export function WalkerShell() {
                 ))}
 
               {/* PAP */}
-              <div className="mb-2 mt-5 text-[11px] font-semibold uppercase tracking-wide text-ink-soft">
-                Produits d&apos;aide au positionnement (PAP)
-              </div>
+              <h3 className="mb-3 mt-6 text-lg font-semibold tracking-tight">
+                Produits d&apos;aide au positionnement
+              </h3>
               {device.modular ? (
                 papRegions.map((region) => (
                   <details key={region.name} className="mb-2 rounded-lg border border-line-soft">
@@ -594,7 +596,9 @@ function Line({ code, label, value, open }: { code: string; label: string; value
   return (
     <div className="flex items-baseline justify-between gap-3 border-b border-line-soft py-1.5 text-sm last:border-0">
       <span className="flex min-w-0 items-baseline gap-2">
-        <span className="font-mono text-[11px] text-ink-soft">{code}</span>
+        <span className="shrink-0 rounded bg-petrol-tint px-1.5 py-0.5 font-mono text-[11px] font-semibold text-petrol-deep">
+          {code}
+        </span>
         <span>{label}</span>
       </span>
       <span className={`font-mono ${open ? "text-amber" : "text-petrol-deep"}`}>{value}</span>
