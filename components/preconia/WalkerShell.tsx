@@ -73,13 +73,13 @@ export function WalkerShell() {
   const availableBrands = brandsForBases(brandBases, adjBrandMap);
 
   return (
-    <div className="mx-auto max-w-[790px] px-5 pb-16 pt-8">
+    <div className="relative z-10 mx-auto max-w-[790px] px-5 pb-16 pt-8">
       <header>
         <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-petrol">
           Aide à la préconisation VPH · Médecine physique &amp; réadaptation
         </div>
-        <div className="my-1 text-[30px] font-bold tracking-tight">
-          PRECON<span className="text-petrol">IA</span>
+        <div className="pc-wordmark-rise my-1 text-[30px] font-bold tracking-tight">
+          PRECON<span className="pc-accent-breathe inline-block text-petrol">IA</span>
         </div>
         <p className="max-w-[60ch] text-sm leading-relaxed text-ink-soft">
           Du profil fonctionnel au dispositif, à sa classe, ses adjonctions facturables (codes LPPR)

@@ -24,3 +24,50 @@ body {
   color: var(--color-ink);
   font-family: var(--font-sans);
 }
+
+/* --- animations --- */
+@keyframes pc-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes pc-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes pc-breathe {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.62;
+  }
+}
+
+/* roue de fauteuil en arrière-plan (bas-gauche) */
+.pc-wheel-spin {
+  transform-origin: 50% 50%;
+  animation: pc-spin 18s linear infinite;
+}
+/* titre : entrée en fondu montant + accent « IA » qui respire */
+.pc-wordmark-rise {
+  animation: pc-rise 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+.pc-accent-breathe {
+  animation: pc-breathe 3.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pc-wheel-spin,
+  .pc-wordmark-rise,
+  .pc-accent-breathe {
+    animation: none;
+  }
+}
