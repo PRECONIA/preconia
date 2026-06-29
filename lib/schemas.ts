@@ -79,12 +79,25 @@ export const BesoinOptionSchema = z.object({ v: z.string(), t: z.string() });
 export const BesoinFieldSchema = z.object({
   id: z.string(),
   label: z.string(),
+  hint: z.string().optional(),
   when: z.string().optional(),
   source: z.string().optional(),
   options: z.array(BesoinOptionSchema).optional(),
   effect: z.string().optional(),
 });
 export const BesoinsFileSchema = z.object({ appliesWhen: z.string(), fields: z.array(BesoinFieldSchema) });
+
+/* --- lppr.json (base nomenclature scrappée — catalogue produits VPH par code LPP) --- */
+export const LpprProductSchema = z.object({
+  code: z.string(),
+  label: z.string(),
+  category: z.string(),
+});
+export const LpprFileSchema = z.object({
+  source: z.string(),
+  lastUpdated: z.string(),
+  products: z.array(LpprProductSchema),
+});
 
 /* --- meta.json --- */
 export const MetaSchema = z.object({

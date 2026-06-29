@@ -77,9 +77,10 @@ export function computeSubtotal(
   return adjCost + papCost;
 }
 
-/** Gating de l'étape besoins : seulement si la fiche d'évaluation est requise. */
+/** Gating de l'étape besoins : seulement pour les dispositifs électriques
+ *  (classe A/B/C + aptitude à la conduite). Les manuels vont directement aux adjonctions. */
 export function needsBesoins(device: Device): boolean {
-  return device.fiche === true;
+  return device.electric === true;
 }
 
 /** INV. 4 — une classe B/C est soumise au code de la route (équipements inclus). */

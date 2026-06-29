@@ -17,6 +17,7 @@ import {
   prescribers,
 } from "@/lib/data";
 import { eur } from "@/lib/format";
+import { RechercheLpp } from "@/components/preconia/RechercheLpp";
 import type { Adjonction, BesoinField, Device } from "@/lib/types";
 import { useWalker } from "@/lib/walker/WalkerProvider";
 import {
@@ -43,7 +44,8 @@ function priceLabel(a: Adjonction): string {
   return eur(a.price ?? 0);
 }
 
-const MAN_FAMILIES = ["Manuel non modulaire", "Manuel modulaire"];
+// Propulsion manuelle / podale : fauteuils manuels + cycle (propulsion podale).
+const MAN_FAMILIES = ["Manuel non modulaire", "Manuel modulaire", "Cycle"];
 
 export function WalkerShell() {
   const { state, dispatch } = useWalker();
@@ -163,44 +165,24 @@ export function WalkerShell() {
 
           {/* ---------------- MOBILITE ---------------- */}
           {stage === "mob" && (
-            <Step title="Capacité de marche et de propulsion" hint="Détermine la grande famille de dispositif.">
-              <button className={btn} onClick={() => dispatch({ type: "CHOOSE_DEVICE", code: "SCO", mob: "scooter" })}>
-                Marche possible sur quelques mètres → scooter
-              </button>
+            <Step title="Capacité de propulsion" hint="Oriente vers la famille de dispositif.">
               <button
-                className={btn}
+                className={`${btn} ${answers.mob === "manuel" ? btnOn : ""}`}
                 onClick={() => {
                   setAnswer("mob", "manuel");
                   go("cfg_man");
                 }}
               >
-                Incapacité de marche — propulsion manuelle possible
+                Propulsion manuelle / podale
               </button>
               <button
-                className={btn}
+                className={`${btn} ${answers.mob === "elec" ? btnOn : ""}`}
                 onClick={() => {
                   setAnswer("mob", "elec");
                   go("cfg_elec");
                 }}
               >
-                Incapacité de marche — propulsion manuelle impossible (électrique)
-              </button>
-              {answers.age === "enfant" && (
-                <button
-                  className={btn}
-                  onClick={() => {
-                    setAnswer("mob", "poussette");
-                    go("cfg_pou");
-                  }}
-                >
-                  Enfant ne pouvant utiliser un autre VPH → poussette
-                </button>
-              )}
-              <button className={btn} onClick={() => dispatch({ type: "CHOOSE_DEVICE", code: "BASE", mob: "base" })}>
-                Installation sur moulage thermoformable → base roulante
-              </button>
-              <button className={btn} onClick={() => dispatch({ type: "CHOOSE_DEVICE", code: "CYC", mob: "cycle" })}>
-                Déplacement par tricycle adapté → cycle
+                Propulsion électrique
               </button>
               <Nav dispatch={dispatch} />
             </Step>
@@ -209,7 +191,7 @@ export function WalkerShell() {
           {/* ---------------- CONFIG (man / elec / pou) ---------------- */}
           {stage === "cfg_man" && (
             <DeviceChoice
-              title="Configuration manuelle"
+              title="Configuration manuelle / podale"
               list={devices.filter((d) => MAN_FAMILIES.includes(d.family))}
               dispatch={dispatch}
             />
@@ -218,13 +200,6 @@ export function WalkerShell() {
             <DeviceChoice
               title="Configuration électrique"
               list={devices.filter((d) => d.family === "Électrique")}
-              dispatch={dispatch}
-            />
-          )}
-          {stage === "cfg_pou" && (
-            <DeviceChoice
-              title="Type de poussette"
-              list={devices.filter((d) => d.family === "Poussette")}
               dispatch={dispatch}
             />
           )}
@@ -259,15 +234,14 @@ export function WalkerShell() {
 
               {besoins.fields
                 .filter((f) => f.id !== "classe")
-                .filter((f) => !(f.id === "depl" && device.electric))
                 .map((f) => (
                   <BesoinFieldRow key={f.id} field={f} answers={answers} onSet={setAnswer} />
                 ))}
 
-              {device.electric && answers.cognition === "non" && (
+              {answers.aptitude === "non" && (
                 <Flag>
-                  <b>Capacités de conduite insuffisantes.</b> Envisager une commande pour
-                  l&apos;accompagnant (FREP/FREV — exception prévue par la nomenclature).
+                  <b>Conduite par tierce personne.</b> Inaptitude à la conduite (sensorielle, motrice
+                  ou cognitive) → commande pour l&apos;accompagnant (FREP/FREV, exception nomenclature).
                 </Flag>
               )}
 
@@ -411,10 +385,10 @@ export function WalkerShell() {
                   réfléchissantes inclus et non facturables en sus.
                 </Flag>
               )}
-              {answers.conduite && (
+              {device.electric && answers.aptitude === "non" && (
                 <Flag>
-                  <b>Conduite depuis le fauteuil.</b> Assise basse (type Low Rider), homologation
-                  ISO 7176-19 et arrimage. À coordonner avec l&apos;évaluation du véhicule aménagé.
+                  <b>Conduite par tierce personne.</b> Commande pour l&apos;accompagnant
+                  (FREP/FREV, exception nomenclature).
                 </Flag>
               )}
 
@@ -450,8 +424,6 @@ export function WalkerShell() {
                 </div>
               )}
 
-              <Section title="Fiche technique · repères" items={device.ft} muted />
-
               <div className="mt-5 flex flex-wrap gap-2">
                 <button className={`${primary} py-2.5`} onClick={() => go("adj")}>
                   Modifier les adjonctions
@@ -467,6 +439,8 @@ export function WalkerShell() {
           )}
         </div>
       </div>
+
+      <RechercheLpp />
 
       <footer className="mt-6 border-t border-line pt-4 text-[11.5px] leading-relaxed text-ink-soft/90">
         <b className="text-ink-soft">{meta.disclaimer}</b> {meta.livraison.label}{" "}
@@ -553,9 +527,7 @@ function BesoinFieldRow({
     <div className="mb-4">
       <div className="mb-2 text-sm font-semibold">
         {field.label}
-        {field.effect && field.id === "conduiteAuto" && (
-          <span className="ml-1.5 font-normal text-ink-soft">· active le volet véhicule aménagé</span>
-        )}
+        {field.hint && <span className="ml-1.5 font-normal text-ink-soft">· {field.hint}</span>}
       </div>
       <div className="flex flex-wrap gap-2">
         {field.options.map((o) => (

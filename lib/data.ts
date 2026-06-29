@@ -3,6 +3,7 @@ import adjonctionsRaw from "@/data/adjonctions.json";
 import papRaw from "@/data/pap.json";
 import classesRaw from "@/data/classes.json";
 import besoinsRaw from "@/data/besoins.json";
+import lpprRaw from "@/data/lppr.json";
 import metaRaw from "@/data/meta.json";
 
 import {
@@ -11,6 +12,7 @@ import {
   PapFileSchema,
   ClassesFileSchema,
   BesoinsFileSchema,
+  LpprFileSchema,
   MetaSchema,
 } from "./schemas";
 import type { Device, Presc } from "./types";
@@ -36,6 +38,10 @@ export const papForfaits = papFile.forfaits;
 export const classes = ClassesFileSchema.parse(classesRaw);
 export const besoins = BesoinsFileSchema.parse(besoinsRaw);
 export const meta = MetaSchema.parse(metaRaw);
+
+const lpprFile = LpprFileSchema.parse(lpprRaw);
+export const lpprProducts = lpprFile.products;
+export const lpprMeta = { source: lpprFile.source, lastUpdated: lpprFile.lastUpdated };
 
 /* Index pratique code → device. */
 export const deviceByCode: Record<string, Device> = Object.fromEntries(

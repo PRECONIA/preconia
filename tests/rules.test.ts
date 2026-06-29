@@ -82,13 +82,13 @@ describe("computeSubtotal (INV. 7 — devis/tbd exclus)", () => {
   });
 });
 
-describe("needsBesoins (gating de l'étape besoins)", () => {
-  it("false pour FMP, FMPR, BASE, POU_S ; true pour FRM, FRE", () => {
-    for (const code of ["FMP", "FMPR", "BASE", "POU_S"]) {
-      expect(needsBesoins(deviceByCode[code])).toBe(false);
-    }
-    for (const code of ["FRM", "FRE"]) {
+describe("needsBesoins (gating = dispositifs électriques)", () => {
+  it("true pour FRE/FREP/FREV ; false pour les manuels et autres", () => {
+    for (const code of ["FRE", "FREP", "FREV"]) {
       expect(needsBesoins(deviceByCode[code])).toBe(true);
+    }
+    for (const code of ["FMP", "FRM", "FRMA", "BASE", "POU_S", "SCO", "CYC"]) {
+      expect(needsBesoins(deviceByCode[code])).toBe(false);
     }
   });
 });

@@ -1,0 +1,756 @@
+{
+  "source": "Nomenclature LPPR — base CNAM (codage.ext.cnamts.fr), chapitre VPH achat neuf (7 sous-catégories)",
+  "lastUpdated": "2026-06-25",
+  "products": [
+    {
+      "code": "4507210",
+      "label": "VPH, ACHAT NEUF, BASE, BASE ROULANTE MODULAIRE",
+      "category": "Bases roulantes modulaires"
+    },
+    {
+      "code": "9523478",
+      "label": "VPH, ACHAT NEUF, BASE, BASE ROULANTE MODULAIRE,MEYRA",
+      "category": "Bases roulantes modulaires"
+    },
+    {
+      "code": "9556236",
+      "label": "VPH, ACHAT NEUF, BASE, BASE ROULANTE MODULAIRE,INVACARE",
+      "category": "Bases roulantes modulaires"
+    },
+    {
+      "code": "4540153",
+      "label": "VPH, ACHAT NEUF, CYC, CYCLES MODULAIRES À ROUES MULTIPLES",
+      "category": "Cycles modulaires à roues multiples"
+    },
+    {
+      "code": "9500767",
+      "label": "VPH, ACHAT NEUF, CYC, CYCLES MODULAIRES À ROUES MULTIPLES,RUPIANI",
+      "category": "Cycles modulaires à roues multiples"
+    },
+    {
+      "code": "9538882",
+      "label": "VPH, ACHAT NEUF, CYC, CYCLES MODULAIRES À ROUES MULTIPLES,VERMEIREN",
+      "category": "Cycles modulaires à roues multiples"
+    },
+    {
+      "code": "9581694",
+      "label": "VPH, ACHAT NEUF, CYC, CYCLES MODULAIRES À ROUES MULTIPLES,SCHUCHMANN",
+      "category": "Cycles modulaires à roues multiples"
+    },
+    {
+      "code": "4505889",
+      "label": "VPH, ACHAT NEUF, POU_S, POUSSETTE STANDARD",
+      "category": "Poussettes"
+    },
+    {
+      "code": "4567040",
+      "label": "VPH, ACHAT NEUF, POU_MRE, POUSSETTE MODULAIRE MULTIRÉGLABLE ET ÉVOLUTIVE",
+      "category": "Poussettes"
+    },
+    {
+      "code": "9501100",
+      "label": "VPH, ACHAT NEUF, POU_MRE,POUSSETTE MODUL MULTIRÉGLABLE ÉVOLUTIVE,RUPIANI",
+      "category": "Poussettes"
+    },
+    {
+      "code": "9504660",
+      "label": "VPH, ACHAT NEUF, POU_MRE,POUSSETTE MODUL MULTIRÉGLABLE ÉVOLUTIVE,VERMEIREN",
+      "category": "Poussettes"
+    },
+    {
+      "code": "9516432",
+      "label": "VPH, ACHAT NEUF, POU_MRE,POUSSETTE MODUL MULTIRÉGLABLE ÉVOLUTIVE,SUNRISE MED",
+      "category": "Poussettes"
+    },
+    {
+      "code": "9516700",
+      "label": "VPH, ACHAT NEUF, POU_MRE,POUSSETTE MODUL MULTIRÉGLABLE ÉVOLUTIVE,OTTO BOCK",
+      "category": "Poussettes"
+    },
+    {
+      "code": "9517963",
+      "label": "VPH, ACHAT NEUF, POU_MRE,POUSSETTE MODUL MULTIRÉGLABLE ÉVOLUTIVE,JOHN GMBH",
+      "category": "Poussettes"
+    },
+    {
+      "code": "9522846",
+      "label": "VPH, ACHAT NEUF, POU_S, POUSSETTE STANDARD,CREE",
+      "category": "Poussettes"
+    },
+    {
+      "code": "9524130",
+      "label": "VPH, ACHAT NEUF, POU_MRE,POUSSETTE MODUL MULTIRÉGLABLE ÉVOLUTIVE,CREE",
+      "category": "Poussettes"
+    },
+    {
+      "code": "9566482",
+      "label": "VPH, ACHAT NEUF, POU_MRE,POUSSETTE MODUL MULTIRÉGLABLE ÉVOLUTIVE,PRIDE MOBILITY",
+      "category": "Poussettes"
+    },
+    {
+      "code": "9587685",
+      "label": "VPH, ACHAT NEUF, POU_S, POUSSETTE STANDARD,OTTO BOCK",
+      "category": "Poussettes"
+    },
+    {
+      "code": "4515072",
+      "label": "VPH, ACHAT NEUF, SCO-B, SCOOTER CLASSE B",
+      "category": "Scooters modulaires"
+    },
+    {
+      "code": "4541193",
+      "label": "VPH, ACHAT NEUF, SCO-A, SCOOTER CLASSE A+",
+      "category": "Scooters modulaires"
+    },
+    {
+      "code": "4568000",
+      "label": "VPH, ACHAT NEUF, SCO-C, SCOOTER CLASSE C",
+      "category": "Scooters modulaires"
+    },
+    {
+      "code": "9514255",
+      "label": "VPH, ACHAT NEUF, SCO-B, SCOOTER CLASSE B,INVACARE",
+      "category": "Scooters modulaires"
+    },
+    {
+      "code": "9525827",
+      "label": "VPH, ACHAT NEUF, SCO-B, SCOOTER CLASSE B,MEDTRADE",
+      "category": "Scooters modulaires"
+    },
+    {
+      "code": "9526672",
+      "label": "VPH, ACHAT NEUF, SCO-B, SCOOTER CLASSE B,VERMEIREN",
+      "category": "Scooters modulaires"
+    },
+    {
+      "code": "9541157",
+      "label": "VPH, ACHAT NEUF, SCO-B, SCOOTER CLASSE B,LIFE MOBILITY",
+      "category": "Scooters modulaires"
+    },
+    {
+      "code": "9553373",
+      "label": "VPH, ACHAT NEUF, SCO-C, SCOOTER CLASSE C,LIFE MOBILITY",
+      "category": "Scooters modulaires"
+    },
+    {
+      "code": "9573565",
+      "label": "VPH, ACHAT NEUF, SCO-C, SCOOTER CLASSE C,VERMEIREN",
+      "category": "Scooters modulaires"
+    },
+    {
+      "code": "9587805",
+      "label": "VPH, ACHAT NEUF, SCO-C, SCOOTER CLASSE C,PRIDE MOBILITY",
+      "category": "Scooters modulaires"
+    },
+    {
+      "code": "9597442",
+      "label": "VPH, ACHAT NEUF, SCO-C, SCOOTER CLASSE C,INVACARE",
+      "category": "Scooters modulaires"
+    },
+    {
+      "code": "4520972",
+      "label": "VPH, ACHAT NEUF, FRMS, MODULAIRE À PROPULSION MANUELLE DE SPORT",
+      "category": "VPH modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "4521687",
+      "label": "VPH, ACHAT NEUF, FRMA, MODULAIRE À PROPULSION MANUELLE ACTIFS",
+      "category": "VPH modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "4544910",
+      "label": "VPH, ACHAT NEUF, FRMV, MODULAIRE À PROPULSION MANUELLE DE VERTICALISATION",
+      "category": "VPH modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "4551530",
+      "label": "VPH, ACHAT NEUF, FRMP, MODULAIRE À PROPULSION MANUELLE OU POUSSER MULTI-POSITION",
+      "category": "VPH modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "4592457",
+      "label": "VPH, ACHAT NEUF, FRM, MODULAIRE PROPULSION MANUELLE OU À POUSSER",
+      "category": "VPH modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "4594077",
+      "label": "VPH, ACHAT NEUF, FRMC, MODULAIRE À PROPULSION MANUELLE MULTI-CONFIGURABLES",
+      "category": "VPH modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "9504200",
+      "label": "VPH, ACHAT NEUF, FRM MODULAIRE À PROPULSION MANUELLE/POUSSER,INVACARE",
+      "category": "VPH modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "9506675",
+      "label": "VPH, ACHAT NEUF, FRMP, MODULAIRE MANUEL/POUSSER, MULTI-POSITION,PRIDE MOBILITY",
+      "category": "VPH modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "9506712",
+      "label": "VPH, ACHAT NEUF, FRM MODULAIRE À PROPULSION MANUELLE/POUSSER,MEYRA",
+      "category": "VPH modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "9507261",
+      "label": "VPH, ACHAT NEUF, FRMA, MODULAIRE À PROPULSION MANUELLE ACTIFS,EUROMOVE",
+      "category": "VPH modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "9509231",
+      "label": "VPH, ACHAT NEUF, FRMC, MODULAIRE MANUEL MULTI-CONFIGURABLE,AMYMAT",
+      "category": "VPH modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "9510895",
+      "label": "VPH, ACHAT NEUF, FRMP, MODULAIRE MANUEL/POUSSER, MULTI-POSITION,RUPIANI",
+      "category": "VPH modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "9514670",
+      "label": "VPH, ACHAT NEUF, FRM MODULAIRE À PROPULSION MANUELLE/POUSSER,VERMEIREN",
+      "category": "VPH modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "9517087",
+      "label": "VPH, ACHAT NEUF, FRMA, MODULAIRE À PROPULSION MANUELLE ACTIFS,PERMOBIL",
+      "category": "VPH modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "9517472",
+      "label": "VPH, ACHAT NEUF, FRMS, MODULAIRE À PROPULSION MANUELLE DE SPORT,INVACARE",
+      "category": "VPH modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "9519873",
+      "label": "VPH, ACHAT NEUF, FRMA, MODULAIRE À PROPULSION MANUELLE ACTIFS,AMI AUTONOMIE",
+      "category": "VPH modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "9525371",
+      "label": "VPH, ACHAT NEUF, FRMC, MODULAIRE MANUEL MULTI-CONFIGURABLE,OTTO BOCK",
+      "category": "VPH modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "9530627",
+      "label": "VPH, ACHAT NEUF, FRMC, MODULAIRE MANUEL MULTI-CONFIGURABLE,MEYRA NETTI",
+      "category": "VPH modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "9531414",
+      "label": "VPH, ACHAT NEUF, FRMA, MODULAIRE À PROPULSION MANUELLE ACTIFS,JANTON",
+      "category": "VPH modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "9531845",
+      "label": "VPH, ACHAT NEUF, FRMP, MODULAIRE MANUEL/POUSSER, MULTI-POSITION,MEYRA NETTI",
+      "category": "VPH modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "9533620",
+      "label": "VPH, ACHAT NEUF, FRMA, MODULAIRE À PROPULSION MANUELLE ACTIFS,E-PROG.HANDICAP",
+      "category": "VPH modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "9538913",
+      "label": "VPH, ACHAT NEUF, FRMA, MODULAIRE À PROPULSION MANUELLE ACTIFS,MEYRA NETTI",
+      "category": "VPH modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "9539433",
+      "label": "VPH, ACHAT NEUF, FRMP, MODULAIRE MANUEL OU À POUSSER MULTI-POSITION, INVACARE",
+      "category": "VPH modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "9540614",
+      "label": "VPH, ACHAT NEUF, FRMC, MODULAIRE MANUEL MULTI-CONFIGURABLE,GT CONCEPT",
+      "category": "VPH modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "9541045",
+      "label": "VPH, ACHAT NEUF, FRMC, MODULAIRE MANUEL MULTI-CONFIGURABLE,VERMEIREN",
+      "category": "VPH modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "9543541",
+      "label": "VPH, ACHAT NEUF, FRMA, MODULAIRE À PROPULSION MANUELLE ACTIFS,SUNRISE MED",
+      "category": "VPH modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "9547071",
+      "label": "VPH, ACHAT NEUF, FRMA, MODULAIRE À PROPULSION MANUELLE ACTIFS,INVACARE",
+      "category": "VPH modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "9548060",
+      "label": "VPH, ACHAT NEUF, FRM MODULAIRE À PROPULSION MANUELLE/POUSSER,VILGO",
+      "category": "VPH modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "9548490",
+      "label": "VPH, ACHAT NEUF, FRMC, MODULAIRE MANUEL MULTI-CONFIGURABLE,DPZ SERVICES",
+      "category": "VPH modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "9556213",
+      "label": "VPH, ACHAT NEUF, FRMP, MODULAIRE MANUEL/POUSSER, MULTI-POSITION,VERMEIREN",
+      "category": "VPH modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "9557230",
+      "label": "VPH, ACHAT NEUF, FRMC, MODULAIRE MANUEL MULTI-CONFIGURABLE,LIFE MOBILITY",
+      "category": "VPH modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "9567091",
+      "label": "VPH, ACHAT NEUF, FRMC, MODULAIRE MANUEL MULTI-CONFIGURABLE,AMI AUTONOMIE",
+      "category": "VPH modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "9568587",
+      "label": "VPH, ACHAT NEUF, FRM MODULAIRE À PROPULSION MANUELLE/POUSSER,MEYRA NETTI",
+      "category": "VPH modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "9572761",
+      "label": "VPH, ACHAT NEUF, FRMA, MODULAIRE À PROPULSION MANUELLE ACTIFS,OTTO BOCK",
+      "category": "VPH modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "9575297",
+      "label": "VPH, ACHAT NEUF, FRMC, MODULAIRE MANUEL MULTI-CONFIGURABLE,INVACARE",
+      "category": "VPH modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "9575305",
+      "label": "VPH, ACHAT NEUF, FRMA, MODULAIRE À PROPULSION MANUELLE ACTIFS,GT CONCEPT",
+      "category": "VPH modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "9578798",
+      "label": "VPH, ACHAT NEUF, FRMV, MODULAIRE MANUEL DE VERTICALISATION,LIFE MOBILITY",
+      "category": "VPH modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "9580430",
+      "label": "VPH, ACHAT NEUF, FRMA, MODULAIRE À PROPULSION MANUELLE ACTIFS,DPZ SERVICES",
+      "category": "VPH modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "9584882",
+      "label": "VPH, ACHAT NEUF, FRM MODULAIRE À PROPULSION MANUELLE/POUSSER,DRIVE DEVILBISS",
+      "category": "VPH modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "9585433",
+      "label": "VPH, ACHAT NEUF, FRM MODULAIRE À PROPULSION MANUELLE/POUSSER,OTTO BOCK",
+      "category": "VPH modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "9589075",
+      "label": "VPH, ACHAT NEUF, FRMA, MODULAIRE À PROPULSION MANUELLE ACTIFS,AMYMAT",
+      "category": "VPH modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "9590598",
+      "label": "VPH, ACHAT NEUF, FRMC, MODULAIRE MANUEL MULTI-CONFIGURABLE,PERMOBIL",
+      "category": "VPH modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "9592031",
+      "label": "VPH, ACHAT NEUF, FRMC, MODULAIRE MANUEL MULTI-CONFIGURABLE,SUNRISE MED",
+      "category": "VPH modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "9592278",
+      "label": "VPH, ACHAT NEUF, FRM MODULAIRE À PROPULSION MANUELLE/POUSSER,AMYMAT",
+      "category": "VPH modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "9594722",
+      "label": "VPH, ACHAT NEUF, FRM MODULAIRE À PROPULSION MANUELLE/POUSSER,SUNRISE MED",
+      "category": "VPH modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "4518410",
+      "label": "VPH, ACHAT NEUF, FREP-A, MODULAIRE PROPULS MOTEUR ÉLEC MULTI-POSITION - CLASSE A",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "4521010",
+      "label": "VPH, ACHAT NEUF, FREP-B, MODULAIRE PROPULS MOTEUR ÉLEC MULTI-POSITION - CLASSE B",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "4544777",
+      "label": "VPH, ACHAT NEUF, FRE-A, MODULAIRE À PROPULSION PAR MOTEUR ÉLECTRIQUE - CLASSE A",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "4545512",
+      "label": "VPH, ACHAT NEUF, FRE-B, MODULAIRE À PROPULSION PAR MOTEUR ÉLECTRIQUE - CLASSE B",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "4551435",
+      "label": "VPH, ACHAT NEUF, FRE-C, MODULAIRE À PROPULSION PAR MOTEUR ÉLECTRIQUE - CLASSE C",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "4563467",
+      "label": "VPH, ACHAT NEUF, FREV, MODULAIRE PROPULSION MOTEUR ÉLEC DE VERTICALISATION",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "4567229",
+      "label": "VPH, ACHAT NEUF, FREP-C, MODULAIRE PROPULS MOTEUR ÉLEC MULTI-POSITION - CLASSE C",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9501962",
+      "label": "VPH, ACHAT NEUF, FRE-A, MODULAIRE PAR MOTEUR ÉLECTRIQUE CLASSE A,VERMEIREN",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9511386",
+      "label": "VPH, ACHAT NEUF, FRE-B, MODULAIRE PAR MOTEUR ÉLECTRIQUE - CLASSE B,LIFE MOBILITY",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9511417",
+      "label": "VPH, ACHAT NEUF, FRE-A, MODULAIRE PAR MOTEUR ÉLECTRIQUE CLASSE A,ACEKARE",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9515326",
+      "label": "VPH, ACHAT NEUF, FREP-A, MODULAIRE ÉLECTRIQUE MULTI-POSITION – A,MEYRA NETTI",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9515645",
+      "label": "VPH, ACHAT NEUF, FRE-A, MODULAIRE PAR MOTEUR ÉLECTRIQUE CLASSE A,RUPIANI",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9517532",
+      "label": "VPH, ACHAT NEUF, FREP-A, MODULAIRE ÉLECTRIQUE MULTI-POSITION – A,PERMOBIL",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9519850",
+      "label": "VPH, ACHAT NEUF, FREP-C, MODULAIRE ÉLECTRIQUE MULTI-POSITION – C,LOGO SILVER",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9519985",
+      "label": "VPH, ACHAT NEUF, FREP-C, MODULAIRE ÉLECTRIQUE MULTI-POSITION – C,4POWER4",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9523076",
+      "label": "VPH, ACHAT NEUF, FRE-A, MODULAIRE PAR MOTEUR ÉLECTRIQUE CLASSE A,SUNRISE MED",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9523082",
+      "label": "VPH, ACHAT NEUF, FRE-A, MODULAIRE PAR MOTEUR ÉLECTRIQUE CLASSE A,ERGOCONCEPT",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9525916",
+      "label": "VPH, ACHAT NEUF, FRE-A, MODULAIRE PAR MOTEUR ÉLECTRIQUE CLASSE A,PRIDE MOBILITY",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9527944",
+      "label": "VPH, ACHAT NEUF, FREP-B, MODULAIRE ÉLECTRIQUE MULTI-POSITION – B, SKS ROLTEC",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9528576",
+      "label": "VPH, ACHAT NEUF, FRE-B, MODULAIRE PAR MOTEUR ÉLECTRIQUE CLASSE B,ERGOCONCEPT",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9528754",
+      "label": "VPH, ACHAT NEUF, FREV, MODULAIRE ÉLECTRIQUE DE VERTICALISATION,4POWER4",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9529386",
+      "label": "VPH, ACHAT NEUF, FRE-C, MODULAIRE PAR MOTEUR ÉLECTRIQUE CLASSE C,ERGOCONCEPT",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9533927",
+      "label": "VPH, ACHAT NEUF, FRE-A, MODULAIRE PAR MOTEUR ÉLECTRIQUE CLASSE A,INVACARE",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9534111",
+      "label": "VPH, ACHAT NEUF, FRE-B, MODULAIRE PAR MOTEUR ÉLECTRIQUE CLASSE B,ACEKARE",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9535725",
+      "label": "VPH, ACHAT NEUF, FREP-B, MODULAIRE ÉLECTRIQUE MULTI-POSITION – B,OTTO BOCK",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9537204",
+      "label": "VPH, ACHAT NEUF, FREP-C, MODULAIRE ÉLECTRIQUE MULTI-POSITION – C,SUNRISE MED",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9538936",
+      "label": "VPH, ACHAT NEUF, FRE-A, MODULAIRE PAR MOTEUR ÉLECTRIQUE CLASSE A,ERGOFLIX",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9539628",
+      "label": "VPH, ACHAT NEUF, FRE-B, MODULAIRE PAR MOTEUR ÉLECTRIQUE CLASSE B,LOGO SILVER",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9539930",
+      "label": "VPH, ACHAT NEUF, FREV, MODULAIRE ÉLECTRIQUE DE VERTICALISATION,INVACARE",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9541105",
+      "label": "VPH, ACHAT NEUF, FREP-B, MODULAIRE ÉLECTRIQUE MULTI-POSITION – B,INVACARE",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9543452",
+      "label": "VPH, ACHAT NEUF, FREP-B, MODULAIRE ÉLECTRIQUE MULTI-POSITION – B,DIETZ POWER BV",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9544121",
+      "label": "VPH, ACHAT NEUF, FREV, MODULAIRE ÉLECTRIQUE DE VERTICALISATION,LIFE MOBILITY",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9546396",
+      "label": "VPH, ACHAT NEUF, FREV, MODULAIRE ÉLECTRIQUE DE VERTICALISATION,LOGO SILVER",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9547600",
+      "label": "VPH, ACHAT NEUF, FREP-B, MODULAIRE ÉLECTRIQUE MULTI-POSITION – B,MEYRA NETTI",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9548745",
+      "label": "VPH, ACHAT NEUF, FRE-B, MODULAIRE PAR MOTEUR ÉLECTRIQUE CLASSE B,DIETZ POWER BV",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9549182",
+      "label": "VPH, ACHAT NEUF, FRE-A, MODULAIRE PAR MOTEUR ÉLECTRIQUE CLASSE A,LOGO SILVER",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9549207",
+      "label": "VPH, ACHAT NEUF, FRE-B, MODULAIRE PAR MOTEUR ÉLECTRIQUE CLASSE B,PROT VIRGINIE",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9551138",
+      "label": "VPH, ACHAT NEUF, FREP-A, MODULAIRE ÉLECTRIQUE MULTI-POSITION – A,SUNRISE MED",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9555001",
+      "label": "VPH, ACHAT NEUF, FREP-B, MODULAIRE ÉLECTRIQUE MULTI-POSITION – B,SUNRISE MED",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9557595",
+      "label": "VPH, ACHAT NEUF, FREV, MODULAIRE ÉLECTRIQUE DE VERTICALISATION, SKS ROLTEC",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9557773",
+      "label": "VPH, ACHAT NEUF, FRE-B, MODULAIRE PAR MOTEUR ÉLECTRIQUE CLASSE B,VERMEIREN",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9558809",
+      "label": "VPH, ACHAT NEUF, FRE-B, MODULAIRE PAR MOTEUR ÉLECTRIQUE CLASSE B,MEYRA NETTI",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9559855",
+      "label": "VPH, ACHAT NEUF, FREV, MODULAIRE ÉLECTRIQUE DE VERTICALISATION,SUNRISE MED",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9561496",
+      "label": "VPH, ACHAT NEUF, FREP-B, MODULAIRE ÉLECTRIQUE MULTI-POSITION – B,PRIDE MOBILITY",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9562260",
+      "label": "VPH, ACHAT NEUF, FREP-B, MODULAIRE ÉLECTRIQUE MULTI-POSITION – B,LIFE MOBILITY",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9566944",
+      "label": "VPH, ACHAT NEUF, FRE-B, MODULAIRE PAR MOTEUR ÉLECTRIQUE CLASSE B,OTTO BOCK",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9569581",
+      "label": "VPH, ACHAT NEUF, FREP-A, MODULAIRE ÉLECTRIQUE MULTI-POSITION – A,PRIDE MOBILITY",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9570265",
+      "label": "VPH, ACHAT NEUF, FRE-B, MODULAIRE PAR MOTEUR ÉLECTRIQUE CLASSE B,ELOFLEX",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9571448",
+      "label": "VPH, ACHAT NEUF, FREV, MODULAIRE ÉLECTRIQUE DE VERTICALISATION,MEYRA NETTI",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9574553",
+      "label": "VPH, ACHAT NEUF, FREV, MODULAIRE ÉLECTRIQUE DE VERTICALISATION,VERMEIREN",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9579881",
+      "label": "VPH, ACHAT NEUF, FREP-B, MODULAIRE ÉLECTRIQUE MULTI-POSITION – B,VERMEIREN",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9581381",
+      "label": "VPH, ACHAT NEUF, FRE-B, MODULAIRE PAR MOTEUR ÉLECTRIQUE CLASSE B,WHILL",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9583173",
+      "label": "VPH, ACHAT NEUF, FREP-C, MODULAIRE ÉLECTRIQUE MULTI-POSITION – C,PERMOBIL",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9587001",
+      "label": "VPH, ACHAT NEUF, FRE-B, MODULAIRE PAR MOTEUR ÉLECTRIQUE CLASSE B,SUNRISE MED",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9588839",
+      "label": "VPH, ACHAT NEUF, FREP-C, MODULAIRE ÉLECTRIQUE MULTI-POSITION – C,PRIDE MOBILITY",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9591340",
+      "label": "VPH, ACHAT NEUF, FREP-B, MODULAIRE ÉLECTRIQUE MULTI-POSITION – B,PERMOBIL",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9594076",
+      "label": "VPH, ACHAT NEUF, FREP-B, MODULAIRE ÉLECTRIQUE MULTI-POSITION – B,NEW LIVE MOBIL",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9597956",
+      "label": "VPH, ACHAT NEUF, FRE-B, MODULAIRE PAR MOTEUR ÉLECTRIQUE CLASSE B,PRIDE MOBILITY",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9599174",
+      "label": "VPH, ACHAT NEUF, FREP-B, MODULAIRE ÉLECTRIQUE MULTI-POSITION – B,LOGO SILVER",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9599961",
+      "label": "VPH, ACHAT NEUF, FRE-B, MODULAIRE PAR MOTEUR ÉLECTRIQUE CLASSE B,INVACARE",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9599990",
+      "label": "VPH, ACHAT NEUF, FREV, MODULAIRE ÉLECTRIQUE DE VERTICALISATION,PERMOBIL",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "4530982",
+      "label": "VPH, ACHAT NEUF, FMPR, NON-MODULAIRE, ASS RIGIDE, PROPULSION MANUELLE OU POUSSER",
+      "category": "VPH non modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "4544151",
+      "label": "VPH, ACHAT NEUF, FMP, NON-MODULAIRE À PROPULSION MANUELLE OU À POUSSER",
+      "category": "VPH non modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "9507798",
+      "label": "VPH, ACHAT NEUF, FMP, NON-MODULAIRE, MANUEL OU À POUSSER,MEYRA NETTI",
+      "category": "VPH non modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "9514166",
+      "label": "VPH, ACHAT NEUF, FMP, NON-MODULAIRE, MANUEL OU À POUSSER,DRIVE DEVILBISS",
+      "category": "VPH non modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "9516544",
+      "label": "VPH, ACHAT NEUF, FMPR, NON-MODUL., ASSISE RIGIDE, MANUEL/POUSSER,INNOV S.A.",
+      "category": "VPH non modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "9517986",
+      "label": "VPH, ACHAT NEUF, FMP, NON-MODULAIRE À PROPULSION MANUELLE OU À POUSSER,VERMEIREN",
+      "category": "VPH non modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "9536736",
+      "label": "VPH, ACHAT NEUF, FMPR, NON-MODULAIRE, ASSISE RIGIDE, MANUEL OU POUSSER,INVACARE",
+      "category": "VPH non modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "9539025",
+      "label": "VPH, ACHAT NEUF, FMPR, NON-MODUL., ASSISE RIGIDE, MANUEL/POUSSER,MEYRA NETTI",
+      "category": "VPH non modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "9543297",
+      "label": "VPH, ACHAT NEUF, FMPR, NON-MODUL., ASSISE RIGIDE, MANUEL/POUSSER,VERMEIREN",
+      "category": "VPH non modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "9548277",
+      "label": "VPH, ACHAT NEUF, FMPR, NON-MODUL., ASSISE RIGIDE, MANUEL/POUSSER,DRIVE DEVILBISS",
+      "category": "VPH non modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "9561616",
+      "label": "VPH, ACHAT NEUF, FMP, NON-MODULAIRE À PROPULSION MANUELLE OU À POUSSER,INVACARE",
+      "category": "VPH non modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "9571365",
+      "label": "VPH, ACHAT NEUF, FMP, NON-MODULAIRE, MANUEL OU À POUSSER,VILGO",
+      "category": "VPH non modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "9580938",
+      "label": "VPH, ACHAT NEUF, FMPR, NON-MODUL., ASSISE RIGIDE, MANUEL/POUSSER,OTTO BOCK",
+      "category": "VPH non modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "9595615",
+      "label": "VPH, ACHAT NEUF, FMP, NON-MODULAIRE, MANUEL OU À POUSSER,SUNRISE MED",
+      "category": "VPH non modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "9595800",
+      "label": "VPH, ACHAT NEUF, FMP, NON-MODULAIRE, MANUEL OU À POUSSER,IDENTITES 49",
+      "category": "VPH non modulaires à propulsion manuelle ou à pousser"
+    }
+  ]
+}

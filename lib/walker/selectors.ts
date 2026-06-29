@@ -57,12 +57,8 @@ export interface Facet {
 }
 
 const MOB_LABEL: Record<string, string> = {
-  manuel: "Manuel",
+  manuel: "Manuel / podal",
   elec: "Électrique",
-  scooter: "Scooter",
-  poussette: "Poussette",
-  base: "Base",
-  cycle: "Cycle",
 };
 
 export function facets(answers: Answers): Facet[] {

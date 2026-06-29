@@ -23,14 +23,19 @@ describe("walkerReducer — navigation", () => {
   });
 });
 
-describe("walkerReducer — CHOOSE_DEVICE (gating besoins)", () => {
-  it("FRM (fiche) route vers besoins", () => {
-    const s = walkerReducer(initialState, { type: "CHOOSE_DEVICE", code: "FRM" });
-    expect(s.answers.device).toBe("FRM");
+describe("walkerReducer — CHOOSE_DEVICE (gating besoins = électrique)", () => {
+  it("FRE (électrique) route vers besoins", () => {
+    const s = walkerReducer(initialState, { type: "CHOOSE_DEVICE", code: "FRE" });
+    expect(s.answers.device).toBe("FRE");
     expect(s.stage).toBe("besoins");
   });
 
-  it("FMP (sans fiche) route vers adj", () => {
+  it("FRM (manuel) route directement vers adj", () => {
+    const s = walkerReducer(initialState, { type: "CHOOSE_DEVICE", code: "FRM" });
+    expect(s.stage).toBe("adj");
+  });
+
+  it("FMP (manuel non modulaire) route vers adj", () => {
     const s = walkerReducer(initialState, { type: "CHOOSE_DEVICE", code: "FMP" });
     expect(s.stage).toBe("adj");
   });
@@ -50,13 +55,13 @@ describe("walkerReducer — CHOOSE_DEVICE (gating besoins)", () => {
 });
 
 describe("walkerReducer — SET_ANSWER", () => {
-  it("conduiteAuto='oui' dérive conduite=true", () => {
-    const s = walkerReducer(initialState, { type: "SET_ANSWER", field: "conduiteAuto", value: "oui" });
-    expect(s.answers.conduite).toBe(true);
+  it("enregistre l'aptitude à la conduite", () => {
+    const s = walkerReducer(initialState, { type: "SET_ANSWER", field: "aptitude", value: "non" });
+    expect(s.answers.aptitude).toBe("non");
   });
-  it("conduiteAuto='non' dérive conduite=false", () => {
-    const s = walkerReducer(initialState, { type: "SET_ANSWER", field: "conduiteAuto", value: "non" });
-    expect(s.answers.conduite).toBe(false);
+  it("enregistre la classe électrique", () => {
+    const s = walkerReducer(initialState, { type: "SET_ANSWER", field: "classe", value: "C" });
+    expect(s.answers.classe).toBe("C");
   });
 });
 

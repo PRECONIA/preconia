@@ -7,13 +7,8 @@ export const initialAnswers: Answers = {
   duree: null,
   mob: null,
   device: null,
-  conduite: false,
   classe: null,
-  depl: null,
-  cotes: null,
-  cognition: null,
-  conduiteAuto: null,
-  projet: null,
+  aptitude: null,
 };
 
 export const initialState: WalkerState = {
@@ -43,8 +38,6 @@ export function walkerReducer(state: WalkerState, action: Action): WalkerState {
 
     case "SET_ANSWER": {
       const answers: Answers = { ...state.answers, [action.field]: action.value };
-      // conduiteAuto pilote le drapeau `conduite` (volet véhicule aménagé).
-      if (action.field === "conduiteAuto") answers.conduite = action.value === "oui";
       return { ...state, answers };
     }
 

@@ -1,5 +1,5 @@
 {
-  "appliesWhen": "device.fiche === true",
+  "appliesWhen": "device.electric === true",
   "fields": [
     {
       "id": "classe",
@@ -8,81 +8,20 @@
       "source": "classes.json"
     },
     {
-      "id": "depl",
-      "label": "Types de déplacements",
-      "when": "!device.electric",
-      "options": [
-        {
-          "v": "int",
-          "t": "Intérieur"
-        },
-        {
-          "v": "mixte",
-          "t": "Intérieur + extérieur"
-        },
-        {
-          "v": "ext",
-          "t": "Extérieur / tout-terrain"
-        }
-      ]
-    },
-    {
-      "id": "cotes",
-      "label": "Côtes ou terrains accidentés fréquents",
+      "id": "aptitude",
+      "label": "Aptitude à conduire le fauteuil",
+      "hint": "Limitation sensorielle, motrice ou cognitive",
       "options": [
         {
           "v": "oui",
-          "t": "Oui"
+          "t": "Apte à conduire"
         },
         {
           "v": "non",
-          "t": "Non"
-        }
-      ]
-    },
-    {
-      "id": "cognition",
-      "label": "Capacités cognitives permettant la conduite du VPH",
-      "options": [
-        {
-          "v": "oui",
-          "t": "Oui"
-        },
-        {
-          "v": "non",
-          "t": "Non"
+          "t": "Inapte → conduite par tierce personne"
         }
       ],
-      "effect": "Si device.electric && cognition==='non' → suggérer commande accompagnant (FREP/FREV)."
-    },
-    {
-      "id": "conduiteAuto",
-      "label": "Conduite d'un véhicule motorisé par l'usager",
-      "options": [
-        {
-          "v": "oui",
-          "t": "Oui"
-        },
-        {
-          "v": "non",
-          "t": "Non"
-        }
-      ],
-      "effect": "Si 'oui' → active le modulateur véhicule aménagé (assise basse / Low Rider, ISO 7176-19, arrimage)."
-    },
-    {
-      "id": "projet",
-      "label": "Projet",
-      "options": [
-        {
-          "v": "premiere",
-          "t": "Première acquisition"
-        },
-        {
-          "v": "renouv",
-          "t": "Renouvellement / cumul"
-        }
-      ]
+      "effect": "Si 'non' → proposer une commande pour l'accompagnant (FREP/FREV, exception nomenclature)."
     }
   ]
 }

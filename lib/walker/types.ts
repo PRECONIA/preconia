@@ -1,6 +1,7 @@
 import type { Adjonction, ClasseValue } from "../types";
 
-/* Étapes du walker (cf. CLAUDE.md « Flux du walker »). */
+/* Étapes du walker. Le scooter, la base et la poussette sont, pour l'instant,
+   retirés du flux de préconisation (les dispositifs restent dans la donnée). */
 export type Stage =
   | "home"
   | "age"
@@ -8,17 +9,14 @@ export type Stage =
   | "mob"
   | "cfg_man"
   | "cfg_elec"
-  | "cfg_pou"
   | "besoins"
   | "adj"
   | "result";
 
 export type Age = "adulte" | "enfant";
 export type Duree = "temp" | "durable";
-export type Mob = "manuel" | "elec" | "scooter" | "poussette" | "base" | "cycle";
+export type Mob = "manuel" | "elec";
 export type OuiNon = "oui" | "non";
-export type Depl = "int" | "mixte" | "ext";
-export type Projet = "premiere" | "renouv";
 
 /** Réponses accumulées au fil du parcours (aucune donnée patient). */
 export interface Answers {
@@ -26,13 +24,9 @@ export interface Answers {
   duree: Duree | null;
   mob: Mob | null;
   device: string | null; // code dispositif
-  conduite: boolean; // dérivé de conduiteAuto
   classe: ClasseValue | null;
-  depl: Depl | null;
-  cotes: OuiNon | null;
-  cognition: OuiNon | null;
-  conduiteAuto: OuiNon | null;
-  projet: Projet | null;
+  /** Aptitude à conduire le fauteuil (électrique) : "non" → conduite par tierce personne. */
+  aptitude: OuiNon | null;
 }
 
 export interface WalkerState {

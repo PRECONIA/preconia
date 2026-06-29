@@ -11,6 +11,7 @@ import type {
   PapRegionSchema,
   ClasseSchema,
   BesoinFieldSchema,
+  LpprProductSchema,
   MetaSchema,
 } from "./schemas";
 
@@ -28,4 +29,5 @@ export type PapItem = z.infer<typeof PapItemSchema>;
 export type PapRegion = z.infer<typeof PapRegionSchema>;
 export type Classe = z.infer<typeof ClasseSchema>;
 export type BesoinField = z.infer<typeof BesoinFieldSchema>;
+export type LpprProduct = z.infer<typeof LpprProductSchema>;
 export type Meta = z.infer<typeof MetaSchema>;
