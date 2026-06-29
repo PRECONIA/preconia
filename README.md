@@ -32,3 +32,8 @@ npm run build    # build de production (échoue si une donnée JSON est invalide
   états du walker (`walker/`).
 - `components/preconia/` — UI du walker et de la recherche.
 - `tests/` — Vitest.
+
+## Déploiement
+
+Déploiement automatique sur Vercel : chaque push sur `main` met à jour
+https://preconia.vercel.app.
