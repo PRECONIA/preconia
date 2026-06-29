@@ -118,3 +118,15 @@ export function searchCatalog(query: string, limit = 20): CatalogEntry[] {
     category: e.category,
   }));
 }
+
+/** Catégories de véhicules (VPH uniquement — pas les adjonctions / PAP). */
+export const vphCategories: string[] = Array.from(
+  new Set(catalog.filter((e) => e.kind === "vph").map((e) => e.category)),
+);
+
+/** Catalogue complet d'une catégorie de véhicule (accès direct via les raccourcis). */
+export function catalogByCategory(category: string): CatalogEntry[] {
+  return catalog
+    .filter((e) => e.kind === "vph" && e.category === category)
+    .sort((a, b) => a.label.localeCompare(b.label));
+}

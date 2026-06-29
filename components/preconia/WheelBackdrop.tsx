@@ -12,7 +12,7 @@ export function WheelBackdrop() {
   return (
     <div
       aria-hidden
-      className="pointer-events-none fixed bottom-[-6vh] left-[-4vh] z-0 h-[57.5vh] w-[57.5vh] text-petrol opacity-10"
+      className="pointer-events-none fixed bottom-[-9vh] left-[-7vh] z-0 h-[97.75vh] w-[97.75vh] text-petrol opacity-10"
     >
       <svg
         viewBox="0 0 200 200"
@@ -23,10 +23,10 @@ export function WheelBackdrop() {
         strokeLinejoin="round"
       >
         {/* --- châssis fixe --- */}
-        {/* dossier */}
-        <path d="M62 92 L52 44" strokeWidth="4" />
+        {/* dossier (allongé) */}
+        <path d="M62 92 L47 20" strokeWidth="4" />
         {/* poignée de poussée */}
-        <path d="M52 44 L38 49" strokeWidth="3" />
+        <path d="M47 20 L33 25" strokeWidth="3" />
         {/* assise */}
         <path d="M60 92 L138 92" strokeWidth="4" />
         {/* accoudoir */}
@@ -36,9 +36,6 @@ export function WheelBackdrop() {
         <path d="M74 120 L62 92" strokeWidth="3" />
         {/* tube avant assise → roue avant */}
         <path d="M138 92 L150 150" strokeWidth="4" />
-        {/* repose-pied */}
-        <path d="M146 124 L174 138" strokeWidth="3" />
-        <path d="M170 138 L180 146" strokeWidth="4" />
         {/* fourche roue avant */}
         <path d="M150 150 L150 162" strokeWidth="3" />
         {/* roue avant (pivot, fixe) */}
