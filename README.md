@@ -1,36 +1,34 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# PRECONIA
 
-## Getting Started
+Aide à la préconisation des VPH (véhicules pour personnes handicapées) destinée aux
+prescripteurs (médecins MPR, ergothérapeutes, équipes pluridisciplinaires). Un walker
+d'arbre de décision mène du **profil fonctionnel** à la **catégorie LPPR**, son **mode de
+prise en charge**, ses **adjonctions facturables**, son **positionnement (PAP)** et une
+**synthèse pour l'essai**. Inclut un moteur de recherche de la nomenclature LPPR (VPH,
+adjonctions, PAP) par dénomination, type, marque ou code LPP.
 
-First, run the development server:
+> Aide à la décision **non opposable**. Ne remplace ni l'essai réel ni l'évaluation ergothérapique.
+
+- **En ligne :** https://preconia.vercel.app
+- **Stack :** Next.js (App Router) + TypeScript + Tailwind v4, déployé sur Vercel.
+- **Données :** entièrement externalisées dans `data/*.json` (source unique), validées au
+  build par des schémas zod. Mettre à jour la nomenclature = éditer les JSON, sans toucher au code.
+
+## Développement
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000/preconia
+npm test         # tests Vitest (fonctions pures, schémas, reducer, recherche)
+npm run build    # build de production (échoue si une donnée JSON est invalide)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Architecture
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `data/*.json` — devices, adjonctions, pap, classes, besoins, meta, et bases LPPR scrapées
+  (`lppr.json`, `lppr-adjonctions.json`, `adjonction-brands.json`).
+- `lib/` — schémas (`schemas.ts`), types inférés (`types.ts`), chargement validé (`data.ts`),
+  invariants en fonctions pures testables (`rules.ts`), recherche (`search.ts`), machine à
+  états du walker (`walker/`).
+- `components/preconia/` — UI du walker et de la recherche.
+- `tests/` — Vitest.
