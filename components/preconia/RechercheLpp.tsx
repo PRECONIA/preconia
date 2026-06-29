@@ -37,7 +37,7 @@ const SHORTCUTS = [...vphCategories].sort(
   (a, b) => (CAT_META[a]?.order ?? 99) - (CAT_META[b]?.order ?? 99),
 );
 
-const TYPE_WORDS = ["FRE", "FRE-B", "FMC", "Marque", "Code LPP"];
+const TYPE_WORDS = ["FRE", "FRE-B", "FRMC", "Marque", "Code LPP"];
 
 function frDate(iso: string): string {
   const [y, m, d] = iso.split("-");

@@ -5,6 +5,7 @@
    de bout en bout. Le rendu riche par étape (QuestionStep, BesoinsForm, AdjonctionsPanel,
    PapPanel, ResultCard, synthèse copiable) est volontairement reporté à la session UI. */
 
+import { useState } from "react";
 import {
   adjBrandMap,
   adjGroups,
@@ -71,6 +72,29 @@ export function WalkerShell() {
     ...(device?.modular ? [papForfaits.A.code, papForfaits.B.code] : []),
   ];
   const availableBrands = brandsForBases(brandBases, adjBrandMap);
+
+  // Tous les codes LPP de la fiche finale (forfaits PAP + adjonctions, adaptés à la marque).
+  const lpprCodes = [
+    ...forfaits.map((f) => ({
+      code: adaptedCode(papForfaits[f].code, brand, adjBrandMap),
+      label: papForfaits[f].label,
+    })),
+    ...selectedAdj.map((a) => ({
+      code: adaptedCode(a.code, brand, adjBrandMap),
+      label: a.name,
+    })),
+  ];
+  const [copied, setCopied] = useState(false);
+  const copyCodes = async () => {
+    const text = lpprCodes.map((c) => `${c.code}\t${c.label}`).join("\n");
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 2000);
+    } catch {
+      /* clipboard indisponible */
+    }
+  };
 
   return (
     <div className="relative z-10 mx-auto max-w-[790px] px-5 pb-16 pt-8">
@@ -202,7 +226,13 @@ export function WalkerShell() {
           {stage === "cfg_man" && (
             <DeviceChoice
               title="Configuration manuelle / podale"
-              list={devices.filter((d) => MAN_FAMILIES.includes(d.family))}
+              list={[
+                ...devices.filter((d) => MAN_FAMILIES.includes(d.family)),
+                // poussettes (POU_S, POU_MRE) réservées aux enfants
+                ...(answers.age === "enfant"
+                  ? devices.filter((d) => d.family === "Poussette")
+                  : []),
+              ]}
               dispatch={dispatch}
             />
           )}
@@ -266,16 +296,16 @@ export function WalkerShell() {
               hint={`Sélection compatible avec le ${device.code}. Codes LPPR et tarifs TTC indicatifs.`}
             >
               {availableBrands.length > 0 && (
-                <div className="mb-5">
-                  <label htmlFor="vehicleBrand" className="mb-1.5 block text-sm font-semibold">
+                <div className="mb-5 rounded-xl border-2 border-petrol bg-petrol-tint/50 p-4">
+                  <label htmlFor="vehicleBrand" className="mb-1.5 block text-sm font-semibold text-petrol-deep">
                     Marque du fauteuil
-                    <span className="ml-1.5 font-normal text-ink-soft">· adapte les codes LPP</span>
+                    <span className="ml-1.5 font-normal text-petrol-deep/70">· adapte les codes LPP</span>
                   </label>
                   <select
                     id="vehicleBrand"
                     value={brand ?? ""}
                     onChange={(e) => setAnswer("vehicleBrand", e.target.value || null)}
-                    className="w-full rounded-lg border border-line bg-card px-3 py-2.5 text-sm outline-none focus:border-petrol"
+                    className="w-full rounded-lg border-2 border-petrol bg-card px-3 py-2.5 text-sm font-medium text-petrol-deep outline-none focus:ring-2 focus:ring-petrol/40"
                   >
                     <option value="">Générique (code mère)</option>
                     {availableBrands.map((b) => (
@@ -376,7 +406,7 @@ export function WalkerShell() {
                 <Subtotal costs={costs} />
               )}
 
-              <Nav dispatch={dispatch} next={() => go("result")} nextLabel="Voir la préconisation →" />
+              <Nav dispatch={dispatch} next={() => go("result")} nextLabel="Voir la préconisation →" nextPrimary />
             </Step>
           )}
 
@@ -387,7 +417,7 @@ export function WalkerShell() {
                 <span className="rounded-lg bg-petrol-deep px-3 py-2 font-mono text-lg font-semibold text-petrol-tint">
                   {device.code}
                 </span>
-                <span className="rounded-full bg-petrol-tint px-3 py-1 text-xs font-semibold text-petrol-deep">
+                <span className="rounded-full bg-orange-100 px-3 py-1 text-xs font-semibold text-orange-700">
                   {device.family}
                 </span>
                 {answers.vehicleBrand && (
@@ -396,7 +426,7 @@ export function WalkerShell() {
                   </span>
                 )}
                 {device.electric && answers.classe && (
-                  <span className="rounded-full bg-petrol-tint px-3 py-1 text-xs font-semibold text-petrol-deep">
+                  <span className="rounded-full bg-orange-100 px-3 py-1 text-xs font-semibold text-orange-700">
                     Classe {answers.classe}
                   </span>
                 )}
@@ -422,8 +452,6 @@ export function WalkerShell() {
                   </span>
                 </Cell>
               </dl>
-
-              <Section title="Indications · mots-clés de prescription" items={device.indications} />
 
               {route && (
                 <Flag>
@@ -461,6 +489,12 @@ export function WalkerShell() {
                     />
                   ))}
                   <Subtotal costs={costs} />
+                  <button
+                    onClick={copyCodes}
+                    className={`mt-3 w-full justify-center ${primary} py-3`}
+                  >
+                    {copied ? "✓ Codes LPP copiés" : `Copier les ${lpprCodes.length} codes LPP`}
+                  </button>
                 </div>
               )}
 
@@ -524,18 +558,20 @@ function Nav({
   dispatch,
   next,
   nextLabel,
+  nextPrimary,
 }: {
   dispatch: ReturnType<typeof useWalker>["dispatch"];
   next?: () => void;
   nextLabel?: string;
+  nextPrimary?: boolean;
 }) {
   return (
-    <div className="mt-4 flex items-center justify-between">
+    <div className="mt-4 flex items-center justify-between gap-3">
       <button className={link} onClick={() => dispatch({ type: "BACK" })}>
         ← Retour
       </button>
       {next ? (
-        <button className={link} onClick={next}>
+        <button className={nextPrimary ? `${primary} py-2.5` : link} onClick={next}>
           {nextLabel}
         </button>
       ) : (
@@ -627,22 +663,6 @@ function Cell({ label, children, full }: { label: string; children: React.ReactN
     <div className={`bg-card px-4 py-3 ${full ? "sm:col-span-2" : ""}`}>
       <dt className="text-[10.5px] font-semibold uppercase tracking-wide text-ink-soft">{label}</dt>
       <dd className="mt-1 text-sm">{children}</dd>
-    </div>
-  );
-}
-
-function Section({ title, items, muted }: { title: string; items: string[]; muted?: boolean }) {
-  return (
-    <div className="my-4">
-      <h4 className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-ink-soft">{title}</h4>
-      <ul className="space-y-1.5">
-        {items.map((it, i) => (
-          <li key={i} className="flex gap-2 text-sm">
-            <span className={`mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full ${muted ? "bg-line" : "bg-petrol"}`} />
-            {it}
-          </li>
-        ))}
-      </ul>
     </div>
   );
 }
