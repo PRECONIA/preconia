@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Hanken_Grotesk, JetBrains_Mono } from "next/font/google";
+import { PasswordGate } from "@/components/preconia/PasswordGate";
 import "./globals.css";
 
 const sans = Hanken_Grotesk({
@@ -54,7 +55,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr" className={`${sans.variable} ${mono.variable} h-full antialiased`}>
-      <body className="min-h-full">{children}</body>
+      <body className="min-h-full">
+        <PasswordGate>{children}</PasswordGate>
+      </body>
     </html>
   );
 }

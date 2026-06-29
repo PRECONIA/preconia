@@ -41,6 +41,16 @@ body {
     transform: none;
   }
 }
+@keyframes pc-fade {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
 @keyframes pc-breathe {
   0%,
   100% {
@@ -64,11 +74,15 @@ body {
 .pc-accent-breathe {
   animation: pc-breathe 3.6s ease-in-out infinite;
 }
+.pc-fade {
+  animation: pc-fade 0.45s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
 
 @media (prefers-reduced-motion: reduce) {
   .pc-wheel-spin,
   .pc-wordmark-rise,
-  .pc-accent-breathe {
+  .pc-accent-breathe,
+  .pc-fade {
     animation: none;
   }
 }
