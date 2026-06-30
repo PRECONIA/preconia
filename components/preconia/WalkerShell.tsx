@@ -51,6 +51,8 @@ const btnOn = "border-petrol bg-petrol-tint";
 const link = "text-ink-soft hover:text-petrol-deep text-sm";
 const primary =
   "inline-flex items-center gap-2 rounded-lg bg-petrol px-5 py-3 font-semibold text-white hover:bg-petrol-deep";
+const finish =
+  "inline-flex items-center gap-2 rounded-lg bg-orange-600 px-5 py-2.5 font-semibold text-white hover:bg-orange-700";
 
 function priceLabel(a: Adjonction): string {
   if (a.devis) return "Sur devis";
@@ -327,7 +329,7 @@ export function WalkerShell() {
                 </Flag>
               )}
 
-              <Nav dispatch={dispatch} next={() => go("adj")} nextLabel="Adjonctions →" />
+              <Nav dispatch={dispatch} next={() => go("adj")} nextLabel="Suivant →" />
             </Step>
           )}
 
@@ -510,7 +512,7 @@ export function WalkerShell() {
                 <Subtotal costs={costs} />
               )}
 
-              <Nav dispatch={dispatch} next={() => go("result")} nextLabel="Voir la préconisation →" nextPrimary />
+              <Nav dispatch={dispatch} next={() => go("result")} nextLabel="Terminer" nextFinish />
             </Step>
           )}
 
@@ -687,19 +689,22 @@ function Nav({
   next,
   nextLabel,
   nextPrimary,
+  nextFinish,
 }: {
   dispatch: ReturnType<typeof useWalker>["dispatch"];
   next?: () => void;
   nextLabel?: string;
   nextPrimary?: boolean;
+  nextFinish?: boolean;
 }) {
+  const nextClass = nextFinish ? finish : nextPrimary ? `${primary} py-2.5` : link;
   return (
     <div className="mt-4 flex items-center justify-between gap-3">
       <button className={link} onClick={() => dispatch({ type: "BACK" })}>
-        ← Retour
+        ← Précédent
       </button>
       {next ? (
-        <button className={nextPrimary ? `${primary} py-2.5` : link} onClick={next}>
+        <button className={nextClass} onClick={next}>
           {nextLabel}
         </button>
       ) : (

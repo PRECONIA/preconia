@@ -61,11 +61,17 @@ const MOB_LABEL: Record<string, string> = {
   elec: "Électrique",
 };
 
+/** Types dont le code LPP dépend de la classe (la classe est alors affichée : FRE-B, FREP-C…). */
+const CLASSED = new Set(["FRE", "FREP", "SCO"]);
+
 export function facets(answers: Answers): Facet[] {
+  const code = answers.device ? deviceByCode[answers.device]?.code ?? null : null;
+  const deviceLabel =
+    code && CLASSED.has(code) && answers.classe ? `${code}-${answers.classe}` : code;
   return [
     { k: "Âge", v: answers.age ? (answers.age === "enfant" ? "Enfant" : "Adulte") : null },
     { k: "Durée", v: answers.duree ? (answers.duree === "temp" ? "Temporaire" : "Durable") : null },
     { k: "Mobilité", v: answers.mob ? MOB_LABEL[answers.mob] ?? null : null },
-    { k: "Dispositif", v: answers.device ? deviceByCode[answers.device]?.code ?? null : null },
+    { k: "Dispositif", v: deviceLabel },
   ];
 }
