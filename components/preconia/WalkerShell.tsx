@@ -25,6 +25,7 @@ import {
   brandsForBases,
   deviceBrandsForToken,
   deviceLpp,
+  deviceModelGeneric,
   deviceModelsForBrand,
   hasBrandVariant,
   hasDeviceBrandVariant,
@@ -98,12 +99,16 @@ export function WalkerShell() {
     : [];
   const model = answers.vehicleModel;
 
-  // Code LPP + tarif du fauteuil : code propre à la marque si au catalogue, sinon code mère.
+  // Code LPP + tarif du fauteuil : code du modèle si dispo, sinon code marque, sinon code mère.
   const devLpp = device
-    ? deviceLpp(device, answers.classe, deviceLppByType, deviceModelsByType, brand)
+    ? deviceLpp(device, answers.classe, deviceLppByType, deviceModelsByType, brand, model)
     : null;
   const devBrandHit = device
     ? hasDeviceBrandVariant(device, answers.classe, brand, deviceModelsByType)
+    : false;
+  // modèle choisi sans code propre → on affiche le code générique (mère).
+  const devModelGeneric = device
+    ? deviceModelGeneric(device, answers.classe, brand, model, deviceModelsByType)
     : false;
 
   // Tous les codes LPP de la fiche finale : fauteuil + forfaits PAP + adjonctions (adaptés marque).
@@ -373,6 +378,11 @@ export function WalkerShell() {
                       </span>
                     </span>
                   </div>
+                  {devModelGeneric && (
+                    <p className="mt-2 rounded-md bg-orange-200/60 px-2 py-1.5 text-[11px] text-orange-800">
+                      Pas de code produit pour ce modèle — code générique (mère) affiché.
+                    </p>
+                  )}
                 </div>
               )}
 

@@ -132,15 +132,40 @@ export function deviceLpp(
   byType: Record<string, DeviceLppEntry>,
   byBrand?: Record<string, Record<string, DeviceModelEntry>>,
   brand?: string | null,
+  model?: string | null,
 ): DeviceLppEntry | null {
   const token = deviceLppToken(device, classe);
   if (!token) return null;
   const mere = byType[token] ?? null;
   if (brand && byBrand) {
-    const variant = byBrand[token]?.[brand];
-    if (variant) return { code: variant.code, tarif: mere?.tarif ?? null };
+    const entry = byBrand[token]?.[brand];
+    if (entry) {
+      if (model) {
+        // code propre du modèle ; à défaut (modèle sans code), repli sur le code générique (mère).
+        const m = entry.models.find((x) => x.name === model);
+        const code = m?.code ?? mere?.code ?? null;
+        if (code) return { code, tarif: mere?.tarif ?? null };
+      } else {
+        return { code: entry.code, tarif: mere?.tarif ?? null };
+      }
+    }
   }
   return mere;
+}
+
+/** Vrai si le modèle sélectionné n'a pas de code propre → on affiche le code générique (mère). */
+export function deviceModelGeneric(
+  device: Device,
+  classe: ClasseValue | null,
+  brand: string | null,
+  model: string | null,
+  byBrand: Record<string, Record<string, DeviceModelEntry>>,
+): boolean {
+  if (!brand || !model) return false;
+  const token = deviceLppToken(device, classe);
+  if (!token) return false;
+  const m = byBrand[token]?.[brand]?.models.find((x) => x.name === model);
+  return !!m && !m.code;
 }
 
 /** Marques de fauteuil disponibles (triées) pour le type/classe courant — alimente le sélecteur. */
@@ -154,7 +179,7 @@ export function deviceBrandsForToken(
   return Object.keys(byBrand[token] ?? {}).sort((a, b) => a.localeCompare(b));
 }
 
-/** Modèles commerciaux (triés) pour le type/classe + marque — alimente le volet « modèle ». */
+/** Noms de modèles commerciaux (triés) pour le type/classe + marque — alimente le volet « modèle ». */
 export function deviceModelsForBrand(
   device: Device,
   classe: ClasseValue | null,
@@ -163,7 +188,7 @@ export function deviceModelsForBrand(
 ): string[] {
   if (!brand) return [];
   const token = deviceLppToken(device, classe);
-  return token ? (byBrand[token]?.[brand]?.models ?? []) : [];
+  return token ? (byBrand[token]?.[brand]?.models.map((m) => m.name) ?? []) : [];
 }
 
 /** Vrai si le fauteuil possède une variante de marque (code propre) pour le type/classe courant. */

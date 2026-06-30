@@ -127,9 +127,15 @@ export const DeviceLppFileSchema = z.object({
    token/marque/code viennent de la nomenclature CNAM (lppr.json, token explicite par code) ; les
    noms de modèles viennent du PDF CERAH, rattachés par code. Le code LPP est propre à (type, marque) ;
    les modèles d'une même marque le partagent (vérifié). */
+export const DeviceModelSchema = z.object({
+  name: z.string(),
+  /** code LPP propre au modèle ; null = pas de code produit → repli sur le code générique (mère). */
+  code: z.string().nullable(),
+});
 export const DeviceModelEntrySchema = z.object({
+  /** code LPP de la marque (partagé par ses modèles codés, pour le type/classe). */
   code: z.string(),
-  models: z.array(z.string()),
+  models: z.array(DeviceModelSchema),
 });
 export const DeviceModelsFileSchema = z.object({
   source: z.string(),

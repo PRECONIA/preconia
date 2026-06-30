@@ -15,6 +15,7 @@ import {
   deriveForfaits,
   deviceBrandsForToken,
   deviceLpp,
+  deviceModelGeneric,
   deviceModelsForBrand,
   filterAdjonctions,
   hasBrandVariant,
@@ -201,5 +202,25 @@ describe("deviceLpp — code par marque (catalogue CERAH, code propre, jamais in
     const brands = deviceBrandsForToken(deviceByCode.FREP, "B", deviceModelsByType);
     expect(brands).toContain("OTTO BOCK");
     expect([...brands].sort((a, b) => a.localeCompare(b))).toEqual(brands);
+  });
+
+  it("modèle codé → code de la marque ; modèle sans code → repli code générique (mère) + drapeau", () => {
+    const models = deviceModelsByType["FREP-B"]["SUNRISE MED"].models;
+    const coded = models.find((m) => m.code)!;
+    const codeless = models.find((m) => !m.code)!;
+    expect(coded).toBeTruthy();
+    expect(codeless).toBeTruthy(); // SUNRISE FREP-B a des modèles sans code (ex. Frontier V6)
+
+    const codedLpp = deviceLpp(
+      deviceByCode.FREP, "B", deviceLppByType, deviceModelsByType, "SUNRISE MED", coded.name,
+    )!;
+    expect(codedLpp.code).toBe(coded.code);
+    expect(deviceModelGeneric(deviceByCode.FREP, "B", "SUNRISE MED", coded.name, deviceModelsByType)).toBe(false);
+
+    const genericLpp = deviceLpp(
+      deviceByCode.FREP, "B", deviceLppByType, deviceModelsByType, "SUNRISE MED", codeless.name,
+    )!;
+    expect(genericLpp.code).toBe(mereFrepB.code); // code générique (mère)
+    expect(deviceModelGeneric(deviceByCode.FREP, "B", "SUNRISE MED", codeless.name, deviceModelsByType)).toBe(true);
   });
 });

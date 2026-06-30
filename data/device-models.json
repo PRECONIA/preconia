@@ -1,40 +1,64 @@
 {
-  "source": "CERAH (lppr_nn.pdf, MAJ 25/06/2026) pour les modèles ; nomenclature CNAM (lppr.json) pour token/marque/code. Le code LPP est propre à (type, marque) ; les modèles d'une même marque le partagent.",
+  "source": "CERAH (lppr_nn.pdf, MAJ 25/06/2026) : modèles + code individuel par modèle ; nomenclature CNAM (lppr.json) pour token/marque/code des modèles codés. code=null -> repli code générique.",
   "lastUpdated": "2026-06-25",
   "byToken": {
     "BASE": {
       "INVACARE": {
         "code": "9556236",
         "models": [
-          "Rea Azalea Base"
+          {
+            "name": "Rea Azalea Base",
+            "code": "9556236"
+          },
+          {
+            "name": "Rea Dahlia 45° Base",
+            "code": null
+          }
         ]
-      },
-      "MEYRA": {
-        "code": "9523478",
-        "models": []
       }
     },
     "CYC": {
       "RUPIANI": {
         "code": "9500767",
         "models": [
-          "Tonicross City",
-          "Tonicross Plus"
+          {
+            "name": "Tonicross City",
+            "code": "9500767"
+          },
+          {
+            "name": "Tonicross Plus",
+            "code": "9500767"
+          }
         ]
       },
       "SCHUCHMANN": {
         "code": "9581694",
         "models": [
-          "Momo Essentiel"
+          {
+            "name": "Momo Essentiel",
+            "code": "9581694"
+          }
         ]
       },
       "VERMEIREN": {
         "code": "9538882",
         "models": [
-          "2202",
-          "2215",
-          "2217",
-          "2219"
+          {
+            "name": "2202",
+            "code": "9538882"
+          },
+          {
+            "name": "2215",
+            "code": "9538882"
+          },
+          {
+            "name": "2217",
+            "code": "9538882"
+          },
+          {
+            "name": "2219",
+            "code": "9538882"
+          }
         ]
       }
     },
@@ -42,82 +66,137 @@
       "DRIVE DEVILBISS": {
         "code": "9514166",
         "models": [
-          "NOVO Light",
-          "Stan'Ultra",
-          "Stan'Up"
+          {
+            "name": "NOVO Light",
+            "code": "9514166"
+          },
+          {
+            "name": "Stan'Ultra",
+            "code": "9514166"
+          },
+          {
+            "name": "Stan'Up",
+            "code": "9514166"
+          }
         ]
-      },
-      "IDENTITES 49": {
-        "code": "9595800",
-        "models": []
       },
       "INVACARE": {
         "code": "9561616",
         "models": [
-          "Action 2 NG",
-          "Action 2 NG Transit Lite",
-          "Action 3 NG S"
+          {
+            "name": "Action 2 NG",
+            "code": "9561616"
+          },
+          {
+            "name": "Action 2 NG Transit Lite",
+            "code": "9561616"
+          },
+          {
+            "name": "Action 3 NG S",
+            "code": "9561616"
+          }
         ]
       },
       "MEYRA NETTI": {
         "code": "9507798",
         "models": [
-          "Budget 9.050",
-          "Eurochair 1.750"
+          {
+            "name": "Budget 9.050",
+            "code": "9507798"
+          },
+          {
+            "name": "Eurochair 1.750",
+            "code": "9507798"
+          }
         ]
       },
       "SUNRISE MED": {
         "code": "9595615",
         "models": [
-          "Style",
-          "Style X"
+          {
+            "name": "Style",
+            "code": "9595615"
+          },
+          {
+            "name": "Style X",
+            "code": "9595615"
+          }
         ]
       },
       "VERMEIREN": {
         "code": "9517986",
         "models": [
-          "BOBBY EVO"
+          {
+            "name": "BOBBY EVO",
+            "code": "9517986"
+          },
+          {
+            "name": "D200N 30° Initial",
+            "code": null
+          },
+          {
+            "name": "D200N Initial",
+            "code": null
+          },
+          {
+            "name": "POCKET",
+            "code": null
+          }
         ]
-      },
-      "VILGO": {
-        "code": "9571365",
-        "models": []
       }
     },
     "FMPR": {
       "DRIVE DEVILBISS": {
         "code": "9548277",
         "models": [
-          "IDSoft Evolution"
+          {
+            "name": "IDSoft Evolution",
+            "code": "9548277"
+          },
+          {
+            "name": "Multitec",
+            "code": null
+          }
         ]
-      },
-      "INNOV S.A.": {
-        "code": "9516544",
-        "models": []
       },
       "INVACARE": {
         "code": "9536736",
         "models": [
-          "Rea Clematis Pro One S"
+          {
+            "name": "Rea Clematis Pro One S",
+            "code": "9536736"
+          }
         ]
       },
       "MEYRA NETTI": {
         "code": "9539025",
         "models": [
-          "Netti 4U CE"
+          {
+            "name": "Netti 4U CE",
+            "code": "9539025"
+          }
         ]
       },
       "OTTO BOCK": {
         "code": "9580938",
         "models": [
-          "JIANGSU Start Multi Confort OTTO"
+          {
+            "name": "JIANGSU Start Multi Confort OTTO",
+            "code": "9580938"
+          }
         ]
       },
       "VERMEIREN": {
         "code": "9543297",
         "models": [
-          "Inovys II Evo Initial",
-          "Inovys II Evo Initital T30"
+          {
+            "name": "Inovys II Evo Initial",
+            "code": "9543297"
+          },
+          {
+            "name": "Inovys II Evo Initital T30",
+            "code": "9543297"
+          }
         ]
       }
     },
@@ -125,62 +204,122 @@
       "ACEKARE": {
         "code": "9511417",
         "models": [
-          "KUNSHAN SmartChair Lite",
-          "Smartchair Helix"
+          {
+            "name": "KUNSHAN SmartChair Lite",
+            "code": "9511417"
+          },
+          {
+            "name": "Smartchair Helix",
+            "code": "9511417"
+          }
         ]
       },
       "ERGOCONCEPT": {
         "code": "9523082",
         "models": [
-          "BR7L",
-          "CHANGSHU Ergo 07L 2.0",
-          "CHANGSHU Ergo 08L 2.0",
-          "Ergo 09L 2.0"
+          {
+            "name": "BR7L",
+            "code": "9523082"
+          },
+          {
+            "name": "CHANGSHU Ergo 07L 2.0",
+            "code": "9523082"
+          },
+          {
+            "name": "CHANGSHU Ergo 08L 2.0",
+            "code": "9523082"
+          },
+          {
+            "name": "Ergo 09L 2.0",
+            "code": "9523082"
+          }
         ]
       },
       "ERGOFLIX": {
         "code": "9538936",
         "models": [
-          "FlixOne"
+          {
+            "name": "Ergoflix LX",
+            "code": null
+          },
+          {
+            "name": "FlixOne",
+            "code": "9538936"
+          },
+          {
+            "name": "L-Back",
+            "code": null
+          }
         ]
       },
       "INVACARE": {
         "code": "9533927",
         "models": [
-          "Erivo",
-          "Esprit Action"
+          {
+            "name": "Erivo",
+            "code": "9533927"
+          },
+          {
+            "name": "Esprit Action",
+            "code": "9533927"
+          }
         ]
       },
       "LOGO SILVER": {
         "code": "9549182",
         "models": [
-          "LIGHTCHAIR"
+          {
+            "name": "LIGHTCHAIR",
+            "code": "9549182"
+          },
+          {
+            "name": "LIGHTCHAIR +",
+            "code": null
+          }
         ]
       },
       "PRIDE MOBILITY": {
         "code": "9525916",
         "models": [
-          "Go Chair",
-          "Jazzy Air 2"
+          {
+            "name": "Go Chair",
+            "code": "9525916"
+          },
+          {
+            "name": "Jazzy Air 2",
+            "code": "9525916"
+          }
         ]
       },
       "RUPIANI": {
         "code": "9515645",
         "models": [
-          "Sixi Hybrid"
+          {
+            "name": "Sixi Hybrid",
+            "code": "9515645"
+          }
         ]
       },
       "SUNRISE MED": {
         "code": "9523076",
         "models": [
-          "Q200 R",
-          "Q300 M Mini Sedeo Lite"
+          {
+            "name": "Q200 R",
+            "code": "9523076"
+          },
+          {
+            "name": "Q300 M Mini Sedeo Lite",
+            "code": "9523076"
+          }
         ]
       },
       "VERMEIREN": {
         "code": "9501962",
         "models": [
-          "Verso 30°"
+          {
+            "name": "Verso 30°",
+            "code": "9501962"
+          }
         ]
       }
     },
@@ -188,102 +327,185 @@
       "ACEKARE": {
         "code": "9534111",
         "models": [
-          "M4 Pro",
-          "SmartChair EVO2",
-          "SmartChair Travel Max"
+          {
+            "name": "M4 Pro",
+            "code": "9534111"
+          },
+          {
+            "name": "SmartChair EVO2",
+            "code": "9534111"
+          },
+          {
+            "name": "SmartChair Travel Max",
+            "code": "9534111"
+          }
         ]
-      },
-      "DIETZ POWER BV": {
-        "code": "9548745",
-        "models": []
-      },
-      "ELOFLEX": {
-        "code": "9570265",
-        "models": []
       },
       "ERGOCONCEPT": {
         "code": "9528576",
         "models": [
-          "BR7L",
-          "BR8L",
-          "CHANGSHU Ergo 08L 3.0"
+          {
+            "name": "BR7L",
+            "code": "9528576"
+          },
+          {
+            "name": "BR8L",
+            "code": "9528576"
+          },
+          {
+            "name": "CHANGSHU Ergo 08L 3.0",
+            "code": "9528576"
+          }
         ]
       },
       "INVACARE": {
         "code": "9599961",
         "models": [
-          "Aviva RX20 Modulite",
-          "Erivo Premium",
-          "Esprit Action"
+          {
+            "name": "Aviva RX20 Modulite",
+            "code": "9599961"
+          },
+          {
+            "name": "Erivo Premium",
+            "code": "9599961"
+          },
+          {
+            "name": "Esprit Action",
+            "code": "9599961"
+          }
         ]
       },
       "LIFE MOBILITY": {
         "code": "9511386",
         "models": [
-          "Blazer Sling",
-          "Morgan Sling"
+          {
+            "name": "Blazer Sling",
+            "code": "9511386"
+          },
+          {
+            "name": "Morgan Sling",
+            "code": "9511386"
+          }
         ]
       },
       "LOGO SILVER": {
         "code": "9539628",
         "models": [
-          "LIGHTCHAIR +"
+          {
+            "name": "LIGHTCHAIR +",
+            "code": "9539628"
+          }
         ]
       },
       "MEYRA NETTI": {
         "code": "9558809",
         "models": [
-          "iCHAIR MC2 1.611",
-          "iCHAIR ORBIT 1.618"
+          {
+            "name": "iCHAIR MC2 1.611",
+            "code": "9558809"
+          },
+          {
+            "name": "iCHAIR ORBIT 1.618",
+            "code": "9558809"
+          }
         ]
       },
       "OTTO BOCK": {
         "code": "9566944",
         "models": [
-          "OTTO Juvo B4"
+          {
+            "name": "OTTO Juvo B4",
+            "code": "9566944"
+          }
         ]
       },
       "PRIDE MOBILITY": {
         "code": "9597956",
         "models": [
-          "Edge 2",
-          "Edge 3 Stretto",
-          "R-Trak"
+          {
+            "name": "Edge 2",
+            "code": "9597956"
+          },
+          {
+            "name": "Edge 3 Stretto",
+            "code": "9597956"
+          },
+          {
+            "name": "R-Trak",
+            "code": "9597956"
+          }
         ]
       },
       "PROT VIRGINIE": {
         "code": "9549207",
         "models": [
-          "KUNSHAN Eloflex F"
+          {
+            "name": "KUNSHAN Eloflex D2",
+            "code": null
+          },
+          {
+            "name": "KUNSHAN Eloflex F",
+            "code": "9549207"
+          },
+          {
+            "name": "KUNSHAN Eloflex L",
+            "code": null
+          },
+          {
+            "name": "KUNSHAN Eloflex P",
+            "code": null
+          },
+          {
+            "name": "KUNSHAN Eloflex R",
+            "code": null
+          }
         ]
       },
       "SUNRISE MED": {
         "code": "9587001",
         "models": [
-          "Q300 M Mini Kids",
-          "Q300 R Sedeo Lite",
-          "Q400 M Sedeo Lite",
-          "Q400 R Sedeo Lite"
+          {
+            "name": "Q300 M Mini Kids",
+            "code": "9587001"
+          },
+          {
+            "name": "Q300 R Sedeo Lite",
+            "code": "9587001"
+          },
+          {
+            "name": "Q400 M Sedeo Lite",
+            "code": "9587001"
+          },
+          {
+            "name": "Q400 R Sedeo Lite",
+            "code": "9587001"
+          }
         ]
       },
       "VERMEIREN": {
         "code": "9557773",
         "models": [
-          "FOREST 3 Initial"
+          {
+            "name": "FOREST 3 Initial",
+            "code": "9557773"
+          },
+          {
+            "name": "Sigma Initial",
+            "code": null
+          },
+          {
+            "name": "Turios Initial",
+            "code": null
+          }
         ]
       },
       "WHILL": {
         "code": "9581381",
         "models": [
-          "C Light"
-        ]
-      }
-    },
-    "FRE-C": {
-      "ERGOCONCEPT": {
-        "code": "9529386",
-        "models": [
-          "BR8L Explorer Section 8 - Fauteuils roulants"
+          {
+            "name": "C Light",
+            "code": "9581381"
+          }
         ]
       }
     },
@@ -291,25 +513,41 @@
       "MEYRA NETTI": {
         "code": "9515326",
         "models": [
-          "TA Indoor Wave"
+          {
+            "name": "TA Indoor Wave",
+            "code": "9515326"
+          }
         ]
       },
       "PERMOBIL": {
         "code": "9517532",
         "models": [
-          "M3 Lite Corpus"
+          {
+            "name": "M3 Lite Corpus",
+            "code": "9517532"
+          }
         ]
       },
       "PRIDE MOBILITY": {
         "code": "9569581",
         "models": [
-          "Edge 3 Stretto"
+          {
+            "name": "Edge 3 Stretto",
+            "code": "9569581"
+          }
         ]
       },
       "SUNRISE MED": {
         "code": "9551138",
         "models": [
-          "Q500 M Sedeo Pro"
+          {
+            "name": "Q500 M Sedeo Pro",
+            "code": "9551138"
+          },
+          {
+            "name": "Q500 R Sedeo Pro",
+            "code": null
+          }
         ]
       }
     },
@@ -317,109 +555,364 @@
       "DIETZ POWER BV": {
         "code": "9543452",
         "models": [
-          "Sango Advanced MWD 5 roues"
+          {
+            "name": "Sango Advanced FWD",
+            "code": null
+          },
+          {
+            "name": "Sango Advanced FWD Junior",
+            "code": null
+          },
+          {
+            "name": "Sango Advanced MWD 5 roues",
+            "code": "9543452"
+          },
+          {
+            "name": "Sango Advanced MWD 5 roues Junior",
+            "code": null
+          },
+          {
+            "name": "Sango Advanced MWD 6 roues",
+            "code": null
+          },
+          {
+            "name": "Sango Advanced MWD 6 roues Junior",
+            "code": null
+          },
+          {
+            "name": "Sango Advanced RWD",
+            "code": null
+          },
+          {
+            "name": "Sango Advanced RWD Junior",
+            "code": null
+          },
+          {
+            "name": "Sango Slimline FWD",
+            "code": null
+          },
+          {
+            "name": "Sango Slimline FWD Junior",
+            "code": null
+          },
+          {
+            "name": "Sango Slimline MWD 5 roues",
+            "code": null
+          },
+          {
+            "name": "Sango Slimline MWD 5 roues Junior",
+            "code": null
+          },
+          {
+            "name": "Sango Slimline MWD 6 roues",
+            "code": null
+          },
+          {
+            "name": "Sango Slimline MWD 6 roues Junior",
+            "code": null
+          },
+          {
+            "name": "Sango Slimline RWD",
+            "code": null
+          },
+          {
+            "name": "Sango Slimline RWD Junior",
+            "code": null
+          }
         ]
       },
       "INVACARE": {
         "code": "9541105",
         "models": [
-          "Aviva RX20 Modulite",
-          "Aviva RX40 Modulite",
-          "Aviva RX40 Ultra Low Maxx",
-          "Storm 4",
-          "Storm 4 X-plore",
-          "TDX SP2 Modulite",
-          "TDX SP2 NB Ultra Low Maxx",
-          "TDX SP2 Ultra Low Maxx"
+          {
+            "name": "Aviva RX20 Modulite",
+            "code": "9541105"
+          },
+          {
+            "name": "Aviva RX40 Modulite",
+            "code": "9541105"
+          },
+          {
+            "name": "Aviva RX40 Ultra Low Maxx",
+            "code": "9541105"
+          },
+          {
+            "name": "Storm 4",
+            "code": "9541105"
+          },
+          {
+            "name": "Storm 4 X-plore",
+            "code": "9541105"
+          },
+          {
+            "name": "TDX SP2 Modulite",
+            "code": "9541105"
+          },
+          {
+            "name": "TDX SP2 NB Ultra Low Maxx",
+            "code": "9541105"
+          },
+          {
+            "name": "TDX SP2 NB modulite",
+            "code": null
+          },
+          {
+            "name": "TDX SP2 Ultra Low Maxx",
+            "code": "9541105"
+          }
         ]
       },
       "LIFE MOBILITY": {
         "code": "9562260",
         "models": [
-          "Blazer Sling",
-          "Evo Lectus",
-          "Evo Lectus Low Rider",
-          "Leon F Kameleon",
-          "Leon Versus",
-          "Mid Lectus",
-          "Morgan M Lectus",
-          "Morgan M Versus",
-          "Morgan Sling"
+          {
+            "name": "Blazer Sling",
+            "code": "9562260"
+          },
+          {
+            "name": "Evo Lectus",
+            "code": "9562260"
+          },
+          {
+            "name": "Evo Lectus Low Rider",
+            "code": "9562260"
+          },
+          {
+            "name": "Leon F Kameleon",
+            "code": "9562260"
+          },
+          {
+            "name": "Leon Versus",
+            "code": "9562260"
+          },
+          {
+            "name": "Mid Lectus",
+            "code": "9562260"
+          },
+          {
+            "name": "Morgan M Lectus",
+            "code": "9562260"
+          },
+          {
+            "name": "Morgan M Versus",
+            "code": "9562260"
+          },
+          {
+            "name": "Morgan Sling",
+            "code": "9562260"
+          }
         ]
       },
       "LOGO SILVER": {
         "code": "9599174",
         "models": [
-          "Alltrack M",
-          "Alltrack M HD",
-          "Alltrack R Foot"
+          {
+            "name": "Alltrack M",
+            "code": "9599174"
+          },
+          {
+            "name": "Alltrack M HD",
+            "code": "9599174"
+          },
+          {
+            "name": "Alltrack R Foot",
+            "code": "9599174"
+          }
         ]
       },
       "MEYRA NETTI": {
         "code": "9547600",
         "models": [
-          "OPTIMUS 2 2.322",
-          "iCHAIR MC2 1.611",
-          "iCHAIR MC3 1.612",
-          "iCHAIR ORBIT 2 1.618",
-          "iCHAIR XXL bis 1.614"
+          {
+            "name": "OPTIMUS 2 2.322",
+            "code": "9547600"
+          },
+          {
+            "name": "TA IQ",
+            "code": null
+          },
+          {
+            "name": "iCHAIR MC2 1.611",
+            "code": "9547600"
+          },
+          {
+            "name": "iCHAIR MC2 NEW 2.611",
+            "code": null
+          },
+          {
+            "name": "iCHAIR MC3 1.612",
+            "code": "9547600"
+          },
+          {
+            "name": "iCHAIR ORBIT 2 1.618",
+            "code": "9547600"
+          },
+          {
+            "name": "iCHAIR XXL bis 1.614",
+            "code": "9547600"
+          }
         ]
       },
       "NEW LIVE MOBIL": {
         "code": "9594076",
         "models": [
-          "Magix II"
+          {
+            "name": "Magix II",
+            "code": "9594076"
+          }
         ]
       },
       "OTTO BOCK": {
         "code": "9535725",
         "models": [
-          "OTTO Juvo B4",
-          "OTTO Juvo B5",
-          "OTTO Juvo B6",
-          "OTTO Juvo B7"
+          {
+            "name": "OTTO Juvo B4",
+            "code": "9535725"
+          },
+          {
+            "name": "OTTO Juvo B5",
+            "code": "9535725"
+          },
+          {
+            "name": "OTTO Juvo B6",
+            "code": "9535725"
+          },
+          {
+            "name": "OTTO Juvo B7",
+            "code": "9535725"
+          }
         ]
       },
       "PERMOBIL": {
         "code": "9591340",
         "models": [
-          "M5 Corpus"
+          {
+            "name": "F3 Corpus",
+            "code": null
+          },
+          {
+            "name": "M3 Corpus",
+            "code": null
+          },
+          {
+            "name": "M5 Corpus",
+            "code": "9591340"
+          }
         ]
       },
       "PRIDE MOBILITY": {
         "code": "9561496",
         "models": [
-          "4Front²",
-          "Edge 3",
-          "Q1450",
-          "Q6 Edge HD",
-          "R-Trak"
+          {
+            "name": "4Front²",
+            "code": "9561496"
+          },
+          {
+            "name": "Edge 3",
+            "code": "9561496"
+          },
+          {
+            "name": "Q1450",
+            "code": "9561496"
+          },
+          {
+            "name": "Q6 Edge 4",
+            "code": null
+          },
+          {
+            "name": "Q6 Edge HD",
+            "code": "9561496"
+          },
+          {
+            "name": "R-Trak",
+            "code": "9561496"
+          }
         ]
       },
       "SUNRISE MED": {
         "code": "9555001",
         "models": [
-          "Extreme X8",
-          "Frontier V4",
-          "Magic 360",
-          "Q300 M Mini Sedeo Lite",
-          "Q300 M Mini Sedeo Pro",
-          "Q300 R Sedeo Lite",
-          "Q400 M Sedeo Lite",
-          "Q400 R Sedeo Lite",
-          "Q700 F Sedeo Pro",
-          "Q700 F Sedeo Pro Advanced",
-          "Q700 M HD",
-          "Q700 M Sedeo Pro",
-          "Q700 M Sedeo Pro Advanced",
-          "Q700 R Sedeo Pro"
+          {
+            "name": "Extreme X8",
+            "code": "9555001"
+          },
+          {
+            "name": "Frontier V4",
+            "code": "9555001"
+          },
+          {
+            "name": "Frontier V6",
+            "code": null
+          },
+          {
+            "name": "Magic 360",
+            "code": "9555001"
+          },
+          {
+            "name": "Q300 M Mini Sedeo Lite",
+            "code": "9555001"
+          },
+          {
+            "name": "Q300 M Mini Sedeo Pro",
+            "code": "9555001"
+          },
+          {
+            "name": "Q300 R Sedeo Lite",
+            "code": "9555001"
+          },
+          {
+            "name": "Q400 M Sedeo Lite",
+            "code": "9555001"
+          },
+          {
+            "name": "Q400 R Sedeo Lite",
+            "code": "9555001"
+          },
+          {
+            "name": "Q700 F Sedeo Pro",
+            "code": "9555001"
+          },
+          {
+            "name": "Q700 F Sedeo Pro Advanced",
+            "code": "9555001"
+          },
+          {
+            "name": "Q700 M HD",
+            "code": "9555001"
+          },
+          {
+            "name": "Q700 M Sedeo Pro",
+            "code": "9555001"
+          },
+          {
+            "name": "Q700 M Sedeo Pro Advanced",
+            "code": "9555001"
+          },
+          {
+            "name": "Q700 R Sedeo Pro",
+            "code": "9555001"
+          }
         ]
       },
       "VERMEIREN": {
         "code": "9579881",
         "models": [
-          "FOREST 3 Advance",
-          "Turios"
+          {
+            "name": "FOREST 3 Advance",
+            "code": "9579881"
+          },
+          {
+            "name": "Forest 3+",
+            "code": null
+          },
+          {
+            "name": "Sigma",
+            "code": null
+          },
+          {
+            "name": "Turios",
+            "code": "9579881"
+          }
         ]
       }
     },
@@ -427,32 +920,45 @@
       "4POWER4": {
         "code": "9519985",
         "models": [
-          "P4-Adventure"
-        ]
-      },
-      "LOGO SILVER": {
-        "code": "9519850",
-        "models": [
-          "Alltrack R Section 9 - Fauteuils roulants"
+          {
+            "name": "P4-Adventure",
+            "code": "9519985"
+          }
         ]
       },
       "PERMOBIL": {
         "code": "9583173",
         "models": [
-          "X850 Corpus"
+          {
+            "name": "X850 Corpus",
+            "code": "9583173"
+          }
         ]
       },
       "PRIDE MOBILITY": {
         "code": "9588839",
         "models": [
-          "Outback"
+          {
+            "name": "Outback",
+            "code": "9588839"
+          }
         ]
       },
       "SUNRISE MED": {
         "code": "9537204",
         "models": [
-          "XT2",
-          "XT4"
+          {
+            "name": "Frontier V6",
+            "code": null
+          },
+          {
+            "name": "XT2",
+            "code": "9537204"
+          },
+          {
+            "name": "XT4",
+            "code": "9537204"
+          }
         ]
       }
     },
@@ -460,206 +966,445 @@
       "4POWER4": {
         "code": "9528754",
         "models": [
-          "P-Access",
-          "P-Advance",
-          "P-Compact",
-          "P6-Compact"
+          {
+            "name": "P-Access",
+            "code": "9528754"
+          },
+          {
+            "name": "P-Advance",
+            "code": "9528754"
+          },
+          {
+            "name": "P-Compact",
+            "code": "9528754"
+          },
+          {
+            "name": "P6-Compact",
+            "code": "9528754"
+          }
         ]
       },
       "INVACARE": {
         "code": "9539930",
         "models": [
-          "Aviva FX40 MPS Maxx"
+          {
+            "name": "Aviva FX40 MPS Maxx",
+            "code": "9539930"
+          }
         ]
       },
       "LIFE MOBILITY": {
         "code": "9544121",
         "models": [
-          "Evo Altus",
-          "Levo C3",
-          "Levo Combi - Combi Junior"
+          {
+            "name": "Evo Altus",
+            "code": "9544121"
+          },
+          {
+            "name": "Levo C3",
+            "code": "9544121"
+          },
+          {
+            "name": "Levo Combi - Combi Junior",
+            "code": "9544121"
+          },
+          {
+            "name": "Levo LCM2",
+            "code": null
+          }
         ]
       },
       "LOGO SILVER": {
         "code": "9546396",
         "models": [
-          "Alltrack M Ascent"
+          {
+            "name": "Alltrack M Ascent",
+            "code": "9546396"
+          }
         ]
       },
       "MEYRA NETTI": {
         "code": "9571448",
         "models": [
-          "TA IQ Stand-Up",
-          "iCHAIR SKY 1.620"
+          {
+            "name": "TA IQ Stand-Up",
+            "code": "9571448"
+          },
+          {
+            "name": "iCHAIR SKY 1.620",
+            "code": "9571448"
+          }
         ]
       },
       "PERMOBIL": {
         "code": "9599990",
         "models": [
-          "F5 Corpus VS"
+          {
+            "name": "F5 Corpus VS",
+            "code": "9599990"
+          },
+          {
+            "name": "M VS",
+            "code": null
+          }
         ]
       },
       "SUNRISE MED": {
         "code": "9559855",
         "models": [
-          "Q700-Up F Sedeo Pro Advanced",
-          "Q700-Up M Sedeo Pro Advanced"
+          {
+            "name": "Q700-Up F Sedeo Pro Advanced",
+            "code": "9559855"
+          },
+          {
+            "name": "Q700-Up M Sedeo Pro Advanced",
+            "code": "9559855"
+          }
         ]
       },
       "VERMEIREN": {
         "code": "9574553",
         "models": [
-          "Forest 3 SU",
-          "Timix SU"
+          {
+            "name": "Forest 3 SU",
+            "code": "9574553"
+          },
+          {
+            "name": "Timix SU",
+            "code": "9574553"
+          }
         ]
       }
     },
     "FRM": {
-      "AMYMAT": {
-        "code": "9592278",
-        "models": []
-      },
       "DRIVE DEVILBISS": {
         "code": "9584882",
         "models": [
-          "Novo Light"
+          {
+            "name": "Novo Light",
+            "code": "9584882"
+          }
         ]
       },
       "INVACARE": {
         "code": "9504200",
         "models": [
-          "Action 3 NG",
-          "Action 3 NG Dual HR",
-          "Action 4 NG",
-          "Action3 Junior",
-          "Action3 NG Hémi",
-          "Action3 NG Levier Pendulaire",
-          "Action3 NG Light"
+          {
+            "name": "Action 3 NG",
+            "code": "9504200"
+          },
+          {
+            "name": "Action 3 NG Dual HR",
+            "code": "9504200"
+          },
+          {
+            "name": "Action 3 NG Transit",
+            "code": null
+          },
+          {
+            "name": "Action 4 NG",
+            "code": "9504200"
+          },
+          {
+            "name": "Action 4 NG Dual HR",
+            "code": null
+          },
+          {
+            "name": "Action 4 NG XLT",
+            "code": null
+          },
+          {
+            "name": "Action3 Junior",
+            "code": "9504200"
+          },
+          {
+            "name": "Action3 NG Hémi",
+            "code": "9504200"
+          },
+          {
+            "name": "Action3 NG Levier Pendulaire",
+            "code": "9504200"
+          },
+          {
+            "name": "Action3 NG Light",
+            "code": "9504200"
+          }
         ]
-      },
-      "MEYRA": {
-        "code": "9506712",
-        "models": []
-      },
-      "MEYRA NETTI": {
-        "code": "9568587",
-        "models": []
       },
       "OTTO BOCK": {
         "code": "9585433",
         "models": [
-          "OTTO Innov XXL"
+          {
+            "name": "OTTO Innov XXL",
+            "code": "9585433"
+          }
         ]
       },
       "SUNRISE MED": {
         "code": "9594722",
         "models": [
-          "Rubix2 XL",
-          "Style-X Ultra"
+          {
+            "name": "Rubix2 XL",
+            "code": "9594722"
+          },
+          {
+            "name": "Style-X Ultra",
+            "code": "9594722"
+          }
         ]
       },
       "VERMEIREN": {
         "code": "9514670",
         "models": [
-          "D200N",
-          "D200N 30°",
-          "V300",
-          "V300 XXL",
-          "V500",
-          "V500 Light"
+          {
+            "name": "D200N",
+            "code": "9514670"
+          },
+          {
+            "name": "D200N 30°",
+            "code": "9514670"
+          },
+          {
+            "name": "V300",
+            "code": "9514670"
+          },
+          {
+            "name": "V300 XXL",
+            "code": "9514670"
+          },
+          {
+            "name": "V500",
+            "code": "9514670"
+          },
+          {
+            "name": "V500 Light",
+            "code": "9514670"
+          }
         ]
-      },
-      "VILGO": {
-        "code": "9548060",
-        "models": []
       }
     },
     "FRMA": {
       "AMI AUTONOMIE": {
         "code": "9519873",
         "models": [
-          "ROGUE 2"
+          {
+            "name": "ROGUE 2",
+            "code": "9519873"
+          },
+          {
+            "name": "ROGUE XP",
+            "code": null
+          }
         ]
-      },
-      "AMYMAT": {
-        "code": "9589075",
-        "models": []
       },
       "DPZ SERVICES": {
         "code": "9580430",
         "models": [
-          "Apex Aluminium",
-          "Apex Carbon"
+          {
+            "name": "Apex Aluminium",
+            "code": "9580430"
+          },
+          {
+            "name": "Apex Carbon",
+            "code": "9580430"
+          }
         ]
       },
       "E-PROG.HANDICAP": {
         "code": "9533620",
         "models": [
-          "LITTY 4all"
+          {
+            "name": "BUDDY",
+            "code": null
+          },
+          {
+            "name": "LITTY 4all",
+            "code": "9533620"
+          },
+          {
+            "name": "LITTY 4you",
+            "code": null
+          },
+          {
+            "name": "SPEEDY 4all Ergo",
+            "code": null
+          },
+          {
+            "name": "SPEEDY 4you Ergo",
+            "code": null
+          },
+          {
+            "name": "SPEEDY A1",
+            "code": null
+          },
+          {
+            "name": "SPEEDY F2",
+            "code": null
+          },
+          {
+            "name": "SPEEDY F3",
+            "code": null
+          }
         ]
       },
       "EUROMOVE": {
         "code": "9507261",
         "models": [
-          "Cleo"
+          {
+            "name": "Cleo",
+            "code": "9507261"
+          }
         ]
       },
       "GT CONCEPT": {
         "code": "9575305",
         "models": [
-          "Icon 60",
-          "W5"
+          {
+            "name": "Icon 60",
+            "code": "9575305"
+          },
+          {
+            "name": "Tukan",
+            "code": null
+          },
+          {
+            "name": "W5",
+            "code": "9575305"
+          }
         ]
       },
       "INVACARE": {
         "code": "9547071",
         "models": [
-          "K-series",
-          "The KSL"
+          {
+            "name": "K-series",
+            "code": "9547071"
+          },
+          {
+            "name": "The KSL",
+            "code": "9547071"
+          }
         ]
       },
       "JANTON": {
         "code": "9531414",
         "models": [
-          "Trace S"
+          {
+            "name": "Trace S",
+            "code": "9531414"
+          }
         ]
       },
       "MEYRA NETTI": {
         "code": "9538913",
         "models": [
-          "FEMTO R 1.180",
-          "HURRICANE DAILY 1.880",
-          "NANO 1.155"
+          {
+            "name": "FEMTO R 1.180",
+            "code": "9538913"
+          },
+          {
+            "name": "HURRICANE DAILY 1.880",
+            "code": "9538913"
+          },
+          {
+            "name": "NANO 1.155",
+            "code": "9538913"
+          }
         ]
       },
       "OTTO BOCK": {
         "code": "9572761",
         "models": [
-          "OTTO Ventus",
-          "OTTO Zenit R"
+          {
+            "name": "OTTO Ventus",
+            "code": "9572761"
+          },
+          {
+            "name": "OTTO Zenit R",
+            "code": "9572761"
+          }
         ]
       },
       "PERMOBIL": {
         "code": "9517087",
         "models": [
-          "Progeo Joker Energy",
-          "Progeo Joker R2",
-          "Progeo Noir 2.0"
+          {
+            "name": "Progeo Joker Energy",
+            "code": "9517087"
+          },
+          {
+            "name": "Progeo Joker R2",
+            "code": "9517087"
+          },
+          {
+            "name": "Progeo Noir 2.0",
+            "code": "9517087"
+          },
+          {
+            "name": "TiLite TR",
+            "code": null
+          },
+          {
+            "name": "TiLite ZRA",
+            "code": null
+          },
+          {
+            "name": "Tilite TRA",
+            "code": null
+          },
+          {
+            "name": "Tilite ZR",
+            "code": null
+          }
         ]
       },
       "SUNRISE MED": {
         "code": "9543541",
         "models": [
-          "Hilite",
-          "Hilite XTR",
-          "Krypton R",
-          "Nitrum",
-          "Nitrum Hybrid",
-          "Nitrum Hybrid Pro",
-          "Nitrum Pro",
-          "Octane Sub 4",
-          "Tiga",
-          "Tiga F2"
+          {
+            "name": "Hilite",
+            "code": "9543541"
+          },
+          {
+            "name": "Hilite XTR",
+            "code": "9543541"
+          },
+          {
+            "name": "Krypton R",
+            "code": "9543541"
+          },
+          {
+            "name": "Nitrum",
+            "code": "9543541"
+          },
+          {
+            "name": "Nitrum Hybrid",
+            "code": "9543541"
+          },
+          {
+            "name": "Nitrum Hybrid Pro",
+            "code": "9543541"
+          },
+          {
+            "name": "Nitrum Pro",
+            "code": "9543541"
+          },
+          {
+            "name": "Octane Sub 4",
+            "code": "9543541"
+          },
+          {
+            "name": "Tiga",
+            "code": "9543541"
+          },
+          {
+            "name": "Tiga F2",
+            "code": "9543541"
+          },
+          {
+            "name": "Tiga Sub 4",
+            "code": null
+          }
         ]
       }
     },
@@ -667,98 +1412,251 @@
       "AMI AUTONOMIE": {
         "code": "9567091",
         "models": [
-          "Catalyst 5VX (DF)"
+          {
+            "name": "Catalyst 5VX (DF)",
+            "code": "9567091"
+          }
         ]
-      },
-      "AMYMAT": {
-        "code": "9509231",
-        "models": []
       },
       "DPZ SERVICES": {
         "code": "9548490",
         "models": [
-          "Helio A6",
-          "Helio A7",
-          "Helio C2",
-          "Helio Kids",
-          "Veloce"
+          {
+            "name": "Helio A6",
+            "code": "9548490"
+          },
+          {
+            "name": "Helio A7",
+            "code": "9548490"
+          },
+          {
+            "name": "Helio C2",
+            "code": "9548490"
+          },
+          {
+            "name": "Helio Kids",
+            "code": "9548490"
+          },
+          {
+            "name": "Veloce",
+            "code": "9548490"
+          }
         ]
       },
       "GT CONCEPT": {
         "code": "9540614",
         "models": [
-          "Icon 30FAF"
+          {
+            "name": "Icon 30FAF",
+            "code": "9540614"
+          },
+          {
+            "name": "Icon 60",
+            "code": null
+          }
         ]
       },
       "INVACARE": {
         "code": "9575297",
         "models": [
-          "Action 4 NG XLT",
-          "Action 5",
-          "Action3 junior Evolutif",
-          "Champion",
-          "Compact",
-          "Compact Attract"
+          {
+            "name": "Action 4 NG XLT",
+            "code": "9575297"
+          },
+          {
+            "name": "Action 5",
+            "code": "9575297"
+          },
+          {
+            "name": "Action 5 Rigid",
+            "code": null
+          },
+          {
+            "name": "Action3 junior Evolutif",
+            "code": "9575297"
+          },
+          {
+            "name": "Champion",
+            "code": "9575297"
+          },
+          {
+            "name": "Compact",
+            "code": "9575297"
+          },
+          {
+            "name": "Compact Attract",
+            "code": "9575297"
+          }
         ]
       },
       "LIFE MOBILITY": {
         "code": "9557230",
         "models": [
-          "Panthera S3 Neox (DI)"
+          {
+            "name": "Panthera S3 Neox (DI)",
+            "code": "9557230"
+          }
         ]
       },
       "MEYRA NETTI": {
         "code": "9530627",
         "models": [
-          "AVANTI 1.736",
-          "AVANTI PRO 1.735",
-          "FEMTO S 1.186",
-          "FEMTO X 1.185",
-          "FLASH 1.135",
-          "NANO S 1.157",
-          "NANO X 1.156",
-          "SMART F 2.360",
-          "SMART S 2.370"
+          {
+            "name": "AVANTI 1.736",
+            "code": "9530627"
+          },
+          {
+            "name": "AVANTI PRO 1.735",
+            "code": "9530627"
+          },
+          {
+            "name": "FEMTO S 1.186",
+            "code": "9530627"
+          },
+          {
+            "name": "FEMTO X 1.185",
+            "code": "9530627"
+          },
+          {
+            "name": "FLASH 1.135",
+            "code": "9530627"
+          },
+          {
+            "name": "NANO S 1.157",
+            "code": "9530627"
+          },
+          {
+            "name": "NANO X 1.156",
+            "code": "9530627"
+          },
+          {
+            "name": "SMART F 2.360",
+            "code": "9530627"
+          },
+          {
+            "name": "SMART S 2.370",
+            "code": "9530627"
+          }
         ]
       },
       "OTTO BOCK": {
         "code": "9525371",
         "models": [
-          "OTTO Avantgarde 4 DS",
-          "OTTO Avantgarde 4 DV",
-          "OTTO Motus 2.0",
-          "OTTO Motus 2.0 Hemi",
-          "OTTO Zenit"
+          {
+            "name": "OTTO Avantgarde 4 DS",
+            "code": "9525371"
+          },
+          {
+            "name": "OTTO Avantgarde 4 DV",
+            "code": "9525371"
+          },
+          {
+            "name": "OTTO Motus 2.0",
+            "code": "9525371"
+          },
+          {
+            "name": "OTTO Motus 2.0 Hemi",
+            "code": "9525371"
+          },
+          {
+            "name": "OTTO Zenit",
+            "code": "9525371"
+          }
         ]
       },
       "PERMOBIL": {
         "code": "9590598",
         "models": [
-          "Progeo Ego",
-          "Progeo Exelle",
-          "Progeo Exelle Junior",
-          "Progeo Exelle Vario",
-          "Progeo Joker"
+          {
+            "name": "Progeo Ego",
+            "code": "9590598"
+          },
+          {
+            "name": "Progeo Exelle",
+            "code": "9590598"
+          },
+          {
+            "name": "Progeo Exelle Junior",
+            "code": "9590598"
+          },
+          {
+            "name": "Progeo Exelle Vario",
+            "code": "9590598"
+          },
+          {
+            "name": "Progeo Joker",
+            "code": "9590598"
+          }
         ]
       },
       "SUNRISE MED": {
         "code": "9592031",
         "models": [
-          "Argon2",
-          "Krypton F",
-          "QS5X",
-          "Quckie Life T",
-          "Quickie Life",
-          "Xenon2",
-          "Xenon2 SA",
-          "Youngster 3"
+          {
+            "name": "Argon2",
+            "code": "9592031"
+          },
+          {
+            "name": "Krypton F",
+            "code": "9592031"
+          },
+          {
+            "name": "Nitrum",
+            "code": null
+          },
+          {
+            "name": "Nitrum Hybrid",
+            "code": null
+          },
+          {
+            "name": "Nitrum Hybrid Pro",
+            "code": null
+          },
+          {
+            "name": "Nitrum Pro",
+            "code": null
+          },
+          {
+            "name": "QS5X",
+            "code": "9592031"
+          },
+          {
+            "name": "Quckie Life T",
+            "code": "9592031"
+          },
+          {
+            "name": "Quickie Life",
+            "code": "9592031"
+          },
+          {
+            "name": "Xenon2",
+            "code": "9592031"
+          },
+          {
+            "name": "Xenon2 SA",
+            "code": "9592031"
+          },
+          {
+            "name": "Youngster 3",
+            "code": "9592031"
+          }
         ]
       },
       "VERMEIREN": {
         "code": "9541045",
         "models": [
-          "Trigo S",
-          "Trigo T"
+          {
+            "name": "Sagitta SI",
+            "code": null
+          },
+          {
+            "name": "Trigo S",
+            "code": "9541045"
+          },
+          {
+            "name": "Trigo T",
+            "code": "9541045"
+          }
         ]
       }
     },
@@ -766,40 +1664,81 @@
       "INVACARE": {
         "code": "9539433",
         "models": [
-          "Rea Azalea",
-          "Rea Azalea Max",
-          "Rea Azalea S",
-          "Rea Clematis Pro Configuré",
-          "Rea Clematis Pro E-Tilt Configuré",
-          "Rea Clematis Pro E-Tilt S",
-          "Rea Dahlia 30°",
-          "Rea Dahlia 45°"
+          {
+            "name": "Rea Azalea",
+            "code": "9539433"
+          },
+          {
+            "name": "Rea Azalea Max",
+            "code": "9539433"
+          },
+          {
+            "name": "Rea Azalea S",
+            "code": "9539433"
+          },
+          {
+            "name": "Rea Clematis Pro Configuré",
+            "code": "9539433"
+          },
+          {
+            "name": "Rea Clematis Pro E-Tilt Configuré",
+            "code": "9539433"
+          },
+          {
+            "name": "Rea Clematis Pro E-Tilt S",
+            "code": "9539433"
+          },
+          {
+            "name": "Rea Dahlia 30°",
+            "code": "9539433"
+          },
+          {
+            "name": "Rea Dahlia 45°",
+            "code": "9539433"
+          }
         ]
       },
       "MEYRA NETTI": {
         "code": "9531845",
         "models": [
-          "Netti 4U CE",
-          "Netti 4U CE PLUS",
-          "Netti 4U CED",
-          "Netti V"
+          {
+            "name": "Netti 4U CE",
+            "code": "9531845"
+          },
+          {
+            "name": "Netti 4U CE PLUS",
+            "code": "9531845"
+          },
+          {
+            "name": "Netti 4U CED",
+            "code": "9531845"
+          },
+          {
+            "name": "Netti V",
+            "code": "9531845"
+          }
         ]
-      },
-      "PRIDE MOBILITY": {
-        "code": "9506675",
-        "models": []
       },
       "RUPIANI": {
         "code": "9510895",
         "models": [
-          "Weely"
+          {
+            "name": "Weely",
+            "code": "9510895"
+          }
         ]
       },
       "VERMEIREN": {
         "code": "9556213",
         "models": [
-          "Inovys II Evo Configuré",
-          "Inovys II-E Evo Configuré"
+          {
+            "name": "Inovys II Evo Configuré",
+            "code": "9556213"
+          },
+          {
+            "name": "Inovys II-E Evo Configuré",
+            "code": "9556213"
+          }
         ]
       }
     },
@@ -807,7 +1746,10 @@
       "INVACARE": {
         "code": "9517472",
         "models": [
-          "Action 5 Rigid"
+          {
+            "name": "Action 5 Rigid",
+            "code": "9517472"
+          }
         ]
       }
     },
@@ -815,9 +1757,18 @@
       "LIFE MOBILITY": {
         "code": "9578798",
         "models": [
-          "Levo LAE",
-          "Levo LCEV - LCE Kid/JR",
-          "Levo Summit EL"
+          {
+            "name": "Levo LAE",
+            "code": "9578798"
+          },
+          {
+            "name": "Levo LCEV - LCE Kid/JR",
+            "code": "9578798"
+          },
+          {
+            "name": "Levo Summit EL",
+            "code": "9578798"
+          }
         ]
       }
     },
@@ -825,46 +1776,80 @@
       "CREE": {
         "code": "9524130",
         "models": [
-          "BUG GREYLINE",
-          "Chilla"
+          {
+            "name": "BUG GREYLINE",
+            "code": "9524130"
+          },
+          {
+            "name": "Chilla",
+            "code": "9524130"
+          }
         ]
       },
       "JOHN GMBH": {
         "code": "9517963",
         "models": [
-          "JOSI-Pro",
-          "JOSI-Wismi G2"
+          {
+            "name": "JOSI-Pro",
+            "code": "9517963"
+          },
+          {
+            "name": "JOSI-Wismi G2",
+            "code": "9517963"
+          }
         ]
       },
       "OTTO BOCK": {
         "code": "9516700",
         "models": [
-          "OTTO Kimba Buggy - 470G71=5_AA04_C"
+          {
+            "name": "OTTO Kimba Buggy - 470G71=5_AA04_C",
+            "code": "9516700"
+          }
         ]
       },
       "PRIDE MOBILITY": {
         "code": "9566482",
         "models": [
-          "Reach"
+          {
+            "name": "Reach",
+            "code": "9566482"
+          },
+          {
+            "name": "Trak",
+            "code": null
+          }
         ]
       },
       "RUPIANI": {
         "code": "9501100",
         "models": [
-          "Geko",
-          "LERADO Rolly Pop"
+          {
+            "name": "Geko",
+            "code": "9501100"
+          },
+          {
+            "name": "LERADO Rolly Pop",
+            "code": "9501100"
+          }
         ]
       },
       "SUNRISE MED": {
         "code": "9516432",
         "models": [
-          "Zippie Voyage"
+          {
+            "name": "Zippie Voyage",
+            "code": "9516432"
+          }
         ]
       },
       "VERMEIREN": {
         "code": "9504660",
         "models": [
-          "Gemini 2"
+          {
+            "name": "Gemini 2",
+            "code": "9504660"
+          }
         ]
       }
     },
@@ -872,51 +1857,24 @@
       "CREE": {
         "code": "9522846",
         "models": [
-          "Piper"
+          {
+            "name": "Piper",
+            "code": "9522846"
+          }
         ]
       },
       "OTTO BOCK": {
         "code": "9587685",
         "models": [
-          "OTTO Eco-Buggy",
-          "OTTO Lisa"
+          {
+            "name": "OTTO Eco-Buggy",
+            "code": "9587685"
+          },
+          {
+            "name": "OTTO Lisa",
+            "code": "9587685"
+          }
         ]
-      }
-    },
-    "SCO-B": {
-      "INVACARE": {
-        "code": "9514255",
-        "models": []
-      },
-      "LIFE MOBILITY": {
-        "code": "9541157",
-        "models": []
-      },
-      "MEDTRADE": {
-        "code": "9525827",
-        "models": []
-      },
-      "VERMEIREN": {
-        "code": "9526672",
-        "models": []
-      }
-    },
-    "SCO-C": {
-      "INVACARE": {
-        "code": "9597442",
-        "models": []
-      },
-      "LIFE MOBILITY": {
-        "code": "9553373",
-        "models": []
-      },
-      "PRIDE MOBILITY": {
-        "code": "9587805",
-        "models": []
-      },
-      "VERMEIREN": {
-        "code": "9573565",
-        "models": []
       }
     }
   }
