@@ -92,7 +92,7 @@ function eur(n: number): string {
 const s = StyleSheet.create({
   page: {
     paddingTop: 38,
-    paddingBottom: 54,
+    paddingBottom: 76,
     paddingHorizontal: 40,
     fontFamily: "Hanken Grotesk",
     fontSize: 9.5,
@@ -108,7 +108,7 @@ const s = StyleSheet.create({
     borderBottomColor: C.petrol,
     paddingBottom: 8,
   },
-  wordmark: { fontSize: 22, fontWeight: 700, letterSpacing: -0.4, color: C.ink },
+  wordmark: { fontSize: 22, fontWeight: 700, letterSpacing: -0.4, lineHeight: 1, color: C.ink },
   wordmarkAccent: { color: C.petrol },
   eyebrow: {
     fontSize: 7,
@@ -116,7 +116,7 @@ const s = StyleSheet.create({
     letterSpacing: 1.1,
     textTransform: "uppercase",
     color: C.petrol,
-    marginTop: 3,
+    marginTop: 5,
   },
   headerRight: { textAlign: "right" },
   headerTitle: { fontSize: 10, fontWeight: 600, color: C.petrolDeep },
@@ -233,7 +233,7 @@ const s = StyleSheet.create({
     paddingHorizontal: 10,
     marginTop: 6,
   },
-  indicative: { fontSize: 7.5, fontStyle: "italic", color: C.inkSoft, marginBottom: 5 },
+  indicative: { fontSize: 7.5, color: C.inkSoft, marginBottom: 5 },
   /* PAP */
   papItem: { borderBottomWidth: 1, borderBottomColor: C.lineSoft, paddingVertical: 5 },
   papHead: { flexDirection: "row", alignItems: "center", marginBottom: 2 },
@@ -275,9 +275,19 @@ const s = StyleSheet.create({
   },
 });
 
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
+function Section({
+  title,
+  children,
+  wrap = false,
+}: {
+  title: string;
+  children: React.ReactNode;
+  /** true pour les sections longues (PAP) : elles peuvent s'étendre sur la page suivante
+      au lieu d'être renvoyées en bloc, ce qui évite une page 1 à moitié vide. */
+  wrap?: boolean;
+}) {
   return (
-    <View style={s.section} wrap={false}>
+    <View style={s.section} wrap={wrap}>
       <Text style={s.sectionTitle}>{title}</Text>
       {children}
     </View>
@@ -463,7 +473,7 @@ function FicheDocument({ d }: { d: FicheData }) {
 
         {/* positionnement (PAP) retenu + descriptions */}
         {d.pap.length > 0 && (
-          <Section title="Positionnement (PAP) retenu">
+          <Section title="Positionnement (PAP) retenu" wrap>
             {d.pap.map((p) => (
               <View key={p.name} style={s.papItem} wrap={false}>
                 <View style={s.papHead}>
