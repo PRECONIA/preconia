@@ -155,6 +155,13 @@ export function WalkerShell() {
     copyToClipboard(`${meta.livraison.code}\t${meta.livraison.label}`, setCopiedLiv);
   // Encart « définition + spécificités techniques » du forfait PAP A ou B.
   const [papInfo, setPapInfo] = useState<"A" | "B" | null>(null);
+  // Connecteur animé : trace une ligne du bouton survolé vers l'encart info orange (grand écran).
+  const [connSource, setConnSource] = useState<DOMRect | null>(null);
+  const onHoverEnter = (e: React.MouseEvent<HTMLElement>) => {
+    if (typeof window !== "undefined" && window.innerWidth >= 1024)
+      setConnSource(e.currentTarget.getBoundingClientRect());
+  };
+  const onHoverLeave = () => setConnSource(null);
 
   return (
     <div className="relative z-10 mx-auto max-w-[790px] px-5 pb-16 pt-8">
@@ -300,6 +307,8 @@ export function WalkerShell() {
               ].filter((d) => deviceAllowedForDuree(d, answers.duree))}
               duree={answers.duree}
               dispatch={dispatch}
+              onEnter={onHoverEnter}
+              onLeave={onHoverLeave}
             />
           )}
           {stage === "cfg_elec" && (
@@ -310,6 +319,8 @@ export function WalkerShell() {
                 .filter((d) => deviceAllowedForDuree(d, answers.duree))}
               duree={answers.duree}
               dispatch={dispatch}
+              onEnter={onHoverEnter}
+              onLeave={onHoverLeave}
             />
           )}
 
@@ -560,7 +571,12 @@ export function WalkerShell() {
                       </span>
                     </summary>
                     {region.items.map((it) => (
-                      <div key={it.name} className="group relative border-t border-line-soft">
+                      <div
+                        key={it.name}
+                        className="group relative border-t border-line-soft"
+                        onMouseEnter={it.info ? onHoverEnter : undefined}
+                        onMouseLeave={it.info ? onHoverLeave : undefined}
+                      >
                         <button
                           className="flex w-full items-start gap-2 px-3 py-2 text-left hover:bg-white"
                           onClick={() => dispatch({ type: "TOGGLE_PAP", name: it.name })}
@@ -802,11 +818,44 @@ export function WalkerShell() {
         <b className="text-ink-soft">{meta.disclaimer}</b> Source : {meta.source}. Dernière mise à
         jour : {meta.lastUpdated}.
       </footer>
+
+      {connSource && <InfoConnector source={connSource} />}
     </div>
   );
 }
 
 /* ---------------- petits composants utilitaires ---------------- */
+
+/** Ligne SVG animée du bouton survolé (dispositif ou PAP) vers l'encart d'information orange.
+ *  L'encart est en position fixe à droite (grand écran) ; on relie sa gauche au bord droit du bouton. */
+function InfoConnector({ source }: { source: DOMRect }) {
+  const vw = typeof window !== "undefined" ? window.innerWidth : 1280;
+  const x1 = source.right - 10;
+  const y1 = source.top + source.height / 2;
+  const x2 = vw / 2 + 401; // bord gauche de l'encart : lg:left-[calc(50%+399px)]
+  const y2 = 96; // sous le haut de l'encart : lg:top-16
+  const mx = (x1 + x2) / 2;
+  const d = `M${x1},${y1} C${mx},${y1} ${mx},${y2} ${x2},${y2}`;
+  return (
+    <svg aria-hidden className="pointer-events-none fixed inset-0 z-[45] h-full w-full">
+      <path
+        d={d}
+        fill="none"
+        stroke="#F59E42"
+        strokeWidth="2.25"
+        strokeLinecap="round"
+        strokeDasharray="640"
+        strokeDashoffset="640"
+      >
+        <animate attributeName="stroke-dashoffset" from="640" to="0" dur="0.4s" fill="freeze" />
+      </path>
+      <circle r="3.5" fill="#2A66E8">
+        <animateMotion dur="1.2s" repeatCount="indefinite" path={d} />
+      </circle>
+      <circle cx={x2} cy={y2} r="4" fill="#F59E42" />
+    </svg>
+  );
+}
 
 function Step({ title, hint, children }: { title: string; hint?: string; children: React.ReactNode }) {
   return (
@@ -853,11 +902,15 @@ function DeviceChoice({
   list,
   duree,
   dispatch,
+  onEnter,
+  onLeave,
 }: {
   title: string;
   list: Device[];
   duree: Answers["duree"];
   dispatch: ReturnType<typeof useWalker>["dispatch"];
+  onEnter?: (e: React.MouseEvent<HTMLElement>) => void;
+  onLeave?: () => void;
 }) {
   const allowed = modesForDuree(duree);
   return (
@@ -872,7 +925,12 @@ function DeviceChoice({
         const ind = deviceIndicationsByCode[d.code] ?? {};
         const entries = modes.map((m) => [m, ind[m]] as const).filter(([, t]) => t);
         return (
-          <div key={d.code} className="group relative">
+          <div
+            key={d.code}
+            className="group relative"
+            onMouseEnter={entries.length > 0 ? onEnter : undefined}
+            onMouseLeave={entries.length > 0 ? onLeave : undefined}
+          >
             <button
               className={btn}
               onClick={() => dispatch({ type: "CHOOSE_DEVICE", code: d.code })}
