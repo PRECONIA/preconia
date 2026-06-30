@@ -518,15 +518,9 @@ function FicheDocument({ d }: { d: FicheData }) {
   );
 }
 
-/** Construit le PDF et déclenche son téléchargement (appelée au clic, en navigateur). */
-export async function downloadFichePdf(data: FicheData): Promise<void> {
+/** Construit le PDF et renvoie une URL blob (à ouvrir pour prévisualisation, en navigateur).
+ *  L'appelant ouvre l'onglet et révoque l'URL ensuite. */
+export async function renderFichePdfUrl(data: FicheData): Promise<string> {
   const blob = await pdf(<FicheDocument d={data} />).toBlob();
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = `preconisation-${data.device.code}.pdf`;
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-  URL.revokeObjectURL(url);
+  return URL.createObjectURL(blob);
 }

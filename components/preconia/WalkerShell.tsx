@@ -266,13 +266,25 @@ export function WalkerShell() {
   const [pdfBusy, setPdfBusy] = useState(false);
   const exportPdf = async () => {
     if (!device) return;
+    // Onglet ouvert dans le geste de clic (sinon bloqué comme pop-up après l'await).
+    const win = window.open("", "_blank");
+    if (win) {
+      win.document.title = `Préconisation ${device.code}`;
+      win.document.body.style.cssText = "margin:0;font-family:sans-serif;color:#4c5c68";
+      win.document.body.innerHTML =
+        '<p style="padding:24px">Génération de la fiche PDF…</p>';
+    }
     setPdfBusy(true);
     try {
       const data = buildFicheData();
-      const { downloadFichePdf } = await import("@/components/preconia/fiche-pdf");
-      await downloadFichePdf(data);
+      const { renderFichePdfUrl } = await import("@/components/preconia/fiche-pdf");
+      const url = await renderFichePdfUrl(data);
+      if (win) win.location.href = url;
+      else window.location.href = url; // repli si pop-up bloqué
+      window.setTimeout(() => URL.revokeObjectURL(url), 60000);
     } catch (e) {
       console.error("Export PDF échoué", e);
+      win?.close();
     } finally {
       setPdfBusy(false);
     }
@@ -929,7 +941,7 @@ export function WalkerShell() {
                   onClick={exportPdf}
                   disabled={pdfBusy}
                 >
-                  {pdfBusy ? "Génération…" : "⬇ Exporter en PDF"}
+                  {pdfBusy ? "Génération…" : "Aperçu PDF ↗"}
                 </button>
               </div>
             </>
