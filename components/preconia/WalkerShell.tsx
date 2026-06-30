@@ -646,7 +646,7 @@ export function WalkerShell() {
                           {meta.livraison.code}
                         </span>
                         <span>
-                          {meta.livraison.label} <span className="text-ink-soft">· livraison</span>
+                          {meta.livraison.label} <span className="text-ink-soft">· MAD</span>
                         </span>
                       </span>
                       <span className="font-mono text-blue-800">{eur(meta.livraison.price)}</span>
@@ -680,7 +680,7 @@ export function WalkerShell() {
                         className="mt-0.5 h-4 w-4 accent-blue-600"
                       />
                       <span className="text-sm">
-                        <b className="text-blue-900">Ajouter le forfait de livraison &amp; mise en service</b>
+                        <b className="text-blue-900">Ajouter le forfait Mise A Disposition (MAD)</b>
                         <span className="mt-0.5 block text-[12px] text-blue-800/80">
                           {meta.livraison.label}
                         </span>
@@ -699,7 +699,7 @@ export function WalkerShell() {
                         onClick={copyLivraison}
                         className="shrink-0 rounded-lg bg-blue-600 px-3 py-2 text-sm font-semibold text-white hover:bg-blue-700"
                       >
-                        {copiedLiv ? "✓ Copié" : "Copier le code livraison"}
+                        {copiedLiv ? "✓ Copié" : "Copier le code MAD"}
                       </button>
                     </div>
                   </div>
@@ -828,7 +828,7 @@ function DeviceChoice({
               </span>
             </button>
             {entries.length > 0 && (
-              <div className="pointer-events-none absolute left-0 top-full z-30 mt-2 hidden w-full rounded-xl border-2 border-orange-400 bg-orange-50 p-4 text-[12px] leading-relaxed text-orange-900 shadow-xl group-hover:block lg:fixed lg:left-auto lg:right-5 lg:top-20 lg:z-50 lg:mt-0 lg:max-h-[calc(100vh-7rem)] lg:w-[21rem] lg:overflow-y-auto">
+              <div className="pointer-events-none absolute left-0 top-full z-30 mt-2 hidden w-full rounded-xl border-2 border-orange-400 bg-orange-50 p-4 text-[13px] leading-relaxed text-orange-900 shadow-xl group-hover:block lg:fixed lg:left-[calc(50%+399px)] lg:right-4 lg:top-16 lg:z-50 lg:mt-0 lg:w-auto lg:max-w-[34rem]">
                 <div className="mb-1.5 text-[11px] font-bold uppercase tracking-wide text-orange-700">
                   Indication officielle de prise en charge
                 </div>
