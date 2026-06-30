@@ -830,7 +830,7 @@ export function WalkerShell() {
  *  L'encart est en position fixe à droite (grand écran) ; on relie sa gauche au bord droit du bouton. */
 function InfoConnector({ source }: { source: DOMRect }) {
   const vw = typeof window !== "undefined" ? window.innerWidth : 1280;
-  const x1 = source.right - 10;
+  const x1 = source.right; // bord droit exact du bouton
   const y1 = source.top + source.height / 2;
   const x2 = vw / 2 + 401; // bord gauche de l'encart : lg:left-[calc(50%+399px)]
   const y2 = 96; // sous le haut de l'encart : lg:top-16
@@ -849,10 +849,6 @@ function InfoConnector({ source }: { source: DOMRect }) {
       >
         <animate attributeName="stroke-dashoffset" from="640" to="0" dur="0.4s" fill="freeze" />
       </path>
-      <circle r="3.5" fill="#2A66E8">
-        <animateMotion dur="1.2s" repeatCount="indefinite" path={d} />
-      </circle>
-      <circle cx={x2} cy={y2} r="4" fill="#F59E42" />
     </svg>
   );
 }
@@ -933,7 +929,10 @@ function DeviceChoice({
           >
             <button
               className={btn}
-              onClick={() => dispatch({ type: "CHOOSE_DEVICE", code: d.code })}
+              onClick={() => {
+                onLeave?.();
+                dispatch({ type: "CHOOSE_DEVICE", code: d.code });
+              }}
             >
               <b className="block">
                 <span className="font-mono">{d.code}</span> — {d.name}
