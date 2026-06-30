@@ -828,7 +828,7 @@ function DeviceChoice({
               </span>
             </button>
             {entries.length > 0 && (
-              <div className="pointer-events-none absolute left-0 top-full z-20 mt-2 hidden w-full rounded-xl border-2 border-orange-400 bg-orange-50 p-3 text-[12px] leading-relaxed text-orange-900 shadow-lg group-hover:block lg:left-full lg:top-0 lg:mt-0 lg:ml-3 lg:w-[22rem]">
+              <div className="pointer-events-none absolute left-0 top-full z-30 mt-2 hidden w-full rounded-xl border-2 border-orange-400 bg-orange-50 p-4 text-[12px] leading-relaxed text-orange-900 shadow-xl group-hover:block lg:fixed lg:left-auto lg:right-5 lg:top-20 lg:z-50 lg:mt-0 lg:max-h-[calc(100vh-7rem)] lg:w-[21rem] lg:overflow-y-auto">
                 <div className="mb-1.5 text-[11px] font-bold uppercase tracking-wide text-orange-700">
                   Indication officielle de prise en charge
                 </div>
