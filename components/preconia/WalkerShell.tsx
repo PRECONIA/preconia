@@ -153,6 +153,8 @@ export function WalkerShell() {
   const [copiedLiv, setCopiedLiv] = useState(false);
   const copyLivraison = () =>
     copyToClipboard(`${meta.livraison.code}\t${meta.livraison.label}`, setCopiedLiv);
+  // Encart « définition + spécificités techniques » du forfait PAP A ou B.
+  const [papInfo, setPapInfo] = useState<"A" | "B" | null>(null);
 
   return (
     <div className="relative z-10 mx-auto max-w-[790px] px-5 pb-16 pt-8">
@@ -499,9 +501,55 @@ export function WalkerShell() {
                 ))}
 
               {/* PAP */}
-              <h3 className="mb-3 mt-6 text-lg font-semibold tracking-tight">
-                Produits d&apos;aide au positionnement
-              </h3>
+              <div className="mb-3 mt-6 flex flex-wrap items-center gap-2">
+                <h3 className="text-lg font-semibold tracking-tight">
+                  Produits d&apos;aide au positionnement
+                </h3>
+                {(["A", "B"] as const).map((f) => (
+                  <button
+                    key={f}
+                    type="button"
+                    onClick={() => setPapInfo(papInfo === f ? null : f)}
+                    className={`rounded-full border px-2.5 py-1 text-xs font-semibold transition-colors ${
+                      papInfo === f
+                        ? "border-petrol bg-petrol text-white"
+                        : "border-petrol/40 text-petrol-deep hover:bg-petrol-tint"
+                    }`}
+                  >
+                    ⓘ PAP {f}
+                  </button>
+                ))}
+              </div>
+              {papInfo && (
+                <div className="mb-3 rounded-xl border-2 border-petrol bg-petrol-tint/40 p-4 text-sm leading-relaxed">
+                  <div className="mb-2 flex items-center justify-between gap-2">
+                    <b className="text-petrol-deep">{papForfaits[papInfo].label}</b>
+                    <button
+                      type="button"
+                      onClick={() => setPapInfo(null)}
+                      className="shrink-0 text-xs text-ink-soft hover:text-petrol-deep"
+                    >
+                      Fermer ✕
+                    </button>
+                  </div>
+                  <div className="mb-1 text-[11px] font-bold uppercase tracking-wide text-petrol">
+                    Définition
+                  </div>
+                  <ul className="mb-3 list-disc space-y-1 pl-4 text-ink">
+                    {papForfaits[papInfo].definition.map((d, i) => (
+                      <li key={i}>{d}</li>
+                    ))}
+                  </ul>
+                  <div className="mb-1 text-[11px] font-bold uppercase tracking-wide text-petrol">
+                    Spécificités techniques minimales
+                  </div>
+                  <ul className="list-disc space-y-1 pl-4 text-ink">
+                    {papForfaits[papInfo].technique.map((d, i) => (
+                      <li key={i}>{d}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
               {device.modular ? (
                 papRegions.map((region) => (
                   <details key={region.name} className="mb-2 rounded-lg border border-line-soft">
@@ -512,21 +560,30 @@ export function WalkerShell() {
                       </span>
                     </summary>
                     {region.items.map((it) => (
-                      <button
-                        key={it.name}
-                        className="flex w-full items-start gap-2 border-t border-line-soft px-3 py-2 text-left hover:bg-white"
-                        onClick={() => dispatch({ type: "TOGGLE_PAP", name: it.name })}
-                      >
-                        <span
-                          className={`mt-0.5 inline-block h-4 w-4 rounded border ${
-                            state.pap[it.name] ? "border-petrol bg-petrol" : "border-line"
-                          }`}
-                        />
-                        <span>
-                          <b className="block text-sm">{it.name}</b>
-                          <span className="block text-xs text-ink-soft">{it.desc}</span>
-                        </span>
-                      </button>
+                      <div key={it.name} className="group relative border-t border-line-soft">
+                        <button
+                          className="flex w-full items-start gap-2 px-3 py-2 text-left hover:bg-white"
+                          onClick={() => dispatch({ type: "TOGGLE_PAP", name: it.name })}
+                        >
+                          <span
+                            className={`mt-0.5 inline-block h-4 w-4 shrink-0 rounded border ${
+                              state.pap[it.name] ? "border-petrol bg-petrol" : "border-line"
+                            }`}
+                          />
+                          <span>
+                            <b className="block text-sm">{it.name}</b>
+                            <span className="block text-xs text-ink-soft">{it.desc}</span>
+                          </span>
+                        </button>
+                        {it.info && (
+                          <div className="pointer-events-none absolute left-0 top-full z-30 mt-1 hidden w-full rounded-xl border-2 border-orange-400 bg-orange-50 p-4 text-[13px] leading-relaxed text-orange-900 shadow-xl group-hover:block lg:fixed lg:left-[calc(50%+399px)] lg:right-4 lg:top-16 lg:z-50 lg:mt-0 lg:w-auto lg:max-w-[34rem]">
+                            <div className="mb-1.5 text-[11px] font-bold uppercase tracking-wide text-orange-700">
+                              {it.name}
+                            </div>
+                            {it.info}
+                          </div>
+                        )}
+                      </div>
                     ))}
                   </details>
                 ))

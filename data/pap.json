@@ -3,12 +3,30 @@
     "A": {
       "code": "4954096",
       "price": 600,
-      "label": "Forfait A — dossier & membres supérieurs"
+      "label": "Forfait A — dossier (cervico-céphalique, thoraco-lombaire)",
+      "definition": [
+        "Aides techniques susceptibles d'être adaptées sur tout VPH modulaire, conçues pour maintenir, adapter, compenser ou corriger le positionnement du corps, pour améliorer le confort, la stabilité et la réalisation facilitée des activités quotidiennes des personnes utilisatrices des VPH qui ont des troubles posturaux.",
+        "Les PAP sont classés par région corporelle et par type d'assistance ou correction de posture"
+      ],
+      "technique": [
+        "Les produits d'assistance à la posture sont ajoutés en compléments des différents modules minimaux constitutifs d'un VPH pour répondre aux besoins du patient en termes de positionnement. Ces éléments répondent à des besoins spécifiques et doivent être précisés sur l'ordonnance du prescripteur.",
+        "La prise en charge des produits d'assistance à la posture est assurée pour les personnes utilisatrices de VPH modulaires ayant des troubles posturaux avec une incidence sur le plan clinique et fonctionnel et sur leur qualité de vie.",
+        "Les objectifs du positionnement sont de prévenir, corriger et compenser les troubles posturaux qui ont une incidence sur le plan clinique et fonctionnel (confort, stabilité, prévention d'escarres, accomplissement facilité des activités quotidiennes), ainsi que sur la qualité de vie de l'utilisateur d'un VPH (meilleure autonomie, participation sociale favorisée)."
+      ]
     },
     "B": {
       "code": "4947601",
       "price": 600,
-      "label": "Forfait B — siège & membres inférieurs"
+      "label": "Forfait B — siège (bassin, hanches, genou, épaule, poignet)",
+      "definition": [
+        "Aides techniques susceptibles d'être adaptées sur tout VPH modulaire, conçues pour maintenir, adapter, compenser ou corriger le positionnement du corps, pour améliorer le confort, la stabilité et la réalisation facilitée des activités quotidiennes des personnes utilisatrices des VPH qui ont des troubles posturaux.",
+        "Les PAP sont classés par région corporelle et par type d'assistance ou correction de posture"
+      ],
+      "technique": [
+        "Les produits d'assistance à la posture sont ajoutés en compléments des différents modules minimaux constitutifs d'un VPH pour répondre aux besoins du patient en termes de positionnement. Ces éléments répondent à des besoins spécifiques et doivent être précisés sur l'ordonnance du prescripteur.",
+        "La prise en charge des produits d'assistance à la posture est assurée pour les personnes utilisatrices de VPH modulaires ayant des troubles posturaux avec une incidence sur le plan clinique et fonctionnel et sur leur qualité de vie.",
+        "Les objectifs du positionnement sont de prévenir, corriger et compenser les troubles posturaux qui ont une incidence sur le plan clinique et fonctionnel (confort, stabilité, prévention d'escarres, accomplissement facilité des activités quotidiennes), ainsi que sur la qualité de vie de l'utilisateur d'un VPH (meilleure autonomie, participation sociale favorisée)."
+      ]
     }
   },
   "regions": [
@@ -17,16 +35,19 @@
       "forfait": "A",
       "items": [
         {
-          "name": "Base d'appui cervico-céphalique",
-          "desc": "Appui-tête simple, réglable, escamotable/amovible."
+          "name": "Base d’appui-cervico-céphalique (Appui-tête simple)",
+          "desc": "Base du système de positionnement de la tête, composé au minimum d’une base de fixation au…",
+          "info": "Base du système de positionnement de la tête, composé au minimum d’une base de fixation au dossier ou au siège du VPH, avec un axe réglable en hauteur et en profondeur, et d’un appui occipital ou cervical. Le dispositif doit être escamotable et/ou amovible. Il peut comporter un axe rotatif à sa base."
         },
         {
-          "name": "Appuis cervico-céphaliques latéraux",
-          "desc": "Inclinaison latérale du rachis cervical."
+          "name": "Appuis cervico-céphaliques latéraux (appui-tête enveloppant)",
+          "desc": "Dispositifs de soutien ou de correction d’une inclinaison latérale du rachis cervical, à f…",
+          "info": "Dispositifs de soutien ou de correction d’une inclinaison latérale du rachis cervical, à fixation rigide. Forme d’appui-tête enveloppant simple non escamotable et non amovible. En fonction des besoins spécifiques il peut être : - Réglable dans le plan frontal de l’appui latéral sur sa base ou de sa base sur son élément de fixation, et dans l’axe horizontal. Réglable en rotation. Permet de s’adapter à la morphologie ou une posture particulière. Le point d’application de l’appui peut être temporal ou sous maxillaire. - Dynamique pour l’absorption de l’énergie lors de dystonies ou d’hypertonies."
         },
         {
           "name": "Appui cervico-céphalique antérieur",
-          "desc": "Flexion antérieure ; appui frontal ou sous-maxillaire."
+          "desc": "Dispositif de soutien ou de correction d’une flexion antérieure du rachis cervical, à fixa…",
+          "info": "Dispositif de soutien ou de correction d’une flexion antérieure du rachis cervical, à fixation rigide. Escamotable et/ou amovible, et réglable dans le plan sagittal sur les axes horizontal et vertical pour s’adapter à la morphologie ou à une posture particulière. Le point de l’application de l’appui peut être frontal ou sous maxillaire. Il peut comporter un axe rotatif à sa base. En fonction des besoins spécifiques, il peut être : - Dynamique pour l’absorption de l’énergie lors de dystonies ou d’hypertonies, - Souple escamotable et/ou amovible et réglable. Le point de l’application de l’appui est frontal."
         }
       ]
     },
@@ -35,56 +56,85 @@
       "forfait": "A",
       "items": [
         {
-          "name": "Dossier de base rigide",
-          "desc": "Soutien sagittal du rachis, réglable."
+          "name": "Dossier de base de positionnement rigide",
+          "desc": "Dispositif de soutien du rachis dans le plan sagittal, composé d’une base rigide fixée sur…",
+          "info": "Dispositif de soutien du rachis dans le plan sagittal, composé d’une base rigide fixée sur le VPH, réglable en hauteur et profondeur. Plusieurs hauteurs et largeurs doivent être proposées. Ces dossiers doivent proposer des éléments de positionnement à la commande ou être préformés pour assurer une fonction posturale."
         },
         {
           "name": "Dossier de positionnement souple",
-          "desc": "Sangles réglables, matériau de confort."
+          "desc": "Dispositif de soutien du rachis dans le plan sagittal fixé sur le VPH par différents procé…",
+          "info": "Dispositif de soutien du rachis dans le plan sagittal fixé sur le VPH par différents procédés de fixation définitive (velcros, collage, insertion dans une housse), au minimum réglable en largeur. Il est composé d’une base disposant de sangles transversales réglables en tension et d’un élément en matériau de confort (mousse, gel, air…). Ces dossiers doivent proposer des éléments de positionnement à la commande"
         },
         {
-          "name": "Appuis thoraciques latéraux",
-          "desc": "Inclinaison latérale du tronc."
+          "name": "Appuis thoraciques latéraux intégrés à un dossier rigide",
+          "desc": "Dispositifs de soutien ou correction d’une inclinaison latérale du tronc, à fixation rigide",
+          "info": "Dispositifs de soutien ou correction d’une inclinaison latérale du tronc, à fixation rigide. Non escamotables, non amovibles et non réglables. Au moins 3 écartements et 2 profondeurs sont proposés. Le dispositif doit indiquer les compatibilités et incompatibilités avec les différents types d’assises"
+        },
+        {
+          "name": "Appuis thoraciques latéraux non escamotables non amovibles non réglables fixés sur un dossier rigide ou un VPH",
+          "desc": "Dispositif de soutien ou correction d’une inclinaison latérale du tronc, à fixation rigide",
+          "info": "Dispositif de soutien ou correction d’une inclinaison latérale du tronc, à fixation rigide. Non escamotables, non amovibles non réglables. Le bon de commande doit proposer au minimum 3 écartements et 2 profondeurs. Le dispositif doit indiquer les compatibilités et incompatibilités avec les différents types d’assises. En fonction de besoins spécifiques, ils peuvent être : - Dynamique pour absorber l’énergie lors de dystonies ou d’hypertonies"
+        },
+        {
+          "name": "Appuis thoraciques latéraux non escamotables non amovibles réglables fixés sur un dossier rigide ou un VPH",
+          "desc": "Dispositif de soutien ou correction d’une inclinaison latérale du tronc, à fixation rigide",
+          "info": "Dispositif de soutien ou correction d’une inclinaison latérale du tronc, à fixation rigide. Non escamotables, non amovibles mais réglables sur le plan frontal dans les axes horizontal et vertical. Le dispositif doit indiquer les compatibilités et incompatibilités avec les différents types d’assises. En fonction des besoins, ils peuvent être réglables sur 3 axes: horizontal, vertical et en rotation."
+        },
+        {
+          "name": "Appuis thoraciques latéraux réglables fixés sur un dossier rigide ou un VPH avec option d'escamotage",
+          "desc": "Dispositif de soutien ou correction d’une inclinaison latérale du tronc, à fixation rigide…",
+          "info": "Dispositif de soutien ou correction d’une inclinaison latérale du tronc, à fixation rigide avec option escamotage. Le dispositif doit indiquer les compatibilités et incompatibilités avec les différents types d’assises"
+        },
+        {
+          "name": "Appuis thoraciques latéraux réglables fixés sur un dossier rigide ou un VPH avec option dynamique",
+          "desc": "Dispositif de soutien ou correction d’une inclinaison latérale du tronc, à fixation rigide…",
+          "info": "Dispositif de soutien ou correction d’une inclinaison latérale du tronc, à fixation rigide avec option dynamique. Le dispositif doit indiquer les compatibilités et incompatibilités avec les différents types d’assises."
+        },
+        {
+          "name": "Appuis thoraciques latéraux fixés sur un dossier de positionnement souple",
+          "desc": "Dispositifs de soutien ou correction d’une flexion antérieure, d’une rotation du tronc à f…",
+          "info": "Dispositifs de soutien ou correction d’une flexion antérieure, d’une rotation du tronc à fixer sur un dossier de positionnement souple ou sur le dossier du VPH, à fixation rigide. Amovibles ou fixes et réglables dans le plan frontal sur 2 axes (horizontal et vertical)."
+        },
+        {
+          "name": "Biseau dorso-lombaire",
+          "desc": "Dispositif de soutien ou correction d’une rotation du tronc fixé sur une base par différen…",
+          "info": "Dispositif de soutien ou correction d’une rotation du tronc fixé sur une base par différents moyens de fixation définitive ou repositionnable (collage, velcros, housse…), à fixation souple. Amovible ou fixe, réglable ou positionnable sur mesure selon les axes vertical et horizontal"
         },
         {
           "name": "Ceinture de maintien thoracique",
-          "desc": "Plastron / harnais / brassière (hors contention)."
+          "desc": "Dispositif de maintien et de stabilisation du tronc (de type plastron, harnais, brassière)…",
+          "info": "Dispositif de maintien et de stabilisation du tronc (de type plastron, harnais, brassière) à l’exclusion des dispositifs de contention. Contribue au soutien postural et à la sécurité. Escamotable et amovible, réglable et lavable, à fixation souple"
         },
         {
-          "name": "Biseaux dorso-lombaire / thoracique / sacro-lombaire",
-          "desc": "Rotation, cyphose ou lordose."
+          "name": "Biseau thoracique",
+          "desc": "Dispositif de soutien ou correction d’une cyphose, fixé sur une base par différents moyens…",
+          "info": "Dispositif de soutien ou correction d’une cyphose, fixé sur une base par différents moyens de fixation définitive ou repositionnable (collage, velcros, housse…). Amovible ou fixe, réglable ou positionnable sur mesure selon les axes vertical et horizontal, à fixation souple."
+        },
+        {
+          "name": "Biseau sacro-lombaire",
+          "desc": "Dispositif de soutien ou correction d’une lordose, fixé sur une base par différents moyens…",
+          "info": "Dispositif de soutien ou correction d’une lordose, fixé sur une base par différents moyens de fixation définitive ou repositionnable (collage, velcros, housse…). Amovible ou fixe, réglable ou positionnable sur mesure selon l’axe horizontal dans le plan sagittal, à fixation souple"
         }
       ]
     },
     {
-      "name": "Épaule",
-      "forfait": "A",
+      "name": "Base de positionnement du siège",
+      "forfait": "B",
       "items": [
         {
-          "name": "Accoudoir de positionnement (gouttière d'avant-bras)",
-          "desc": "Abduction et rétropulsion d'épaule."
+          "name": "Coussin de base de positionnement",
+          "desc": "Coussin de base de soutien ou de correction du positionnement sur lequel sont fixés des él…",
+          "info": "Coussin de base de soutien ou de correction du positionnement sur lequel sont fixés des éléments d’assistance à la posture. Souple, amovible et fourni avec 2 housses lavables, proposé en 5 largeurs et 5 longueurs différentes ou sur mesure. Le bon de commande doit proposer un minimum de 2 des éléments d’assistance à la posture se fixant sur le coussin de base de positionnement."
         },
         {
-          "name": "Butée latérale du coude",
-          "desc": "Abduction-adduction de l'épaule."
+          "name": "Base rigide de positionnement",
+          "desc": "Base rigide et amovible disposant d’éléments de fixation au châssis du VPH, et permettant…",
+          "info": "Base rigide et amovible disposant d’éléments de fixation au châssis du VPH, et permettant la fixation d’éléments d’assistance à la posture. Non cumulable avec la base rigide du VPH."
         },
         {
-          "name": "Butée postérieure du coude",
-          "desc": "Rétropulsion de l'épaule."
-        }
-      ]
-    },
-    {
-      "name": "Poignet",
-      "forfait": "A",
-      "items": [
-        {
-          "name": "Sangle de poignet",
-          "desc": "Flexion, escamotable."
-        },
-        {
-          "name": "Pommeau ergonomique",
-          "desc": "Prono-supination, première commissure."
+          "name": "Insert de matériaux d’aide à la prévention des escarres",
+          "desc": "Dispositif adaptable sur un coussin de base de positionnement permettant l’insert de matér…",
+          "info": "Dispositif adaptable sur un coussin de base de positionnement permettant l’insert de matériau d’aide à la prévention des escarres. Le matériau utilisé doit recouvrir au minimum les régions sacro-ischiatiques et correspondre au cahier des spécifications techniques minimales des dispositifs inscrits à la LPPR au titre I."
         }
       ]
     },
@@ -94,19 +144,23 @@
       "items": [
         {
           "name": "Biseau pelvien",
-          "desc": "Obliquité pelvienne."
+          "desc": "Dispositif souple de soutien ou correction d’une obliquité pelvienne",
+          "info": "Dispositif souple de soutien ou correction d’une obliquité pelvienne. Amovible ou fixe, réglable ou positionnable sur mesure dans les plans frontal et sagittal selon les axes horizontal et vertical. Il est fixé sur la base rigide ou le coussin de base de positionnement par différents procédés de fixation définitive ou repositionnable (collage, velcros, housse)."
         },
         {
           "name": "Stabilisateurs pelviens latéraux",
-          "desc": "Déviation latérale du bassin."
+          "desc": "Dispositif droit ou gauche, de soutien ou correction d’une déviation latérale du bassin",
+          "info": "Dispositif droit ou gauche, de soutien ou correction d’une déviation latérale du bassin. - Rigide, amovible ou fixe, fixé sur une base ou le dossier du VPH, - ou souple : fixé sur une base par différents procédés de fixation définitive ou repositionnable (collage, velcros, housse)."
         },
         {
           "name": "Ceinture pelvienne",
-          "desc": "Rétro- ou antéversion (hors contention)."
+          "desc": "Dispositif souple de stabilisation du bassin dans le plan sagittal ou de correction d’une…",
+          "info": "Dispositif souple de stabilisation du bassin dans le plan sagittal ou de correction d’une rétro- ou d’une antéversion pelvienne, à l’exclusion des dispositifs de contention. Escamotable et amovible, réglable dans le plan frontal et sagittal, et se fixant sur une base de positionnement ou au dossier du VPH. Elle contribue également à la sécurité de la personne"
         },
         {
-          "name": "Butée tibiale (bassin)",
-          "desc": "Rotation pelvienne."
+          "name": "Butée tibiale",
+          "desc": "Dispositif de stabilisation du bassin dans le plan sagittal ou correction d’une rotation p…",
+          "info": "Dispositif de stabilisation du bassin dans le plan sagittal ou correction d’une rotation pelvienne. Droit ou gauche, rigide ou souple, et réglable dans le plan sagittal sur l’axe horizontal. Elle est fixée sur une base rigide, sur le VPH ou pour les butées tibiales souples, sur un coussin de base de positionnement."
         }
       ]
     },
@@ -115,20 +169,29 @@
       "forfait": "B",
       "items": [
         {
-          "name": "Butée d'abduction",
-          "desc": "Correction d'une adduction."
+          "name": "Butée d’abduction",
+          "desc": "Dispositif de stabilisation des hanches dans le plan transversal ou correction d’une adduc…",
+          "info": "Dispositif de stabilisation des hanches dans le plan transversal ou correction d’une adduction. Il est : - Rigide, escamotable et/ou amovible et réglable, fixée sur une base ou le VPH - Ou souple, amovible ou fixe, fixée sur une base par différents procédés de fixation définitive ou repositionnable (collage, velcros, housse)."
         },
         {
-          "name": "Butée d'adduction",
-          "desc": "Correction d'une abduction."
+          "name": "Butée d’adduction",
+          "desc": "Dispositif de stabilisation des hanches dans le plan transversal ou correction d’une abduc…",
+          "info": "Dispositif de stabilisation des hanches dans le plan transversal ou correction d’une abduction. Il est : - Rigide escamotable, amovible et réglable, fixée sur une base ou le VPH - ou souple, amovible ou fixe, fixée sur une base par différents procédés de fixation définitive ou repositionnable."
         },
         {
-          "name": "Biseau / butée crurale",
-          "desc": "Flexion-extension des hanches."
+          "name": "Biseau crural",
+          "desc": "Dispositif souple de stabilisation ou correction d’une flexion ou d’une extension des hanc…",
+          "info": "Dispositif souple de stabilisation ou correction d’une flexion ou d’une extension des hanches dans le plan sagittal : - Rigide, escamotable, amovible et réglable dans le plan sagittal - Ou Souple : système de ceintures crurales (à l’exclusion des dispositifs de contention) escamotable, amovible et réglable"
         },
         {
-          "name": "Cale talonnière latérale",
-          "desc": "Rotation interne ou externe."
+          "name": "Butée crurale",
+          "desc": "Dispositif de stabilisation ou correction d’une extension des hanches dans le plan sagittal",
+          "info": "Dispositif de stabilisation ou correction d’une extension des hanches dans le plan sagittal. Amovible ou fixe, elle est fixée sur une base rigide ou un coussin de positionnement par différents procédés de fixation définitive ou repositionnable (collage, velcros, housse)."
+        },
+        {
+          "name": "Butée ou cale talonnière latérale",
+          "desc": "Dispositif rigide de stabilisation du bassin, de maintien ou correction d’une rotation int…",
+          "info": "Dispositif rigide de stabilisation du bassin, de maintien ou correction d’une rotation interne ou externe. Fixée sur le VPH, non escamotable et non amovible"
         }
       ]
     },
@@ -138,33 +201,60 @@
       "items": [
         {
           "name": "Butée talonnière postérieure",
-          "desc": "Correction d'une flexion."
+          "desc": "- Dispositif de soutien ou correction d’une flexion",
+          "info": "- Dispositif de soutien ou correction d’une flexion. - Rigide, non escamotable, non amovible et fixé sur le VPH ou sur une base rigide"
         },
         {
           "name": "Butée tibiale (appui-mollet)",
-          "desc": "Correction d'une extension."
+          "desc": "- Dispositif rigide ou souple de soutien ou correction d’une extension",
+          "info": "- Dispositif rigide ou souple de soutien ou correction d’une extension. - Voir dispositif de positionnement du bassin"
         },
         {
           "name": "Sangle de coup de pied",
-          "desc": "Souple, réglable."
+          "desc": "- Dispositif souple de soutien ou correction d’une extension",
+          "info": "- Dispositif souple de soutien ou correction d’une extension. - Escamotable, amovible, réglable en longueur et fixée sur le VPH ou associée à un produit d’assistance à la posture"
         }
       ]
     },
     {
-      "name": "Base de siège",
+      "name": "Épaule",
       "forfait": "B",
       "items": [
         {
-          "name": "Coussin de base de positionnement",
-          "desc": "Support des éléments de posture."
+          "name": "Accoudoir de positionnement rigide (gouttière d’avant-bras)",
+          "desc": "Dispositif de positionnement rigide, escamotable et amovible, fixé sur le VPH ou la base r…",
+          "info": "Dispositif de positionnement rigide, escamotable et amovible, fixé sur le VPH ou la base rigide de positionnement. Composé d’une butée d’abduction et de rétropulsion d’épaule et réglable en longueur et dans le plan sagittal, en hauteur et en rotation. Différents pommeaux ergonomiques doivent être proposés en association sur le bon de commande."
         },
         {
-          "name": "Base rigide de positionnement",
-          "desc": "Non cumulable avec la base rigide du VPH."
+          "name": "Accoudoir de positionnement souple (gouttière d’avant-bras souple)",
+          "desc": "Composé au minimum d’une base de soutien du bras et d’une sangle de maintien",
+          "info": "Composé au minimum d’une base de soutien du bras et d’une sangle de maintien. Réglable"
         },
         {
-          "name": "Insert anti-escarre",
-          "desc": "Régions sacro-ischiatiques (titre I)."
+          "name": "Butée latérale du coude",
+          "desc": "Dispositif rigide escamotable et amovible de soutien ou correction de l’abduction et de l’…",
+          "info": "Dispositif rigide escamotable et amovible de soutien ou correction de l’abduction et de l’adduction de l’épaule. Se fixe sur le VPH, non cumulable avec une base réglable"
+        },
+        {
+          "name": "Butée postérieure du coude",
+          "desc": "Dispositif rigide escamotable et amovible de soutien ou correction de la rétropulsion de l…",
+          "info": "Dispositif rigide escamotable et amovible de soutien ou correction de la rétropulsion de l’épaule. Se fixe sur le VPH, non cumulable avec une base réglable."
+        }
+      ]
+    },
+    {
+      "name": "Poignet",
+      "forfait": "B",
+      "items": [
+        {
+          "name": "Sangle de poignet",
+          "desc": "Dispositif souple de soutien ou correction de la flexion",
+          "info": "Dispositif souple de soutien ou correction de la flexion. Escamotable et amovible."
+        },
+        {
+          "name": "Pommeau ergonomique",
+          "desc": "Dispositif rigide de soutien ou correction de la prono-supination du poignet, ouverture de…",
+          "info": "Dispositif rigide de soutien ou correction de la prono-supination du poignet, ouverture de la première commissure."
         }
       ]
     }

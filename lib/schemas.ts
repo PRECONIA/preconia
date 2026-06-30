@@ -53,8 +53,20 @@ export const AdjonctionsFileSchema = z.object({
 });
 
 /* --- pap.json --- */
-export const PapForfaitSchema = z.object({ code: z.string(), price: z.number(), label: z.string() });
-export const PapItemSchema = z.object({ name: z.string(), desc: z.string() });
+export const PapForfaitSchema = z.object({
+  code: z.string(),
+  price: z.number(),
+  label: z.string(),
+  /** paragraphes officiels (INI-CERAH) : définition + spécificités techniques minimales. */
+  definition: z.array(z.string()),
+  technique: z.array(z.string()),
+});
+export const PapItemSchema = z.object({
+  name: z.string(),
+  desc: z.string(),
+  /** description officielle complète du PAP (encart d'information). */
+  info: z.string(),
+});
 export const PapRegionSchema = z.object({
   name: z.string(),
   forfait: ForfaitEnum,
