@@ -911,18 +911,21 @@ export function WalkerShell() {
                 </div>
               )}
 
-              <div className="mt-5 flex flex-wrap gap-2">
-                <button className={`${primary} py-2.5`} onClick={() => go("adj")}>
+              <div className="mt-5 flex flex-col gap-2 sm:flex-row">
+                <button
+                  className={`${primary} w-full justify-center py-2.5 sm:flex-1`}
+                  onClick={() => go("adj")}
+                >
                   Modifier les adjonctions
                 </button>
                 <button
-                  className="rounded-lg border border-line bg-card px-4 py-2.5 font-semibold hover:border-petrol hover:text-petrol-deep"
+                  className="inline-flex w-full items-center justify-center rounded-lg border border-line bg-card px-4 py-2.5 font-semibold hover:border-petrol hover:text-petrol-deep sm:flex-1"
                   onClick={() => dispatch({ type: "RESET" })}
                 >
                   Nouvelle évaluation
                 </button>
                 <button
-                  className={`${finish} py-2.5 disabled:cursor-wait disabled:opacity-70`}
+                  className={`${finish} w-full justify-center py-2.5 disabled:cursor-wait disabled:opacity-70 sm:flex-1`}
                   onClick={exportPdf}
                   disabled={pdfBusy}
                 >
