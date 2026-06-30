@@ -4,6 +4,7 @@ import type {
   ClasseValue,
   Device,
   DeviceLppEntry,
+  DeviceModelEntry,
   Forfait,
   PapForfait,
   PapRegion,
@@ -122,14 +123,14 @@ export function deviceLppToken(device: Device, classe: ClasseValue | null): stri
   return device.code;
 }
 
-/** Code LPP + tarif du fauteuil sélectionné. Si une `brand` est fournie et qu'une variante de
- *  marque existe pour le jeton, on privilégie **son code** ; son tarif si connu, sinon repli sur
- *  le tarif de la ligne (code mère). Sans marque (ou variante absente) → code mère. Jamais inventé. */
+/** Code LPP + tarif du fauteuil sélectionné. Si une `brand` est fournie et qu'elle figure au
+ *  catalogue CERAH pour le jeton, on privilégie **son code propre** (le tarif reste celui de la
+ *  ligne / code mère — il n'y a pas de tarif par modèle). Sinon → code mère. Jamais inventé. */
 export function deviceLpp(
   device: Device,
   classe: ClasseValue | null,
   byType: Record<string, DeviceLppEntry>,
-  byBrand?: Record<string, Record<string, DeviceLppEntry>>,
+  byBrand?: Record<string, Record<string, DeviceModelEntry>>,
   brand?: string | null,
 ): DeviceLppEntry | null {
   const token = deviceLppToken(device, classe);
@@ -137,7 +138,7 @@ export function deviceLpp(
   const mere = byType[token] ?? null;
   if (brand && byBrand) {
     const variant = byBrand[token]?.[brand];
-    if (variant) return { code: variant.code, tarif: variant.tarif ?? mere?.tarif ?? null };
+    if (variant) return { code: variant.code, tarif: mere?.tarif ?? null };
   }
   return mere;
 }
@@ -146,11 +147,23 @@ export function deviceLpp(
 export function deviceBrandsForToken(
   device: Device,
   classe: ClasseValue | null,
-  byBrand: Record<string, Record<string, DeviceLppEntry>>,
+  byBrand: Record<string, Record<string, DeviceModelEntry>>,
 ): string[] {
   const token = deviceLppToken(device, classe);
   if (!token) return [];
   return Object.keys(byBrand[token] ?? {}).sort((a, b) => a.localeCompare(b));
+}
+
+/** Modèles commerciaux (triés) pour le type/classe + marque — alimente le volet « modèle ». */
+export function deviceModelsForBrand(
+  device: Device,
+  classe: ClasseValue | null,
+  brand: string | null,
+  byBrand: Record<string, Record<string, DeviceModelEntry>>,
+): string[] {
+  if (!brand) return [];
+  const token = deviceLppToken(device, classe);
+  return token ? (byBrand[token]?.[brand]?.models ?? []) : [];
 }
 
 /** Vrai si le fauteuil possède une variante de marque (code propre) pour le type/classe courant. */
@@ -158,7 +171,7 @@ export function hasDeviceBrandVariant(
   device: Device,
   classe: ClasseValue | null,
   brand: string | null,
-  byBrand: Record<string, Record<string, DeviceLppEntry>>,
+  byBrand: Record<string, Record<string, DeviceModelEntry>>,
 ): boolean {
   if (!brand) return false;
   const token = deviceLppToken(device, classe);

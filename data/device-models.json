@@ -1,0 +1,923 @@
+{
+  "source": "CERAH (lppr_nn.pdf, MAJ 25/06/2026) pour les modèles ; nomenclature CNAM (lppr.json) pour token/marque/code. Le code LPP est propre à (type, marque) ; les modèles d'une même marque le partagent.",
+  "lastUpdated": "2026-06-25",
+  "byToken": {
+    "BASE": {
+      "INVACARE": {
+        "code": "9556236",
+        "models": [
+          "Rea Azalea Base"
+        ]
+      },
+      "MEYRA": {
+        "code": "9523478",
+        "models": []
+      }
+    },
+    "CYC": {
+      "RUPIANI": {
+        "code": "9500767",
+        "models": [
+          "Tonicross City",
+          "Tonicross Plus"
+        ]
+      },
+      "SCHUCHMANN": {
+        "code": "9581694",
+        "models": [
+          "Momo Essentiel"
+        ]
+      },
+      "VERMEIREN": {
+        "code": "9538882",
+        "models": [
+          "2202",
+          "2215",
+          "2217",
+          "2219"
+        ]
+      }
+    },
+    "FMP": {
+      "DRIVE DEVILBISS": {
+        "code": "9514166",
+        "models": [
+          "NOVO Light",
+          "Stan'Ultra",
+          "Stan'Up"
+        ]
+      },
+      "IDENTITES 49": {
+        "code": "9595800",
+        "models": []
+      },
+      "INVACARE": {
+        "code": "9561616",
+        "models": [
+          "Action 2 NG",
+          "Action 2 NG Transit Lite",
+          "Action 3 NG S"
+        ]
+      },
+      "MEYRA NETTI": {
+        "code": "9507798",
+        "models": [
+          "Budget 9.050",
+          "Eurochair 1.750"
+        ]
+      },
+      "SUNRISE MED": {
+        "code": "9595615",
+        "models": [
+          "Style",
+          "Style X"
+        ]
+      },
+      "VERMEIREN": {
+        "code": "9517986",
+        "models": [
+          "BOBBY EVO"
+        ]
+      },
+      "VILGO": {
+        "code": "9571365",
+        "models": []
+      }
+    },
+    "FMPR": {
+      "DRIVE DEVILBISS": {
+        "code": "9548277",
+        "models": [
+          "IDSoft Evolution"
+        ]
+      },
+      "INNOV S.A.": {
+        "code": "9516544",
+        "models": []
+      },
+      "INVACARE": {
+        "code": "9536736",
+        "models": [
+          "Rea Clematis Pro One S"
+        ]
+      },
+      "MEYRA NETTI": {
+        "code": "9539025",
+        "models": [
+          "Netti 4U CE"
+        ]
+      },
+      "OTTO BOCK": {
+        "code": "9580938",
+        "models": [
+          "JIANGSU Start Multi Confort OTTO"
+        ]
+      },
+      "VERMEIREN": {
+        "code": "9543297",
+        "models": [
+          "Inovys II Evo Initial",
+          "Inovys II Evo Initital T30"
+        ]
+      }
+    },
+    "FRE-A": {
+      "ACEKARE": {
+        "code": "9511417",
+        "models": [
+          "KUNSHAN SmartChair Lite",
+          "Smartchair Helix"
+        ]
+      },
+      "ERGOCONCEPT": {
+        "code": "9523082",
+        "models": [
+          "BR7L",
+          "CHANGSHU Ergo 07L 2.0",
+          "CHANGSHU Ergo 08L 2.0",
+          "Ergo 09L 2.0"
+        ]
+      },
+      "ERGOFLIX": {
+        "code": "9538936",
+        "models": [
+          "FlixOne"
+        ]
+      },
+      "INVACARE": {
+        "code": "9533927",
+        "models": [
+          "Erivo",
+          "Esprit Action"
+        ]
+      },
+      "LOGO SILVER": {
+        "code": "9549182",
+        "models": [
+          "LIGHTCHAIR"
+        ]
+      },
+      "PRIDE MOBILITY": {
+        "code": "9525916",
+        "models": [
+          "Go Chair",
+          "Jazzy Air 2"
+        ]
+      },
+      "RUPIANI": {
+        "code": "9515645",
+        "models": [
+          "Sixi Hybrid"
+        ]
+      },
+      "SUNRISE MED": {
+        "code": "9523076",
+        "models": [
+          "Q200 R",
+          "Q300 M Mini Sedeo Lite"
+        ]
+      },
+      "VERMEIREN": {
+        "code": "9501962",
+        "models": [
+          "Verso 30°"
+        ]
+      }
+    },
+    "FRE-B": {
+      "ACEKARE": {
+        "code": "9534111",
+        "models": [
+          "M4 Pro",
+          "SmartChair EVO2",
+          "SmartChair Travel Max"
+        ]
+      },
+      "DIETZ POWER BV": {
+        "code": "9548745",
+        "models": []
+      },
+      "ELOFLEX": {
+        "code": "9570265",
+        "models": []
+      },
+      "ERGOCONCEPT": {
+        "code": "9528576",
+        "models": [
+          "BR7L",
+          "BR8L",
+          "CHANGSHU Ergo 08L 3.0"
+        ]
+      },
+      "INVACARE": {
+        "code": "9599961",
+        "models": [
+          "Aviva RX20 Modulite",
+          "Erivo Premium",
+          "Esprit Action"
+        ]
+      },
+      "LIFE MOBILITY": {
+        "code": "9511386",
+        "models": [
+          "Blazer Sling",
+          "Morgan Sling"
+        ]
+      },
+      "LOGO SILVER": {
+        "code": "9539628",
+        "models": [
+          "LIGHTCHAIR +"
+        ]
+      },
+      "MEYRA NETTI": {
+        "code": "9558809",
+        "models": [
+          "iCHAIR MC2 1.611",
+          "iCHAIR ORBIT 1.618"
+        ]
+      },
+      "OTTO BOCK": {
+        "code": "9566944",
+        "models": [
+          "OTTO Juvo B4"
+        ]
+      },
+      "PRIDE MOBILITY": {
+        "code": "9597956",
+        "models": [
+          "Edge 2",
+          "Edge 3 Stretto",
+          "R-Trak"
+        ]
+      },
+      "PROT VIRGINIE": {
+        "code": "9549207",
+        "models": [
+          "KUNSHAN Eloflex F"
+        ]
+      },
+      "SUNRISE MED": {
+        "code": "9587001",
+        "models": [
+          "Q300 M Mini Kids",
+          "Q300 R Sedeo Lite",
+          "Q400 M Sedeo Lite",
+          "Q400 R Sedeo Lite"
+        ]
+      },
+      "VERMEIREN": {
+        "code": "9557773",
+        "models": [
+          "FOREST 3 Initial"
+        ]
+      },
+      "WHILL": {
+        "code": "9581381",
+        "models": [
+          "C Light"
+        ]
+      }
+    },
+    "FRE-C": {
+      "ERGOCONCEPT": {
+        "code": "9529386",
+        "models": [
+          "BR8L Explorer Section 8 - Fauteuils roulants"
+        ]
+      }
+    },
+    "FREP-A": {
+      "MEYRA NETTI": {
+        "code": "9515326",
+        "models": [
+          "TA Indoor Wave"
+        ]
+      },
+      "PERMOBIL": {
+        "code": "9517532",
+        "models": [
+          "M3 Lite Corpus"
+        ]
+      },
+      "PRIDE MOBILITY": {
+        "code": "9569581",
+        "models": [
+          "Edge 3 Stretto"
+        ]
+      },
+      "SUNRISE MED": {
+        "code": "9551138",
+        "models": [
+          "Q500 M Sedeo Pro"
+        ]
+      }
+    },
+    "FREP-B": {
+      "DIETZ POWER BV": {
+        "code": "9543452",
+        "models": [
+          "Sango Advanced MWD 5 roues"
+        ]
+      },
+      "INVACARE": {
+        "code": "9541105",
+        "models": [
+          "Aviva RX20 Modulite",
+          "Aviva RX40 Modulite",
+          "Aviva RX40 Ultra Low Maxx",
+          "Storm 4",
+          "Storm 4 X-plore",
+          "TDX SP2 Modulite",
+          "TDX SP2 NB Ultra Low Maxx",
+          "TDX SP2 Ultra Low Maxx"
+        ]
+      },
+      "LIFE MOBILITY": {
+        "code": "9562260",
+        "models": [
+          "Blazer Sling",
+          "Evo Lectus",
+          "Evo Lectus Low Rider",
+          "Leon F Kameleon",
+          "Leon Versus",
+          "Mid Lectus",
+          "Morgan M Lectus",
+          "Morgan M Versus",
+          "Morgan Sling"
+        ]
+      },
+      "LOGO SILVER": {
+        "code": "9599174",
+        "models": [
+          "Alltrack M",
+          "Alltrack M HD",
+          "Alltrack R Foot"
+        ]
+      },
+      "MEYRA NETTI": {
+        "code": "9547600",
+        "models": [
+          "OPTIMUS 2 2.322",
+          "iCHAIR MC2 1.611",
+          "iCHAIR MC3 1.612",
+          "iCHAIR ORBIT 2 1.618",
+          "iCHAIR XXL bis 1.614"
+        ]
+      },
+      "NEW LIVE MOBIL": {
+        "code": "9594076",
+        "models": [
+          "Magix II"
+        ]
+      },
+      "OTTO BOCK": {
+        "code": "9535725",
+        "models": [
+          "OTTO Juvo B4",
+          "OTTO Juvo B5",
+          "OTTO Juvo B6",
+          "OTTO Juvo B7"
+        ]
+      },
+      "PERMOBIL": {
+        "code": "9591340",
+        "models": [
+          "M5 Corpus"
+        ]
+      },
+      "PRIDE MOBILITY": {
+        "code": "9561496",
+        "models": [
+          "4Front²",
+          "Edge 3",
+          "Q1450",
+          "Q6 Edge HD",
+          "R-Trak"
+        ]
+      },
+      "SUNRISE MED": {
+        "code": "9555001",
+        "models": [
+          "Extreme X8",
+          "Frontier V4",
+          "Magic 360",
+          "Q300 M Mini Sedeo Lite",
+          "Q300 M Mini Sedeo Pro",
+          "Q300 R Sedeo Lite",
+          "Q400 M Sedeo Lite",
+          "Q400 R Sedeo Lite",
+          "Q700 F Sedeo Pro",
+          "Q700 F Sedeo Pro Advanced",
+          "Q700 M HD",
+          "Q700 M Sedeo Pro",
+          "Q700 M Sedeo Pro Advanced",
+          "Q700 R Sedeo Pro"
+        ]
+      },
+      "VERMEIREN": {
+        "code": "9579881",
+        "models": [
+          "FOREST 3 Advance",
+          "Turios"
+        ]
+      }
+    },
+    "FREP-C": {
+      "4POWER4": {
+        "code": "9519985",
+        "models": [
+          "P4-Adventure"
+        ]
+      },
+      "LOGO SILVER": {
+        "code": "9519850",
+        "models": [
+          "Alltrack R Section 9 - Fauteuils roulants"
+        ]
+      },
+      "PERMOBIL": {
+        "code": "9583173",
+        "models": [
+          "X850 Corpus"
+        ]
+      },
+      "PRIDE MOBILITY": {
+        "code": "9588839",
+        "models": [
+          "Outback"
+        ]
+      },
+      "SUNRISE MED": {
+        "code": "9537204",
+        "models": [
+          "XT2",
+          "XT4"
+        ]
+      }
+    },
+    "FREV": {
+      "4POWER4": {
+        "code": "9528754",
+        "models": [
+          "P-Access",
+          "P-Advance",
+          "P-Compact",
+          "P6-Compact"
+        ]
+      },
+      "INVACARE": {
+        "code": "9539930",
+        "models": [
+          "Aviva FX40 MPS Maxx"
+        ]
+      },
+      "LIFE MOBILITY": {
+        "code": "9544121",
+        "models": [
+          "Evo Altus",
+          "Levo C3",
+          "Levo Combi - Combi Junior"
+        ]
+      },
+      "LOGO SILVER": {
+        "code": "9546396",
+        "models": [
+          "Alltrack M Ascent"
+        ]
+      },
+      "MEYRA NETTI": {
+        "code": "9571448",
+        "models": [
+          "TA IQ Stand-Up",
+          "iCHAIR SKY 1.620"
+        ]
+      },
+      "PERMOBIL": {
+        "code": "9599990",
+        "models": [
+          "F5 Corpus VS"
+        ]
+      },
+      "SUNRISE MED": {
+        "code": "9559855",
+        "models": [
+          "Q700-Up F Sedeo Pro Advanced",
+          "Q700-Up M Sedeo Pro Advanced"
+        ]
+      },
+      "VERMEIREN": {
+        "code": "9574553",
+        "models": [
+          "Forest 3 SU",
+          "Timix SU"
+        ]
+      }
+    },
+    "FRM": {
+      "AMYMAT": {
+        "code": "9592278",
+        "models": []
+      },
+      "DRIVE DEVILBISS": {
+        "code": "9584882",
+        "models": [
+          "Novo Light"
+        ]
+      },
+      "INVACARE": {
+        "code": "9504200",
+        "models": [
+          "Action 3 NG",
+          "Action 3 NG Dual HR",
+          "Action 4 NG",
+          "Action3 Junior",
+          "Action3 NG Hémi",
+          "Action3 NG Levier Pendulaire",
+          "Action3 NG Light"
+        ]
+      },
+      "MEYRA": {
+        "code": "9506712",
+        "models": []
+      },
+      "MEYRA NETTI": {
+        "code": "9568587",
+        "models": []
+      },
+      "OTTO BOCK": {
+        "code": "9585433",
+        "models": [
+          "OTTO Innov XXL"
+        ]
+      },
+      "SUNRISE MED": {
+        "code": "9594722",
+        "models": [
+          "Rubix2 XL",
+          "Style-X Ultra"
+        ]
+      },
+      "VERMEIREN": {
+        "code": "9514670",
+        "models": [
+          "D200N",
+          "D200N 30°",
+          "V300",
+          "V300 XXL",
+          "V500",
+          "V500 Light"
+        ]
+      },
+      "VILGO": {
+        "code": "9548060",
+        "models": []
+      }
+    },
+    "FRMA": {
+      "AMI AUTONOMIE": {
+        "code": "9519873",
+        "models": [
+          "ROGUE 2"
+        ]
+      },
+      "AMYMAT": {
+        "code": "9589075",
+        "models": []
+      },
+      "DPZ SERVICES": {
+        "code": "9580430",
+        "models": [
+          "Apex Aluminium",
+          "Apex Carbon"
+        ]
+      },
+      "E-PROG.HANDICAP": {
+        "code": "9533620",
+        "models": [
+          "LITTY 4all"
+        ]
+      },
+      "EUROMOVE": {
+        "code": "9507261",
+        "models": [
+          "Cleo"
+        ]
+      },
+      "GT CONCEPT": {
+        "code": "9575305",
+        "models": [
+          "Icon 60",
+          "W5"
+        ]
+      },
+      "INVACARE": {
+        "code": "9547071",
+        "models": [
+          "K-series",
+          "The KSL"
+        ]
+      },
+      "JANTON": {
+        "code": "9531414",
+        "models": [
+          "Trace S"
+        ]
+      },
+      "MEYRA NETTI": {
+        "code": "9538913",
+        "models": [
+          "FEMTO R 1.180",
+          "HURRICANE DAILY 1.880",
+          "NANO 1.155"
+        ]
+      },
+      "OTTO BOCK": {
+        "code": "9572761",
+        "models": [
+          "OTTO Ventus",
+          "OTTO Zenit R"
+        ]
+      },
+      "PERMOBIL": {
+        "code": "9517087",
+        "models": [
+          "Progeo Joker Energy",
+          "Progeo Joker R2",
+          "Progeo Noir 2.0"
+        ]
+      },
+      "SUNRISE MED": {
+        "code": "9543541",
+        "models": [
+          "Hilite",
+          "Hilite XTR",
+          "Krypton R",
+          "Nitrum",
+          "Nitrum Hybrid",
+          "Nitrum Hybrid Pro",
+          "Nitrum Pro",
+          "Octane Sub 4",
+          "Tiga",
+          "Tiga F2"
+        ]
+      }
+    },
+    "FRMC": {
+      "AMI AUTONOMIE": {
+        "code": "9567091",
+        "models": [
+          "Catalyst 5VX (DF)"
+        ]
+      },
+      "AMYMAT": {
+        "code": "9509231",
+        "models": []
+      },
+      "DPZ SERVICES": {
+        "code": "9548490",
+        "models": [
+          "Helio A6",
+          "Helio A7",
+          "Helio C2",
+          "Helio Kids",
+          "Veloce"
+        ]
+      },
+      "GT CONCEPT": {
+        "code": "9540614",
+        "models": [
+          "Icon 30FAF"
+        ]
+      },
+      "INVACARE": {
+        "code": "9575297",
+        "models": [
+          "Action 4 NG XLT",
+          "Action 5",
+          "Action3 junior Evolutif",
+          "Champion",
+          "Compact",
+          "Compact Attract"
+        ]
+      },
+      "LIFE MOBILITY": {
+        "code": "9557230",
+        "models": [
+          "Panthera S3 Neox (DI)"
+        ]
+      },
+      "MEYRA NETTI": {
+        "code": "9530627",
+        "models": [
+          "AVANTI 1.736",
+          "AVANTI PRO 1.735",
+          "FEMTO S 1.186",
+          "FEMTO X 1.185",
+          "FLASH 1.135",
+          "NANO S 1.157",
+          "NANO X 1.156",
+          "SMART F 2.360",
+          "SMART S 2.370"
+        ]
+      },
+      "OTTO BOCK": {
+        "code": "9525371",
+        "models": [
+          "OTTO Avantgarde 4 DS",
+          "OTTO Avantgarde 4 DV",
+          "OTTO Motus 2.0",
+          "OTTO Motus 2.0 Hemi",
+          "OTTO Zenit"
+        ]
+      },
+      "PERMOBIL": {
+        "code": "9590598",
+        "models": [
+          "Progeo Ego",
+          "Progeo Exelle",
+          "Progeo Exelle Junior",
+          "Progeo Exelle Vario",
+          "Progeo Joker"
+        ]
+      },
+      "SUNRISE MED": {
+        "code": "9592031",
+        "models": [
+          "Argon2",
+          "Krypton F",
+          "QS5X",
+          "Quckie Life T",
+          "Quickie Life",
+          "Xenon2",
+          "Xenon2 SA",
+          "Youngster 3"
+        ]
+      },
+      "VERMEIREN": {
+        "code": "9541045",
+        "models": [
+          "Trigo S",
+          "Trigo T"
+        ]
+      }
+    },
+    "FRMP": {
+      "INVACARE": {
+        "code": "9539433",
+        "models": [
+          "Rea Azalea",
+          "Rea Azalea Max",
+          "Rea Azalea S",
+          "Rea Clematis Pro Configuré",
+          "Rea Clematis Pro E-Tilt Configuré",
+          "Rea Clematis Pro E-Tilt S",
+          "Rea Dahlia 30°",
+          "Rea Dahlia 45°"
+        ]
+      },
+      "MEYRA NETTI": {
+        "code": "9531845",
+        "models": [
+          "Netti 4U CE",
+          "Netti 4U CE PLUS",
+          "Netti 4U CED",
+          "Netti V"
+        ]
+      },
+      "PRIDE MOBILITY": {
+        "code": "9506675",
+        "models": []
+      },
+      "RUPIANI": {
+        "code": "9510895",
+        "models": [
+          "Weely"
+        ]
+      },
+      "VERMEIREN": {
+        "code": "9556213",
+        "models": [
+          "Inovys II Evo Configuré",
+          "Inovys II-E Evo Configuré"
+        ]
+      }
+    },
+    "FRMS": {
+      "INVACARE": {
+        "code": "9517472",
+        "models": [
+          "Action 5 Rigid"
+        ]
+      }
+    },
+    "FRMV": {
+      "LIFE MOBILITY": {
+        "code": "9578798",
+        "models": [
+          "Levo LAE",
+          "Levo LCEV - LCE Kid/JR",
+          "Levo Summit EL"
+        ]
+      }
+    },
+    "POU_MRE": {
+      "CREE": {
+        "code": "9524130",
+        "models": [
+          "BUG GREYLINE",
+          "Chilla"
+        ]
+      },
+      "JOHN GMBH": {
+        "code": "9517963",
+        "models": [
+          "JOSI-Pro",
+          "JOSI-Wismi G2"
+        ]
+      },
+      "OTTO BOCK": {
+        "code": "9516700",
+        "models": [
+          "OTTO Kimba Buggy - 470G71=5_AA04_C"
+        ]
+      },
+      "PRIDE MOBILITY": {
+        "code": "9566482",
+        "models": [
+          "Reach"
+        ]
+      },
+      "RUPIANI": {
+        "code": "9501100",
+        "models": [
+          "Geko",
+          "LERADO Rolly Pop"
+        ]
+      },
+      "SUNRISE MED": {
+        "code": "9516432",
+        "models": [
+          "Zippie Voyage"
+        ]
+      },
+      "VERMEIREN": {
+        "code": "9504660",
+        "models": [
+          "Gemini 2"
+        ]
+      }
+    },
+    "POU_S": {
+      "CREE": {
+        "code": "9522846",
+        "models": [
+          "Piper"
+        ]
+      },
+      "OTTO BOCK": {
+        "code": "9587685",
+        "models": [
+          "OTTO Eco-Buggy",
+          "OTTO Lisa"
+        ]
+      }
+    },
+    "SCO-B": {
+      "INVACARE": {
+        "code": "9514255",
+        "models": []
+      },
+      "LIFE MOBILITY": {
+        "code": "9541157",
+        "models": []
+      },
+      "MEDTRADE": {
+        "code": "9525827",
+        "models": []
+      },
+      "VERMEIREN": {
+        "code": "9526672",
+        "models": []
+      }
+    },
+    "SCO-C": {
+      "INVACARE": {
+        "code": "9597442",
+        "models": []
+      },
+      "LIFE MOBILITY": {
+        "code": "9553373",
+        "models": []
+      },
+      "PRIDE MOBILITY": {
+        "code": "9587805",
+        "models": []
+      },
+      "VERMEIREN": {
+        "code": "9573565",
+        "models": []
+      }
+    }
+  }
+}

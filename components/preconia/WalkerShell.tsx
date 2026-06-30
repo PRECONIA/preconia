@@ -11,7 +11,7 @@ import {
   adjGroups,
   besoins,
   classes,
-  deviceBrandByType,
+  deviceModelsByType,
   deviceLppByType,
   devices,
   meta,
@@ -25,6 +25,7 @@ import {
   brandsForBases,
   deviceBrandsForToken,
   deviceLpp,
+  deviceModelsForBrand,
   hasBrandVariant,
   hasDeviceBrandVariant,
 } from "@/lib/rules";
@@ -81,23 +82,36 @@ export function WalkerShell() {
     ...compatAdj.map((a) => a.code),
     ...(device?.modular ? [papForfaits.A.code, papForfaits.B.code] : []),
   ];
-  // Union : marques de fauteuil (pour le type/classe) + marques d'adjonctions/PAP, triée.
-  const deviceBrands = device ? deviceBrandsForToken(device, answers.classe, deviceBrandByType) : [];
+  // Union : marques de fauteuil (catalogue CERAH, pour le type/classe) + marques d'adjonctions/PAP.
+  const deviceBrands = device ? deviceBrandsForToken(device, answers.classe, deviceModelsByType) : [];
   const availableBrands = Array.from(
     new Set([...deviceBrands, ...brandsForBases(brandBases, adjBrandMap)]),
   ).sort((a, b) => a.localeCompare(b));
 
-  // Code LPP + tarif du fauteuil : variante de marque si elle existe, sinon code mère.
+  // Modèles commerciaux proposés pour la marque choisie (volet « modèle »).
+  const brandModels = device
+    ? deviceModelsForBrand(device, answers.classe, brand, deviceModelsByType)
+    : [];
+  const model = answers.vehicleModel;
+
+  // Code LPP + tarif du fauteuil : code propre à la marque si au catalogue, sinon code mère.
   const devLpp = device
-    ? deviceLpp(device, answers.classe, deviceLppByType, deviceBrandByType, brand)
+    ? deviceLpp(device, answers.classe, deviceLppByType, deviceModelsByType, brand)
     : null;
   const devBrandHit = device
-    ? hasDeviceBrandVariant(device, answers.classe, brand, deviceBrandByType)
+    ? hasDeviceBrandVariant(device, answers.classe, brand, deviceModelsByType)
     : false;
 
   // Tous les codes LPP de la fiche finale : fauteuil + forfaits PAP + adjonctions (adaptés marque).
   const lpprCodes = [
-    ...(devLpp && device ? [{ code: devLpp.code, label: device.name }] : []),
+    ...(devLpp && device
+      ? [
+          {
+            code: devLpp.code,
+            label: model ? `${device.name} — ${model}${brand ? ` (${brand})` : ""}` : device.name,
+          },
+        ]
+      : []),
     ...forfaits.map((f) => ({
       code: adaptedCode(papForfaits[f].code, brand, adjBrandMap),
       label: papForfaits[f].label,
@@ -344,10 +358,15 @@ export function WalkerShell() {
                       <span className="shrink-0 rounded bg-orange-200/70 px-1.5 py-0.5 font-mono text-[12px] font-semibold text-orange-800">
                         {devLpp.code}
                       </span>
-                      <span className="truncate text-sm text-ink">{device.name}</span>
+                      <span className="truncate text-sm text-ink">{model ?? device.name}</span>
                     </span>
-                    <span className="shrink-0 font-mono text-sm font-semibold text-orange-800">
-                      {devLpp.tarif != null ? eur(devLpp.tarif) : "tarif n.c."}
+                    <span className="shrink-0 text-right">
+                      <span className="block font-mono text-sm font-semibold text-orange-800">
+                        {devLpp.tarif != null ? eur(devLpp.tarif) : "tarif n.c."}
+                      </span>
+                      <span className="block text-[10px] font-normal text-orange-700/80">
+                        à titre indicatif
+                      </span>
                     </span>
                   </div>
                 </div>
@@ -372,6 +391,33 @@ export function WalkerShell() {
                       </option>
                     ))}
                   </select>
+
+                  {brandModels.length > 0 && (
+                    <div className="mt-3 border-t border-petrol/20 pt-3">
+                      <label
+                        htmlFor="vehicleModel"
+                        className="mb-1.5 block text-sm font-semibold text-petrol-deep"
+                      >
+                        Modèle
+                        <span className="ml-1.5 font-normal text-petrol-deep/70">
+                          · {brandModels.length} modèle{brandModels.length > 1 ? "s" : ""} · CERAH
+                        </span>
+                      </label>
+                      <select
+                        id="vehicleModel"
+                        value={model ?? ""}
+                        onChange={(e) => setAnswer("vehicleModel", e.target.value || null)}
+                        className="w-full rounded-lg border-2 border-petrol bg-card px-3 py-2.5 text-sm font-medium text-petrol-deep outline-none focus:ring-2 focus:ring-petrol/40"
+                      >
+                        <option value="">Tous modèles (code marque)</option>
+                        {brandModels.map((m) => (
+                          <option key={m} value={m}>
+                            {m}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  )}
                 </div>
               )}
 
@@ -521,9 +567,12 @@ export function WalkerShell() {
 
               {(devLpp || selectedAdj.length > 0 || forfaits.length > 0) && (
                 <div className="my-4">
-                  <h4 className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-ink-soft">
+                  <h4 className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-ink-soft">
                     Codes LPP &amp; tarifs
                   </h4>
+                  <p className="mb-2 text-[11px] italic text-ink-soft">
+                    Tarifs de responsabilité LPPR, affichés à titre indicatif.
+                  </p>
                   {devLpp && (
                     <div className="flex items-baseline justify-between gap-3 border-b border-line-soft py-1.5 text-sm">
                       <span className="flex min-w-0 items-baseline gap-2">
@@ -531,7 +580,8 @@ export function WalkerShell() {
                           {devLpp.code}
                         </span>
                         <span>
-                          {device.name} <span className="text-ink-soft">· dispositif</span>
+                          {model ? `${device.name} — ${model}` : device.name}{" "}
+                          <span className="text-ink-soft">· {brand ?? "dispositif"}</span>
                         </span>
                       </span>
                       <span className="font-mono text-orange-800">

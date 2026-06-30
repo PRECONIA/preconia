@@ -123,13 +123,18 @@ export const DeviceLppFileSchema = z.object({
   byType: z.record(z.string(), DeviceLppEntrySchema),
 });
 
-/* --- device-brands.json (variantes de marque par type de VPH : token → marque → {code, tarif}).
-   Le code de marque est sourcé des libellés lppr.json ; le tarif par marque peut être null
-   (non sourcé) → repli sur le tarif de la ligne / code mère dans `deviceLpp`. */
-export const DeviceBrandsFileSchema = z.object({
+/* --- device-models.json (catalogue CERAH : type → marque → {code LPP propre, modèles commerciaux}).
+   token/marque/code viennent de la nomenclature CNAM (lppr.json, token explicite par code) ; les
+   noms de modèles viennent du PDF CERAH, rattachés par code. Le code LPP est propre à (type, marque) ;
+   les modèles d'une même marque le partagent (vérifié). */
+export const DeviceModelEntrySchema = z.object({
+  code: z.string(),
+  models: z.array(z.string()),
+});
+export const DeviceModelsFileSchema = z.object({
   source: z.string(),
   lastUpdated: z.string(),
-  byToken: z.record(z.string(), z.record(z.string(), DeviceLppEntrySchema)),
+  byToken: z.record(z.string(), z.record(z.string(), DeviceModelEntrySchema)),
 });
 
 /* --- meta.json --- */

@@ -10,6 +10,7 @@ export const initialAnswers: Answers = {
   classe: null,
   aptitude: null,
   vehicleBrand: null,
+  vehicleModel: null,
 };
 
 export const initialState: WalkerState = {
@@ -39,6 +40,8 @@ export function walkerReducer(state: WalkerState, action: Action): WalkerState {
 
     case "SET_ANSWER": {
       const answers: Answers = { ...state.answers, [action.field]: action.value };
+      // changer de marque invalide le modèle précédemment choisi.
+      if (action.field === "vehicleBrand") answers.vehicleModel = null;
       return { ...state, answers };
     }
 
@@ -49,6 +52,7 @@ export function walkerReducer(state: WalkerState, action: Action): WalkerState {
         ...state.answers,
         device: action.code,
         vehicleBrand: null,
+        vehicleModel: null,
         ...(action.mob ? { mob: action.mob } : {}),
       };
       const next = needsBesoins(device) ? "besoins" : "adj";

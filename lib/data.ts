@@ -7,7 +7,7 @@ import lpprRaw from "@/data/lppr.json";
 import lpprAdjRaw from "@/data/lppr-adjonctions.json";
 import adjBrandsRaw from "@/data/adjonction-brands.json";
 import deviceLppRaw from "@/data/device-lpp.json";
-import deviceBrandsRaw from "@/data/device-brands.json";
+import deviceModelsRaw from "@/data/device-models.json";
 import metaRaw from "@/data/meta.json";
 
 import {
@@ -19,10 +19,10 @@ import {
   LpprFileSchema,
   AdjonctionBrandsFileSchema,
   DeviceLppFileSchema,
-  DeviceBrandsFileSchema,
+  DeviceModelsFileSchema,
   MetaSchema,
 } from "./schemas";
-import type { DeviceLppEntry } from "./types";
+import type { DeviceLppEntry, DeviceModelEntry } from "./types";
 import type { Device, Presc } from "./types";
 
 /* Chargement + validation de la donnée au niveau module.
@@ -65,10 +65,14 @@ const deviceLppFile = DeviceLppFileSchema.parse(deviceLppRaw);
 /** code LPP « mère » + tarif par type de fauteuil (token : FRM, FRE-C, FREP-A, FREV…). */
 export const deviceLppByType: Record<string, DeviceLppEntry> = deviceLppFile.byType;
 
-const deviceBrandsFile = DeviceBrandsFileSchema.parse(deviceBrandsRaw);
-/** variantes de marque par type : token → { marque → {code, tarif?} } (tarif null = repli ligne). */
-export const deviceBrandByType: Record<string, Record<string, DeviceLppEntry>> =
-  deviceBrandsFile.byToken;
+const deviceModelsFile = DeviceModelsFileSchema.parse(deviceModelsRaw);
+/** catalogue CERAH par type : token → { marque → {code LPP propre, modèles commerciaux} }. */
+export const deviceModelsByType: Record<string, Record<string, DeviceModelEntry>> =
+  deviceModelsFile.byToken;
+export const deviceModelsMeta = {
+  source: deviceModelsFile.source,
+  lastUpdated: deviceModelsFile.lastUpdated,
+};
 
 /* Index pratique code → device. */
 export const deviceByCode: Record<string, Device> = Object.fromEntries(

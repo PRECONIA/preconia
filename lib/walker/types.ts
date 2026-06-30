@@ -29,6 +29,8 @@ export interface Answers {
   aptitude: OuiNon | null;
   /** Marque du fauteuil (étape adjonctions) : adapte les codes LPP des adjonctions / PAP. */
   vehicleBrand: string | null;
+  /** Modèle commercial du fauteuil (optionnel) : documente la fiche ; code LPP propre à la marque. */
+  vehicleModel: string | null;
 }
 
 export interface WalkerState {

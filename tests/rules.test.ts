@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   adjBrandMap,
   adjonctions,
-  deviceBrandByType,
+  deviceModelsByType,
   deviceByCode,
   deviceLppByType,
   papForfaits,
@@ -15,6 +15,7 @@ import {
   deriveForfaits,
   deviceBrandsForToken,
   deviceLpp,
+  deviceModelsForBrand,
   filterAdjonctions,
   hasBrandVariant,
   hasDeviceBrandVariant,
@@ -163,37 +164,42 @@ describe("deviceLpp (code LPP + tarif du fauteuil)", () => {
   });
 });
 
-describe("deviceLpp — code par marque du fauteuil (variante prioritaire, jamais inventée)", () => {
+describe("deviceLpp — code par marque (catalogue CERAH, code propre, jamais inventé)", () => {
   const mereFrepB = deviceLpp(deviceByCode.FREP, "B", deviceLppByType)!;
 
-  it("FREP-B + marque connue → code de la variante (≠ code mère)", () => {
-    const brands = deviceBrandsForToken(deviceByCode.FREP, "B", deviceBrandByType);
-    expect(brands.length).toBeGreaterThan(0);
-    const b = brands[0];
-    const v = deviceLpp(deviceByCode.FREP, "B", deviceLppByType, deviceBrandByType, b)!;
-    expect(v.code).toBe(deviceBrandByType["FREP-B"][b].code);
+  it("FREP-B + OTTO BOCK → code propre de la marque (≠ code mère)", () => {
+    const v = deviceLpp(deviceByCode.FREP, "B", deviceLppByType, deviceModelsByType, "OTTO BOCK")!;
+    expect(v.code).toBe("9535725");
     expect(v.code).not.toBe(mereFrepB.code);
-    expect(hasDeviceBrandVariant(deviceByCode.FREP, "B", b, deviceBrandByType)).toBe(true);
+    expect(hasDeviceBrandVariant(deviceByCode.FREP, "B", "OTTO BOCK", deviceModelsByType)).toBe(true);
   });
 
-  it("tarif de marque inconnu (null) → repli sur le tarif de la ligne (code mère)", () => {
-    const b = deviceBrandsForToken(deviceByCode.FREP, "B", deviceBrandByType)[0];
-    const v = deviceLpp(deviceByCode.FREP, "B", deviceLppByType, deviceBrandByType, b)!;
+  it("le tarif reste celui de la ligne (pas de tarif par modèle)", () => {
+    const v = deviceLpp(deviceByCode.FREP, "B", deviceLppByType, deviceModelsByType, "OTTO BOCK")!;
     expect(v.tarif).toBe(mereFrepB.tarif);
   });
 
   it("marque inconnue ou nulle → repli sur le code mère", () => {
-    expect(deviceLpp(deviceByCode.FREP, "B", deviceLppByType, deviceBrandByType, "MARQUE_X")!.code).toBe(
+    expect(deviceLpp(deviceByCode.FREP, "B", deviceLppByType, deviceModelsByType, "MARQUE_X")!.code).toBe(
       mereFrepB.code,
     );
-    expect(deviceLpp(deviceByCode.FREP, "B", deviceLppByType, deviceBrandByType, null)!.code).toBe(
+    expect(deviceLpp(deviceByCode.FREP, "B", deviceLppByType, deviceModelsByType, null)!.code).toBe(
       mereFrepB.code,
     );
-    expect(hasDeviceBrandVariant(deviceByCode.FREP, "B", null, deviceBrandByType)).toBe(false);
+    expect(hasDeviceBrandVariant(deviceByCode.FREP, "B", null, deviceModelsByType)).toBe(false);
   });
 
-  it("deviceBrandsForToken : trié et stable", () => {
-    const brands = deviceBrandsForToken(deviceByCode.FREP, "B", deviceBrandByType);
+  it("deviceModelsForBrand : modèles OTTO BOCK (OTTO Juvo Bx), triés ; vide si pas de marque", () => {
+    const models = deviceModelsForBrand(deviceByCode.FREP, "B", "OTTO BOCK", deviceModelsByType);
+    expect(models.length).toBeGreaterThan(1);
+    expect(models.some((m) => m.includes("Juvo"))).toBe(true);
+    expect([...models].sort((a, b) => a.localeCompare(b))).toEqual(models);
+    expect(deviceModelsForBrand(deviceByCode.FREP, "B", null, deviceModelsByType)).toEqual([]);
+  });
+
+  it("deviceBrandsForToken : trié et inclut OTTO BOCK", () => {
+    const brands = deviceBrandsForToken(deviceByCode.FREP, "B", deviceModelsByType);
+    expect(brands).toContain("OTTO BOCK");
     expect([...brands].sort((a, b) => a.localeCompare(b))).toEqual(brands);
   });
 });
