@@ -36,6 +36,7 @@ import {
 import { eur } from "@/lib/format";
 import { RechercheLpp } from "@/components/preconia/RechercheLpp";
 import { Logo } from "@/components/preconia/Logo";
+import type { FicheData } from "@/components/preconia/fiche-pdf";
 import type { Adjonction, BesoinField, Device } from "@/lib/types";
 import { useWalker } from "@/lib/walker/WalkerProvider";
 import {
@@ -162,6 +163,120 @@ export function WalkerShell() {
       setConnSource(e.currentTarget.getBoundingClientRect());
   };
   const onHoverLeave = () => setConnSource(null);
+
+  // ---- Export PDF de la fiche de préconisation ----
+  // Construit un objet purement sérialisable depuis l'état courant (aucune logique dans le PDF).
+  const buildFicheData = (): FicheData => {
+    const dev = device!;
+    const allowedModes = modesForDuree(answers.duree);
+
+    const profile: { k: string; v: string }[] = facets(answers)
+      .filter((f) => f.v)
+      .map((f) => ({ k: f.k, v: f.v as string }));
+    if (dev.electric && answers.classe) profile.push({ k: "Classe", v: `Classe ${answers.classe}` });
+    if (answers.vehicleBrand) profile.push({ k: "Marque", v: answers.vehicleBrand });
+    if (answers.vehicleModel) profile.push({ k: "Modèle", v: answers.vehicleModel });
+
+    const flags: string[] = [];
+    if (route)
+      flags.push(
+        `Classe ${answers.classe} — code de la route : ceinture, éclairage et bandes réfléchissantes inclus et non facturables en sus.`,
+      );
+    if (dev.electric && answers.aptitude === "non")
+      flags.push(
+        "Conduite par tierce personne : commande pour l'accompagnant (FREP/FREV, exception nomenclature).",
+      );
+
+    const vphInd = Object.entries(deviceIndicationsByCode[dev.code] ?? {})
+      .filter(([m]) => allowedModes.includes(m as (typeof allowedModes)[number]))
+      .map(([mode, text]) => ({ mode, text }));
+
+    const vph = devLpp
+      ? {
+          code: devLpp.code,
+          tarif: devLpp.tarif,
+          name: model
+            ? `${dev.name} — ${model}${brand ? ` (${brand})` : ""}`
+            : `${dev.name}${brand ? ` · ${brand}` : ""}`,
+          indications: vphInd,
+        }
+      : null;
+
+    const forfaitsData = forfaits.map((f) => ({
+      code: adaptedCode(papForfaits[f].code, brand, adjBrandMap),
+      label: papForfaits[f].label,
+      price: papForfaits[f].price,
+      definition: papForfaits[f].definition,
+      technique: papForfaits[f].technique,
+    }));
+
+    const adjData = selectedAdj.map((a) => ({
+      code: adaptedCode(a.code, brand, adjBrandMap),
+      name: a.name,
+      price: priceLabel(a),
+      open: !!(a.devis || a.tbd),
+    }));
+
+    const papData = papRegions.flatMap((r) =>
+      r.items
+        .filter((it) => state.pap[it.name])
+        .map((it) => ({
+          name: it.name,
+          forfait: r.forfait,
+          code: adaptedCode(papForfaits[r.forfait].code, brand, adjBrandMap),
+          info: it.info,
+        })),
+    );
+
+    const total =
+      devLpp?.tarif != null
+        ? devLpp.tarif + costs.subtotal + (addLivraison ? meta.livraison.price : 0)
+        : null;
+
+    return {
+      generatedAt: new Date().toLocaleDateString("fr-FR"),
+      device: {
+        code: dev.code,
+        name: dev.name,
+        family: dev.family,
+        modes: dev.modes
+          .filter((m) => allowedModes.includes(m))
+          .map((m) => modeLabels[m]?.label ?? m)
+          .join(" / "),
+        presc: prescribers[dev.presc],
+        fiche: dev.fiche,
+        dap: dev.dap,
+      },
+      profile,
+      flags,
+      vph,
+      forfaits: forfaitsData,
+      adjonctions: adjData,
+      pap: papData,
+      livraison: addLivraison
+        ? { code: meta.livraison.code, label: meta.livraison.label, price: meta.livraison.price }
+        : null,
+      totals: { subtotal: costs.subtotal, hasOpen: costs.hasOpen, total },
+      disclaimer: meta.disclaimer,
+      source: meta.source,
+      lastUpdated: meta.lastUpdated,
+    };
+  };
+
+  const [pdfBusy, setPdfBusy] = useState(false);
+  const exportPdf = async () => {
+    if (!device) return;
+    setPdfBusy(true);
+    try {
+      const data = buildFicheData();
+      const { downloadFichePdf } = await import("@/components/preconia/fiche-pdf");
+      await downloadFichePdf(data);
+    } catch (e) {
+      console.error("Export PDF échoué", e);
+    } finally {
+      setPdfBusy(false);
+    }
+  };
 
   return (
     <div className="relative z-10 mx-auto max-w-[790px] px-5 pb-16 pt-8">
@@ -805,6 +920,13 @@ export function WalkerShell() {
                   onClick={() => dispatch({ type: "RESET" })}
                 >
                   Nouvelle évaluation
+                </button>
+                <button
+                  className={`${finish} py-2.5 disabled:cursor-wait disabled:opacity-70`}
+                  onClick={exportPdf}
+                  disabled={pdfBusy}
+                >
+                  {pdfBusy ? "Génération…" : "⬇ Exporter en PDF"}
                 </button>
               </div>
             </>

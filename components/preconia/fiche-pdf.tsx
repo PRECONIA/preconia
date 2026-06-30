@@ -1,0 +1,522 @@
+/* Document PDF de la fiche de préconisation (export vectoriel, rendu fidèle à la charte).
+   Importé dynamiquement (au clic) depuis WalkerShell : @react-pdf/renderer ne pèse donc
+   pas sur le chargement de la page. Reçoit un objet `FicheData` purement sérialisable —
+   aucune logique métier ici, seulement la mise en page. */
+
+import {
+  Document,
+  Font,
+  Page,
+  StyleSheet,
+  Text,
+  View,
+  pdf,
+} from "@react-pdf/renderer";
+
+/* --- polices de la charte (TTF same-origin, cachées par le service worker → hors-ligne OK) --- */
+Font.register({
+  family: "Hanken Grotesk",
+  fonts: [
+    { src: "/fonts/HankenGrotesk_400Regular.ttf", fontWeight: 400 },
+    { src: "/fonts/HankenGrotesk_600SemiBold.ttf", fontWeight: 600 },
+    { src: "/fonts/HankenGrotesk_700Bold.ttf", fontWeight: 700 },
+  ],
+});
+Font.register({
+  family: "JetBrains Mono",
+  fonts: [
+    { src: "/fonts/JetBrainsMono_400Regular.ttf", fontWeight: 400 },
+    { src: "/fonts/JetBrainsMono_600SemiBold.ttf", fontWeight: 600 },
+  ],
+});
+// pas de césure automatique (évite les coupures hasardeuses des libellés/codes)
+Font.registerHyphenationCallback((w) => [w]);
+
+/* --- couleurs (miroir de app/globals.css + oranges/bleus Tailwind utilisés dans l'UI) --- */
+const C = {
+  ink: "#16212b",
+  inkSoft: "#4c5c68",
+  line: "#d3dbdd",
+  lineSoft: "#e3e9ea",
+  petrol: "#0c6b66",
+  petrolDeep: "#073f3c",
+  petrolTint: "#e0efed",
+  amber: "#9c4a06",
+  amberTint: "#f6eadc",
+  orange400: "#fb923c",
+  orange50: "#fff7ed",
+  orange100: "#ffedd5",
+  orange700: "#c2410c",
+  orange800: "#9a3412",
+  blue400: "#60a5fa",
+  blue50: "#eff6ff",
+  blue100: "#dbeafe",
+  blue800: "#1e40af",
+  white: "#ffffff",
+};
+
+/* --- types de données (sérialisables, construits dans WalkerShell) --- */
+export interface FicheData {
+  generatedAt: string;
+  device: {
+    code: string;
+    name: string;
+    family: string;
+    modes: string;
+    presc: string;
+    fiche: boolean;
+    dap: boolean;
+  };
+  profile: { k: string; v: string }[];
+  flags: string[];
+  vph: {
+    code: string;
+    tarif: number | null;
+    name: string;
+    indications: { mode: string; text: string }[];
+  } | null;
+  forfaits: { code: string; label: string; price: number; definition: string[]; technique: string[] }[];
+  adjonctions: { code: string; name: string; price: string; open: boolean }[];
+  pap: { name: string; forfait: "A" | "B"; code: string; info: string }[];
+  livraison: { code: string; label: string; price: number } | null;
+  totals: { subtotal: number; hasOpen: boolean; total: number | null };
+  disclaimer: string;
+  source: string;
+  lastUpdated: string;
+}
+
+function eur(n: number): string {
+  return n.toLocaleString("fr-FR", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " €";
+}
+
+const s = StyleSheet.create({
+  page: {
+    paddingTop: 38,
+    paddingBottom: 54,
+    paddingHorizontal: 40,
+    fontFamily: "Hanken Grotesk",
+    fontSize: 9.5,
+    color: C.ink,
+    lineHeight: 1.45,
+  },
+  /* en-tête */
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "flex-end",
+    borderBottomWidth: 2,
+    borderBottomColor: C.petrol,
+    paddingBottom: 8,
+  },
+  wordmark: { fontSize: 22, fontWeight: 700, letterSpacing: -0.4, color: C.ink },
+  wordmarkAccent: { color: C.petrol },
+  eyebrow: {
+    fontSize: 7,
+    fontWeight: 700,
+    letterSpacing: 1.1,
+    textTransform: "uppercase",
+    color: C.petrol,
+    marginTop: 3,
+  },
+  headerRight: { textAlign: "right" },
+  headerTitle: { fontSize: 10, fontWeight: 600, color: C.petrolDeep },
+  headerMeta: { fontSize: 8, color: C.inkSoft, marginTop: 2 },
+  /* sections */
+  section: { marginTop: 16 },
+  sectionTitle: {
+    fontSize: 8,
+    fontWeight: 700,
+    letterSpacing: 0.8,
+    textTransform: "uppercase",
+    color: C.petrol,
+    borderBottomWidth: 1,
+    borderBottomColor: C.lineSoft,
+    paddingBottom: 3,
+    marginBottom: 7,
+  },
+  /* bandeau dispositif */
+  deviceBar: { flexDirection: "row", alignItems: "center", gap: 8, marginBottom: 8 },
+  deviceCode: {
+    fontFamily: "JetBrains Mono",
+    fontWeight: 600,
+    fontSize: 13,
+    color: C.petrolTint,
+    backgroundColor: C.petrolDeep,
+    paddingVertical: 4,
+    paddingHorizontal: 8,
+    borderRadius: 5,
+  },
+  pill: {
+    fontSize: 8,
+    fontWeight: 600,
+    color: C.orange800,
+    backgroundColor: C.orange100,
+    paddingVertical: 3,
+    paddingHorizontal: 7,
+    borderRadius: 20,
+  },
+  deviceName: { fontSize: 13, fontWeight: 600, marginBottom: 8 },
+  /* grille profil / méta */
+  grid: { flexDirection: "row", flexWrap: "wrap" },
+  gridCell: { width: "50%", paddingVertical: 3, paddingRight: 10 },
+  gridLabel: { fontSize: 7, fontWeight: 700, letterSpacing: 0.5, textTransform: "uppercase", color: C.inkSoft },
+  gridValue: { fontSize: 9.5, marginTop: 1 },
+  /* drapeaux (DAP, code de la route…) */
+  flag: {
+    backgroundColor: C.amberTint,
+    borderWidth: 1,
+    borderColor: "#e3c9a0",
+    borderRadius: 5,
+    paddingVertical: 5,
+    paddingHorizontal: 8,
+    marginTop: 6,
+    fontSize: 9,
+    color: "#5c3208",
+  },
+  /* indications officielles */
+  indicBox: {
+    backgroundColor: C.orange50,
+    borderWidth: 1.2,
+    borderColor: C.orange400,
+    borderRadius: 7,
+    padding: 9,
+  },
+  indicLine: { flexDirection: "row", marginBottom: 4 },
+  indicMode: {
+    fontFamily: "JetBrains Mono",
+    fontSize: 8,
+    fontWeight: 600,
+    color: C.white,
+    backgroundColor: C.orange700,
+    paddingVertical: 2,
+    paddingHorizontal: 5,
+    borderRadius: 3,
+    marginRight: 6,
+  },
+  indicText: { flex: 1, fontSize: 9, color: C.orange800 },
+  /* tableau codes LPP */
+  row: {
+    flexDirection: "row",
+    alignItems: "center",
+    borderBottomWidth: 1,
+    borderBottomColor: C.lineSoft,
+    paddingVertical: 4,
+  },
+  codeBadge: {
+    fontFamily: "JetBrains Mono",
+    fontSize: 8.5,
+    fontWeight: 600,
+    paddingVertical: 2,
+    paddingHorizontal: 5,
+    borderRadius: 3,
+    marginRight: 7,
+  },
+  rowLabel: { flex: 1, fontSize: 9.5, paddingRight: 8 },
+  rowValue: { fontFamily: "JetBrains Mono", fontSize: 9.5, textAlign: "right" },
+  totalRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    backgroundColor: "#eef1f1",
+    borderRadius: 6,
+    paddingVertical: 7,
+    paddingHorizontal: 10,
+    marginTop: 8,
+  },
+  subtotalRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    backgroundColor: C.petrolTint,
+    borderRadius: 6,
+    paddingVertical: 6,
+    paddingHorizontal: 10,
+    marginTop: 6,
+  },
+  indicative: { fontSize: 7.5, fontStyle: "italic", color: C.inkSoft, marginBottom: 5 },
+  /* PAP */
+  papItem: { borderBottomWidth: 1, borderBottomColor: C.lineSoft, paddingVertical: 5 },
+  papHead: { flexDirection: "row", alignItems: "center", marginBottom: 2 },
+  papName: { flex: 1, fontSize: 10, fontWeight: 600 },
+  papForfait: {
+    fontFamily: "JetBrains Mono",
+    fontSize: 7.5,
+    color: C.petrolDeep,
+    backgroundColor: C.petrolTint,
+    paddingVertical: 2,
+    paddingHorizontal: 5,
+    borderRadius: 3,
+    marginLeft: 6,
+  },
+  papInfo: { fontSize: 8.5, color: C.inkSoft },
+  /* livraison */
+  livBox: {
+    backgroundColor: C.blue50,
+    borderWidth: 1.2,
+    borderColor: C.blue400,
+    borderRadius: 7,
+    padding: 9,
+    marginTop: 8,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  /* pied de page */
+  footer: {
+    position: "absolute",
+    bottom: 24,
+    left: 40,
+    right: 40,
+    borderTopWidth: 1,
+    borderTopColor: C.line,
+    paddingTop: 6,
+    fontSize: 7,
+    color: C.inkSoft,
+  },
+});
+
+function Section({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <View style={s.section} wrap={false}>
+      <Text style={s.sectionTitle}>{title}</Text>
+      {children}
+    </View>
+  );
+}
+
+/** Ligne du tableau « codes LPP & tarifs » (badge couleur paramétrable). */
+function CodeRow({
+  code,
+  label,
+  value,
+  badgeBg,
+  badgeColor,
+  valueColor,
+}: {
+  code: string;
+  label: string;
+  value: string;
+  badgeBg: string;
+  badgeColor: string;
+  valueColor: string;
+}) {
+  return (
+    <View style={s.row}>
+      <Text style={[s.codeBadge, { backgroundColor: badgeBg, color: badgeColor }]}>{code}</Text>
+      <Text style={s.rowLabel}>{label}</Text>
+      <Text style={[s.rowValue, { color: valueColor }]}>{value}</Text>
+    </View>
+  );
+}
+
+function FicheDocument({ d }: { d: FicheData }) {
+  const hasCodes = d.vph || d.forfaits.length > 0 || d.adjonctions.length > 0;
+  return (
+    <Document
+      title={`Préconisation ${d.device.code}`}
+      author="PRECONIA"
+      subject="Fiche de préconisation VPH"
+    >
+      <Page size="A4" style={s.page}>
+        {/* en-tête */}
+        <View style={s.header} fixed>
+          <View>
+            <Text style={s.wordmark}>
+              PRECON<Text style={s.wordmarkAccent}>IA</Text>
+            </Text>
+            <Text style={s.eyebrow}>Aide à la préconisation VPH · Médecine physique &amp; réadaptation</Text>
+          </View>
+          <View style={s.headerRight}>
+            <Text style={s.headerTitle}>Fiche de préconisation</Text>
+            <Text style={s.headerMeta}>Établie le {d.generatedAt}</Text>
+          </View>
+        </View>
+
+        {/* dispositif retenu */}
+        <View style={s.section}>
+          <View style={s.deviceBar}>
+            <Text style={s.deviceCode}>{d.device.code}</Text>
+            <Text style={s.pill}>{d.device.family}</Text>
+          </View>
+          <Text style={s.deviceName}>{d.device.name}</Text>
+          <View style={s.grid}>
+            <View style={s.gridCell}>
+              <Text style={s.gridLabel}>Mode de prise en charge</Text>
+              <Text style={s.gridValue}>{d.device.modes}</Text>
+            </View>
+            <View style={s.gridCell}>
+              <Text style={s.gridLabel}>Prescripteur / attestation</Text>
+              <Text style={s.gridValue}>{d.device.presc}</Text>
+            </View>
+            <View style={s.gridCell}>
+              <Text style={s.gridLabel}>Fiche évaluation + préconisation</Text>
+              <Text style={s.gridValue}>{d.device.fiche ? "Requises" : "Non concerné"}</Text>
+            </View>
+            <View style={s.gridCell}>
+              <Text style={s.gridLabel}>Accord préalable</Text>
+              <Text style={[s.gridValue, d.device.dap ? { color: C.amber, fontWeight: 600 } : {}]}>
+                {d.device.dap ? "DAP requise" : "Non requise"}
+              </Text>
+            </View>
+          </View>
+          {d.flags.map((f, i) => (
+            <Text key={i} style={s.flag}>
+              {f}
+            </Text>
+          ))}
+        </View>
+
+        {/* profil de prescription */}
+        <Section title="Profil de prescription">
+          <View style={s.grid}>
+            {d.profile.map((p) => (
+              <View key={p.k} style={s.gridCell}>
+                <Text style={s.gridLabel}>{p.k}</Text>
+                <Text style={s.gridValue}>{p.v}</Text>
+              </View>
+            ))}
+          </View>
+        </Section>
+
+        {/* indications officielles du VPH */}
+        {d.vph && d.vph.indications.length > 0 && (
+          <Section title="Indication officielle de prise en charge — VPH">
+            <View style={s.indicBox}>
+              {d.vph.indications.map((ind) => (
+                <View key={ind.mode} style={s.indicLine}>
+                  <Text style={s.indicMode}>{ind.mode}</Text>
+                  <Text style={s.indicText}>{ind.text}</Text>
+                </View>
+              ))}
+            </View>
+          </Section>
+        )}
+
+        {/* codes LPP & tarifs */}
+        {hasCodes && (
+          <Section title="Codes LPP &amp; tarifs">
+            <Text style={s.indicative}>Tarifs de responsabilité LPPR, affichés à titre indicatif.</Text>
+            {d.vph && (
+              <CodeRow
+                code={d.vph.code}
+                label={d.vph.name}
+                value={d.vph.tarif != null ? eur(d.vph.tarif) : "n.c."}
+                badgeBg={C.orange100}
+                badgeColor={C.orange800}
+                valueColor={C.orange800}
+              />
+            )}
+            {d.forfaits.map((f) => (
+              <CodeRow
+                key={f.code}
+                code={f.code}
+                label={f.label}
+                value={eur(f.price)}
+                badgeBg={C.petrolTint}
+                badgeColor={C.petrolDeep}
+                valueColor={C.petrolDeep}
+              />
+            ))}
+            {d.adjonctions.map((a) => (
+              <CodeRow
+                key={a.code}
+                code={a.code}
+                label={a.name}
+                value={a.price}
+                badgeBg={C.petrolTint}
+                badgeColor={C.petrolDeep}
+                valueColor={a.open ? C.amber : C.petrolDeep}
+              />
+            ))}
+            {d.livraison && (
+              <CodeRow
+                code={d.livraison.code}
+                label={d.livraison.label}
+                value={eur(d.livraison.price)}
+                badgeBg={C.blue100}
+                badgeColor={C.blue800}
+                valueColor={C.blue800}
+              />
+            )}
+            {(d.adjonctions.length > 0 || d.forfaits.length > 0) && (
+              <View style={s.subtotalRow}>
+                <Text style={{ fontWeight: 600, color: C.petrolDeep }}>
+                  Sous-total{d.totals.hasOpen ? " (hors devis / à préciser)" : ""}
+                </Text>
+                <Text style={{ fontFamily: "JetBrains Mono", fontWeight: 600, color: C.petrolDeep }}>
+                  {eur(d.totals.subtotal)}
+                </Text>
+              </View>
+            )}
+            {d.totals.total != null && (
+              <View style={s.totalRow}>
+                <Text style={{ fontWeight: 700 }}>
+                  Total indicatif{d.totals.hasOpen ? " (hors devis / à préciser)" : ""}
+                </Text>
+                <Text style={{ fontFamily: "JetBrains Mono", fontSize: 11, fontWeight: 700 }}>
+                  {eur(d.totals.total)}
+                </Text>
+              </View>
+            )}
+          </Section>
+        )}
+
+        {/* positionnement (PAP) retenu + descriptions */}
+        {d.pap.length > 0 && (
+          <Section title="Positionnement (PAP) retenu">
+            {d.pap.map((p) => (
+              <View key={p.name} style={s.papItem} wrap={false}>
+                <View style={s.papHead}>
+                  <Text style={s.papName}>{p.name}</Text>
+                  <Text style={s.papForfait}>
+                    {p.code} · Forfait {p.forfait}
+                  </Text>
+                </View>
+                {p.info ? <Text style={s.papInfo}>{p.info}</Text> : null}
+              </View>
+            ))}
+            {d.forfaits.map((f) =>
+              f.definition.length > 0 || f.technique.length > 0 ? (
+                <View key={f.code} style={{ marginTop: 8 }} wrap={false}>
+                  <Text style={{ fontSize: 9, fontWeight: 600, color: C.petrolDeep, marginBottom: 2 }}>
+                    {f.label}
+                  </Text>
+                  {f.definition.map((line, i) => (
+                    <Text key={`d${i}`} style={s.papInfo}>
+                      • {line}
+                    </Text>
+                  ))}
+                  {f.technique.map((line, i) => (
+                    <Text key={`t${i}`} style={s.papInfo}>
+                      • {line}
+                    </Text>
+                  ))}
+                </View>
+              ) : null,
+            )}
+          </Section>
+        )}
+
+        {/* pied de page */}
+        <View style={s.footer} fixed>
+          <Text>
+            {d.disclaimer} Source : {d.source}. Dernière mise à jour : {d.lastUpdated}.
+          </Text>
+        </View>
+      </Page>
+    </Document>
+  );
+}
+
+/** Construit le PDF et déclenche son téléchargement (appelée au clic, en navigateur). */
+export async function downloadFichePdf(data: FicheData): Promise<void> {
+  const blob = await pdf(<FicheDocument d={data} />).toBlob();
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `preconisation-${data.device.code}.pdf`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
