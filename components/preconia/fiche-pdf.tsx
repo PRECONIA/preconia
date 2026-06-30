@@ -6,6 +6,7 @@
 import {
   Document,
   Font,
+  Image,
   Page,
   StyleSheet,
   Text,
@@ -108,6 +109,8 @@ const s = StyleSheet.create({
     borderBottomColor: C.petrol,
     paddingBottom: 8,
   },
+  headerLeft: { flexDirection: "row", alignItems: "center", gap: 11 },
+  logo: { width: 44, height: 44, borderRadius: 10 },
   wordmark: { fontSize: 22, fontWeight: 700, letterSpacing: -0.4, lineHeight: 1, color: C.ink },
   wordmarkAccent: { color: C.petrol },
   eyebrow: {
@@ -140,19 +143,23 @@ const s = StyleSheet.create({
     fontFamily: "JetBrains Mono",
     fontWeight: 600,
     fontSize: 13,
+    lineHeight: 1,
+    textAlign: "center",
     color: C.petrolTint,
     backgroundColor: C.petrolDeep,
-    paddingVertical: 4,
+    paddingVertical: 5,
     paddingHorizontal: 8,
     borderRadius: 5,
   },
   pill: {
     fontSize: 8,
     fontWeight: 600,
+    lineHeight: 1,
+    textAlign: "center",
     color: C.orange800,
     backgroundColor: C.orange100,
-    paddingVertical: 3,
-    paddingHorizontal: 7,
+    paddingVertical: 4,
+    paddingHorizontal: 8,
     borderRadius: 20,
   },
   deviceName: { fontSize: 13, fontWeight: 600, marginBottom: 8 },
@@ -181,19 +188,23 @@ const s = StyleSheet.create({
     borderRadius: 7,
     padding: 9,
   },
-  indicLine: { flexDirection: "row", marginBottom: 4 },
+  // flex-start : le badge ne s'étire pas verticalement quand le texte d'à côté tient sur
+  // plusieurs lignes (sinon ACHAT/LLD apparaissaient disproportionnés).
+  indicLine: { flexDirection: "row", alignItems: "flex-start", marginBottom: 4 },
   indicMode: {
     fontFamily: "JetBrains Mono",
     fontSize: 8,
     fontWeight: 600,
+    lineHeight: 1,
+    width: 46, // largeur fixe → badges de mode uniformes et alignés en colonne
+    textAlign: "center",
     color: C.white,
     backgroundColor: C.orange700,
-    paddingVertical: 2,
-    paddingHorizontal: 5,
+    paddingVertical: 3,
     borderRadius: 3,
     marginRight: 6,
   },
-  indicText: { flex: 1, fontSize: 9, color: C.orange800 },
+  indicText: { flex: 1, fontSize: 9, lineHeight: 1.35, color: C.orange800 },
   /* tableau codes LPP */
   row: {
     flexDirection: "row",
@@ -206,7 +217,9 @@ const s = StyleSheet.create({
     fontFamily: "JetBrains Mono",
     fontSize: 8.5,
     fontWeight: 600,
-    paddingVertical: 2,
+    lineHeight: 1,
+    textAlign: "center",
+    paddingVertical: 3,
     paddingHorizontal: 5,
     borderRadius: 3,
     marginRight: 7,
@@ -241,9 +254,11 @@ const s = StyleSheet.create({
   papForfait: {
     fontFamily: "JetBrains Mono",
     fontSize: 7.5,
+    lineHeight: 1,
+    textAlign: "center",
     color: C.petrolDeep,
     backgroundColor: C.petrolTint,
-    paddingVertical: 2,
+    paddingVertical: 3,
     paddingHorizontal: 5,
     borderRadius: 3,
     marginLeft: 6,
@@ -330,11 +345,15 @@ function FicheDocument({ d }: { d: FicheData }) {
       <Page size="A4" style={s.page}>
         {/* en-tête */}
         <View style={s.header} fixed>
-          <View>
-            <Text style={s.wordmark}>
-              PRECON<Text style={s.wordmarkAccent}>IA</Text>
-            </Text>
-            <Text style={s.eyebrow}>Aide à la préconisation VPH · Médecine physique &amp; réadaptation</Text>
+          <View style={s.headerLeft}>
+            {/* eslint-disable-next-line jsx-a11y/alt-text */}
+            <Image src="/icon-512.png" style={s.logo} />
+            <View>
+              <Text style={s.wordmark}>
+                PRECON<Text style={s.wordmarkAccent}>IA</Text>
+              </Text>
+              <Text style={s.eyebrow}>Aide à la préconisation VPH · Médecine physique &amp; réadaptation</Text>
+            </View>
           </View>
           <View style={s.headerRight}>
             <Text style={s.headerTitle}>Fiche de préconisation</Text>
