@@ -8,6 +8,7 @@ import lpprAdjRaw from "@/data/lppr-adjonctions.json";
 import adjBrandsRaw from "@/data/adjonction-brands.json";
 import deviceLppRaw from "@/data/device-lpp.json";
 import deviceModelsRaw from "@/data/device-models.json";
+import deviceIndicationsRaw from "@/data/device-indications.json";
 import metaRaw from "@/data/meta.json";
 
 import {
@@ -20,6 +21,7 @@ import {
   AdjonctionBrandsFileSchema,
   DeviceLppFileSchema,
   DeviceModelsFileSchema,
+  DeviceIndicationsFileSchema,
   MetaSchema,
 } from "./schemas";
 import type { DeviceLppEntry, DeviceModelEntry } from "./types";
@@ -73,6 +75,11 @@ export const deviceModelsMeta = {
   source: deviceModelsFile.source,
   lastUpdated: deviceModelsFile.lastUpdated,
 };
+
+const deviceIndicationsFile = DeviceIndicationsFileSchema.parse(deviceIndicationsRaw);
+/** indications officielles de prise en charge : code → { mode → texte } (survol écran VPH). */
+export const deviceIndicationsByCode: Record<string, Record<string, string>> =
+  deviceIndicationsFile.byCode;
 
 /* Index pratique code → device. */
 export const deviceByCode: Record<string, Device> = Object.fromEntries(

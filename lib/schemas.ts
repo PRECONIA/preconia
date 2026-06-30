@@ -143,6 +143,14 @@ export const DeviceModelsFileSchema = z.object({
   byToken: z.record(z.string(), z.record(z.string(), DeviceModelEntrySchema)),
 });
 
+/* --- device-indications.json (indications officielles de prise en charge par dispositif et par
+   mode, INI-CERAH ; affichées en survol sur l'écran de choix du VPH). --- */
+export const DeviceIndicationsFileSchema = z.object({
+  source: z.string(),
+  lastUpdated: z.string(),
+  byCode: z.record(z.string(), z.record(z.string(), z.string())),
+});
+
 /* --- meta.json --- */
 export const MetaSchema = z.object({
   source: z.string(),

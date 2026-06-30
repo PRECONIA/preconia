@@ -12,6 +12,7 @@ import {
   besoins,
   classes,
   deviceModelsByType,
+  deviceIndicationsByCode,
   deviceLppByType,
   devices,
   meta,
@@ -809,16 +810,39 @@ function DeviceChoice({
           Aucun dispositif disponible pour cette temporalité.
         </p>
       )}
-      {list.map((d) => (
-        <button key={d.code} className={btn} onClick={() => dispatch({ type: "CHOOSE_DEVICE", code: d.code })}>
-          <b className="block">
-            <span className="font-mono">{d.code}</span> — {d.name}
-          </b>
-          <span className="mt-0.5 block text-xs text-ink-soft">
-            Prise en charge : {d.modes.filter((m) => allowed.includes(m)).join(" · ")}
-          </span>
-        </button>
-      ))}
+      {list.map((d) => {
+        const modes = d.modes.filter((m) => allowed.includes(m));
+        const ind = deviceIndicationsByCode[d.code] ?? {};
+        const entries = modes.map((m) => [m, ind[m]] as const).filter(([, t]) => t);
+        return (
+          <div key={d.code} className="group relative">
+            <button
+              className={btn}
+              onClick={() => dispatch({ type: "CHOOSE_DEVICE", code: d.code })}
+            >
+              <b className="block">
+                <span className="font-mono">{d.code}</span> — {d.name}
+              </b>
+              <span className="mt-0.5 block text-xs text-ink-soft">
+                Prise en charge : {modes.join(" · ")}
+              </span>
+            </button>
+            {entries.length > 0 && (
+              <div className="pointer-events-none absolute left-0 top-full z-20 mt-2 hidden w-full rounded-xl border-2 border-orange-400 bg-orange-50 p-3 text-[12px] leading-relaxed text-orange-900 shadow-lg group-hover:block lg:left-full lg:top-0 lg:mt-0 lg:ml-3 lg:w-[22rem]">
+                <div className="mb-1.5 text-[11px] font-bold uppercase tracking-wide text-orange-700">
+                  Indication officielle de prise en charge
+                </div>
+                {entries.map(([m, t]) => (
+                  <p key={m} className="mb-2 last:mb-0">
+                    <span className="font-semibold">{m} — </span>
+                    {t}
+                  </p>
+                ))}
+              </div>
+            )}
+          </div>
+        );
+      })}
       <Nav dispatch={dispatch} />
     </Step>
   );

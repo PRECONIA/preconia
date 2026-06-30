@@ -1,0 +1,63 @@
+{
+  "source": "INI-CERAH — indications officielles de prise en charge VPH (arrêté du 6 février 2025)",
+  "lastUpdated": "2026-06-25",
+  "byCode": {
+    "FMP": {
+      "LCD": "Les patients concernés par cette modalité de prise en charge sont ceux dont la situation de handicap est temporaire et dont la durée du handicap est initialement estimée par le prescripteur à moins de trois mois. Cette location hebdomadaire courte durée ne peut pas dépasser six mois de facturations consécutives sur une année glissante.",
+      "ACHAT": "Incapacité de marche partielle ou totale, permanente ou longue (+ 6 mois)"
+    },
+    "FMPR": {
+      "LCD": "Les patients concernés par cette modalité de prise en charge sont ceux dont la situation de handicap est temporaire et dont la durée du handicap est initialement estimée par le prescripteur à moins de trois mois. Cette location hebdomadaire courte durée ne peut pas dépasser six mois de facturations consécutives sur une année glissante.",
+      "ACHAT": "Incapacité de marche partielle ou totale, permanente ou longue (+ 6 mois)"
+    },
+    "FRM": {
+      "LCD": "Les patients concernés par cette modalité de prise en charge sont ceux dont la situation de handicap est temporaire et dont la durée du handicap est initialement estimée par le prescripteur à moins de trois mois. Cette location hebdomadaire courte durée ne peut pas dépasser six mois de facturations consécutives sur une année glissante.",
+      "ACHAT": "Incapacité de marche partielle ou totale, permanente ou longue (+ 6 mois)"
+    },
+    "FRMA": {
+      "ACHAT": "Incapacité de marche partielle ou totale, permanente ou longue (+ 6 mois). Ces types de VPH présentent des possibilités de configuration et/ou de réglages supérieurs au fauteuil roulant modulaire à propulsion manuelle ou à pousser (FRM) permettant de répondre aux besoins spécifiques dynamiques de la personne utilisatrice expérimentée dans la maniabilité autonome, les transferts et les franchissements, pour une utilisation intérieure et extérieure."
+    },
+    "FRMS": {
+      "ACHAT": "Incapacité de marche partielle ou totale, permanente ou longue (+ 6 mois). Ces types de VPH présentent des possibilités de configuration et/ou de réglages supérieurs au fauteuil roulant modulaire à propulsion manuelle ou à pousser (FRM) permettant de répondre à la pratique d'une activité sportive."
+    },
+    "FRMC": {
+      "ACHAT": "Incapacité de marche partielle ou totale, permanente ou longue (+ 6 mois). Ces types de VPH présentent des possibilités de configuration et/ou de réglages supérieurs au fauteuil roulant modulaire à propulsion manuelle ou à pousser (FRM) permettant de répondre aux besoins spécifiques de la personne utilisatrice en termes de mobilité et d'efficience de propulsion."
+    },
+    "FRMP": {
+      "LLD": "Incapacité de marche partielle ou totale et ayant des capacités cognitives et physiques permettant d'assurer la maîtrise du fauteuil roulant modulaire à propulsion manuelle (pas ou peu de déficit fonctionnel des membres supérieurs et pas ou peu d'incapacités à l'effort). Ces types de VPH présentent des possibilités de configuration et/ou de réglages supérieurs au fauteuil roulant modulaire à propulsion manuelle ou à pousser (FRM) permettant de répondre aux besoins spécifiques d'installation et de changement de position (FRMP). La prescription de ce type de fauteuil doit tenir compte de l'environnement de vie du patient et de ses habitudes de vie.",
+      "ACHAT": "Incapacité de marche partielle ou totale, permanente ou longue (+ 6 mois). Ces types de VPH présentent des possibilités de configuration et/ou de réglages supérieurs au fauteuil roulant modulaire à propulsion manuelle ou à pousser (FRM) permettant de répondre aux besoins spécifiques d'installation et de changement de positions."
+    },
+    "FRMV": {
+      "LLD": "Incapacité de marche partielle ou totale, dont les besoins nécessitent une verticalisation régulière, et dont les capacités fonctionnelles ne leur permettent pas de se verticaliser eux-mêmes. Ce type de VPH contribue à la prévention des complications liées à l'immobilité en permettant de passer de la position assise à la position debout, en soutenant la partie postérieure du corps, et favorise une meilleure participation sociale. Ce type de VPH présente des possibilités de configuration et/ou de réglages supérieures au fauteuil roulant modulaire à propulsion manuelle ou à pousser (FRM), permettant de répondre aux besoins spécifiques de la personne utilisatrice.",
+      "ACHAT": "Incapacité de marche partielle ou totale, permanente ou longue (+ 6 mois). Ces types de VPH présentent des possibilités de configuration et/ou de réglages supérieurs au fauteuil roulant modulaire à propulsion manuelle ou à pousser (FRM) permettant de répondre aux besoins des personnes nécessitant une verticalisation régulière et dont les capacités fonctionnelles ne leur permettent pas de se verticaliser eux-mêmes."
+    },
+    "FRE": {
+      "LCD": "La prise en charge est assurée dans les situations suivantes : personnes dans l'impossibilité provisoire de propulser elles-mêmes un fauteuil roulant à propulsion manuelle soit en raison de leur déficience, soit en raison de leur situation environnementale et qui ont des capacités cognitives leur permettant d'assurer la maîtrise du fauteuil roulant à propulsion par moteur électrique ; un évènement médical intercurrent entrainant une situation de handicap temporaire nécessitant l'utilisation d'un fauteuil roulant électrique chez des patients se déplaçant habituellement en fauteuil roulant manuel ; une pathologie neurologique, neuromusculaire, rhumatologique, ou autre maladie rapidement évolutive ou pathologies dont l'évolution est non prévisible (par exemple, certains stades de sclérose latérale amyotrophique, de sclérose en plaque, de dystrophie musculaire, de Locked in syndrome, de syndrome de l'immunodéficience acquise, de cancers entrainant une incapacité à la marche…) nécessitant d'avoir recours rapidement et pour une courte durée à un fauteuil roulant électrique.",
+      "ACHAT": "Incapacité de marche partielle ou totale ET impossibilité de propulser un VPH manuel ou podale (déficience ou situation environnementale). Capacités cognitives et physiques pour maîtriser le FRE. Fonctionnement suffisant des membres supérieurs et capacités visuelles nécessaires."
+    },
+    "FREP": {
+      "LLD": "Incapacité de marche partielle ou totale, provisoire ou définitive, étant dans l'impossibilité de propulser eux-mêmes un VPH à propulsion manuelle ou podale soit en raison de leur déficience soit de leur situation environnementale contraignante et qui ont des capacités cognitives et physiques leur permettant d'assurer la maîtrise du fauteuil roulant modulaire de positionnement à propulsion par moteur électrique. Contrairement aux FRE, ce type de véhicule s'adresse aux patients ayant un besoin de maintien, de positionnement lié notamment à une perte du tonus musculaire. Une exception pour les personnes n'ayant pas les capacités physiques et cognitives est prévue permettant de prévoir une commande uniquement pour l'accompagnant",
+      "ACHAT": "Incapacité de maré de marche partielle ou totale ET impossibilité de propulser un VPH manuel ou podale (déficience ou situation environnementale). Capacités cognitives et physiques pour maîtriser le FREP. Fonctionnement suffisant des membres supérieurs et capacités visuelles nécessaires."
+    },
+    "FREV": {
+      "LLD": "Incapacité de marche partielle ou totale, provisoire ou définitive, et qui sont dans l'impossibilité de propulser elles-mêmes un VPH à propulsion manuelle ou podale soit en raison de leur déficience, soit en raison de leur situation environnementale et qui ont des capacités cognitives et physiques leur permettant d'assurer la maîtrise du fauteuil roulant modulaire à propulsion par moteur électrique de verticalisation. Besoins nécessitant une verticalisation régulière, et en particulier les personnes ayant des rétractions musculo-tendineuse des membres inférieurs, et dont les capacités fonctionnelles ne leur permettent pas de se verticaliser elles-mêmes ou d'utiliser un système de verticalisation mécanique, assistée ou non. Ce système contribue à la prévention des complications liées à l'immobilité en permettant de passer de la position assis à la position debout, directement (mode assis debout) ou par des positions intermédiaires « couchées » (mode assis/debout/assis/couché) en soutenant la partie postérieure du corps et il favorise une meilleure participation sociale. Lorsque la personne n'a pas les capacités physiques et cognitives pour utiliser un fauteuil roulant modulaire à propulsion par moteur électrique de positionnement et/ou que sa situation et son environnement rendent impossible la propulsion par l'accompagnant, la prise en charge d'un fauteuil roulant modulaire à propulsion par moteur électrique de verticalisation avec commande uniquement pour l'accompagnant peut alors être envisagée. La préconisation, l'essai et la validation du choix du fauteuil roulant modulaire à propulsion par moteur électrique de verticalisation sont alors réalisés en présence de l'accompagnant. Ce type de VPH présente des possibilités de configuration et/ou de réglage supérieures au FRE permettant de répondre aux besoins spécifiques de positionnement de la personne utilisatrice.",
+      "ACHAT": "Incapacité de marche partielle ou totale ET impossibilité de propulser un VPH manuel ou podale (déficience ou situation environnementale). Capacités cognitives et physiques pour maîtriser le FREV. Fonctionnement suffisant des membres supérieurs et capacités visuelles nécessaires. Besoin de verticalisation en position assise pour prévenir les complications liées à la position assise prolongée (escarres, troubles circulatoires, rétraction musculo-tendineuse, troubles digestifs, troubles respiratoires, etc.) OU besoin de verticalisation en position assise pour réaliser des activités de la vie quotidienne ou professionnelle nécessitant une position debout."
+    },
+    "POU_S": {
+      "ACHAT": "Enfants < 18 ans avec incapacité de marche partielle ou totale, permanente ou longue (+ 6 mois)"
+    },
+    "POU_MRE": {
+      "LLD": "Enfants de moins de 18 ans présentant une incapacité de marche partielle ou totale, et/ou qui sont dans l'impossibilité d'utiliser elles-mêmes un autre VPH et/ou qui se trouvent dans des situations environnementales ou d'activité empêchant l'utilisation d'un autre VPH. Contrairement aux poussettes standard (POU_S), ce type de véhicule s'adresse aux patients ayant un besoin de maintien, de positionnement lié notamment à une perte du tonus musculaire.",
+      "ACHAT": "Enfants < 18 ans avec incapacité de marche partielle ou totale, impossibilité d'utiliser un autre VPH ou situations environnementales empêchant l'utilisation d'un autre VPH. Besoin de maintien et positionnement lié à une perte du tonus musculaire."
+    },
+    "SCO": {
+      "ACHAT": "Limitation sévère et durable de l'activité de marche, impossibilité d'atteindre les objectifs de participation sociale avec un FR manuel. Capacité à marcher sur quelques mètres, équilibre assis sans aide, transferts autonomes, fonctionnement suffisant des membres supérieurs, capacités cognitives et perceptives nécessaires."
+    },
+    "BASE": {
+      "ACHAT": "Incapacité de marche partielle ou totale, provisoire ou définitive, uniquement si installées dans un système de soutien du corps réalisé sur moulage en matériaux thermoformable haute température."
+    },
+    "CYC": {
+      "ACHAT": "Déficience motrice (acquise ou congénitale) avec autonomie de déplacement réduite, incapacité de marche partielle ou totale, provisoire ou définitive. Tricycle adapté à la morphologie au niveau du tronc et membres inférieurs."
+    }
+  }
+}
