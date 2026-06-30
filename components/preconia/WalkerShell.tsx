@@ -111,7 +111,11 @@ export function WalkerShell() {
     ? deviceModelGeneric(device, answers.classe, brand, model, deviceModelsByType)
     : false;
 
-  // Tous les codes LPP de la fiche finale : fauteuil + forfaits PAP + adjonctions (adaptés marque).
+  // Forfait de livraison & mise en service — option cochable sur la fiche finale.
+  const [addLivraison, setAddLivraison] = useState(false);
+
+  // Tous les codes LPP de la fiche finale : fauteuil + forfaits PAP + adjonctions (adaptés marque)
+  // + le forfait de livraison s'il est coché.
   const lpprCodes = [
     ...(devLpp && device
       ? [
@@ -129,18 +133,23 @@ export function WalkerShell() {
       code: adaptedCode(a.code, brand, adjBrandMap),
       label: a.name,
     })),
+    ...(addLivraison ? [{ code: meta.livraison.code, label: meta.livraison.label }] : []),
   ];
   const [copied, setCopied] = useState(false);
-  const copyCodes = async () => {
-    const text = lpprCodes.map((c) => `${c.code}\t${c.label}`).join("\n");
+  const copyToClipboard = async (text: string, mark: (v: boolean) => void) => {
     try {
       await navigator.clipboard.writeText(text);
-      setCopied(true);
-      window.setTimeout(() => setCopied(false), 2000);
+      mark(true);
+      window.setTimeout(() => mark(false), 2000);
     } catch {
       /* clipboard indisponible */
     }
   };
+  const copyCodes = () =>
+    copyToClipboard(lpprCodes.map((c) => `${c.code}\t${c.label}`).join("\n"), setCopied);
+  const [copiedLiv, setCopiedLiv] = useState(false);
+  const copyLivraison = () =>
+    copyToClipboard(`${meta.livraison.code}\t${meta.livraison.label}`, setCopiedLiv);
 
   return (
     <div className="relative z-10 mx-auto max-w-[790px] px-5 pb-16 pt-8">
@@ -620,6 +629,19 @@ export function WalkerShell() {
                       open={!!(a.devis || a.tbd)}
                     />
                   ))}
+                  {addLivraison && (
+                    <div className="flex items-baseline justify-between gap-3 border-b border-line-soft py-1.5 text-sm">
+                      <span className="flex min-w-0 items-baseline gap-2">
+                        <span className="shrink-0 rounded bg-blue-100 px-1.5 py-0.5 font-mono text-[11px] font-semibold text-blue-800">
+                          {meta.livraison.code}
+                        </span>
+                        <span>
+                          {meta.livraison.label} <span className="text-ink-soft">· livraison</span>
+                        </span>
+                      </span>
+                      <span className="font-mono text-blue-800">{eur(meta.livraison.price)}</span>
+                    </div>
+                  )}
                   {(selectedAdj.length > 0 || forfaits.length > 0) && <Subtotal costs={costs} />}
                   {devLpp?.tarif != null && (
                     <div className="mt-2 flex items-center justify-between rounded-lg bg-ink/5 px-4 py-3">
@@ -627,7 +649,7 @@ export function WalkerShell() {
                         Total indicatif{costs.hasOpen ? " (hors devis / à préciser)" : ""}
                       </b>
                       <span className="font-mono text-base font-semibold text-ink">
-                        {eur(devLpp.tarif + costs.subtotal)}
+                        {eur(devLpp.tarif + costs.subtotal + (addLivraison ? meta.livraison.price : 0))}
                       </span>
                     </div>
                   )}
@@ -637,6 +659,40 @@ export function WalkerShell() {
                   >
                     {copied ? "✓ Codes LPP copiés" : `Copier les ${lpprCodes.length} codes LPP`}
                   </button>
+
+                  {/* Forfait de livraison : option cochable, encart bleu, copie dédiée. */}
+                  <div className="mt-3 rounded-xl border-2 border-blue-400 bg-blue-50 p-4">
+                    <label className="flex cursor-pointer items-start gap-2.5">
+                      <input
+                        type="checkbox"
+                        checked={addLivraison}
+                        onChange={(e) => setAddLivraison(e.target.checked)}
+                        className="mt-0.5 h-4 w-4 accent-blue-600"
+                      />
+                      <span className="text-sm">
+                        <b className="text-blue-900">Ajouter le forfait de livraison &amp; mise en service</b>
+                        <span className="mt-0.5 block text-[12px] text-blue-800/80">
+                          {meta.livraison.label}
+                        </span>
+                      </span>
+                    </label>
+                    <div className="mt-3 flex items-center justify-between gap-3">
+                      <span className="flex items-center gap-2">
+                        <span className="rounded bg-blue-200/70 px-1.5 py-0.5 font-mono text-[12px] font-semibold text-blue-900">
+                          {meta.livraison.code}
+                        </span>
+                        <span className="font-mono text-sm font-semibold text-blue-900">
+                          {eur(meta.livraison.price)}
+                        </span>
+                      </span>
+                      <button
+                        onClick={copyLivraison}
+                        className="shrink-0 rounded-lg bg-blue-600 px-3 py-2 text-sm font-semibold text-white hover:bg-blue-700"
+                      >
+                        {copiedLiv ? "✓ Copié" : "Copier le code livraison"}
+                      </button>
+                    </div>
+                  </div>
                 </div>
               )}
 
@@ -676,9 +732,8 @@ export function WalkerShell() {
       <RechercheLpp />
 
       <footer className="mt-6 border-t border-line pt-4 text-[11.5px] leading-relaxed text-ink-soft/90">
-        <b className="text-ink-soft">{meta.disclaimer}</b> {meta.livraison.label}{" "}
-        <span className="font-mono">{meta.livraison.code}</span> : {eur(meta.livraison.price)}. Source :{" "}
-        {meta.source}. Dernière mise à jour : {meta.lastUpdated}.
+        <b className="text-ink-soft">{meta.disclaimer}</b> Source : {meta.source}. Dernière mise à
+        jour : {meta.lastUpdated}.
       </footer>
     </div>
   );
