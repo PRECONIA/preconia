@@ -123,6 +123,15 @@ export const DeviceLppFileSchema = z.object({
   byType: z.record(z.string(), DeviceLppEntrySchema),
 });
 
+/* --- device-brands.json (variantes de marque par type de VPH : token → marque → {code, tarif}).
+   Le code de marque est sourcé des libellés lppr.json ; le tarif par marque peut être null
+   (non sourcé) → repli sur le tarif de la ligne / code mère dans `deviceLpp`. */
+export const DeviceBrandsFileSchema = z.object({
+  source: z.string(),
+  lastUpdated: z.string(),
+  byToken: z.record(z.string(), z.record(z.string(), DeviceLppEntrySchema)),
+});
+
 /* --- meta.json --- */
 export const MetaSchema = z.object({
   source: z.string(),

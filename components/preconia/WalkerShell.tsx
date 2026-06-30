@@ -11,6 +11,7 @@ import {
   adjGroups,
   besoins,
   classes,
+  deviceBrandByType,
   deviceLppByType,
   devices,
   meta,
@@ -19,7 +20,14 @@ import {
   papRegions,
   prescribers,
 } from "@/lib/data";
-import { adaptedCode, brandsForBases, deviceLpp, hasBrandVariant } from "@/lib/rules";
+import {
+  adaptedCode,
+  brandsForBases,
+  deviceBrandsForToken,
+  deviceLpp,
+  hasBrandVariant,
+  hasDeviceBrandVariant,
+} from "@/lib/rules";
 import { eur } from "@/lib/format";
 import { RechercheLpp } from "@/components/preconia/RechercheLpp";
 import { Logo } from "@/components/preconia/Logo";
@@ -67,16 +75,25 @@ export function WalkerShell() {
   const costs = selectCosts(state);
   const route = selectRoute(state);
 
-  // Marque du fauteuil → adapte les codes LPP (adjonctions compatibles + forfaits PAP).
+  // Marque du fauteuil → pilote le code LPP du fauteuil ET adapte les adjonctions / PAP.
   const brand = answers.vehicleBrand;
   const brandBases = [
     ...compatAdj.map((a) => a.code),
     ...(device?.modular ? [papForfaits.A.code, papForfaits.B.code] : []),
   ];
-  const availableBrands = brandsForBases(brandBases, adjBrandMap);
+  // Union : marques de fauteuil (pour le type/classe) + marques d'adjonctions/PAP, triée.
+  const deviceBrands = device ? deviceBrandsForToken(device, answers.classe, deviceBrandByType) : [];
+  const availableBrands = Array.from(
+    new Set([...deviceBrands, ...brandsForBases(brandBases, adjBrandMap)]),
+  ).sort((a, b) => a.localeCompare(b));
 
-  // Code LPP + tarif du fauteuil sélectionné (selon le type et, pour l'électrique, la classe).
-  const devLpp = device ? deviceLpp(device, answers.classe, deviceLppByType) : null;
+  // Code LPP + tarif du fauteuil : variante de marque si elle existe, sinon code mère.
+  const devLpp = device
+    ? deviceLpp(device, answers.classe, deviceLppByType, deviceBrandByType, brand)
+    : null;
+  const devBrandHit = device
+    ? hasDeviceBrandVariant(device, answers.classe, brand, deviceBrandByType)
+    : false;
 
   // Tous les codes LPP de la fiche finale : fauteuil + forfaits PAP + adjonctions (adaptés marque).
   const lpprCodes = [
@@ -308,8 +325,19 @@ export function WalkerShell() {
             >
               {devLpp && (
                 <div className="mb-5 rounded-xl border-2 border-orange-400 bg-orange-100/60 p-4">
-                  <div className="mb-1.5 text-sm font-semibold text-orange-800">
+                  <div className="mb-1.5 flex items-center gap-2 text-sm font-semibold text-orange-800">
                     Fauteuil sélectionné · code LPP
+                    {devBrandHit ? (
+                      <span className="rounded bg-orange-500 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">
+                        {brand}
+                      </span>
+                    ) : (
+                      brand && (
+                        <span className="rounded bg-orange-200 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-orange-700">
+                          générique
+                        </span>
+                      )
+                    )}
                   </div>
                   <div className="flex items-center justify-between gap-3">
                     <span className="flex min-w-0 items-center gap-2">

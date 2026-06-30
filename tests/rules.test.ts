@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   adjBrandMap,
   adjonctions,
+  deviceBrandByType,
   deviceByCode,
   deviceLppByType,
   papForfaits,
@@ -12,9 +13,11 @@ import {
   brandsForBases,
   computeSubtotal,
   deriveForfaits,
+  deviceBrandsForToken,
   deviceLpp,
   filterAdjonctions,
   hasBrandVariant,
+  hasDeviceBrandVariant,
   hasOpenItems,
   needsBesoins,
   selectedAdjonctions,
@@ -157,5 +160,40 @@ describe("deviceLpp (code LPP + tarif du fauteuil)", () => {
 
   it("FREV : pas de classe requise", () => {
     expect(deviceLpp(deviceByCode.FREV, null, deviceLppByType)?.code).toBeTruthy();
+  });
+});
+
+describe("deviceLpp — code par marque du fauteuil (variante prioritaire, jamais inventée)", () => {
+  const mereFrepB = deviceLpp(deviceByCode.FREP, "B", deviceLppByType)!;
+
+  it("FREP-B + marque connue → code de la variante (≠ code mère)", () => {
+    const brands = deviceBrandsForToken(deviceByCode.FREP, "B", deviceBrandByType);
+    expect(brands.length).toBeGreaterThan(0);
+    const b = brands[0];
+    const v = deviceLpp(deviceByCode.FREP, "B", deviceLppByType, deviceBrandByType, b)!;
+    expect(v.code).toBe(deviceBrandByType["FREP-B"][b].code);
+    expect(v.code).not.toBe(mereFrepB.code);
+    expect(hasDeviceBrandVariant(deviceByCode.FREP, "B", b, deviceBrandByType)).toBe(true);
+  });
+
+  it("tarif de marque inconnu (null) → repli sur le tarif de la ligne (code mère)", () => {
+    const b = deviceBrandsForToken(deviceByCode.FREP, "B", deviceBrandByType)[0];
+    const v = deviceLpp(deviceByCode.FREP, "B", deviceLppByType, deviceBrandByType, b)!;
+    expect(v.tarif).toBe(mereFrepB.tarif);
+  });
+
+  it("marque inconnue ou nulle → repli sur le code mère", () => {
+    expect(deviceLpp(deviceByCode.FREP, "B", deviceLppByType, deviceBrandByType, "MARQUE_X")!.code).toBe(
+      mereFrepB.code,
+    );
+    expect(deviceLpp(deviceByCode.FREP, "B", deviceLppByType, deviceBrandByType, null)!.code).toBe(
+      mereFrepB.code,
+    );
+    expect(hasDeviceBrandVariant(deviceByCode.FREP, "B", null, deviceBrandByType)).toBe(false);
+  });
+
+  it("deviceBrandsForToken : trié et stable", () => {
+    const brands = deviceBrandsForToken(deviceByCode.FREP, "B", deviceBrandByType);
+    expect([...brands].sort((a, b) => a.localeCompare(b))).toEqual(brands);
   });
 });

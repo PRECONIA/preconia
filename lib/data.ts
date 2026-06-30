@@ -7,6 +7,7 @@ import lpprRaw from "@/data/lppr.json";
 import lpprAdjRaw from "@/data/lppr-adjonctions.json";
 import adjBrandsRaw from "@/data/adjonction-brands.json";
 import deviceLppRaw from "@/data/device-lpp.json";
+import deviceBrandsRaw from "@/data/device-brands.json";
 import metaRaw from "@/data/meta.json";
 
 import {
@@ -18,6 +19,7 @@ import {
   LpprFileSchema,
   AdjonctionBrandsFileSchema,
   DeviceLppFileSchema,
+  DeviceBrandsFileSchema,
   MetaSchema,
 } from "./schemas";
 import type { DeviceLppEntry } from "./types";
@@ -62,6 +64,11 @@ export const adjBrandMap: Map<string, Record<string, string>> = new Map(
 const deviceLppFile = DeviceLppFileSchema.parse(deviceLppRaw);
 /** code LPP « mère » + tarif par type de fauteuil (token : FRM, FRE-C, FREP-A, FREV…). */
 export const deviceLppByType: Record<string, DeviceLppEntry> = deviceLppFile.byType;
+
+const deviceBrandsFile = DeviceBrandsFileSchema.parse(deviceBrandsRaw);
+/** variantes de marque par type : token → { marque → {code, tarif?} } (tarif null = repli ligne). */
+export const deviceBrandByType: Record<string, Record<string, DeviceLppEntry>> =
+  deviceBrandsFile.byToken;
 
 /* Index pratique code → device. */
 export const deviceByCode: Record<string, Device> = Object.fromEntries(

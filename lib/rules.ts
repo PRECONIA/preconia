@@ -112,19 +112,57 @@ export function hasBrandVariant(baseCode: string, brand: string | null, map: Bra
   return !!brand && !!map.get(baseCode)?.[brand];
 }
 
-/** Code LPP « mère » + tarif du fauteuil sélectionné. Pour l'électrique (FRE/FREP) et le
- *  scooter, le code dépend de la classe (FRE-C, FREP-A…). Retourne null si non résolu. */
+/** Jeton de type LPP du fauteuil (FRM, FRE-C, FREP-A…). Pour l'électrique (FRE/FREP) et le
+ *  scooter, il dépend de la classe. Retourne null si la classe manque alors qu'elle est requise. */
+export function deviceLppToken(device: Device, classe: ClasseValue | null): string | null {
+  if (device.code === "FRE" || device.code === "FREP" || device.code === "SCO") {
+    if (!classe) return null;
+    return `${device.code}-${classe}`;
+  }
+  return device.code;
+}
+
+/** Code LPP + tarif du fauteuil sélectionné. Si une `brand` est fournie et qu'une variante de
+ *  marque existe pour le jeton, on privilégie **son code** ; son tarif si connu, sinon repli sur
+ *  le tarif de la ligne (code mère). Sans marque (ou variante absente) → code mère. Jamais inventé. */
 export function deviceLpp(
   device: Device,
   classe: ClasseValue | null,
   byType: Record<string, DeviceLppEntry>,
+  byBrand?: Record<string, Record<string, DeviceLppEntry>>,
+  brand?: string | null,
 ): DeviceLppEntry | null {
-  let token: string = device.code;
-  if (device.code === "FRE" || device.code === "FREP" || device.code === "SCO") {
-    if (!classe) return null;
-    token = `${device.code}-${classe}`;
+  const token = deviceLppToken(device, classe);
+  if (!token) return null;
+  const mere = byType[token] ?? null;
+  if (brand && byBrand) {
+    const variant = byBrand[token]?.[brand];
+    if (variant) return { code: variant.code, tarif: variant.tarif ?? mere?.tarif ?? null };
   }
-  return byType[token] ?? null;
+  return mere;
+}
+
+/** Marques de fauteuil disponibles (triées) pour le type/classe courant — alimente le sélecteur. */
+export function deviceBrandsForToken(
+  device: Device,
+  classe: ClasseValue | null,
+  byBrand: Record<string, Record<string, DeviceLppEntry>>,
+): string[] {
+  const token = deviceLppToken(device, classe);
+  if (!token) return [];
+  return Object.keys(byBrand[token] ?? {}).sort((a, b) => a.localeCompare(b));
+}
+
+/** Vrai si le fauteuil possède une variante de marque (code propre) pour le type/classe courant. */
+export function hasDeviceBrandVariant(
+  device: Device,
+  classe: ClasseValue | null,
+  brand: string | null,
+  byBrand: Record<string, Record<string, DeviceLppEntry>>,
+): boolean {
+  if (!brand) return false;
+  const token = deviceLppToken(device, classe);
+  return !!token && !!byBrand[token]?.[brand];
 }
 
 /** Marques disponibles (triées) parmi un ensemble de codes mères — pour peupler le sélecteur. */
