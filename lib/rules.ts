@@ -6,6 +6,7 @@ import type {
   DeviceLppEntry,
   DeviceModelEntry,
   Forfait,
+  Mode,
   PapForfait,
   PapRegion,
 } from "./types";
@@ -85,6 +86,23 @@ export function computeSubtotal(
     .reduce((s, x) => s + (x.price ?? 0), 0);
   const papCost = forfaits.reduce((s, f) => s + forfaitData[f].price, 0);
   return adjCost + papCost;
+}
+
+/* --- temporalité du besoin → modes de prise en charge possibles (réf. fichier VPH/CERAH) ---
+   Temporaire (≤ 3 mois) ⇒ location courte durée (LCD) uniquement.
+   Durable (≥ 6 mois) ⇒ achat ou location longue durée (ACHAT / LLD). */
+export type DureeValue = "temp" | "durable";
+
+export function modesForDuree(duree: DureeValue | null): Mode[] {
+  if (duree === "temp") return ["LCD"];
+  if (duree === "durable") return ["ACHAT", "LLD"];
+  return ["ACHAT", "LCD", "LLD"];
+}
+
+/** Un dispositif est proposable pour la temporalité s'il offre au moins un mode compatible. */
+export function deviceAllowedForDuree(device: Device, duree: DureeValue | null): boolean {
+  const allowed = modesForDuree(duree);
+  return device.modes.some((m) => allowed.includes(m));
 }
 
 /** Gating de l'étape besoins : seulement pour les dispositifs électriques

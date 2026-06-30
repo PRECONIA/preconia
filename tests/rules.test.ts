@@ -13,9 +13,11 @@ import {
   brandsForBases,
   computeSubtotal,
   deriveForfaits,
+  deviceAllowedForDuree,
   deviceBrandsForToken,
   deviceLpp,
   deviceModelGeneric,
+  modesForDuree,
   deviceModelsForBrand,
   filterAdjonctions,
   hasBrandVariant,
@@ -95,6 +97,29 @@ describe("computeSubtotal (INV. 7 — devis/tbd exclus)", () => {
     expect(total).toBe(25 + 132 + papForfaits.A.price);
     expect(hasOpenItems([devis, tbd])).toBe(true);
     expect(hasOpenItems([levier])).toBe(false);
+  });
+});
+
+describe("temporalité → modes (LCD si temporaire ; ACHAT/LLD si durable)", () => {
+  it("modesForDuree", () => {
+    expect(modesForDuree("temp")).toEqual(["LCD"]);
+    expect(modesForDuree("durable")).toEqual(["ACHAT", "LLD"]);
+    expect(modesForDuree(null)).toEqual(["ACHAT", "LCD", "LLD"]);
+  });
+
+  it("temporaire (≤3 mois) : seuls les types avec LCD (FMP/FMPR/FRM/FRE)", () => {
+    for (const code of ["FMP", "FMPR", "FRM", "FRE"]) {
+      expect(deviceAllowedForDuree(deviceByCode[code], "temp")).toBe(true);
+    }
+    for (const code of ["FRMA", "FRMS", "FREP", "FREV", "POU_S", "POU_MRE", "SCO"]) {
+      expect(deviceAllowedForDuree(deviceByCode[code], "temp")).toBe(false);
+    }
+  });
+
+  it("durable (≥6 mois) : tous les types (tous ont ACHAT)", () => {
+    for (const code of ["FMP", "FRMA", "FREP", "FREV", "POU_S", "POU_MRE", "SCO", "BASE", "CYC"]) {
+      expect(deviceAllowedForDuree(deviceByCode[code], "durable")).toBe(true);
+    }
   });
 });
 

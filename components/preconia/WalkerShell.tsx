@@ -23,12 +23,14 @@ import {
 import {
   adaptedCode,
   brandsForBases,
+  deviceAllowedForDuree,
   deviceBrandsForToken,
   deviceLpp,
   deviceModelGeneric,
   deviceModelsForBrand,
   hasBrandVariant,
   hasDeviceBrandVariant,
+  modesForDuree,
 } from "@/lib/rules";
 import { eur } from "@/lib/format";
 import { RechercheLpp } from "@/components/preconia/RechercheLpp";
@@ -242,7 +244,7 @@ export function WalkerShell() {
                   go("mob");
                 }}
               >
-                Temporaire — moins de 3 mois estimés
+                Temporaire — 3 mois ou moins · location courte durée (LCD)
               </button>
               <button
                 className={`${btn} ${answers.duree === "durable" ? btnOn : ""}`}
@@ -251,7 +253,7 @@ export function WalkerShell() {
                   go("mob");
                 }}
               >
-                Durable — permanent ou supérieur à 6 mois
+                Durable — 6 mois ou plus · achat ou location longue durée (ACHAT / LLD)
               </button>
               <Nav dispatch={dispatch} />
             </Step>
@@ -292,14 +294,18 @@ export function WalkerShell() {
                 ...(answers.age === "enfant"
                   ? devices.filter((d) => d.family === "Poussette")
                   : []),
-              ]}
+              ].filter((d) => deviceAllowedForDuree(d, answers.duree))}
+              duree={answers.duree}
               dispatch={dispatch}
             />
           )}
           {stage === "cfg_elec" && (
             <DeviceChoice
               title="Configuration électrique"
-              list={devices.filter((d) => d.family === "Électrique")}
+              list={devices
+                .filter((d) => d.family === "Électrique")
+                .filter((d) => deviceAllowedForDuree(d, answers.duree))}
+              duree={answers.duree}
               dispatch={dispatch}
             />
           )}
@@ -562,7 +568,10 @@ export function WalkerShell() {
 
               <dl className="my-4 grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-line-soft bg-line-soft sm:grid-cols-2">
                 <Cell full label="Mode de prise en charge">
-                  {device.modes.map((m) => modeLabels[m]?.label ?? m).join(" / ")}
+                  {device.modes
+                    .filter((m) => modesForDuree(answers.duree).includes(m))
+                    .map((m) => modeLabels[m]?.label ?? m)
+                    .join(" / ")}
                 </Cell>
                 <Cell full label="Prescripteur / attestation">{prescribers[device.presc]}</Cell>
                 <Cell label="Fiche évaluation + préconisation">
@@ -784,20 +793,30 @@ function Nav({
 function DeviceChoice({
   title,
   list,
+  duree,
   dispatch,
 }: {
   title: string;
   list: Device[];
+  duree: Answers["duree"];
   dispatch: ReturnType<typeof useWalker>["dispatch"];
 }) {
+  const allowed = modesForDuree(duree);
   return (
     <Step title={title} hint="Choisissez le dispositif correspondant au besoin dominant.">
+      {list.length === 0 && (
+        <p className="rounded-lg bg-petrol-tint/40 px-3 py-2 text-sm text-ink-soft">
+          Aucun dispositif disponible pour cette temporalité.
+        </p>
+      )}
       {list.map((d) => (
         <button key={d.code} className={btn} onClick={() => dispatch({ type: "CHOOSE_DEVICE", code: d.code })}>
           <b className="block">
             <span className="font-mono">{d.code}</span> — {d.name}
           </b>
-          <span className="block text-xs text-ink-soft">{d.indications[0]}</span>
+          <span className="mt-0.5 block text-xs text-ink-soft">
+            Prise en charge : {d.modes.filter((m) => allowed.includes(m)).join(" · ")}
+          </span>
         </button>
       ))}
       <Nav dispatch={dispatch} />
