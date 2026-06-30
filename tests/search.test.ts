@@ -41,13 +41,47 @@ describe("searchCatalog", () => {
   });
 
   it("respecte la limite de résultats", () => {
-    expect(searchCatalog("vph", 5).length).toBeLessThanOrEqual(5);
+    expect(searchCatalog("vph", {}, 5).length).toBeLessThanOrEqual(5);
   });
 
   it("trouve par marque et expose la vignette marque", () => {
     const r = searchCatalog("invacare");
     expect(r.length).toBeGreaterThan(0);
     expect(r[0]?.brand).toBe("INVACARE");
+  });
+
+  it("token souple : « FREP B », « FREP-B », « FREPB » donnent les mêmes FREP-B", () => {
+    const a = searchCatalog("frep b").map((e) => e.code).sort();
+    const b = searchCatalog("frep-b").map((e) => e.code).sort();
+    const c = searchCatalog("frepb").map((e) => e.code).sort();
+    expect(a.length).toBeGreaterThan(0);
+    expect(a).toEqual(b);
+    expect(a).toEqual(c);
+    expect(searchCatalog("frep-b").every((e) => e.token === "FREP-B")).toBe(true);
+  });
+
+  it("type + marque : « frep b otto » → FREP-B de la marque OTTO BOCK", () => {
+    const r = searchCatalog("frep b otto");
+    expect(r.length).toBeGreaterThan(0);
+    expect(r.every((e) => e.token === "FREP-B" && e.brand === "OTTO BOCK")).toBe(true);
+  });
+
+  it("nature + marque : « adjonction otto » → adjonctions OTTO BOCK uniquement", () => {
+    const r = searchCatalog("adjonction otto");
+    expect(r.length).toBeGreaterThan(0);
+    expect(r.every((e) => e.kind === "adjonction" && e.brand === "OTTO BOCK")).toBe(true);
+  });
+
+  it("filtre PAP-A (bouton rapide) : que des forfaits PAP A", () => {
+    const r = searchCatalog("", { kind: "pap", papForfait: "A" }, 50);
+    expect(r.length).toBeGreaterThan(0);
+    expect(r.every((e) => e.kind === "pap" && e.papForfait === "A")).toBe(true);
+  });
+
+  it("filtre marque seul (sélecteur) : que des produits de la marque", () => {
+    const r = searchCatalog("", { brand: "OTTO BOCK" }, 100);
+    expect(r.length).toBeGreaterThan(0);
+    expect(r.every((e) => e.brand === "OTTO BOCK")).toBe(true);
   });
 });
 
