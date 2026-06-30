@@ -49,6 +49,8 @@ const btn =
   "block w-full text-left rounded-lg border border-line bg-card px-4 py-3 mb-2 transition-colors hover:border-petrol hover:bg-white";
 const btnOn = "border-petrol bg-petrol-tint";
 const link = "text-ink-soft hover:text-petrol-deep text-sm";
+const navBtn =
+  "inline-flex items-center gap-1.5 rounded-lg border-2 border-petrol bg-petrol-tint/50 px-4 py-2 text-sm font-semibold text-petrol-deep hover:bg-petrol-tint";
 const primary =
   "inline-flex items-center gap-2 rounded-lg bg-petrol px-5 py-3 font-semibold text-white hover:bg-petrol-deep";
 const finish =
@@ -697,10 +699,10 @@ function Nav({
   nextPrimary?: boolean;
   nextFinish?: boolean;
 }) {
-  const nextClass = nextFinish ? finish : nextPrimary ? `${primary} py-2.5` : link;
+  const nextClass = nextFinish ? finish : nextPrimary ? `${primary} py-2.5` : navBtn;
   return (
     <div className="mt-4 flex items-center justify-between gap-3">
-      <button className={link} onClick={() => dispatch({ type: "BACK" })}>
+      <button className={navBtn} onClick={() => dispatch({ type: "BACK" })}>
         ← Précédent
       </button>
       {next ? (
