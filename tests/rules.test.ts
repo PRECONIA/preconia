@@ -188,6 +188,12 @@ describe("deviceLpp (code LPP + tarif du fauteuil)", () => {
   it("FREV : pas de classe requise", () => {
     expect(deviceLpp(deviceByCode.FREV, null, deviceLppByType)?.code).toBeTruthy();
   });
+
+  it("codes mères officiels non marqués (CERAH/AMELI) : FREP-B=4521010, FREV=4563467", () => {
+    // garde-fou : 9527944 (FREP-B) et 9557595 (FREV) sont des variantes SKS ROLTEC, pas les mères.
+    expect(deviceLpp(deviceByCode.FREP, "B", deviceLppByType)?.code).toBe("4521010");
+    expect(deviceLpp(deviceByCode.FREV, null, deviceLppByType)?.code).toBe("4563467");
+  });
 });
 
 describe("deviceLpp — code par marque (catalogue CERAH, code propre, jamais inventé)", () => {

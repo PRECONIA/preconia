@@ -829,6 +829,19 @@
           }
         ]
       },
+      "SKS ROLTEC": {
+        "code": "9527944",
+        "models": [
+          {
+            "name": "SR 31R Compact",
+            "code": null
+          },
+          {
+            "name": "SR 33R",
+            "code": "9527944"
+          }
+        ]
+      },
       "SUNRISE MED": {
         "code": "9555001",
         "models": [
@@ -1046,6 +1059,15 @@
           {
             "name": "M VS",
             "code": null
+          }
+        ]
+      },
+      "SKS ROLTEC": {
+        "code": "9557595",
+        "models": [
+          {
+            "name": "SR 33RS",
+            "code": "9557595"
           }
         ]
       },
