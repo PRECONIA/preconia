@@ -35,6 +35,20 @@
       }
     },
     "FMP": {
+      "DRIVE DEVILBISS": {
+        "NOVO Light": {
+          "url": "https://www.drivedevilbiss.fr/tl_files/dupont_medical/produits_photos/la_mobilite/fiche_tarif/fiche-de-mesure-novo-light.pdf",
+          "kind": "pdf"
+        },
+        "Stan'Ultra": {
+          "url": "https://www.drivedevilbiss.fr/tl_files/dupont_medical/produits_photos/la_mobilite/fiche_tarif/fiche-de-mesure-stan-ultra.pdf",
+          "kind": "pdf"
+        },
+        "Stan'Up": {
+          "url": "https://www.drivedevilbiss.fr/tl_files/dupont_medical/produits_photos/la_mobilite/fiche_tarif/fiche-de-mesure-stan-up.pdf",
+          "kind": "pdf"
+        }
+      },
       "INVACARE": {
         "Action 3 NG S": {
           "url": "https://invacaredocs.com/france-fr/2320_FR/PVI000111/",
@@ -73,6 +87,12 @@
       }
     },
     "FMPR": {
+      "DRIVE DEVILBISS": {
+        "IDSoft Evolution": {
+          "url": "https://www.drivedevilbiss.fr/tl_files/dupont_medical/produits_photos/la_mobilite/fiche_tarif/fiche-de-mesure-idsoft.pdf",
+          "kind": "pdf"
+        }
+      },
       "INVACARE": {
         "Rea Clematis Pro One S": {
           "url": "https://invacaredocs.com/france-fr/2201_FR/PVI000660/",
@@ -103,6 +123,16 @@
       }
     },
     "FRE-A": {
+      "ERGOFLIX": {
+        "Ergoflix LX": {
+          "url": "https://ergoflix.fr/ergoflix-lx/",
+          "kind": "page"
+        },
+        "FlixOne": {
+          "url": "https://ergoflix.fr/flixone/",
+          "kind": "page"
+        }
+      },
       "INVACARE": {
         "Erivo": {
           "url": "https://invacaredocs.com/assets/documents/PIM/Erivo_123.pdf",
@@ -155,6 +185,12 @@
           "kind": "pdf"
         }
       },
+      "LIFE MOBILITY": {
+        "Morgan Sling": {
+          "url": "https://www.life-mobility.com/fr/uploads/downloads/downloads_download/Documentation_EVO_Morgan_LR.pdf",
+          "kind": "pdf"
+        }
+      },
       "MEYRA NETTI": {
         "iCHAIR MC2 1.611": {
           "url": "https://www.meyra-netti.com/app/uploads/2021/03/1611-iCHAIR-MC2-AA-2-FR-PL-2021-13-Copie.pdf",
@@ -175,6 +211,28 @@
         "Edge 3 Stretto": {
           "url": "https://www.pridemobility.com/pdf/brochures/france/fr_edge_3_ss.pdf",
           "kind": "pdf"
+        }
+      },
+      "PROT VIRGINIE": {
+        "KUNSHAN Eloflex D2": {
+          "url": "https://eloflex.fr/produits/eloflex-d2",
+          "kind": "page"
+        },
+        "KUNSHAN Eloflex F": {
+          "url": "https://eloflex.fr/produits/eloflex-f",
+          "kind": "page"
+        },
+        "KUNSHAN Eloflex L": {
+          "url": "https://eloflex.fr/produits/eloflex-l",
+          "kind": "page"
+        },
+        "KUNSHAN Eloflex P": {
+          "url": "https://eloflex.fr/produits/eloflex-p",
+          "kind": "page"
+        },
+        "KUNSHAN Eloflex R": {
+          "url": "https://eloflex.fr/produits/eloflex-r",
+          "kind": "page"
         }
       },
       "SUNRISE MED": {
@@ -208,6 +266,12 @@
           "url": "https://vermeiren.fr/product/orderform.nsf/O/BDDA42B02D3C2017C1258E090050D50C/%24FILE/FRE%20-%20Classe%20B%20-%20TURIOS%20Initial.pdf",
           "kind": "pdf"
         }
+      },
+      "WHILL": {
+        "C Light": {
+          "url": "https://whill.inc/fr/model-c-lite",
+          "kind": "page"
+        }
       }
     },
     "FREP-A": {
@@ -233,6 +297,72 @@
       }
     },
     "FREP-B": {
+      "DIETZ POWER BV": {
+        "Sango Advanced FWD": {
+          "url": "https://dietz-power.fr/advanced/",
+          "kind": "page"
+        },
+        "Sango Advanced FWD Junior": {
+          "url": "https://dietz-power.fr/advanced/",
+          "kind": "page"
+        },
+        "Sango Advanced MWD 5 roues": {
+          "url": "https://dietz-power.fr/advanced/",
+          "kind": "page"
+        },
+        "Sango Advanced MWD 5 roues Junior": {
+          "url": "https://dietz-power.fr/advanced/",
+          "kind": "page"
+        },
+        "Sango Advanced MWD 6 roues": {
+          "url": "https://dietz-power.fr/advanced/",
+          "kind": "page"
+        },
+        "Sango Advanced MWD 6 roues Junior": {
+          "url": "https://dietz-power.fr/advanced/",
+          "kind": "page"
+        },
+        "Sango Advanced RWD": {
+          "url": "https://dietz-power.fr/advanced/",
+          "kind": "page"
+        },
+        "Sango Advanced RWD Junior": {
+          "url": "https://dietz-power.fr/advanced/",
+          "kind": "page"
+        },
+        "Sango Slimline FWD": {
+          "url": "https://dietz-power.fr/slimline/",
+          "kind": "page"
+        },
+        "Sango Slimline FWD Junior": {
+          "url": "https://dietz-power.fr/slimline/",
+          "kind": "page"
+        },
+        "Sango Slimline MWD 5 roues": {
+          "url": "https://dietz-power.fr/slimline/",
+          "kind": "page"
+        },
+        "Sango Slimline MWD 5 roues Junior": {
+          "url": "https://dietz-power.fr/slimline/",
+          "kind": "page"
+        },
+        "Sango Slimline MWD 6 roues": {
+          "url": "https://dietz-power.fr/slimline/",
+          "kind": "page"
+        },
+        "Sango Slimline MWD 6 roues Junior": {
+          "url": "https://dietz-power.fr/slimline/",
+          "kind": "page"
+        },
+        "Sango Slimline RWD": {
+          "url": "https://dietz-power.fr/slimline/",
+          "kind": "page"
+        },
+        "Sango Slimline RWD Junior": {
+          "url": "https://dietz-power.fr/slimline/",
+          "kind": "page"
+        }
+      },
       "INVACARE": {
         "Aviva RX20 Modulite": {
           "url": "https://invacaredocs.com/assets/documents/PIM/Aviva%20RX20%20Modulite%20AA2%20122.pdf",
@@ -268,6 +398,28 @@
         },
         "TDX SP2 Ultra Low Maxx": {
           "url": "https://invacaredocs.com/assets/documents/PIM/15._Tarif_TDX-SP2_ULM_0120_FR.pdf",
+          "kind": "pdf"
+        }
+      },
+      "LIFE MOBILITY": {
+        "Evo Lectus": {
+          "url": "https://www.life-mobility.com/fr/uploads/downloads/downloads_download/Documentation_EVO_Morgan_LR.pdf",
+          "kind": "pdf"
+        },
+        "Evo Lectus Low Rider": {
+          "url": "https://www.life-mobility.com/fr/uploads/downloads/downloads_download/Documentation_EVO_Morgan_LR.pdf",
+          "kind": "pdf"
+        },
+        "Morgan M Lectus": {
+          "url": "https://www.life-mobility.com/fr/uploads/downloads/downloads_download/Documentation_EVO_Morgan_LR.pdf",
+          "kind": "pdf"
+        },
+        "Morgan M Versus": {
+          "url": "https://www.life-mobility.com/fr/uploads/downloads/downloads_download/Documentation_EVO_Morgan_LR.pdf",
+          "kind": "pdf"
+        },
+        "Morgan Sling": {
+          "url": "https://www.life-mobility.com/fr/uploads/downloads/downloads_download/Documentation_EVO_Morgan_LR.pdf",
           "kind": "pdf"
         }
       },
@@ -441,6 +593,20 @@
           "kind": "page"
         }
       },
+      "LIFE MOBILITY": {
+        "Evo Altus": {
+          "url": "https://www.life-mobility.com/fr/uploads/downloads/downloads_download/Documentation_EVO_Morgan_LR.pdf",
+          "kind": "pdf"
+        },
+        "Levo C3": {
+          "url": "https://www.life-mobility.com/fr/uploads/downloads/downloads_download/Documentation_Levo_C3_et_Combi.pdf",
+          "kind": "pdf"
+        },
+        "Levo Combi - Combi Junior": {
+          "url": "https://www.life-mobility.com/fr/uploads/downloads/downloads_download/Documentation_Levo_C3_et_Combi.pdf",
+          "kind": "pdf"
+        }
+      },
       "PERMOBIL": {
         "F5 Corpus VS": {
           "url": "https://hub.permobil.com/hubfs/FDM%202026%20F5%20VS%20Corpus.pdf",
@@ -473,6 +639,12 @@
       }
     },
     "FRM": {
+      "DRIVE DEVILBISS": {
+        "Novo Light": {
+          "url": "https://www.drivedevilbiss.fr/tl_files/dupont_medical/produits_photos/la_mobilite/fiche_tarif/fiche-de-mesure-novo-light.pdf",
+          "kind": "pdf"
+        }
+      },
       "INVACARE": {
         "Action 3 NG": {
           "url": "https://invacaredocs.com/france-fr/2320_FR/PVI000111/",
@@ -545,6 +717,16 @@
       }
     },
     "FRMA": {
+      "DPZ SERVICES": {
+        "Apex Aluminium": {
+          "url": "https://www.motioncomposites.com/media/contentmanager/content/APEX-Formulaire-MOTION-FRANCE-6.7.pdf",
+          "kind": "pdf"
+        },
+        "Apex Carbon": {
+          "url": "https://www.motioncomposites.com/media/contentmanager/content/APEX-Formulaire-MOTION-FRANCE-6.7.pdf",
+          "kind": "pdf"
+        }
+      },
       "OTTO BOCK": {
         "OTTO Ventus": {
           "url": "https://assets.ctfassets.net/8ks1shyq5m87/5qRj0wm7Ko4ZMVDQXL9dMv/8b7763e92e70fad895701b3f72b3a750/Ventus_2026_F.pdf",
@@ -609,6 +791,28 @@
       }
     },
     "FRMC": {
+      "DPZ SERVICES": {
+        "Helio A6": {
+          "url": "https://www.motioncomposites.com/media/contentmanager/content/HELIO_A6_Formulaire_MOTION_FRANCE_6.3_5.pdf",
+          "kind": "pdf"
+        },
+        "Helio A7": {
+          "url": "https://www.motioncomposites.com/media/contentmanager/content/HELIO_A7_Formulaire_MOTION_FRANCE_6.0_1.pdf",
+          "kind": "pdf"
+        },
+        "Helio C2": {
+          "url": "https://www.motioncomposites.com/media/contentmanager/content/HELIO-C2-Formulaire-MOTION-FRANCE-6.7.pdf",
+          "kind": "pdf"
+        },
+        "Helio Kids": {
+          "url": "https://www.motioncomposites.com/media/contentmanager/content/HELIO_KIDS_Formulaire_MOTION_FRANCE_5.2a_5.pdf",
+          "kind": "pdf"
+        },
+        "Veloce": {
+          "url": "https://www.motioncomposites.com/media/contentmanager/content/VELOCE_formulaire_MOTION_FRANCE_5.2a_5.pdf",
+          "kind": "pdf"
+        }
+      },
       "INVACARE": {
         "Action 4 NG XLT": {
           "url": "https://invacaredocs.com/assets/documents/PIM/2.Tarif%20Action4%20NG%20std%20et%20modulaire_0721_FR.pdf",
