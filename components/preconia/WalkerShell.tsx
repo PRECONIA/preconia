@@ -605,8 +605,8 @@ export function WalkerShell() {
                           className="inline-flex w-full items-center justify-center gap-2 rounded-lg border-2 border-petrol bg-card px-3 py-2.5 text-sm font-semibold text-petrol-deep outline-none transition hover:bg-petrol hover:text-white focus:ring-2 focus:ring-petrol/40"
                         >
                           {optionSheet.kind === "pdf"
-                            ? "Fiche tarif & options constructeur (PDF)"
-                            : "Page constructeur du modèle"}{" "}
+                            ? "Bon de commande & options (PDF)"
+                            : "Bon de commande & options — page constructeur"}{" "}
                           ↗
                         </a>
                       ) : (
