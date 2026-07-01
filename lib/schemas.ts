@@ -179,6 +179,17 @@ export const DeviceIndicationsFileSchema = z.object({
   byCode: z.record(z.string(), z.record(z.string(), z.string())),
 });
 
+/* --- cumul.json (règles de cumul VPH : incompatibilités par acronyme LPPR).
+   `incompatible[X]` = acronymes non cumulables avec X (relation symétrique appliquée au calcul).
+   Deux VPH sont cumulables si aucun des deux ne figure dans l'incompatibilité de l'autre. --- */
+export const CumulCategorySchema = z.object({ code: z.string(), label: z.string() });
+export const CumulFileSchema = z.object({
+  source: z.string(),
+  lastUpdated: z.string(),
+  categories: z.array(CumulCategorySchema).nonempty(),
+  incompatible: z.record(z.string(), z.array(z.string())),
+});
+
 /* --- meta.json --- */
 export const MetaSchema = z.object({
   source: z.string(),

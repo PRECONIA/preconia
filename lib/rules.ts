@@ -237,6 +237,19 @@ export function optionSheetFor(
   return token ? (byToken[token]?.[brand]?.[model] ?? null) : null;
 }
 
+/** Cumul de deux VPH autorisé ? Faux si l'un figure dans l'incompatibilité de l'autre (relation
+    symétrique). `a`/`b` : acronymes LPPR (FMP, FREP, SIEGE_COQUILLE…). null tant qu'un choix manque. */
+export function isCumulAllowed(
+  a: string | null,
+  b: string | null,
+  incompatible: Record<string, string[]>,
+): boolean | null {
+  if (!a || !b) return null;
+  const incompatibleAB = incompatible[a]?.includes(b) ?? false;
+  const incompatibleBA = incompatible[b]?.includes(a) ?? false;
+  return !(incompatibleAB || incompatibleBA);
+}
+
 /** Marques disponibles (triées) parmi un ensemble de codes mères — pour peupler le sélecteur. */
 export function brandsForBases(baseCodes: string[], map: BrandMap): string[] {
   const set = new Set<string>();

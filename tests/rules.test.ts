@@ -4,6 +4,8 @@ import {
   adjonctions,
   deviceModelsByType,
   deviceOptionSheetByToken,
+  cumulCategories,
+  cumulIncompatible,
   deviceByCode,
   deviceLppByType,
   papForfaits,
@@ -21,6 +23,7 @@ import {
   modesForDuree,
   deviceModelsForBrand,
   optionSheetFor,
+  isCumulAllowed,
   filterAdjonctions,
   hasBrandVariant,
   hasDeviceBrandVariant,
@@ -283,5 +286,46 @@ describe("deviceLpp — code par marque (catalogue CERAH, code propre, jamais in
     )!;
     expect(genericLpp.code).toBe(mereFrepB.code); // code générique (mère)
     expect(deviceModelGeneric(deviceByCode.FREP, "B", "SUNRISE MED", codeless.name, deviceModelsByType)).toBe(true);
+  });
+});
+
+describe("isCumulAllowed (module cumul VPH)", () => {
+  const I = cumulIncompatible;
+
+  it("null tant qu'un choix manque", () => {
+    expect(isCumulAllowed(null, "FRM", I)).toBeNull();
+    expect(isCumulAllowed("FRM", null, I)).toBeNull();
+  });
+
+  it("cumuls interdits (incompatibilités du document)", () => {
+    expect(isCumulAllowed("FMP", "FMPR", I)).toBe(false);
+    expect(isCumulAllowed("FRM", "FRMA", I)).toBe(false);
+    expect(isCumulAllowed("FRMC", "FRMP", I)).toBe(false);
+    expect(isCumulAllowed("FRE", "AAP", I)).toBe(false); // AAP figure dans FRE
+    expect(isCumulAllowed("SCO", "FREP", I)).toBe(false);
+    expect(isCumulAllowed("POU_S", "POU_MRE", I)).toBe(false);
+    expect(isCumulAllowed("FRM", "FRM", I)).toBe(false); // deux fois la même catégorie
+  });
+
+  it("siège coquille : incompatible avec tout", () => {
+    for (const c of cumulCategories) {
+      expect(isCumulAllowed("SIEGE_COQUILLE", c.code, I)).toBe(false);
+    }
+  });
+
+  it("cumuls autorisés", () => {
+    expect(isCumulAllowed("FMP", "FRE", I)).toBe(true); // manuel + électrique
+    expect(isCumulAllowed("CYC", "FRM", I)).toBe(true);
+    expect(isCumulAllowed("FREP", "FRM", I)).toBe(true);
+    expect(isCumulAllowed("SCO", "AAP", I)).toBe(true); // non listés l'un chez l'autre
+    expect(isCumulAllowed("BASE", "FRE", I)).toBe(true);
+  });
+
+  it("relation symétrique", () => {
+    for (const a of cumulCategories) {
+      for (const b of cumulCategories) {
+        expect(isCumulAllowed(a.code, b.code, I)).toBe(isCumulAllowed(b.code, a.code, I));
+      }
+    }
   });
 });

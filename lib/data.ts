@@ -10,6 +10,7 @@ import deviceLppRaw from "@/data/device-lpp.json";
 import deviceModelsRaw from "@/data/device-models.json";
 import deviceOptionSheetsRaw from "@/data/device-option-sheets.json";
 import deviceIndicationsRaw from "@/data/device-indications.json";
+import cumulRaw from "@/data/cumul.json";
 import metaRaw from "@/data/meta.json";
 
 import {
@@ -24,9 +25,10 @@ import {
   DeviceModelsFileSchema,
   DeviceOptionSheetsFileSchema,
   DeviceIndicationsFileSchema,
+  CumulFileSchema,
   MetaSchema,
 } from "./schemas";
-import type { DeviceLppEntry, DeviceModelEntry, OptionSheet } from "./types";
+import type { DeviceLppEntry, DeviceModelEntry, OptionSheet, CumulCategory } from "./types";
 import type { Device, Presc } from "./types";
 
 /* Chargement + validation de la donnée au niveau module.
@@ -94,6 +96,13 @@ const deviceIndicationsFile = DeviceIndicationsFileSchema.parse(deviceIndication
 export const deviceIndicationsByCode: Record<string, Record<string, string>> =
   deviceIndicationsFile.byCode;
 
+const cumulFile = CumulFileSchema.parse(cumulRaw);
+/** catégories VPH cumulables (acronyme LPPR + libellé), dans l'ordre du document. */
+export const cumulCategories: CumulCategory[] = cumulFile.categories;
+/** incompatibilités de cumul : acronyme → acronymes non cumulables (relation symétrique). */
+export const cumulIncompatible: Record<string, string[]> = cumulFile.incompatible;
+export const cumulMeta = { source: cumulFile.source, lastUpdated: cumulFile.lastUpdated };
+
 /* Index pratique code → device. */
 export const deviceByCode: Record<string, Device> = Object.fromEntries(
   devices.map((d) => [d.code, d]),
@@ -112,4 +121,11 @@ for (const a of adjonctions) {
 }
 for (const region of papRegions) {
   assert(region.forfait in papForfaits, `région PAP « ${region.name} » : forfait ${region.forfait} sans définition`);
+}
+const cumulCodes = new Set(cumulCategories.map((c) => c.code));
+for (const [from, list] of Object.entries(cumulIncompatible)) {
+  assert(cumulCodes.has(from), `cumul : acronyme « ${from} » absent des catégories`);
+  for (const to of list) {
+    assert(cumulCodes.has(to), `cumul : « ${from} » incompatible avec « ${to} » inconnu`);
+  }
 }
