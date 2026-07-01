@@ -20,8 +20,7 @@
 }
 
 body {
-  /* Vert forêt muté (doux), assez sombre pour laisser ressortir le fauteuil en contours blancs. */
-  background: linear-gradient(180deg, #234a3d, #163229);
+  background: linear-gradient(180deg, #eff3f3, #e6eced);
   color: var(--color-ink);
   font-family: var(--font-sans);
 }
