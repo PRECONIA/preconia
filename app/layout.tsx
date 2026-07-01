@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   title: "PRECONIA — Aide à la préconisation des VPH",
   description: DESCRIPTION,
   // Vérification Google Search Console (méthode « Balise HTML »).
-  verification: { google: "d865wdbBW1pG6s9JCrbMBcMy8QYejMdeeDn7jkaXhJw" },
+  verification: { google: "lU1B5PnT8isi3CwpZQdZkaYILExzsT02RaYBTaertlo" },
   openGraph: {
     title: "PRECONIA — Aide à la préconisation des VPH",
     description: DESCRIPTION,
