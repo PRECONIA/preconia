@@ -22,6 +22,8 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://preconia.vercel.app"),
   title: "PRECONIA — Aide à la préconisation des VPH",
   description: DESCRIPTION,
+  // Vérification Google Search Console (méthode « Balise HTML »).
+  verification: { google: "d865wdbBW1pG6s9JCrbMBcMy8QYejMdeeDn7jkaXhJw" },
   openGraph: {
     title: "PRECONIA — Aide à la préconisation des VPH",
     description: DESCRIPTION,
