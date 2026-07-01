@@ -12,6 +12,7 @@ import {
   besoins,
   classes,
   deviceModelsByType,
+  deviceOptionSheetByBrand,
   deviceIndicationsByCode,
   deviceLppByType,
   devices,
@@ -32,6 +33,7 @@ import {
   hasBrandVariant,
   hasDeviceBrandVariant,
   modesForDuree,
+  optionSheetFor,
 } from "@/lib/rules";
 import { eur } from "@/lib/format";
 import { RechercheLpp } from "@/components/preconia/RechercheLpp";
@@ -102,6 +104,8 @@ export function WalkerShell() {
     ? deviceModelsForBrand(device, answers.classe, brand, deviceModelsByType)
     : [];
   const model = answers.vehicleModel;
+  // Fiche tarif/options constructeur pour le modèle choisi (null = non répertoriée).
+  const optionSheet = optionSheetFor(brand, model, deviceOptionSheetByBrand);
 
   // Code LPP + tarif du fauteuil : code du modèle si dispo, sinon code marque, sinon code mère.
   const devLpp = device
@@ -586,6 +590,28 @@ export function WalkerShell() {
                           </option>
                         ))}
                       </select>
+                    </div>
+                  )}
+
+                  {model && (
+                    <div className="mt-3 border-t border-petrol/20 pt-3">
+                      {optionSheet ? (
+                        <a
+                          href={optionSheet.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex w-full items-center justify-center gap-2 rounded-lg border-2 border-petrol bg-card px-3 py-2.5 text-sm font-semibold text-petrol-deep outline-none transition hover:bg-petrol hover:text-white focus:ring-2 focus:ring-petrol/40"
+                        >
+                          {optionSheet.kind === "pdf"
+                            ? "Fiche tarif & options constructeur (PDF)"
+                            : "Page constructeur du modèle"}{" "}
+                          ↗
+                        </a>
+                      ) : (
+                        <p className="text-center text-sm text-petrol-deep/60">
+                          Pas de fiche d’option constructeur disponible pour ce modèle.
+                        </p>
+                      )}
                     </div>
                   )}
                 </div>

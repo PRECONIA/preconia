@@ -7,6 +7,7 @@ import type {
   DeviceModelEntry,
   Forfait,
   Mode,
+  OptionSheet,
   PapForfait,
   PapRegion,
 } from "./types";
@@ -219,6 +220,16 @@ export function hasDeviceBrandVariant(
   if (!brand) return false;
   const token = deviceLppToken(device, classe);
   return !!token && !!byBrand[token]?.[brand];
+}
+
+/** Fiche tarif/options constructeur pour un (marque, modèle) — null si aucune fiche répertoriée. */
+export function optionSheetFor(
+  brand: string | null,
+  model: string | null,
+  byBrand: Record<string, Record<string, OptionSheet>>,
+): OptionSheet | null {
+  if (!brand || !model) return null;
+  return byBrand[brand]?.[model] ?? null;
 }
 
 /** Marques disponibles (triées) parmi un ensemble de codes mères — pour peupler le sélecteur. */

@@ -155,6 +155,20 @@ export const DeviceModelsFileSchema = z.object({
   byToken: z.record(z.string(), z.record(z.string(), DeviceModelEntrySchema)),
 });
 
+/* --- device-option-sheets.json (fiche tarif/options du constructeur par modèle commercial).
+   `kind` : "pdf" = fiche tarif/options PDF officielle ; "page" = repli page produit constructeur.
+   Aucune entrée pour un modèle = « pas de fiche d'option constructeur disponible ». Liens vérifiés
+   uniquement (règle #1 : jamais de source inventée). --- */
+export const OptionSheetSchema = z.object({
+  url: z.string().url(),
+  kind: z.enum(["pdf", "page"]),
+});
+export const DeviceOptionSheetsFileSchema = z.object({
+  source: z.string(),
+  lastUpdated: z.string(),
+  byBrand: z.record(z.string(), z.record(z.string(), OptionSheetSchema)),
+});
+
 /* --- device-indications.json (indications officielles de prise en charge par dispositif et par
    mode, INI-CERAH ; affichées en survol sur l'écran de choix du VPH). --- */
 export const DeviceIndicationsFileSchema = z.object({

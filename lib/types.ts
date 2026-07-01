@@ -15,6 +15,7 @@ import type {
   AdjonctionBrandGroupSchema,
   DeviceLppEntrySchema,
   DeviceModelEntrySchema,
+  OptionSheetSchema,
   MetaSchema,
 } from "./schemas";
 
@@ -36,4 +37,5 @@ export type LpprProduct = z.infer<typeof LpprProductSchema>;
 export type AdjonctionBrandGroup = z.infer<typeof AdjonctionBrandGroupSchema>;
 export type DeviceLppEntry = z.infer<typeof DeviceLppEntrySchema>;
 export type DeviceModelEntry = z.infer<typeof DeviceModelEntrySchema>;
+export type OptionSheet = z.infer<typeof OptionSheetSchema>;
 export type Meta = z.infer<typeof MetaSchema>;

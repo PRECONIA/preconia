@@ -8,6 +8,7 @@ import lpprAdjRaw from "@/data/lppr-adjonctions.json";
 import adjBrandsRaw from "@/data/adjonction-brands.json";
 import deviceLppRaw from "@/data/device-lpp.json";
 import deviceModelsRaw from "@/data/device-models.json";
+import deviceOptionSheetsRaw from "@/data/device-option-sheets.json";
 import deviceIndicationsRaw from "@/data/device-indications.json";
 import metaRaw from "@/data/meta.json";
 
@@ -21,10 +22,11 @@ import {
   AdjonctionBrandsFileSchema,
   DeviceLppFileSchema,
   DeviceModelsFileSchema,
+  DeviceOptionSheetsFileSchema,
   DeviceIndicationsFileSchema,
   MetaSchema,
 } from "./schemas";
-import type { DeviceLppEntry, DeviceModelEntry } from "./types";
+import type { DeviceLppEntry, DeviceModelEntry, OptionSheet } from "./types";
 import type { Device, Presc } from "./types";
 
 /* Chargement + validation de la donnée au niveau module.
@@ -74,6 +76,15 @@ export const deviceModelsByType: Record<string, Record<string, DeviceModelEntry>
 export const deviceModelsMeta = {
   source: deviceModelsFile.source,
   lastUpdated: deviceModelsFile.lastUpdated,
+};
+
+const deviceOptionSheetsFile = DeviceOptionSheetsFileSchema.parse(deviceOptionSheetsRaw);
+/** fiche tarif/options constructeur : marque → { nom de modèle → {url, kind} }. */
+export const deviceOptionSheetByBrand: Record<string, Record<string, OptionSheet>> =
+  deviceOptionSheetsFile.byBrand;
+export const deviceOptionSheetsMeta = {
+  source: deviceOptionSheetsFile.source,
+  lastUpdated: deviceOptionSheetsFile.lastUpdated,
 };
 
 const deviceIndicationsFile = DeviceIndicationsFileSchema.parse(deviceIndicationsRaw);

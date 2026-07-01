@@ -3,6 +3,7 @@ import {
   adjBrandMap,
   adjonctions,
   deviceModelsByType,
+  deviceOptionSheetByBrand,
   deviceByCode,
   deviceLppByType,
   papForfaits,
@@ -19,6 +20,7 @@ import {
   deviceModelGeneric,
   modesForDuree,
   deviceModelsForBrand,
+  optionSheetFor,
   filterAdjonctions,
   hasBrandVariant,
   hasDeviceBrandVariant,
@@ -227,6 +229,20 @@ describe("deviceLpp — code par marque (catalogue CERAH, code propre, jamais in
     expect(models.some((m) => m.includes("Juvo"))).toBe(true);
     expect([...models].sort((a, b) => a.localeCompare(b))).toEqual(models);
     expect(deviceModelsForBrand(deviceByCode.FREP, "B", null, deviceModelsByType)).toEqual([]);
+  });
+
+  it("optionSheetFor : null sans marque/modèle ; entrée valide si répertoriée", () => {
+    expect(optionSheetFor(null, "Nitrum", deviceOptionSheetByBrand)).toBeNull();
+    expect(optionSheetFor("INVACARE", null, deviceOptionSheetByBrand)).toBeNull();
+    // modèle inconnu → pas de fiche
+    expect(optionSheetFor("INVACARE", "Modèle inexistant", deviceOptionSheetByBrand)).toBeNull();
+    // toute entrée présente doit être une URL http(s) avec un kind connu
+    for (const models of Object.values(deviceOptionSheetByBrand)) {
+      for (const s of Object.values(models)) {
+        expect(s.url).toMatch(/^https?:\/\//);
+        expect(["pdf", "page"]).toContain(s.kind);
+      }
+    }
   });
 
   it("deviceBrandsForToken : trié et inclut OTTO BOCK", () => {
