@@ -347,7 +347,7 @@ export function WalkerShell() {
                 Un parcours guidé mène du profil fonctionnel à la catégorie LPPR, sa classe, son
                 circuit de prise en charge et ses adjonctions.
               </p>
-              <button className={primary} onClick={() => go("age")}>
+              <button className={`${primary} w-full justify-center`} onClick={() => go("age")}>
                 Commencer l&apos;évaluation →
               </button>
             </>
