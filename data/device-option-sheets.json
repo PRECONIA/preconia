@@ -1,395 +1,623 @@
 {
-  "source": "Fiches tarif/options des constructeurs — liens officiels vérifiés (HTTP 200 + type de contenu contrôlé, juil. 2026). kind=pdf : fiche tarif/options PDF ; kind=page : page produit officielle du constructeur. Modèle absent = « pas de fiche d'option constructeur disponible ». Liens par famille (une variante hérite de la fiche de sa gamme). Lot 1 : Invacare, Sunrise Medical, Permobil, Meyra, Vermeiren, Pride ; Ottobock à compléter (pas de page officielle FR trouvée).",
+  "source": "Fiches tarif/options des constructeurs — liens officiels vérifiés (HTTP 200 + type/contenu contrôlés, juil. 2026). Clé par token/classe → marque → modèle (un modèle peut avoir une fiche par classe, codes LPPR distincts). Sunrise : bons de commande professionnels sunrisedice.com par (modèle, classe). kind=pdf : fiche/bon de commande PDF ; kind=page : page produit officielle (repli). Absent = « pas de fiche disponible ». Jamais de source inventée (règle #1).",
   "lastUpdated": "2026-07-01",
-  "byBrand": {
-    "INVACARE": {
-      "Action 3 NG": {
-        "url": "https://invacaredocs.com/france-fr/2320_FR/PVI000111/",
-        "kind": "page"
-      },
-      "Action 3 NG Dual HR": {
-        "url": "https://invacaredocs.com/france-fr/2320_FR/PVI000111/",
-        "kind": "page"
-      },
-      "Action 3 NG S": {
-        "url": "https://invacaredocs.com/france-fr/2320_FR/PVI000111/",
-        "kind": "page"
-      },
-      "Action 3 NG Transit": {
-        "url": "https://invacaredocs.com/france-fr/2320_FR/PVI000111/",
-        "kind": "page"
-      },
-      "Action 4 NG": {
-        "url": "https://invacaredocs.com/assets/documents/PIM/2.Tarif%20Action4%20NG%20std%20et%20modulaire_0721_FR.pdf",
-        "kind": "pdf"
-      },
-      "Action 4 NG Dual HR": {
-        "url": "https://invacaredocs.com/assets/documents/PIM/2.Tarif%20Action4%20NG%20std%20et%20modulaire_0721_FR.pdf",
-        "kind": "pdf"
-      },
-      "Action 4 NG XLT": {
-        "url": "https://invacaredocs.com/assets/documents/PIM/2.Tarif%20Action4%20NG%20std%20et%20modulaire_0721_FR.pdf",
-        "kind": "pdf"
-      },
-      "Action 5": {
-        "url": "https://invacaredocs.com/france-fr/2320_FR/PVI000119/",
-        "kind": "page"
-      },
-      "Action 5 Rigid": {
-        "url": "https://invacaredocs.com/france-fr/2320_FR/PVI000119/",
-        "kind": "page"
-      },
-      "Action3 Junior": {
-        "url": "https://invacaredocs.com/france-fr/2320_FR/PVI000111/",
-        "kind": "page"
-      },
-      "Action3 NG Hémi": {
-        "url": "https://invacaredocs.com/france-fr/2320_FR/PVI000111/",
-        "kind": "page"
-      },
-      "Action3 NG Levier Pendulaire": {
-        "url": "https://invacaredocs.com/france-fr/2320_FR/PVI000111/",
-        "kind": "page"
-      },
-      "Action3 NG Light": {
-        "url": "https://invacaredocs.com/assets/documents/PIM/1.c%20Tarif%20Action3%20NG%20LIGHT_0721_FR.pdf",
-        "kind": "pdf"
-      },
-      "Action3 junior Evolutif": {
-        "url": "https://invacaredocs.com/france-fr/2320_FR/PVI000111/",
-        "kind": "page"
-      },
-      "Aviva FX40 MPS Maxx": {
-        "url": "https://invacaredocs.com/france-fr/1140_FR/PVI000734/",
-        "kind": "page"
-      },
-      "Aviva RX20 Modulite": {
-        "url": "https://invacaredocs.com/assets/documents/PIM/Aviva%20RX20%20Modulite%20AA2%20122.pdf",
-        "kind": "pdf"
-      },
-      "Aviva RX40 Modulite": {
-        "url": "https://invacaredocs.com/assets/documents/PIM/Tarif%20AVIVA%20RX40_0121_FR.pdf",
-        "kind": "pdf"
-      },
-      "Aviva RX40 Ultra Low Maxx": {
-        "url": "https://invacaredocs.com/assets/documents/PIM/Tarif%20AVIVA%20RX40_0121_FR.pdf",
-        "kind": "pdf"
-      },
-      "Erivo": {
-        "url": "https://invacaredocs.com/assets/documents/PIM/Erivo_123.pdf",
-        "kind": "pdf"
-      },
-      "Erivo Premium": {
-        "url": "https://invacaredocs.com/assets/documents/PIM/Erivo_123.pdf",
-        "kind": "pdf"
-      },
-      "Esprit Action": {
-        "url": "https://invacaredocs.com/assets/documents/PIM/Esprit%20Action_721.pdf",
-        "kind": "pdf"
-      },
-      "Rea Azalea": {
-        "url": "https://invacaredocs.com/assets/documents/PIM/CH_PL_02.20222_Rea%20Azalea_fr.pdf",
-        "kind": "pdf"
-      },
-      "Rea Azalea Base": {
-        "url": "https://invacaredocs.com/assets/documents/PIM/CH_PL_02.20222_Rea%20Azalea_fr.pdf",
-        "kind": "pdf"
-      },
-      "Rea Azalea Max": {
-        "url": "https://invacaredocs.com/assets/documents/PIM/CH_PL_02.20222_Rea%20Azalea_fr.pdf",
-        "kind": "pdf"
-      },
-      "Rea Azalea S": {
-        "url": "https://invacaredocs.com/assets/documents/PIM/CH_PL_02.20222_Rea%20Azalea_fr.pdf",
-        "kind": "pdf"
-      },
-      "Rea Clematis Pro Configuré": {
-        "url": "https://invacaredocs.com/france-fr/2201_FR/PVI000660/",
-        "kind": "page"
-      },
-      "Rea Clematis Pro E-Tilt Configuré": {
-        "url": "https://invacaredocs.com/france-fr/2201_FR/PVI000660/",
-        "kind": "page"
-      },
-      "Rea Clematis Pro E-Tilt S": {
-        "url": "https://invacaredocs.com/france-fr/2201_FR/PVI000660/",
-        "kind": "page"
-      },
-      "Rea Clematis Pro One S": {
-        "url": "https://invacaredocs.com/france-fr/2201_FR/PVI000660/",
-        "kind": "page"
-      },
-      "Rea Dahlia 30°": {
-        "url": "https://invacaredocs.com/assets/documents/PIM/Dahlia%2030%20MatrX%20Assist_721.pdf",
-        "kind": "pdf"
-      },
-      "Rea Dahlia 45°": {
-        "url": "https://invacaredocs.com/assets/documents/PIM/Rea_Dahlia_45_Jan%202022.pdf",
-        "kind": "pdf"
-      },
-      "Rea Dahlia 45° Base": {
-        "url": "https://invacaredocs.com/assets/documents/PIM/Rea_Dahlia_45_Jan%202022.pdf",
-        "kind": "pdf"
-      },
-      "Storm 4": {
-        "url": "https://invacaredocs.com/assets/documents/PIM/9.%20Tarif%20Storm4_0122_FR.pdf",
-        "kind": "pdf"
-      },
-      "Storm 4 X-plore": {
-        "url": "https://invacaredocs.com/assets/documents/PIM/9.%20Tarif%20Storm4_0122_FR.pdf",
-        "kind": "pdf"
-      },
-      "TDX SP2 Modulite": {
-        "url": "https://invacaredocs.com/assets/documents/PIM/8.%20Tarif%20TDX-SP2_0122_FR.pdf",
-        "kind": "pdf"
-      },
-      "TDX SP2 NB Ultra Low Maxx": {
-        "url": "https://invacaredocs.com/assets/documents/PIM/15._Tarif_TDX-SP2_ULM_0120_FR.pdf",
-        "kind": "pdf"
-      },
-      "TDX SP2 NB modulite": {
-        "url": "https://invacaredocs.com/assets/documents/PIM/8.%20Tarif%20TDX-SP2_0122_FR.pdf",
-        "kind": "pdf"
-      },
-      "TDX SP2 Ultra Low Maxx": {
-        "url": "https://invacaredocs.com/assets/documents/PIM/15._Tarif_TDX-SP2_ULM_0120_FR.pdf",
-        "kind": "pdf"
+  "byToken": {
+    "BASE": {
+      "INVACARE": {
+        "Rea Azalea Base": {
+          "url": "https://invacaredocs.com/assets/documents/PIM/CH_PL_02.20222_Rea%20Azalea_fr.pdf",
+          "kind": "pdf"
+        },
+        "Rea Dahlia 45° Base": {
+          "url": "https://invacaredocs.com/assets/documents/PIM/Rea_Dahlia_45_Jan%202022.pdf",
+          "kind": "pdf"
+        }
       }
     },
-    "SUNRISE MED": {
-      "Argon2": {
-        "url": "https://www.sunrisemedical.fr/fauteuils-roulants/quickie/argon-2",
-        "kind": "page"
+    "FMP": {
+      "INVACARE": {
+        "Action 3 NG S": {
+          "url": "https://invacaredocs.com/france-fr/2320_FR/PVI000111/",
+          "kind": "page"
+        }
       },
-      "Krypton R": {
-        "url": "https://www.sunrisemedical.fr/fauteuils-roulants/quickie/fauteuil-roulant-leger/fauteuil-roulant-carbone-krypton-r",
-        "kind": "page"
+      "MEYRA NETTI": {
+        "Eurochair 1.750": {
+          "url": "https://www.meyra-netti.com/app/uploads/2020/12/1.750-Eurochair.pdf",
+          "kind": "pdf"
+        }
       },
-      "Nitrum": {
-        "url": "https://www.sunrisemedical.fr/fauteuils-roulants/quickie/fauteuil-roulant-actif-nitrum",
-        "kind": "page"
-      },
-      "Nitrum Hybrid": {
-        "url": "https://www.sunrisemedical.fr/fauteuils-roulants/quickie/fauteuil-roulant-actif-nitrum",
-        "kind": "page"
-      },
-      "Nitrum Hybrid Pro": {
-        "url": "https://www.sunrisemedical.fr/fauteuils-roulants/quickie/fauteuil-roulant-actif-nitrum",
-        "kind": "page"
-      },
-      "Nitrum Pro": {
-        "url": "https://www.sunrisemedical.fr/fauteuils-roulants/quickie/fauteuil-roulant-actif-nitrum",
-        "kind": "page"
-      },
-      "Q300 M Mini Kids": {
-        "url": "https://www.sunrisemedical.fr/fauteuils-roulants/quickie/fauteuil-roulant-electrique-q300-m-mini-sedeo-pro",
-        "kind": "page"
-      },
-      "Q300 M Mini Sedeo Lite": {
-        "url": "https://www.sunrisemedical.fr/fauteuils-roulants/quickie/fauteuil-roulant-electrique-q300-m-mini-sedeo-pro",
-        "kind": "page"
-      },
-      "Q300 M Mini Sedeo Pro": {
-        "url": "https://www.sunrisemedical.fr/fauteuils-roulants/quickie/fauteuil-roulant-electrique-q300-m-mini-sedeo-pro",
-        "kind": "page"
-      },
-      "Q300 R Sedeo Lite": {
-        "url": "https://www.sunrisemedical.fr/fauteuils-roulants/quickie/fauteuil-roulant-electrique-q300-r",
-        "kind": "page"
-      },
-      "Q400 M Sedeo Lite": {
-        "url": "https://www.sunrisemedical.fr/fauteuils-roulants/quickie/fauteuil-roulant-electrique-q400-m-sedeo-lite",
-        "kind": "page"
-      },
-      "Q500 M Sedeo Pro": {
-        "url": "https://www.sunrisemedical.fr/fauteuils-roulants/quickie/fauteuil-roulant-electrique-q500-m-sedeo-pro",
-        "kind": "page"
-      },
-      "Q700 F Sedeo Pro": {
-        "url": "https://www.sunrisemedical.fr/fauteuils-roulants/quickie/fauteuil-roulant-electrique-q700-f-sedeo-pro",
-        "kind": "page"
-      },
-      "Q700 F Sedeo Pro Advanced": {
-        "url": "https://www.sunrisemedical.fr/fauteuils-roulants/quickie/fauteuil-roulant-electrique-q700-f-sedeo-pro-advanced",
-        "kind": "page"
-      },
-      "Q700 M Sedeo Pro": {
-        "url": "https://www.sunrisemedical.fr/fauteuils-roulants/quickie/fauteuil-roulant-electrique-q700-m-sedeo-pro",
-        "kind": "page"
-      },
-      "Q700 M Sedeo Pro Advanced": {
-        "url": "https://www.sunrisemedical.fr/fauteuils-roulants/quickie/fauteuil-roulant-electrique-q700-m-sedeo-pro-advanced",
-        "kind": "page"
-      },
-      "Q700 R Sedeo Pro": {
-        "url": "https://www.sunrisemedical.fr/fauteuils-roulants/quickie/fauteuil-roulant-electrique-q700-r-sedeo-pro",
-        "kind": "page"
-      },
-      "Quckie Life T": {
-        "url": "https://www.sunrisemedical.fr/fauteuils-roulants/quickie/fauteuil-roulant-pliant-quickie-life-t",
-        "kind": "page"
-      },
-      "Quickie Life": {
-        "url": "https://www.sunrisemedical.fr/fauteuils-roulants/quickie/fauteuil-roulant-pliable-quickie-life",
-        "kind": "page"
-      },
-      "Xenon2": {
-        "url": "https://www.sunrisemedical.fr/fauteuils-roulants/quickie/fauteuil-roulant-pliant-xenon-2",
-        "kind": "page"
-      },
-      "Xenon2 SA": {
-        "url": "https://www.sunrisemedical.fr/fauteuils-roulants/quickie/fauteuil-roulant-pliable-xenon-2-sa",
-        "kind": "page"
+      "SUNRISE MED": {
+        "Style": {
+          "url": "https://www.sunrisedice.com/asset-bank/assetfile/111564.pdf",
+          "kind": "pdf"
+        },
+        "Style X": {
+          "url": "https://www.sunrisedice.com/asset-bank/assetfile/111565.pdf",
+          "kind": "pdf"
+        }
       }
     },
-    "PERMOBIL": {
-      "F3 Corpus": {
-        "url": "https://www.permobil.com/fr-fr/produits/fauteuils-electriques/permobil-f3-corpus",
-        "kind": "page"
+    "FMPR": {
+      "INVACARE": {
+        "Rea Clematis Pro One S": {
+          "url": "https://invacaredocs.com/france-fr/2201_FR/PVI000660/",
+          "kind": "page"
+        }
       },
-      "F5 Corpus VS": {
-        "url": "https://www.permobil.com/fr-fr/produits/fauteuils-electriques/permobil-f5-corpus",
-        "kind": "page"
+      "MEYRA NETTI": {
+        "Netti 4U CE": {
+          "url": "https://www.meyra.fr/fileadmin/user_upload/pdf/downloads/franzoesisch/netti/meyra-Fiche_de_mesure_Netti_4U_CE_PLUS.pdf",
+          "kind": "pdf"
+        }
       },
-      "M3 Corpus": {
-        "url": "https://www.permobil.com/fr-fr/produits/fauteuils-electriques/permobil-m3-corpus",
-        "kind": "page"
-      },
-      "M5 Corpus": {
-        "url": "https://www.permobil.com/fr-fr/produits/fauteuils-electriques/permobil-m5-corpus",
-        "kind": "page"
-      },
-      "Progeo Ego": {
-        "url": "https://www.permobil.com/fr-fr/produits/fauteuils-manuels/progeo-ego",
-        "kind": "page"
-      },
-      "Progeo Exelle": {
-        "url": "https://www.permobil.com/fr-fr/produits/fauteuils-manuels/progeo-exelle",
-        "kind": "page"
-      },
-      "Progeo Exelle Junior": {
-        "url": "https://www.permobil.com/fr-fr/produits/fauteuils-manuels/progeo-exelle",
-        "kind": "page"
-      },
-      "Progeo Exelle Vario": {
-        "url": "https://www.permobil.com/fr-fr/produits/fauteuils-manuels/progeo-exelle-vario",
-        "kind": "page"
-      },
-      "Progeo Joker": {
-        "url": "https://www.permobil.com/fr-fr/produits/fauteuils-manuels/progeo-joker",
-        "kind": "page"
-      },
-      "Progeo Joker Energy": {
-        "url": "https://www.permobil.com/fr-fr/produits/fauteuils-manuels/progeo-joker-energy",
-        "kind": "page"
-      },
-      "Progeo Joker R2": {
-        "url": "https://www.permobil.com/fr-fr/produits/fauteuils-manuels/progeo-joker-r2",
-        "kind": "page"
-      },
-      "Progeo Noir 2.0": {
-        "url": "https://www.permobil.com/fr-fr/produits/fauteuils-manuels/progeo-noir-20",
-        "kind": "page"
+      "VERMEIREN": {
+        "Inovys II Evo Initial": {
+          "url": "https://www.vermeiren.fr/product/brochure.nsf/O/2FB9DA5F9D59A42BC12589160033E750/$FILE/Inovys%20EVO.pdf",
+          "kind": "pdf"
+        },
+        "Inovys II Evo Initital T30": {
+          "url": "https://www.vermeiren.fr/product/brochure.nsf/O/2FB9DA5F9D59A42BC12589160033E750/$FILE/Inovys%20EVO.pdf",
+          "kind": "pdf"
+        }
       }
     },
-    "MEYRA NETTI": {
-      "Eurochair 1.750": {
-        "url": "https://www.meyra-netti.com/app/uploads/2020/12/1.750-Eurochair.pdf",
-        "kind": "pdf"
+    "FRE-A": {
+      "INVACARE": {
+        "Erivo": {
+          "url": "https://invacaredocs.com/assets/documents/PIM/Erivo_123.pdf",
+          "kind": "pdf"
+        },
+        "Esprit Action": {
+          "url": "https://invacaredocs.com/assets/documents/PIM/Esprit%20Action_721.pdf",
+          "kind": "pdf"
+        }
       },
-      "Netti 4U CE": {
-        "url": "https://www.meyra.fr/fileadmin/user_upload/pdf/downloads/franzoesisch/netti/meyra-Fiche_de_mesure_Netti_4U_CE_PLUS.pdf",
-        "kind": "pdf"
-      },
-      "Netti 4U CE PLUS": {
-        "url": "https://www.meyra.fr/fileadmin/user_upload/pdf/downloads/franzoesisch/netti/meyra-Fiche_de_mesure_Netti_4U_CE_PLUS.pdf",
-        "kind": "pdf"
-      },
-      "Netti 4U CED": {
-        "url": "https://www.meyra.fr/fileadmin/user_upload/pdf/downloads/franzoesisch/netti/meyra-Fiche_de_mesure_Netti_4U_CE_PLUS.pdf",
-        "kind": "pdf"
-      },
-      "SMART F 2.360": {
-        "url": "https://www.meyra-netti.com/app/uploads/2020/12/2.360-SMART-F-1.pdf",
-        "kind": "pdf"
-      },
-      "SMART S 2.370": {
-        "url": "https://www.meyra-netti.com/app/uploads/2020/12/2.370-SMART-S.pdf",
-        "kind": "pdf"
-      },
-      "iCHAIR MC2 1.611": {
-        "url": "https://www.meyra-netti.com/app/uploads/2021/03/1611-iCHAIR-MC2-AA-2-FR-PL-2021-13-Copie.pdf",
-        "kind": "pdf"
-      },
-      "iCHAIR MC2 NEW 2.611": {
-        "url": "https://www.meyra-netti.com/app/uploads/2021/03/1611-iCHAIR-MC2-AA-2-FR-PL-2021-13-Copie.pdf",
-        "kind": "pdf"
-      },
-      "iCHAIR MC3 1.612": {
-        "url": "https://www.meyra-netti.com/app/uploads/2021/03/1612-iCHAIR-MC3-AA2-FR-PL-2021-corrige.pdf",
-        "kind": "pdf"
-      },
-      "iCHAIR ORBIT 1.618": {
-        "url": "https://www.meyra-netti.com/app/uploads/2022/01/1.618-iCHAIR-ORBIT-FR-AA2-2022-1.pdf",
-        "kind": "pdf"
-      },
-      "iCHAIR ORBIT 2 1.618": {
-        "url": "https://www.meyra-netti.com/app/uploads/2022/01/1.618-iCHAIR-ORBIT-FR-AA2-2022-1.pdf",
-        "kind": "pdf"
-      },
-      "iCHAIR XXL bis 1.614": {
-        "url": "https://www.meyra-netti.com/app/uploads/2021/03/1614-iCHAIR-XXL-FR-PL-2021-AA2-Copie.pdf",
-        "kind": "pdf"
+      "SUNRISE MED": {
+        "Q200 R": {
+          "url": "https://www.sunrisedice.com/asset-bank/assetfile/111831.pdf",
+          "kind": "pdf"
+        },
+        "Q300 M Mini Sedeo Lite": {
+          "url": "https://www.sunrisedice.com/asset-bank/assetfile/111832.pdf",
+          "kind": "pdf"
+        }
       }
     },
-    "PRIDE MOBILITY": {
-      "Q6 Edge 4": {
-        "url": "https://www.pridemobility.com/pdf/brochures/jazzy/q6_edge.pdf",
-        "kind": "pdf"
+    "FRE-B": {
+      "INVACARE": {
+        "Aviva RX20 Modulite": {
+          "url": "https://invacaredocs.com/assets/documents/PIM/Aviva%20RX20%20Modulite%20AA2%20122.pdf",
+          "kind": "pdf"
+        },
+        "Erivo Premium": {
+          "url": "https://invacaredocs.com/assets/documents/PIM/Erivo_123.pdf",
+          "kind": "pdf"
+        },
+        "Esprit Action": {
+          "url": "https://invacaredocs.com/assets/documents/PIM/Esprit%20Action_721.pdf",
+          "kind": "pdf"
+        }
       },
-      "Q6 Edge HD": {
-        "url": "https://www.pridemobility.com/pdf/brochures/jazzy/q6_edge.pdf",
-        "kind": "pdf"
+      "MEYRA NETTI": {
+        "iCHAIR MC2 1.611": {
+          "url": "https://www.meyra-netti.com/app/uploads/2021/03/1611-iCHAIR-MC2-AA-2-FR-PL-2021-13-Copie.pdf",
+          "kind": "pdf"
+        },
+        "iCHAIR ORBIT 1.618": {
+          "url": "https://www.meyra-netti.com/app/uploads/2022/01/1.618-iCHAIR-ORBIT-FR-AA2-2022-1.pdf",
+          "kind": "pdf"
+        }
+      },
+      "OTTO BOCK": {
+        "OTTO Juvo B4": {
+          "url": "https://www.ottobock.com/fr-fr/product/490E75--1---C-106600",
+          "kind": "page"
+        }
+      },
+      "SUNRISE MED": {
+        "Q300 R Sedeo Lite": {
+          "url": "https://www.sunrisedice.com/asset-bank/assetfile/111834.pdf",
+          "kind": "pdf"
+        },
+        "Q400 M Sedeo Lite": {
+          "url": "https://www.sunrisedice.com/asset-bank/assetfile/111835.pdf",
+          "kind": "pdf"
+        },
+        "Q400 R Sedeo Lite": {
+          "url": "https://www.sunrisedice.com/asset-bank/assetfile/111836.pdf",
+          "kind": "pdf"
+        },
+        "Q300 M Mini Kids": {
+          "url": "https://www.sunrisedice.com/asset-bank/assetfile/111849.pdf",
+          "kind": "pdf"
+        }
+      },
+      "VERMEIREN": {
+        "FOREST 3 Initial": {
+          "url": "https://www.vermeiren.fr/product/brochure.nsf/O/757DF9BDC9231CAEC1258D7A004017A1/$FILE/Forest%203%20-%20WL.pdf",
+          "kind": "pdf"
+        }
       }
     },
-    "VERMEIREN": {
-      "FOREST 3 Advance": {
-        "url": "https://www.vermeiren.fr/product/brochure.nsf/O/757DF9BDC9231CAEC1258D7A004017A1/$FILE/Forest%203%20-%20WL.pdf",
-        "kind": "pdf"
-      },
-      "FOREST 3 Initial": {
-        "url": "https://www.vermeiren.fr/product/brochure.nsf/O/757DF9BDC9231CAEC1258D7A004017A1/$FILE/Forest%203%20-%20WL.pdf",
-        "kind": "pdf"
-      },
-      "Forest 3 SU": {
-        "url": "https://www.vermeiren.fr/product/brochure.nsf/O/757DF9BDC9231CAEC1258D7A004017A1/$FILE/Forest%203%20-%20WL.pdf",
-        "kind": "pdf"
-      },
-      "Forest 3+": {
-        "url": "https://www.vermeiren.fr/product/brochure.nsf/O/757DF9BDC9231CAEC1258D7A004017A1/$FILE/Forest%203%20-%20WL.pdf",
-        "kind": "pdf"
-      },
-      "Inovys II Evo Configuré": {
-        "url": "https://www.vermeiren.fr/product/brochure.nsf/O/2FB9DA5F9D59A42BC12589160033E750/$FILE/Inovys%20EVO.pdf",
-        "kind": "pdf"
-      },
-      "Inovys II Evo Initial": {
-        "url": "https://www.vermeiren.fr/product/brochure.nsf/O/2FB9DA5F9D59A42BC12589160033E750/$FILE/Inovys%20EVO.pdf",
-        "kind": "pdf"
-      },
-      "Inovys II Evo Initital T30": {
-        "url": "https://www.vermeiren.fr/product/brochure.nsf/O/2FB9DA5F9D59A42BC12589160033E750/$FILE/Inovys%20EVO.pdf",
-        "kind": "pdf"
-      },
-      "Inovys II-E Evo Configuré": {
-        "url": "https://www.vermeiren.fr/product/brochure.nsf/O/2FB9DA5F9D59A42BC12589160033E750/$FILE/Inovys%20EVO.pdf",
-        "kind": "pdf"
+    "FREP-A": {
+      "SUNRISE MED": {
+        "Q300 M Mini Sedeo Pro": {
+          "url": "https://www.sunrisedice.com/asset-bank/assetfile/111837.pdf",
+          "kind": "pdf"
+        },
+        "Q500 M Sedeo Pro": {
+          "url": "https://www.sunrisedice.com/asset-bank/assetfile/111838.pdf",
+          "kind": "pdf"
+        },
+        "Q500 R Sedeo Pro": {
+          "url": "https://www.sunrisedice.com/asset-bank/assetfile/111839.pdf",
+          "kind": "pdf"
+        }
       }
     },
-    "OTTO BOCK": {
-      "OTTO Juvo B4": {
-        "url": "https://www.ottobock.com/fr-fr/product/490E75--1---C-106600",
-        "kind": "page"
+    "FREP-B": {
+      "INVACARE": {
+        "Aviva RX20 Modulite": {
+          "url": "https://invacaredocs.com/assets/documents/PIM/Aviva%20RX20%20Modulite%20AA2%20122.pdf",
+          "kind": "pdf"
+        },
+        "Aviva RX40 Modulite": {
+          "url": "https://invacaredocs.com/assets/documents/PIM/Tarif%20AVIVA%20RX40_0121_FR.pdf",
+          "kind": "pdf"
+        },
+        "Aviva RX40 Ultra Low Maxx": {
+          "url": "https://invacaredocs.com/assets/documents/PIM/Tarif%20AVIVA%20RX40_0121_FR.pdf",
+          "kind": "pdf"
+        },
+        "Storm 4": {
+          "url": "https://invacaredocs.com/assets/documents/PIM/9.%20Tarif%20Storm4_0122_FR.pdf",
+          "kind": "pdf"
+        },
+        "Storm 4 X-plore": {
+          "url": "https://invacaredocs.com/assets/documents/PIM/9.%20Tarif%20Storm4_0122_FR.pdf",
+          "kind": "pdf"
+        },
+        "TDX SP2 Modulite": {
+          "url": "https://invacaredocs.com/assets/documents/PIM/8.%20Tarif%20TDX-SP2_0122_FR.pdf",
+          "kind": "pdf"
+        },
+        "TDX SP2 NB Ultra Low Maxx": {
+          "url": "https://invacaredocs.com/assets/documents/PIM/15._Tarif_TDX-SP2_ULM_0120_FR.pdf",
+          "kind": "pdf"
+        },
+        "TDX SP2 NB modulite": {
+          "url": "https://invacaredocs.com/assets/documents/PIM/8.%20Tarif%20TDX-SP2_0122_FR.pdf",
+          "kind": "pdf"
+        },
+        "TDX SP2 Ultra Low Maxx": {
+          "url": "https://invacaredocs.com/assets/documents/PIM/15._Tarif_TDX-SP2_ULM_0120_FR.pdf",
+          "kind": "pdf"
+        }
+      },
+      "MEYRA NETTI": {
+        "iCHAIR MC2 1.611": {
+          "url": "https://www.meyra-netti.com/app/uploads/2021/03/1611-iCHAIR-MC2-AA-2-FR-PL-2021-13-Copie.pdf",
+          "kind": "pdf"
+        },
+        "iCHAIR MC2 NEW 2.611": {
+          "url": "https://www.meyra-netti.com/app/uploads/2021/03/1611-iCHAIR-MC2-AA-2-FR-PL-2021-13-Copie.pdf",
+          "kind": "pdf"
+        },
+        "iCHAIR MC3 1.612": {
+          "url": "https://www.meyra-netti.com/app/uploads/2021/03/1612-iCHAIR-MC3-AA2-FR-PL-2021-corrige.pdf",
+          "kind": "pdf"
+        },
+        "iCHAIR ORBIT 2 1.618": {
+          "url": "https://www.meyra-netti.com/app/uploads/2022/01/1.618-iCHAIR-ORBIT-FR-AA2-2022-1.pdf",
+          "kind": "pdf"
+        },
+        "iCHAIR XXL bis 1.614": {
+          "url": "https://www.meyra-netti.com/app/uploads/2021/03/1614-iCHAIR-XXL-FR-PL-2021-AA2-Copie.pdf",
+          "kind": "pdf"
+        }
+      },
+      "OTTO BOCK": {
+        "OTTO Juvo B4": {
+          "url": "https://www.ottobock.com/fr-fr/product/490E75--1---C-106600",
+          "kind": "page"
+        }
+      },
+      "PERMOBIL": {
+        "F3 Corpus": {
+          "url": "https://www.permobil.com/fr-fr/produits/fauteuils-electriques/permobil-f3-corpus",
+          "kind": "page"
+        },
+        "M3 Corpus": {
+          "url": "https://www.permobil.com/fr-fr/produits/fauteuils-electriques/permobil-m3-corpus",
+          "kind": "page"
+        },
+        "M5 Corpus": {
+          "url": "https://www.permobil.com/fr-fr/produits/fauteuils-electriques/permobil-m5-corpus",
+          "kind": "page"
+        }
+      },
+      "PRIDE MOBILITY": {
+        "Q6 Edge 4": {
+          "url": "https://www.pridemobility.com/pdf/brochures/jazzy/q6_edge.pdf",
+          "kind": "pdf"
+        },
+        "Q6 Edge HD": {
+          "url": "https://www.pridemobility.com/pdf/brochures/jazzy/q6_edge.pdf",
+          "kind": "pdf"
+        }
+      },
+      "SUNRISE MED": {
+        "Q300 M Mini Sedeo Pro": {
+          "url": "https://www.sunrisedice.com/asset-bank/assetfile/111840.pdf",
+          "kind": "pdf"
+        },
+        "Q700 F Sedeo Pro Advanced": {
+          "url": "https://www.sunrisedice.com/asset-bank/assetfile/111842.pdf",
+          "kind": "pdf"
+        },
+        "Q700 F Sedeo Pro": {
+          "url": "https://www.sunrisedice.com/asset-bank/assetfile/111843.pdf",
+          "kind": "pdf"
+        },
+        "Q700 M HD": {
+          "url": "https://www.sunrisedice.com/asset-bank/assetfile/111844.pdf",
+          "kind": "pdf"
+        },
+        "Q700 M Sedeo Pro Advanced": {
+          "url": "https://www.sunrisedice.com/asset-bank/assetfile/111845.pdf",
+          "kind": "pdf"
+        },
+        "Q700 M Sedeo Pro": {
+          "url": "https://www.sunrisedice.com/asset-bank/assetfile/111846.pdf",
+          "kind": "pdf"
+        },
+        "Q700 R Sedeo Pro": {
+          "url": "https://www.sunrisedice.com/asset-bank/assetfile/111847.pdf",
+          "kind": "pdf"
+        },
+        "Q300 R Sedeo Lite": {
+          "url": "https://www.sunrisedice.com/asset-bank/assetfile/112003.pdf",
+          "kind": "pdf"
+        },
+        "Q300 M Mini Sedeo Lite": {
+          "url": "https://www.sunrisedice.com/asset-bank/assetfile/112004.pdf",
+          "kind": "pdf"
+        },
+        "Q400 M Sedeo Lite": {
+          "url": "https://www.sunrisedice.com/asset-bank/assetfile/112005.pdf",
+          "kind": "pdf"
+        },
+        "Q400 R Sedeo Lite": {
+          "url": "https://www.sunrisedice.com/asset-bank/assetfile/112006.pdf",
+          "kind": "pdf"
+        },
+        "Frontier V4": {
+          "url": "https://www.sunrisedice.com/asset-bank/assetfile/111689.pdf",
+          "kind": "pdf"
+        }
+      },
+      "VERMEIREN": {
+        "FOREST 3 Advance": {
+          "url": "https://www.vermeiren.fr/product/brochure.nsf/O/757DF9BDC9231CAEC1258D7A004017A1/$FILE/Forest%203%20-%20WL.pdf",
+          "kind": "pdf"
+        },
+        "Forest 3+": {
+          "url": "https://www.vermeiren.fr/product/brochure.nsf/O/757DF9BDC9231CAEC1258D7A004017A1/$FILE/Forest%203%20-%20WL.pdf",
+          "kind": "pdf"
+        }
+      }
+    },
+    "FREP-C": {
+      "SUNRISE MED": {
+        "Frontier V6": {
+          "url": "https://www.sunrisedice.com/asset-bank/assetfile/111690.pdf",
+          "kind": "pdf"
+        },
+        "XT2": {
+          "url": "https://www.sunrisedice.com/asset-bank/assetfile/111693.pdf",
+          "kind": "pdf"
+        },
+        "XT4": {
+          "url": "https://www.sunrisedice.com/asset-bank/assetfile/111694.pdf",
+          "kind": "pdf"
+        }
+      }
+    },
+    "FREV": {
+      "INVACARE": {
+        "Aviva FX40 MPS Maxx": {
+          "url": "https://invacaredocs.com/france-fr/1140_FR/PVI000734/",
+          "kind": "page"
+        }
+      },
+      "PERMOBIL": {
+        "F5 Corpus VS": {
+          "url": "https://www.permobil.com/fr-fr/produits/fauteuils-electriques/permobil-f5-corpus",
+          "kind": "page"
+        }
+      },
+      "SUNRISE MED": {
+        "Q700-Up M Sedeo Pro Advanced": {
+          "url": "https://www.sunrisedice.com/asset-bank/assetfile/111848.pdf",
+          "kind": "pdf"
+        },
+        "Q700-Up F Sedeo Pro Advanced": {
+          "url": "https://www.sunrisedice.com/asset-bank/assetfile/111919.pdf",
+          "kind": "pdf"
+        }
+      },
+      "VERMEIREN": {
+        "Forest 3 SU": {
+          "url": "https://www.vermeiren.fr/product/brochure.nsf/O/757DF9BDC9231CAEC1258D7A004017A1/$FILE/Forest%203%20-%20WL.pdf",
+          "kind": "pdf"
+        }
+      }
+    },
+    "FRM": {
+      "INVACARE": {
+        "Action 3 NG": {
+          "url": "https://invacaredocs.com/france-fr/2320_FR/PVI000111/",
+          "kind": "page"
+        },
+        "Action 3 NG Dual HR": {
+          "url": "https://invacaredocs.com/france-fr/2320_FR/PVI000111/",
+          "kind": "page"
+        },
+        "Action 3 NG Transit": {
+          "url": "https://invacaredocs.com/france-fr/2320_FR/PVI000111/",
+          "kind": "page"
+        },
+        "Action 4 NG": {
+          "url": "https://invacaredocs.com/assets/documents/PIM/2.Tarif%20Action4%20NG%20std%20et%20modulaire_0721_FR.pdf",
+          "kind": "pdf"
+        },
+        "Action 4 NG Dual HR": {
+          "url": "https://invacaredocs.com/assets/documents/PIM/2.Tarif%20Action4%20NG%20std%20et%20modulaire_0721_FR.pdf",
+          "kind": "pdf"
+        },
+        "Action 4 NG XLT": {
+          "url": "https://invacaredocs.com/assets/documents/PIM/2.Tarif%20Action4%20NG%20std%20et%20modulaire_0721_FR.pdf",
+          "kind": "pdf"
+        },
+        "Action3 Junior": {
+          "url": "https://invacaredocs.com/france-fr/2320_FR/PVI000111/",
+          "kind": "page"
+        },
+        "Action3 NG Hémi": {
+          "url": "https://invacaredocs.com/france-fr/2320_FR/PVI000111/",
+          "kind": "page"
+        },
+        "Action3 NG Levier Pendulaire": {
+          "url": "https://invacaredocs.com/france-fr/2320_FR/PVI000111/",
+          "kind": "page"
+        },
+        "Action3 NG Light": {
+          "url": "https://invacaredocs.com/assets/documents/PIM/1.c%20Tarif%20Action3%20NG%20LIGHT_0721_FR.pdf",
+          "kind": "pdf"
+        }
+      },
+      "SUNRISE MED": {
+        "Style-X Ultra": {
+          "url": "https://www.sunrisedice.com/asset-bank/assetfile/111567.pdf",
+          "kind": "pdf"
+        },
+        "Rubix2 XL": {
+          "url": "https://www.sunrisedice.com/asset-bank/assetfile/111568.pdf",
+          "kind": "pdf"
+        }
+      }
+    },
+    "FRMA": {
+      "PERMOBIL": {
+        "Progeo Joker Energy": {
+          "url": "https://www.permobil.com/fr-fr/produits/fauteuils-manuels/progeo-joker-energy",
+          "kind": "page"
+        },
+        "Progeo Joker R2": {
+          "url": "https://www.permobil.com/fr-fr/produits/fauteuils-manuels/progeo-joker-r2",
+          "kind": "page"
+        },
+        "Progeo Noir 2.0": {
+          "url": "https://www.permobil.com/fr-fr/produits/fauteuils-manuels/progeo-noir-20",
+          "kind": "page"
+        }
+      },
+      "SUNRISE MED": {
+        "Krypton R": {
+          "url": "https://www.sunrisemedical.fr/fauteuils-roulants/quickie/fauteuil-roulant-leger/fauteuil-roulant-carbone-krypton-r",
+          "kind": "page"
+        },
+        "Nitrum": {
+          "url": "https://www.sunrisedice.com/asset-bank/assetfile/111759.pdf",
+          "kind": "pdf"
+        },
+        "Nitrum Hybrid": {
+          "url": "https://www.sunrisedice.com/asset-bank/assetfile/111758.pdf",
+          "kind": "pdf"
+        },
+        "Nitrum Hybrid Pro": {
+          "url": "https://www.sunrisemedical.fr/fauteuils-roulants/quickie/fauteuil-roulant-actif-nitrum",
+          "kind": "page"
+        },
+        "Nitrum Pro": {
+          "url": "https://www.sunrisemedical.fr/fauteuils-roulants/quickie/fauteuil-roulant-actif-nitrum",
+          "kind": "page"
+        }
+      }
+    },
+    "FRMC": {
+      "INVACARE": {
+        "Action 4 NG XLT": {
+          "url": "https://invacaredocs.com/assets/documents/PIM/2.Tarif%20Action4%20NG%20std%20et%20modulaire_0721_FR.pdf",
+          "kind": "pdf"
+        },
+        "Action 5": {
+          "url": "https://invacaredocs.com/france-fr/2320_FR/PVI000119/",
+          "kind": "page"
+        },
+        "Action 5 Rigid": {
+          "url": "https://invacaredocs.com/france-fr/2320_FR/PVI000119/",
+          "kind": "page"
+        },
+        "Action3 junior Evolutif": {
+          "url": "https://invacaredocs.com/france-fr/2320_FR/PVI000111/",
+          "kind": "page"
+        }
+      },
+      "MEYRA NETTI": {
+        "SMART F 2.360": {
+          "url": "https://www.meyra-netti.com/app/uploads/2020/12/2.360-SMART-F-1.pdf",
+          "kind": "pdf"
+        },
+        "SMART S 2.370": {
+          "url": "https://www.meyra-netti.com/app/uploads/2020/12/2.370-SMART-S.pdf",
+          "kind": "pdf"
+        }
+      },
+      "PERMOBIL": {
+        "Progeo Ego": {
+          "url": "https://www.permobil.com/fr-fr/produits/fauteuils-manuels/progeo-ego",
+          "kind": "page"
+        },
+        "Progeo Exelle": {
+          "url": "https://www.permobil.com/fr-fr/produits/fauteuils-manuels/progeo-exelle",
+          "kind": "page"
+        },
+        "Progeo Exelle Junior": {
+          "url": "https://www.permobil.com/fr-fr/produits/fauteuils-manuels/progeo-exelle",
+          "kind": "page"
+        },
+        "Progeo Exelle Vario": {
+          "url": "https://www.permobil.com/fr-fr/produits/fauteuils-manuels/progeo-exelle-vario",
+          "kind": "page"
+        },
+        "Progeo Joker": {
+          "url": "https://www.permobil.com/fr-fr/produits/fauteuils-manuels/progeo-joker",
+          "kind": "page"
+        }
+      },
+      "SUNRISE MED": {
+        "Nitrum": {
+          "url": "https://www.sunrisedice.com/asset-bank/assetfile/111762.pdf",
+          "kind": "pdf"
+        },
+        "Nitrum Hybrid": {
+          "url": "https://www.sunrisedice.com/asset-bank/assetfile/111761.pdf",
+          "kind": "pdf"
+        },
+        "Nitrum Hybrid Pro": {
+          "url": "https://www.sunrisemedical.fr/fauteuils-roulants/quickie/fauteuil-roulant-actif-nitrum",
+          "kind": "page"
+        },
+        "Nitrum Pro": {
+          "url": "https://www.sunrisemedical.fr/fauteuils-roulants/quickie/fauteuil-roulant-actif-nitrum",
+          "kind": "page"
+        },
+        "Argon2": {
+          "url": "https://www.sunrisedice.com/asset-bank/assetfile/111760.pdf",
+          "kind": "pdf"
+        },
+        "QS5X": {
+          "url": "https://www.sunrisedice.com/asset-bank/assetfile/111763.pdf",
+          "kind": "pdf"
+        },
+        "Quckie Life T": {
+          "url": "https://www.sunrisedice.com/asset-bank/assetfile/111764.pdf",
+          "kind": "pdf"
+        },
+        "Quickie Life": {
+          "url": "https://www.sunrisedice.com/asset-bank/assetfile/111765.pdf",
+          "kind": "pdf"
+        },
+        "Xenon2 SA": {
+          "url": "https://www.sunrisedice.com/asset-bank/assetfile/111767.pdf",
+          "kind": "pdf"
+        },
+        "Xenon2": {
+          "url": "https://www.sunrisedice.com/asset-bank/assetfile/111768.pdf",
+          "kind": "pdf"
+        },
+        "Youngster 3": {
+          "url": "https://www.sunrisedice.com/asset-bank/assetfile/111769.pdf",
+          "kind": "pdf"
+        }
+      }
+    },
+    "FRMP": {
+      "INVACARE": {
+        "Rea Azalea": {
+          "url": "https://invacaredocs.com/assets/documents/PIM/CH_PL_02.20222_Rea%20Azalea_fr.pdf",
+          "kind": "pdf"
+        },
+        "Rea Azalea Max": {
+          "url": "https://invacaredocs.com/assets/documents/PIM/CH_PL_02.20222_Rea%20Azalea_fr.pdf",
+          "kind": "pdf"
+        },
+        "Rea Azalea S": {
+          "url": "https://invacaredocs.com/assets/documents/PIM/CH_PL_02.20222_Rea%20Azalea_fr.pdf",
+          "kind": "pdf"
+        },
+        "Rea Clematis Pro Configuré": {
+          "url": "https://invacaredocs.com/france-fr/2201_FR/PVI000660/",
+          "kind": "page"
+        },
+        "Rea Clematis Pro E-Tilt Configuré": {
+          "url": "https://invacaredocs.com/france-fr/2201_FR/PVI000660/",
+          "kind": "page"
+        },
+        "Rea Clematis Pro E-Tilt S": {
+          "url": "https://invacaredocs.com/france-fr/2201_FR/PVI000660/",
+          "kind": "page"
+        },
+        "Rea Dahlia 30°": {
+          "url": "https://invacaredocs.com/assets/documents/PIM/Dahlia%2030%20MatrX%20Assist_721.pdf",
+          "kind": "pdf"
+        },
+        "Rea Dahlia 45°": {
+          "url": "https://invacaredocs.com/assets/documents/PIM/Rea_Dahlia_45_Jan%202022.pdf",
+          "kind": "pdf"
+        }
+      },
+      "MEYRA NETTI": {
+        "Netti 4U CE": {
+          "url": "https://www.meyra.fr/fileadmin/user_upload/pdf/downloads/franzoesisch/netti/meyra-Fiche_de_mesure_Netti_4U_CE_PLUS.pdf",
+          "kind": "pdf"
+        },
+        "Netti 4U CE PLUS": {
+          "url": "https://www.meyra.fr/fileadmin/user_upload/pdf/downloads/franzoesisch/netti/meyra-Fiche_de_mesure_Netti_4U_CE_PLUS.pdf",
+          "kind": "pdf"
+        },
+        "Netti 4U CED": {
+          "url": "https://www.meyra.fr/fileadmin/user_upload/pdf/downloads/franzoesisch/netti/meyra-Fiche_de_mesure_Netti_4U_CE_PLUS.pdf",
+          "kind": "pdf"
+        }
+      },
+      "VERMEIREN": {
+        "Inovys II Evo Configuré": {
+          "url": "https://www.vermeiren.fr/product/brochure.nsf/O/2FB9DA5F9D59A42BC12589160033E750/$FILE/Inovys%20EVO.pdf",
+          "kind": "pdf"
+        },
+        "Inovys II-E Evo Configuré": {
+          "url": "https://www.vermeiren.fr/product/brochure.nsf/O/2FB9DA5F9D59A42BC12589160033E750/$FILE/Inovys%20EVO.pdf",
+          "kind": "pdf"
+        }
+      }
+    },
+    "FRMS": {
+      "INVACARE": {
+        "Action 5 Rigid": {
+          "url": "https://invacaredocs.com/france-fr/2320_FR/PVI000119/",
+          "kind": "page"
+        }
+      }
+    },
+    "POU_MRE": {
+      "SUNRISE MED": {
+        "Zippie Voyage": {
+          "url": "https://www.sunrisedice.com/asset-bank/assetfile/111850.pdf",
+          "kind": "pdf"
+        }
       }
     }
   }

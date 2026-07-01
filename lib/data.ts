@@ -79,9 +79,11 @@ export const deviceModelsMeta = {
 };
 
 const deviceOptionSheetsFile = DeviceOptionSheetsFileSchema.parse(deviceOptionSheetsRaw);
-/** fiche tarif/options constructeur : marque → { nom de modèle → {url, kind} }. */
-export const deviceOptionSheetByBrand: Record<string, Record<string, OptionSheet>> =
-  deviceOptionSheetsFile.byBrand;
+/** fiche tarif/options constructeur : token/classe → marque → { nom de modèle → {url, kind} }. */
+export const deviceOptionSheetByToken: Record<
+  string,
+  Record<string, Record<string, OptionSheet>>
+> = deviceOptionSheetsFile.byToken;
 export const deviceOptionSheetsMeta = {
   source: deviceOptionSheetsFile.source,
   lastUpdated: deviceOptionSheetsFile.lastUpdated,

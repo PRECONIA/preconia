@@ -12,7 +12,7 @@ import {
   besoins,
   classes,
   deviceModelsByType,
-  deviceOptionSheetByBrand,
+  deviceOptionSheetByToken,
   deviceIndicationsByCode,
   deviceLppByType,
   devices,
@@ -105,7 +105,9 @@ export function WalkerShell() {
     : [];
   const model = answers.vehicleModel;
   // Fiche tarif/options constructeur pour le modèle choisi (null = non répertoriée).
-  const optionSheet = optionSheetFor(brand, model, deviceOptionSheetByBrand);
+  const optionSheet = device
+    ? optionSheetFor(device, answers.classe, brand, model, deviceOptionSheetByToken)
+    : null;
 
   // Code LPP + tarif du fauteuil : code du modèle si dispo, sinon code marque, sinon code mère.
   const devLpp = device

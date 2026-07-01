@@ -156,9 +156,11 @@ export const DeviceModelsFileSchema = z.object({
 });
 
 /* --- device-option-sheets.json (fiche tarif/options du constructeur par modèle commercial).
+   Clé par token/classe → marque → modèle : un même modèle peut avoir une fiche différente selon
+   la classe (ex. Q300 M Mini Sedeo Pro : fiche FREP-A ≠ fiche FREP-B, codes LPPR distincts).
    `kind` : "pdf" = fiche tarif/options PDF officielle ; "page" = repli page produit constructeur.
-   Aucune entrée pour un modèle = « pas de fiche d'option constructeur disponible ». Liens vérifiés
-   uniquement (règle #1 : jamais de source inventée). --- */
+   Aucune entrée = « pas de fiche d'option constructeur disponible ». Liens vérifiés uniquement
+   (règle #1 : jamais de source inventée). --- */
 export const OptionSheetSchema = z.object({
   url: z.string().url(),
   kind: z.enum(["pdf", "page"]),
@@ -166,7 +168,7 @@ export const OptionSheetSchema = z.object({
 export const DeviceOptionSheetsFileSchema = z.object({
   source: z.string(),
   lastUpdated: z.string(),
-  byBrand: z.record(z.string(), z.record(z.string(), OptionSheetSchema)),
+  byToken: z.record(z.string(), z.record(z.string(), z.record(z.string(), OptionSheetSchema))),
 });
 
 /* --- device-indications.json (indications officielles de prise en charge par dispositif et par

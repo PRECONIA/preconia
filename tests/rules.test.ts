@@ -3,7 +3,7 @@ import {
   adjBrandMap,
   adjonctions,
   deviceModelsByType,
-  deviceOptionSheetByBrand,
+  deviceOptionSheetByToken,
   deviceByCode,
   deviceLppByType,
   papForfaits,
@@ -232,17 +232,31 @@ describe("deviceLpp — code par marque (catalogue CERAH, code propre, jamais in
   });
 
   it("optionSheetFor : null sans marque/modèle ; entrée valide si répertoriée", () => {
-    expect(optionSheetFor(null, "Nitrum", deviceOptionSheetByBrand)).toBeNull();
-    expect(optionSheetFor("INVACARE", null, deviceOptionSheetByBrand)).toBeNull();
+    const dev = deviceByCode.FREP;
+    expect(optionSheetFor(dev, "A", null, "Q300 M Mini Sedeo Pro", deviceOptionSheetByToken)).toBeNull();
+    expect(optionSheetFor(dev, "A", "SUNRISE MED", null, deviceOptionSheetByToken)).toBeNull();
     // modèle inconnu → pas de fiche
-    expect(optionSheetFor("INVACARE", "Modèle inexistant", deviceOptionSheetByBrand)).toBeNull();
+    expect(
+      optionSheetFor(dev, "A", "SUNRISE MED", "Modèle inexistant", deviceOptionSheetByToken),
+    ).toBeNull();
     // toute entrée présente doit être une URL http(s) avec un kind connu
-    for (const models of Object.values(deviceOptionSheetByBrand)) {
-      for (const s of Object.values(models)) {
-        expect(s.url).toMatch(/^https?:\/\//);
-        expect(["pdf", "page"]).toContain(s.kind);
+    for (const byBrand of Object.values(deviceOptionSheetByToken)) {
+      for (const models of Object.values(byBrand)) {
+        for (const s of Object.values(models)) {
+          expect(s.url).toMatch(/^https?:\/\//);
+          expect(["pdf", "page"]).toContain(s.kind);
+        }
       }
     }
+  });
+
+  it("optionSheetFor : Q300 M Mini Sedeo Pro a des fiches distinctes en FREP-A et FREP-B", () => {
+    const dev = deviceByCode.FREP;
+    const a = optionSheetFor(dev, "A", "SUNRISE MED", "Q300 M Mini Sedeo Pro", deviceOptionSheetByToken);
+    const b = optionSheetFor(dev, "B", "SUNRISE MED", "Q300 M Mini Sedeo Pro", deviceOptionSheetByToken);
+    expect(a?.url).toBeTruthy();
+    expect(b?.url).toBeTruthy();
+    expect(a?.url).not.toBe(b?.url);
   });
 
   it("deviceBrandsForToken : trié et inclut OTTO BOCK", () => {

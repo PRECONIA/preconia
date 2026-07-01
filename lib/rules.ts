@@ -222,14 +222,19 @@ export function hasDeviceBrandVariant(
   return !!token && !!byBrand[token]?.[brand];
 }
 
-/** Fiche tarif/options constructeur pour un (marque, modèle) — null si aucune fiche répertoriée. */
+/** Fiche tarif/options constructeur pour le (type/classe, marque, modèle) courant — null si aucune
+    fiche répertoriée. Clé par token car un même modèle peut avoir une fiche par classe (codes LPPR
+    distincts, ex. FREP-A vs FREP-B). */
 export function optionSheetFor(
+  device: Device,
+  classe: ClasseValue | null,
   brand: string | null,
   model: string | null,
-  byBrand: Record<string, Record<string, OptionSheet>>,
+  byToken: Record<string, Record<string, Record<string, OptionSheet>>>,
 ): OptionSheet | null {
   if (!brand || !model) return null;
-  return byBrand[brand]?.[model] ?? null;
+  const token = deviceLppToken(device, classe);
+  return token ? (byToken[token]?.[brand]?.[model] ?? null) : null;
 }
 
 /** Marques disponibles (triées) parmi un ensemble de codes mères — pour peupler le sélecteur. */
