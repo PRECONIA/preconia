@@ -14,6 +14,26 @@
         }
       }
     },
+    "CYC": {
+      "VERMEIREN": {
+        "2202": {
+          "url": "https://vermeiren.fr/product/orderform.nsf/O/9E4AEFDDCD3EDEE5C1258DDC0038384F/%24FILE/CYC%20-%202202%20Version%20standard.pdf",
+          "kind": "pdf"
+        },
+        "2215": {
+          "url": "https://vermeiren.fr/product/orderform.nsf/O/52203093420BBAE1C1258DDC003857B8/%24FILE/CYC%20-%202215%20Version%20standard.pdf",
+          "kind": "pdf"
+        },
+        "2217": {
+          "url": "https://vermeiren.fr/product/orderform.nsf/O/CC59138641F90D54C1258DDC00386F96/%24FILE/CYC%20-%202217%20Version%20standard.pdf",
+          "kind": "pdf"
+        },
+        "2219": {
+          "url": "https://vermeiren.fr/product/orderform.nsf/O/0F0DA42DFD3B0A53C1258DDC00388814/%24FILE/CYC%20-%202219%20Version%20standard.pdf",
+          "kind": "pdf"
+        }
+      }
+    },
     "FMP": {
       "INVACARE": {
         "Action 3 NG S": {
@@ -34,6 +54,20 @@
         },
         "Style X": {
           "url": "https://www.sunrisedice.com/asset-bank/assetfile/111565.pdf",
+          "kind": "pdf"
+        }
+      },
+      "VERMEIREN": {
+        "BOBBY EVO": {
+          "url": "https://vermeiren.fr/product/orderform.nsf/O/BD79901B3C7A4611C1258E0C002D570F/%24FILE/FMP%20Bobby%20Evo.pdf",
+          "kind": "pdf"
+        },
+        "D200N 30° Initial": {
+          "url": "https://vermeiren.fr/product/orderform.nsf/O/15E86D598B95CDA8C1258DDC003F07A7/%24FILE/FMP%20D200N%20&%20D200N%2030%C2%B0Initial.pdf",
+          "kind": "pdf"
+        },
+        "D200N Initial": {
+          "url": "https://vermeiren.fr/product/orderform.nsf/O/15E86D598B95CDA8C1258DDC003F07A7/%24FILE/FMP%20D200N%20&%20D200N%2030%C2%B0Initial.pdf",
           "kind": "pdf"
         }
       }
@@ -59,11 +93,11 @@
       },
       "VERMEIREN": {
         "Inovys II Evo Initial": {
-          "url": "https://www.vermeiren.fr/product/brochure.nsf/O/2FB9DA5F9D59A42BC12589160033E750/$FILE/Inovys%20EVO.pdf",
+          "url": "https://vermeiren.fr/product/orderform.nsf/O/194E7F0A7C0396FDC1258E1000457ECF/%24FILE/FMPR%20Inovys%20II%20Evo%20Initial%20standard.pdf",
           "kind": "pdf"
         },
         "Inovys II Evo Initital T30": {
-          "url": "https://www.vermeiren.fr/product/brochure.nsf/O/2FB9DA5F9D59A42BC12589160033E750/$FILE/Inovys%20EVO.pdf",
+          "url": "https://vermeiren.fr/product/orderform.nsf/O/9DD38551186529D8C1258E22002DA077/%24FILE/FMPR%20Inovys%20II%20Evo%20Initial%20kit%20T30.pdf",
           "kind": "pdf"
         }
       }
@@ -79,6 +113,16 @@
           "kind": "pdf"
         }
       },
+      "PRIDE MOBILITY": {
+        "Go Chair": {
+          "url": "https://www.pridemobility.com/pdf/brochures/france/fr_go_chair_ss.pdf",
+          "kind": "pdf"
+        },
+        "Jazzy Air 2": {
+          "url": "https://www.pridemobility.com/pdf/brochures/france/fr_jazzy_air_2_ss.pdf",
+          "kind": "pdf"
+        }
+      },
       "SUNRISE MED": {
         "Q200 R": {
           "url": "https://www.sunrisedice.com/asset-bank/assetfile/111831.pdf",
@@ -86,6 +130,12 @@
         },
         "Q300 M Mini Sedeo Lite": {
           "url": "https://www.sunrisedice.com/asset-bank/assetfile/111832.pdf",
+          "kind": "pdf"
+        }
+      },
+      "VERMEIREN": {
+        "Verso 30°": {
+          "url": "https://vermeiren.fr/product/orderform.nsf/O/B82D7266A1072289C1258E090039100A/%24FILE/FRE%20-%20Classe%20A%20-%20Verso%2030%C2%B0.pdf",
           "kind": "pdf"
         }
       }
@@ -121,6 +171,12 @@
           "kind": "pdf"
         }
       },
+      "PRIDE MOBILITY": {
+        "Edge 3 Stretto": {
+          "url": "https://www.pridemobility.com/pdf/brochures/france/fr_edge_3_ss.pdf",
+          "kind": "pdf"
+        }
+      },
       "SUNRISE MED": {
         "Q300 R Sedeo Lite": {
           "url": "https://www.sunrisedice.com/asset-bank/assetfile/111834.pdf",
@@ -141,12 +197,26 @@
       },
       "VERMEIREN": {
         "FOREST 3 Initial": {
-          "url": "https://www.vermeiren.fr/product/brochure.nsf/O/757DF9BDC9231CAEC1258D7A004017A1/$FILE/Forest%203%20-%20WL.pdf",
+          "url": "https://vermeiren.fr/product/orderform.nsf/O/890B96CB3C96C838C1258E090039347F/%24FILE/FRE%20-%20Classe%20B%20-%20Forest%203%20Initial.pdf",
+          "kind": "pdf"
+        },
+        "Sigma Initial": {
+          "url": "https://vermeiren.fr/product/orderform.nsf/O/EACA4B884A2BD06EC1258E09003951C7/%24FILE/FRE%20-%20Classe%20B%20-%20Sigma%20Initial.pdf",
+          "kind": "pdf"
+        },
+        "Turios Initial": {
+          "url": "https://vermeiren.fr/product/orderform.nsf/O/BDDA42B02D3C2017C1258E090050D50C/%24FILE/FRE%20-%20Classe%20B%20-%20TURIOS%20Initial.pdf",
           "kind": "pdf"
         }
       }
     },
     "FREP-A": {
+      "PRIDE MOBILITY": {
+        "Edge 3 Stretto": {
+          "url": "https://www.pridemobility.com/pdf/brochures/france/fr_edge_3_ss.pdf",
+          "kind": "pdf"
+        }
+      },
       "SUNRISE MED": {
         "Q300 M Mini Sedeo Pro": {
           "url": "https://www.sunrisedice.com/asset-bank/assetfile/111837.pdf",
@@ -243,16 +313,16 @@
       },
       "PERMOBIL": {
         "F3 Corpus": {
-          "url": "https://www.permobil.com/fr-fr/produits/fauteuils-electriques/permobil-f3-corpus",
-          "kind": "page"
+          "url": "https://hub.permobil.com/hubfs/FDM%202026%20F3%20Corpus.pdf",
+          "kind": "pdf"
         },
         "M3 Corpus": {
-          "url": "https://www.permobil.com/fr-fr/produits/fauteuils-electriques/permobil-m3-corpus",
-          "kind": "page"
+          "url": "https://hub.permobil.com/hubfs/FDM%202026%20M3%20Corpus.pdf",
+          "kind": "pdf"
         },
         "M5 Corpus": {
-          "url": "https://www.permobil.com/fr-fr/produits/fauteuils-electriques/permobil-m5-corpus",
-          "kind": "page"
+          "url": "https://hub.permobil.com/hubfs/FDM%202026%20M5%20Corpus.pdf",
+          "kind": "pdf"
         }
       },
       "PRIDE MOBILITY": {
@@ -262,6 +332,14 @@
         },
         "Q6 Edge HD": {
           "url": "https://www.pridemobility.com/pdf/brochures/jazzy/q6_edge.pdf",
+          "kind": "pdf"
+        },
+        "Edge 3": {
+          "url": "https://www.pridemobility.com/pdf/brochures/france/fr_edge_3_ss.pdf",
+          "kind": "pdf"
+        },
+        "Q1450": {
+          "url": "https://www.pridemobility.com/pdf/brochures/france/fr_quantum_1450_ss.pdf",
           "kind": "pdf"
         }
       },
@@ -317,16 +395,30 @@
       },
       "VERMEIREN": {
         "FOREST 3 Advance": {
-          "url": "https://www.vermeiren.fr/product/brochure.nsf/O/757DF9BDC9231CAEC1258D7A004017A1/$FILE/Forest%203%20-%20WL.pdf",
+          "url": "https://vermeiren.fr/product/orderform.nsf/O/ADBCD8BB489D8115C1258E120035DC40/%24FILE/FREP%20B%20Forest%203%20Advance%20STANDARD.pdf",
           "kind": "pdf"
         },
         "Forest 3+": {
-          "url": "https://www.vermeiren.fr/product/brochure.nsf/O/757DF9BDC9231CAEC1258D7A004017A1/$FILE/Forest%203%20-%20WL.pdf",
+          "url": "https://vermeiren.fr/product/orderform.nsf/O/8285424CFBCA42ABC1258E1200539A8F/%24FILE/FREP%20B%20Forest%203+%20.pdf",
+          "kind": "pdf"
+        },
+        "Sigma": {
+          "url": "https://vermeiren.fr/product/orderform.nsf/O/A317AD546B4F21E0C1258E12003602FA/%24FILE/FREP%20B%20Sigma%20STANDARD%20.pdf",
+          "kind": "pdf"
+        },
+        "Turios": {
+          "url": "https://vermeiren.fr/product/orderform.nsf/O/E222368F8FE0AF5BC1258E1200360B8E/%24FILE/FREP%20B%20TURIOS%20FULL%20.pdf",
           "kind": "pdf"
         }
       }
     },
     "FREP-C": {
+      "PERMOBIL": {
+        "X850 Corpus": {
+          "url": "https://hub.permobil.com/hubfs/FDM%202026%20X850.pdf",
+          "kind": "pdf"
+        }
+      },
       "SUNRISE MED": {
         "Frontier V6": {
           "url": "https://www.sunrisedice.com/asset-bank/assetfile/111690.pdf",
@@ -351,8 +443,12 @@
       },
       "PERMOBIL": {
         "F5 Corpus VS": {
-          "url": "https://www.permobil.com/fr-fr/produits/fauteuils-electriques/permobil-f5-corpus",
-          "kind": "page"
+          "url": "https://hub.permobil.com/hubfs/FDM%202026%20F5%20VS%20Corpus.pdf",
+          "kind": "pdf"
+        },
+        "M VS": {
+          "url": "https://hub.permobil.com/hubfs/FDM%202026%20M%20VS%20Corpus.pdf",
+          "kind": "pdf"
         }
       },
       "SUNRISE MED": {
@@ -367,7 +463,11 @@
       },
       "VERMEIREN": {
         "Forest 3 SU": {
-          "url": "https://www.vermeiren.fr/product/brochure.nsf/O/757DF9BDC9231CAEC1258D7A004017A1/$FILE/Forest%203%20-%20WL.pdf",
+          "url": "https://vermeiren.fr/product/orderform.nsf/O/992F6172709AEE8EC1258E120036134C/%24FILE/FREV%20%20Forest%203%20SU.pdf",
+          "kind": "pdf"
+        },
+        "Timix SU": {
+          "url": "https://vermeiren.fr/product/orderform.nsf/O/9506685D4E85E405C1258E1200361BB1/%24FILE/FREV%20%20TIMIX%20SU%20%20.pdf",
           "kind": "pdf"
         }
       }
@@ -424,6 +524,24 @@
           "url": "https://www.sunrisedice.com/asset-bank/assetfile/111568.pdf",
           "kind": "pdf"
         }
+      },
+      "VERMEIREN": {
+        "D200N": {
+          "url": "https://vermeiren.fr/product/orderform.nsf/O/10A93E39A6D66CFEC1258E09004805C2/%24FILE/FRM%20D200N%20Standard.pdf",
+          "kind": "pdf"
+        },
+        "D200N 30°": {
+          "url": "https://vermeiren.fr/product/orderform.nsf/O/E74EF3991B8A252CC1258E0900475F0A/%24FILE/FRM%20D200N%2030%C2%B0%20Standard.pdf",
+          "kind": "pdf"
+        },
+        "V300 XXL": {
+          "url": "https://vermeiren.fr/product/orderform.nsf/O/6E38848531D0F7B0C1258E0900496A00/%24FILE/FRM%20V300%20XL%20Standard.pdf",
+          "kind": "pdf"
+        },
+        "V500 Light": {
+          "url": "https://vermeiren.fr/product/orderform.nsf/O/981646DE65294CF9C1258E09004B4358/%24FILE/FRM%20V500%20Light%20Standard.pdf",
+          "kind": "pdf"
+        }
       }
     },
     "FRMA": {
@@ -448,6 +566,22 @@
         },
         "Progeo Noir 2.0": {
           "url": "https://www.permobil.com/fr-fr/produits/fauteuils-manuels/progeo-noir-20",
+          "kind": "page"
+        },
+        "TiLite TR": {
+          "url": "https://www.permobil.com/fr-fr/produits/fauteuils-manuels/tilite-tr",
+          "kind": "page"
+        },
+        "TiLite ZRA": {
+          "url": "https://www.permobil.com/fr-fr/produits/fauteuils-manuels/tilite-zra",
+          "kind": "page"
+        },
+        "Tilite TRA": {
+          "url": "https://www.permobil.com/fr-fr/produits/fauteuils-manuels/tilite-tra",
+          "kind": "page"
+        },
+        "Tilite ZR": {
+          "url": "https://www.permobil.com/fr-fr/produits/fauteuils-manuels/tilite-zr",
           "kind": "page"
         }
       },
@@ -510,6 +644,10 @@
         },
         "OTTO Avantgarde 4 DV": {
           "url": "https://assets.ctfassets.net/8ks1shyq5m87/72Cp1mcMvLjHjM4c7W7cNF/ea3359582ca046a66b10e61413e70241/Avantgarde4_DV_2026_F.pdf",
+          "kind": "pdf"
+        },
+        "OTTO Motus 2.0": {
+          "url": "https://assets.ctfassets.net/8ks1shyq5m87/4jGH5Ow8i7znTytw3hT01W/cd733292ec15018a4ab8a02f4dc8db69/Motus_2_CS_2026_F.pdf",
           "kind": "pdf"
         },
         "OTTO Zenit": {
@@ -584,6 +722,20 @@
           "url": "https://www.sunrisedice.com/asset-bank/assetfile/111769.pdf",
           "kind": "pdf"
         }
+      },
+      "VERMEIREN": {
+        "Sagitta SI": {
+          "url": "https://vermeiren.fr/product/orderform.nsf/O/A921AC5E19DC4259C1258E11002C72CF/%24FILE/FRMC%20-%20Sagitta%20SI%20Standard%20Adulte.pdf",
+          "kind": "pdf"
+        },
+        "Trigo S": {
+          "url": "https://vermeiren.fr/product/orderform.nsf/O/8E5F5D230DDFBC72C1258E11002C91D2/%24FILE/FRMC%20TRIGO%20S%20standard%20.pdf",
+          "kind": "pdf"
+        },
+        "Trigo T": {
+          "url": "https://vermeiren.fr/product/orderform.nsf/O/499967B2A867AC5FC1258E11002CA885/%24FILE/FRMC%20TRIGO%20T%20standard%20.pdf",
+          "kind": "pdf"
+        }
       }
     },
     "FRMP": {
@@ -637,11 +789,11 @@
       },
       "VERMEIREN": {
         "Inovys II Evo Configuré": {
-          "url": "https://www.vermeiren.fr/product/brochure.nsf/O/2FB9DA5F9D59A42BC12589160033E750/$FILE/Inovys%20EVO.pdf",
+          "url": "https://vermeiren.fr/product/orderform.nsf/O/8D122C64D4BA8D1EC1258E1000459E90/%24FILE/FRMP%20-%20Inovys%20II%20Evo%20Configure%CC%81.pdf",
           "kind": "pdf"
         },
         "Inovys II-E Evo Configuré": {
-          "url": "https://www.vermeiren.fr/product/brochure.nsf/O/2FB9DA5F9D59A42BC12589160033E750/$FILE/Inovys%20EVO.pdf",
+          "url": "https://vermeiren.fr/product/orderform.nsf/O/BE8E60F883E1B69AC1258E100045D273/%24FILE/FRMP%20-%20Inovys%20II-E%20Evo%20Configure%CC%81.pdf",
           "kind": "pdf"
         }
       }
@@ -664,6 +816,12 @@
       "SUNRISE MED": {
         "Zippie Voyage": {
           "url": "https://www.sunrisedice.com/asset-bank/assetfile/111850.pdf",
+          "kind": "pdf"
+        }
+      },
+      "VERMEIREN": {
+        "Gemini 2": {
+          "url": "https://vermeiren.fr/product/orderform.nsf/O/5A91D075089D930AC1258DDC00449E53/%24FILE/POU_MRE%20Gemini%202%20Version%20standard.pdf",
           "kind": "pdf"
         }
       }
