@@ -1,6 +1,6 @@
 /* Fauteuil roulant (profil) en arrière-plan dans l'angle inférieur gauche.
    Le châssis est fixe ; seule la grande roue arrière tourne lentement.
-   Vert pétrole (couleur du bouton « Commencer ») peu opaque, discret, non interactif. */
+   Contours blancs uniquement (formes évidées), peu opaque, discret, non interactif. */
 
 const SPOKES = Array.from({ length: 12 }, (_, i) => (i * 360) / 12);
 
@@ -12,7 +12,7 @@ export function WheelBackdrop() {
   return (
     <div
       aria-hidden
-      className="pointer-events-none fixed bottom-[-9vh] left-[-7vh] z-0 h-[97.75vh] w-[97.75vh] text-petrol opacity-10"
+      className="pointer-events-none fixed bottom-[-9vh] left-[-7vh] z-0 h-[97.75vh] w-[97.75vh] text-white opacity-20"
     >
       <svg
         viewBox="0 0 200 200"
@@ -40,7 +40,7 @@ export function WheelBackdrop() {
         <path d="M150 150 L150 162" strokeWidth="3" />
         {/* roue avant (pivot, fixe) */}
         <circle cx="150" cy="166" r="12" strokeWidth="3" />
-        <circle cx="150" cy="166" r="3" fill="currentColor" stroke="none" />
+        <circle cx="150" cy="166" r="3.5" strokeWidth="2" />
 
         {/* --- roue arrière (tourne) --- */}
         <g className="pc-wheel-spin">
@@ -49,7 +49,7 @@ export function WheelBackdrop() {
           {/* main courante */}
           <circle cx={RX} cy={RY} r="50" strokeWidth="2.5" />
           {/* moyeu */}
-          <circle cx={RX} cy={RY} r="8" fill="currentColor" stroke="none" />
+          <circle cx={RX} cy={RY} r="8" strokeWidth="3" />
           {/* rayons */}
           {SPOKES.map((deg) => (
             <line

@@ -303,15 +303,15 @@ export function WalkerShell() {
         <div className="pc-wordmark-rise flex items-center gap-3.5">
           <Logo className="h-12 w-12 shrink-0 drop-shadow-sm sm:h-14 sm:w-14" />
           <div>
-            <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-petrol">
+            <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-petrol-tint">
               Aide à la préconisation VPH · Médecine physique &amp; réadaptation
             </div>
-            <div className="text-[30px] font-bold leading-none tracking-tight">
-              PRECON<span className="pc-accent-breathe inline-block text-petrol">IA</span>
+            <div className="text-[30px] font-bold leading-none tracking-tight text-white">
+              PRECON<span className="pc-accent-breathe inline-block text-teal-300">IA</span>
             </div>
           </div>
         </div>
-        <p className="mt-3 max-w-[60ch] text-sm leading-relaxed text-ink-soft">
+        <p className="mt-3 max-w-[60ch] text-sm leading-relaxed text-white/70">
           Du profil fonctionnel au dispositif, à sa classe, ses adjonctions facturables (codes LPPR)
           et son positionnement — d&apos;après la nomenclature VPH 2025 et les fiches 2026.
         </p>
@@ -323,7 +323,7 @@ export function WalkerShell() {
             <span
               key={f.k}
               className={`rounded-full border px-3 py-1 text-xs ${
-                f.v ? "border-line bg-card text-ink-soft" : "border-dashed border-line text-ink-soft/60"
+                f.v ? "border-line bg-card text-ink-soft" : "border-dashed border-white/30 text-white/60"
               }`}
             >
               {f.k}
@@ -982,8 +982,8 @@ export function WalkerShell() {
 
       <ModuleCumul />
 
-      <footer className="mt-6 border-t border-line pt-4 text-[11.5px] leading-relaxed text-ink-soft/90">
-        <b className="text-ink-soft">{meta.disclaimer}</b> Source : {meta.source}. Dernière mise à
+      <footer className="mt-6 border-t border-white/15 pt-4 text-[11.5px] leading-relaxed text-white/65">
+        <b className="text-white/85">{meta.disclaimer}</b> Source : {meta.source}. Dernière mise à
         jour : {meta.lastUpdated}.
       </footer>
 
