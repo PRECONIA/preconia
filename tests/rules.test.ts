@@ -312,10 +312,16 @@ describe("madForfaitFor (forfaits MAD1/MAD2 par niveau)", () => {
     // FREP = niveau 3 : MAD1 375 €, MAD2 187,50 €
     const p3 = madForfaitFor("FREP", "premiere", madNiveaux, prestationByCode)!;
     expect(p3).toMatchObject({ code: "4865487", price: 375, niveau: 3 });
-    const r3 = madForfaitFor("FREP", "renouv", madNiveaux, prestationByCode)!;
+    const r3 = madForfaitFor("FREP", "renouv_id", madNiveaux, prestationByCode)!;
     expect(r3).toMatchObject({ code: "4891059", price: 187.5, niveau: 3 });
+    // renouvellement avec changement de catégorie → MAD1 (pas « à l'identique »)
+    expect(madForfaitFor("FREP", "renouv_cat", madNiveaux, prestationByCode)).toMatchObject({
+      code: "4865487",
+      price: 375,
+      niveau: 3,
+    });
     // FRE = niveau 2 ; SCO = niveau 1
-    expect(madForfaitFor("FRE", "renouv", madNiveaux, prestationByCode)).toMatchObject({
+    expect(madForfaitFor("FRE", "renouv_id", madNiveaux, prestationByCode)).toMatchObject({
       code: "4836273",
       price: 125,
       niveau: 2,
@@ -330,7 +336,7 @@ describe("madForfaitFor (forfaits MAD1/MAD2 par niveau)", () => {
   it("null si contexte absent ou dispositif hors niveaux (FMP, FMPR)", () => {
     expect(madForfaitFor("FREP", null, madNiveaux, prestationByCode)).toBeNull();
     expect(madForfaitFor("FMP", "premiere", madNiveaux, prestationByCode)).toBeNull();
-    expect(madForfaitFor("FMPR", "renouv", madNiveaux, prestationByCode)).toBeNull();
+    expect(madForfaitFor("FMPR", "renouv_id", madNiveaux, prestationByCode)).toBeNull();
   });
 
   it("tout device des niveaux existe et chaque device apparaît dans au plus un niveau", () => {

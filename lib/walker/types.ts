@@ -19,8 +19,9 @@ export type Age = "adulte" | "enfant";
 export type Duree = "temp" | "durable";
 export type Mob = "manuel" | "elec";
 export type OuiNon = "oui" | "non";
-/** Contexte de mise à disposition : première MAD (MAD1) ou renouvellement à l'identique (MAD2). */
-export type Mad = "premiere" | "renouv";
+/** Contexte de mise à disposition : première MAD ou renouvellement avec changement de
+    catégorie → forfait MAD1 ; renouvellement à l'identique → forfait MAD2. */
+export type Mad = "premiere" | "renouv_cat" | "renouv_id";
 
 /** Réponses accumulées au fil du parcours (aucune donnée patient). */
 export interface Answers {

@@ -58,7 +58,12 @@ import type { Answers, Stage } from "@/lib/walker/types";
 
 const btn =
   "block w-full text-left rounded-lg border border-line bg-card px-4 py-3 mb-2 transition-colors hover:border-petrol hover:bg-white";
-const btnOn = "border-petrol bg-petrol-tint";
+/** Bouton de choix : l'état sélectionné remplace le hover (sinon le bouton cliqué restait
+    blanc tant que la souris ne quittait pas le bouton — le hover l'emportait sur la sélection). */
+const choice = (on: boolean, extra = "") =>
+  `block w-full text-left rounded-lg border px-4 py-3 mb-2 transition-colors ${extra} ${
+    on ? "border-petrol bg-petrol-tint" : "border-line bg-card hover:border-petrol hover:bg-white"
+  }`;
 const link = "text-ink-soft hover:text-petrol-deep text-sm";
 const navBtn =
   "inline-flex items-center gap-1.5 rounded-lg border-2 border-petrol bg-petrol-tint/50 px-4 py-2 text-sm font-semibold text-petrol-deep hover:bg-petrol-tint";
@@ -368,7 +373,7 @@ export function WalkerShell() {
                 Un parcours guidé mène du profil fonctionnel à la catégorie LPPR, sa classe, son
                 circuit de prise en charge et ses adjonctions.
               </p>
-              <button className={`${primary} w-full justify-center`} onClick={() => go("cumul")}>
+              <button className={`${primary} w-full justify-center`} onClick={() => go("age")}>
                 Commencer l&apos;évaluation →
               </button>
             </>
@@ -381,16 +386,16 @@ export function WalkerShell() {
               hint="Le patient possède-t-il déjà un VPH pris en charge ? Certaines catégories ne sont pas cumulables (nomenclature LPPR)."
             >
               <button
-                className={`${btn} ${answers.cumul === "non" ? btnOn : ""}`}
+                className={choice(answers.cumul === "non")}
                 onClick={() => {
                   setAnswer("cumul", "non");
-                  go("age");
+                  go("duree");
                 }}
               >
                 Non — pas de VPH déjà possédé (pas de question de cumul)
               </button>
               <button
-                className={`${btn} ${answers.cumul === "oui" ? btnOn : ""}`}
+                className={choice(answers.cumul === "oui")}
                 onClick={() => setAnswer("cumul", "oui")}
               >
                 Oui — un VPH est déjà possédé (évaluer le cumul)
@@ -403,7 +408,7 @@ export function WalkerShell() {
                   {cumulVerdict === true && (
                     <button
                       className={`${primary} mt-3 w-full justify-center`}
-                      onClick={() => go("age")}
+                      onClick={() => go("duree")}
                     >
                       Cumul autorisé — poursuivre l&apos;évaluation →
                     </button>
@@ -435,19 +440,19 @@ export function WalkerShell() {
           {stage === "age" && (
             <Step title="Âge du patient" hint="Conditionne l'accès aux poussettes (moins de 18 ans).">
               <button
-                className={`${btn} ${answers.age === "adulte" ? btnOn : ""}`}
+                className={choice(answers.age === "adulte")}
                 onClick={() => {
                   setAnswer("age", "adulte");
-                  go("duree");
+                  go("mad");
                 }}
               >
                 Adulte (18 ans et plus)
               </button>
               <button
-                className={`${btn} ${answers.age === "enfant" ? btnOn : ""}`}
+                className={choice(answers.age === "enfant")}
                 onClick={() => {
                   setAnswer("age", "enfant");
-                  go("duree");
+                  go("mad");
                 }}
               >
                 Enfant (moins de 18 ans)
@@ -460,19 +465,19 @@ export function WalkerShell() {
           {stage === "duree" && (
             <Step title="Durée prévisible du besoin" hint="Détermine le mode de prise en charge.">
               <button
-                className={`${btn} ${answers.duree === "temp" ? btnOn : ""}`}
+                className={choice(answers.duree === "temp")}
                 onClick={() => {
                   setAnswer("duree", "temp");
-                  go("mad");
+                  go("mob");
                 }}
               >
                 Temporaire — 3 mois ou moins · location courte durée (LCD)
               </button>
               <button
-                className={`${btn} ${answers.duree === "durable" ? btnOn : ""}`}
+                className={choice(answers.duree === "durable")}
                 onClick={() => {
                   setAnswer("duree", "durable");
-                  go("mad");
+                  go("mob");
                 }}
               >
                 Durable — 6 mois ou plus · achat ou location longue durée (ACHAT / LLD)
@@ -485,25 +490,35 @@ export function WalkerShell() {
           {stage === "mad" && (
             <Step
               title="Mise à disposition"
-              hint="Détermine le forfait applicable : MAD1 (première mise à disposition) ou MAD2 (renouvellement à l'identique). Sans objet pour les fauteuils non modulaires (FMP, FMPR)."
+              hint="Détermine le forfait applicable : MAD1 (première mise à disposition ou changement de catégorie) ou MAD2 (renouvellement à l'identique). Sans objet pour les fauteuils non modulaires (FMP, FMPR)."
             >
               <button
-                className={`${btn} ${answers.mad === "premiere" ? btnOn : ""}`}
+                className={choice(answers.mad === "premiere")}
                 onClick={() => {
                   setAnswer("mad", "premiere");
-                  go("mob");
+                  go("cumul");
                 }}
               >
-                Première mise à disposition — forfait MAD1
+                Première mise à disposition <span className="text-ink-soft">· forfait MAD1</span>
               </button>
               <button
-                className={`${btn} ${answers.mad === "renouv" ? btnOn : ""}`}
+                className={choice(answers.mad === "renouv_cat")}
                 onClick={() => {
-                  setAnswer("mad", "renouv");
-                  go("mob");
+                  setAnswer("mad", "renouv_cat");
+                  go("cumul");
                 }}
               >
-                Renouvellement à l&apos;identique — forfait MAD2
+                Renouvellement avec changement de catégorie{" "}
+                <span className="text-ink-soft">· forfait MAD1</span>
+              </button>
+              <button
+                className={choice(answers.mad === "renouv_id")}
+                onClick={() => {
+                  setAnswer("mad", "renouv_id");
+                  go("duree");
+                }}
+              >
+                Renouvellement à l&apos;identique <span className="text-ink-soft">· forfait MAD2</span>
               </button>
               <Nav dispatch={dispatch} />
             </Step>
@@ -513,7 +528,7 @@ export function WalkerShell() {
           {stage === "mob" && (
             <Step title="Capacité de propulsion" hint="Oriente vers la famille de dispositif.">
               <button
-                className={`${btn} ${answers.mob === "manuel" ? btnOn : ""}`}
+                className={choice(answers.mob === "manuel")}
                 onClick={() => {
                   setAnswer("mob", "manuel");
                   go("cfg_man");
@@ -522,7 +537,7 @@ export function WalkerShell() {
                 Propulsion manuelle / podale
               </button>
               <button
-                className={`${btn} ${answers.mob === "elec" ? btnOn : ""}`}
+                className={choice(answers.mob === "elec")}
                 onClick={() => {
                   setAnswer("mob", "elec");
                   go("cfg_elec");
@@ -576,7 +591,7 @@ export function WalkerShell() {
                   {classes.map((c) => (
                     <button
                       key={c.value}
-                      className={`${btn} ${answers.classe === c.value ? btnOn : ""}`}
+                      className={choice(answers.classe === c.value)}
                       onClick={() => setAnswer("classe", c.value)}
                     >
                       <b>{c.label}</b>
@@ -745,9 +760,7 @@ export function WalkerShell() {
                     {items.map((item) => (
                       <button
                         key={item.code}
-                        className={`${btn} flex items-start justify-between gap-3 ${
-                          state.adj[item.code] ? btnOn : ""
-                        }`}
+                        className={choice(!!state.adj[item.code], "flex items-start justify-between gap-3")}
                         onClick={() => dispatch({ type: "TOGGLE_ADJ", item })}
                       >
                         <span>
@@ -1043,12 +1056,14 @@ export function WalkerShell() {
                           <span className="text-sm">
                             <b className="text-blue-900">
                               Ajouter le forfait de mise à disposition — MAD
-                              {answers.mad === "renouv" ? "2" : "1"} niveau {madForfait.niveau}
+                              {answers.mad === "renouv_id" ? "2" : "1"} niveau {madForfait.niveau}
                             </b>
                             <span className="mt-0.5 block text-[12px] text-blue-800/80">
-                              {answers.mad === "renouv"
+                              {answers.mad === "renouv_id"
                                 ? "Renouvellement à l'identique"
-                                : "Première mise à disposition"}{" "}
+                                : answers.mad === "renouv_cat"
+                                  ? "Renouvellement avec changement de catégorie (relève de MAD1)"
+                                  : "Première mise à disposition"}{" "}
                               — niveau déterminé par la catégorie retenue ({device.code}).
                             </span>
                           </span>

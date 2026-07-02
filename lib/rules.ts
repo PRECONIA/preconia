@@ -239,9 +239,10 @@ export function optionSheetFor(
   return token ? (byToken[token]?.[brand]?.[model] ?? null) : null;
 }
 
-/** Forfait MAD applicable au dispositif : niveau selon la catégorie de VPH, code MAD1 (première
-    mise à disposition) ou MAD2 (renouvellement à l'identique) selon le contexte. null si le
-    dispositif n'ouvre pas droit au forfait (FMP, FMPR) ou si le contexte n'est pas renseigné. */
+/** Forfait MAD applicable au dispositif : niveau selon la catégorie de VPH ; MAD1 pour une
+    première mise à disposition OU un renouvellement avec changement de catégorie, MAD2 pour un
+    renouvellement à l'identique. null si le dispositif n'ouvre pas droit au forfait (FMP, FMPR)
+    ou si le contexte n'est pas renseigné. */
 export interface MadForfait {
   code: string;
   label: string;
@@ -250,14 +251,16 @@ export interface MadForfait {
 }
 export function madForfaitFor(
   deviceCode: string,
-  context: "premiere" | "renouv" | null,
+  context: "premiere" | "renouv_cat" | "renouv_id" | null,
   niveaux: MadNiveau[],
   prestaByCode: Record<string, Prestation>,
 ): MadForfait | null {
   if (!context) return null;
   const n = niveaux.find((x) => x.devices.includes(deviceCode));
   if (!n) return null;
-  const code = context === "premiere" ? n.premiere : n.renouvellement;
+  // MAD2 est réservé au renouvellement À L'IDENTIQUE ; un renouvellement avec changement
+  // de catégorie relève du forfait de première mise à disposition (MAD1).
+  const code = context === "renouv_id" ? n.renouvellement : n.premiere;
   const p = prestaByCode[code];
   return p ? { code, label: p.label, price: p.tarif, niveau: n.niveau } : null;
 }

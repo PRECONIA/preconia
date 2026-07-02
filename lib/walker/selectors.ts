@@ -73,7 +73,13 @@ export function facets(answers: Answers): Facet[] {
     { k: "Durée", v: answers.duree ? (answers.duree === "temp" ? "Temporaire" : "Durable") : null },
     {
       k: "Mise à dispo",
-      v: answers.mad ? (answers.mad === "premiere" ? "Première" : "Renouvellement") : null,
+      v: answers.mad
+        ? answers.mad === "premiere"
+          ? "Première"
+          : answers.mad === "renouv_cat"
+            ? "Renouv. changement de catégorie"
+            : "Renouv. à l'identique"
+        : null,
     },
     { k: "Mobilité", v: answers.mob ? MOB_LABEL[answers.mob] ?? null : null },
     { k: "Dispositif", v: deviceLabel },
