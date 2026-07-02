@@ -41,6 +41,7 @@ import {
 import { eur } from "@/lib/format";
 import { RechercheLpp } from "@/components/preconia/RechercheLpp";
 import { ModuleCumul } from "@/components/preconia/ModuleCumul";
+import { RechercheVph } from "@/components/preconia/RechercheVph";
 import { Logo } from "@/components/preconia/Logo";
 import type { FicheData } from "@/components/preconia/fiche-pdf";
 import type { Adjonction, BesoinField, Device } from "@/lib/types";
@@ -1173,6 +1174,8 @@ export function WalkerShell() {
       <RechercheLpp />
 
       <ModuleCumul />
+
+      <RechercheVph />
 
       <footer className="mt-6 border-t border-line pt-4 text-[11.5px] leading-relaxed text-ink-soft/90">
         <b className="text-ink-soft">{meta.disclaimer}</b> Source : {meta.source}. Dernière mise à
