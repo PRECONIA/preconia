@@ -129,15 +129,15 @@ export function SeoContent() {
         <div className="h-[3px] bg-gradient-to-r from-petrol to-petrol-deep" />
         <div className="px-6 py-5 text-center">
           <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-petrol">
-            À l&apos;origine du projet
+            Développement
           </div>
           <div className="mt-1.5 text-base font-bold tracking-tight">Dr Thomas BREDEL</div>
           <div className="mt-0.5 text-sm text-ink-soft">
             Médecine Physique et de Réadaptation — Rouen
           </div>
           <p className="mx-auto mt-2 max-w-[52ch] text-xs leading-relaxed text-ink-soft/80">
-            PRECONIA est conçu et développé à son initiative pour accompagner les prescripteurs
-            dans l&apos;application de la nomenclature VPH 2025.
+            PRECONIA est conçu et développé dans le but d&apos;accompagner les prescripteurs et
+            les prestataires dans l&apos;application de la réforme de la nomenclature 2025.
           </p>
         </div>
       </div>

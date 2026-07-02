@@ -20,7 +20,9 @@
 }
 
 body {
-  background: linear-gradient(180deg, #eff3f3, #e6eced);
+  /* no-repeat + couleur de fin : le dégradé ne se répète plus en mosaïque au scroll
+     (au-delà du dégradé, le fond continue dans la couleur d'arrivée, raccord invisible). */
+  background: #e6eced linear-gradient(180deg, #eff3f3, #e6eced) no-repeat;
   color: var(--color-ink);
   font-family: var(--font-sans);
 }
