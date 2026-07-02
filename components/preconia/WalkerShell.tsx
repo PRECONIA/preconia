@@ -367,7 +367,7 @@ export function WalkerShell() {
           {stage === "home" && (
             <>
               <h1 className="mb-1 text-xl font-semibold">
-                Préconisation d&apos;un véhicule pour personne handicapée
+                Prescription &amp; préconisation d&apos;un fauteuil roulant (VPH)
               </h1>
               <p className="mb-4 text-sm text-ink-soft">
                 Un parcours guidé mène du profil fonctionnel à la catégorie LPPR, sa classe, son

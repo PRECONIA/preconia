@@ -16,17 +16,35 @@ const mono = JetBrains_Mono({
   display: "swap",
 });
 
+const TITLE =
+  "PRECONIA — Aide à la prescription des fauteuils roulants (VPH) · Nomenclature LPPR 2025";
 const DESCRIPTION =
-  "Du profil fonctionnel à la catégorie LPPR, ses adjonctions facturables et son positionnement. Aide à la décision non opposable (MPR).";
+  "Aide gratuite à la prescription et à la préconisation des fauteuils roulants et VPH (nomenclature VPH 2025) : catégorie LPPR, classe, prescripteur, codes LPP et tarifs, adjonctions, positionnement PAP, forfaits MAD et livraison, location LLD/LCD, cumul. Aide à la décision non opposable (MPR).";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://preconia.vercel.app"),
-  title: "PRECONIA — Aide à la préconisation des VPH",
+  title: TITLE,
   description: DESCRIPTION,
+  keywords: [
+    "prescription fauteuil roulant",
+    "aide prescription fauteuil",
+    "prescription VPH",
+    "aide prescription VPH",
+    "préconisation VPH",
+    "nomenclature VPH",
+    "nomenclature VPH 2025",
+    "nomenclature fauteuil roulant",
+    "réforme fauteuil roulant 2025",
+    "LPPR fauteuil roulant",
+    "codes LPP VPH",
+    "fiche de préconisation VPH",
+    "cumul VPH",
+    "forfait MAD fauteuil roulant",
+  ],
   // Vérification Google Search Console (méthode « Balise HTML »).
   verification: { google: "lU1B5PnT8isi3CwpZQdZkaYILExzsT02RaYBTaertlo" },
   openGraph: {
-    title: "PRECONIA — Aide à la préconisation des VPH",
+    title: TITLE,
     description: DESCRIPTION,
     url: "https://preconia.vercel.app",
     siteName: "PRECONIA",
@@ -35,7 +53,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "PRECONIA — Aide à la préconisation des VPH",
+    title: TITLE,
     description: DESCRIPTION,
   },
   appleWebApp: {
