@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Hanken_Grotesk, JetBrains_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { EntryDisclaimer } from "@/components/preconia/EntryDisclaimer";
 import "./globals.css";
 
 const sans = Hanken_Grotesk({
@@ -58,7 +59,7 @@ export default function RootLayout({
   return (
     <html lang="fr" className={`${sans.variable} ${mono.variable} h-full antialiased`}>
       <body className="min-h-full">
-        {children}
+        <EntryDisclaimer>{children}</EntryDisclaimer>
         {/* Statistiques de visite agrégées & anonymes (sans cookies, RGPD).
             À activer une fois dans le dashboard Vercel → onglet Analytics. */}
         <Analytics />
