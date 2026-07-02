@@ -81,8 +81,7 @@
       "code": "4904626",
       "group": "conduite",
       "name": "DREEFT — paire de roues avec freinage intégré",
-      "price": null,
-      "tbd": true,
+      "price": 1940.0,
       "compat": [
         "FRM",
         "FRMA",
@@ -194,8 +193,7 @@
       "code": "4922720",
       "group": "option",
       "name": "Supplément fauteuil bariatrique (FRM)",
-      "price": null,
-      "tbd": true,
+      "price": 700.0,
       "compat": [
         "FRM"
       ]
@@ -204,8 +202,7 @@
       "code": "4936922",
       "group": "option",
       "name": "Harnais 4 points ou plus",
-      "price": null,
-      "tbd": true,
+      "price": 230.0,
       "compat": [
         "POU_MRE"
       ]

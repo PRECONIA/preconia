@@ -179,6 +179,22 @@ export const DeviceIndicationsFileSchema = z.object({
   byCode: z.record(z.string(), z.record(z.string(), z.string())),
 });
 
+/* --- lppr-prestations.json (LLD, LCD, SAV, MAD & livraison — chapitres Titre IV « location
+   longue durée » / « réparations et prestations associées » et Titre I). `unit` précise la
+   périodicité du forfait (trimestre pour la LLD, semaine pour la LCD) ; absent = forfait unique. */
+export const PrestationSchema = z.object({
+  code: z.string(),
+  label: z.string(),
+  category: z.string(),
+  tarif: z.number(),
+  unit: z.enum(["semaine", "trimestre"]).optional(),
+});
+export const PrestationsFileSchema = z.object({
+  source: z.string(),
+  lastUpdated: z.string(),
+  products: z.array(PrestationSchema).nonempty(),
+});
+
 /* --- cumul.json (règles de cumul VPH : incompatibilités par acronyme LPPR).
    `incompatible[X]` = acronymes non cumulables avec X (relation symétrique appliquée au calcul).
    Deux VPH sont cumulables si aucun des deux ne figure dans l'incompatibilité de l'autre. --- */

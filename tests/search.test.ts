@@ -2,11 +2,29 @@ import { describe, expect, it } from "vitest";
 import { catalog, normalize, parseLpprBrand, searchCatalog } from "@/lib/search";
 
 describe("catalogue de recherche", () => {
-  it("indexe les VPH scrappés + adjonctions + forfaits PAP", () => {
+  it("indexe les VPH scrappés + adjonctions + forfaits PAP + prestations", () => {
     expect(catalog.length).toBeGreaterThan(150);
     expect(catalog.some((e) => e.kind === "vph")).toBe(true);
     expect(catalog.some((e) => e.kind === "adjonction")).toBe(true);
     expect(catalog.some((e) => e.kind === "pap")).toBe(true);
+    expect(catalog.some((e) => e.kind === "prestation")).toBe(true);
+  });
+
+  it("prestations : LLD par token, MAD/livraison/batterie trouvables", () => {
+    // « frep-b lld » → le forfait trimestriel LLD FREP-B (4762238)
+    const lld = searchCatalog("frep-b lld");
+    expect(lld.some((e) => e.code === "4762238" && e.kind === "prestation")).toBe(true);
+    // filtre catégorie prestation (chips MAD de l'UI)
+    const mad = searchCatalog(
+      "",
+      { kind: "prestation", category: "Mise à disposition & livraison (MAD)" },
+      50,
+    );
+    expect(mad.length).toBeGreaterThanOrEqual(8);
+    expect(mad.every((e) => e.kind === "prestation")).toBe(true);
+    // forfait de livraison indexé + batterie (SAV4)
+    expect(searchCatalog("1266390").some((e) => e.code === "1266390")).toBe(true);
+    expect(searchCatalog("batterie").some((e) => e.code === "4891384")).toBe(true);
   });
 });
 

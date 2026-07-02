@@ -11,6 +11,7 @@ import deviceModelsRaw from "@/data/device-models.json";
 import deviceOptionSheetsRaw from "@/data/device-option-sheets.json";
 import deviceIndicationsRaw from "@/data/device-indications.json";
 import cumulRaw from "@/data/cumul.json";
+import prestationsRaw from "@/data/lppr-prestations.json";
 import metaRaw from "@/data/meta.json";
 
 import {
@@ -26,9 +27,16 @@ import {
   DeviceOptionSheetsFileSchema,
   DeviceIndicationsFileSchema,
   CumulFileSchema,
+  PrestationsFileSchema,
   MetaSchema,
 } from "./schemas";
-import type { DeviceLppEntry, DeviceModelEntry, OptionSheet, CumulCategory } from "./types";
+import type {
+  DeviceLppEntry,
+  DeviceModelEntry,
+  OptionSheet,
+  CumulCategory,
+  Prestation,
+} from "./types";
 import type { Device, Presc } from "./types";
 
 /* Chargement + validation de la donnée au niveau module.
@@ -96,6 +104,14 @@ const deviceIndicationsFile = DeviceIndicationsFileSchema.parse(deviceIndication
 export const deviceIndicationsByCode: Record<string, Record<string, string>> =
   deviceIndicationsFile.byCode;
 
+const prestationsFile = PrestationsFileSchema.parse(prestationsRaw);
+/** prestations & forfaits LPPR : LLD (trimestriel), LCD (hebdo + options d'achat), SAV, MAD. */
+export const prestationProducts: Prestation[] = prestationsFile.products;
+export const prestationsMeta = {
+  source: prestationsFile.source,
+  lastUpdated: prestationsFile.lastUpdated,
+};
+
 const cumulFile = CumulFileSchema.parse(cumulRaw);
 /** catégories VPH cumulables (acronyme LPPR + libellé), dans l'ordre du document. */
 export const cumulCategories: CumulCategory[] = cumulFile.categories;
@@ -122,6 +138,14 @@ for (const a of adjonctions) {
 for (const region of papRegions) {
   assert(region.forfait in papForfaits, `région PAP « ${region.name} » : forfait ${region.forfait} sans définition`);
 }
+// meta.livraison est un raccourci d'affichage : il doit rester aligné sur la prestation LPPR.
+const livraisonPresta = prestationProducts.find((p) => p.code === meta.livraison.code);
+assert(!!livraisonPresta, `meta.livraison : code ${meta.livraison.code} absent des prestations`);
+assert(
+  livraisonPresta!.tarif === meta.livraison.price,
+  `meta.livraison : tarif ${meta.livraison.price} ≠ prestation ${livraisonPresta!.tarif}`,
+);
+
 const cumulCodes = new Set(cumulCategories.map((c) => c.code));
 for (const [from, list] of Object.entries(cumulIncompatible)) {
   assert(cumulCodes.has(from), `cumul : acronyme « ${from} » absent des catégories`);

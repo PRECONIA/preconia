@@ -1,6 +1,6 @@
 {
-  "source": "CERAH (lppr_nn.pdf, MAJ 25/06/2026) : modèles + code individuel par modèle ; nomenclature CNAM (lppr.json) pour token/marque/code des modèles codés. code=null -> repli code générique.",
-  "lastUpdated": "2026-06-25",
+  "source": "CERAH (lppr_nn.pdf, MAJ 25/06/2026) : modèles + code individuel par modèle ; nomenclature CNAM (lppr.json) pour token/marque/code des modèles codés. code=null -> repli code générique. Complété (02/07/2026) : scooters SCO-B/SCO-C, FRE-C, FMP Vilgo, FREP-C Logo Silver (CERAH 25/06/2026, croisé base CNAM v890).",
+  "lastUpdated": "2026-07-02",
   "byToken": {
     "BASE": {
       "INVACARE": {
@@ -141,6 +141,15 @@
           {
             "name": "POCKET",
             "code": null
+          }
+        ]
+      },
+      "VILGO": {
+        "code": "9571365",
+        "models": [
+          {
+            "name": "Fauteuil de transfert CESAR (réf. MA 013)",
+            "code": "9571365"
           }
         ]
       }
@@ -505,6 +514,17 @@
           {
             "name": "C Light",
             "code": "9581381"
+          }
+        ]
+      }
+    },
+    "FRE-C": {
+      "ERGOCONCEPT": {
+        "code": "9529386",
+        "models": [
+          {
+            "name": "BR8L Explorer",
+            "code": "9529386"
           }
         ]
       }
@@ -940,6 +960,15 @@
           {
             "name": "P4-Adventure",
             "code": "9519985"
+          }
+        ]
+      },
+      "LOGO SILVER": {
+        "code": "9519850",
+        "models": [
+          {
+            "name": "Alltrack R",
+            "code": "9519850"
           }
         ]
       },
@@ -1899,6 +1928,97 @@
           {
             "name": "OTTO Lisa",
             "code": "9587685"
+          }
+        ]
+      }
+    },
+    "SCO-B": {
+      "INVACARE": {
+        "code": "9514255",
+        "models": [
+          {
+            "name": "Leo",
+            "code": "9514255"
+          },
+          {
+            "name": "Colibri Outdoor",
+            "code": "9514255"
+          }
+        ]
+      },
+      "LIFE MOBILITY": {
+        "code": "9541157",
+        "models": [
+          {
+            "name": "Vivo",
+            "code": "9541157"
+          }
+        ]
+      },
+      "VERMEIREN": {
+        "code": "9526672",
+        "models": [
+          {
+            "name": "ERIS",
+            "code": "9526672"
+          },
+          {
+            "name": "One+ Air",
+            "code": null
+          }
+        ]
+      }
+    },
+    "SCO-C": {
+      "INVACARE": {
+        "code": "9597442",
+        "models": [
+          {
+            "name": "Orion Pro",
+            "code": "9597442"
+          },
+          {
+            "name": "Comet Ultra",
+            "code": "9597442"
+          },
+          {
+            "name": "Comet Alpine+",
+            "code": "9597442"
+          }
+        ]
+      },
+      "LIFE MOBILITY": {
+        "code": "9553373",
+        "models": [
+          {
+            "name": "Presto",
+            "code": "9553373"
+          },
+          {
+            "name": "Presto S",
+            "code": "9553373"
+          }
+        ]
+      },
+      "PRIDE MOBILITY": {
+        "code": "9587805",
+        "models": [
+          {
+            "name": "Victory XL 140",
+            "code": "9587805"
+          }
+        ]
+      },
+      "VERMEIREN": {
+        "code": "9573565",
+        "models": [
+          {
+            "name": "Carpo 2",
+            "code": "9573565"
+          },
+          {
+            "name": "Kuarz",
+            "code": null
           }
         ]
       }

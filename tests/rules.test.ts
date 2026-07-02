@@ -97,11 +97,26 @@ describe("computeSubtotal (INV. 7 — devis/tbd exclus)", () => {
     const levier = adjonctions.find((a) => a.code === "4938766")!; // 25 €
     const tablette = adjonctions.find((a) => a.code === "4970497")!; // 132 €
     const devis = adjonctions.find((a) => a.devis)!;
-    const tbd = adjonctions.find((a) => a.tbd)!;
+    // plus aucun item `tbd` dans la donnée réelle (tous les tarifs sont officiels
+    // depuis la v890) : fixture synthétique pour continuer à verrouiller l'invariant.
+    const tbd = { ...levier, code: "0000000", price: null, tbd: true as const };
     const total = computeSubtotal([levier, tablette, devis, tbd], ["A"], papForfaits);
     expect(total).toBe(25 + 132 + papForfaits.A.price);
     expect(hasOpenItems([devis, tbd])).toBe(true);
     expect(hasOpenItems([levier])).toBe(false);
+  });
+
+  it("les 3 anciens « tarif à préciser » portent leur tarif officiel (LPP v890)", () => {
+    const expected: Record<string, number> = {
+      "4904626": 1940, // DREEFT — paire de roues avec freinage intégré
+      "4922720": 700, // supplément bariatrique FRM
+      "4936922": 230, // harnais 4 points ou plus (POU_MRE)
+    };
+    for (const [code, price] of Object.entries(expected)) {
+      const a = adjonctions.find((x) => x.code === code)!;
+      expect(a.price).toBe(price);
+      expect(a.tbd).toBeUndefined();
+    }
   });
 });
 

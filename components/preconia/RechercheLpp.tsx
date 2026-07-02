@@ -22,6 +22,7 @@ const KIND_STYLE: Record<CatalogKind, string> = {
   vph: "bg-petrol-tint text-petrol-deep",
   adjonction: "bg-paper text-ink-soft",
   pap: "bg-amber-tint text-amber",
+  prestation: "bg-petrol text-white",
 };
 
 /* Libellés courts + ordre des catégories de véhicules. */
@@ -41,6 +42,10 @@ const NATURE_SHORTCUTS: { key: string; label: string }[] = [
   { key: "adjonction", label: "Adjonctions" },
   { key: "pap-a", label: "PAP-A" },
   { key: "pap-b", label: "PAP-B" },
+  { key: "lld", label: "Location LLD" },
+  { key: "lcd", label: "Location LCD" },
+  { key: "sav", label: "Réparations SAV" },
+  { key: "mad", label: "MAD & livraison" },
 ];
 
 const TYPE_WORDS = ["FREP-B", "OTTO", "PAP OTTO", "adjonction OTTO", "repose jambe", "Code LPP"];
@@ -55,6 +60,11 @@ function quickToFilters(quick: string | null): SearchFilters {
   if (quick === "adjonction") return { kind: "adjonction" };
   if (quick === "pap-a") return { kind: "pap", papForfait: "A" };
   if (quick === "pap-b") return { kind: "pap", papForfait: "B" };
+  if (quick === "lld") return { kind: "prestation", category: "Location longue durée (LLD)" };
+  if (quick === "lcd") return { kind: "prestation", category: "Location courte durée (LCD)" };
+  if (quick === "sav") return { kind: "prestation", category: "Réparations & batteries (SAV)" };
+  if (quick === "mad")
+    return { kind: "prestation", category: "Mise à disposition & livraison (MAD)" };
   return { category: quick }; // catégorie VPH
 }
 function quickLabel(quick: string): string {

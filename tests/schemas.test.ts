@@ -3,8 +3,10 @@ import {
   adjGroups,
   adjonctions,
   deviceByCode,
+  meta,
   papForfaits,
   papRegions,
+  prestationProducts,
 } from "@/lib/data";
 
 /* Le seul fait d'importer `@/lib/data` exécute la validation zod + les contrôles
@@ -45,5 +47,16 @@ describe("intégrité de la donnée (data/*.json)", () => {
     for (const region of papRegions) {
       expect(papForfaits[region.forfait]).toBeDefined();
     }
+  });
+
+  it("INV. 4 — prestations : codes uniques, tarifs > 0, livraison alignée sur meta", () => {
+    const codes = prestationProducts.map((p) => p.code);
+    expect(new Set(codes).size).toBe(codes.length);
+    for (const p of prestationProducts) expect(p.tarif).toBeGreaterThan(0);
+    const livraison = prestationProducts.find((p) => p.code === meta.livraison.code);
+    expect(livraison?.tarif).toBe(meta.livraison.price);
+    // les 4 familles de prestations sont présentes
+    const cats = new Set(prestationProducts.map((p) => p.category));
+    expect(cats.size).toBe(4);
   });
 });

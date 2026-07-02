@@ -1,0 +1,216 @@
+{
+  "source": "Nomenclature LPPR — base CNAM (codage.ext.cnamts.fr, fichier LPPTOT v890 du 25/06/2026) : chapitres Titre IV « Location longue durée » et « Réparations des VPH et prestations associées », et Titre I (location courte durée, forfait de livraison). Libellés et tarifs officiels vérifiés code par code. LLD : forfait trimestriel ; LCD : forfait hebdomadaire.",
+  "lastUpdated": "2026-07-02",
+  "products": [
+    {
+      "code": "4723793",
+      "label": "VPH, LLD, FRMP, MODULAIRE À PROPULSION MANUELLE OU À POUSSER MULTI-POSITION, FORFAIT TRIMESTRIEL",
+      "category": "Location longue durée (LLD)",
+      "tarif": 232.53,
+      "unit": "trimestre"
+    },
+    {
+      "code": "4776720",
+      "label": "VPH, LLD, FRMV, MODULAIRE MANUEL VERTICALISATEUR, FORFAIT TRIMESTRIEL",
+      "category": "Location longue durée (LLD)",
+      "tarif": 856.86,
+      "unit": "trimestre"
+    },
+    {
+      "code": "4706211",
+      "label": "VPH, LLD, FREP-A, MODULAIRE PROPULSION ÉLECTRIQUE DE POSITIONNEMENT CLASSE A, FORFAIT TRIMESTRIEL",
+      "category": "Location longue durée (LLD)",
+      "tarif": 755.64,
+      "unit": "trimestre"
+    },
+    {
+      "code": "4762238",
+      "label": "VPH, LLD, FREP-B, MODULAIRE PROPULSION ÉLECTRIQUE DE POSITIONNEMENT CLASSE B, FORFAIT TRIMESTRIEL",
+      "category": "Location longue durée (LLD)",
+      "tarif": 1021.13,
+      "unit": "trimestre"
+    },
+    {
+      "code": "4759785",
+      "label": "VPH, LLD, FREP-C, MODULAIRE PROPULSION ÉLECTRIQUE DE POSITIONNEMENT CLASSE C, FORFAIT TRIMESTRIEL",
+      "category": "Location longue durée (LLD)",
+      "tarif": 1243.0,
+      "unit": "trimestre"
+    },
+    {
+      "code": "4780118",
+      "label": "VPH, LLD, FREV, MODULAIRE ÉLECTRIQUE VERTICALISATEUR, FORFAIT TRIMESTRIEL",
+      "category": "Location longue durée (LLD)",
+      "tarif": 1725.29,
+      "unit": "trimestre"
+    },
+    {
+      "code": "4711293",
+      "label": "VPH, LLD, POU_MRE, POUSSETTE MODULAIRE MULTIRÉGLABLE, FORFAIT TRIMESTRIEL",
+      "category": "Location longue durée (LLD)",
+      "tarif": 220.08,
+      "unit": "trimestre"
+    },
+
+    {
+      "code": "1268182",
+      "label": "VPH, LCD, FORFAIT DE LOCATION HEBDOMADAIRE FMP, JUSQU'À 13 SEMAINES",
+      "category": "Location courte durée (LCD)",
+      "tarif": 3.82,
+      "unit": "semaine"
+    },
+    {
+      "code": "1291028",
+      "label": "VPH, LCD, FORFAIT DE LOCATION HEBDOMADAIRE FMP, 14 À 26 SEMAINES INCLUSES",
+      "category": "Location courte durée (LCD)",
+      "tarif": 2.97,
+      "unit": "semaine"
+    },
+    {
+      "code": "1261613",
+      "label": "VPH, LCD, FORFAIT DE LOCATION HEBDOMADAIRE FMPR, JUSQU'À 13 SEMAINES",
+      "category": "Location courte durée (LCD)",
+      "tarif": 8.27,
+      "unit": "semaine"
+    },
+    {
+      "code": "1277376",
+      "label": "VPH, LCD, FORFAIT DE LOCATION HEBDOMADAIRE FMPR, 14 À 26 SEMAINES INCLUSES",
+      "category": "Location courte durée (LCD)",
+      "tarif": 6.43,
+      "unit": "semaine"
+    },
+    {
+      "code": "1290922",
+      "label": "VPH, LCD, FORFAIT DE LOCATION HEBDOMADAIRE FRM, JUSQU'À 13 SEMAINES",
+      "category": "Location courte durée (LCD)",
+      "tarif": 4.7,
+      "unit": "semaine"
+    },
+    {
+      "code": "1207648",
+      "label": "VPH, LCD, FORFAIT DE LOCATION HEBDOMADAIRE FRM, 14 À 26 SEMAINES INCLUSES",
+      "category": "Location courte durée (LCD)",
+      "tarif": 3.66,
+      "unit": "semaine"
+    },
+    {
+      "code": "1270434",
+      "label": "VPH, LCD, FORFAIT DE LOCATION HEBDOMADAIRE FRE, JUSQU'À 13 SEMAINES",
+      "category": "Location courte durée (LCD)",
+      "tarif": 95.75,
+      "unit": "semaine"
+    },
+    {
+      "code": "1225178",
+      "label": "VPH, LCD, FORFAIT DE LOCATION HEBDOMADAIRE FRE, 14 À 26 SEMAINES INCLUSES",
+      "category": "Location courte durée (LCD)",
+      "tarif": 74.47,
+      "unit": "semaine"
+    },
+    {
+      "code": "1267633",
+      "label": "VPH, LCD, OPTION D'ACHAT FMP",
+      "category": "Location courte durée (LCD)",
+      "tarif": 108.16
+    },
+    {
+      "code": "1228567",
+      "label": "VPH, LCD, OPTION D'ACHAT FMPR",
+      "category": "Location courte durée (LCD)",
+      "tarif": 234.05
+    },
+    {
+      "code": "1215560",
+      "label": "VPH, LCD, OPTION D'ACHAT FRM",
+      "category": "Location courte durée (LCD)",
+      "tarif": 133.09
+    },
+    {
+      "code": "1273020",
+      "label": "VPH, LCD, OPTION D'ACHAT FRE",
+      "category": "Location courte durée (LCD)",
+      "tarif": 948.36
+    },
+
+    {
+      "code": "4894307",
+      "label": "VPH, SAV1, PLAFOND ANNUEL, RÉPARATIONS FAUTEUILS ROULANTS MANUELS",
+      "category": "Réparations & batteries (SAV)",
+      "tarif": 260.5
+    },
+    {
+      "code": "4859937",
+      "label": "VPH, SAV2, PLAFOND ANNUEL, RÉPARATIONS FAUTEUILS ROULANTS ÉLECTRIQUES HORS BATTERIE",
+      "category": "Réparations & batteries (SAV)",
+      "tarif": 750.96
+    },
+    {
+      "code": "4858932",
+      "label": "VPH, SAV3, PLAFOND ANNUEL, RÉPARATIONS POUSSETTES",
+      "category": "Réparations & batteries (SAV)",
+      "tarif": 260.5
+    },
+    {
+      "code": "4891384",
+      "label": "VPH, SAV4, ACHAT BATTERIE VPH ÉLECTRIQUE TOUT TYPE (AU MAXIMUM TOUS LES ANS)",
+      "category": "Réparations & batteries (SAV)",
+      "tarif": 350.0
+    },
+    {
+      "code": "4800737",
+      "label": "VPH, SAV5, PLAFOND ANNUEL, RÉPARATIONS CYC",
+      "category": "Réparations & batteries (SAV)",
+      "tarif": 260.5
+    },
+
+    {
+      "code": "4841966",
+      "label": "VPH, MAD1, NIVEAU 1 — PREMIÈRE MISE À DISPOSITION SCO, BASE, POU_S, POU_MRE, CYC",
+      "category": "Mise à disposition & livraison (MAD)",
+      "tarif": 100.0
+    },
+    {
+      "code": "4853449",
+      "label": "VPH, MAD1, NIVEAU 2 — PREMIÈRE MISE À DISPOSITION FRM, FRMC, FRMS, FRMA, FRE",
+      "category": "Mise à disposition & livraison (MAD)",
+      "tarif": 250.0
+    },
+    {
+      "code": "4865487",
+      "label": "VPH, MAD1, NIVEAU 3 — PREMIÈRE MISE À DISPOSITION FRMP, FREP, FRMV, FREV",
+      "category": "Mise à disposition & livraison (MAD)",
+      "tarif": 375.0
+    },
+    {
+      "code": "4811876",
+      "label": "VPH, MAD2, NIVEAU 1 — RENOUVELLEMENT À L'IDENTIQUE SCO, BASE, POU_S, POU_MRE, CYC",
+      "category": "Mise à disposition & livraison (MAD)",
+      "tarif": 50.0
+    },
+    {
+      "code": "4836273",
+      "label": "VPH, MAD2, NIVEAU 2 — RENOUVELLEMENT À L'IDENTIQUE FRM, FRMC, FRMS, FRMA, FRE",
+      "category": "Mise à disposition & livraison (MAD)",
+      "tarif": 125.0
+    },
+    {
+      "code": "4891059",
+      "label": "VPH, MAD2, NIVEAU 3 — RENOUVELLEMENT À L'IDENTIQUE FRMP, FREP, FRMV, FREV",
+      "category": "Mise à disposition & livraison (MAD)",
+      "tarif": 187.5
+    },
+    {
+      "code": "1213650",
+      "label": "VPH, LCD, MAD, FRM, FRE — MISE À DISPOSITION EN LOCATION COURTE DURÉE",
+      "category": "Mise à disposition & livraison (MAD)",
+      "tarif": 20.0
+    },
+    {
+      "code": "1266390",
+      "label": "VPH, FORFAIT DE LIVRAISON (SUR PRESCRIPTION, ACHAT, LLD OU LCD)",
+      "category": "Mise à disposition & livraison (MAD)",
+      "tarif": 50.0
+    }
+  ]
+}

@@ -17,6 +17,7 @@ import type {
   DeviceModelEntrySchema,
   OptionSheetSchema,
   CumulCategorySchema,
+  PrestationSchema,
   MetaSchema,
 } from "./schemas";
 
@@ -40,4 +41,5 @@ export type DeviceLppEntry = z.infer<typeof DeviceLppEntrySchema>;
 export type DeviceModelEntry = z.infer<typeof DeviceModelEntrySchema>;
 export type OptionSheet = z.infer<typeof OptionSheetSchema>;
 export type CumulCategory = z.infer<typeof CumulCategorySchema>;
+export type Prestation = z.infer<typeof PrestationSchema>;
 export type Meta = z.infer<typeof MetaSchema>;

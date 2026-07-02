@@ -5,6 +5,7 @@ import {
   lpprAdjProducts,
   lpprProducts,
   papForfaits,
+  prestationProducts,
 } from "./data";
 
 /* Moteur de recherche du catalogue LPPR — à jour de notre base.
@@ -14,7 +15,7 @@ import {
    « FREP B otto », « FREPB otto », « PAP otto », « adjonction otto », « repose jambe otto ».
    Filtres pour les boutons rapides (adjonctions, PAP-A, PAP-B, catégorie VPH) et le sélecteur marque. */
 
-export type CatalogKind = "vph" | "adjonction" | "pap";
+export type CatalogKind = "vph" | "adjonction" | "pap" | "prestation";
 
 export interface CatalogEntry {
   code: string;
@@ -31,6 +32,7 @@ export const KIND_LABEL: Record<CatalogKind, string> = {
   vph: "Fauteuil / VPH",
   adjonction: "Adjonction",
   pap: "Forfait PAP",
+  prestation: "Forfait / prestation",
 };
 
 /** Normalisation FR : minuscules + suppression des diacritiques. */
@@ -128,6 +130,18 @@ export const catalog: CatalogEntry[] = [
     category: "Forfaits de positionnement (PAP)",
     token: null,
     papForfait: f,
+    models: [],
+  })),
+  // prestations & forfaits (LLD, LCD, SAV, MAD/livraison) — le token est détecté sur les
+  // libellés LLD (« VPH, LLD, FREP-A, … ») pour que « frep-a lld » fonctionne.
+  ...prestationProducts.map((p): CatalogEntry => ({
+    code: p.code,
+    label: p.label,
+    brand: null,
+    kind: "prestation",
+    category: p.category,
+    token: vphToken(p.label),
+    papForfait: null,
     models: [],
   })),
 ];
@@ -270,7 +284,9 @@ export function searchCatalog(query: string, filters: SearchFilters = {}, limit 
   if (filters.kind) pool = pool.filter((e) => e.kind === filters.kind);
   if (filters.papForfait) pool = pool.filter((e) => e.kind === "pap" && e.papForfait === filters.papForfait);
   if (filters.brand) pool = pool.filter((e) => e.brand === filters.brand);
-  if (filters.category) pool = pool.filter((e) => e.kind === "vph" && e.category === filters.category);
+  // les noms de catégories sont propres à chaque nature (VPH, prestations…) : égalité simple,
+  // combinable avec filters.kind pour verrouiller la nature si besoin.
+  if (filters.category) pool = pool.filter((e) => e.category === filters.category);
 
   const terms = qTrim.length >= 2 ? tokenize(query) : [];
   if (terms.length === 0) {
