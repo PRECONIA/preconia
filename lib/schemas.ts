@@ -195,6 +195,21 @@ export const PrestationsFileSchema = z.object({
   products: z.array(PrestationSchema).nonempty(),
 });
 
+/* --- mad-forfaits.json (correspondance dispositif → niveau MAD → code prestation).
+   Les codes référencent lppr-prestations.json (cohérence vérifiée au chargement) ;
+   un dispositif absent de tout niveau (FMP, FMPR) n'ouvre pas droit au forfait MAD. --- */
+export const MadNiveauSchema = z.object({
+  niveau: z.number().int().min(1).max(3),
+  devices: z.array(z.string()).nonempty(),
+  premiere: z.string(),
+  renouvellement: z.string(),
+});
+export const MadForfaitsFileSchema = z.object({
+  source: z.string(),
+  lastUpdated: z.string(),
+  niveaux: z.array(MadNiveauSchema).nonempty(),
+});
+
 /* --- cumul.json (règles de cumul VPH : incompatibilités par acronyme LPPR).
    `incompatible[X]` = acronymes non cumulables avec X (relation symétrique appliquée au calcul).
    Deux VPH sont cumulables si aucun des deux ne figure dans l'incompatibilité de l'autre. --- */

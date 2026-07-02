@@ -16,7 +16,9 @@ import {
   deviceIndicationsByCode,
   deviceLppByType,
   devices,
+  madNiveaux,
   meta,
+  prestationByCode,
   modes as modeLabels,
   papForfaits,
   papRegions,
@@ -32,6 +34,7 @@ import {
   deviceModelsForBrand,
   hasBrandVariant,
   hasDeviceBrandVariant,
+  madForfaitFor,
   modesForDuree,
   optionSheetFor,
 } from "@/lib/rules";
@@ -122,8 +125,15 @@ export function WalkerShell() {
     ? deviceModelGeneric(device, answers.classe, brand, model, deviceModelsByType)
     : false;
 
-  // Forfait de livraison & mise en service — option cochable sur la fiche finale.
+  // Forfait de livraison — option cochable sur la fiche finale.
   const [addLivraison, setAddLivraison] = useState(false);
+  // Forfait MAD (MAD1 première / MAD2 renouvellement, niveau selon le VPH) — cochable aussi.
+  const [addMad, setAddMad] = useState(false);
+  const madForfait = device
+    ? madForfaitFor(device.code, answers.mad, madNiveaux, prestationByCode)
+    : null;
+  // Verdict du module de cumul embarqué (étape cumul) : null tant que non évalué.
+  const [cumulVerdict, setCumulVerdict] = useState<boolean | null>(null);
 
   // Tous les codes LPP de la fiche finale : fauteuil + forfaits PAP + adjonctions (adaptés marque)
   // + le forfait de livraison s'il est coché.
@@ -145,6 +155,7 @@ export function WalkerShell() {
       label: a.name,
     })),
     ...(addLivraison ? [{ code: meta.livraison.code, label: meta.livraison.label }] : []),
+    ...(addMad && madForfait ? [{ code: madForfait.code, label: madForfait.label }] : []),
   ];
   const [copied, setCopied] = useState(false);
   const copyToClipboard = async (text: string, mark: (v: boolean) => void) => {
@@ -161,6 +172,9 @@ export function WalkerShell() {
   const [copiedLiv, setCopiedLiv] = useState(false);
   const copyLivraison = () =>
     copyToClipboard(`${meta.livraison.code}\t${meta.livraison.label}`, setCopiedLiv);
+  const [copiedMad, setCopiedMad] = useState(false);
+  const copyMad = () =>
+    madForfait && copyToClipboard(`${madForfait.code}\t${madForfait.label}`, setCopiedMad);
   // Encart « définition + spécificités techniques » du forfait PAP A ou B.
   const [papInfo, setPapInfo] = useState<"A" | "B" | null>(null);
   // Connecteur animé : trace une ligne du bouton survolé vers l'encart info orange (grand écran).
@@ -237,7 +251,10 @@ export function WalkerShell() {
 
     const total =
       devLpp?.tarif != null
-        ? devLpp.tarif + costs.subtotal + (addLivraison ? meta.livraison.price : 0)
+        ? devLpp.tarif +
+          costs.subtotal +
+          (addLivraison ? meta.livraison.price : 0) +
+          (addMad && madForfait ? madForfait.price : 0)
         : null;
 
     return {
@@ -263,6 +280,10 @@ export function WalkerShell() {
       livraison: addLivraison
         ? { code: meta.livraison.code, label: meta.livraison.label, price: meta.livraison.price }
         : null,
+      mad:
+        addMad && madForfait
+          ? { code: madForfait.code, label: madForfait.label, price: madForfait.price }
+          : null,
       totals: { subtotal: costs.subtotal, hasOpen: costs.hasOpen, total },
       disclaimer: meta.disclaimer,
       source: meta.source,
@@ -347,10 +368,67 @@ export function WalkerShell() {
                 Un parcours guidé mène du profil fonctionnel à la catégorie LPPR, sa classe, son
                 circuit de prise en charge et ses adjonctions.
               </p>
-              <button className={`${primary} w-full justify-center`} onClick={() => go("age")}>
+              <button className={`${primary} w-full justify-center`} onClick={() => go("cumul")}>
                 Commencer l&apos;évaluation →
               </button>
             </>
+          )}
+
+          {/* ---------------- CUMUL ---------------- */}
+          {stage === "cumul" && (
+            <Step
+              title="Cumul de VPH"
+              hint="Le patient possède-t-il déjà un VPH pris en charge ? Certaines catégories ne sont pas cumulables (nomenclature LPPR)."
+            >
+              <button
+                className={`${btn} ${answers.cumul === "non" ? btnOn : ""}`}
+                onClick={() => {
+                  setAnswer("cumul", "non");
+                  go("age");
+                }}
+              >
+                Non — pas de VPH déjà possédé (pas de question de cumul)
+              </button>
+              <button
+                className={`${btn} ${answers.cumul === "oui" ? btnOn : ""}`}
+                onClick={() => setAnswer("cumul", "oui")}
+              >
+                Oui — un VPH est déjà possédé (évaluer le cumul)
+              </button>
+
+              {answers.cumul === "oui" && (
+                <div className="mt-3">
+                  <ModuleCumul embedded idPrefix="walker-cumul" onVerdict={setCumulVerdict} />
+
+                  {cumulVerdict === true && (
+                    <button
+                      className={`${primary} mt-3 w-full justify-center`}
+                      onClick={() => go("age")}
+                    >
+                      Cumul autorisé — poursuivre l&apos;évaluation →
+                    </button>
+                  )}
+                  {cumulVerdict === false && (
+                    <div className="mt-3 rounded-xl border-2 border-red-500 bg-red-50 p-4 text-center">
+                      <p className="text-sm font-semibold text-red-700">
+                        Cumul interdit — fin de l&apos;évaluation.
+                      </p>
+                      <p className="mt-1 text-xs text-red-700/80">
+                        La catégorie souhaitée n&apos;est pas cumulable avec le VPH déjà possédé au
+                        titre de la LPPR.
+                      </p>
+                      <button
+                        className="mt-3 inline-flex w-full items-center justify-center rounded-lg border border-red-300 bg-card px-4 py-2.5 font-semibold text-red-700 hover:bg-red-100"
+                        onClick={() => dispatch({ type: "RESET" })}
+                      >
+                        Nouvelle évaluation
+                      </button>
+                    </div>
+                  )}
+                </div>
+              )}
+              <Nav dispatch={dispatch} />
+            </Step>
           )}
 
           {/* ---------------- AGE ---------------- */}
@@ -385,7 +463,7 @@ export function WalkerShell() {
                 className={`${btn} ${answers.duree === "temp" ? btnOn : ""}`}
                 onClick={() => {
                   setAnswer("duree", "temp");
-                  go("mob");
+                  go("mad");
                 }}
               >
                 Temporaire — 3 mois ou moins · location courte durée (LCD)
@@ -394,10 +472,38 @@ export function WalkerShell() {
                 className={`${btn} ${answers.duree === "durable" ? btnOn : ""}`}
                 onClick={() => {
                   setAnswer("duree", "durable");
-                  go("mob");
+                  go("mad");
                 }}
               >
                 Durable — 6 mois ou plus · achat ou location longue durée (ACHAT / LLD)
+              </button>
+              <Nav dispatch={dispatch} />
+            </Step>
+          )}
+
+          {/* ---------------- MAD (première / renouvellement) ---------------- */}
+          {stage === "mad" && (
+            <Step
+              title="Mise à disposition"
+              hint="Détermine le forfait applicable : MAD1 (première mise à disposition) ou MAD2 (renouvellement à l'identique). Sans objet pour les fauteuils non modulaires (FMP, FMPR)."
+            >
+              <button
+                className={`${btn} ${answers.mad === "premiere" ? btnOn : ""}`}
+                onClick={() => {
+                  setAnswer("mad", "premiere");
+                  go("mob");
+                }}
+              >
+                Première mise à disposition — forfait MAD1
+              </button>
+              <button
+                className={`${btn} ${answers.mad === "renouv" ? btnOn : ""}`}
+                onClick={() => {
+                  setAnswer("mad", "renouv");
+                  go("mob");
+                }}
+              >
+                Renouvellement à l&apos;identique — forfait MAD2
               </button>
               <Nav dispatch={dispatch} />
             </Step>
@@ -875,10 +981,24 @@ export function WalkerShell() {
                           {meta.livraison.code}
                         </span>
                         <span>
-                          {meta.livraison.label} <span className="text-ink-soft">· MAD</span>
+                          {meta.livraison.label} <span className="text-ink-soft">· livraison</span>
                         </span>
                       </span>
                       <span className="font-mono text-blue-800">{eur(meta.livraison.price)}</span>
+                    </div>
+                  )}
+                  {addMad && madForfait && (
+                    <div className="flex items-baseline justify-between gap-3 border-b border-line-soft py-1.5 text-sm">
+                      <span className="flex min-w-0 items-baseline gap-2">
+                        <span className="shrink-0 rounded bg-blue-100 px-1.5 py-0.5 font-mono text-[11px] font-semibold text-blue-800">
+                          {madForfait.code}
+                        </span>
+                        <span>
+                          {madForfait.label}{" "}
+                          <span className="text-ink-soft">· MAD niveau {madForfait.niveau}</span>
+                        </span>
+                      </span>
+                      <span className="font-mono text-blue-800">{eur(madForfait.price)}</span>
                     </div>
                   )}
                   {(selectedAdj.length > 0 || forfaits.length > 0) && <Subtotal costs={costs} />}
@@ -888,7 +1008,12 @@ export function WalkerShell() {
                         Total indicatif{costs.hasOpen ? " (hors devis / à préciser)" : ""}
                       </b>
                       <span className="font-mono text-base font-semibold text-ink">
-                        {eur(devLpp.tarif + costs.subtotal + (addLivraison ? meta.livraison.price : 0))}
+                        {eur(
+                          devLpp.tarif +
+                            costs.subtotal +
+                            (addLivraison ? meta.livraison.price : 0) +
+                            (addMad && madForfait ? madForfait.price : 0),
+                        )}
                       </span>
                     </div>
                   )}
@@ -899,9 +1024,61 @@ export function WalkerShell() {
                     {copied ? "✓ Codes LPP copiés" : `Copier les ${lpprCodes.length} codes LPP`}
                   </button>
 
-                  {/* Forfait de livraison : option cochable, encart bleu, copie dédiée. */}
+                  {/* Prestations associées : MAD (code auto : niveau + MAD1/MAD2) et forfait de
+                      livraison — options cochables, encart bleu, copie dédiée. */}
                   <div className="mt-3 rounded-xl border-2 border-blue-400 bg-blue-50 p-4">
-                    <label className="flex cursor-pointer items-start gap-2.5">
+                    <div className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-blue-900/70">
+                      Prestations associées
+                    </div>
+
+                    {madForfait ? (
+                      <div className="border-b border-blue-200 pb-3">
+                        <label className="flex cursor-pointer items-start gap-2.5">
+                          <input
+                            type="checkbox"
+                            checked={addMad}
+                            onChange={(e) => setAddMad(e.target.checked)}
+                            className="mt-0.5 h-4 w-4 accent-blue-600"
+                          />
+                          <span className="text-sm">
+                            <b className="text-blue-900">
+                              Ajouter le forfait de mise à disposition — MAD
+                              {answers.mad === "renouv" ? "2" : "1"} niveau {madForfait.niveau}
+                            </b>
+                            <span className="mt-0.5 block text-[12px] text-blue-800/80">
+                              {answers.mad === "renouv"
+                                ? "Renouvellement à l'identique"
+                                : "Première mise à disposition"}{" "}
+                              — niveau déterminé par la catégorie retenue ({device.code}).
+                            </span>
+                          </span>
+                        </label>
+                        <div className="mt-2.5 flex items-center justify-between gap-3">
+                          <span className="flex items-center gap-2">
+                            <span className="rounded bg-blue-200/70 px-1.5 py-0.5 font-mono text-[12px] font-semibold text-blue-900">
+                              {madForfait.code}
+                            </span>
+                            <span className="font-mono text-sm font-semibold text-blue-900">
+                              {eur(madForfait.price)}
+                            </span>
+                          </span>
+                          <button
+                            onClick={copyMad}
+                            className="shrink-0 rounded-lg bg-blue-600 px-3 py-2 text-sm font-semibold text-white hover:bg-blue-700"
+                          >
+                            {copiedMad ? "✓ Copié" : "Copier le code MAD"}
+                          </button>
+                        </div>
+                      </div>
+                    ) : (
+                      <p className="border-b border-blue-200 pb-3 text-[12px] text-blue-800/80">
+                        {answers.mad
+                          ? `Pas de forfait MAD pour ce dispositif (${device.code} : hors niveaux MAD de la nomenclature).`
+                          : "Contexte de mise à disposition non renseigné (question « Mise à disposition » de l'évaluation)."}
+                      </p>
+                    )}
+
+                    <label className="mt-3 flex cursor-pointer items-start gap-2.5">
                       <input
                         type="checkbox"
                         checked={addLivraison}
@@ -909,13 +1086,13 @@ export function WalkerShell() {
                         className="mt-0.5 h-4 w-4 accent-blue-600"
                       />
                       <span className="text-sm">
-                        <b className="text-blue-900">Ajouter le forfait Mise A Disposition (MAD)</b>
+                        <b className="text-blue-900">Ajouter le forfait de livraison</b>
                         <span className="mt-0.5 block text-[12px] text-blue-800/80">
                           {meta.livraison.label}
                         </span>
                       </span>
                     </label>
-                    <div className="mt-3 flex items-center justify-between gap-3">
+                    <div className="mt-2.5 flex items-center justify-between gap-3">
                       <span className="flex items-center gap-2">
                         <span className="rounded bg-blue-200/70 px-1.5 py-0.5 font-mono text-[12px] font-semibold text-blue-900">
                           {meta.livraison.code}
@@ -928,7 +1105,7 @@ export function WalkerShell() {
                         onClick={copyLivraison}
                         className="shrink-0 rounded-lg bg-blue-600 px-3 py-2 text-sm font-semibold text-white hover:bg-blue-700"
                       >
-                        {copiedLiv ? "✓ Copié" : "Copier le code MAD"}
+                        {copiedLiv ? "✓ Copié" : "Copier le code livraison"}
                       </button>
                     </div>
                   </div>

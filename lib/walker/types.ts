@@ -4,8 +4,10 @@ import type { Adjonction, ClasseValue } from "../types";
    retirés du flux de préconisation (les dispositifs restent dans la donnée). */
 export type Stage =
   | "home"
+  | "cumul"
   | "age"
   | "duree"
+  | "mad"
   | "mob"
   | "cfg_man"
   | "cfg_elec"
@@ -17,11 +19,17 @@ export type Age = "adulte" | "enfant";
 export type Duree = "temp" | "durable";
 export type Mob = "manuel" | "elec";
 export type OuiNon = "oui" | "non";
+/** Contexte de mise à disposition : première MAD (MAD1) ou renouvellement à l'identique (MAD2). */
+export type Mad = "premiere" | "renouv";
 
 /** Réponses accumulées au fil du parcours (aucune donnée patient). */
 export interface Answers {
+  /** Le patient possède-t-il déjà un VPH pris en charge (question cumul) ? */
+  cumul: OuiNon | null;
   age: Age | null;
   duree: Duree | null;
+  /** Première mise à disposition (MAD1) ou renouvellement à l'identique (MAD2). */
+  mad: Mad | null;
   mob: Mob | null;
   device: string | null; // code dispositif
   classe: ClasseValue | null;

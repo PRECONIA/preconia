@@ -3,8 +3,10 @@ import { filterAdjonctions, needsBesoins, toggleAdjonction } from "../rules";
 import type { Action, Answers, WalkerState } from "./types";
 
 export const initialAnswers: Answers = {
+  cumul: null,
   age: null,
   duree: null,
+  mad: null,
   mob: null,
   device: null,
   classe: null,

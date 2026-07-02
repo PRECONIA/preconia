@@ -1,0 +1,24 @@
+{
+  "source": "Nomenclature Titre IV 2025 (5.1 forfaits de première mise à disposition MAD1, 5.2 forfaits MAD renouvellement à l'identique MAD2) — niveaux par catégorie de VPH. Les codes et tarifs vivent dans lppr-prestations.json (base CNAM v890) ; ce fichier ne porte que la correspondance dispositif → niveau → code. FMP et FMPR : pas de forfait MAD (hors niveaux).",
+  "lastUpdated": "2026-07-02",
+  "niveaux": [
+    {
+      "niveau": 1,
+      "devices": ["SCO", "BASE", "POU_S", "POU_MRE", "CYC"],
+      "premiere": "4841966",
+      "renouvellement": "4811876"
+    },
+    {
+      "niveau": 2,
+      "devices": ["FRM", "FRMC", "FRMS", "FRMA", "FRE"],
+      "premiere": "4853449",
+      "renouvellement": "4836273"
+    },
+    {
+      "niveau": 3,
+      "devices": ["FRMP", "FREP", "FRMV", "FREV"],
+      "premiere": "4865487",
+      "renouvellement": "4891059"
+    }
+  ]
+}

@@ -6,10 +6,12 @@ import type {
   DeviceLppEntry,
   DeviceModelEntry,
   Forfait,
+  MadNiveau,
   Mode,
   OptionSheet,
   PapForfait,
   PapRegion,
+  Prestation,
 } from "./types";
 
 /* Fonctions pures des INVARIANTS du CLAUDE.md — isolées, sans état, testables.
@@ -235,6 +237,29 @@ export function optionSheetFor(
   if (!brand || !model) return null;
   const token = deviceLppToken(device, classe);
   return token ? (byToken[token]?.[brand]?.[model] ?? null) : null;
+}
+
+/** Forfait MAD applicable au dispositif : niveau selon la catégorie de VPH, code MAD1 (première
+    mise à disposition) ou MAD2 (renouvellement à l'identique) selon le contexte. null si le
+    dispositif n'ouvre pas droit au forfait (FMP, FMPR) ou si le contexte n'est pas renseigné. */
+export interface MadForfait {
+  code: string;
+  label: string;
+  price: number;
+  niveau: number;
+}
+export function madForfaitFor(
+  deviceCode: string,
+  context: "premiere" | "renouv" | null,
+  niveaux: MadNiveau[],
+  prestaByCode: Record<string, Prestation>,
+): MadForfait | null {
+  if (!context) return null;
+  const n = niveaux.find((x) => x.devices.includes(deviceCode));
+  if (!n) return null;
+  const code = context === "premiere" ? n.premiere : n.renouvellement;
+  const p = prestaByCode[code];
+  return p ? { code, label: p.label, price: p.tarif, niveau: n.niveau } : null;
 }
 
 /** Cumul de deux VPH autorisé ? Faux si l'un figure dans l'incompatibilité de l'autre (relation

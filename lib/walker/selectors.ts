@@ -71,6 +71,10 @@ export function facets(answers: Answers): Facet[] {
   return [
     { k: "Âge", v: answers.age ? (answers.age === "enfant" ? "Enfant" : "Adulte") : null },
     { k: "Durée", v: answers.duree ? (answers.duree === "temp" ? "Temporaire" : "Durable") : null },
+    {
+      k: "Mise à dispo",
+      v: answers.mad ? (answers.mad === "premiere" ? "Première" : "Renouvellement") : null,
+    },
     { k: "Mobilité", v: answers.mob ? MOB_LABEL[answers.mob] ?? null : null },
     { k: "Dispositif", v: deviceLabel },
   ];

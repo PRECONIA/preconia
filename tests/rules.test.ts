@@ -7,6 +7,8 @@ import {
   cumulCategories,
   cumulIncompatible,
   deviceByCode,
+  madNiveaux,
+  prestationByCode,
   deviceLppByType,
   papForfaits,
   papRegions,
@@ -24,6 +26,7 @@ import {
   deviceModelsForBrand,
   optionSheetFor,
   isCumulAllowed,
+  madForfaitFor,
   filterAdjonctions,
   hasBrandVariant,
   hasDeviceBrandVariant,
@@ -301,6 +304,44 @@ describe("deviceLpp — code par marque (catalogue CERAH, code propre, jamais in
     )!;
     expect(genericLpp.code).toBe(mereFrepB.code); // code générique (mère)
     expect(deviceModelGeneric(deviceByCode.FREP, "B", "SUNRISE MED", codeless.name, deviceModelsByType)).toBe(true);
+  });
+});
+
+describe("madForfaitFor (forfaits MAD1/MAD2 par niveau)", () => {
+  it("niveau selon la catégorie, code selon le contexte, tarifs officiels", () => {
+    // FREP = niveau 3 : MAD1 375 €, MAD2 187,50 €
+    const p3 = madForfaitFor("FREP", "premiere", madNiveaux, prestationByCode)!;
+    expect(p3).toMatchObject({ code: "4865487", price: 375, niveau: 3 });
+    const r3 = madForfaitFor("FREP", "renouv", madNiveaux, prestationByCode)!;
+    expect(r3).toMatchObject({ code: "4891059", price: 187.5, niveau: 3 });
+    // FRE = niveau 2 ; SCO = niveau 1
+    expect(madForfaitFor("FRE", "renouv", madNiveaux, prestationByCode)).toMatchObject({
+      code: "4836273",
+      price: 125,
+      niveau: 2,
+    });
+    expect(madForfaitFor("SCO", "premiere", madNiveaux, prestationByCode)).toMatchObject({
+      code: "4841966",
+      price: 100,
+      niveau: 1,
+    });
+  });
+
+  it("null si contexte absent ou dispositif hors niveaux (FMP, FMPR)", () => {
+    expect(madForfaitFor("FREP", null, madNiveaux, prestationByCode)).toBeNull();
+    expect(madForfaitFor("FMP", "premiere", madNiveaux, prestationByCode)).toBeNull();
+    expect(madForfaitFor("FMPR", "renouv", madNiveaux, prestationByCode)).toBeNull();
+  });
+
+  it("tout device des niveaux existe et chaque device apparaît dans au plus un niveau", () => {
+    const seen = new Set<string>();
+    for (const n of madNiveaux) {
+      for (const dc of n.devices) {
+        expect(deviceByCode[dc], dc).toBeDefined();
+        expect(seen.has(dc)).toBe(false);
+        seen.add(dc);
+      }
+    }
   });
 });
 

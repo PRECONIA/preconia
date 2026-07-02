@@ -12,6 +12,7 @@ import deviceOptionSheetsRaw from "@/data/device-option-sheets.json";
 import deviceIndicationsRaw from "@/data/device-indications.json";
 import cumulRaw from "@/data/cumul.json";
 import prestationsRaw from "@/data/lppr-prestations.json";
+import madForfaitsRaw from "@/data/mad-forfaits.json";
 import metaRaw from "@/data/meta.json";
 
 import {
@@ -28,6 +29,7 @@ import {
   DeviceIndicationsFileSchema,
   CumulFileSchema,
   PrestationsFileSchema,
+  MadForfaitsFileSchema,
   MetaSchema,
 } from "./schemas";
 import type {
@@ -36,6 +38,7 @@ import type {
   OptionSheet,
   CumulCategory,
   Prestation,
+  MadNiveau,
 } from "./types";
 import type { Device, Presc } from "./types";
 
@@ -112,6 +115,15 @@ export const prestationsMeta = {
   lastUpdated: prestationsFile.lastUpdated,
 };
 
+/** index code → prestation (tarifs officiels, source unique pour MAD/livraison/LLD…). */
+export const prestationByCode: Record<string, Prestation> = Object.fromEntries(
+  prestationProducts.map((p) => [p.code, p]),
+);
+
+const madForfaitsFile = MadForfaitsFileSchema.parse(madForfaitsRaw);
+/** correspondance dispositif → niveau MAD (codes MAD1/MAD2 dans les prestations). */
+export const madNiveaux: MadNiveau[] = madForfaitsFile.niveaux;
+
 const cumulFile = CumulFileSchema.parse(cumulRaw);
 /** catégories VPH cumulables (acronyme LPPR + libellé), dans l'ordre du document. */
 export const cumulCategories: CumulCategory[] = cumulFile.categories;
@@ -145,6 +157,16 @@ assert(
   livraisonPresta!.tarif === meta.livraison.price,
   `meta.livraison : tarif ${meta.livraison.price} ≠ prestation ${livraisonPresta!.tarif}`,
 );
+
+// mad-forfaits : tout code référencé doit exister dans les prestations, tout device dans devices.
+for (const n of madNiveaux) {
+  for (const c of [n.premiere, n.renouvellement]) {
+    assert(c in prestationByCode, `mad-forfaits niveau ${n.niveau} : code ${c} absent des prestations`);
+  }
+  for (const dc of n.devices) {
+    assert(dc in deviceByCode, `mad-forfaits niveau ${n.niveau} : dispositif « ${dc} » inconnu`);
+  }
+}
 
 const cumulCodes = new Set(cumulCategories.map((c) => c.code));
 for (const [from, list] of Object.entries(cumulIncompatible)) {

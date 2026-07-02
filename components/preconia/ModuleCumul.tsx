@@ -5,7 +5,7 @@
    mode ACHAT/LLD) ; l'encart indique « Cumul autorisé » (vert) ou « Cumul interdit » (rouge).
    Règles : data/cumul.json (incompatibilités par acronyme) → isCumulAllowed (règle pure). */
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { cumulCategories, cumulIncompatible, cumulMeta } from "@/lib/data";
 import { isCumulAllowed } from "@/lib/rules";
 
@@ -70,7 +70,18 @@ function CategoryPicker({
   );
 }
 
-export function ModuleCumul() {
+export function ModuleCumul({
+  embedded = false,
+  idPrefix = "cumul",
+  onVerdict,
+}: {
+  /** Variante embarquée (étape cumul du walker) : pas de carte autonome. */
+  embedded?: boolean;
+  /** Préfixe des ids DOM (unicité quand plusieurs instances coexistent). */
+  idPrefix?: string;
+  /** Remonte le verdict à chaque changement : true (autorisé) / false (interdit) / null. */
+  onVerdict?: (allowed: boolean | null) => void;
+}) {
   const [ownedCode, setOwnedCode] = useState<string | null>(null);
   const [ownedMode, setOwnedMode] = useState<Mode>("ACHAT");
   const [wantCode, setWantCode] = useState<string | null>(null);
@@ -78,9 +89,13 @@ export function ModuleCumul() {
 
   const allowed = isCumulAllowed(ownedCode, wantCode, cumulIncompatible);
 
-  return (
-    <section className="mt-5 overflow-hidden rounded-2xl border border-line bg-card shadow-sm">
-      <div className="px-6 pb-5 pt-5">
+  // remonte le verdict au parent (walker) à chaque changement.
+  useEffect(() => {
+    onVerdict?.(allowed);
+  }, [allowed, onVerdict]);
+
+  const inner = (
+    <>
         <div className="flex flex-wrap items-baseline justify-between gap-2">
           <h2 className="text-base font-semibold">Évaluation de cumul VPH</h2>
           <span className="text-[11px] font-semibold text-red-600">
@@ -99,7 +114,7 @@ export function ModuleCumul() {
             setCode={setOwnedCode}
             mode={ownedMode}
             setMode={setOwnedMode}
-            selectId="cumul-owned"
+            selectId={`${idPrefix}-owned`}
           />
           <CategoryPicker
             legend="Je souhaite acquérir"
@@ -107,7 +122,7 @@ export function ModuleCumul() {
             setCode={setWantCode}
             mode={wantMode}
             setMode={setWantMode}
-            selectId="cumul-want"
+            selectId={`${idPrefix}-want`}
           />
         </div>
 
@@ -142,7 +157,15 @@ export function ModuleCumul() {
         <p className="mt-3 text-[11px] leading-relaxed text-ink-soft/90">
           Aide à la décision non opposable. {cumulMeta.source}
         </p>
-      </div>
+    </>
+  );
+
+  // variante embarquée (étape cumul du walker) : pas de carte autonome.
+  if (embedded) return <div className="rounded-xl border border-line bg-paper/30 p-4">{inner}</div>;
+
+  return (
+    <section className="mt-5 overflow-hidden rounded-2xl border border-line bg-card shadow-sm">
+      <div className="px-6 pb-5 pt-5">{inner}</div>
     </section>
   );
 }

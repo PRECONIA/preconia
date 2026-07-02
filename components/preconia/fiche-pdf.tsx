@@ -80,6 +80,8 @@ export interface FicheData {
   adjonctions: { code: string; name: string; price: string; open: boolean }[];
   pap: { name: string; forfait: "A" | "B"; code: string; info: string }[];
   livraison: { code: string; label: string; price: number } | null;
+  /** forfait MAD (MAD1/MAD2, niveau selon la catégorie) s'il est coché. */
+  mad: { code: string; label: string; price: number } | null;
   totals: { subtotal: number; hasOpen: boolean; total: number | null };
   disclaimer: string;
   source: string;
@@ -462,6 +464,16 @@ function FicheDocument({ d }: { d: FicheData }) {
                 code={d.livraison.code}
                 label={d.livraison.label}
                 value={eur(d.livraison.price)}
+                badgeBg={C.blue100}
+                badgeColor={C.blue800}
+                valueColor={C.blue800}
+              />
+            )}
+            {d.mad && (
+              <CodeRow
+                code={d.mad.code}
+                label={d.mad.label}
+                value={eur(d.mad.price)}
                 badgeBg={C.blue100}
                 badgeColor={C.blue800}
                 valueColor={C.blue800}
