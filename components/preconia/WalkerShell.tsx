@@ -615,8 +615,7 @@ export function WalkerShell() {
                 Prescription &amp; préconisation d&apos;un fauteuil roulant (VPH)
               </h1>
               <p className="mb-4 text-sm text-ink-soft">
-                Un parcours guidé mène du profil fonctionnel à la catégorie LPPR, sa classe, son
-                circuit de prise en charge et ses adjonctions.
+                Un parcours guidé pour la sélection d&apos;un VPH, étape par étape.
               </p>
               <button className={`${primary} w-full justify-center`} onClick={() => go("age")}>
                 Commencer l&apos;évaluation →
