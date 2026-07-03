@@ -44,11 +44,11 @@
       "ACHAT": "Incapacité de marche partielle ou totale ET impossibilité de propulser un VPH manuel ou podale (déficience ou situation environnementale). Capacités cognitives et physiques pour maîtriser le FREV. Fonctionnement suffisant des membres supérieurs et capacités visuelles nécessaires. Besoin de verticalisation en position assise pour prévenir les complications liées à la position assise prolongée (escarres, troubles circulatoires, rétraction musculo-tendineuse, troubles digestifs, troubles respiratoires, etc.) OU besoin de verticalisation en position assise pour réaliser des activités de la vie quotidienne ou professionnelle nécessitant une position debout."
     },
     "POU_S": {
-      "ACHAT": "Enfants < 18 ans avec incapacité de marche partielle ou totale, permanente ou longue (+ 6 mois)"
+      "ACHAT": "Enfants < 16 ans avec incapacité de marche partielle ou totale, permanente ou longue (+ 6 mois)"
     },
     "POU_MRE": {
-      "LLD": "Enfants de moins de 18 ans présentant une incapacité de marche partielle ou totale, et/ou qui sont dans l'impossibilité d'utiliser elles-mêmes un autre VPH et/ou qui se trouvent dans des situations environnementales ou d'activité empêchant l'utilisation d'un autre VPH. Contrairement aux poussettes standard (POU_S), ce type de véhicule s'adresse aux patients ayant un besoin de maintien, de positionnement lié notamment à une perte du tonus musculaire.",
-      "ACHAT": "Enfants < 18 ans avec incapacité de marche partielle ou totale, impossibilité d'utiliser un autre VPH ou situations environnementales empêchant l'utilisation d'un autre VPH. Besoin de maintien et positionnement lié à une perte du tonus musculaire."
+      "LLD": "Enfants de moins de 16 ans présentant une incapacité de marche partielle ou totale, et/ou qui sont dans l'impossibilité d'utiliser elles-mêmes un autre VPH et/ou qui se trouvent dans des situations environnementales ou d'activité empêchant l'utilisation d'un autre VPH. Contrairement aux poussettes standard (POU_S), ce type de véhicule s'adresse aux patients ayant un besoin de maintien, de positionnement lié notamment à une perte du tonus musculaire.",
+      "ACHAT": "Enfants < 16 ans avec incapacité de marche partielle ou totale, impossibilité d'utiliser un autre VPH ou situations environnementales empêchant l'utilisation d'un autre VPH. Besoin de maintien et positionnement lié à une perte du tonus musculaire."
     },
     "SCO": {
       "ACHAT": "Limitation sévère et durable de l'activité de marche, impossibilité d'atteindre les objectifs de participation sociale avec un FR manuel. Capacité à marcher sur quelques mètres, équilibre assis sans aide, transferts autonomes, fonctionnement suffisant des membres supérieurs, capacités cognitives et perceptives nécessaires."

@@ -346,6 +346,27 @@ export function madForfaitFor(
   return p ? { code, label: p.label, price: p.tarif, niveau: n.niveau } : null;
 }
 
+/** Palier de prescripteur affiché, selon le mode de prise en charge et le contexte de MAD
+ *  (arrêté du 06/02/2025) :
+ *  - LCD manuelle (FMP/FMPR/FRM) : médecin, ergothérapeute ou kinésithérapeute (9.5.a) ;
+ *  - LCD FRE : palier restreint MPR / DU / ergo en équipe pluridisciplinaire + certificat (9.5.b) ;
+ *  - renouvellement à l'identique (achat/LLD) : médecin généraliste ou ergothérapeute (3.1.6),
+ *    quel que soit le palier de la primo-prescription ;
+ *  - sinon : palier de la catégorie (`device.presc`). */
+export function prescriberFor(
+  device: Device,
+  pec: "achat" | "lcd" | "lld",
+  mad: "premiere" | "renouv_cat" | "renouv_id" | null,
+  prescribers: Record<string, string>,
+): string {
+  if (pec === "lcd") {
+    const key = device.code === "FRE" ? "lcdFre" : "lcdManuel";
+    return prescribers[key] ?? prescribers[device.presc];
+  }
+  if (mad === "renouv_id") return prescribers.renouvId ?? prescribers[device.presc];
+  return prescribers[device.presc];
+}
+
 /** Cumul de deux VPH autorisé ? Faux si l'un figure dans l'incompatibilité de l'autre (relation
     symétrique). `a`/`b` : acronymes LPPR (FMP, FREP, SIEGE_COQUILLE…). null tant qu'un choix manque. */
 export function isCumulAllowed(
@@ -357,6 +378,41 @@ export function isCumulAllowed(
   const incompatibleAB = incompatible[a]?.includes(b) ?? false;
   const incompatibleBA = incompatible[b]?.includes(a) ?? false;
   return !(incompatibleAB || incompatibleBA);
+}
+
+export type CumulMode = "ACHAT" | "LLD" | "LCD";
+export type CumulVerdict = "autorise" | "interdit" | "derogation";
+
+/** Catégories manuelles dont la possession (sans option d'assistance électrique à la propulsion)
+ *  ouvre la dérogation de LCD d'un FRE (arrêté du 06/02/2025, Titre IV 4.1). */
+const DEROG_LCD_FRE = ["FMP", "FMPR", "FRM", "FRMV", "FRMC", "FRMP"];
+
+/** Verdict de cumul tenant compte du mode (Titre IV 4.1–4.2) :
+ *  - toute prise en charge en LCD est exclusive : pas de cumul avec un VPH acheté ou loué,
+ *    ni deux forfaits LCD concomitants ;
+ *  - dérogation (verdict « derogation ») : LCD d'un FRE souhaitée alors qu'un manuel
+ *    FMP/FMPR/FRM/FRMV/FRMC/FRMP est possédé sans AAP — épisode de soin avec impossibilité
+ *    physique transitoire de propulser, objectivé par une nouvelle prescription ;
+ *  - hors LCD : matrice d'incompatibilités par catégorie (isCumulAllowed). */
+export function cumulVerdict(
+  owned: string | null,
+  ownedMode: CumulMode,
+  want: string | null,
+  wantMode: CumulMode,
+  incompatible: Record<string, string[]>,
+): CumulVerdict | null {
+  if (!owned || !want) return null;
+  if (ownedMode === "LCD" || wantMode === "LCD") {
+    if (
+      wantMode === "LCD" &&
+      want === "FRE" &&
+      ownedMode !== "LCD" &&
+      DEROG_LCD_FRE.includes(owned)
+    )
+      return "derogation";
+    return "interdit";
+  }
+  return isCumulAllowed(owned, want, incompatible) ? "autorise" : "interdit";
 }
 
 /** Marques disponibles (triées) parmi un ensemble de codes mères — pour peupler le sélecteur. */

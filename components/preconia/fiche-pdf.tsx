@@ -88,6 +88,12 @@ export interface FicheData {
   forfaits: { code: string; label: string; price: number; definition: string[]; technique: string[] }[];
   adjonctions: { code: string; name: string; price: string; open: boolean }[];
   pap: { name: string; forfait: "A" | "B"; code: string; info: string }[];
+  /** LCD : adjonctions et PAP documentés mais inclus au forfait hebdomadaire (§7) — noms seuls. */
+  incluses: string[];
+  /** Parcours d'essais requis avant prise en charge (arrêté du 06/02/2025). */
+  essais: string[];
+  /** Pièces conditionnant le remboursement (achat modulaire / LLD — Titre IV, 3.3.6). */
+  documents: string[];
   /** option d'achat LCD de la catégorie si elle est cochée (location courte durée). */
   optionAchat: { code: string; label: string; price: number } | null;
   livraison: { code: string; label: string; price: number } | null;
@@ -525,6 +531,51 @@ function FicheDocument({ d }: { d: FicheData }) {
                 </Text>
               </View>
             )}
+            {d.adjonctions.some((a) => a.open) && (
+              <Text style={{ fontSize: 7.5, color: C.amber, marginTop: 5 }}>
+                Adjonction « sur devis » : demande d&apos;accord préalable au service médical,
+                mention manuscrite obligatoire du prescripteur sur l&apos;ordonnance, essai en
+                conditions réelles (7 jours, 48 h minimum) et confirmation écrite du patient
+                (arrêté du 06/02/2025, §7).
+              </Text>
+            )}
+          </Section>
+        )}
+
+        {/* LCD : sélections incluses au forfait hebdomadaire — à fournir par le prestataire */}
+        {d.incluses.length > 0 && (
+          <Section title="À fournir par le prestataire — inclus au forfait de location">
+            <Text style={{ fontSize: 8, color: C.cyan800, marginBottom: 4 }}>
+              En location courte durée, adjonctions et PAP sont couverts par le forfait
+              hebdomadaire et ne peuvent pas être facturés séparément (arrêté du 06/02/2025, §7).
+            </Text>
+            {d.incluses.map((n, i) => (
+              <Text key={i} style={{ fontSize: 9.5, marginBottom: 2 }}>
+                • {n}
+              </Text>
+            ))}
+          </Section>
+        )}
+
+        {/* parcours d'essais requis */}
+        {d.essais.length > 0 && (
+          <Section title="Essais requis avant prise en charge" wrap>
+            {d.essais.map((n, i) => (
+              <Text key={i} style={{ fontSize: 9, color: C.inkSoft, marginBottom: 3 }}>
+                • {n}
+              </Text>
+            ))}
+          </Section>
+        )}
+
+        {/* pièces conditionnant le remboursement (achat modulaire / LLD) */}
+        {d.documents.length > 0 && (
+          <Section title="Pièces à transmettre à la CPAM (remboursement)" wrap>
+            {d.documents.map((n, i) => (
+              <Text key={i} style={{ fontSize: 9, marginBottom: 2 }}>
+                [ ] {n}
+              </Text>
+            ))}
           </Section>
         )}
 

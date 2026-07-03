@@ -11,6 +11,7 @@ import {
   lldForfaits,
   madLcd,
   madNiveaux,
+  prescribers,
   prestationByCode,
   deviceLppByType,
   papForfaits,
@@ -29,6 +30,8 @@ import {
   deviceModelsForBrand,
   optionSheetFor,
   isCumulAllowed,
+  cumulVerdict,
+  prescriberFor,
   lcdForfaitFor,
   lcdOptionAchatFor,
   lldForfaitFor,
@@ -468,6 +471,16 @@ describe("isCumulAllowed (module cumul VPH)", () => {
     expect(isCumulAllowed("FRM", "FRM", I)).toBe(false); // deux fois la même catégorie
   });
 
+  it("cumuls interdits — arrêté du 06/02/2025, Titre IV 4.2", () => {
+    expect(isCumulAllowed("FRM", "FRMV", I)).toBe(false); // FRMV rejoint les modulaires manuels
+    expect(isCumulAllowed("FRMP", "FRMV", I)).toBe(false);
+    expect(isCumulAllowed("FRM", "FRE", I)).toBe(false); // manuel modulaire + électrique modulaire
+    expect(isCumulAllowed("FREP", "FRM", I)).toBe(false);
+    expect(isCumulAllowed("FRMV", "FREV", I)).toBe(false);
+    expect(isCumulAllowed("CYC", "FRM", I)).toBe(false); // le cycle exclut les manuels modulaires
+    expect(isCumulAllowed("CYC", "FRMS", I)).toBe(false); // FRMS inclus (pas d'exception au 4.2)
+  });
+
   it("siège coquille : incompatible avec tout", () => {
     for (const c of cumulCategories) {
       expect(isCumulAllowed("SIEGE_COQUILLE", c.code, I)).toBe(false);
@@ -475,9 +488,9 @@ describe("isCumulAllowed (module cumul VPH)", () => {
   });
 
   it("cumuls autorisés", () => {
-    expect(isCumulAllowed("FMP", "FRE", I)).toBe(true); // manuel + électrique
-    expect(isCumulAllowed("CYC", "FRM", I)).toBe(true);
-    expect(isCumulAllowed("FREP", "FRM", I)).toBe(true);
+    expect(isCumulAllowed("FMP", "FRE", I)).toBe(true); // non modulaire + électrique
+    expect(isCumulAllowed("FRMS", "FRM", I)).toBe(true); // exception sport (4.2)
+    expect(isCumulAllowed("FRMS", "FRE", I)).toBe(true); // exception sport, y compris électrique
     expect(isCumulAllowed("SCO", "AAP", I)).toBe(true); // non listés l'un chez l'autre
     expect(isCumulAllowed("BASE", "FRE", I)).toBe(true);
   });
@@ -488,5 +501,70 @@ describe("isCumulAllowed (module cumul VPH)", () => {
         expect(isCumulAllowed(a.code, b.code, I)).toBe(isCumulAllowed(b.code, a.code, I));
       }
     }
+  });
+});
+
+describe("cumulVerdict (modes ACHAT/LLD/LCD — Titre IV 4.1)", () => {
+  const I = cumulIncompatible;
+
+  it("null tant qu'un choix manque", () => {
+    expect(cumulVerdict(null, "ACHAT", "FRE", "LCD", I)).toBeNull();
+    expect(cumulVerdict("FRM", "LCD", null, "ACHAT", I)).toBeNull();
+  });
+
+  it("hors LCD : délègue à la matrice d'incompatibilités", () => {
+    expect(cumulVerdict("FRM", "ACHAT", "FRE", "LLD", I)).toBe("interdit");
+    expect(cumulVerdict("FRMS", "ACHAT", "FRE", "ACHAT", I)).toBe("autorise");
+    expect(cumulVerdict("BASE", "ACHAT", "FRE", "LLD", I)).toBe("autorise");
+  });
+
+  it("toute prise en charge LCD est exclusive", () => {
+    expect(cumulVerdict("FRM", "LCD", "FMP", "ACHAT", I)).toBe("interdit");
+    expect(cumulVerdict("FMP", "ACHAT", "FRM", "LCD", I)).toBe("interdit");
+    expect(cumulVerdict("FRM", "LCD", "FRE", "LCD", I)).toBe("interdit"); // deux LCD concomitantes
+    // même des catégories cumulables hors location deviennent interdites en LCD
+    expect(cumulVerdict("BASE", "ACHAT", "FRM", "LCD", I)).toBe("interdit");
+  });
+
+  it("dérogation : LCD d'un FRE malgré un manuel possédé sans AAP", () => {
+    for (const owned of ["FMP", "FMPR", "FRM", "FRMV", "FRMC", "FRMP"]) {
+      expect(cumulVerdict(owned, "ACHAT", "FRE", "LCD", I)).toBe("derogation");
+    }
+    expect(cumulVerdict("FRM", "LLD", "FRE", "LCD", I)).toBe("derogation");
+    expect(cumulVerdict("AAP", "ACHAT", "FRE", "LCD", I)).toBe("interdit"); // AAP exclut la dérogation
+    expect(cumulVerdict("FRMA", "ACHAT", "FRE", "LCD", I)).toBe("interdit"); // FRMA hors liste 4.1
+    expect(cumulVerdict("FRE", "LCD", "FRM", "ACHAT", I)).toBe("interdit"); // sens inverse : épisode LCD en cours
+  });
+});
+
+describe("prescriberFor (palier selon le mode — 9.5, 3.1.6)", () => {
+  const P = prescribers;
+
+  it("LCD manuelle : médecin, ergothérapeute ou kinésithérapeute (9.5.a)", () => {
+    for (const code of ["FMP", "FMPR", "FRM"]) {
+      const line = prescriberFor(deviceByCode[code], "lcd", "premiere", P);
+      expect(line).toContain("kinésithérapeute");
+    }
+  });
+
+  it("LCD FRE : palier restreint + certificat (9.5.b)", () => {
+    const line = prescriberFor(deviceByCode.FRE, "lcd", "premiere", P);
+    expect(line).toContain("équipe pluridisciplinaire");
+    expect(line).toContain("certificat");
+  });
+
+  it("renouvellement à l'identique : généraliste ou ergothérapeute (3.1.6)", () => {
+    const line = prescriberFor(deviceByCode.FREP, "achat", "renouv_id", P);
+    expect(line).toContain("généraliste");
+    const lld = prescriberFor(deviceByCode.FREP, "lld", "renouv_id", P);
+    expect(lld).toContain("généraliste");
+  });
+
+  it("achat / LLD hors renouvellement à l'identique : palier de la catégorie", () => {
+    expect(prescriberFor(deviceByCode.FRE, "achat", "premiere", P)).toBe(P.pluri);
+    expect(prescriberFor(deviceByCode.FRMP, "lld", "renouv_cat", P)).toBe(P.spe);
+    expect(prescriberFor(deviceByCode.FRM, "achat", null, P)).toBe(P.large);
+    // le palier « spe » corrigé mentionne l'ergothérapeute (3.1.4.2.1)
+    expect(P.spe).toContain("ergothérapeute");
   });
 });

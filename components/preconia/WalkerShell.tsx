@@ -30,6 +30,7 @@ import {
 import {
   adaptedCode,
   brandsForBases,
+  computeSubtotal,
   deviceAllowedForDuree,
   deviceBrandsForToken,
   deviceLpp,
@@ -37,6 +38,7 @@ import {
   deviceModelsForBrand,
   hasBrandVariant,
   hasDeviceBrandVariant,
+  hasOpenItems,
   lcdForfaitFor,
   lcdOptionAchatFor,
   lldForfaitFor,
@@ -44,6 +46,8 @@ import {
   madLcdFor,
   modesForDuree,
   optionSheetFor,
+  prescriberFor,
+  type CumulVerdict,
 } from "@/lib/rules";
 import { eur } from "@/lib/format";
 import { RechercheLpp } from "@/components/preconia/RechercheLpp";
@@ -88,6 +92,81 @@ function priceLabel(a: Adjonction): string {
 
 // Propulsion manuelle / podale : fauteuils manuels + cycle (propulsion podale).
 const MAN_FAMILIES = ["Manuel non modulaire", "Manuel modulaire", "Cycle"];
+
+/** Supplément appui-tête réglable — non cumulable avec le forfait PAP A (arrêté 06/02/2025, §7). */
+const APPUI_TETE_CODE = "4954630";
+
+/* Encarts réglementaires (arrêté du 6 février 2025) — partagés entre le walker et la fiche PDF. */
+const CARENCE_LCD =
+  "Location courte durée : 26 forfaits hebdomadaires consécutifs au maximum par année glissante. " +
+  "Après le dernier forfait facturé, délai de carence d'un an avant tout autre VPH à l'achat neuf " +
+  "(hors option d'achat), en LLD ou en nouvelle LCD — sauf épisode de soin dans une indication " +
+  "différente, objectivé par une nouvelle prescription (Titre I, 9.6).";
+const CARENCE_LLD =
+  "Une LLD après une location courte durée n'est possible qu'un an après le dernier forfait LCD " +
+  "facturé, sauf épisode de soin dans une indication différente, objectivé par une nouvelle " +
+  "prescription (Titre IV, 3.3.2). Prise en charge LLD pour 5 ans (3 ans avant 16 ans), " +
+  "renouvelable sur prescription.";
+const RENOUV_ANTICIPE =
+  "Renouvellement anticipé dérogatoire (art. R. 165-24) : possible avant le terme des 5 ans " +
+  "(3 ans avant 16 ans) si le VPH est reconnu irréparable, ou en cas d'évolution rapide de la " +
+  "pathologie ou de la morphologie nécessitant une nouvelle catégorie de VPH — sur nouvelle " +
+  "prescription ; relève du forfait MAD1.";
+const SUR_DEVIS_NOTE =
+  "Adjonction « sur devis » (ligne 4550001) : demande d'accord préalable au service médical, " +
+  "mention manuscrite obligatoire du prescripteur sur l'ordonnance, essai en conditions réelles " +
+  "(7 jours, 48 h minimum à la demande expresse du patient) et confirmation écrite du patient " +
+  "(arrêté du 06/02/2025, §7).";
+const COUSSINS_NOTE =
+  "Les coussins anti-escarres adaptables sur VPH relèvent du Titre I, chapitre 2, section 2 de la " +
+  "LPPR (hors nomenclature VPH) — à prescrire séparément.";
+const EHPAD_NOTE =
+  "Lieu de vie en EHPAD : produits dont le financement est intégré au forfait de soins de " +
+  "l'établissement (arrêté du 30 mai 2008) exclus de la prise en charge LPPR individuelle.";
+
+/** Documents conditionnant le remboursement (achat d'un VPH modulaire / LLD — Titre IV, 3.3.6). */
+const DOCUMENTS_CPAM = [
+  "Fiche d'évaluation des besoins (4 critères, prise de mesures du patient obligatoire)",
+  "Fiche de préconisation (modèle opposable publié par le ministère de la santé)",
+  "Certificat de validation des essais (dans les situations requises)",
+  "Bon de commande / devis du distributeur au détail (3 exemplaires)",
+  "Prescription définitive (consultation post-évaluation, après la phase d'essai)",
+];
+
+/** Parcours d'essais requis avant prise en charge, selon le mode et le dispositif. */
+function essaisNotes(device: Device, pec: Pec, selectedAdj: Adjonction[]): string[] {
+  const notes: string[] = [];
+  if (pec === "lcd") {
+    notes.push(
+      "Essais LCD (2 étapes) : proposition de 4 modèles sur catalogue conformes à la prescription, puis essai pratique comparatif d'au moins 2 modèles (point de vente ou domicile) avec réglages par le distributeur (Titre I, 9.7).",
+    );
+    if (!device.modular)
+      notes.push(
+        "FMP / FMPR : essais comparatifs optionnels en cas de prise en charge urgente, sous réserve d'une mention explicite sur l'ordonnance et d'une information au bénéficiaire.",
+      );
+    if (device.code === "FRE")
+      notes.push(
+        "FRE : essai préalable pratique en présence d'une équipe pluridisciplinaire, puis certificat d'aptitude à la conduite transmis à la CPAM — condition du déclenchement du remboursement (Titre I, 9.5). Refait au moment de l'option d'achat le cas échéant.",
+      );
+  } else {
+    notes.push(
+      "Essais (achat / LLD) : 1) proposition de 4 modèles sur catalogue ; 2) essai pratique comparatif d'au moins 2 modèles réglés par le distributeur (Titre IV, 3.1.4.2).",
+    );
+    if (device.fiche)
+      notes.push(
+        "3) Essai en conditions réelles d'utilisation de 7 jours du modèle pré-choisi (réductible à 48 h minimum à la demande expresse du patient) — aucune facturation du fauteuil avant la fin de cette période d'essai (3.1.4.2.3).",
+      );
+    if (device.electric || device.code === "SCO")
+      notes.push(
+        "Fauteuil électrique / scooter : essai préalable pratique en présence d'une équipe pluridisciplinaire (aptitude à la conduite, attestée par certificat) avant ces étapes ; remise au patient d'une fiche cosignée rappelant les règles d'utilisation, d'assurance, de vitesse et d'entretien.",
+      );
+  }
+  if (selectedAdj.some((a) => a.group === "aap"))
+    notes.push(
+      "AAP : essai pratique préalable par une équipe pluridisciplinaire + certificat d'adéquation ; prescription par un médecin MPR, un titulaire d'un DU Appareillage, un médecin spécialiste (hors médecine générale) d'un établissement ou service, ou un ergothérapeute en équipe pluridisciplinaire (§7.1.1.1).",
+    );
+  return notes;
+}
 
 /** Mode de prise en charge retenu par le parcours : achat, LCD ou LLD. */
 type Pec = "achat" | "lcd" | "lld";
@@ -210,7 +289,31 @@ export function WalkerShell() {
   // Forfait MAD effectif selon le mode (alimente codes copiés, total et PDF).
   const effMad = pec === "lcd" ? madLcdForfait : madForfait;
   // Verdict du module de cumul embarqué (étape cumul) : null tant que non évalué.
-  const [cumulVerdict, setCumulVerdict] = useState<boolean | null>(null);
+  const [cumulVerdict, setCumulVerdict] = useState<CumulVerdict | null>(null);
+
+  // En LCD, adjonctions et PAP ne sont JAMAIS facturés à part : ils sont couverts par le
+  // forfait hebdomadaire de location (arrêté du 06/02/2025, §7 et 9.3). On les laisse
+  // cochables pour documenter le besoin sur la fiche, sans code ni tarif.
+  const billAdj = pec !== "lcd";
+  // Appui-tête réglable et forfait PAP A (membre supérieur) non cumulables (§7) :
+  // si le forfait A est déclenché, l'appui-tête sort de la facturation.
+  const forfaitAActive = forfaits.includes("A");
+  const selectedAdjBill = forfaitAActive
+    ? selectedAdj.filter((a) => a.code !== APPUI_TETE_CODE)
+    : selectedAdj;
+  const appuiTeteDropped =
+    billAdj && forfaitAActive && selectedAdj.some((a) => a.code === APPUI_TETE_CODE);
+  const subtotalBill = billAdj ? computeSubtotal(selectedAdjBill, forfaits, papForfaits) : 0;
+  const hasOpenBill = billAdj && hasOpenItems(selectedAdjBill);
+  const costsBill = { ...costs, subtotal: subtotalBill, hasOpen: hasOpenBill };
+  // Sélections à documenter « incluses au forfait » (LCD) : adjonctions + PAP cochés.
+  const papChecked = Object.keys(state.pap).filter((k) => state.pap[k]);
+  const incluses =
+    pec === "lcd" ? [...selectedAdj.map((a) => a.name), ...papChecked] : [];
+
+  // Palier de prescripteur selon le mode (LCD manuelle : + kinésithérapeute ; LCD FRE :
+  // palier restreint + certificat ; renouvellement à l'identique : généraliste ou ergo).
+  const prescLine = device ? prescriberFor(device, pec, answers.mad, prescribers) : "";
 
   // Ligne « fauteuil » de la fiche : code d'achat neuf en achat, forfait de location en LCD/LLD.
   const deviceLine =
@@ -225,13 +328,16 @@ export function WalkerShell() {
 
   // Tous les codes LPP de la fiche finale : fauteuil (ou forfait de location) + forfaits PAP
   // + adjonctions (adaptés marque) + option d'achat LCD, livraison et MAD s'ils sont cochés.
+  // En LCD, adjonctions et PAP sont inclus au forfait hebdomadaire : aucun code facturable.
   const lpprCodes = [
     ...(deviceLine ? [deviceLine] : []),
-    ...forfaits.map((f) => ({
-      code: adaptedCode(papForfaits[f].code, brand, adjBrandMap),
-      label: papForfaits[f].label,
-    })),
-    ...selectedAdj.map((a) => ({
+    ...(billAdj
+      ? forfaits.map((f) => ({
+          code: adaptedCode(papForfaits[f].code, brand, adjBrandMap),
+          label: papForfaits[f].label,
+        }))
+      : []),
+    ...(billAdj ? selectedAdjBill : []).map((a) => ({
       code: adaptedCode(a.code, brand, adjBrandMap),
       label: a.name,
     })),
@@ -292,6 +398,19 @@ export function WalkerShell() {
       flags.push(
         "Conduite par tierce personne : commande pour l'accompagnant (FREP/FREV, exception nomenclature).",
       );
+    if (pec === "lcd") flags.push(CARENCE_LCD);
+    if (pec === "lld") flags.push(CARENCE_LLD);
+    if (addOptionAchat && lcdOption)
+      flags.push(
+        "Option d'achat LCD : possible uniquement au terme des 26 semaines de location consécutives, sur décision du prescripteur (Titre I, 9.3). Garantie pièces et main-d'œuvre, assistance technique et dépannage inclus pendant 2 ans à compter du premier forfait de LCD (6.1.1) ; renouvellement du fauteuil acquis possible 5 ans après le début de la location, période de LCD incluse (3.1.6)." +
+          (dev.code === "FRE"
+            ? " FRE : nouvel essai préalable et certificat d'aptitude à la conduite requis au moment de l'option d'achat (9.5)."
+            : ""),
+      );
+    if (appuiTeteDropped)
+      flags.push(
+        "Supplément appui-tête réglable retiré de la facturation : non cumulable avec le forfait PAP A — le positionnement cervico-céphalique y est déjà couvert (§7).",
+      );
 
     const vphInd = Object.entries(deviceIndicationsByCode[dev.code] ?? {})
       .filter(([m]) => allowedModes.includes(m as (typeof allowedModes)[number]))
@@ -322,31 +441,36 @@ export function WalkerShell() {
             }
           : null;
 
-    const forfaitsData = forfaits.map((f) => ({
-      code: adaptedCode(papForfaits[f].code, brand, adjBrandMap),
-      label: papForfaits[f].label,
-      price: papForfaits[f].price,
-      definition: papForfaits[f].definition,
-      technique: papForfaits[f].technique,
-    }));
+    // En LCD : adjonctions/PAP inclus au forfait hebdomadaire, aucune ligne facturable.
+    const forfaitsData = billAdj
+      ? forfaits.map((f) => ({
+          code: adaptedCode(papForfaits[f].code, brand, adjBrandMap),
+          label: papForfaits[f].label,
+          price: papForfaits[f].price,
+          definition: papForfaits[f].definition,
+          technique: papForfaits[f].technique,
+        }))
+      : [];
 
-    const adjData = selectedAdj.map((a) => ({
+    const adjData = (billAdj ? selectedAdjBill : []).map((a) => ({
       code: adaptedCode(a.code, brand, adjBrandMap),
       name: a.name,
       price: priceLabel(a),
       open: !!(a.devis || a.tbd),
     }));
 
-    const papData = papRegions.flatMap((r) =>
-      r.items
-        .filter((it) => state.pap[it.name])
-        .map((it) => ({
-          name: it.name,
-          forfait: r.forfait,
-          code: adaptedCode(papForfaits[r.forfait].code, brand, adjBrandMap),
-          info: it.info,
-        })),
-    );
+    const papData = billAdj
+      ? papRegions.flatMap((r) =>
+          r.items
+            .filter((it) => state.pap[it.name])
+            .map((it) => ({
+              name: it.name,
+              forfait: r.forfait,
+              code: adaptedCode(papForfaits[r.forfait].code, brand, adjBrandMap),
+              info: it.info,
+            })),
+        )
+      : [];
 
     const extras =
       (addLivraison ? meta.livraison.price : 0) +
@@ -357,10 +481,10 @@ export function WalkerShell() {
     const total =
       pec === "achat"
         ? devLpp?.tarif != null
-          ? devLpp.tarif + costs.subtotal + extras
+          ? devLpp.tarif + subtotalBill + extras
           : null
-        : costs.subtotal + extras > 0
-          ? costs.subtotal + extras
+        : subtotalBill + extras > 0
+          ? subtotalBill + extras
           : null;
 
     const lcdDureeLabel =
@@ -382,7 +506,7 @@ export function WalkerShell() {
             .filter((m) => allowedModes.includes(m))
             .map((m) => modeLabels[m]?.label ?? m)
             .join(" / ") + lcdDureeLabel,
-        presc: prescribers[dev.presc],
+        presc: prescLine,
         fiche: dev.fiche,
         dap: dev.dap,
       },
@@ -392,6 +516,10 @@ export function WalkerShell() {
       forfaits: forfaitsData,
       adjonctions: adjData,
       pap: papData,
+      incluses,
+      essais: essaisNotes(dev, pec, selectedAdj),
+      documents:
+        pec === "lld" || (pec === "achat" && dev.fiche) ? DOCUMENTS_CPAM : [],
       optionAchat:
         addOptionAchat && lcdOption
           ? { code: lcdOption.code, label: lcdOption.label, price: lcdOption.price }
@@ -401,8 +529,8 @@ export function WalkerShell() {
         : null,
       mad: addMad && effMad ? { code: effMad.code, label: effMad.label, price: effMad.price } : null,
       totals: {
-        subtotal: costs.subtotal,
-        hasOpen: costs.hasOpen,
+        subtotal: subtotalBill,
+        hasOpen: hasOpenBill,
         total,
         horsLocation: pec !== "achat",
       },
@@ -492,6 +620,16 @@ export function WalkerShell() {
               <button className={`${primary} w-full justify-center`} onClick={() => go("age")}>
                 Commencer l&apos;évaluation →
               </button>
+              <div className="mt-4 rounded-xl border border-line bg-paper/40 p-3.5 text-[11.5px] leading-relaxed text-ink-soft">
+                <b className="text-ink">Période transitoire (arrêté du 06/02/2025).</b> Les VPH
+                conformes à l&apos;ancien Titre IV et prescrits avant le 01/12/2025 restent
+                vendables ou louables jusqu&apos;au <b>01/12/2026</b> (art. 2) ; les anciens codes
+                de location ≥ 52 semaines (1255682, 1232988, 1240976) restent facturables
+                jusqu&apos;au <b>30/11/2027</b> ; les spécifications techniques des fauteuils à la
+                location s&apos;appliquent au 01/12/2026 (art. 3). La prise en charge des VPH remis
+                en bon état d&apos;usage (RBEU) est annoncée mais son arrêté d&apos;application
+                n&apos;est pas encore publié.
+              </div>
             </>
           )}
 
@@ -521,7 +659,7 @@ export function WalkerShell() {
                 <div className="mt-3">
                   <ModuleCumul embedded idPrefix="walker-cumul" onVerdict={setCumulVerdict} />
 
-                  {cumulVerdict === true && (
+                  {cumulVerdict === "autorise" && (
                     <button
                       className={`${primary} mt-3 w-full justify-center`}
                       onClick={() => go("duree")}
@@ -529,7 +667,15 @@ export function WalkerShell() {
                       Cumul autorisé — poursuivre l&apos;évaluation →
                     </button>
                   )}
-                  {cumulVerdict === false && (
+                  {cumulVerdict === "derogation" && (
+                    <button
+                      className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-amber-600 px-5 py-3 font-semibold text-white hover:bg-amber-700"
+                      onClick={() => go("duree")}
+                    >
+                      Poursuivre au titre de la dérogation (Titre IV, 4.1) →
+                    </button>
+                  )}
+                  {cumulVerdict === "interdit" && (
                     <div className="mt-3 rounded-xl border-2 border-red-500 bg-red-50 p-4 text-center">
                       <p className="text-sm font-semibold text-red-700">
                         Cumul interdit — fin de l&apos;évaluation.
@@ -554,7 +700,10 @@ export function WalkerShell() {
 
           {/* ---------------- AGE ---------------- */}
           {stage === "age" && (
-            <Step title="Âge du patient" hint="Conditionne l'accès aux poussettes (moins de 18 ans).">
+            <Step
+              title="Âge du patient"
+              hint="Seuil réglementaire de la nomenclature : conditionne l'accès aux poussettes (moins de 16 ans) et les durées de prise en charge — renouvellement, MAD1, livraison : 5 ans, ramenés à 3 ans avant 16 ans."
+            >
               <button
                 className={choice(answers.age === "adulte")}
                 onClick={() => {
@@ -562,7 +711,7 @@ export function WalkerShell() {
                   go("mad");
                 }}
               >
-                Adulte (18 ans et plus)
+                16 ans et plus
               </button>
               <button
                 className={choice(answers.age === "enfant")}
@@ -571,7 +720,7 @@ export function WalkerShell() {
                   go("mad");
                 }}
               >
-                Enfant (moins de 18 ans)
+                Moins de 16 ans
               </button>
               <Nav dispatch={dispatch} />
             </Step>
@@ -628,6 +777,7 @@ export function WalkerShell() {
                 De 14 à 26 semaines{" "}
                 <span className="text-ink-soft">· forfait hebdomadaire 14–26 sem</span>
               </button>
+              <Flag>{CARENCE_LCD}</Flag>
               <Nav dispatch={dispatch} />
             </Step>
           )}
@@ -657,6 +807,7 @@ export function WalkerShell() {
                 Location longue durée (LLD){" "}
                 <span className="text-ink-soft">· forfait trimestriel</span>
               </button>
+              <Flag>{CARENCE_LLD}</Flag>
               <Nav dispatch={dispatch} />
             </Step>
           )}
@@ -695,6 +846,7 @@ export function WalkerShell() {
               >
                 Renouvellement à l&apos;identique <span className="text-ink-soft">· forfait MAD2</span>
               </button>
+              <Flag>{RENOUV_ANTICIPE}</Flag>
               <Nav dispatch={dispatch} />
             </Step>
           )}
@@ -796,6 +948,8 @@ export function WalkerShell() {
                   ou cognitive) → commande pour l&apos;accompagnant (FREP/FREV, exception nomenclature).
                 </Flag>
               )}
+
+              <p className="mb-1 mt-2 text-[11.5px] leading-relaxed text-ink-soft/90">{EHPAD_NOTE}</p>
 
               <Nav dispatch={dispatch} next={() => go("adj")} nextLabel="Suivant →" />
             </Step>
@@ -975,7 +1129,18 @@ export function WalkerShell() {
                 </div>
               )}
 
-              <h3 className="mb-3 mt-1 text-lg font-semibold tracking-tight">Adjonctions facturables</h3>
+              {pec === "lcd" && (
+                <div className="mb-4 rounded-xl border-2 border-cyan-500 bg-cyan-100/60 p-3.5 text-[12px] leading-relaxed text-cyan-900">
+                  <b>Adjonctions &amp; PAP en location courte durée :</b> ils sont inclus dans le
+                  forfait hebdomadaire de location et ne peuvent pas être facturés séparément
+                  (arrêté du 06/02/2025, §7 et 9.3). Cochez ci-dessous ce qui est nécessaire pour
+                  le documenter sur la fiche — le prestataire doit le fournir dans le forfait.
+                </div>
+              )}
+
+              <h3 className="mb-3 mt-1 text-lg font-semibold tracking-tight">
+                {pec === "lcd" ? "Adjonctions à prévoir (incluses au forfait)" : "Adjonctions facturables"}
+              </h3>
 
               {compatAdj.length === 0 && (
                 <p className="rounded-lg bg-petrol-tint/40 px-3 py-2 text-sm text-ink-soft">
@@ -991,34 +1156,72 @@ export function WalkerShell() {
                     <div className="mb-2 mt-3 text-[11px] font-semibold uppercase tracking-wide text-ink-soft">
                       {adjGroups[g]}
                     </div>
-                    {items.map((item) => (
-                      <button
-                        key={item.code}
-                        className={choice(!!state.adj[item.code], "flex items-start justify-between gap-3")}
-                        onClick={() => dispatch({ type: "TOGGLE_ADJ", item })}
-                      >
-                        <span>
-                          <b className="block">{item.name}</b>
-                          <span className="inline-flex items-center gap-1.5">
-                            <span className="rounded bg-petrol-tint px-1.5 py-0.5 font-mono text-[11px] font-semibold text-petrol-deep">
-                              {adaptedCode(item.code, brand, adjBrandMap)}
-                            </span>
-                            {brand && !hasBrandVariant(item.code, brand, adjBrandMap) && (
-                              <span className="text-[10px] text-ink-soft">générique</span>
+                    {items.map((item) => {
+                      // Appui-tête ↔ forfait PAP A non cumulables (§7) : case désactivée
+                      // tant que le forfait A est déclenché par une sélection PAP.
+                      const blocked =
+                        billAdj && item.code === APPUI_TETE_CODE && forfaitAActive;
+                      return (
+                        <button
+                          key={item.code}
+                          disabled={blocked}
+                          className={
+                            blocked
+                              ? "mb-2 block w-full rounded-lg border border-line bg-paper/60 px-4 py-3 text-left opacity-60"
+                              : choice(!!state.adj[item.code], "flex items-start justify-between gap-3")
+                          }
+                          onClick={blocked ? undefined : () => dispatch({ type: "TOGGLE_ADJ", item })}
+                        >
+                          <span>
+                            <b className="block">{item.name}</b>
+                            {billAdj ? (
+                              <span className="inline-flex items-center gap-1.5">
+                                <span className="rounded bg-petrol-tint px-1.5 py-0.5 font-mono text-[11px] font-semibold text-petrol-deep">
+                                  {adaptedCode(item.code, brand, adjBrandMap)}
+                                </span>
+                                {brand && !hasBrandVariant(item.code, brand, adjBrandMap) && (
+                                  <span className="text-[10px] text-ink-soft">générique</span>
+                                )}
+                              </span>
+                            ) : (
+                              <span className="text-[11px] text-cyan-800">
+                                incluse au forfait hebdomadaire de location
+                              </span>
+                            )}
+                            {blocked && (
+                              <span className="mt-1 block text-[11px] text-amber">
+                                Non cumulable avec le forfait PAP A : le positionnement
+                                cervico-céphalique y est déjà couvert (§7).
+                              </span>
                             )}
                           </span>
-                        </span>
-                        <span
-                          className={`whitespace-nowrap font-mono text-sm font-semibold ${
-                            item.devis || item.tbd ? "text-amber" : "text-petrol-deep"
-                          }`}
-                        >
-                          {priceLabel(item)}
-                        </span>
-                      </button>
-                    ))}
+                          {billAdj && !blocked && (
+                            <span
+                              className={`whitespace-nowrap font-mono text-sm font-semibold ${
+                                item.devis || item.tbd ? "text-amber" : "text-petrol-deep"
+                              }`}
+                            >
+                              {priceLabel(item)}
+                            </span>
+                          )}
+                        </button>
+                      );
+                    })}
                   </div>
                 ))}
+
+              {billAdj && compatAdj.some((a) => a.devis) && (
+                <p className="mb-3 mt-1 rounded-lg border border-amber/30 bg-amber-tint px-3 py-2 text-[11.5px] leading-relaxed text-[#5c3208]">
+                  {SUR_DEVIS_NOTE}
+                </p>
+              )}
+              {appuiTeteDropped && (
+                <Flag>
+                  <b>Appui-tête réglable retiré de la facturation.</b> Il n&apos;est pas cumulable
+                  avec le forfait PAP A — le positionnement cervico-céphalique y est déjà couvert
+                  (§7). Décochez les PAP du forfait A pour le facturer seul.
+                </Flag>
+              )}
 
               {/* PAP */}
               <div className="mb-3 mt-6 flex flex-wrap items-center gap-2">
@@ -1118,8 +1321,10 @@ export function WalkerShell() {
                 </p>
               )}
 
-              {(selectedAdj.length > 0 || forfaits.length > 0) && (
-                <Subtotal costs={costs} />
+              <p className="mt-3 text-[11.5px] leading-relaxed text-ink-soft/90">{COUSSINS_NOTE}</p>
+
+              {billAdj && (selectedAdjBill.length > 0 || forfaits.length > 0) && (
+                <Subtotal costs={costsBill} />
               )}
 
               <Nav dispatch={dispatch} next={() => go("result")} nextLabel="Terminer" nextFinish />
@@ -1178,7 +1383,7 @@ export function WalkerShell() {
                       : " (14 à 26 semaines)"
                     : ""}
                 </Cell>
-                <Cell full label="Prescripteur / attestation">{prescribers[device.presc]}</Cell>
+                <Cell full label="Prescripteur / attestation">{prescLine}</Cell>
                 <Cell label="Fiche évaluation + préconisation">
                   {device.fiche ? "Requises" : "Non concerné"}
                 </Cell>
@@ -1201,6 +1406,20 @@ export function WalkerShell() {
                   (FREP/FREV, exception nomenclature).
                 </Flag>
               )}
+              {pec === "lcd" && <Flag>{CARENCE_LCD}</Flag>}
+              {pec === "lld" && <Flag>{CARENCE_LLD}</Flag>}
+
+              {/* Parcours d'essais requis avant prise en charge (arrêté du 06/02/2025). */}
+              <div className="my-4 rounded-xl border border-petrol/30 bg-petrol-tint/30 p-4">
+                <h4 className="mb-1.5 text-[11px] font-semibold uppercase tracking-wide text-petrol-deep">
+                  Essais requis avant prise en charge
+                </h4>
+                <ul className="list-disc space-y-1 pl-4 text-[12.5px] leading-relaxed text-ink">
+                  {essaisNotes(device, pec, selectedAdj).map((n, i) => (
+                    <li key={i}>{n}</li>
+                  ))}
+                </ul>
+              </div>
 
               {(devLpp || locForfait || selectedAdj.length > 0 || forfaits.length > 0) && (
                 <div className="my-4">
@@ -1241,23 +1460,48 @@ export function WalkerShell() {
                       </span>
                     </div>
                   )}
-                  {forfaits.map((f) => (
-                    <Line
-                      key={f}
-                      code={adaptedCode(papForfaits[f].code, brand, adjBrandMap)}
-                      label={papForfaits[f].label}
-                      value={eur(papForfaits[f].price)}
-                    />
-                  ))}
-                  {selectedAdj.map((a) => (
-                    <Line
-                      key={a.code}
-                      code={adaptedCode(a.code, brand, adjBrandMap)}
-                      label={a.name}
-                      value={priceLabel(a)}
-                      open={!!(a.devis || a.tbd)}
-                    />
-                  ))}
+                  {billAdj &&
+                    forfaits.map((f) => (
+                      <Line
+                        key={f}
+                        code={adaptedCode(papForfaits[f].code, brand, adjBrandMap)}
+                        label={papForfaits[f].label}
+                        value={eur(papForfaits[f].price)}
+                      />
+                    ))}
+                  {billAdj &&
+                    selectedAdjBill.map((a) => (
+                      <Line
+                        key={a.code}
+                        code={adaptedCode(a.code, brand, adjBrandMap)}
+                        label={a.name}
+                        value={priceLabel(a)}
+                        open={!!(a.devis || a.tbd)}
+                      />
+                    ))}
+                  {/* LCD : adjonctions & PAP documentés mais couverts par le forfait hebdo (§7). */}
+                  {pec === "lcd" && incluses.length > 0 && (
+                    <div className="my-2 rounded-lg border border-cyan-300 bg-cyan-50 px-3 py-2">
+                      <div className="mb-1 text-[10.5px] font-semibold uppercase tracking-wide text-cyan-800">
+                        Inclus dans le forfait de location (non facturables séparément)
+                      </div>
+                      <div className="flex flex-wrap gap-1.5">
+                        {incluses.map((n) => (
+                          <span
+                            key={n}
+                            className="rounded border border-cyan-200 bg-white px-2 py-0.5 text-xs text-cyan-900"
+                          >
+                            {n}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  {appuiTeteDropped && (
+                    <p className="my-2 rounded-lg border border-amber/30 bg-amber-tint px-3 py-2 text-[11.5px] leading-relaxed text-[#5c3208]">
+                      Appui-tête réglable non facturé : non cumulable avec le forfait PAP A (§7).
+                    </p>
+                  )}
                   {addOptionAchat && lcdOption && (
                     <div className="flex items-baseline justify-between gap-3 border-b border-line-soft py-1.5 text-sm">
                       <span className="flex min-w-0 items-baseline gap-2">
@@ -1301,10 +1545,12 @@ export function WalkerShell() {
                       <span className="font-mono text-blue-800">{eur(effMad.price)}</span>
                     </div>
                   )}
-                  {(selectedAdj.length > 0 || forfaits.length > 0) && <Subtotal costs={costs} />}
+                  {billAdj && (selectedAdjBill.length > 0 || forfaits.length > 0) && (
+                    <Subtotal costs={costsBill} />
+                  )}
                   {(pec === "achat"
                     ? devLpp?.tarif != null
-                    : costs.subtotal +
+                    : subtotalBill +
                         (addLivraison ? meta.livraison.price : 0) +
                         (addMad && effMad ? effMad.price : 0) +
                         (addOptionAchat && lcdOption ? lcdOption.price : 0) >
@@ -1313,12 +1559,12 @@ export function WalkerShell() {
                       <b className="text-sm text-ink">
                         Total indicatif
                         {pec !== "achat" ? " hors forfait de location" : ""}
-                        {costs.hasOpen ? " (hors devis / à préciser)" : ""}
+                        {hasOpenBill ? " (hors devis / à préciser)" : ""}
                       </b>
                       <span className="font-mono text-base font-semibold text-ink">
                         {eur(
                           (pec === "achat" ? (devLpp?.tarif ?? 0) : 0) +
-                            costs.subtotal +
+                            subtotalBill +
                             (addLivraison ? meta.livraison.price : 0) +
                             (addMad && effMad ? effMad.price : 0) +
                             (addOptionAchat && lcdOption ? lcdOption.price : 0),
@@ -1448,8 +1694,16 @@ export function WalkerShell() {
                             <b className="text-blue-900">
                               Ajouter l&apos;option d&apos;achat LCD ({device.code})
                             </b>
-                            <span className="mt-0.5 block text-[12px] text-blue-800/80">
-                              Achat du fauteuil au terme de la location courte durée (Titre I).
+                            <span className="mt-0.5 block text-[12px] leading-relaxed text-blue-800/80">
+                              Acquisition du fauteuil déjà loué, possible uniquement{" "}
+                              <b>au terme des 26 semaines de location consécutives</b>, sur
+                              décision du prescripteur (Titre I, 9.3). Inclut la garantie pièces
+                              et main-d&apos;œuvre, l&apos;assistance technique et le dépannage
+                              pendant <b>2 ans à compter du premier forfait de LCD</b> (6.1.1).
+                              Renouvellement du fauteuil acquis possible 5 ans après le début de
+                              la location, période de LCD incluse (3.1.6).
+                              {device.code === "FRE" &&
+                                " FRE : nouvel essai préalable et certificat d'aptitude à la conduite requis au moment de l'option d'achat (9.5)."}
                             </span>
                           </span>
                         </label>

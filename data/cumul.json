@@ -1,44 +1,251 @@
 {
-  "source": "Règles de cumul VPH (nomenclature LPPR) — document « Module d'évaluation de cumul » (Thomas, MPR). L'acronyme LPPR fait foi ; les libellés sont indicatifs.",
+  "source": "Règles de cumul VPH (nomenclature LPPR) — document « Module d'évaluation de cumul » (Thomas, MPR). L'acronyme LPPR fait foi ; les libellés sont indicatifs. Règles de non-cumul complétées d'après l'arrêté du 6 février 2025 (Titre IV, 4.1–4.2) : modulaires manuels mutuellement exclusifs (FRMV inclus, exception FRMS), manuels modulaires non cumulables avec les électriques modulaires (même grande classe), cycle non cumulable avec un VPH manuel modulaire.",
   "lastUpdated": "2026-07-01",
   "categories": [
-    { "code": "AAP", "label": "Aide à la propulsion" },
-    { "code": "CYC", "label": "Cycle modulaire à roues multiples" },
-    { "code": "FMPR", "label": "Manuel non modulaire à pousser réglable" },
-    { "code": "FREP", "label": "Électrique modulaire à propulsion (multi-position)" },
-    { "code": "FRM", "label": "Manuel modulaire" },
-    { "code": "FRMC", "label": "Manuel modulaire confort (configurable)" },
-    { "code": "FRMS", "label": "Manuel modulaire standard" },
-    { "code": "POU_MRE", "label": "Poussette (MRE)" },
-    { "code": "SCO", "label": "Scooter modulaire" },
-    { "code": "BASE", "label": "Base roulante modulaire" },
-    { "code": "FMP", "label": "Manuel non modulaire (propulsion manuelle / à pousser)" },
-    { "code": "FRE", "label": "Électrique non modulaire" },
-    { "code": "FREV", "label": "Électrique verticalisateur" },
-    { "code": "FRMA", "label": "Manuel modulaire actif (configurable)" },
-    { "code": "FRMP", "label": "Manuel modulaire à pousser" },
-    { "code": "FRMV", "label": "Manuel modulaire verticalisateur" },
-    { "code": "POU_S", "label": "Poussette standard" },
-    { "code": "SIEGE_COQUILLE", "label": "Siège coquille" }
+    {
+      "code": "AAP",
+      "label": "Aide à la propulsion"
+    },
+    {
+      "code": "CYC",
+      "label": "Cycle modulaire à roues multiples"
+    },
+    {
+      "code": "FMPR",
+      "label": "Manuel non modulaire à pousser réglable"
+    },
+    {
+      "code": "FREP",
+      "label": "Électrique modulaire à propulsion (multi-position)"
+    },
+    {
+      "code": "FRM",
+      "label": "Manuel modulaire"
+    },
+    {
+      "code": "FRMC",
+      "label": "Manuel modulaire confort (configurable)"
+    },
+    {
+      "code": "FRMS",
+      "label": "Manuel modulaire standard"
+    },
+    {
+      "code": "POU_MRE",
+      "label": "Poussette (MRE)"
+    },
+    {
+      "code": "SCO",
+      "label": "Scooter modulaire"
+    },
+    {
+      "code": "BASE",
+      "label": "Base roulante modulaire"
+    },
+    {
+      "code": "FMP",
+      "label": "Manuel non modulaire (propulsion manuelle / à pousser)"
+    },
+    {
+      "code": "FRE",
+      "label": "Électrique non modulaire"
+    },
+    {
+      "code": "FREV",
+      "label": "Électrique verticalisateur"
+    },
+    {
+      "code": "FRMA",
+      "label": "Manuel modulaire actif (configurable)"
+    },
+    {
+      "code": "FRMP",
+      "label": "Manuel modulaire à pousser"
+    },
+    {
+      "code": "FRMV",
+      "label": "Manuel modulaire verticalisateur"
+    },
+    {
+      "code": "POU_S",
+      "label": "Poussette standard"
+    },
+    {
+      "code": "SIEGE_COQUILLE",
+      "label": "Siège coquille"
+    }
   ],
   "incompatible": {
-    "FMP": ["FMP", "FMPR", "SIEGE_COQUILLE"],
-    "FMPR": ["FMPR", "FMP", "SIEGE_COQUILLE"],
-    "FRM": ["FRM", "FRMA", "FRMC", "FRMP", "SIEGE_COQUILLE"],
-    "FRMC": ["FRM", "FRMC", "FRMA", "FRMP", "SIEGE_COQUILLE"],
-    "FRMA": ["FRM", "FRMA", "FRMC", "FRMP", "SIEGE_COQUILLE"],
-    "FRMP": ["FRM", "FRMA", "FRMC", "FRMP", "SIEGE_COQUILLE"],
-    "FRMS": ["FRMS", "SIEGE_COQUILLE"],
-    "FRMV": ["FRMV", "SIEGE_COQUILLE"],
-    "FRE": ["AAP", "FRE", "FREV", "FREP", "SCO", "SIEGE_COQUILLE"],
-    "FREP": ["AAP", "FRE", "FREV", "FREP", "SCO", "SIEGE_COQUILLE"],
-    "FREV": ["AAP", "FRE", "FREV", "FREP", "SCO", "SIEGE_COQUILLE"],
-    "POU_S": ["POU_S", "POU_MRE", "SIEGE_COQUILLE"],
-    "POU_MRE": ["POU_S", "POU_MRE", "SIEGE_COQUILLE"],
-    "SCO": ["FRE", "FREP", "FREV", "SCO", "SIEGE_COQUILLE"],
-    "BASE": ["BASE", "SIEGE_COQUILLE"],
-    "CYC": ["CYC", "SIEGE_COQUILLE"],
-    "AAP": ["FRE", "FREP", "FREV", "SIEGE_COQUILLE"],
-    "SIEGE_COQUILLE": ["AAP", "CYC", "FMPR", "FREP", "FRM", "FRMC", "FRMS", "POU_MRE", "SCO", "BASE", "FMP", "FRE", "FREV", "FRMA", "FRMP", "FRMV", "POU_S", "SIEGE_COQUILLE"]
+    "FMP": [
+      "FMP",
+      "FMPR",
+      "SIEGE_COQUILLE"
+    ],
+    "FMPR": [
+      "FMPR",
+      "FMP",
+      "SIEGE_COQUILLE"
+    ],
+    "FRM": [
+      "CYC",
+      "FRE",
+      "FREP",
+      "FREV",
+      "FRM",
+      "FRMA",
+      "FRMC",
+      "FRMP",
+      "FRMV",
+      "SIEGE_COQUILLE"
+    ],
+    "FRMC": [
+      "CYC",
+      "FRE",
+      "FREP",
+      "FREV",
+      "FRM",
+      "FRMA",
+      "FRMC",
+      "FRMP",
+      "FRMV",
+      "SIEGE_COQUILLE"
+    ],
+    "FRMA": [
+      "CYC",
+      "FRE",
+      "FREP",
+      "FREV",
+      "FRM",
+      "FRMA",
+      "FRMC",
+      "FRMP",
+      "FRMV",
+      "SIEGE_COQUILLE"
+    ],
+    "FRMP": [
+      "CYC",
+      "FRE",
+      "FREP",
+      "FREV",
+      "FRM",
+      "FRMA",
+      "FRMC",
+      "FRMP",
+      "FRMV",
+      "SIEGE_COQUILLE"
+    ],
+    "FRMS": [
+      "CYC",
+      "FRMS",
+      "SIEGE_COQUILLE"
+    ],
+    "FRMV": [
+      "CYC",
+      "FRE",
+      "FREP",
+      "FREV",
+      "FRM",
+      "FRMA",
+      "FRMC",
+      "FRMP",
+      "FRMV",
+      "SIEGE_COQUILLE"
+    ],
+    "FRE": [
+      "AAP",
+      "FRE",
+      "FREP",
+      "FREV",
+      "FRM",
+      "FRMA",
+      "FRMC",
+      "FRMP",
+      "FRMV",
+      "SCO",
+      "SIEGE_COQUILLE"
+    ],
+    "FREP": [
+      "AAP",
+      "FRE",
+      "FREP",
+      "FREV",
+      "FRM",
+      "FRMA",
+      "FRMC",
+      "FRMP",
+      "FRMV",
+      "SCO",
+      "SIEGE_COQUILLE"
+    ],
+    "FREV": [
+      "AAP",
+      "FRE",
+      "FREP",
+      "FREV",
+      "FRM",
+      "FRMA",
+      "FRMC",
+      "FRMP",
+      "FRMV",
+      "SCO",
+      "SIEGE_COQUILLE"
+    ],
+    "POU_S": [
+      "POU_S",
+      "POU_MRE",
+      "SIEGE_COQUILLE"
+    ],
+    "POU_MRE": [
+      "POU_S",
+      "POU_MRE",
+      "SIEGE_COQUILLE"
+    ],
+    "SCO": [
+      "FRE",
+      "FREP",
+      "FREV",
+      "SCO",
+      "SIEGE_COQUILLE"
+    ],
+    "BASE": [
+      "BASE",
+      "SIEGE_COQUILLE"
+    ],
+    "CYC": [
+      "CYC",
+      "FRM",
+      "FRMA",
+      "FRMC",
+      "FRMP",
+      "FRMS",
+      "FRMV",
+      "SIEGE_COQUILLE"
+    ],
+    "AAP": [
+      "FRE",
+      "FREP",
+      "FREV",
+      "SIEGE_COQUILLE"
+    ],
+    "SIEGE_COQUILLE": [
+      "AAP",
+      "CYC",
+      "FMPR",
+      "FREP",
+      "FRM",
+      "FRMC",
+      "FRMS",
+      "POU_MRE",
+      "SCO",
+      "BASE",
+      "FMP",
+      "FRE",
+      "FREV",
+      "FRMA",
+      "FRMP",
+      "FRMV",
+      "POU_S",
+      "SIEGE_COQUILLE"
+    ]
   }
 }

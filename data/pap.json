@@ -3,7 +3,7 @@
     "A": {
       "code": "4954096",
       "price": 600,
-      "label": "Forfait A — dossier (cervico-céphalique, thoraco-lombaire)",
+      "label": "Forfait A — membre supérieur : dossier (cervico-céphalique, thoraco-lombaire), épaule, poignet",
       "definition": [
         "Aides techniques susceptibles d'être adaptées sur tout VPH modulaire, conçues pour maintenir, adapter, compenser ou corriger le positionnement du corps, pour améliorer le confort, la stabilité et la réalisation facilitée des activités quotidiennes des personnes utilisatrices des VPH qui ont des troubles posturaux.",
         "Les PAP sont classés par région corporelle et par type d'assistance ou correction de posture"
@@ -17,7 +17,7 @@
     "B": {
       "code": "4947601",
       "price": 600,
-      "label": "Forfait B — siège (bassin, hanches, genou, épaule, poignet)",
+      "label": "Forfait B — membre inférieur : siège, bassin, hanches, genou",
       "definition": [
         "Aides techniques susceptibles d'être adaptées sur tout VPH modulaire, conçues pour maintenir, adapter, compenser ou corriger le positionnement du corps, pour améliorer le confort, la stabilité et la réalisation facilitée des activités quotidiennes des personnes utilisatrices des VPH qui ont des troubles posturaux.",
         "Les PAP sont classés par région corporelle et par type d'assistance ou correction de posture"
@@ -218,7 +218,7 @@
     },
     {
       "name": "Épaule",
-      "forfait": "B",
+      "forfait": "A",
       "items": [
         {
           "name": "Accoudoir de positionnement rigide (gouttière d’avant-bras)",
@@ -244,7 +244,7 @@
     },
     {
       "name": "Poignet",
-      "forfait": "B",
+      "forfait": "A",
       "items": [
         {
           "name": "Sangle de poignet",
