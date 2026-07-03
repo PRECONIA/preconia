@@ -581,9 +581,10 @@ export function WalkerShell() {
             </div>
           </div>
         </div>
-        <p className="mt-3 max-w-[60ch] text-sm leading-relaxed text-ink-soft">
-          Du profil fonctionnel au dispositif, à sa classe, ses adjonctions facturables (codes LPPR)
-          et son positionnement — d&apos;après la nomenclature VPH 2025 et les fiches 2026.
+        <p className="mb-8 mt-3 max-w-[60ch] text-sm leading-relaxed text-ink-soft">
+          Du patient au dispositif, de la classe aux adjonctions facturables et forfaits
+          jusqu&apos;à la mise à disposition et la livraison — D&apos;après la réforme de la
+          nomenclature 2025.
         </p>
       </header>
 
