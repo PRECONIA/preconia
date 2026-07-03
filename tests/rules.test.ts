@@ -7,6 +7,9 @@ import {
   cumulCategories,
   cumulIncompatible,
   deviceByCode,
+  lcdForfaits,
+  lldForfaits,
+  madLcd,
   madNiveaux,
   prestationByCode,
   deviceLppByType,
@@ -26,7 +29,11 @@ import {
   deviceModelsForBrand,
   optionSheetFor,
   isCumulAllowed,
+  lcdForfaitFor,
+  lcdOptionAchatFor,
+  lldForfaitFor,
   madForfaitFor,
+  madLcdFor,
   filterAdjonctions,
   hasBrandVariant,
   hasDeviceBrandVariant,
@@ -143,6 +150,98 @@ describe("temporalité → modes (LCD si temporaire ; ACHAT/LLD si durable)", ()
     for (const code of ["FMP", "FRMA", "FREP", "FREV", "POU_S", "POU_MRE", "SCO", "BASE", "CYC"]) {
       expect(deviceAllowedForDuree(deviceByCode[code], "durable")).toBe(true);
     }
+  });
+
+  it("durable + acquisition : achat → ACHAT seul ; lld → LLD seul", () => {
+    expect(modesForDuree("durable", "achat")).toEqual(["ACHAT"]);
+    expect(modesForDuree("durable", "lld")).toEqual(["LLD"]);
+    expect(modesForDuree("durable", null)).toEqual(["ACHAT", "LLD"]);
+    expect(modesForDuree("temp", "lld")).toEqual(["LCD"]); // temporaire : l'acquisition est sans objet
+  });
+
+  it("LLD : seuls FRMP, FRMV, FREP, FREV et POU_MRE sont éligibles", () => {
+    for (const code of ["FRMP", "FRMV", "FREP", "FREV", "POU_MRE"]) {
+      expect(deviceAllowedForDuree(deviceByCode[code], "durable", "lld")).toBe(true);
+    }
+    for (const code of ["FMP", "FMPR", "FRM", "FRMA", "FRMS", "FRMC", "FRE", "POU_S", "SCO", "BASE", "CYC"]) {
+      expect(deviceAllowedForDuree(deviceByCode[code], "durable", "lld")).toBe(false);
+    }
+  });
+});
+
+describe("forfaits de location (codes LPPR LCD hebdo / option d'achat / LLD trimestriel / MAD LCD)", () => {
+  it("lcdForfaitFor : forfait hebdo officiel selon la catégorie et la durée", () => {
+    expect(lcdForfaitFor("FRM", "s13", lcdForfaits, prestationByCode)).toMatchObject({
+      code: "1290922",
+      price: 4.7,
+      unit: "semaine",
+    });
+    expect(lcdForfaitFor("FRE", "s26", lcdForfaits, prestationByCode)).toMatchObject({
+      code: "1225178",
+      price: 74.47,
+      unit: "semaine",
+    });
+    expect(lcdForfaitFor("FMP", "s13", lcdForfaits, prestationByCode)).toMatchObject({
+      code: "1268182",
+      price: 3.82,
+    });
+    expect(lcdForfaitFor("FMPR", "s26", lcdForfaits, prestationByCode)).toMatchObject({
+      code: "1277376",
+      price: 6.43,
+    });
+  });
+
+  it("lcdForfaitFor : null sans durée ou pour une catégorie non louable en LCD", () => {
+    expect(lcdForfaitFor("FRM", null, lcdForfaits, prestationByCode)).toBeNull();
+    expect(lcdForfaitFor("FREP", "s13", lcdForfaits, prestationByCode)).toBeNull();
+  });
+
+  it("lcdOptionAchatFor : option d'achat officielle de la catégorie", () => {
+    expect(lcdOptionAchatFor("FRM", lcdForfaits, prestationByCode)).toMatchObject({
+      code: "1215560",
+      price: 133.09,
+    });
+    expect(lcdOptionAchatFor("FRE", lcdForfaits, prestationByCode)).toMatchObject({
+      code: "1273020",
+      price: 948.36,
+    });
+    expect(lcdOptionAchatFor("FREP", lcdForfaits, prestationByCode)).toBeNull();
+  });
+
+  it("lldForfaitFor : forfait trimestriel officiel (FREP par classe)", () => {
+    expect(lldForfaitFor(deviceByCode.FREP, "B", lldForfaits, prestationByCode)).toMatchObject({
+      code: "4762238",
+      price: 1021.13,
+      unit: "trimestre",
+    });
+    expect(lldForfaitFor(deviceByCode.FREP, "A", lldForfaits, prestationByCode)).toMatchObject({
+      code: "4706211",
+      price: 755.64,
+    });
+    expect(lldForfaitFor(deviceByCode.FRMV, null, lldForfaits, prestationByCode)).toMatchObject({
+      code: "4776720",
+      price: 856.86,
+    });
+    expect(lldForfaitFor(deviceByCode.FREV, "C", lldForfaits, prestationByCode)).toMatchObject({
+      code: "4780118",
+      price: 1725.29,
+    });
+  });
+
+  it("lldForfaitFor : null si la classe requise manque ou catégorie non éligible", () => {
+    expect(lldForfaitFor(deviceByCode.FREP, null, lldForfaits, prestationByCode)).toBeNull();
+    expect(lldForfaitFor(deviceByCode.FRM, null, lldForfaits, prestationByCode)).toBeNull();
+    expect(lldForfaitFor(deviceByCode.FRE, "B", lldForfaits, prestationByCode)).toBeNull();
+  });
+
+  it("madLcdFor : forfait MAD LCD (1213650, 20 €) réservé aux FRM et FRE", () => {
+    expect(madLcdFor("FRM", madLcd, prestationByCode)).toMatchObject({
+      code: "1213650",
+      price: 20,
+    });
+    expect(madLcdFor("FRE", madLcd, prestationByCode)).toMatchObject({ code: "1213650" });
+    expect(madLcdFor("FMP", madLcd, prestationByCode)).toBeNull();
+    expect(madLcdFor("FMPR", madLcd, prestationByCode)).toBeNull();
   });
 });
 

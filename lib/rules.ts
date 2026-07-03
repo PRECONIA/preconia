@@ -6,6 +6,7 @@ import type {
   DeviceLppEntry,
   DeviceModelEntry,
   Forfait,
+  LcdForfaitEntry,
   MadNiveau,
   Mode,
   OptionSheet,
@@ -93,19 +94,99 @@ export function computeSubtotal(
 
 /* --- temporalité du besoin → modes de prise en charge possibles (réf. fichier VPH/CERAH) ---
    Temporaire (≤ 3 mois) ⇒ location courte durée (LCD) uniquement.
-   Durable (≥ 6 mois) ⇒ achat ou location longue durée (ACHAT / LLD). */
+   Durable (≥ 6 mois) ⇒ achat ou location longue durée (ACHAT / LLD) — le choix
+   d'acquisition, une fois fait, restreint au mode retenu (la LLD ne propose que les
+   catégories éligibles : FRMP, FRMV, FREP, FREV, POU_MRE). */
 export type DureeValue = "temp" | "durable";
+export type AcquisitionValue = "achat" | "lld";
 
-export function modesForDuree(duree: DureeValue | null): Mode[] {
+export function modesForDuree(
+  duree: DureeValue | null,
+  acquisition: AcquisitionValue | null = null,
+): Mode[] {
   if (duree === "temp") return ["LCD"];
-  if (duree === "durable") return ["ACHAT", "LLD"];
+  if (duree === "durable") {
+    if (acquisition === "achat") return ["ACHAT"];
+    if (acquisition === "lld") return ["LLD"];
+    return ["ACHAT", "LLD"];
+  }
   return ["ACHAT", "LCD", "LLD"];
 }
 
-/** Un dispositif est proposable pour la temporalité s'il offre au moins un mode compatible. */
-export function deviceAllowedForDuree(device: Device, duree: DureeValue | null): boolean {
-  const allowed = modesForDuree(duree);
+/** Un dispositif est proposable s'il offre au moins un mode compatible avec la
+ *  temporalité et, le cas échéant, le mode d'acquisition choisi (achat / LLD). */
+export function deviceAllowedForDuree(
+  device: Device,
+  duree: DureeValue | null,
+  acquisition: AcquisitionValue | null = null,
+): boolean {
+  const allowed = modesForDuree(duree, acquisition);
   return device.modes.some((m) => allowed.includes(m));
+}
+
+/* --- forfaits de location (codes LPPR propres à la LCD / LLD, jamais le code achat) --- */
+/** Durée de la LCD : jusqu'à 13 semaines, ou de 14 à 26 semaines (borne réglementaire). */
+export type LcdDureeValue = "s13" | "s26";
+
+export interface LocationForfait {
+  code: string;
+  label: string;
+  price: number;
+  /** périodicité du forfait ("semaine" LCD, "trimestre" LLD) ; absent = forfait unique. */
+  unit?: "semaine" | "trimestre";
+}
+
+function prestationForfait(
+  code: string | undefined,
+  prestaByCode: Record<string, Prestation>,
+): LocationForfait | null {
+  const p = code ? prestaByCode[code] : undefined;
+  return p ? { code: p.code, label: p.label, price: p.tarif, unit: p.unit } : null;
+}
+
+/** Forfait hebdomadaire LCD du dispositif, selon la durée (≤ 13 sem / 14–26 sem).
+ *  null si la durée n'est pas renseignée ou si la catégorie n'est pas louable en LCD. */
+export function lcdForfaitFor(
+  deviceCode: string,
+  lcdDuree: LcdDureeValue | null,
+  lcdMap: Record<string, LcdForfaitEntry>,
+  prestaByCode: Record<string, Prestation>,
+): LocationForfait | null {
+  if (!lcdDuree) return null;
+  return prestationForfait(lcdMap[deviceCode]?.[lcdDuree], prestaByCode);
+}
+
+/** Option d'achat LCD de la catégorie (facturable au terme de la location courte durée). */
+export function lcdOptionAchatFor(
+  deviceCode: string,
+  lcdMap: Record<string, LcdForfaitEntry>,
+  prestaByCode: Record<string, Prestation>,
+): LocationForfait | null {
+  return prestationForfait(lcdMap[deviceCode]?.optionAchat, prestaByCode);
+}
+
+/** Forfait trimestriel LLD du dispositif (jeton par classe pour le FREP : FREP-A/B/C).
+ *  null si la catégorie n'est pas éligible à la LLD ou si la classe requise manque. */
+export function lldForfaitFor(
+  device: Device,
+  classe: ClasseValue | null,
+  lldMap: Record<string, string>,
+  prestaByCode: Record<string, Prestation>,
+): LocationForfait | null {
+  const token = deviceLppToken(device, classe);
+  if (!token) return null;
+  return prestationForfait(lldMap[token], prestaByCode);
+}
+
+/** Forfait de mise à disposition propre à la LCD (Titre I) : réservé aux FRM et FRE,
+ *  au plus une fois par épisode de location. En LCD, MAD1/MAD2 ne s'appliquent pas. */
+export function madLcdFor(
+  deviceCode: string,
+  madLcd: { code: string; devices: string[] },
+  prestaByCode: Record<string, Prestation>,
+): LocationForfait | null {
+  if (!madLcd.devices.includes(deviceCode)) return null;
+  return prestationForfait(madLcd.code, prestaByCode);
 }
 
 /** Gating de l'étape besoins : seulement pour les dispositifs électriques

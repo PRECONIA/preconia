@@ -6,6 +6,8 @@ export const initialAnswers: Answers = {
   cumul: null,
   age: null,
   duree: null,
+  lcdDuree: null,
+  acquisition: null,
   mad: null,
   mob: null,
   device: null,
@@ -44,6 +46,11 @@ export function walkerReducer(state: WalkerState, action: Action): WalkerState {
       const answers: Answers = { ...state.answers, [action.field]: action.value };
       // changer de marque invalide le modèle précédemment choisi.
       if (action.field === "vehicleBrand") answers.vehicleModel = null;
+      // changer de temporalité invalide les choix de la branche quittée (durée LCD / acquisition).
+      if (action.field === "duree") {
+        answers.lcdDuree = null;
+        answers.acquisition = null;
+      }
       return { ...state, answers };
     }
 

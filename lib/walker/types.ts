@@ -7,6 +7,8 @@ export type Stage =
   | "cumul"
   | "age"
   | "duree"
+  | "lcd_duree"
+  | "acq"
   | "mad"
   | "mob"
   | "cfg_man"
@@ -17,6 +19,10 @@ export type Stage =
 
 export type Age = "adulte" | "enfant";
 export type Duree = "temp" | "durable";
+/** Durée de la location courte durée : ≤ 13 semaines / 14 à 26 semaines (forfait hebdo distinct). */
+export type LcdDuree = "s13" | "s26";
+/** Besoin durable : achat ou location longue durée (codes LPPR distincts). */
+export type Acquisition = "achat" | "lld";
 export type Mob = "manuel" | "elec";
 export type OuiNon = "oui" | "non";
 /** Contexte de mise à disposition : première MAD ou renouvellement avec changement de
@@ -29,6 +35,10 @@ export interface Answers {
   cumul: OuiNon | null;
   age: Age | null;
   duree: Duree | null;
+  /** Si temporaire : durée de la LCD (détermine le forfait hebdomadaire). */
+  lcdDuree: LcdDuree | null;
+  /** Si durable : achat ou LLD (détermine le code LPPR du fauteuil et les VPH proposés). */
+  acquisition: Acquisition | null;
   /** Première mise à disposition (MAD1) ou renouvellement à l'identique (MAD2). */
   mad: Mad | null;
   mob: Mob | null;

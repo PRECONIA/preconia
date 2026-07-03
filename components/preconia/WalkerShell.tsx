@@ -16,6 +16,9 @@ import {
   deviceIndicationsByCode,
   deviceLppByType,
   devices,
+  lcdForfaits,
+  lldForfaits,
+  madLcd,
   madNiveaux,
   meta,
   prestationByCode,
@@ -34,7 +37,11 @@ import {
   deviceModelsForBrand,
   hasBrandVariant,
   hasDeviceBrandVariant,
+  lcdForfaitFor,
+  lcdOptionAchatFor,
+  lldForfaitFor,
   madForfaitFor,
+  madLcdFor,
   modesForDuree,
   optionSheetFor,
 } from "@/lib/rules";
@@ -81,6 +88,47 @@ function priceLabel(a: Adjonction): string {
 
 // Propulsion manuelle / podale : fauteuils manuels + cycle (propulsion podale).
 const MAN_FAMILIES = ["Manuel non modulaire", "Manuel modulaire", "Cycle"];
+
+/** Mode de prise en charge retenu par le parcours : achat, LCD ou LLD. */
+type Pec = "achat" | "lcd" | "lld";
+
+/* Charte des encarts « code du fauteuil » : une couleur par mode de prise en charge —
+   achat = orange (existant), LCD = cyan, LLD = violet (classes Tailwind statiques). */
+const PEC_TINT: Record<
+  Pec,
+  { box: string; title: string; badge: string; badgeSoft: string; strong: string; soft: string; tag: string }
+> = {
+  achat: {
+    box: "border-orange-400 bg-orange-100/60",
+    title: "text-orange-800",
+    badge: "bg-orange-200/70 text-orange-800",
+    badgeSoft: "bg-orange-100 text-orange-800",
+    strong: "text-orange-800",
+    soft: "text-orange-700/80",
+    tag: "bg-orange-500",
+  },
+  lcd: {
+    box: "border-cyan-500 bg-cyan-100/60",
+    title: "text-cyan-800",
+    badge: "bg-cyan-200/70 text-cyan-900",
+    badgeSoft: "bg-cyan-100 text-cyan-900",
+    strong: "text-cyan-800",
+    soft: "text-cyan-700/80",
+    tag: "bg-cyan-600",
+  },
+  lld: {
+    box: "border-violet-500 bg-violet-100/60",
+    title: "text-violet-800",
+    badge: "bg-violet-200/70 text-violet-900",
+    badgeSoft: "bg-violet-100 text-violet-800",
+    strong: "text-violet-800",
+    soft: "text-violet-700/80",
+    tag: "bg-violet-600",
+  },
+};
+
+/** Suffixe de périodicité d'un forfait de location (« / semaine », « / trimestre »). */
+const perUnit = (u?: string) => (u === "semaine" ? " / semaine" : u === "trimestre" ? " / trimestre" : "");
 
 export function WalkerShell() {
   const { state, dispatch } = useWalker();
@@ -131,27 +179,54 @@ export function WalkerShell() {
     ? deviceModelGeneric(device, answers.classe, brand, model, deviceModelsByType)
     : false;
 
+  // Mode de prise en charge retenu : LCD (besoin temporaire), LLD ou achat (besoin durable).
+  const pec: Pec = answers.duree === "temp" ? "lcd" : answers.acquisition === "lld" ? "lld" : "achat";
+  const tint = PEC_TINT[pec];
+  // Forfait de location : le code LPPR facturé en LCD (hebdo, selon la durée) ou LLD
+  // (trimestriel, FREP par classe) — jamais le code d'achat neuf.
+  const locForfait = device
+    ? pec === "lcd"
+      ? lcdForfaitFor(device.code, answers.lcdDuree, lcdForfaits, prestationByCode)
+      : pec === "lld"
+        ? lldForfaitFor(device, answers.classe, lldForfaits, prestationByCode)
+        : null
+    : null;
+  // Option d'achat LCD de la catégorie — cochable sur la fiche finale.
+  const lcdOption =
+    device && pec === "lcd" ? lcdOptionAchatFor(device.code, lcdForfaits, prestationByCode) : null;
+  const [addOptionAchat, setAddOptionAchat] = useState(false);
+
   // Forfait de livraison — option cochable sur la fiche finale.
   const [addLivraison, setAddLivraison] = useState(false);
-  // Forfait MAD (MAD1 première / MAD2 renouvellement, niveau selon le VPH) — cochable aussi.
+  // Forfait MAD — cochable aussi. MAD1/MAD2 valent à l'achat et en LLD (Titre IV 5.1/5.2) ;
+  // en LCD c'est le forfait MAD dédié du Titre I (1213650, réservé FRM et FRE) qui s'applique.
   const [addMad, setAddMad] = useState(false);
-  const madForfait = device
-    ? madForfaitFor(device.code, answers.mad, madNiveaux, prestationByCode)
-    : null;
+  const madForfait =
+    device && pec !== "lcd"
+      ? madForfaitFor(device.code, answers.mad, madNiveaux, prestationByCode)
+      : null;
+  const madLcdForfait =
+    device && pec === "lcd" ? madLcdFor(device.code, madLcd, prestationByCode) : null;
+  // Forfait MAD effectif selon le mode (alimente codes copiés, total et PDF).
+  const effMad = pec === "lcd" ? madLcdForfait : madForfait;
   // Verdict du module de cumul embarqué (étape cumul) : null tant que non évalué.
   const [cumulVerdict, setCumulVerdict] = useState<boolean | null>(null);
 
-  // Tous les codes LPP de la fiche finale : fauteuil + forfaits PAP + adjonctions (adaptés marque)
-  // + le forfait de livraison s'il est coché.
+  // Ligne « fauteuil » de la fiche : code d'achat neuf en achat, forfait de location en LCD/LLD.
+  const deviceLine =
+    device && pec === "achat" && devLpp
+      ? {
+          code: devLpp.code,
+          label: model ? `${device.name} — ${model}${brand ? ` (${brand})` : ""}` : device.name,
+        }
+      : device && pec !== "achat" && locForfait
+        ? { code: locForfait.code, label: locForfait.label }
+        : null;
+
+  // Tous les codes LPP de la fiche finale : fauteuil (ou forfait de location) + forfaits PAP
+  // + adjonctions (adaptés marque) + option d'achat LCD, livraison et MAD s'ils sont cochés.
   const lpprCodes = [
-    ...(devLpp && device
-      ? [
-          {
-            code: devLpp.code,
-            label: model ? `${device.name} — ${model}${brand ? ` (${brand})` : ""}` : device.name,
-          },
-        ]
-      : []),
+    ...(deviceLine ? [deviceLine] : []),
     ...forfaits.map((f) => ({
       code: adaptedCode(papForfaits[f].code, brand, adjBrandMap),
       label: papForfaits[f].label,
@@ -160,8 +235,9 @@ export function WalkerShell() {
       code: adaptedCode(a.code, brand, adjBrandMap),
       label: a.name,
     })),
+    ...(addOptionAchat && lcdOption ? [{ code: lcdOption.code, label: lcdOption.label }] : []),
     ...(addLivraison ? [{ code: meta.livraison.code, label: meta.livraison.label }] : []),
-    ...(addMad && madForfait ? [{ code: madForfait.code, label: madForfait.label }] : []),
+    ...(addMad && effMad ? [{ code: effMad.code, label: effMad.label }] : []),
   ];
   const [copied, setCopied] = useState(false);
   const copyToClipboard = async (text: string, mark: (v: boolean) => void) => {
@@ -180,7 +256,10 @@ export function WalkerShell() {
     copyToClipboard(`${meta.livraison.code}\t${meta.livraison.label}`, setCopiedLiv);
   const [copiedMad, setCopiedMad] = useState(false);
   const copyMad = () =>
-    madForfait && copyToClipboard(`${madForfait.code}\t${madForfait.label}`, setCopiedMad);
+    effMad && copyToClipboard(`${effMad.code}\t${effMad.label}`, setCopiedMad);
+  const [copiedOption, setCopiedOption] = useState(false);
+  const copyOption = () =>
+    lcdOption && copyToClipboard(`${lcdOption.code}\t${lcdOption.label}`, setCopiedOption);
   // Encart « définition + spécificités techniques » du forfait PAP A ou B.
   const [papInfo, setPapInfo] = useState<"A" | "B" | null>(null);
   // Connecteur animé : trace une ligne du bouton survolé vers l'encart info orange (grand écran).
@@ -195,7 +274,7 @@ export function WalkerShell() {
   // Construit un objet purement sérialisable depuis l'état courant (aucune logique dans le PDF).
   const buildFicheData = (): FicheData => {
     const dev = device!;
-    const allowedModes = modesForDuree(answers.duree);
+    const allowedModes = modesForDuree(answers.duree, answers.acquisition);
 
     const profile: { k: string; v: string }[] = facets(answers)
       .filter((f) => f.v)
@@ -218,16 +297,30 @@ export function WalkerShell() {
       .filter(([m]) => allowedModes.includes(m as (typeof allowedModes)[number]))
       .map(([mode, text]) => ({ mode, text }));
 
-    const vph = devLpp
-      ? {
-          code: devLpp.code,
-          tarif: devLpp.tarif,
-          name: model
-            ? `${dev.name} — ${model}${brand ? ` (${brand})` : ""}`
-            : `${dev.name}${brand ? ` · ${brand}` : ""}`,
-          indications: vphInd,
-        }
-      : null;
+    const devDisplayName = model
+      ? `${dev.name} — ${model}${brand ? ` (${brand})` : ""}`
+      : `${dev.name}${brand ? ` · ${brand}` : ""}`;
+    // Achat : code d'achat neuf ; LCD/LLD : le forfait de location est LE code facturé.
+    const vph =
+      pec === "achat"
+        ? devLpp
+          ? {
+              code: devLpp.code,
+              tarif: devLpp.tarif,
+              tarifUnit: null,
+              name: devDisplayName,
+              indications: vphInd,
+            }
+          : null
+        : locForfait
+          ? {
+              code: locForfait.code,
+              tarif: locForfait.price,
+              tarifUnit: perUnit(locForfait.unit) || null,
+              name: `${devDisplayName} — ${pec === "lcd" ? "location courte durée" : "location longue durée"}`,
+              indications: vphInd,
+            }
+          : null;
 
     const forfaitsData = forfaits.map((f) => ({
       code: adaptedCode(papForfaits[f].code, brand, adjBrandMap),
@@ -255,24 +348,40 @@ export function WalkerShell() {
         })),
     );
 
+    const extras =
+      (addLivraison ? meta.livraison.price : 0) +
+      (addMad && effMad ? effMad.price : 0) +
+      (addOptionAchat && lcdOption ? lcdOption.price : 0);
+    // Achat : total avec le fauteuil. Location : total des seuls éléments ponctuels, le forfait
+    // de location (périodique) restant affiché à part — jamais mélangé au total.
     const total =
-      devLpp?.tarif != null
-        ? devLpp.tarif +
-          costs.subtotal +
-          (addLivraison ? meta.livraison.price : 0) +
-          (addMad && madForfait ? madForfait.price : 0)
-        : null;
+      pec === "achat"
+        ? devLpp?.tarif != null
+          ? devLpp.tarif + costs.subtotal + extras
+          : null
+        : costs.subtotal + extras > 0
+          ? costs.subtotal + extras
+          : null;
+
+    const lcdDureeLabel =
+      pec === "lcd" && answers.lcdDuree
+        ? answers.lcdDuree === "s13"
+          ? " (jusqu'à 13 semaines)"
+          : " (14 à 26 semaines)"
+        : "";
 
     return {
       generatedAt: new Date().toLocaleDateString("fr-FR"),
+      pec,
       device: {
         code: dev.code,
         name: dev.name,
         family: dev.family,
-        modes: dev.modes
-          .filter((m) => allowedModes.includes(m))
-          .map((m) => modeLabels[m]?.label ?? m)
-          .join(" / "),
+        modes:
+          dev.modes
+            .filter((m) => allowedModes.includes(m))
+            .map((m) => modeLabels[m]?.label ?? m)
+            .join(" / ") + lcdDureeLabel,
         presc: prescribers[dev.presc],
         fiche: dev.fiche,
         dap: dev.dap,
@@ -283,14 +392,20 @@ export function WalkerShell() {
       forfaits: forfaitsData,
       adjonctions: adjData,
       pap: papData,
+      optionAchat:
+        addOptionAchat && lcdOption
+          ? { code: lcdOption.code, label: lcdOption.label, price: lcdOption.price }
+          : null,
       livraison: addLivraison
         ? { code: meta.livraison.code, label: meta.livraison.label, price: meta.livraison.price }
         : null,
-      mad:
-        addMad && madForfait
-          ? { code: madForfait.code, label: madForfait.label, price: madForfait.price }
-          : null,
-      totals: { subtotal: costs.subtotal, hasOpen: costs.hasOpen, total },
+      mad: addMad && effMad ? { code: effMad.code, label: effMad.label, price: effMad.price } : null,
+      totals: {
+        subtotal: costs.subtotal,
+        hasOpen: costs.hasOpen,
+        total,
+        horsLocation: pec !== "achat",
+      },
       disclaimer: meta.disclaimer,
       source: meta.source,
       lastUpdated: meta.lastUpdated,
@@ -469,7 +584,7 @@ export function WalkerShell() {
                 className={choice(answers.duree === "temp")}
                 onClick={() => {
                   setAnswer("duree", "temp");
-                  go("mob");
+                  go("lcd_duree");
                 }}
               >
                 Temporaire — 3 mois ou moins · location courte durée (LCD)
@@ -478,10 +593,69 @@ export function WalkerShell() {
                 className={choice(answers.duree === "durable")}
                 onClick={() => {
                   setAnswer("duree", "durable");
-                  go("mob");
+                  go("acq");
                 }}
               >
                 Durable — 6 mois ou plus · achat ou location longue durée (ACHAT / LLD)
+              </button>
+              <Nav dispatch={dispatch} />
+            </Step>
+          )}
+
+          {/* ---------------- DUREE DE LA LCD (forfait hebdo ≤ 13 sem / 14–26 sem) ---------------- */}
+          {stage === "lcd_duree" && (
+            <Step
+              title="Durée de la location courte durée"
+              hint="Le forfait hebdomadaire LCD dépend de la durée de location : jusqu'à 13 semaines, ou de 14 à 26 semaines incluses (au maximum 6 mois de facturation sur 12 mois glissants)."
+            >
+              <button
+                className={choice(answers.lcdDuree === "s13")}
+                onClick={() => {
+                  setAnswer("lcdDuree", "s13");
+                  go("mob");
+                }}
+              >
+                Jusqu&apos;à 13 semaines{" "}
+                <span className="text-ink-soft">· forfait hebdomadaire ≤ 13 sem</span>
+              </button>
+              <button
+                className={choice(answers.lcdDuree === "s26")}
+                onClick={() => {
+                  setAnswer("lcdDuree", "s26");
+                  go("mob");
+                }}
+              >
+                De 14 à 26 semaines{" "}
+                <span className="text-ink-soft">· forfait hebdomadaire 14–26 sem</span>
+              </button>
+              <Nav dispatch={dispatch} />
+            </Step>
+          )}
+
+          {/* ---------------- ACQUISITION (achat / LLD) ---------------- */}
+          {stage === "acq" && (
+            <Step
+              title="Achat ou location longue durée"
+              hint="Besoin durable : le VPH est acheté, ou loué en longue durée (forfait trimestriel). La LLD est réservée aux catégories FRMP, FRMV, FREP, FREV et POU_MRE — seuls les VPH éligibles seront proposés."
+            >
+              <button
+                className={choice(answers.acquisition === "achat")}
+                onClick={() => {
+                  setAnswer("acquisition", "achat");
+                  go("mob");
+                }}
+              >
+                Achat <span className="text-ink-soft">· code LPPR d&apos;achat neuf</span>
+              </button>
+              <button
+                className={choice(answers.acquisition === "lld")}
+                onClick={() => {
+                  setAnswer("acquisition", "lld");
+                  go("mob");
+                }}
+              >
+                Location longue durée (LLD){" "}
+                <span className="text-ink-soft">· forfait trimestriel</span>
               </button>
               <Nav dispatch={dispatch} />
             </Step>
@@ -560,8 +734,9 @@ export function WalkerShell() {
                 ...(answers.age === "enfant"
                   ? devices.filter((d) => d.family === "Poussette")
                   : []),
-              ].filter((d) => deviceAllowedForDuree(d, answers.duree))}
+              ].filter((d) => deviceAllowedForDuree(d, answers.duree, answers.acquisition))}
               duree={answers.duree}
+              acquisition={answers.acquisition}
               dispatch={dispatch}
               onEnter={onHoverEnter}
               onLeave={onHoverLeave}
@@ -572,8 +747,9 @@ export function WalkerShell() {
               title="Configuration électrique"
               list={devices
                 .filter((d) => d.family === "Électrique")
-                .filter((d) => deviceAllowedForDuree(d, answers.duree))}
+                .filter((d) => deviceAllowedForDuree(d, answers.duree, answers.acquisition))}
               duree={answers.duree}
+              acquisition={answers.acquisition}
               dispatch={dispatch}
               onEnter={onHoverEnter}
               onLeave={onHoverLeave}
@@ -631,7 +807,64 @@ export function WalkerShell() {
               title="Adjonctions & positionnement"
               hint={`Sélection compatible avec le ${device.code}. Codes LPPR et tarifs TTC indicatifs.`}
             >
-              {devLpp && (
+              {/* Fauteuil en location (LCD / LLD) : le code LPPR facturé est le forfait de
+                  location, pas le code d'achat — encart cyan (LCD) ou violet (LLD). */}
+              {pec !== "achat" && (
+                <div className={`mb-5 rounded-xl border-2 p-4 ${tint.box}`}>
+                  <div className={`mb-1.5 flex items-center gap-2 text-sm font-semibold ${tint.title}`}>
+                    {pec === "lcd"
+                      ? "Fauteuil en location courte durée · code LPPR"
+                      : "Fauteuil en location longue durée · code LPPR"}
+                    <span
+                      className={`rounded px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white ${tint.tag}`}
+                    >
+                      {pec === "lcd"
+                        ? answers.lcdDuree === "s26"
+                          ? "LCD 14–26 sem"
+                          : "LCD ≤ 13 sem"
+                        : "LLD"}
+                    </span>
+                  </div>
+                  {locForfait ? (
+                    <>
+                      <div className="flex items-center justify-between gap-3">
+                        <span className="flex min-w-0 items-center gap-2">
+                          <span
+                            className={`shrink-0 rounded px-1.5 py-0.5 font-mono text-[12px] font-semibold ${tint.badge}`}
+                          >
+                            {locForfait.code}
+                          </span>
+                          <span className="truncate text-sm text-ink">{model ?? device.name}</span>
+                        </span>
+                        <span className="shrink-0 text-right">
+                          <span className={`block font-mono text-sm font-semibold ${tint.strong}`}>
+                            {eur(locForfait.price)}
+                            {perUnit(locForfait.unit)}
+                          </span>
+                          <span className={`block text-[10px] font-normal ${tint.soft}`}>
+                            forfait de location — à titre indicatif
+                          </span>
+                        </span>
+                      </div>
+                      {pec === "lcd" && lcdOption && (
+                        <p className={`mt-2 rounded-md px-2 py-1.5 text-[11px] ${tint.badgeSoft}`}>
+                          Option d&apos;achat {device.code} au terme de la location : code{" "}
+                          <span className="font-mono font-semibold">{lcdOption.code}</span> (
+                          {eur(lcdOption.price)}) — cochable sur la fiche finale.
+                        </p>
+                      )}
+                    </>
+                  ) : (
+                    <p className={`text-sm ${tint.soft}`}>
+                      {pec === "lld" && device.electric && !answers.classe
+                        ? "Sélectionnez la classe du fauteuil (étape besoins) pour déterminer le forfait trimestriel LLD."
+                        : "Forfait de location indisponible pour ce dispositif."}
+                    </p>
+                  )}
+                </div>
+              )}
+
+              {pec === "achat" && devLpp && (
                 <div className="mb-5 rounded-xl border-2 border-orange-400 bg-orange-100/60 p-4">
                   <div className="mb-1.5 flex items-center gap-2 text-sm font-semibold text-orange-800">
                     Fauteuil sélectionné · code LPP
@@ -903,6 +1136,23 @@ export function WalkerShell() {
                 <span className="rounded-full bg-orange-100 px-3 py-1 text-xs font-semibold text-orange-700">
                   {device.family}
                 </span>
+                <span
+                  className={`rounded-full px-3 py-1 text-xs font-semibold ${
+                    pec === "lcd"
+                      ? "bg-cyan-100 text-cyan-800"
+                      : pec === "lld"
+                        ? "bg-violet-100 text-violet-800"
+                        : "bg-orange-100 text-orange-700"
+                  }`}
+                >
+                  {pec === "lcd"
+                    ? answers.lcdDuree === "s26"
+                      ? "LCD 14–26 sem"
+                      : "LCD ≤ 13 sem"
+                    : pec === "lld"
+                      ? "LLD"
+                      : "Achat"}
+                </span>
                 {answers.vehicleBrand && (
                   <span className="rounded-full bg-orange-100 px-3 py-1 text-xs font-semibold text-orange-700">
                     {answers.vehicleBrand}
@@ -919,9 +1169,14 @@ export function WalkerShell() {
               <dl className="my-4 grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-line-soft bg-line-soft sm:grid-cols-2">
                 <Cell full label="Mode de prise en charge">
                   {device.modes
-                    .filter((m) => modesForDuree(answers.duree).includes(m))
+                    .filter((m) => modesForDuree(answers.duree, answers.acquisition).includes(m))
                     .map((m) => modeLabels[m]?.label ?? m)
                     .join(" / ")}
+                  {pec === "lcd" && answers.lcdDuree
+                    ? answers.lcdDuree === "s13"
+                      ? " (jusqu'à 13 semaines)"
+                      : " (14 à 26 semaines)"
+                    : ""}
                 </Cell>
                 <Cell full label="Prescripteur / attestation">{prescribers[device.presc]}</Cell>
                 <Cell label="Fiche évaluation + préconisation">
@@ -947,7 +1202,7 @@ export function WalkerShell() {
                 </Flag>
               )}
 
-              {(devLpp || selectedAdj.length > 0 || forfaits.length > 0) && (
+              {(devLpp || locForfait || selectedAdj.length > 0 || forfaits.length > 0) && (
                 <div className="my-4">
                   <h4 className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-ink-soft">
                     Codes LPP &amp; tarifs
@@ -955,19 +1210,34 @@ export function WalkerShell() {
                   <p className="mb-2 text-[11px] italic text-ink-soft">
                     Tarifs de responsabilité LPPR, affichés à titre indicatif.
                   </p>
-                  {devLpp && (
+                  {/* ligne fauteuil : code d'achat neuf (orange), ou forfait de location LCD
+                      (cyan) / LLD (violet) — le code facturé en location est celui du forfait. */}
+                  {(pec === "achat" ? devLpp != null : locForfait != null) && (
                     <div className="flex items-baseline justify-between gap-3 border-b border-line-soft py-1.5 text-sm">
                       <span className="flex min-w-0 items-baseline gap-2">
-                        <span className="shrink-0 rounded bg-orange-100 px-1.5 py-0.5 font-mono text-[11px] font-semibold text-orange-800">
-                          {devLpp.code}
+                        <span
+                          className={`shrink-0 rounded px-1.5 py-0.5 font-mono text-[11px] font-semibold ${tint.badgeSoft}`}
+                        >
+                          {pec === "achat" ? devLpp!.code : locForfait!.code}
                         </span>
                         <span>
                           {model ? `${device.name} — ${model}` : device.name}{" "}
-                          <span className="text-ink-soft">· {brand ?? "dispositif"}</span>
+                          <span className="text-ink-soft">
+                            ·{" "}
+                            {pec === "achat"
+                              ? (brand ?? "dispositif")
+                              : pec === "lcd"
+                                ? "location courte durée"
+                                : "location longue durée"}
+                          </span>
                         </span>
                       </span>
-                      <span className="font-mono text-orange-800">
-                        {devLpp.tarif != null ? eur(devLpp.tarif) : "n.c."}
+                      <span className={`font-mono ${tint.strong}`}>
+                        {pec === "achat"
+                          ? devLpp!.tarif != null
+                            ? eur(devLpp!.tarif)
+                            : "n.c."
+                          : `${eur(locForfait!.price)}${perUnit(locForfait!.unit)}`}
                       </span>
                     </div>
                   )}
@@ -988,6 +1258,20 @@ export function WalkerShell() {
                       open={!!(a.devis || a.tbd)}
                     />
                   ))}
+                  {addOptionAchat && lcdOption && (
+                    <div className="flex items-baseline justify-between gap-3 border-b border-line-soft py-1.5 text-sm">
+                      <span className="flex min-w-0 items-baseline gap-2">
+                        <span className="shrink-0 rounded bg-cyan-100 px-1.5 py-0.5 font-mono text-[11px] font-semibold text-cyan-900">
+                          {lcdOption.code}
+                        </span>
+                        <span>
+                          {lcdOption.label}{" "}
+                          <span className="text-ink-soft">· option d&apos;achat LCD</span>
+                        </span>
+                      </span>
+                      <span className="font-mono text-cyan-800">{eur(lcdOption.price)}</span>
+                    </div>
+                  )}
                   {addLivraison && (
                     <div className="flex items-baseline justify-between gap-3 border-b border-line-soft py-1.5 text-sm">
                       <span className="flex min-w-0 items-baseline gap-2">
@@ -1001,32 +1285,43 @@ export function WalkerShell() {
                       <span className="font-mono text-blue-800">{eur(meta.livraison.price)}</span>
                     </div>
                   )}
-                  {addMad && madForfait && (
+                  {addMad && effMad && (
                     <div className="flex items-baseline justify-between gap-3 border-b border-line-soft py-1.5 text-sm">
                       <span className="flex min-w-0 items-baseline gap-2">
                         <span className="shrink-0 rounded bg-blue-100 px-1.5 py-0.5 font-mono text-[11px] font-semibold text-blue-800">
-                          {madForfait.code}
+                          {effMad.code}
                         </span>
                         <span>
-                          {madForfait.label}{" "}
-                          <span className="text-ink-soft">· MAD niveau {madForfait.niveau}</span>
+                          {effMad.label}{" "}
+                          <span className="text-ink-soft">
+                            · {pec === "lcd" ? "MAD LCD" : `MAD niveau ${madForfait!.niveau}`}
+                          </span>
                         </span>
                       </span>
-                      <span className="font-mono text-blue-800">{eur(madForfait.price)}</span>
+                      <span className="font-mono text-blue-800">{eur(effMad.price)}</span>
                     </div>
                   )}
                   {(selectedAdj.length > 0 || forfaits.length > 0) && <Subtotal costs={costs} />}
-                  {devLpp?.tarif != null && (
+                  {(pec === "achat"
+                    ? devLpp?.tarif != null
+                    : costs.subtotal +
+                        (addLivraison ? meta.livraison.price : 0) +
+                        (addMad && effMad ? effMad.price : 0) +
+                        (addOptionAchat && lcdOption ? lcdOption.price : 0) >
+                      0) && (
                     <div className="mt-2 flex items-center justify-between rounded-lg bg-ink/5 px-4 py-3">
                       <b className="text-sm text-ink">
-                        Total indicatif{costs.hasOpen ? " (hors devis / à préciser)" : ""}
+                        Total indicatif
+                        {pec !== "achat" ? " hors forfait de location" : ""}
+                        {costs.hasOpen ? " (hors devis / à préciser)" : ""}
                       </b>
                       <span className="font-mono text-base font-semibold text-ink">
                         {eur(
-                          devLpp.tarif +
+                          (pec === "achat" ? (devLpp?.tarif ?? 0) : 0) +
                             costs.subtotal +
                             (addLivraison ? meta.livraison.price : 0) +
-                            (addMad && madForfait ? madForfait.price : 0),
+                            (addMad && effMad ? effMad.price : 0) +
+                            (addOptionAchat && lcdOption ? lcdOption.price : 0),
                         )}
                       </span>
                     </div>
@@ -1045,7 +1340,52 @@ export function WalkerShell() {
                       Prestations associées
                     </div>
 
-                    {madForfait ? (
+                    {/* En LCD : forfait MAD dédié du Titre I (1213650, FRM/FRE) — MAD1/MAD2
+                        sont réservés à l'achat et à la LLD. */}
+                    {pec === "lcd" ? (
+                      madLcdForfait ? (
+                        <div className="border-b border-blue-200 pb-3">
+                          <label className="flex cursor-pointer items-start gap-2.5">
+                            <input
+                              type="checkbox"
+                              checked={addMad}
+                              onChange={(e) => setAddMad(e.target.checked)}
+                              className="mt-0.5 h-4 w-4 accent-blue-600"
+                            />
+                            <span className="text-sm">
+                              <b className="text-blue-900">
+                                Ajouter le forfait de mise à disposition — MAD LCD
+                              </b>
+                              <span className="mt-0.5 block text-[12px] text-blue-800/80">
+                                Mise à disposition en location courte durée ({device.code}) — au
+                                plus une fois par épisode de location.
+                              </span>
+                            </span>
+                          </label>
+                          <div className="mt-2.5 flex items-center justify-between gap-3">
+                            <span className="flex items-center gap-2">
+                              <span className="rounded bg-blue-200/70 px-1.5 py-0.5 font-mono text-[12px] font-semibold text-blue-900">
+                                {madLcdForfait.code}
+                              </span>
+                              <span className="font-mono text-sm font-semibold text-blue-900">
+                                {eur(madLcdForfait.price)}
+                              </span>
+                            </span>
+                            <button
+                              onClick={copyMad}
+                              className="shrink-0 rounded-lg bg-blue-600 px-3 py-2 text-sm font-semibold text-white hover:bg-blue-700"
+                            >
+                              {copiedMad ? "✓ Copié" : "Copier le code MAD"}
+                            </button>
+                          </div>
+                        </div>
+                      ) : (
+                        <p className="border-b border-blue-200 pb-3 text-[12px] text-blue-800/80">
+                          Pas de forfait MAD en location courte durée pour ce dispositif (
+                          {device.code}) : le forfait MAD LCD est réservé aux FRM et FRE (Titre I).
+                        </p>
+                      )
+                    ) : madForfait ? (
                       <div className="border-b border-blue-200 pb-3">
                         <label className="flex cursor-pointer items-start gap-2.5">
                           <input
@@ -1092,6 +1432,44 @@ export function WalkerShell() {
                           ? `Pas de forfait MAD pour ce dispositif (${device.code} : hors niveaux MAD de la nomenclature).`
                           : "Contexte de mise à disposition non renseigné (question « Mise à disposition » de l'évaluation)."}
                       </p>
+                    )}
+
+                    {/* Option d'achat LCD de la catégorie — facturable au terme de la location. */}
+                    {pec === "lcd" && lcdOption && (
+                      <div className="mt-3 border-b border-blue-200 pb-3">
+                        <label className="flex cursor-pointer items-start gap-2.5">
+                          <input
+                            type="checkbox"
+                            checked={addOptionAchat}
+                            onChange={(e) => setAddOptionAchat(e.target.checked)}
+                            className="mt-0.5 h-4 w-4 accent-blue-600"
+                          />
+                          <span className="text-sm">
+                            <b className="text-blue-900">
+                              Ajouter l&apos;option d&apos;achat LCD ({device.code})
+                            </b>
+                            <span className="mt-0.5 block text-[12px] text-blue-800/80">
+                              Achat du fauteuil au terme de la location courte durée (Titre I).
+                            </span>
+                          </span>
+                        </label>
+                        <div className="mt-2.5 flex items-center justify-between gap-3">
+                          <span className="flex items-center gap-2">
+                            <span className="rounded bg-blue-200/70 px-1.5 py-0.5 font-mono text-[12px] font-semibold text-blue-900">
+                              {lcdOption.code}
+                            </span>
+                            <span className="font-mono text-sm font-semibold text-blue-900">
+                              {eur(lcdOption.price)}
+                            </span>
+                          </span>
+                          <button
+                            onClick={copyOption}
+                            className="shrink-0 rounded-lg bg-blue-600 px-3 py-2 text-sm font-semibold text-white hover:bg-blue-700"
+                          >
+                            {copiedOption ? "✓ Copié" : "Copier le code option d'achat"}
+                          </button>
+                        </div>
+                      </div>
                     )}
 
                     <label className="mt-3 flex cursor-pointer items-start gap-2.5">
@@ -1260,6 +1638,7 @@ function DeviceChoice({
   title,
   list,
   duree,
+  acquisition,
   dispatch,
   onEnter,
   onLeave,
@@ -1267,16 +1646,26 @@ function DeviceChoice({
   title: string;
   list: Device[];
   duree: Answers["duree"];
+  acquisition: Answers["acquisition"];
   dispatch: ReturnType<typeof useWalker>["dispatch"];
   onEnter?: (e: React.MouseEvent<HTMLElement>) => void;
   onLeave?: () => void;
 }) {
-  const allowed = modesForDuree(duree);
+  const allowed = modesForDuree(duree, acquisition);
+  const restriction =
+    duree === "temp"
+      ? " Seuls les VPH louables en courte durée (LCD) sont proposés."
+      : acquisition === "lld"
+        ? " Seuls les VPH éligibles à la location longue durée (LLD) sont proposés."
+        : "";
   return (
-    <Step title={title} hint="Choisissez le dispositif correspondant au besoin dominant.">
+    <Step
+      title={title}
+      hint={`Choisissez le dispositif correspondant au besoin dominant.${restriction}`}
+    >
       {list.length === 0 && (
         <p className="rounded-lg bg-petrol-tint/40 px-3 py-2 text-sm text-ink-soft">
-          Aucun dispositif disponible pour cette temporalité.
+          Aucun dispositif disponible pour ce mode de prise en charge.
         </p>
       )}
       {list.map((d) => {

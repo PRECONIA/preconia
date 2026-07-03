@@ -1,0 +1,20 @@
+{
+  "source": "Nomenclature LPPR — forfaits de location des VPH : Titre I ch. 9 (LCD : forfaits hebdomadaires jusqu'à 13 semaines / 14 à 26 semaines, options d'achat, forfait MAD LCD 1213650 réservé FRM et FRE) et Titre IV 3.3 (LLD : forfaits trimestriels, FREP par classe). Codes référencés dans lppr-prestations.json (tarifs officiels, base CNAM LPPTOT v890 du 25/06/2026).",
+  "lastUpdated": "2026-07-03",
+  "lcd": {
+    "FMP": { "s13": "1268182", "s26": "1291028", "optionAchat": "1267633" },
+    "FMPR": { "s13": "1261613", "s26": "1277376", "optionAchat": "1228567" },
+    "FRM": { "s13": "1290922", "s26": "1207648", "optionAchat": "1215560" },
+    "FRE": { "s13": "1270434", "s26": "1225178", "optionAchat": "1273020" }
+  },
+  "madLcd": { "code": "1213650", "devices": ["FRM", "FRE"] },
+  "lld": {
+    "FRMP": "4723793",
+    "FRMV": "4776720",
+    "FREP-A": "4706211",
+    "FREP-B": "4762238",
+    "FREP-C": "4759785",
+    "FREV": "4780118",
+    "POU_MRE": "4711293"
+  }
+}

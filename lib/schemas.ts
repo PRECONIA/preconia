@@ -210,6 +210,25 @@ export const MadForfaitsFileSchema = z.object({
   niveaux: z.array(MadNiveauSchema).nonempty(),
 });
 
+/* --- location-forfaits.json (codes des forfaits de location, référencés dans
+   lppr-prestations.json — cohérence vérifiée au chargement).
+   `lcd` : par catégorie (FMP, FMPR, FRM, FRE) → forfait hebdo ≤ 13 sem / 14–26 sem
+   + option d'achat. `madLcd` : forfait de mise à disposition propre à la LCD (Titre I,
+   réservé FRM et FRE — MAD1/MAD2 ne s'appliquent qu'à l'achat et à la LLD).
+   `lld` : par jeton de type (FREP par classe : FREP-A/B/C) → forfait trimestriel. --- */
+export const LcdForfaitEntrySchema = z.object({
+  s13: z.string(),
+  s26: z.string(),
+  optionAchat: z.string(),
+});
+export const LocationForfaitsFileSchema = z.object({
+  source: z.string(),
+  lastUpdated: z.string(),
+  lcd: z.record(z.string(), LcdForfaitEntrySchema),
+  madLcd: z.object({ code: z.string(), devices: z.array(z.string()).nonempty() }),
+  lld: z.record(z.string(), z.string()),
+});
+
 /* --- cumul.json (règles de cumul VPH : incompatibilités par acronyme LPPR).
    `incompatible[X]` = acronymes non cumulables avec X (relation symétrique appliquée au calcul).
    Deux VPH sont cumulables si aucun des deux ne figure dans l'incompatibilité de l'autre. --- */

@@ -72,6 +72,21 @@ export function facets(answers: Answers): Facet[] {
     { k: "Âge", v: answers.age ? (answers.age === "enfant" ? "Enfant" : "Adulte") : null },
     { k: "Durée", v: answers.duree ? (answers.duree === "temp" ? "Temporaire" : "Durable") : null },
     {
+      k: "Prise en charge",
+      v:
+        answers.duree === "temp"
+          ? answers.lcdDuree
+            ? answers.lcdDuree === "s13"
+              ? "LCD ≤ 13 sem"
+              : "LCD 14–26 sem"
+            : "LCD"
+          : answers.acquisition
+            ? answers.acquisition === "achat"
+              ? "Achat"
+              : "LLD"
+            : null,
+    },
+    {
       k: "Mise à dispo",
       v: answers.mad
         ? answers.mad === "premiere"

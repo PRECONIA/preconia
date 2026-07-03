@@ -53,12 +53,19 @@ const C = {
   blue50: "#eff6ff",
   blue100: "#dbeafe",
   blue800: "#1e40af",
+  /* location : LCD = cyan, LLD = violet (miroir des encarts de l'UI) */
+  cyan100: "#cffafe",
+  cyan800: "#155e75",
+  violet100: "#ede9fe",
+  violet800: "#5b21b6",
   white: "#ffffff",
 };
 
 /* --- types de données (sérialisables, construits dans WalkerShell) --- */
 export interface FicheData {
   generatedAt: string;
+  /** mode de prise en charge : colore la ligne du fauteuil (achat = orange, LCD = cyan, LLD = violet). */
+  pec: "achat" | "lcd" | "lld";
   device: {
     code: string;
     name: string;
@@ -73,16 +80,21 @@ export interface FicheData {
   vph: {
     code: string;
     tarif: number | null;
+    /** périodicité du forfait de location (« / semaine », « / trimestre ») ; null = tarif unique. */
+    tarifUnit: string | null;
     name: string;
     indications: { mode: string; text: string }[];
   } | null;
   forfaits: { code: string; label: string; price: number; definition: string[]; technique: string[] }[];
   adjonctions: { code: string; name: string; price: string; open: boolean }[];
   pap: { name: string; forfait: "A" | "B"; code: string; info: string }[];
+  /** option d'achat LCD de la catégorie si elle est cochée (location courte durée). */
+  optionAchat: { code: string; label: string; price: number } | null;
   livraison: { code: string; label: string; price: number } | null;
-  /** forfait MAD (MAD1/MAD2, niveau selon la catégorie) s'il est coché. */
+  /** forfait MAD s'il est coché (MAD1/MAD2 à l'achat et en LLD ; MAD LCD en courte durée). */
   mad: { code: string; label: string; price: number } | null;
-  totals: { subtotal: number; hasOpen: boolean; total: number | null };
+  /** `horsLocation` : en LCD/LLD le total n'inclut pas le forfait de location (périodique). */
+  totals: { subtotal: number; hasOpen: boolean; total: number | null; horsLocation: boolean };
   disclaimer: string;
   source: string;
   lastUpdated: string;
@@ -431,10 +443,12 @@ function FicheDocument({ d }: { d: FicheData }) {
               <CodeRow
                 code={d.vph.code}
                 label={d.vph.name}
-                value={d.vph.tarif != null ? eur(d.vph.tarif) : "n.c."}
-                badgeBg={C.orange100}
-                badgeColor={C.orange800}
-                valueColor={C.orange800}
+                value={
+                  d.vph.tarif != null ? `${eur(d.vph.tarif)}${d.vph.tarifUnit ?? ""}` : "n.c."
+                }
+                badgeBg={d.pec === "lcd" ? C.cyan100 : d.pec === "lld" ? C.violet100 : C.orange100}
+                badgeColor={d.pec === "lcd" ? C.cyan800 : d.pec === "lld" ? C.violet800 : C.orange800}
+                valueColor={d.pec === "lcd" ? C.cyan800 : d.pec === "lld" ? C.violet800 : C.orange800}
               />
             )}
             {d.forfaits.map((f) => (
@@ -459,6 +473,16 @@ function FicheDocument({ d }: { d: FicheData }) {
                 valueColor={a.open ? C.amber : C.petrolDeep}
               />
             ))}
+            {d.optionAchat && (
+              <CodeRow
+                code={d.optionAchat.code}
+                label={d.optionAchat.label}
+                value={eur(d.optionAchat.price)}
+                badgeBg={C.cyan100}
+                badgeColor={C.cyan800}
+                valueColor={C.cyan800}
+              />
+            )}
             {d.livraison && (
               <CodeRow
                 code={d.livraison.code}
@@ -492,7 +516,9 @@ function FicheDocument({ d }: { d: FicheData }) {
             {d.totals.total != null && (
               <View style={s.totalRow}>
                 <Text style={{ fontWeight: 700 }}>
-                  Total indicatif{d.totals.hasOpen ? " (hors devis / à préciser)" : ""}
+                  Total indicatif
+                  {d.totals.horsLocation ? " hors forfait de location" : ""}
+                  {d.totals.hasOpen ? " (hors devis / à préciser)" : ""}
                 </Text>
                 <Text style={{ fontFamily: "JetBrains Mono", fontSize: 11, fontWeight: 700 }}>
                   {eur(d.totals.total)}

@@ -19,6 +19,7 @@ import type {
   CumulCategorySchema,
   PrestationSchema,
   MadNiveauSchema,
+  LcdForfaitEntrySchema,
   MetaSchema,
 } from "./schemas";
 
@@ -44,4 +45,5 @@ export type OptionSheet = z.infer<typeof OptionSheetSchema>;
 export type CumulCategory = z.infer<typeof CumulCategorySchema>;
 export type Prestation = z.infer<typeof PrestationSchema>;
 export type MadNiveau = z.infer<typeof MadNiveauSchema>;
+export type LcdForfaitEntry = z.infer<typeof LcdForfaitEntrySchema>;
 export type Meta = z.infer<typeof MetaSchema>;

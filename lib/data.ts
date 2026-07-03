@@ -13,6 +13,7 @@ import deviceIndicationsRaw from "@/data/device-indications.json";
 import cumulRaw from "@/data/cumul.json";
 import prestationsRaw from "@/data/lppr-prestations.json";
 import madForfaitsRaw from "@/data/mad-forfaits.json";
+import locationForfaitsRaw from "@/data/location-forfaits.json";
 import metaRaw from "@/data/meta.json";
 
 import {
@@ -30,6 +31,7 @@ import {
   CumulFileSchema,
   PrestationsFileSchema,
   MadForfaitsFileSchema,
+  LocationForfaitsFileSchema,
   MetaSchema,
 } from "./schemas";
 import type {
@@ -39,6 +41,7 @@ import type {
   CumulCategory,
   Prestation,
   MadNiveau,
+  LcdForfaitEntry,
 } from "./types";
 import type { Device, Presc } from "./types";
 
@@ -124,6 +127,14 @@ const madForfaitsFile = MadForfaitsFileSchema.parse(madForfaitsRaw);
 /** correspondance dispositif → niveau MAD (codes MAD1/MAD2 dans les prestations). */
 export const madNiveaux: MadNiveau[] = madForfaitsFile.niveaux;
 
+const locationForfaitsFile = LocationForfaitsFileSchema.parse(locationForfaitsRaw);
+/** LCD : catégorie (FMP, FMPR, FRM, FRE) → codes des forfaits hebdo ≤13 sem / 14–26 sem + option d'achat. */
+export const lcdForfaits: Record<string, LcdForfaitEntry> = locationForfaitsFile.lcd;
+/** forfait de mise à disposition propre à la LCD (Titre I) : code + catégories éligibles (FRM, FRE). */
+export const madLcd = locationForfaitsFile.madLcd;
+/** LLD : jeton de type (FRMP, FREP-A/B/C, FREV…) → code du forfait trimestriel. */
+export const lldForfaits: Record<string, string> = locationForfaitsFile.lld;
+
 const cumulFile = CumulFileSchema.parse(cumulRaw);
 /** catégories VPH cumulables (acronyme LPPR + libellé), dans l'ordre du document. */
 export const cumulCategories: CumulCategory[] = cumulFile.categories;
@@ -166,6 +177,42 @@ for (const n of madNiveaux) {
   for (const dc of n.devices) {
     assert(dc in deviceByCode, `mad-forfaits niveau ${n.niveau} : dispositif « ${dc} » inconnu`);
   }
+}
+
+// location-forfaits : tout code référencé doit exister dans les prestations, et la couverture
+// doit être exactement celle des modes déclarés dans devices.json (LCD/LLD).
+for (const [cat, entry] of Object.entries(lcdForfaits)) {
+  for (const c of [entry.s13, entry.s26, entry.optionAchat]) {
+    assert(c in prestationByCode, `location-forfaits LCD ${cat} : code ${c} absent des prestations`);
+  }
+  assert(
+    deviceByCode[cat]?.modes.includes("LCD") ?? false,
+    `location-forfaits LCD : « ${cat} » n'est pas un dispositif à mode LCD`,
+  );
+}
+for (const d of devices.filter((x) => x.modes.includes("LCD"))) {
+  assert(d.code in lcdForfaits, `location-forfaits : forfait LCD manquant pour ${d.code}`);
+}
+assert(madLcd.code in prestationByCode, `location-forfaits madLcd : code ${madLcd.code} absent des prestations`);
+for (const dc of madLcd.devices) {
+  assert(
+    deviceByCode[dc]?.modes.includes("LCD") ?? false,
+    `location-forfaits madLcd : « ${dc} » n'est pas un dispositif à mode LCD`,
+  );
+}
+for (const [token, code] of Object.entries(lldForfaits)) {
+  assert(code in prestationByCode, `location-forfaits LLD ${token} : code ${code} absent des prestations`);
+  const base = token.split("-")[0];
+  assert(
+    deviceByCode[base]?.modes.includes("LLD") ?? false,
+    `location-forfaits LLD : « ${token} » n'est pas un dispositif à mode LLD`,
+  );
+}
+for (const d of devices.filter((x) => x.modes.includes("LLD"))) {
+  const covered =
+    d.code in lldForfaits ||
+    ["A", "B", "C"].every((cl) => `${d.code}-${cl}` in lldForfaits);
+  assert(covered, `location-forfaits : forfait LLD manquant pour ${d.code}`);
 }
 
 const cumulCodes = new Set(cumulCategories.map((c) => c.code));
