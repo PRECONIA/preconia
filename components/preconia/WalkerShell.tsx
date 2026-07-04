@@ -1933,37 +1933,30 @@ export function WalkerShell() {
               {
                 href: "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000051141909",
                 title: "Arrêté du 6 février 2025",
-                desc: "Texte de la réforme VPH au Journal officiel (Légifrance)",
               },
               {
                 href: "https://nomenclature-fauteuil-roulant.fr",
-                title: "Nomenclature fauteuil roulant",
-                desc: "La nouvelle nomenclature VPH présentée par titres (I et IV)",
+                title: "Site officiel FEDEPSAD et UNPDM",
               },
               {
                 href: "https://nomenclature-fauteuil-roulant.fr/Fiche-evaluation-des-besoins-VPH.pdf",
                 title: "Fiche d'évaluation des besoins",
-                desc: "Les 4 critères et la prise de mesures du patient (PDF)",
               },
               {
                 href: "https://nomenclature-fauteuil-roulant.fr/Fiche-de-preconisation-VPH.pdf",
                 title: "Fiche de préconisation",
-                desc: "Catégorie, caractéristiques, options et mesures du VPH retenu (PDF)",
               },
               {
                 href: "https://nomenclature-fauteuil-roulant.fr/PDF_Nomenclature/Documents_Def/Formulaire-engagement-usagers-VPH.pdf",
-                title: "Formulaire d'engagement des usagers",
-                desc: "Engagement de l'usager lors de la prise en charge du VPH (PDF)",
+                title: "Formulaire d'engagement de restitution",
               },
               {
                 href: "https://mobile.cerahtec.fr/doc/lppr_nn.pdf",
                 title: "Liste CERAH des VPH inscrits",
-                desc: "Modèles homologués à la nouvelle nomenclature (PDF)",
               },
               {
                 href: "http://www.codage.ext.cnamts.fr/codif/tips//chapitre/index_chap.php?p_ref_menu_code=1&p_site=AMELI",
                 title: "Base LPP — CNAMTS",
-                desc: "Nomenclature et tarifs officiels de l'Assurance maladie",
               },
             ].map((l) => (
               <a
@@ -1974,7 +1967,6 @@ export function WalkerShell() {
                 className="mb-2 block rounded-lg border border-line bg-card px-4 py-3 transition-colors last:mb-0 hover:border-orange-500 hover:bg-orange-50"
               >
                 <b className="block text-sm">{l.title} ↗</b>
-                <span className="mt-0.5 block text-xs text-ink-soft">{l.desc}</span>
               </a>
             ))}
           </div>
