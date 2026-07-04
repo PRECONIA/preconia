@@ -222,6 +222,15 @@ const PEC_TINT: Record<
 /** Suffixe de périodicité d'un forfait de location (« / semaine », « / trimestre »). */
 const perUnit = (u?: string) => (u === "semaine" ? " / semaine" : u === "trimestre" ? " / trimestre" : "");
 
+/** Sections de la page d'accueil, pour la barre d'ancrage sous le titre. */
+const SECTIONS: { id: string; label: string }[] = [
+  { id: "preconisation", label: "Préconisation guidée" },
+  { id: "recherche-lppr", label: "Recherche LPPR" },
+  { id: "cumul", label: "Évaluation de cumul" },
+  { id: "recherche-vph", label: "Recherche VPH" },
+  { id: "apropos", label: "À propos & FAQ" },
+];
+
 export function WalkerShell() {
   const { state, dispatch } = useWalker();
   const { stage, answers } = state;
@@ -613,11 +622,27 @@ export function WalkerShell() {
             </div>
           </div>
         </div>
-        <p className="mb-8 mt-3 max-w-[60ch] text-sm leading-relaxed text-ink-soft">
+        <p className="mb-4 mt-3 max-w-[60ch] text-sm leading-relaxed text-ink-soft">
           Du patient au dispositif, de la classe aux adjonctions facturables et forfaits
           jusqu&apos;à la mise à disposition et la livraison — D&apos;après la réforme de la
           nomenclature 2025.
         </p>
+        {/* Barre d'ancrage : accès direct à chaque section de la page d'accueil. */}
+        <nav aria-label="Accès rapide aux sections" className="mb-8 flex flex-wrap gap-2">
+          {SECTIONS.map((s) => (
+            <a
+              key={s.id}
+              href={`#${s.id}`}
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById(s.id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+              }}
+              className="rounded-full border border-line bg-card px-3 py-1.5 text-xs font-medium text-ink-soft transition-colors hover:border-petrol hover:text-petrol-deep"
+            >
+              {s.label}
+            </a>
+          ))}
+        </nav>
       </header>
 
       {stage !== "home" && (
@@ -637,7 +662,10 @@ export function WalkerShell() {
         </div>
       )}
 
-      <div className="overflow-hidden rounded-2xl border border-line bg-card shadow-sm">
+      <div
+        id="preconisation"
+        className="scroll-mt-4 overflow-hidden rounded-2xl border border-line bg-card shadow-sm"
+      >
         <div className="h-[3px] bg-gradient-to-r from-petrol to-petrol-deep" />
         <div className="px-6 py-6">
           {/* ---------------- HOME ---------------- */}
@@ -1975,11 +2003,17 @@ export function WalkerShell() {
         </aside>
       )}
 
-      <RechercheLpp />
+      <div id="recherche-lppr" className="scroll-mt-4">
+        <RechercheLpp />
+      </div>
 
-      <ModuleCumul />
+      <div id="cumul" className="scroll-mt-4">
+        <ModuleCumul />
+      </div>
 
-      <RechercheVph />
+      <div id="recherche-vph" className="scroll-mt-4">
+        <RechercheVph />
+      </div>
 
       <footer className="mt-6 border-t border-line pt-4 text-[11.5px] leading-relaxed text-ink-soft/90">
         <b className="text-ink-soft">{meta.disclaimer}</b> Source : {meta.source}. Dernière mise à

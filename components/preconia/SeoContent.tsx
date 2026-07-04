@@ -81,8 +81,9 @@ export function SeoContent() {
 
   return (
     <section
+      id="apropos"
       aria-label="À propos de la prescription des fauteuils roulants (VPH)"
-      className="relative z-10 mx-auto max-w-[790px] px-5 pb-16"
+      className="relative z-10 mx-auto max-w-[790px] scroll-mt-4 px-5 pb-16"
     >
       <script
         type="application/ld+json"
