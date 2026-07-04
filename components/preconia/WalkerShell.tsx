@@ -1966,7 +1966,7 @@ export function WalkerShell() {
                 rel="noopener noreferrer"
                 className="mb-2 block rounded-lg border border-line bg-card px-4 py-3 transition-colors last:mb-0 hover:border-orange-500 hover:bg-orange-50"
               >
-                <b className="block text-sm">{l.title} ↗</b>
+                <b className="block text-sm">{l.title}</b>
               </a>
             ))}
           </div>
