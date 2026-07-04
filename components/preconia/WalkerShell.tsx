@@ -1815,15 +1815,16 @@ export function WalkerShell() {
             <h2 className="text-base font-semibold text-white">Liens officiels</h2>
           </div>
           <div className="p-4">
-            <p className="mb-3 text-xs leading-relaxed text-ink-soft">
-              PRECONIA est une aide à la décision <b>non opposable</b>. Seuls les textes et bases
-              ci-dessous font foi.
-            </p>
             {[
               {
                 href: "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000051141909",
                 title: "Arrêté du 6 février 2025",
                 desc: "Texte de la réforme VPH au Journal officiel (Légifrance)",
+              },
+              {
+                href: "https://nomenclature-fauteuil-roulant.fr",
+                title: "Nomenclature fauteuil roulant",
+                desc: "La nouvelle nomenclature VPH présentée par titres (I et IV)",
               },
               {
                 href: "https://mobile.cerahtec.fr/doc/lppr_nn.pdf",
