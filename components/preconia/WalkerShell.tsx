@@ -1482,7 +1482,7 @@ export function WalkerShell() {
                 <Cell full label="Évaluation des besoins &amp; fiche de préconisation">
                   {evaluators[device.eval]}
                 </Cell>
-                <Cell label="Accord préalable">
+                <Cell full label="Accord préalable">
                   <span className={device.dap ? "font-semibold text-amber" : ""}>
                     {device.dap ? "DAP requise" : "Non requise"}
                   </span>
