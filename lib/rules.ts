@@ -3,6 +3,7 @@ import type {
   Classe,
   ClasseValue,
   Device,
+  Eval,
   DeviceLppEntry,
   DeviceModelEntry,
   Forfait,
@@ -365,6 +366,46 @@ export function prescriberFor(
   }
   if (mad === "renouv_id") return prescribers.renouvId ?? prescribers[device.presc];
   return prescribers[device.presc];
+}
+
+/** Spécificités de prescription d'un VPH selon la modalité de prise en charge (arrêté du
+ *  06/02/2025). Le PRESCRIPTEUR se calcule à part via `prescriberFor` (dépend aussi du
+ *  contexte de renouvellement) ; cette fonction couvre les autres axes :
+ *  - `evaluateur` : qui réalise l'évaluation des besoins + fiche de préconisation (§3.1.4.2.1) ;
+ *     null en LCD (parcours allégé, §9.7 : essai comparatif sans fiche) ;
+ *  - `fichePreconisation` : requise à l'achat et en LLD pour les catégories du parcours
+ *     (§3.1.4.2 / 3.3.6), jamais en LCD ;
+ *  - `dap` : achat → liste §3.1.4 (via device.dap) ; LLD → FRMP/FRMV/FREP/FREV (§3.3.6) ;
+ *     LCD → FRE uniquement (§9.5.b) ;
+ *  - `envLevel` : évaluation environnementale — « non » (LCD manuelle, ou catégories sans
+ *     parcours), « besoins » (volet facteurs environnementaux de l'évaluation), « renforcee »
+ *     (électriques et scooters : compatibilité, stockage/recharge, certificat — §3.1.5 / 9.5.b). */
+export type Modality = "ACHAT" | "LCD" | "LLD";
+const DAP_LLD = ["FRMP", "FRMV", "FREP", "FREV"];
+export interface PrescriptionExtras {
+  evaluateur: Eval | null;
+  fichePreconisation: boolean;
+  dap: boolean;
+  envLevel: "non" | "besoins" | "renforcee";
+}
+export function prescriptionExtras(device: Device, modality: Modality): PrescriptionExtras {
+  const electriqueOuScooter = device.electric || device.code === "SCO";
+  if (modality === "LCD") {
+    const fre = device.code === "FRE";
+    return {
+      evaluateur: null,
+      fichePreconisation: false,
+      dap: fre,
+      envLevel: fre ? "renforcee" : "non",
+    };
+  }
+  const dap = modality === "LLD" ? DAP_LLD.includes(device.code) : device.dap;
+  return {
+    evaluateur: device.eval === "aucune" ? null : device.eval,
+    fichePreconisation: device.fiche,
+    dap,
+    envLevel: !device.fiche ? "non" : electriqueOuScooter ? "renforcee" : "besoins",
+  };
 }
 
 /** Cumul de deux VPH autorisé ? Faux si l'un figure dans l'incompatibilité de l'autre (relation

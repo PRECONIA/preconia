@@ -55,6 +55,7 @@ import { eur } from "@/lib/format";
 import { RechercheLpp } from "@/components/preconia/RechercheLpp";
 import { ModuleCumul } from "@/components/preconia/ModuleCumul";
 import { RechercheVph } from "@/components/preconia/RechercheVph";
+import { SpecificitesPrescription } from "@/components/preconia/SpecificitesPrescription";
 import { Logo } from "@/components/preconia/Logo";
 import type { FicheData } from "@/components/preconia/fiche-pdf";
 import type { Adjonction, BesoinField, Device } from "@/lib/types";
@@ -228,6 +229,7 @@ const SECTIONS: { id: string; label: string }[] = [
   { id: "recherche-lppr", label: "Recherche LPPR" },
   { id: "cumul", label: "Évaluation de cumul" },
   { id: "recherche-vph", label: "Recherche VPH" },
+  { id: "specificites-prescription", label: "Spécificités de prescription" },
   { id: "apropos", label: "À propos & FAQ" },
 ];
 
@@ -2013,6 +2015,10 @@ export function WalkerShell() {
 
       <div id="recherche-vph" className="scroll-mt-4">
         <RechercheVph />
+      </div>
+
+      <div id="specificites-prescription" className="scroll-mt-4">
+        <SpecificitesPrescription />
       </div>
 
       <footer className="mt-6 border-t border-line pt-4 text-[11.5px] leading-relaxed text-ink-soft/90">

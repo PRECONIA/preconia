@@ -34,6 +34,7 @@ import {
   isCumulAllowed,
   cumulVerdict,
   prescriberFor,
+  prescriptionExtras,
   lcdForfaitFor,
   lcdOptionAchatFor,
   lldForfaitFor,
@@ -643,5 +644,55 @@ describe("évaluation/préconisation distincte du prescripteur (§3.1.4.2.1)", (
   it("libellés d'évaluation présents pour chaque valeur", () => {
     for (const k of ["equipe", "competent", "aucune"] as const)
       expect(evaluators[k]).toBeTruthy();
+  });
+});
+
+describe("prescriptionExtras (spécificités par modalité)", () => {
+  it("ACHAT : fiche + évaluateur selon la catégorie, DAP §3.1.4", () => {
+    expect(prescriptionExtras(deviceByCode.FRE, "ACHAT")).toEqual({
+      evaluateur: "equipe",
+      fichePreconisation: true,
+      dap: true,
+      envLevel: "renforcee",
+    });
+    expect(prescriptionExtras(deviceByCode.FMP, "ACHAT")).toEqual({
+      evaluateur: null,
+      fichePreconisation: false,
+      dap: false,
+      envLevel: "non",
+    });
+    expect(prescriptionExtras(deviceByCode.FRM, "ACHAT").envLevel).toBe("besoins");
+    expect(prescriptionExtras(deviceByCode.SCO, "ACHAT").envLevel).toBe("renforcee");
+  });
+
+  it("LCD : pas de fiche ni d'évaluateur ; DAP et évaluation renforcée pour le FRE seul", () => {
+    expect(prescriptionExtras(deviceByCode.FRM, "LCD")).toEqual({
+      evaluateur: null,
+      fichePreconisation: false,
+      dap: false,
+      envLevel: "non",
+    });
+    expect(prescriptionExtras(deviceByCode.FRE, "LCD")).toEqual({
+      evaluateur: null,
+      fichePreconisation: false,
+      dap: true,
+      envLevel: "renforcee",
+    });
+  });
+
+  it("LLD : fiche + évaluateur ; DAP pour FRMP/FRMV/FREP/FREV, pas POU_MRE", () => {
+    expect(prescriptionExtras(deviceByCode.FREP, "LLD")).toMatchObject({
+      fichePreconisation: true,
+      dap: true,
+      evaluateur: "equipe",
+      envLevel: "renforcee",
+    });
+    expect(prescriptionExtras(deviceByCode.POU_MRE, "LLD")).toMatchObject({
+      fichePreconisation: true,
+      dap: false, // POU_MRE hors liste DAP LLD (§3.3.6)
+      evaluateur: "equipe",
+      envLevel: "besoins",
+    });
+    expect(prescriptionExtras(deviceByCode.FRMP, "LLD").dap).toBe(true);
   });
 });
