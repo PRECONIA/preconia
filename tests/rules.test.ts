@@ -10,6 +10,7 @@ import {
   lcdForfaits,
   lldForfaits,
   madLcd,
+  classesSco,
   madNiveaux,
   prescribers,
   prestationByCode,
@@ -248,14 +249,54 @@ describe("forfaits de location (codes LPPR LCD hebdo / option d'achat / LLD trim
   });
 });
 
-describe("needsBesoins (gating = dispositifs électriques)", () => {
-  it("true pour FRE/FREP/FREV ; false pour les manuels et autres", () => {
-    for (const code of ["FRE", "FREP", "FREV"]) {
+describe("needsBesoins (gating = dispositifs électriques et scooters)", () => {
+  it("true pour FRE/FREP/FREV et SCO ; false pour les manuels et autres", () => {
+    for (const code of ["FRE", "FREP", "FREV", "SCO"]) {
       expect(needsBesoins(deviceByCode[code])).toBe(true);
     }
-    for (const code of ["FMP", "FRM", "FRMA", "BASE", "POU_S", "SCO", "CYC"]) {
+    for (const code of ["FMP", "FRM", "FRMA", "BASE", "POU_S", "CYC"]) {
       expect(needsBesoins(deviceByCode[code])).toBe(false);
     }
+  });
+});
+
+describe("scooter (SCO) dans le parcours — arrêté du 06/02/2025", () => {
+  const sco = deviceByCode.SCO;
+
+  it("achat uniquement : exclu des parcours LCD et LLD", () => {
+    expect(deviceAllowedForDuree(sco, "temp", null)).toBe(false);
+    expect(deviceAllowedForDuree(sco, "durable", "lld")).toBe(false);
+    expect(deviceAllowedForDuree(sco, "durable", "achat")).toBe(true);
+  });
+
+  it("codes d'achat neuf par classe d'usage (jetons SCO-A/B/C, base LPP)", () => {
+    expect(deviceLpp(sco, "A", deviceLppByType)).toMatchObject({ code: "4541193", tarif: 1300 });
+    expect(deviceLpp(sco, "B", deviceLppByType)).toMatchObject({ code: "4515072", tarif: 2100 });
+    expect(deviceLpp(sco, "C", deviceLppByType)).toMatchObject({ code: "4568000", tarif: 3800 });
+    expect(deviceLpp(sco, null, deviceLppByType)).toBeNull(); // classe requise
+  });
+
+  it("MAD niveau 1 : MAD1 4841966 (première) / MAD2 4811876 (renouvellement identique)", () => {
+    expect(madForfaitFor("SCO", "premiere", madNiveaux, prestationByCode)).toMatchObject({
+      code: "4841966",
+      niveau: 1,
+    });
+    expect(madForfaitFor("SCO", "renouv_id", madNiveaux, prestationByCode)).toMatchObject({
+      code: "4811876",
+      niveau: 1,
+    });
+  });
+
+  it("adjonctions : seul le supplément bariatrique électrique est compatible", () => {
+    const compat = filterAdjonctions(sco, adjonctions);
+    expect(compat.map((a) => a.code)).toEqual(["4902165"]);
+  });
+
+  it("prescription : équipe pluridisciplinaire + DAP ; classes d'usage A+/B/C", () => {
+    expect(sco.presc).toBe("pluri");
+    expect(sco.dap).toBe(true);
+    expect(classesSco.map((c) => c.label)).toEqual(["Classe A+", "Classe B", "Classe C"]);
+    expect(classesSco.map((c) => c.value)).toEqual(["A", "B", "C"]);
   });
 });
 

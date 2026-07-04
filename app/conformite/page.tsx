@@ -278,6 +278,12 @@ const REGLES: { regle: string; ref: string; impl: string; controle: string }[] =
     controle: "E2E",
   },
   {
+    regle: "Scooters (SCO) : achat uniquement, classes d'usage A+/B/C, aptitude à la conduite condition de l'indication (pas d'exception accompagnant), PAP non applicables, éclairage code de la route selon la classe, mention pathologie évolutive",
+    ref: "Titre IV, 2.4.2.4, 3.1.3.5, 3.1.5 et 4.2",
+    impl: "classes-sco.json + parcours besoins/adjonctions dédié",
+    controle: "Tests dédiés (SCO) + E2E",
+  },
+  {
     regle: "Dispositions transitoires : anciens VPH délivrables jusqu'au 01/12/2026 ; anciens codes de location ≥ 52 sem facturables jusqu'au 30/11/2027",
     ref: "Arrêté du 06/02/2025, art. 2 et 3",
     impl: "Encart « période transitoire » de l'accueil",

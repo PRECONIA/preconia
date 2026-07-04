@@ -1,7 +1,8 @@
 import type { Adjonction, ClasseValue } from "../types";
 
-/* Étapes du walker. Le scooter, la base et la poussette sont, pour l'instant,
-   retirés du flux de préconisation (les dispositifs restent dans la donnée). */
+/* Étapes du walker. Seule la base roulante (BASE) reste hors du flux de préconisation
+   (le dispositif reste dans la donnée) ; le scooter (SCO, achat uniquement), le cycle et
+   les poussettes (moins de 16 ans) y sont intégrés. */
 export type Stage =
   | "home"
   | "cumul"

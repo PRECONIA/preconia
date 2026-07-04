@@ -1,0 +1,20 @@
+[
+  {
+    "value": "A",
+    "label": "Classe A+",
+    "route": false,
+    "desc": "Usage intérieur : scooter compact, manœuvrable et démontable pour les environnements domestiques, capable de franchir certains environnements extérieurs. Le bon de commande doit proposer un dispositif d'éclairage conforme au code de la route."
+  },
+  {
+    "value": "B",
+    "label": "Classe B",
+    "route": false,
+    "desc": "Usage mixte : suffisamment compact et manœuvrable pour certains environnements domestiques, capable de franchir certains environnements extérieurs. Le bon de commande doit proposer un dispositif d'éclairage conforme au code de la route."
+  },
+  {
+    "value": "C",
+    "label": "Classe C",
+    "route": true,
+    "desc": "Usage extérieur : scooter de taille généralement importante, capable de se déplacer sur d'assez longues distances et de franchir des obstacles extérieurs. Équipé d'office d'un dispositif d'éclairage conforme au code de la route."
+  }
+]

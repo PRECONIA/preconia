@@ -189,10 +189,10 @@ export function madLcdFor(
   return prestationForfait(madLcd.code, prestaByCode);
 }
 
-/** Gating de l'étape besoins : seulement pour les dispositifs électriques
- *  (classe A/B/C + aptitude à la conduite). Les manuels vont directement aux adjonctions. */
+/** Gating de l'étape besoins : dispositifs électriques ET scooters (classe d'usage
+ *  A/B/C ou A+/B/C + aptitude à la conduite). Les manuels vont directement aux adjonctions. */
 export function needsBesoins(device: Device): boolean {
-  return device.electric === true;
+  return device.electric === true || device.code === "SCO";
 }
 
 /** INV. 4 — une classe B/C est soumise au code de la route (équipements inclus). */

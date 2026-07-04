@@ -2,6 +2,7 @@ import devicesRaw from "@/data/devices.json";
 import adjonctionsRaw from "@/data/adjonctions.json";
 import papRaw from "@/data/pap.json";
 import classesRaw from "@/data/classes.json";
+import classesScoRaw from "@/data/classes-sco.json";
 import besoinsRaw from "@/data/besoins.json";
 import lpprRaw from "@/data/lppr.json";
 import lpprAdjRaw from "@/data/lppr-adjonctions.json";
@@ -64,6 +65,11 @@ export const papRegions = papFile.regions;
 export const papForfaits = papFile.forfaits;
 
 export const classes = ClassesFileSchema.parse(classesRaw);
+/* Classes d'usage des scooters (A+ / B / C — Titre IV, 2.4.2.4) : mêmes valeurs internes
+   A/B/C (jetons SCO-A/B/C de la base LPP), libellés et descriptions propres au scooter. */
+export const classesSco = ClassesFileSchema.parse(classesScoRaw);
+if (classesSco.map((c) => c.value).join() !== classes.map((c) => c.value).join())
+  throw new Error("classes-sco.json : les valeurs doivent refléter celles de classes.json (A/B/C)");
 export const besoins = BesoinsFileSchema.parse(besoinsRaw);
 export const meta = MetaSchema.parse(metaRaw);
 

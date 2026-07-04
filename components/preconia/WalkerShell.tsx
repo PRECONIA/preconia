@@ -11,6 +11,7 @@ import {
   adjGroups,
   besoins,
   classes,
+  classesSco,
   deviceModelsByType,
   deviceOptionSheetByToken,
   deviceIndicationsByCode,
@@ -123,6 +124,17 @@ const COUSSINS_NOTE =
 const EHPAD_NOTE =
   "Lieu de vie en EHPAD : produits dont le financement est intégré au forfait de soins de " +
   "l'établissement (arrêté du 30 mai 2008) exclus de la prise en charge LPPR individuelle.";
+
+const SCO_PATHOLOGIE_EVOLUTIVE =
+  "Pathologie évolutive : la prescription du scooter doit préciser qu'un recours à un fauteuil " +
+  "roulant électrique n'est pas envisagé dans l'année qui suit (Titre IV, 4.2).";
+
+/** Note d'éclairage code de la route selon la classe d'usage du scooter (Titre IV, 2.4.2.4). */
+function scoEclairageNote(classe: string): string {
+  return classe === "C"
+    ? "Classe C : le scooter est équipé d'office d'un dispositif d'éclairage conforme au code de la route."
+    : `Classe ${classe === "A" ? "A+" : classe} : le bon de commande doit proposer un dispositif d'éclairage conforme au code de la route (Titre IV, 2.4.2.4).`;
+}
 
 /** Documents conditionnant le remboursement (achat d'un VPH modulaire / LLD — Titre IV, 3.3.6). */
 const DOCUMENTS_CPAM = [
@@ -385,7 +397,13 @@ export function WalkerShell() {
     const profile: { k: string; v: string }[] = facets(answers)
       .filter((f) => f.v)
       .map((f) => ({ k: f.k, v: f.v as string }));
-    if (dev.electric && answers.classe) profile.push({ k: "Classe", v: `Classe ${answers.classe}` });
+    if ((dev.electric || dev.code === "SCO") && answers.classe)
+      profile.push({
+        k: "Classe",
+        v:
+          (dev.code === "SCO" ? classesSco : classes).find((c) => c.value === answers.classe)
+            ?.label ?? `Classe ${answers.classe}`,
+      });
     if (answers.vehicleBrand) profile.push({ k: "Marque", v: answers.vehicleBrand });
     if (answers.vehicleModel) profile.push({ k: "Modèle", v: answers.vehicleModel });
 
@@ -397,6 +415,18 @@ export function WalkerShell() {
     if (dev.electric && answers.aptitude === "non")
       flags.push(
         "Conduite par tierce personne : commande pour l'accompagnant (FREP/FREV, exception nomenclature).",
+      );
+    if (dev.code === "SCO") {
+      if (answers.aptitude === "non")
+        flags.push(
+          "SCOOTER NON INDIQUÉ : la maîtrise de la conduite par l'utilisateur est une condition de l'indication (3.1.3.5) et le certificat d'aptitude conditionne le remboursement (3.1.5) — pas d'exception « commande accompagnant ». Orienter vers un FREP/FREV le cas échéant.",
+        );
+      flags.push(SCO_PATHOLOGIE_EVOLUTIVE);
+      if (answers.classe) flags.push(scoEclairageNote(answers.classe));
+    }
+    if (dev.electric || dev.code === "SCO")
+      flags.push(
+        `Le lieu de vie doit permettre le stockage et la recharge du ${dev.code === "SCO" ? "scooter" : "fauteuil électrique"} (Titre IV, 3.1.5).`,
       );
     if (pec === "lcd") flags.push(CARENCE_LCD);
     if (pec === "lld") flags.push(CARENCE_LLD);
@@ -898,7 +928,9 @@ export function WalkerShell() {
             <DeviceChoice
               title="Configuration électrique"
               list={devices
-                .filter((d) => d.family === "Électrique")
+                // scooters modulaires (SCO) : propulsion électrique, achat uniquement —
+                // le filtre par mode les retire de lui-même des parcours LCD et LLD.
+                .filter((d) => d.family === "Électrique" || d.family === "Scooter")
                 .filter((d) => deviceAllowedForDuree(d, answers.duree, answers.acquisition))}
               duree={answers.duree}
               acquisition={answers.acquisition}
@@ -914,10 +946,14 @@ export function WalkerShell() {
               title="Besoins & environnement"
               hint="D'après la fiche d'évaluation des besoins 2026."
             >
-              {device.electric && (
+              {(device.electric || device.code === "SCO") && (
                 <div className="mb-4">
-                  <div className="mb-2 text-sm font-semibold">Classe du fauteuil électrique</div>
-                  {classes.map((c) => (
+                  <div className="mb-2 text-sm font-semibold">
+                    {device.code === "SCO"
+                      ? "Classe d'usage du scooter"
+                      : "Classe du fauteuil électrique"}
+                  </div>
+                  {(device.code === "SCO" ? classesSco : classes).map((c) => (
                     <button
                       key={c.value}
                       className={choice(answers.classe === c.value)}
@@ -938,15 +974,68 @@ export function WalkerShell() {
 
               {besoins.fields
                 .filter((f) => f.id !== "classe")
+                .filter((f) => !(device.code === "SCO" && f.id === "aptitude"))
                 .map((f) => (
                   <BesoinFieldRow key={f.id} field={f} answers={answers} onSet={setAnswer} />
                 ))}
 
-              {answers.aptitude === "non" && (
-                <Flag>
-                  <b>Conduite par tierce personne.</b> Inaptitude à la conduite (sensorielle, motrice
-                  ou cognitive) → commande pour l&apos;accompagnant (FREP/FREV, exception nomenclature).
-                </Flag>
+              {/* Aptitude à la conduite — variante scooter : condition de l'indication
+                  (3.1.3.5), pas d'exception « commande accompagnant ». */}
+              {device.code === "SCO" && (
+                <div className="mb-4">
+                  <div className="mb-2 text-sm font-semibold">
+                    Aptitude à conduire le scooter
+                    <span className="ml-1.5 font-normal text-ink-soft">
+                      · marche stable sur quelques mètres, équilibre assis sans aide à la posture,
+                      transferts autonomes, membres supérieurs et cognition suffisants (3.1.3.5)
+                    </span>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {(
+                      [
+                        { v: "oui", t: "Apte à conduire" },
+                        { v: "non", t: "Inapte à la conduite" },
+                      ] as const
+                    ).map((o) => (
+                      <button
+                        key={o.v}
+                        className={`rounded-lg border px-3 py-2 text-sm transition-colors ${
+                          answers.aptitude === o.v
+                            ? "border-petrol bg-petrol text-white"
+                            : "border-line bg-card hover:border-petrol"
+                        }`}
+                        onClick={() => setAnswer("aptitude", o.v)}
+                      >
+                        {o.t}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {answers.aptitude === "non" &&
+                (device.code === "SCO" ? (
+                  <div className="my-3 rounded-lg border-2 border-red-400 bg-red-50 px-3 py-3 text-sm leading-relaxed text-red-800">
+                    <b>Scooter non indiqué.</b> La maîtrise de la conduite par l&apos;utilisateur
+                    est une condition de l&apos;indication (3.1.3.5) et le certificat
+                    d&apos;aptitude conditionne le remboursement (3.1.5) — il n&apos;existe pas
+                    d&apos;exception « commande accompagnant » pour les scooters. Orienter vers un
+                    FREP/FREV le cas échéant.
+                  </div>
+                ) : (
+                  <Flag>
+                    <b>Conduite par tierce personne.</b> Inaptitude à la conduite (sensorielle,
+                    motrice ou cognitive) → commande pour l&apos;accompagnant (FREP/FREV, exception
+                    nomenclature).
+                  </Flag>
+                ))}
+
+              {(device.electric || device.code === "SCO") && (
+                <p className="mb-1 mt-2 text-[11.5px] leading-relaxed text-ink-soft/90">
+                  Le lieu de vie doit permettre le stockage et la recharge du{" "}
+                  {device.code === "SCO" ? "scooter" : "fauteuil électrique"} — à intégrer à
+                  l&apos;évaluation des besoins et à la préconisation (Titre IV, 3.1.5).
+                </p>
               )}
 
               <p className="mb-1 mt-2 text-[11.5px] leading-relaxed text-ink-soft/90">{EHPAD_NOTE}</p>
@@ -1317,7 +1406,9 @@ export function WalkerShell() {
                 ))
               ) : (
                 <p className="rounded-lg bg-petrol-tint/40 px-3 py-2 text-sm text-ink-soft">
-                  Dispositif non modulaire : les PAP ne s&apos;appliquent pas.
+                  {device.code === "SCO"
+                    ? "Scooter : les produits d'aide au positionnement ne s'appliquent pas — l'indication exige un équilibre suffisant pour maintenir la position assise sans aide technique à la posture (3.1.3.5). Un besoin de positionnement oriente vers un FREP/FREV."
+                    : "Dispositif non modulaire : les PAP ne s'appliquent pas."}
                 </p>
               )}
 
@@ -1363,9 +1454,11 @@ export function WalkerShell() {
                     {answers.vehicleBrand}
                   </span>
                 )}
-                {device.electric && answers.classe && (
+                {(device.electric || device.code === "SCO") && answers.classe && (
                   <span className="rounded-full bg-orange-100 px-3 py-1 text-xs font-semibold text-orange-700">
-                    Classe {answers.classe}
+                    {(device.code === "SCO" ? classesSco : classes).find(
+                      (c) => c.value === answers.classe,
+                    )?.label ?? `Classe ${answers.classe}`}
                   </span>
                 )}
               </div>
@@ -1404,6 +1497,27 @@ export function WalkerShell() {
                 <Flag>
                   <b>Conduite par tierce personne.</b> Commande pour l&apos;accompagnant
                   (FREP/FREV, exception nomenclature).
+                </Flag>
+              )}
+              {device.code === "SCO" && answers.aptitude === "non" && (
+                <div className="my-3 rounded-lg border-2 border-red-400 bg-red-50 px-3 py-3 text-sm leading-relaxed text-red-800">
+                  <b>Scooter non indiqué.</b> La maîtrise de la conduite par l&apos;utilisateur est
+                  une condition de l&apos;indication (3.1.3.5) et le certificat d&apos;aptitude
+                  conditionne le remboursement (3.1.5) — pas d&apos;exception « commande
+                  accompagnant ». Orienter vers un FREP/FREV le cas échéant.
+                </div>
+              )}
+              {device.code === "SCO" && (
+                <>
+                  <Flag>{SCO_PATHOLOGIE_EVOLUTIVE}</Flag>
+                  {answers.classe && <Flag>{scoEclairageNote(answers.classe)}</Flag>}
+                </>
+              )}
+              {(device.electric || device.code === "SCO") && (
+                <Flag>
+                  Le lieu de vie doit permettre le <b>stockage et la recharge</b> du{" "}
+                  {device.code === "SCO" ? "scooter" : "fauteuil électrique"} — à intégrer à
+                  l&apos;évaluation des besoins et à la préconisation (Titre IV, 3.1.5).
                 </Flag>
               )}
               {pec === "lcd" && <Flag>{CARENCE_LCD}</Flag>}
