@@ -1,5 +1,5 @@
 {
-  "source": "Règles de non-cumul complétées d'après l'arrêté du 6 février 2025 (Titre IV, 4.1–4.2)",
+  "source": "Règles de non-cumul d'après le tableau officiel du ministère de la Santé « Cumul-fauteuil-roulant-reforme-2025 » (handicap.gouv.fr, déc. 2025) et l'arrêté du 6 février 2025 (Titre IV, 4.1–4.2). Le cumul d'un VPH manuel modulaire avec un VPH électrique modulaire est autorisé ; les cumuls entre deux manuels modulaires (hors sport) ou entre deux électriques modulaires restent interdits. L'AAP, assimilée à une propulsion électrique, n'est pas cumulable avec un scooter.",
   "lastUpdated": "2026-07-01",
   "categories": [
     {
@@ -88,9 +88,6 @@
     ],
     "FRM": [
       "CYC",
-      "FRE",
-      "FREP",
-      "FREV",
       "FRM",
       "FRMA",
       "FRMC",
@@ -100,9 +97,6 @@
     ],
     "FRMC": [
       "CYC",
-      "FRE",
-      "FREP",
-      "FREV",
       "FRM",
       "FRMA",
       "FRMC",
@@ -112,9 +106,6 @@
     ],
     "FRMA": [
       "CYC",
-      "FRE",
-      "FREP",
-      "FREV",
       "FRM",
       "FRMA",
       "FRMC",
@@ -124,9 +115,6 @@
     ],
     "FRMP": [
       "CYC",
-      "FRE",
-      "FREP",
-      "FREV",
       "FRM",
       "FRMA",
       "FRMC",
@@ -141,9 +129,6 @@
     ],
     "FRMV": [
       "CYC",
-      "FRE",
-      "FREP",
-      "FREV",
       "FRM",
       "FRMA",
       "FRMC",
@@ -156,11 +141,6 @@
       "FRE",
       "FREP",
       "FREV",
-      "FRM",
-      "FRMA",
-      "FRMC",
-      "FRMP",
-      "FRMV",
       "SCO",
       "SIEGE_COQUILLE"
     ],
@@ -169,11 +149,6 @@
       "FRE",
       "FREP",
       "FREV",
-      "FRM",
-      "FRMA",
-      "FRMC",
-      "FRMP",
-      "FRMV",
       "SCO",
       "SIEGE_COQUILLE"
     ],
@@ -182,11 +157,6 @@
       "FRE",
       "FREP",
       "FREV",
-      "FRM",
-      "FRMA",
-      "FRMC",
-      "FRMP",
-      "FRMV",
       "SCO",
       "SIEGE_COQUILLE"
     ],
@@ -201,6 +171,7 @@
       "SIEGE_COQUILLE"
     ],
     "SCO": [
+      "AAP",
       "FRE",
       "FREP",
       "FREV",
@@ -225,6 +196,7 @@
       "FRE",
       "FREP",
       "FREV",
+      "SCO",
       "SIEGE_COQUILLE"
     ],
     "SIEGE_COQUILLE": [

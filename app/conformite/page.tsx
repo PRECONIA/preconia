@@ -236,10 +236,10 @@ const REGLES: { regle: string; ref: string; impl: string; controle: string }[] =
     controle: "Revue + E2E",
   },
   {
-    regle: "Non-cumuls : deux non-modulaires ; deux modulaires (manuels ou électriques) ; cycle + manuel modulaire ; scooter + électrique ; sièges coquille — exception FRMS",
-    ref: "Titre IV, 4.2",
+    regle: "Non-cumuls : deux non-modulaires ; deux manuels modulaires (exception sport FRMS) ; deux électriques modulaires ; cycle + manuel modulaire ; scooter + électrique ; AAP + électrique ou scooter ; sièges coquille. Le cumul manuel modulaire + électrique modulaire est autorisé.",
+    ref: "Tableau ministériel « Cumul 2025 » (handicap.gouv.fr) + Titre IV 4.2",
     impl: "cumul.json + isCumulAllowed()",
-    controle: "Tests unitaires ligne à ligne (« 4.2 »)",
+    controle: "Tests unitaires ligne à ligne",
   },
   {
     regle: "LCD exclusive de tout autre VPH loué ou vendu ; dérogation LCD d'un FRE (manuel possédé sans AAP, impossibilité transitoire)",

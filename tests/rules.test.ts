@@ -512,14 +512,27 @@ describe("isCumulAllowed (module cumul VPH)", () => {
     expect(isCumulAllowed("FRM", "FRM", I)).toBe(false); // deux fois la même catégorie
   });
 
-  it("cumuls interdits — arrêté du 06/02/2025, Titre IV 4.2", () => {
-    expect(isCumulAllowed("FRM", "FRMV", I)).toBe(false); // FRMV rejoint les modulaires manuels
+  it("cumuls interdits — tableau gouvernemental + arrêté (Titre IV 4.2)", () => {
+    expect(isCumulAllowed("FRM", "FRMV", I)).toBe(false); // deux manuels modulaires
     expect(isCumulAllowed("FRMP", "FRMV", I)).toBe(false);
-    expect(isCumulAllowed("FRM", "FRE", I)).toBe(false); // manuel modulaire + électrique modulaire
-    expect(isCumulAllowed("FREP", "FRM", I)).toBe(false);
-    expect(isCumulAllowed("FRMV", "FREV", I)).toBe(false);
-    expect(isCumulAllowed("CYC", "FRM", I)).toBe(false); // le cycle exclut les manuels modulaires
-    expect(isCumulAllowed("CYC", "FRMS", I)).toBe(false); // FRMS inclus (pas d'exception au 4.2)
+    expect(isCumulAllowed("FRM", "FRMC", I)).toBe(false);
+    expect(isCumulAllowed("FRE", "FREP", I)).toBe(false); // deux électriques modulaires
+    expect(isCumulAllowed("FREP", "FREV", I)).toBe(false);
+    expect(isCumulAllowed("SCO", "FREP", I)).toBe(false); // scooter + électrique
+    expect(isCumulAllowed("CYC", "FRM", I)).toBe(false); // cycle + manuel modulaire (inchangé)
+  });
+
+  it("cumuls manuel modulaire ↔ électrique modulaire : AUTORISÉS (tableau gouvernemental)", () => {
+    for (const m of ["FRM", "FRMC", "FRMA", "FRMP", "FRMV"]) {
+      for (const e of ["FRE", "FREP", "FREV"]) {
+        expect(isCumulAllowed(m, e, I), `${m}×${e}`).toBe(true);
+      }
+    }
+  });
+
+  it("AAP ↔ scooter : INTERDIT (l'AAP s'apparente à une propulsion électrique)", () => {
+    expect(isCumulAllowed("AAP", "SCO", I)).toBe(false);
+    expect(isCumulAllowed("SCO", "AAP", I)).toBe(false);
   });
 
   it("siège coquille : incompatible avec tout", () => {
@@ -532,8 +545,8 @@ describe("isCumulAllowed (module cumul VPH)", () => {
     expect(isCumulAllowed("FMP", "FRE", I)).toBe(true); // non modulaire + électrique
     expect(isCumulAllowed("FRMS", "FRM", I)).toBe(true); // exception sport (4.2)
     expect(isCumulAllowed("FRMS", "FRE", I)).toBe(true); // exception sport, y compris électrique
-    expect(isCumulAllowed("SCO", "AAP", I)).toBe(true); // non listés l'un chez l'autre
     expect(isCumulAllowed("BASE", "FRE", I)).toBe(true);
+    expect(isCumulAllowed("SCO", "FRM", I)).toBe(true); // scooter + manuel (tableau gouvernemental)
   });
 
   it("relation symétrique", () => {
@@ -554,7 +567,8 @@ describe("cumulVerdict (modes ACHAT/LLD/LCD — Titre IV 4.1)", () => {
   });
 
   it("hors LCD : délègue à la matrice d'incompatibilités", () => {
-    expect(cumulVerdict("FRM", "ACHAT", "FRE", "LLD", I)).toBe("interdit");
+    expect(cumulVerdict("FRE", "ACHAT", "FREP", "LLD", I)).toBe("interdit"); // deux électriques
+    expect(cumulVerdict("FRM", "ACHAT", "FRE", "LLD", I)).toBe("autorise"); // manuel + électrique
     expect(cumulVerdict("FRMS", "ACHAT", "FRE", "ACHAT", I)).toBe("autorise");
     expect(cumulVerdict("BASE", "ACHAT", "FRE", "LLD", I)).toBe("autorise");
   });
