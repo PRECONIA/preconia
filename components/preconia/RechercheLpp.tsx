@@ -104,7 +104,7 @@ function useTypewriter(words: string[]): string {
 }
 
 const chip = (on: boolean) =>
-  `rounded-full border px-3 py-1.5 text-xs font-medium transition-colors ${
+  `w-full rounded-full border px-3 py-1.5 text-center text-xs font-medium transition-colors ${
     on
       ? "border-petrol bg-petrol text-white"
       : "border-line bg-card text-ink-soft hover:border-petrol hover:text-petrol-deep"
@@ -153,29 +153,42 @@ export function RechercheLpp() {
           aria-label="Recherche nomenclature LPPR"
         />
 
-        {/* Nature + marque */}
-        <div className="mt-3 flex flex-wrap items-center gap-2">
+        {/* Filtres rapides (nature + catégories VPH) — boutons de largeur uniforme */}
+        <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3">
           {NATURE_SHORTCUTS.map((n) => (
             <button key={n.key} type="button" onClick={() => toggleQuick(n.key)} className={chip(quick === n.key)}>
               {n.label}
             </button>
           ))}
-          <select
-            value={brand ?? ""}
-            onChange={(e) => setBrand(e.target.value || null)}
-            aria-label="Filtrer par marque"
-            className={`rounded-full border px-3 py-1.5 text-xs font-medium outline-none ${
-              brand ? "border-orange-400 bg-orange-50 text-orange-800" : "border-line bg-card text-ink-soft"
-            }`}
-          >
-            <option value="">Toutes les marques</option>
-            {allBrands.map((b) => (
-              <option key={b} value={b}>
-                {b}
-              </option>
-            ))}
-          </select>
-          {(hasFilter || q) && (
+          {VPH_SHORTCUTS.map((c) => (
+            <button key={c} type="button" onClick={() => toggleQuick(c)} className={chip(quick === c)}>
+              {CAT_META[c]?.short ?? c}
+            </button>
+          ))}
+        </div>
+
+        {/* Sélecteur de marque — pleine largeur (alignée sur la barre de recherche),
+            encadré orange pour le mettre en évidence. */}
+        <select
+          value={brand ?? ""}
+          onChange={(e) => setBrand(e.target.value || null)}
+          aria-label="Filtrer par marque"
+          className={`mt-3 w-full rounded-lg border-2 px-3 py-2.5 text-sm font-medium outline-none transition-colors ${
+            brand
+              ? "border-orange-500 bg-orange-50 text-orange-800"
+              : "border-orange-300 bg-card text-ink-soft focus:border-orange-500"
+          }`}
+        >
+          <option value="">Toutes les marques</option>
+          {allBrands.map((b) => (
+            <option key={b} value={b}>
+              {b}
+            </option>
+          ))}
+        </select>
+
+        {(hasFilter || q) && (
+          <div className="mt-2 text-right">
             <button
               type="button"
               onClick={reset}
@@ -183,17 +196,8 @@ export function RechercheLpp() {
             >
               Réinitialiser
             </button>
-          )}
-        </div>
-
-        {/* Catégories VPH */}
-        <div className="mt-2 flex flex-wrap gap-2">
-          {VPH_SHORTCUTS.map((c) => (
-            <button key={c} type="button" onClick={() => toggleQuick(c)} className={chip(quick === c)}>
-              {CAT_META[c]?.short ?? c}
-            </button>
-          ))}
-        </div>
+          </div>
+        )}
 
         {showResults && (
           <div className="mt-3">
