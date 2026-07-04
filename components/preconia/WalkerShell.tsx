@@ -1803,6 +1803,54 @@ export function WalkerShell() {
         </div>
       </div>
 
+      {/* Liens officiels (opposables) — visibles uniquement sur l'accueil : une fois le
+          walker lancé, l'emplacement de droite est réservé aux indications officielles
+          (encart orange animé). Sur mobile, l'encart s'insère sous le walker. */}
+      {stage === "home" && (
+        <aside
+          aria-label="Liens officiels"
+          className="mt-5 overflow-hidden rounded-2xl border border-line bg-card shadow-sm lg:fixed lg:left-[calc(50%+399px)] lg:right-4 lg:top-16 lg:z-40 lg:mt-0 lg:max-w-[26rem]"
+        >
+          <div className="bg-orange-600 px-5 py-3">
+            <h2 className="text-base font-semibold text-white">Liens officiels</h2>
+          </div>
+          <div className="p-4">
+            <p className="mb-3 text-xs leading-relaxed text-ink-soft">
+              PRECONIA est une aide à la décision <b>non opposable</b>. Seuls les textes et bases
+              ci-dessous font foi.
+            </p>
+            {[
+              {
+                href: "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000051141909",
+                title: "Arrêté du 6 février 2025",
+                desc: "Texte de la réforme VPH au Journal officiel (Légifrance)",
+              },
+              {
+                href: "https://mobile.cerahtec.fr/doc/lppr_nn.pdf",
+                title: "Liste CERAH des VPH inscrits",
+                desc: "Modèles homologués à la nouvelle nomenclature (PDF)",
+              },
+              {
+                href: "http://www.codage.ext.cnamts.fr/codif/tips//chapitre/index_chap.php?p_ref_menu_code=1&p_site=AMELI",
+                title: "Base LPP — CNAMTS",
+                desc: "Nomenclature et tarifs officiels de l'Assurance maladie",
+              },
+            ].map((l) => (
+              <a
+                key={l.href}
+                href={l.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mb-2 block rounded-lg border border-line bg-card px-4 py-3 transition-colors last:mb-0 hover:border-orange-500 hover:bg-orange-50"
+              >
+                <b className="block text-sm">{l.title} ↗</b>
+                <span className="mt-0.5 block text-xs text-ink-soft">{l.desc}</span>
+              </a>
+            ))}
+          </div>
+        </aside>
+      )}
+
       <RechercheLpp />
 
       <ModuleCumul />
