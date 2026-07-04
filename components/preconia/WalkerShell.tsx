@@ -1941,6 +1941,21 @@ export function WalkerShell() {
                 desc: "La nouvelle nomenclature VPH présentée par titres (I et IV)",
               },
               {
+                href: "https://nomenclature-fauteuil-roulant.fr/Fiche-evaluation-des-besoins-VPH.pdf",
+                title: "Fiche d'évaluation des besoins",
+                desc: "Les 4 critères et la prise de mesures du patient (PDF)",
+              },
+              {
+                href: "https://nomenclature-fauteuil-roulant.fr/Fiche-de-preconisation-VPH.pdf",
+                title: "Fiche de préconisation",
+                desc: "Catégorie, caractéristiques, options et mesures du VPH retenu (PDF)",
+              },
+              {
+                href: "https://nomenclature-fauteuil-roulant.fr/PDF_Nomenclature/Documents_Def/Formulaire-engagement-usagers-VPH.pdf",
+                title: "Formulaire d'engagement des usagers",
+                desc: "Engagement de l'usager lors de la prise en charge du VPH (PDF)",
+              },
+              {
                 href: "https://mobile.cerahtec.fr/doc/lppr_nn.pdf",
                 title: "Liste CERAH des VPH inscrits",
                 desc: "Modèles homologués à la nouvelle nomenclature (PDF)",
