@@ -32,6 +32,23 @@ const PAGE_TELECHARGEMENT =
 const HOTE_CNAMTS = "http://www.codage.ext.cnamts.fr";
 const SENTINELLE_DEVIS = 100000000;
 
+/** Codes « VPH » de la base officielle volontairement NON portés par PRECONIA — chaque
+ *  exclusion est justifiée. Tout autre code VPH en vigueur absent du catalogue est signalé
+ *  en écart (détection des nouveautés : nouvelle ligne inscrite par la CNAMTS, RBEU…). */
+const HORS_PERIMETRE = {
+  // Monte-escaliers transportables : famille « VPH » du Titre IV mais hors fauteuils
+  // roulants / poussettes / scooters / cycles — hors périmètre fonctionnel de PRECONIA.
+  4302057: "monte-escalier transportable (Alber Scalamobil S35)",
+  4320552: "monte-escalier transportable (Alber Scalamobil S38)",
+  4335298: "monte-escalier transportable — prestation initiale",
+  4353787: "monte-escalier transportable — kit de fixation",
+  4371160: "monte-escalier transportable — prestation kit",
+  // Anciens fauteuils électriques inscrits en nom de marque (ancienne nomenclature),
+  // encore en vigueur au titre des dispositions transitoires (arrêté 06/02/2025, art. 2).
+  4144173: "ancienne nomenclature — Lazelec Mobile Dream MD S (transitoire)",
+  4154830: "ancienne nomenclature — Lazelec Mobile Dream MD TT (transitoire)",
+};
+
 /* ---------------------------------- utilitaires ---------------------------------- */
 
 const lireJson = (rel) => JSON.parse(readFileSync(join(RACINE, "data", rel), "utf-8"));
@@ -133,6 +150,7 @@ function faireLookup(DATA) {
 
 const ecarts = [];
 const avertissements = [];
+const codesConnus = new Set();
 let nbCodes = 0;
 let nbTarifs = 0;
 let nbLibellesExacts = 0;
@@ -140,6 +158,7 @@ let nbLibellesReformules = 0;
 
 function verifier(lookup, code, { tarif, libelle, devis, marque, contexte }) {
   nbCodes++;
+  codesConnus.add(code);
   const fiche = lookup(code);
   if (!fiche) {
     ecarts.push(`CODE ABSENT       ${code}  (${contexte})`);
@@ -183,6 +202,39 @@ function section(titre, fn) {
   fn();
   const statut = ecarts.length === avantE ? "OK " : "ÉCART";
   console.log(`  [${statut}] ${titre} — ${nbCodes - avantC} code(s) contrôlé(s)`);
+}
+
+/** Balayage inverse (couverture) : énumère TOUS les codes de la base officielle dont la
+ *  désignation commence par « VPH » et signale ceux, en vigueur, absents du catalogue
+ *  PRECONIA et de la liste d'exclusions documentée — c'est la détection des nouveautés
+ *  (nouvelle ligne inscrite, RBEU à venir…). Les codes sans tarif en vigueur (radiés /
+ *  éteints) sont ignorés. NB : deux codes du catalogue (variantes LOGOSILVER 4918568 et
+ *  4998768) ont une désignation officielle commençant par « ADJONCTION, » et non « VPH, »
+ *  (nommage CNAM irrégulier) — ils échappent à ce balayage mais restent couverts par le
+ *  contrôle direct, d'où un « portés » inférieur de 2 au total du catalogue. */
+function verifierCouverture(DATA, lookup) {
+  const codesBase = new Set();
+  for (const m of DATA.matchAll(/1010101(\d{7}) +VPH\b/g)) codesBase.add(m[1]);
+  let horsPerimetre = 0;
+  let eteints = 0;
+  let nouveautes = 0;
+  for (const code of codesBase) {
+    if (codesConnus.has(code)) continue;
+    if (code in HORS_PERIMETRE) {
+      horsPerimetre++;
+      continue;
+    }
+    const fiche = lookup(code);
+    if (!fiche || fiche.tarif === null) {
+      eteints++;
+      continue;
+    }
+    nouveautes++;
+    ecarts.push(
+      `CODE NON RÉPERTORIÉ ${code} — « ${fiche.designation.slice(0, 80)} » : en vigueur dans la base officielle mais absent du catalogue PRECONIA (nouveauté ?)`,
+    );
+  }
+  return { total: codesBase.size, horsPerimetre, eteints, nouveautes };
 }
 
 async function principal() {
@@ -274,10 +326,18 @@ async function principal() {
       }
   });
 
+  let couverture = { total: 0, horsPerimetre: 0, eteints: 0, nouveautes: 0 };
+  section("couverture — codes « VPH » de la base officielle absents du catalogue", () => {
+    couverture = verifierCouverture(base.texte, lookup);
+  });
+
   /* ----------------------------------- synthèse ----------------------------------- */
   console.log(`\n================================ SYNTHÈSE ================================`);
   console.log(`Base officielle          : ${base.version} (SHA-256 ${base.sha256.slice(0, 16)}…)`);
   console.log(`Codes LPP contrôlés      : ${nbCodes}`);
+  console.log(
+    `Couverture inverse       : ${couverture.total} codes « VPH » recensés dans la base — ${couverture.total - couverture.horsPerimetre - couverture.eteints - couverture.nouveautes} portés, ${couverture.horsPerimetre} hors périmètre documentés, ${couverture.eteints} éteints ignorés, ${couverture.nouveautes} nouveauté(s) non couverte(s)`,
+  );
   console.log(`Tarifs confrontés        : ${nbTarifs}`);
   console.log(
     `Libellés confrontés      : ${nbLibellesExacts + nbLibellesReformules} (${nbLibellesExacts} identiques, ${nbLibellesReformules} reformulés pour lisibilité)`,

@@ -21,7 +21,9 @@ adjonctions, PAP) par dénomination, type, marque ou code LPP.
 La fidélité de la base aux données officielles est **vérifiable par quiconque** : le script
 `scripts/verifier-lpptot.mjs` télécharge la base LPP publique de la CNAMTS (LPPTOT) et
 confronte chaque code, tarif et libellé de `data/*.json` à l'enregistrement officiel.
-La CI l'exécute à chaque modification et chaque semaine. La correspondance règle par règle
+Le contrôle est bidirectionnel : il énumère aussi tous les codes « VPH » de la base et
+signale toute ligne en vigueur absente du catalogue (détection des nouveautés). La CI
+l'exécute à chaque modification et chaque semaine. La correspondance règle par règle
 avec l'arrêté du 6 février 2025 (et les tests qui la verrouillent) est documentée sur
 https://preconia.vercel.app/conformite.
 

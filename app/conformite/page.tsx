@@ -23,6 +23,10 @@ const VERIF = {
   tarifs: 74,
   libelles: 412,
   ecarts: 0,
+  /* couverture inverse : codes « VPH » recensés dans la base officielle */
+  couvertureTotal: 419,
+  couvertureHorsPerimetre: 7,
+  couvertureNouveautes: 0,
 };
 
 const DEPOT = "https://github.com/PRECONIA/preconia";
@@ -361,6 +365,16 @@ export default function ConformitePage() {
           erreur au moindre écart (code absent, radié ou tarif divergent) ; les libellés que nous
           reformulons pour la lisibilité (abréviations développées) sont signalés à part, en
           avertissements.
+        </p>
+        <p className="mt-2 text-justify text-xs leading-relaxed text-ink-soft/80 hyphens-auto" lang="fr">
+          Le contrôle est <b>bidirectionnel</b> : outre la vérification de chaque code porté par
+          PRECONIA, le script énumère l&apos;intégralité des codes « VPH » de la base officielle
+          ({VERIF.couvertureTotal} recensés) et signale toute ligne en vigueur absente du
+          catalogue — c&apos;est la détection des nouveautés (nouvelle inscription, lignes RBEU à
+          venir…). À la dernière campagne : {VERIF.couvertureNouveautes} nouveauté non couverte ;{" "}
+          {VERIF.couvertureHorsPerimetre} codes documentés hors périmètre (monte-escaliers
+          transportables, anciens codes en nom de marque transitoires — liste justifiée dans le
+          script).
         </p>
       </Carte>
 
