@@ -44,7 +44,7 @@ import type {
   MadNiveau,
   LcdForfaitEntry,
 } from "./types";
-import type { Device, Presc } from "./types";
+import type { Device, Eval, Presc } from "./types";
 
 /* Chargement + validation de la donnée au niveau module.
    Si un JSON est invalide → `parse` lève → échec de `next build` et des tests.
@@ -56,7 +56,15 @@ const papFile = PapFileSchema.parse(papRaw);
 
 export const devices = devicesFile.devices;
 export const prescribers = devicesFile.prescribers as Record<Presc, string>;
+/** Libellés d'évaluation/préconisation (§3.1.4.2.1) — qui remplit les fiches, distinct
+    du prescripteur (§3.1.4.2.4). */
+export const evaluators = devicesFile.evaluators as Record<Eval, string>;
 export const modes = devicesFile.modes;
+// cohérence : un dispositif sans fiche d'évaluation/préconisation a forcément eval = "aucune",
+// et réciproquement (les deux dérivent du parcours §3.1.4.2 vs §3.1.4.1).
+for (const d of devices)
+  if ((d.eval === "aucune") !== (d.fiche === false))
+    throw new Error(`devices.json : eval/fiche incohérents pour ${d.code}`);
 
 export const adjonctions = adjonctionsFile.items;
 export const adjGroups = adjonctionsFile.groups;

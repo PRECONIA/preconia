@@ -5,6 +5,9 @@ import { z } from "zod";
 
 /* --- énumérations structurelles (le code en dépend : routage, forfaits, classes) --- */
 export const PrescEnum = z.enum(["large", "spe", "pluri"]);
+/** Qui réalise l'évaluation des besoins et rédige la fiche de préconisation (§3.1.4.2.1) —
+ *  distinct de qui PRESCRIT (§3.1.4.2.4 / 3.1.4.1, cf. PrescEnum). */
+export const EvalEnum = z.enum(["equipe", "competent", "aucune"]);
 export const ModeEnum = z.enum(["ACHAT", "LCD", "LLD"]);
 export const ForfaitEnum = z.enum(["A", "B"]);
 export const ClasseValueEnum = z.enum(["A", "B", "C"]);
@@ -19,6 +22,8 @@ export const DeviceSchema = z.object({
   fiche: z.boolean(),
   dap: z.boolean(),
   presc: PrescEnum,
+  /** professionnel(s) réalisant l'évaluation des besoins + fiche de préconisation (§3.1.4.2.1). */
+  eval: EvalEnum,
   modes: z.array(ModeEnum).nonempty(),
   tarif: z.number().optional(),
   child: z.boolean().optional(),
@@ -28,6 +33,8 @@ export const DeviceSchema = z.object({
 
 export const DevicesFileSchema = z.object({
   prescribers: z.record(z.string(), z.string()),
+  /** libellés des professionnels d'évaluation/préconisation (clés de EvalEnum). */
+  evaluators: z.record(z.string(), z.string()),
   modes: z.record(z.string(), z.object({ label: z.string(), condition: z.string() })),
   devices: z.array(DeviceSchema).nonempty(),
 });

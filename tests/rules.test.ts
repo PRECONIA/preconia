@@ -13,6 +13,7 @@ import {
   classesSco,
   madNiveaux,
   prescribers,
+  evaluators,
   prestationByCode,
   deviceLppByType,
   papForfaits,
@@ -619,7 +620,28 @@ describe("prescriberFor (palier selon le mode — 9.5, 3.1.6)", () => {
     expect(prescriberFor(deviceByCode.FRE, "achat", "premiere", P)).toBe(P.pluri);
     expect(prescriberFor(deviceByCode.FRMP, "lld", "renouv_cat", P)).toBe(P.spe);
     expect(prescriberFor(deviceByCode.FRM, "achat", null, P)).toBe(P.large);
-    // le palier « spe » corrigé mentionne l'ergothérapeute (3.1.4.2.1)
+    // le palier « spe » (§3.1.4.2.4.b) mentionne l'ergothérapeute
     expect(P.spe).toContain("ergothérapeute");
+  });
+});
+
+describe("évaluation/préconisation distincte du prescripteur (§3.1.4.2.1)", () => {
+  it("champ eval par catégorie : équipe / compétent / aucune", () => {
+    for (const code of ["FRMS", "FRMV", "FRE", "FREP", "FREV", "POU_MRE", "CYC", "SCO"])
+      expect(deviceByCode[code].eval, code).toBe("equipe");
+    for (const code of ["FRM", "FRMC", "FRMA", "FRMP"])
+      expect(deviceByCode[code].eval, code).toBe("competent");
+    for (const code of ["FMP", "FMPR", "BASE", "POU_S"])
+      expect(deviceByCode[code].eval, code).toBe("aucune");
+  });
+
+  it("cohérence eval « aucune » ⟺ pas de fiche", () => {
+    for (const d of Object.values(deviceByCode))
+      expect(d.eval === "aucune", d.code).toBe(d.fiche === false);
+  });
+
+  it("libellés d'évaluation présents pour chaque valeur", () => {
+    for (const k of ["equipe", "competent", "aucune"] as const)
+      expect(evaluators[k]).toBeTruthy();
   });
 });

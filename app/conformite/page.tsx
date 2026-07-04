@@ -158,10 +158,16 @@ const REGLES: { regle: string; ref: string; impl: string; controle: string }[] =
     controle: "Vérificateur (code, tarif) + revue",
   },
   {
-    regle: "Paliers de prescripteur à l'achat (médecin/ergo ; MPR-DU-formation-ergo ; équipe pluridisciplinaire)",
-    ref: "Titre IV, 3.1.4",
+    regle: "Prescripteur à l'achat (qui signe l'ordonnance) : médecin/ergo (FMP, FMPR, FRM, BASE, POU_S) ; MPR/DU/formation ou ergo seul (FRMC, FRMA, FRMP) ; MPR/DU ou ergo en équipe pluridisciplinaire (FRMS, FRMV, FRE, FREP, FREV, POU_MRE, CYC, SCO)",
+    ref: "Titre IV, 3.1.4.1 et 3.1.4.2.4",
     impl: "devices.json (presc) + prescriberFor()",
     controle: "Tests dédiés (prescriberFor)",
+  },
+  {
+    regle: "Évaluation des besoins et fiche de préconisation — professionnel distinct du prescripteur : équipe pluridisciplinaire (catégories complexes) ; prescripteur compétent (FRM, FRMC, FRMA, FRMP) ; non requise (FMP, FMPR, BASE, POU_S)",
+    ref: "Titre IV, 3.1.4.2.1",
+    impl: "devices.json (eval) + carte evaluators",
+    controle: "Schéma zod + cohérence eval/fiche au build",
   },
   {
     regle: "LCD manuelle prescriptible par médecin, ergothérapeute ou kinésithérapeute",

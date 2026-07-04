@@ -27,6 +27,7 @@ import {
   papForfaits,
   papRegions,
   prescribers,
+  evaluators,
 } from "@/lib/data";
 import {
   adaptedCode,
@@ -537,6 +538,7 @@ export function WalkerShell() {
             .map((m) => modeLabels[m]?.label ?? m)
             .join(" / ") + lcdDureeLabel,
         presc: prescLine,
+        evaluation: evaluators[dev.eval],
         fiche: dev.fiche,
         dap: dev.dap,
       },
@@ -1476,9 +1478,9 @@ export function WalkerShell() {
                       : " (14 à 26 semaines)"
                     : ""}
                 </Cell>
-                <Cell full label="Prescripteur / attestation">{prescLine}</Cell>
-                <Cell label="Fiche évaluation + préconisation">
-                  {device.fiche ? "Requises" : "Non concerné"}
+                <Cell full label="Prescripteur (qui signe l'ordonnance)">{prescLine}</Cell>
+                <Cell full label="Évaluation des besoins &amp; fiche de préconisation">
+                  {evaluators[device.eval]}
                 </Cell>
                 <Cell label="Accord préalable">
                   <span className={device.dap ? "font-semibold text-amber" : ""}>

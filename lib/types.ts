@@ -1,6 +1,7 @@
 import type { z } from "zod";
 import type {
   PrescEnum,
+  EvalEnum,
   ModeEnum,
   ForfaitEnum,
   ClasseValueEnum,
@@ -26,6 +27,7 @@ import type {
 /* Types inférés des schémas zod — source unique de vérité, pas de duplication. */
 
 export type Presc = z.infer<typeof PrescEnum>;
+export type Eval = z.infer<typeof EvalEnum>;
 export type Mode = z.infer<typeof ModeEnum>;
 export type Forfait = z.infer<typeof ForfaitEnum>;
 export type ClasseValue = z.infer<typeof ClasseValueEnum>;

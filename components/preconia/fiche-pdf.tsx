@@ -71,7 +71,10 @@ export interface FicheData {
     name: string;
     family: string;
     modes: string;
+    /** qui signe l'ordonnance (§3.1.4.2.4 / 3.1.4.1). */
     presc: string;
+    /** qui réalise l'évaluation des besoins + fiche de préconisation (§3.1.4.2.1). */
+    evaluation: string;
     fiche: boolean;
     dap: boolean;
   };
@@ -394,18 +397,18 @@ function FicheDocument({ d }: { d: FicheData }) {
               <Text style={s.gridValue}>{d.device.modes}</Text>
             </View>
             <View style={s.gridCell}>
-              <Text style={s.gridLabel}>Prescripteur / attestation</Text>
+              <Text style={s.gridLabel}>Prescripteur (qui signe l&apos;ordonnance)</Text>
               <Text style={s.gridValue}>{d.device.presc}</Text>
-            </View>
-            <View style={s.gridCell}>
-              <Text style={s.gridLabel}>Fiche évaluation + préconisation</Text>
-              <Text style={s.gridValue}>{d.device.fiche ? "Requises" : "Non concerné"}</Text>
             </View>
             <View style={s.gridCell}>
               <Text style={s.gridLabel}>Accord préalable</Text>
               <Text style={[s.gridValue, d.device.dap ? { color: C.amber, fontWeight: 600 } : {}]}>
                 {d.device.dap ? "DAP requise" : "Non requise"}
               </Text>
+            </View>
+            <View style={[s.gridCell, { width: "100%" }]}>
+              <Text style={s.gridLabel}>Évaluation des besoins &amp; fiche de préconisation</Text>
+              <Text style={s.gridValue}>{d.device.evaluation}</Text>
             </View>
           </View>
           {d.flags.map((f, i) => (

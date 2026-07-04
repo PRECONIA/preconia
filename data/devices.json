@@ -1,8 +1,8 @@
 {
   "prescribers": {
-    "large": "Tout médecin ou ergothérapeute (n'exerçant ni comme fournisseur, ni pour son compte)",
-    "spe": "Prescripteur compétent : médecin MPR, médecin titulaire d'un DU Appareillage ou d'une formation à la compensation du handicap, ou ergothérapeute (arrêté du 06/02/2025, 3.1.4.2.1)",
-    "pluri": "Équipe pluridisciplinaire constituée au minimum d'un médecin MPR",
+    "large": "Médecin ou ergothérapeute (arrêté du 06/02/2025, 3.1.4.1 et 3.1.4.2.4.a)",
+    "spe": "Médecin MPR (DES de MPR, ou DIU de médecine de rééducation avec expérience MPR), médecin titulaire d'un DU Appareillage ou d'une formation à la compensation du handicap, ou ergothérapeute (arrêté du 06/02/2025, 3.1.4.2.4.b)",
+    "pluri": "Médecin MPR (DES de MPR, ou DIU de médecine de rééducation avec expérience MPR), médecin titulaire d'un DU Appareillage ou de la compensation du handicap, ou ergothérapeute exerçant au sein d'une équipe pluridisciplinaire (arrêté du 06/02/2025, 3.1.4.2.4.c)",
     "lcdManuel": "Médecin, ergothérapeute ou kinésithérapeute (LCD, arrêté du 06/02/2025, 9.5.a)",
     "lcdFre": "Médecin MPR (DES, ou DIU de médecine de rééducation avec expérience MPR) ou médecin titulaire d'un DU Appareillage, ou ergothérapeute exerçant au sein d'une équipe pluridisciplinaire — essai préalable et certificat d'aptitude à la conduite transmis à la CPAM, condition du remboursement (LCD, 9.5.b)",
     "renouvId": "Médecin généraliste ou ergothérapeute — renouvellement à l'identique : même catégorie, même modèle (ou sa nouvelle version), même configuration (arrêté du 06/02/2025, 3.1.6)"
@@ -31,6 +31,7 @@
       "fiche": false,
       "dap": false,
       "presc": "large",
+      "eval": "aucune",
       "modes": [
         "ACHAT",
         "LCD"
@@ -55,6 +56,7 @@
       "fiche": false,
       "dap": false,
       "presc": "large",
+      "eval": "aucune",
       "modes": [
         "ACHAT",
         "LCD"
@@ -79,6 +81,7 @@
       "fiche": true,
       "dap": false,
       "presc": "large",
+      "eval": "competent",
       "modes": [
         "ACHAT",
         "LCD"
@@ -103,6 +106,7 @@
       "fiche": true,
       "dap": true,
       "presc": "spe",
+      "eval": "competent",
       "modes": [
         "ACHAT"
       ],
@@ -127,6 +131,7 @@
       "fiche": true,
       "dap": true,
       "presc": "pluri",
+      "eval": "equipe",
       "modes": [
         "ACHAT"
       ],
@@ -151,6 +156,7 @@
       "fiche": true,
       "dap": true,
       "presc": "spe",
+      "eval": "competent",
       "modes": [
         "ACHAT"
       ],
@@ -175,6 +181,7 @@
       "fiche": true,
       "dap": true,
       "presc": "spe",
+      "eval": "competent",
       "modes": [
         "ACHAT",
         "LLD"
@@ -199,6 +206,7 @@
       "fiche": true,
       "dap": true,
       "presc": "pluri",
+      "eval": "equipe",
       "modes": [
         "ACHAT",
         "LLD"
@@ -223,6 +231,7 @@
       "fiche": true,
       "dap": true,
       "presc": "pluri",
+      "eval": "equipe",
       "modes": [
         "ACHAT",
         "LCD"
@@ -247,6 +256,7 @@
       "fiche": true,
       "dap": true,
       "presc": "pluri",
+      "eval": "equipe",
       "modes": [
         "ACHAT",
         "LLD"
@@ -271,6 +281,7 @@
       "fiche": true,
       "dap": true,
       "presc": "pluri",
+      "eval": "equipe",
       "modes": [
         "ACHAT",
         "LLD"
@@ -295,6 +306,7 @@
       "fiche": false,
       "dap": false,
       "presc": "large",
+      "eval": "aucune",
       "modes": [
         "ACHAT"
       ],
@@ -318,6 +330,7 @@
       "fiche": true,
       "dap": false,
       "presc": "pluri",
+      "eval": "equipe",
       "modes": [
         "ACHAT",
         "LLD"
@@ -343,6 +356,7 @@
       "fiche": true,
       "dap": true,
       "presc": "pluri",
+      "eval": "equipe",
       "modes": [
         "ACHAT"
       ],
@@ -366,6 +380,7 @@
       "fiche": false,
       "dap": false,
       "presc": "large",
+      "eval": "aucune",
       "modes": [
         "ACHAT"
       ],
@@ -388,6 +403,7 @@
       "fiche": true,
       "dap": false,
       "presc": "pluri",
+      "eval": "equipe",
       "modes": [
         "ACHAT"
       ],
@@ -402,5 +418,10 @@
         "Fixations de pieds proposées"
       ]
     }
-  ]
+  ],
+  "evaluators": {
+    "equipe": "Équipe pluridisciplinaire (au minimum un médecin MPR ou titulaire d'un DU Appareillage, et un ergothérapeute ou un kinésithérapeute ayant une pratique des VPH), indépendante des fabricants, distributeurs et prestataires (arrêté du 06/02/2025, 3.1.4.2.1)",
+    "competent": "Le prescripteur compétent, sur la base de la fiche d'évaluation des besoins (arrêté du 06/02/2025, 3.1.4.2.1)",
+    "aucune": "Non concerné : prescription simple, sans fiche d'évaluation ni de préconisation (arrêté du 06/02/2025, 3.1.4.1)"
+  }
 }
