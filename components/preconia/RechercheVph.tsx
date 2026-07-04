@@ -137,7 +137,7 @@ export function RechercheVph() {
               id="vph-brand"
               value={brand ?? ""}
               onChange={(e) => setBrand(e.target.value || null)}
-              className="w-full rounded-lg border border-line bg-card px-3 py-2.5 text-sm outline-none focus:border-petrol"
+              className="w-full rounded-lg border-2 border-orange-300 bg-card px-3 py-2.5 text-sm outline-none transition-colors focus:border-orange-500"
             >
               <option value="">— Tous les fabricants —</option>
               {ALL_BRANDS.map((b) => (
@@ -155,7 +155,7 @@ export function RechercheVph() {
               id="vph-base"
               value={base ?? ""}
               onChange={(e) => setBase(e.target.value || null)}
-              className="w-full rounded-lg border border-line bg-card px-3 py-2.5 text-sm outline-none focus:border-petrol"
+              className="w-full rounded-lg border-2 border-orange-300 bg-card px-3 py-2.5 text-sm outline-none transition-colors focus:border-orange-500"
             >
               <option value="">— Toutes les catégories —</option>
               {ALL_BASES.map((b) => (

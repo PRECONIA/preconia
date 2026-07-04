@@ -58,7 +58,7 @@ function CategoryPicker({
         id={selectId}
         value={code ?? ""}
         onChange={(e) => setCode(e.target.value || null)}
-        className="w-full rounded-lg border border-line bg-card px-3 py-2.5 text-sm outline-none focus:border-petrol"
+        className="w-full rounded-lg border-2 border-orange-300 bg-card px-3 py-2.5 text-sm outline-none transition-colors focus:border-orange-500"
       >
         <option value="">— Choisir une catégorie de VPH —</option>
         {cumulCategories.map((c) => (

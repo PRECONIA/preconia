@@ -643,7 +643,7 @@ export function WalkerShell() {
                 e.preventDefault();
                 document.getElementById(s.id)?.scrollIntoView({ behavior: "smooth", block: "start" });
               }}
-              className="flex flex-1 min-w-0 items-center justify-center px-2 py-2.5 text-center text-[11px] font-semibold leading-tight text-white transition-colors hover:bg-white/15 sm:text-xs"
+              className="flex flex-1 min-w-0 items-center justify-center px-3 py-3.5 text-center text-[13px] font-semibold leading-tight text-white transition-colors hover:bg-white/15 sm:text-[15px]"
             >
               {s.label}
             </a>
@@ -1193,7 +1193,7 @@ export function WalkerShell() {
                     id="vehicleBrand"
                     value={brand ?? ""}
                     onChange={(e) => setAnswer("vehicleBrand", e.target.value || null)}
-                    className="w-full rounded-lg border-2 border-petrol bg-card px-3 py-2.5 text-sm font-medium text-petrol-deep outline-none focus:ring-2 focus:ring-petrol/40"
+                    className="w-full rounded-lg border-2 border-orange-300 bg-card px-3 py-2.5 text-sm font-medium text-petrol-deep outline-none transition-colors focus:border-orange-500"
                   >
                     <option value="">Générique (code mère)</option>
                     {availableBrands.map((b) => (
@@ -1218,7 +1218,7 @@ export function WalkerShell() {
                         id="vehicleModel"
                         value={model ?? ""}
                         onChange={(e) => setAnswer("vehicleModel", e.target.value || null)}
-                        className="w-full rounded-lg border-2 border-petrol bg-card px-3 py-2.5 text-sm font-medium text-petrol-deep outline-none focus:ring-2 focus:ring-petrol/40"
+                        className="w-full rounded-lg border-2 border-orange-300 bg-card px-3 py-2.5 text-sm font-medium text-petrol-deep outline-none transition-colors focus:border-orange-500"
                       >
                         <option value="">Tous modèles (code marque)</option>
                         {brandModels.map((m) => (
