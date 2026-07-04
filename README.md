@@ -1,5 +1,7 @@
 # PRECONIA
 
+[![CI](https://github.com/PRECONIA/preconia/actions/workflows/ci.yml/badge.svg)](https://github.com/PRECONIA/preconia/actions/workflows/ci.yml)
+
 Aide à la préconisation des VPH (véhicules pour personnes handicapées) destinée aux
 prescripteurs (médecins MPR, ergothérapeutes, équipes pluridisciplinaires). Un walker
 d'arbre de décision mène du **profil fonctionnel** à la **catégorie LPPR**, son **mode de
@@ -13,6 +15,20 @@ adjonctions, PAP) par dénomination, type, marque ou code LPP.
 - **Stack :** Next.js (App Router) + TypeScript + Tailwind v4, déployé sur Vercel.
 - **Données :** entièrement externalisées dans `data/*.json` (source unique), validées au
   build par des schémas zod. Mettre à jour la nomenclature = éditer les JSON, sans toucher au code.
+
+## Conformité & traçabilité
+
+La fidélité de la base aux données officielles est **vérifiable par quiconque** : le script
+`scripts/verifier-lpptot.mjs` télécharge la base LPP publique de la CNAMTS (LPPTOT) et
+confronte chaque code, tarif et libellé de `data/*.json` à l'enregistrement officiel.
+La CI l'exécute à chaque modification et chaque semaine. La correspondance règle par règle
+avec l'arrêté du 6 février 2025 (et les tests qui la verrouillent) est documentée sur
+https://preconia.vercel.app/conformite.
+
+```bash
+npm run verifier:lpptot                          # base courante téléchargée (CNAMTS)
+node scripts/verifier-lpptot.mjs --fichier LPPTOT890   # base locale (brute ou .zip)
+```
 
 ## Développement
 

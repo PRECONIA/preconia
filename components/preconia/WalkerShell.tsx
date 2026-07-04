@@ -1860,7 +1860,13 @@ export function WalkerShell() {
 
       <footer className="mt-6 border-t border-line pt-4 text-[11.5px] leading-relaxed text-ink-soft/90">
         <b className="text-ink-soft">{meta.disclaimer}</b> Source : {meta.source}. Dernière mise à
-        jour : {meta.lastUpdated}.
+        jour : {meta.lastUpdated}.{" "}
+        <a
+          href="/conformite"
+          className="font-semibold text-petrol underline-offset-2 hover:underline"
+        >
+          Conformité &amp; traçabilité ↗
+        </a>
       </footer>
 
       {connSource && <InfoConnector source={connSource} />}

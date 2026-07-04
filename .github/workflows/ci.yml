@@ -1,0 +1,45 @@
+# Intégration continue publique de PRECONIA — le contrôle qualité s'exécute chez un
+# tiers neutre (GitHub) à chaque modification ET chaque semaine, pour détecter aussi les
+# évolutions de la base officielle CNAMTS (nouvelle version LPPTOT, tarif modifié…).
+# Historique public : https://github.com/PRECONIA/preconia/actions
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    # chaque lundi 06:00 UTC : vérification hebdomadaire contre la base CNAMTS courante
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+jobs:
+  qualite:
+    name: Typage, tests des règles, build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - name: Typage TypeScript
+        run: npx tsc --noEmit
+      - name: Tests unitaires des règles (arrêté du 06/02/2025)
+        run: npx vitest run
+      - name: Build complet (schémas zod + contrôles de cohérence des données)
+        run: npm run build
+
+  conformite-lpptot:
+    name: Vérification base PRECONIA vs base officielle LPPTOT (CNAMTS)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      # script autonome, sans dépendance : télécharge la base courante et confronte
+      # chaque code LPP, tarif et libellé de data/*.json (sortie non nulle au moindre écart)
+      - name: Vérificateur LPPTOT
+        run: node scripts/verifier-lpptot.mjs
