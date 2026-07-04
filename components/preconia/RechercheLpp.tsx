@@ -132,13 +132,14 @@ export function RechercheLpp() {
 
   return (
     <section className="mt-5 overflow-hidden rounded-2xl border border-line bg-card shadow-sm">
-      <div className="px-6 pb-5 pt-5">
-        <div className="flex flex-wrap items-baseline justify-between gap-2">
-          <h2 className="text-base font-semibold">Recherche nomenclature LPPR</h2>
-          <span className="text-[11px] font-semibold text-red-600">
-            Base mise à jour le {frDate(lpprMeta.lastUpdated)}
-          </span>
-        </div>
+      {/* bandeau de titre vert : distingue les modules outils du walker (encart blanc) */}
+      <div className="flex flex-wrap items-baseline justify-between gap-2 bg-petrol px-6 py-3">
+        <h2 className="text-base font-semibold text-white">Recherche nomenclature LPPR</h2>
+        <span className="text-[11px] font-semibold text-petrol-tint">
+          Base mise à jour le {frDate(lpprMeta.lastUpdated)}
+        </span>
+      </div>
+      <div className="px-6 pb-5 pt-4">
         <p className="mb-3 mt-1 text-xs text-ink-soft">
           Par type, marque, nature ou code LPP — ex. « FREP B otto », « PAP otto », « repose jambe otto ».
         </p>

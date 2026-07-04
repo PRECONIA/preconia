@@ -113,13 +113,16 @@ export function RechercheVph() {
 
   return (
     <section className="mt-5 overflow-hidden rounded-2xl border border-line bg-card shadow-sm">
-      <div className="px-6 pb-5 pt-5">
-        <div className="flex flex-wrap items-baseline justify-between gap-2">
-          <h2 className="text-base font-semibold">Recherche de VPH par fabricant et catégorie</h2>
-          <span className="text-[11px] font-semibold text-red-600">
-            Catalogue CERAH à jour le {frDate(deviceModelsMeta.lastUpdated)}
-          </span>
-        </div>
+      {/* bandeau de titre vert : distingue les modules outils du walker (encart blanc) */}
+      <div className="flex flex-wrap items-baseline justify-between gap-2 bg-petrol px-6 py-3">
+        <h2 className="text-base font-semibold text-white">
+          Recherche de VPH par fabricant et catégorie
+        </h2>
+        <span className="text-[11px] font-semibold text-petrol-tint">
+          Catalogue CERAH à jour le {frDate(deviceModelsMeta.lastUpdated)}
+        </span>
+      </div>
+      <div className="px-6 pb-5 pt-4">
         <p className="mb-3 mt-1 text-xs text-ink-soft">
           Tous les modèles inscrits à la nomenclature. La vignette renvoie vers le bon de commande
           / la fiche tarif du constructeur lorsqu&apos;elle est disponible.

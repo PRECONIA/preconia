@@ -97,12 +97,15 @@ export function ModuleCumul({
 
   const inner = (
     <>
-        <div className="flex flex-wrap items-baseline justify-between gap-2">
-          <h2 className="text-base font-semibold">Évaluation de cumul VPH</h2>
-          <span className="text-[11px] font-semibold text-red-600">
-            Règles à jour le {frDate(cumulMeta.lastUpdated)}
-          </span>
-        </div>
+        {/* variante embarquée (étape cumul du walker) : titre inline, sans bandeau */}
+        {embedded && (
+          <div className="flex flex-wrap items-baseline justify-between gap-2">
+            <h2 className="text-base font-semibold">Évaluation de cumul VPH</h2>
+            <span className="text-[11px] font-semibold text-red-600">
+              Règles à jour le {frDate(cumulMeta.lastUpdated)}
+            </span>
+          </div>
+        )}
         <p className="mb-3 mt-1 text-xs text-ink-soft">
           Deux VPH sont-ils cumulables au titre de la LPPR ? Choisissez ce qui est déjà possédé et ce
           qui est souhaité.
@@ -192,7 +195,14 @@ export function ModuleCumul({
 
   return (
     <section className="mt-5 overflow-hidden rounded-2xl border border-line bg-card shadow-sm">
-      <div className="px-6 pb-5 pt-5">{inner}</div>
+      {/* bandeau de titre vert : distingue les modules outils du walker (encart blanc) */}
+      <div className="flex flex-wrap items-baseline justify-between gap-2 bg-petrol px-6 py-3">
+        <h2 className="text-base font-semibold text-white">Évaluation de cumul VPH</h2>
+        <span className="text-[11px] font-semibold text-petrol-tint">
+          Règles à jour le {frDate(cumulMeta.lastUpdated)}
+        </span>
+      </div>
+      <div className="px-6 pb-5 pt-4">{inner}</div>
     </section>
   );
 }
