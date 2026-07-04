@@ -225,12 +225,12 @@ const perUnit = (u?: string) => (u === "semaine" ? " / semaine" : u === "trimest
 
 /** Sections de la page d'accueil, pour la barre d'ancrage sous le titre. */
 const SECTIONS: { id: string; label: string }[] = [
-  { id: "preconisation", label: "Préconisation guidée" },
+  { id: "preconisation", label: "Parcours guidé" },
   { id: "recherche-lppr", label: "Recherche LPPR" },
   { id: "cumul", label: "Évaluation de cumul" },
   { id: "recherche-vph", label: "Recherche VPH" },
   { id: "specificites-prescription", label: "Spécificités de prescription" },
-  { id: "apropos", label: "À propos & FAQ" },
+  { id: "apropos", label: "FAQ" },
 ];
 
 export function WalkerShell() {
@@ -629,8 +629,12 @@ export function WalkerShell() {
           jusqu&apos;à la mise à disposition et la livraison — D&apos;après la réforme de la
           nomenclature 2025.
         </p>
-        {/* Barre d'ancrage : accès direct à chaque section de la page d'accueil. */}
-        <nav aria-label="Accès rapide aux sections" className="mb-8 flex flex-wrap gap-2">
+        {/* Barre d'ancrage : encart vert (façon carte du walker), segmenté par de fines
+            lignes blanches — accès direct à chaque section de la page d'accueil. */}
+        <nav
+          aria-label="Accès rapide aux sections"
+          className="mb-8 flex overflow-hidden rounded-xl bg-petrol shadow-sm divide-x divide-white/25"
+        >
           {SECTIONS.map((s) => (
             <a
               key={s.id}
@@ -639,7 +643,7 @@ export function WalkerShell() {
                 e.preventDefault();
                 document.getElementById(s.id)?.scrollIntoView({ behavior: "smooth", block: "start" });
               }}
-              className="rounded-full border border-line bg-card px-3 py-1.5 text-xs font-medium text-ink-soft transition-colors hover:border-petrol hover:text-petrol-deep"
+              className="flex flex-1 min-w-0 items-center justify-center px-2 py-2.5 text-center text-[11px] font-semibold leading-tight text-white transition-colors hover:bg-white/15 sm:text-xs"
             >
               {s.label}
             </a>
