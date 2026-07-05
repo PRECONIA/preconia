@@ -677,12 +677,14 @@ export function WalkerShell() {
           {/* ---------------- HOME ---------------- */}
           {stage === "home" && (
             <>
-              <h1 className="mb-1 text-xl font-semibold">
-                Prescription &amp; préconisation d&apos;un fauteuil roulant (VPH)
-              </h1>
-              <p className="mb-4 text-sm text-ink-soft">
-                Un parcours guidé pour la sélection d&apos;un VPH, étape par étape.
-              </p>
+              <div className="-mx-6 -mt-6 mb-5 bg-petrol px-6 py-4">
+                <h1 className="text-lg font-semibold text-white">
+                  Prescription &amp; préconisation d&apos;un fauteuil roulant (VPH)
+                </h1>
+                <p className="mt-1 text-sm leading-relaxed text-petrol-tint">
+                  Un parcours guidé pour la sélection d&apos;un VPH, étape par étape.
+                </p>
+              </div>
               <button className={`${primary} w-full justify-center`} onClick={() => go("age")}>
                 Débuter le parcours guidé
               </button>
@@ -2073,8 +2075,12 @@ function InfoConnector({ source }: { source: DOMRect }) {
 function Step({ title, hint, children }: { title: string; hint?: string; children: React.ReactNode }) {
   return (
     <>
-      <h2 className="mb-1 text-xl font-semibold">{title}</h2>
-      {hint && <p className="mb-4 text-sm text-ink-soft">{hint}</p>}
+      {/* bandeau de titre vert pleine largeur (déborde du padding de la carte via -mx/-mt),
+          cohérent avec les moteurs de recherche. */}
+      <div className="-mx-6 -mt-6 mb-5 bg-petrol px-6 py-4">
+        <h2 className="text-lg font-semibold text-white">{title}</h2>
+        {hint && <p className="mt-1 text-sm leading-relaxed text-petrol-tint">{hint}</p>}
+      </div>
       {children}
     </>
   );
