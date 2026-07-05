@@ -684,7 +684,7 @@ export function WalkerShell() {
                 Un parcours guidé pour la sélection d&apos;un VPH, étape par étape.
               </p>
               <button className={`${primary} w-full justify-center`} onClick={() => go("age")}>
-                Commencer l&apos;évaluation →
+                Débuter le parcours guidé
               </button>
               <div className="mt-4 rounded-xl border border-line bg-paper/40 p-3.5 text-[11.5px] leading-relaxed text-ink-soft">
                 <b className="text-ink">Période transitoire (arrêté du 06/02/2025).</b> Les VPH
