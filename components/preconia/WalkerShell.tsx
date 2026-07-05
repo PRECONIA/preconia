@@ -6,6 +6,7 @@
    PapPanel, ResultCard, synthèse copiable) est volontairement reporté à la session UI. */
 
 import { useState } from "react";
+import Link from "next/link";
 import {
   adjBrandMap,
   adjGroups,
@@ -648,6 +649,13 @@ export function WalkerShell() {
               {s.label}
             </a>
           ))}
+          {/* bouton Contact — orange, à droite ; mène à la page de contact (autre route). */}
+          <Link
+            href="/contact"
+            className="flex flex-1 min-w-0 items-center justify-center bg-orange-500 px-3 py-3.5 text-center text-[13px] font-semibold leading-tight text-white transition-colors hover:bg-orange-600 sm:text-[15px]"
+          >
+            Contact
+          </Link>
         </nav>
       </header>
 
