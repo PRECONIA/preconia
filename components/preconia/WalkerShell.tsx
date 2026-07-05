@@ -1959,7 +1959,7 @@ export function WalkerShell() {
       {stage === "home" && (
         <aside
           aria-label="Liens officiels"
-          className="mt-5 overflow-hidden rounded-2xl border border-line bg-card shadow-sm lg:fixed lg:left-[calc(50%+399px)] lg:right-4 lg:top-[188px] lg:z-40 lg:mt-0 lg:max-w-[26rem]"
+          className="mt-5 overflow-hidden rounded-2xl border border-line bg-card shadow-sm lg:fixed lg:left-[calc(50%+399px)] lg:right-4 lg:top-[184px] lg:z-40 lg:mt-0 lg:max-w-[26rem]"
         >
           <div className="bg-orange-600 px-5 py-3">
             <h2 className="text-base font-semibold text-white">Liens officiels</h2>
