@@ -149,7 +149,7 @@ export function RechercheLpp() {
           value={q}
           onChange={(e) => setQ(e.target.value)}
           placeholder={`Rechercher… ${typed}▌`}
-          className="w-full rounded-lg border border-line bg-card px-3 py-2.5 text-sm outline-none focus:border-petrol"
+          className="w-full rounded-lg border-2 border-orange-300 bg-card px-3 py-2.5 text-sm outline-none transition-colors focus:border-orange-500"
           aria-label="Recherche nomenclature LPPR"
         />
 
