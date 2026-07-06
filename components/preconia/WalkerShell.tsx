@@ -630,11 +630,12 @@ export function WalkerShell() {
           jusqu&apos;à la mise à disposition et la livraison — D&apos;après la réforme de la
           nomenclature 2025.
         </p>
-        {/* Barre d'ancrage : encart vert (façon carte du walker), segmenté par de fines
-            lignes blanches — accès direct à chaque section de la page d'accueil. */}
+        {/* Barre d'ancrage : panneau vert segmenté par de fines lignes blanches (gap-px sur
+            fond blanc translucide). Grille responsive : 2 colonnes en portrait mobile (libellés
+            lisibles, plus de chevauchement), rang unique de 7 dès sm (paysage / desktop). */}
         <nav
           aria-label="Accès rapide aux sections"
-          className="mb-8 flex overflow-hidden rounded-xl bg-petrol shadow-sm divide-x divide-white/25"
+          className="mb-8 grid grid-cols-2 gap-px overflow-hidden rounded-xl bg-white/30 shadow-sm sm:grid-cols-7"
         >
           {SECTIONS.map((s) => (
             <a
@@ -644,15 +645,15 @@ export function WalkerShell() {
                 e.preventDefault();
                 document.getElementById(s.id)?.scrollIntoView({ behavior: "smooth", block: "start" });
               }}
-              className="flex flex-1 min-w-0 items-center justify-center px-3 py-3.5 text-center text-[13px] font-semibold leading-tight text-white transition-colors hover:bg-white/15 sm:text-[15px]"
+              className="flex items-center justify-center bg-petrol px-2 py-3 text-center text-[13px] font-semibold leading-tight text-white transition-colors hover:bg-petrol-deep sm:px-3 sm:py-3.5 sm:text-[15px]"
             >
               {s.label}
             </a>
           ))}
-          {/* bouton Contact — orange, à droite ; mène à la page de contact (autre route). */}
+          {/* bouton Contact — orange ; pleine largeur en portrait mobile, dernier segment sinon. */}
           <Link
             href="/contact"
-            className="flex flex-1 min-w-0 items-center justify-center bg-orange-500 px-3 py-3.5 text-center text-[13px] font-semibold leading-tight text-white transition-colors hover:bg-orange-600 sm:text-[15px]"
+            className="col-span-2 flex items-center justify-center bg-orange-500 px-2 py-3 text-center text-[13px] font-semibold leading-tight text-white transition-colors hover:bg-orange-600 sm:col-span-1 sm:px-3 sm:py-3.5 sm:text-[15px]"
           >
             Contact
           </Link>
