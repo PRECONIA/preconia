@@ -1,6 +1,6 @@
 {
-  "source": "Nomenclature LPPR — base CNAM (menu 722), regroupement par ordre de page : code mère → variantes de marque",
-  "lastUpdated": "2026-06-25",
+  "source": "Nomenclature LPPR — base CNAM (menu 722), regroupement par ordre de page : code mère → variantes de marque — MAJ LPPTOT891 (2026-07-08) : 6 variantes de marque LOGO SILVER inscrites par la CNAM ajoutées.",
+  "lastUpdated": "2026-07-08",
   "groups": [
     {
       "base": "4947601",
@@ -86,7 +86,8 @@
         "PRIDE MOBILITY": "9951441",
         "4POWER4": "9981873",
         "SUNRISE MED": "9987717",
-        "VERMEIREN": "9947847"
+        "VERMEIREN": "9947847",
+        "LOGO SILVER": "9967169"
       }
     },
     {
@@ -117,7 +118,8 @@
         "RUPIANI": "9905139",
         "SCHUCHMANN": "9919934",
         "SUNRISE MED": "9921865",
-        "VERMEIREN": "9922920"
+        "VERMEIREN": "9922920",
+        "LOGO SILVER": "9974749"
       }
     },
     {
@@ -139,7 +141,8 @@
         "SKS ROLTEC": "9968387",
         "SUNRISE MED": "9995042",
         "VERMEIREN": "9929507",
-        "INVACARE": "9947184"
+        "INVACARE": "9947184",
+        "LOGO SILVER": "9982795"
       }
     },
     {
@@ -236,7 +239,8 @@
         "PROT VIRGINIE": "9975401",
         "4POWER4": "9930798",
         "SUNRISE MED": "9928790",
-        "VERMEIREN": "9901650"
+        "VERMEIREN": "9901650",
+        "LOGO SILVER": "9962829"
       }
     },
     {
@@ -255,7 +259,8 @@
         "PRIDE MOBILITY": "9938392",
         "4POWER4": "9946776",
         "SUNRISE MED": "9963830",
-        "VERMEIREN": "9976725"
+        "VERMEIREN": "9976725",
+        "LOGO SILVER": "9927721"
       }
     },
     {
@@ -269,7 +274,8 @@
         "OTTO BOCK": "9993669",
         "PRIDE MOBILITY": "9923901",
         "SUNRISE MED": "9973572",
-        "VERMEIREN": "9957840"
+        "VERMEIREN": "9957840",
+        "LOGO SILVER": "9902684"
       }
     },
     {
