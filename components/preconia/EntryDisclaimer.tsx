@@ -100,14 +100,14 @@ export function EntryDisclaimer({ children }: { children: React.ReactNode }) {
                     · pour mieux connaître notre audience (anonyme)
                   </span>
                 </div>
-                <div className="flex flex-wrap gap-2" role="group" aria-label="Votre profession">
+                <div className="grid grid-cols-2 gap-2" role="group" aria-label="Votre profession">
                   {PROFESSIONS.map((p) => (
                     <button
                       key={p}
                       type="button"
                       onClick={() => setProfession(p)}
                       aria-pressed={profession === p}
-                      className={`rounded-full border px-3 py-2 text-[13px] font-medium transition-colors ${
+                      className={`flex items-center justify-center rounded-lg border px-3 py-2.5 text-center text-[13px] font-medium leading-tight transition-colors ${
                         profession === p
                           ? "border-petrol bg-petrol text-white"
                           : "border-line bg-card text-ink-soft hover:border-petrol hover:text-petrol-deep"
