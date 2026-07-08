@@ -20,6 +20,7 @@ const VERIF = {
   base: "LPPTOT891",
   sha256: "38e65617d9dd48c5e8a0dee6bad560b1e4c6533779ce6707c4cb20d8190747dd",
   codes: 1090,
+  distincts: 418,
   tarifs: 74,
   libelles: 412,
   ecarts: 0,
@@ -356,7 +357,7 @@ export default function ConformitePage() {
         </p>
         <div className="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-4">
           {[
-            { k: "Codes LPP contrôlés", v: String(VERIF.codes) },
+            { k: "Contrôles de codes LPP", v: String(VERIF.codes) },
             { k: "Tarifs confrontés", v: String(VERIF.tarifs) },
             { k: "Libellés confrontés", v: String(VERIF.libelles) },
             { k: "Écarts", v: String(VERIF.ecarts) },
@@ -369,6 +370,12 @@ export default function ConformitePage() {
             </div>
           ))}
         </div>
+        <p className="mt-2 text-justify text-xs leading-relaxed text-ink-soft/80 hyphens-auto" lang="fr">
+          Les {VERIF.codes} contrôles portent sur <b>{VERIF.distincts} codes LPP distincts</b> : un
+          même code officiel est re-vérifié dans chacun des fichiers qui le référence (code mère,
+          catalogue de recherche, fiche de modèle de marque…), ce qui garantit sa cohérence d'un
+          fichier à l'autre en plus de sa conformité à la base.
+        </p>
         <p className="mt-3 text-justify text-xs leading-relaxed text-ink-soft/80 hyphens-auto" lang="fr">
           Empreinte SHA-256 de la base officielle vérifiée :{" "}
           <span className="break-all font-mono">{VERIF.sha256}</span>. Quiconque télécharge la même
