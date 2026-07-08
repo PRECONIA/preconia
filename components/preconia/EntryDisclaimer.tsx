@@ -6,11 +6,26 @@
    les visiteurs qui n'ont pas encore accepté. Acceptation mémorisée (localStorage) : une fois par
    navigateur. useSyncExternalStore : pas de setState en effet, pas de désynchro d'hydratation. */
 
-import { useSyncExternalStore } from "react";
+import { useState, useSyncExternalStore } from "react";
+import { track } from "@vercel/analytics";
 import { Logo } from "@/components/preconia/Logo";
 
 const STORAGE_KEY = "preconia-disclaimer-accepted";
+const PROFESSION_KEY = "preconia-profession";
 const EVENT = "preconia-disclaimer-change";
+
+/* Qualifications proposées à l'entrée — remontées en statistiques agrégées (événement
+   Vercel Analytics « qualification », sans cookie ni donnée identifiante). Ordre = affichage. */
+const PROFESSIONS = [
+  "Médecin spécialiste MPR",
+  "Médecin spécialiste (hors MPR)",
+  "Médecin généraliste",
+  "Ergothérapeute",
+  "Kinésithérapeute",
+  "Rééducateur (hors ergothérapie ou kinésithérapie)",
+  "Prestataire",
+  "Autre profession",
+];
 
 function subscribe(cb: () => void): () => void {
   window.addEventListener(EVENT, cb);
@@ -27,12 +42,21 @@ const getServerSnapshot = (): boolean => true; // pas d'encart au SSR (indexable
 
 export function EntryDisclaimer({ children }: { children: React.ReactNode }) {
   const accepted = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  const [profession, setProfession] = useState("");
 
   const accept = () => {
+    if (!profession) return; // qualification requise
     try {
       localStorage.setItem(STORAGE_KEY, "1");
+      localStorage.setItem(PROFESSION_KEY, profession);
     } catch {
       /* ignore */
+    }
+    // statistique agrégée, anonyme (Vercel Web Analytics, sans cookie)
+    try {
+      track("qualification", { profession });
+    } catch {
+      /* analytics indisponible → on n'empêche pas l'entrée */
     }
     window.dispatchEvent(new Event(EVENT));
   };
@@ -69,11 +93,34 @@ export function EntryDisclaimer({ children }: { children: React.ReactNode }) {
                 l&apos;essai réel.
               </p>
 
+              <div className="mt-5 text-left">
+                <label htmlFor="pc-profession" className="mb-1.5 block text-sm font-semibold text-ink">
+                  Votre profession
+                  <span className="ml-1 font-normal text-ink-soft">
+                    · pour mieux connaître notre audience (anonyme)
+                  </span>
+                </label>
+                <select
+                  id="pc-profession"
+                  value={profession}
+                  onChange={(e) => setProfession(e.target.value)}
+                  autoFocus
+                  className="w-full rounded-lg border-2 border-orange-300 bg-card px-3 py-2.5 text-sm outline-none transition-colors focus:border-orange-500"
+                >
+                  <option value="">— Sélectionnez votre profession —</option>
+                  {PROFESSIONS.map((p) => (
+                    <option key={p} value={p}>
+                      {p}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
               <button
                 type="button"
                 onClick={accept}
-                autoFocus
-                className="mt-6 w-full rounded-lg bg-petrol px-5 py-3 font-semibold text-white transition-colors hover:bg-petrol-deep"
+                disabled={!profession}
+                className="mt-5 w-full rounded-lg bg-petrol px-5 py-3 font-semibold text-white transition-colors hover:bg-petrol-deep disabled:cursor-not-allowed disabled:opacity-50"
               >
                 Je comprends et j&apos;accepte
               </button>
