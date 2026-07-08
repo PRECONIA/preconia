@@ -10,6 +10,7 @@ import { useEffect, useMemo, useState } from "react";
 import { lpprMeta } from "@/lib/data";
 import {
   allBrands,
+  catalogSize,
   KIND_LABEL,
   searchCatalog,
   vphCategories,
@@ -135,7 +136,10 @@ export function RechercheLpp() {
       {/* bandeau de titre vert : distingue les modules outils du walker (encart blanc) */}
       <div className="flex flex-wrap items-baseline justify-between gap-2 bg-petrol px-6 py-3">
         <h2 className="text-base font-semibold text-white">Recherche nomenclature LPPR</h2>
-        <span className="text-[11px] font-semibold text-petrol-tint">
+        <span className="flex items-center gap-2 text-[11px] font-semibold text-petrol-tint">
+          <span className="rounded-full bg-white/15 px-2 py-0.5 text-white">
+            {catalogSize.toLocaleString("fr-FR")} codes LPP indexés
+          </span>
           Base mise à jour le {frDate(lpprMeta.lastUpdated)}
         </span>
       </div>

@@ -83,58 +83,58 @@ for (const [token, brands] of Object.entries(deviceModelsByType)) {
   }
 }
 
-function kindOfAdj(label: string): CatalogKind {
-  return /PAP\s+FORFAIT/i.test(label) ? "pap" : "adjonction";
-}
 function papForfaitOf(label: string): "A" | "B" | null {
   const m = label.match(/FORFAIT\s+([AB])\b/i);
   return m ? (m[1].toUpperCase() as "A" | "B") : null;
 }
+// Un forfait PAP est reconnu par la présence de « FORFAIT A/B » (les libellés officiels
+// écrivent tantôt « PAP FORFAIT B », tantôt « PAP, FORFAIT A » avec une virgule — d'où la
+// détection sur « FORFAIT A/B » plutôt que sur « PAP FORFAIT »). Aucune autre adjonction ni
+// prestation ne porte « FORFAIT A/B ».
+function kindOfAdj(label: string): CatalogKind {
+  return papForfaitOf(label) ? "pap" : "adjonction";
+}
 
-/** Catalogue unifié, construit une fois au chargement. */
-export const catalog: CatalogEntry[] = [
-  ...lpprProducts.map((p): CatalogEntry => {
-    const { name, brand } = parseLpprBrand(p.label);
-    const info = codeInfo.get(p.code);
-    return {
-      code: p.code,
-      label: name,
-      brand: info?.brand ?? brand,
-      kind: "vph",
-      category: p.category,
-      token: info?.token ?? vphToken(p.label),
-      papForfait: null,
-      models: info?.models ?? [],
-    };
-  }),
-  ...lpprAdjProducts.map((p): CatalogEntry => {
-    const { name, brand } = parseLpprBrand(p.label);
-    const kind = kindOfAdj(p.label);
-    return {
-      code: p.code,
-      label: name,
-      brand,
-      kind,
-      category: p.category,
-      token: null,
-      papForfait: kind === "pap" ? papForfaitOf(p.label) : null,
-      models: [],
-    };
-  }),
-  // forfaits PAP de base (notre pap.json) — pour que les boutons PAP-A / PAP-B aient un résultat.
-  ...(["A", "B"] as const).map((f): CatalogEntry => ({
-    code: papForfaits[f].code,
-    label: papForfaits[f].label,
-    brand: null,
-    kind: "pap",
-    category: "Forfaits de positionnement (PAP)",
+/** Catalogue unifié, construit une fois au chargement, dédupliqué par code LPP. Chaque code
+    n'apparaît qu'une fois (première source gagne) : VPH puis adjonctions/PAP puis prestations
+    puis forfaits PAP de base puis variantes de marque non déjà indexées. */
+const byCode = new Map<string, CatalogEntry>();
+const put = (e: CatalogEntry) => {
+  if (!byCode.has(e.code)) byCode.set(e.code, e);
+};
+
+for (const p of lpprProducts) {
+  const { name, brand } = parseLpprBrand(p.label);
+  const info = codeInfo.get(p.code);
+  put({
+    code: p.code,
+    label: name,
+    brand: info?.brand ?? brand,
+    kind: "vph",
+    category: p.category,
+    token: info?.token ?? vphToken(p.label),
+    papForfait: null,
+    models: info?.models ?? [],
+  });
+}
+for (const p of lpprAdjProducts) {
+  const { name, brand } = parseLpprBrand(p.label);
+  const kind = kindOfAdj(p.label);
+  put({
+    code: p.code,
+    label: name,
+    brand,
+    kind,
+    category: p.category,
     token: null,
-    papForfait: f,
+    papForfait: kind === "pap" ? papForfaitOf(p.label) : null,
     models: [],
-  })),
-  // prestations & forfaits (LLD, LCD, SAV, MAD/livraison) — le token est détecté sur les
-  // libellés LLD (« VPH, LLD, FREP-A, … ») pour que « frep-a lld » fonctionne.
-  ...prestationProducts.map((p): CatalogEntry => ({
+  });
+}
+// prestations & forfaits (LLD, LCD, SAV, MAD/livraison) — le token est détecté sur les
+// libellés LLD (« VPH, LLD, FREP-A, … ») pour que « frep-a lld » fonctionne.
+for (const p of prestationProducts) {
+  put({
     code: p.code,
     label: p.label,
     brand: null,
@@ -143,8 +143,43 @@ export const catalog: CatalogEntry[] = [
     token: vphToken(p.label),
     papForfait: null,
     models: [],
-  })),
-];
+  });
+}
+// forfaits PAP de base (notre pap.json) — garantit un résultat pour les boutons PAP-A / PAP-B.
+for (const f of ["A", "B"] as const) {
+  put({
+    code: papForfaits[f].code,
+    label: papForfaits[f].label,
+    brand: null,
+    kind: "pap",
+    category: "Forfaits de positionnement (PAP)",
+    token: null,
+    papForfait: f,
+    models: [],
+  });
+}
+// variantes de marque (adjonction-brands.json) — indexe celles absentes des sources ci-dessus
+// (ex. codes de marque récemment inscrits par la CNAM), pour qu'elles soient toutes trouvables.
+for (const g of adjBrandGroups) {
+  const pf = papForfaitOf(g.function);
+  const kind: CatalogKind = pf ? "pap" : "adjonction";
+  for (const [brand, code] of Object.entries(g.byBrand)) {
+    put({
+      code,
+      label: g.function,
+      brand,
+      kind,
+      category: pf ? "Forfaits de positionnement (PAP)" : "Adjonctions VPH modulaire",
+      token: null,
+      papForfait: pf,
+      models: [],
+    });
+  }
+}
+
+export const catalog: CatalogEntry[] = [...byCode.values()];
+/** Nombre de codes LPP indexés (uniques) — affiché à côté du moteur de recherche. */
+export const catalogSize = catalog.length;
 
 /** Marques disponibles (triées) — alimente le sélecteur de marque. */
 export const allBrands: string[] = Array.from(
@@ -210,6 +245,17 @@ function tokenize(query: string): QTerm[] {
     }
     if (t === "pap" && /^[ab]$/.test(next)) {
       terms.push({ raw: t, kind: "pap", pap: raw[++i].toUpperCase() as "A" | "B" });
+      continue;
+    }
+    // « forfait A » / « forfait B » / « forfaita » → forfait PAP A/B (aucun autre code ne
+    // porte « forfait A/B » : renvoie le générique ET toutes les variantes de marque).
+    if (t === "forfait" && /^[ab]$/.test(next)) {
+      terms.push({ raw: t, kind: "pap", pap: raw[++i].toUpperCase() as "A" | "B" });
+      continue;
+    }
+    m = t.match(/^forfait([ab])$/);
+    if (m) {
+      terms.push({ raw: t, kind: "pap", pap: m[1].toUpperCase() as "A" | "B" });
       continue;
     }
     // type hyphené : « frep-b »

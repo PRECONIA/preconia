@@ -127,3 +127,36 @@ describe("vignettes marque dans le catalogue", () => {
     expect(branded.length).toBeGreaterThanOrEqual(100);
   });
 });
+
+describe("indexation exhaustive & forfaits PAP de marque", () => {
+  it("« forfait A » remonte le générique ET les variantes de marque (PAP)", () => {
+    const r = searchCatalog("forfait A", {}, 100);
+    const pa = r.filter((e) => e.kind === "pap" && e.papForfait === "A");
+    expect(pa.length).toBeGreaterThan(5); // générique + de nombreuses marques
+    expect(pa.some((e) => e.brand === null)).toBe(true); // le générique
+    expect(pa.some((e) => e.brand)).toBe(true); // au moins une marque
+    // aucun n'est classé « adjonction » (le bug de la virgule « PAP, FORFAIT A »)
+    expect(r.some((e) => e.papForfait === "A" && e.kind === "adjonction")).toBe(false);
+  });
+
+  it("bouton PAP-A : filtre kind=pap papForfait=A → générique + marques", () => {
+    const r = searchCatalog("", { kind: "pap", papForfait: "A" }, 100);
+    expect(r.length).toBeGreaterThan(5);
+    expect(r.every((e) => e.kind === "pap" && e.papForfait === "A")).toBe(true);
+  });
+
+  it("les 6 variantes LOGO SILVER (LPPTOT891) sont indexées", () => {
+    for (const code of ["9902684", "9927721", "9962829", "9967169", "9974749", "9982795"]) {
+      const r = searchCatalog(code, {}, 20);
+      expect(r.some((e) => e.code === code), code).toBe(true);
+    }
+  });
+
+  it("chaque code d'adjonction de marque (adjonction-brands) est trouvable par son code", () => {
+    // échantillon : recherche par code exact renvoie l'entrée
+    const echantillon = ["9974749", "9956697", "9535725"]; // LOGO SILVER appui-tête, SKS forfait A, OTTO FREP-B
+    for (const c of echantillon) {
+      expect(searchCatalog(c, {}, 10).some((e) => e.code === c), c).toBe(true);
+    }
+  });
+});
