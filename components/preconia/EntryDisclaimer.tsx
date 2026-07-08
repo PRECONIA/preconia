@@ -68,9 +68,9 @@ export function EntryDisclaimer({ children }: { children: React.ReactNode }) {
 
       {!accepted && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-paper/40 p-4 backdrop-blur-md">
-          <div className="pc-fade w-full max-w-md overflow-hidden rounded-2xl border border-line bg-card shadow-xl">
-            <div className="h-[3px] bg-gradient-to-r from-petrol to-petrol-deep" />
-            <div className="px-7 py-8 text-center">
+          <div className="pc-fade flex max-h-[92vh] w-full max-w-md flex-col overflow-hidden rounded-2xl border border-line bg-card shadow-xl">
+            <div className="h-[3px] shrink-0 bg-gradient-to-r from-petrol to-petrol-deep" />
+            <div className="overflow-y-auto px-7 py-8 text-center">
               <Logo className="mx-auto h-16 w-16 drop-shadow-sm" />
               <div className="mt-3 text-2xl font-bold tracking-tight">
                 PRECON<span className="text-petrol">IA</span>
@@ -94,26 +94,29 @@ export function EntryDisclaimer({ children }: { children: React.ReactNode }) {
               </p>
 
               <div className="mt-5 text-left">
-                <label htmlFor="pc-profession" className="mb-1.5 block text-sm font-semibold text-ink">
+                <div className="mb-2 text-sm font-semibold text-ink">
                   Votre profession
                   <span className="ml-1 font-normal text-ink-soft">
                     · pour mieux connaître notre audience (anonyme)
                   </span>
-                </label>
-                <select
-                  id="pc-profession"
-                  value={profession}
-                  onChange={(e) => setProfession(e.target.value)}
-                  autoFocus
-                  className="w-full rounded-lg border-2 border-orange-300 bg-card px-3 py-2.5 text-sm outline-none transition-colors focus:border-orange-500"
-                >
-                  <option value="">— Sélectionnez votre profession —</option>
+                </div>
+                <div className="flex flex-wrap gap-2" role="group" aria-label="Votre profession">
                   {PROFESSIONS.map((p) => (
-                    <option key={p} value={p}>
+                    <button
+                      key={p}
+                      type="button"
+                      onClick={() => setProfession(p)}
+                      aria-pressed={profession === p}
+                      className={`rounded-full border px-3 py-2 text-[13px] font-medium transition-colors ${
+                        profession === p
+                          ? "border-petrol bg-petrol text-white"
+                          : "border-line bg-card text-ink-soft hover:border-petrol hover:text-petrol-deep"
+                      }`}
+                    >
                       {p}
-                    </option>
+                    </button>
                   ))}
-                </select>
+                </div>
               </div>
 
               <button
