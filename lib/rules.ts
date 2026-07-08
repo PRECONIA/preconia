@@ -216,10 +216,18 @@ export function hasBrandVariant(baseCode: string, brand: string | null, map: Bra
   return !!brand && !!map.get(baseCode)?.[brand];
 }
 
+/** Le dispositif est-il subdivisé par classe A/B/C dans les codes de remboursement ? Seuls
+ *  le FRE, le FREP et le scooter (SCO) ont des codes par classe. Le FREV (verticalisateur
+ *  électrique) a un code unique — l'arrêté §2 évoque des classes d'usage mais le §3 ne crée
+ *  pas de code FREV-A/B/C (confirmé dans la base LPPTOT) : pas de choix de classe. */
+export function deviceHasClasses(device: Device): boolean {
+  return device.code === "FRE" || device.code === "FREP" || device.code === "SCO";
+}
+
 /** Jeton de type LPP du fauteuil (FRM, FRE-C, FREP-A…). Pour l'électrique (FRE/FREP) et le
  *  scooter, il dépend de la classe. Retourne null si la classe manque alors qu'elle est requise. */
 export function deviceLppToken(device: Device, classe: ClasseValue | null): string | null {
-  if (device.code === "FRE" || device.code === "FREP" || device.code === "SCO") {
+  if (deviceHasClasses(device)) {
     if (!classe) return null;
     return `${device.code}-${classe}`;
   }

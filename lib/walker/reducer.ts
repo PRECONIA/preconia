@@ -60,6 +60,9 @@ export function walkerReducer(state: WalkerState, action: Action): WalkerState {
       const answers: Answers = {
         ...state.answers,
         device: action.code,
+        // changer de dispositif remet la classe à zéro (elle ne vaut que pour FRE/FREP/SCO,
+        // et évite qu'une classe choisie pour un FRE ne reste collée à un FREV).
+        classe: null,
         vehicleBrand: null,
         vehicleModel: null,
         ...(action.mob ? { mob: action.mob } : {}),

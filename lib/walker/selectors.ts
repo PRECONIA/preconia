@@ -1,6 +1,7 @@
 import { adjonctions, classes, deviceByCode, papForfaits, papRegions } from "../data";
 import {
   classeRoute,
+  deviceHasClasses,
   computeSubtotal,
   deriveForfaits,
   filterAdjonctions,
@@ -46,7 +47,9 @@ export function selectCosts(state: WalkerState): Costs {
 
 export function selectRoute(state: WalkerState): boolean {
   const device = selectDevice(state);
-  if (!device || !device.electric) return false;
+  // seuls les dispositifs à classes (FRE/FREP/SCO) portent la notion de code de la route ;
+  // le FREV (électrique sans classe) n'est pas concerné.
+  if (!device || !deviceHasClasses(device)) return false;
   return classeRoute(state.answers.classe, classes);
 }
 

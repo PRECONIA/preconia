@@ -47,6 +47,8 @@ import {
   needsBesoins,
   selectedAdjonctions,
   toggleAdjonction,
+  deviceHasClasses,
+  deviceLppToken,
 } from "@/lib/rules";
 
 describe("filterAdjonctions (INV. 3)", () => {
@@ -694,5 +696,18 @@ describe("prescriptionExtras (spécificités par modalité)", () => {
       envLevel: "besoins",
     });
     expect(prescriptionExtras(deviceByCode.FRMP, "LLD").dap).toBe(true);
+  });
+});
+
+describe("deviceHasClasses (classes A/B/C dans les codes de remboursement)", () => {
+  it("FRE, FREP, SCO ont des classes ; FREV et les autres non", () => {
+    for (const c of ["FRE", "FREP", "SCO"]) expect(deviceHasClasses(deviceByCode[c]), c).toBe(true);
+    for (const c of ["FREV", "FRM", "FRMV", "FMP", "POU_MRE", "CYC", "BASE"])
+      expect(deviceHasClasses(deviceByCode[c]), c).toBe(false);
+  });
+  it("FREV : jeton LPP unique sans classe (code FREV, pas FREV-A/B/C)", () => {
+    expect(deviceLppToken(deviceByCode.FREV, null)).toBe("FREV");
+    expect(deviceLppToken(deviceByCode.FREV, "B")).toBe("FREV"); // la classe est ignorée
+    expect(deviceLppToken(deviceByCode.FREP, null)).toBeNull(); // FREP requiert la classe
   });
 });

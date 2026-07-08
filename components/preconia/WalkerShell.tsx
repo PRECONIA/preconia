@@ -35,6 +35,7 @@ import {
   brandsForBases,
   computeSubtotal,
   deviceAllowedForDuree,
+  deviceHasClasses,
   deviceBrandsForToken,
   deviceLpp,
   deviceModelGeneric,
@@ -413,7 +414,7 @@ export function WalkerShell() {
     const profile: { k: string; v: string }[] = facets(answers)
       .filter((f) => f.v)
       .map((f) => ({ k: f.k, v: f.v as string }));
-    if ((dev.electric || dev.code === "SCO") && answers.classe)
+    if (deviceHasClasses(dev) && answers.classe)
       profile.push({
         k: "Classe",
         v:
@@ -996,7 +997,7 @@ export function WalkerShell() {
               title="Besoins & environnement"
               hint="D'après la fiche d'évaluation des besoins 2026."
             >
-              {(device.electric || device.code === "SCO") && (
+              {deviceHasClasses(device) && (
                 <div className="mb-4">
                   <div className="mb-2 text-sm font-semibold">
                     {device.code === "SCO"
@@ -1527,7 +1528,7 @@ export function WalkerShell() {
                     {answers.vehicleBrand}
                   </span>
                 )}
-                {(device.electric || device.code === "SCO") && answers.classe && (
+                {deviceHasClasses(device) && answers.classe && (
                   <span className="rounded-full bg-orange-100 px-3 py-1 text-xs font-semibold text-orange-700">
                     {(device.code === "SCO" ? classesSco : classes).find(
                       (c) => c.value === answers.classe,
