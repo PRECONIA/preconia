@@ -118,7 +118,10 @@ export function RechercheVph() {
         <h2 className="text-base font-semibold text-white">
           Recherche de VPH par fabricant et catégorie
         </h2>
-        <span className="text-[11px] font-semibold text-petrol-tint">
+        <span className="flex items-center gap-2 text-[11px] font-semibold text-petrol-tint">
+          <span className="rounded-full bg-white/15 px-2 py-0.5 text-white">
+            {ALL_CARDS.length.toLocaleString("fr-FR")} modèles VPH indexés
+          </span>
           Catalogue CERAH à jour le {frDate(deviceModelsMeta.lastUpdated)}
         </span>
       </div>
