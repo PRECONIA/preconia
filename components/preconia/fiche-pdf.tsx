@@ -148,7 +148,9 @@ function eur(n: number): string {
 
 const s = StyleSheet.create({
   page: {
-    paddingTop: 38,
+    /* l'en-tête est un bandeau fixe pleine largeur (position absolue) : le padding haut
+       de page réserve sa hauteur sur chaque page. */
+    paddingTop: 100,
     paddingBottom: 76,
     paddingHorizontal: 40,
     fontFamily: "Hanken Grotesk",
@@ -156,30 +158,42 @@ const s = StyleSheet.create({
     color: C.ink,
     lineHeight: 1.45,
   },
-  /* en-tête */
+  /* en-tête : bandeau vert pleine largeur, texte blanc, logo sur tuile blanche */
   header: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "flex-end",
-    borderBottomWidth: 2,
-    borderBottomColor: C.petrol,
-    paddingBottom: 8,
+    alignItems: "center",
+    backgroundColor: C.petrol,
+    borderBottomWidth: 3,
+    borderBottomColor: C.petrolDeep,
+    paddingVertical: 13,
+    paddingHorizontal: 40,
   },
   headerLeft: { flexDirection: "row", alignItems: "center", gap: 11 },
-  logo: { width: 44, height: 44, borderRadius: 10 },
-  wordmark: { fontSize: 22, fontWeight: 700, letterSpacing: -0.4, lineHeight: 1, color: C.ink },
-  wordmarkAccent: { color: C.petrol },
+  /* tuile blanche façon icône d'application : le logo s'y démarque du bandeau vert */
+  logoTile: {
+    backgroundColor: C.white,
+    borderRadius: 10,
+    padding: 4,
+  },
+  logo: { width: 40, height: 40, borderRadius: 8 },
+  wordmark: { fontSize: 22, fontWeight: 700, letterSpacing: -0.4, lineHeight: 1, color: C.white },
+  wordmarkAccent: { color: "#8fd6cf" },
   eyebrow: {
     fontSize: 7,
     fontWeight: 700,
     letterSpacing: 1.1,
     textTransform: "uppercase",
-    color: C.petrol,
+    color: "#cde9e6",
     marginTop: 5,
   },
   headerRight: { textAlign: "right" },
-  headerTitle: { fontSize: 10, fontWeight: 600, color: C.petrolDeep },
-  headerMeta: { fontSize: 8, color: C.inkSoft, marginTop: 2 },
+  headerTitle: { fontSize: 10, fontWeight: 600, color: C.white },
+  headerMeta: { fontSize: 8, color: "#cde9e6", marginTop: 2 },
   /* sections */
   section: { marginTop: 16 },
   sectionTitle: {
@@ -434,8 +448,10 @@ function FicheDocument({ d }: { d: FicheData }) {
         {/* en-tête */}
         <View style={s.header} fixed>
           <View style={s.headerLeft}>
-            {/* eslint-disable-next-line jsx-a11y/alt-text */}
-            <Image src="/icon-512.png" style={s.logo} />
+            <View style={s.logoTile}>
+              {/* eslint-disable-next-line jsx-a11y/alt-text */}
+              <Image src="/icon-512.png" style={s.logo} />
+            </View>
             <View>
               <Text style={s.wordmark}>
                 PRECON<Text style={s.wordmarkAccent}>IA</Text>
