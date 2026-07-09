@@ -18,10 +18,10 @@ jobs:
     name: Typage, tests des règles, build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
       - run: npm ci
       - name: Typage TypeScript
@@ -35,10 +35,10 @@ jobs:
     name: Vérification base PRECONIA vs base officielle LPPTOT (CNAMTS)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
-          node-version: 20
+          node-version: 22
       # script autonome, sans dépendance : télécharge la base courante et confronte
       # chaque code LPP, tarif et libellé de data/*.json (sortie non nulle au moindre écart)
       - name: Vérificateur LPPTOT
