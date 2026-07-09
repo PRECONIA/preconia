@@ -1,6 +1,6 @@
 {
-  "source": "Nomenclature LPPR — base CNAM (menu 722), regroupement par ordre de page : code mère → variantes de marque — MAJ LPPTOT891 (2026-07-08) : 6 variantes de marque LOGO SILVER inscrites par la CNAM ajoutées.",
-  "lastUpdated": "2026-07-08",
+  "source": "Nomenclature LPPR — base CNAM (menu 722), regroupement par ordre de page : code mère → variantes de marque — MAJ LPPTOT892 (2026-07-09) : variante Forfait A LOGO SILVER (9989917) ajoutée.",
+  "lastUpdated": "2026-07-09",
   "groups": [
     {
       "base": "4947601",
@@ -68,7 +68,8 @@
         "SCHUCHMANN": "9989573",
         "SUNRISE MED": "9936542",
         "VERMEIREN": "9961008",
-        "WINNCARE FRANCE": "9917562"
+        "WINNCARE FRANCE": "9917562",
+        "LOGO SILVER": "9989917"
       }
     },
     {

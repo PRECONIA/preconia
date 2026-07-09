@@ -1,6 +1,6 @@
 {
-  "source": "Nomenclature LPPR — base CNAM (codage.ext.cnamts.fr), chapitre VPH achat neuf (7 sous-catégories)",
-  "lastUpdated": "2026-06-25",
+  "source": "Nomenclature LPPR — base CNAM (codage.ext.cnamts.fr), chapitre VPH achat neuf (7 sous-catégories) — MAJ LPPTOT892 (2026-07-09) : FRE-B ERGOFLIX (9502938) ajouté.",
+  "lastUpdated": "2026-07-09",
   "products": [
     {
       "code": "4507210",
@@ -470,6 +470,11 @@
     {
       "code": "9528576",
       "label": "VPH, ACHAT NEUF, FRE-B, MODULAIRE PAR MOTEUR ÉLECTRIQUE CLASSE B,ERGOCONCEPT",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9502938",
+      "label": "VPH, ACHAT NEUF, FRE-B, MODULAIRE PAR MOTEUR ÉLECTRIQUE CLASSE B,ERGOFLIX",
       "category": "VPH modulaires à propulsion électrique"
     },
     {
