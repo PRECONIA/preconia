@@ -59,6 +59,7 @@ import { ModuleCumul } from "@/components/preconia/ModuleCumul";
 import { RechercheVph } from "@/components/preconia/RechercheVph";
 import { SpecificitesPrescription } from "@/components/preconia/SpecificitesPrescription";
 import { AppuiTeteAnimation } from "@/components/preconia/AppuiTeteAnimation";
+import { ContactToast } from "@/components/preconia/ContactToast";
 import { Logo } from "@/components/preconia/Logo";
 import type { FicheData } from "@/components/preconia/fiche-pdf";
 import type { Adjonction, BesoinField, Device } from "@/lib/types";
@@ -2075,6 +2076,8 @@ export function WalkerShell() {
       </footer>
 
       {connSource && <InfoConnector source={connSource} />}
+
+      <ContactToast />
     </div>
   );
 }
