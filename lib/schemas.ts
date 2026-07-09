@@ -178,6 +178,19 @@ export const DeviceOptionSheetsFileSchema = z.object({
   byToken: z.record(z.string(), z.record(z.string(), z.record(z.string(), OptionSheetSchema))),
 });
 
+/* --- fiches-techniques.json (spécifications techniques minimales par catégorie de VPH,
+   arrêté du 06/02/2025 — tableau officiel rubrique → texte, affiché sur la fiche
+   récapitulative PDF). L'ordre des lignes suit le tableau de l'arrêté. --- */
+export const FicheTechniqueRowSchema = z.object({
+  k: z.string(),
+  v: z.string(),
+});
+export const FichesTechniquesFileSchema = z.object({
+  source: z.string(),
+  lastUpdated: z.string(),
+  byCode: z.record(z.string(), z.object({ rows: z.array(FicheTechniqueRowSchema) })),
+});
+
 /* --- device-indications.json (indications officielles de prise en charge par dispositif et par
    mode, INI-CERAH ; affichées en survol sur l'écran de choix du VPH). --- */
 export const DeviceIndicationsFileSchema = z.object({

@@ -1,7 +1,10 @@
-/* Document PDF de la fiche de préconisation (export vectoriel, rendu fidèle à la charte).
-   Importé dynamiquement (au clic) depuis WalkerShell : @react-pdf/renderer ne pèse donc
-   pas sur le chargement de la page. Reçoit un objet `FicheData` purement sérialisable —
-   aucune logique métier ici, seulement la mise en page. */
+/* Document PDF de la fiche récapitulative (export vectoriel, rendu fidèle à la charte).
+   Structure calquée sur la fiche de préconisation officielle (nomenclature-fauteuil-roulant.fr),
+   sans identité patient : profil du VPH en vignettes, caractéristiques techniques officielles
+   (arrêté du 06/02/2025), tableau PAP, tableau adjonctions (code générique + code constructeur),
+   synthèse de facturation. Importé dynamiquement (au clic) depuis WalkerShell :
+   @react-pdf/renderer ne pèse donc pas sur le chargement de la page. Reçoit un objet
+   `FicheData` purement sérialisable — aucune logique métier ici, seulement la mise en page. */
 
 import {
   Document,
@@ -42,6 +45,8 @@ const C = {
   petrol: "#0c6b66",
   petrolDeep: "#073f3c",
   petrolTint: "#e0efed",
+  petrolWash: "#f2f8f7",
+  zebra: "#f7fafa",
   amber: "#9c4a06",
   amberTint: "#f6eadc",
   orange400: "#fb923c",
@@ -88,8 +93,30 @@ export interface FicheData {
     name: string;
     indications: { mode: string; text: string }[];
   } | null;
-  forfaits: { code: string; label: string; price: number; definition: string[]; technique: string[] }[];
-  adjonctions: { code: string; name: string; price: string; open: boolean }[];
+  /** marque du fauteuil choisie (colonne « code constructeur » des tableaux). */
+  marque: string | null;
+  /** caractéristiques techniques officielles du VPH retenu (arrêté du 06/02/2025) :
+      lignes rubrique → texte du tableau des spécifications minimales. */
+  technique: { k: string; v: string }[];
+  forfaits: {
+    /** code facturé (variante constructeur si elle existe, sinon générique). */
+    code: string;
+    codeGenerique: string;
+    codeMarque: string | null;
+    label: string;
+    price: number;
+    definition: string[];
+    technique: string[];
+  }[];
+  adjonctions: {
+    /** code facturé (variante constructeur si elle existe, sinon générique). */
+    code: string;
+    codeGenerique: string;
+    codeMarque: string | null;
+    name: string;
+    price: string;
+    open: boolean;
+  }[];
   pap: { name: string; forfait: "A" | "B"; code: string; info: string }[];
   /** LCD : adjonctions et PAP documentés mais inclus au forfait hebdomadaire (§7) — noms seuls. */
   incluses: string[];
@@ -110,7 +137,13 @@ export interface FicheData {
 }
 
 function eur(n: number): string {
-  return n.toLocaleString("fr-FR", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " €";
+  // séparateur de milliers : espace normale — l'espace fine insécable (U+202F) produite par
+  // toLocaleString n'a pas de glyphe dans JetBrains Mono (carré barré dans le PDF).
+  return (
+    n
+      .toLocaleString("fr-FR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+      .replace(/[\u202f\u00a0]/g, " ") + " €"
+  );
 }
 
 const s = StyleSheet.create({
@@ -186,11 +219,31 @@ const s = StyleSheet.create({
     borderRadius: 20,
   },
   deviceName: { fontSize: 13, fontWeight: 600, marginBottom: 8 },
-  /* grille profil / méta */
+  /* grille méta du dispositif */
   grid: { flexDirection: "row", flexWrap: "wrap" },
   gridCell: { width: "50%", paddingVertical: 3, paddingRight: 10 },
   gridLabel: { fontSize: 7, fontWeight: 700, letterSpacing: 0.5, textTransform: "uppercase", color: C.inkSoft },
   gridValue: { fontSize: 9.5, marginTop: 1 },
+  /* profil du VPH : vignettes */
+  tiles: { flexDirection: "row", flexWrap: "wrap", gap: 5 },
+  tile: {
+    backgroundColor: C.petrolWash,
+    borderWidth: 1,
+    borderColor: C.lineSoft,
+    borderRadius: 6,
+    paddingVertical: 5,
+    paddingHorizontal: 8,
+    minWidth: "23%",
+    flexGrow: 1,
+  },
+  tileLabel: {
+    fontSize: 6.5,
+    fontWeight: 700,
+    letterSpacing: 0.6,
+    textTransform: "uppercase",
+    color: C.petrol,
+  },
+  tileValue: { fontSize: 9.5, fontWeight: 600, marginTop: 1.5, color: C.ink, lineHeight: 1.3 },
   /* drapeaux (DAP, code de la route…) */
   flag: {
     backgroundColor: C.amberTint,
@@ -228,7 +281,46 @@ const s = StyleSheet.create({
     marginRight: 6,
   },
   indicText: { flex: 1, fontSize: 9, lineHeight: 1.35, color: C.orange800 },
-  /* tableau codes LPP */
+  /* tableaux (caractéristiques techniques, PAP, adjonctions) */
+  table: { borderWidth: 1, borderColor: C.lineSoft, borderRadius: 4 },
+  thRow: { flexDirection: "row", backgroundColor: C.petrolDeep },
+  th: {
+    fontSize: 7,
+    fontWeight: 700,
+    letterSpacing: 0.5,
+    textTransform: "uppercase",
+    color: C.petrolTint,
+    paddingVertical: 4,
+    paddingHorizontal: 6,
+  },
+  tRow: { flexDirection: "row", borderTopWidth: 1, borderTopColor: C.lineSoft },
+  tRowAlt: { backgroundColor: C.zebra },
+  td: { fontSize: 8.5, paddingVertical: 5, paddingHorizontal: 6, lineHeight: 1.35 },
+  tdMono: { fontFamily: "JetBrains Mono", fontSize: 8 },
+  /* colonne rubrique du tableau des caractéristiques techniques */
+  specKey: {
+    width: 92,
+    fontSize: 8,
+    fontWeight: 700,
+    color: C.petrolDeep,
+    paddingVertical: 5,
+    paddingHorizontal: 6,
+    borderRightWidth: 1,
+    borderRightColor: C.lineSoft,
+  },
+  specVal: { flex: 1, fontSize: 8, paddingVertical: 5, paddingHorizontal: 6, lineHeight: 1.4, color: C.inkSoft },
+  /* ligne forfait PAP (sous le tableau PAP) */
+  forfaitRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    backgroundColor: C.petrolTint,
+    borderRadius: 5,
+    paddingVertical: 5,
+    paddingHorizontal: 8,
+    marginTop: 5,
+  },
+  /* synthèse codes LPP */
   row: {
     flexDirection: "row",
     alignItems: "center",
@@ -270,35 +362,7 @@ const s = StyleSheet.create({
     marginTop: 6,
   },
   indicative: { fontSize: 7.5, color: C.inkSoft, marginBottom: 5 },
-  /* PAP */
-  papItem: { borderBottomWidth: 1, borderBottomColor: C.lineSoft, paddingVertical: 5 },
-  papHead: { flexDirection: "row", alignItems: "center", marginBottom: 2 },
-  papName: { flex: 1, fontSize: 10, fontWeight: 600 },
-  papForfait: {
-    fontFamily: "JetBrains Mono",
-    fontSize: 7.5,
-    lineHeight: 1,
-    textAlign: "center",
-    color: C.petrolDeep,
-    backgroundColor: C.petrolTint,
-    paddingVertical: 3,
-    paddingHorizontal: 5,
-    borderRadius: 3,
-    marginLeft: 6,
-  },
   papInfo: { fontSize: 8.5, color: C.inkSoft },
-  /* livraison */
-  livBox: {
-    backgroundColor: C.blue50,
-    borderWidth: 1.2,
-    borderColor: C.blue400,
-    borderRadius: 7,
-    padding: 9,
-    marginTop: 8,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
   /* pied de page */
   footer: {
     position: "absolute",
@@ -320,8 +384,8 @@ function Section({
 }: {
   title: string;
   children: React.ReactNode;
-  /** true pour les sections longues (PAP) : elles peuvent s'étendre sur la page suivante
-      au lieu d'être renvoyées en bloc, ce qui évite une page 1 à moitié vide. */
+  /** true pour les sections longues (tableaux) : elles peuvent s'étendre sur la page suivante
+      au lieu d'être renvoyées en bloc, ce qui évite une page à moitié vide. */
   wrap?: boolean;
 }) {
   return (
@@ -332,7 +396,7 @@ function Section({
   );
 }
 
-/** Ligne du tableau « codes LPP & tarifs » (badge couleur paramétrable). */
+/** Ligne de la synthèse « codes LPP & tarifs » (badge couleur paramétrable). */
 function CodeRow({
   code,
   label,
@@ -358,12 +422,13 @@ function CodeRow({
 }
 
 function FicheDocument({ d }: { d: FicheData }) {
-  const hasCodes = d.vph || d.forfaits.length > 0 || d.adjonctions.length > 0;
+  const hasSynthese =
+    d.vph || d.forfaits.length > 0 || d.adjonctions.length > 0 || d.optionAchat || d.livraison || d.mad;
   return (
     <Document
-      title={`Préconisation ${d.device.code}`}
+      title={`Récapitulatif ${d.device.code}`}
       author="PRECONIA"
-      subject="Fiche de préconisation VPH"
+      subject="Fiche récapitulative VPH"
     >
       <Page size="A4" style={s.page}>
         {/* en-tête */}
@@ -379,7 +444,7 @@ function FicheDocument({ d }: { d: FicheData }) {
             </View>
           </View>
           <View style={s.headerRight}>
-            <Text style={s.headerTitle}>Fiche de préconisation</Text>
+            <Text style={s.headerTitle}>Fiche récapitulative</Text>
             <Text style={s.headerMeta}>Établie le {d.generatedAt}</Text>
           </View>
         </View>
@@ -406,8 +471,8 @@ function FicheDocument({ d }: { d: FicheData }) {
                 {d.device.dap ? "DAP requise" : "Non requise"}
               </Text>
             </View>
-            <View style={[s.gridCell, { width: "100%" }]}>
-              <Text style={s.gridLabel}>Évaluation des besoins &amp; fiche de préconisation</Text>
+            <View style={s.gridCell}>
+              <Text style={s.gridLabel}>Évaluation des besoins &amp; préconisation</Text>
               <Text style={s.gridValue}>{d.device.evaluation}</Text>
             </View>
           </View>
@@ -418,13 +483,13 @@ function FicheDocument({ d }: { d: FicheData }) {
           ))}
         </View>
 
-        {/* profil de prescription */}
-        <Section title="Profil de prescription">
-          <View style={s.grid}>
+        {/* profil du VPH — vignettes */}
+        <Section title="Profil du VPH">
+          <View style={s.tiles}>
             {d.profile.map((p) => (
-              <View key={p.k} style={s.gridCell}>
-                <Text style={s.gridLabel}>{p.k}</Text>
-                <Text style={s.gridValue}>{p.v}</Text>
+              <View key={p.k} style={s.tile}>
+                <Text style={s.tileLabel}>{p.k}</Text>
+                <Text style={s.tileValue}>{p.v}</Text>
               </View>
             ))}
           </View>
@@ -444,9 +509,128 @@ function FicheDocument({ d }: { d: FicheData }) {
           </Section>
         )}
 
-        {/* codes LPP & tarifs */}
-        {hasCodes && (
-          <Section title="Codes LPP &amp; tarifs">
+        {/* caractéristiques techniques officielles du VPH retenu */}
+        {d.technique.length > 0 && (
+          <Section
+            title={`Caractéristiques techniques du VPH (${d.device.code}) — spécifications minimales, arrêté du 6 février 2025`}
+            wrap
+          >
+            <View style={s.table}>
+              {d.technique.map((r, i) => (
+                <View key={r.k} style={[s.tRow, ...(i % 2 ? [s.tRowAlt] : []), ...(i === 0 ? [{ borderTopWidth: 0 }] : [])]} wrap={false}>
+                  <Text style={s.specKey}>{r.k}</Text>
+                  <Text style={s.specVal}>{r.v}</Text>
+                </View>
+              ))}
+            </View>
+          </Section>
+        )}
+
+        {/* produits d'assistance à la posture — tableau façon fiche officielle */}
+        {(d.pap.length > 0 || d.forfaits.length > 0) && (
+          <Section title="Produits d'assistance à la posture (PAP) sélectionnés" wrap>
+            {d.pap.length > 0 && (
+              <View style={s.table}>
+                <View style={s.thRow}>
+                  <Text style={[s.th, { flex: 1 }]}>Produit d&apos;assistance à la posture</Text>
+                  <Text style={[s.th, { width: 44, textAlign: "center" }]}>Forfait</Text>
+                  <Text style={[s.th, { width: 64, textAlign: "center" }]}>Code LPP</Text>
+                </View>
+                {d.pap.map((p, i) => (
+                  <View key={p.name} style={[s.tRow, ...(i % 2 ? [s.tRowAlt] : [])]} wrap={false}>
+                    <View style={{ flex: 1, paddingVertical: 5, paddingHorizontal: 6 }}>
+                      <Text style={{ fontSize: 8.5, fontWeight: 600 }}>{p.name}</Text>
+                      {p.info ? (
+                        <Text style={{ fontSize: 7.5, color: C.inkSoft, marginTop: 1, lineHeight: 1.35 }}>
+                          {p.info}
+                        </Text>
+                      ) : null}
+                    </View>
+                    <Text style={[s.td, s.tdMono, { width: 44, textAlign: "center" }]}>{p.forfait}</Text>
+                    <Text style={[s.td, s.tdMono, { width: 64, textAlign: "center" }]}>{p.code}</Text>
+                  </View>
+                ))}
+              </View>
+            )}
+            {d.forfaits.map((f) => (
+              <View key={f.code} style={s.forfaitRow} wrap={false}>
+                <View style={{ flex: 1, paddingRight: 8 }}>
+                  <Text style={{ fontSize: 8.5, fontWeight: 700, color: C.petrolDeep }}>{f.label}</Text>
+                  <Text style={{ fontFamily: "JetBrains Mono", fontSize: 7.5, color: C.petrolDeep, marginTop: 1.5 }}>
+                    Code générique {f.codeGenerique}
+                    {f.codeMarque ? `  ·  code constructeur${d.marque ? ` (${d.marque})` : ""} ${f.codeMarque}` : ""}
+                  </Text>
+                </View>
+                <Text style={{ fontFamily: "JetBrains Mono", fontSize: 9.5, fontWeight: 600, color: C.petrolDeep }}>
+                  {eur(f.price)}
+                </Text>
+              </View>
+            ))}
+            {d.forfaits.map((f) =>
+              f.definition.length > 0 || f.technique.length > 0 ? (
+                <View key={`info-${f.code}`} style={{ marginTop: 8 }} wrap={false}>
+                  <Text style={{ fontSize: 9, fontWeight: 600, color: C.petrolDeep, marginBottom: 2 }}>
+                    {f.label}
+                  </Text>
+                  {f.definition.map((line, i) => (
+                    <Text key={`d${i}`} style={s.papInfo}>
+                      • {line}
+                    </Text>
+                  ))}
+                  {f.technique.map((line, i) => (
+                    <Text key={`t${i}`} style={s.papInfo}>
+                      • {line}
+                    </Text>
+                  ))}
+                </View>
+              ) : null,
+            )}
+          </Section>
+        )}
+
+        {/* adjonctions — code générique ET code constructeur */}
+        {d.adjonctions.length > 0 && (
+          <Section title="Adjonctions sélectionnées" wrap>
+            <View style={s.table}>
+              <View style={s.thRow}>
+                <Text style={[s.th, { flex: 1 }]}>Adjonction</Text>
+                <Text style={[s.th, { width: 66, textAlign: "center" }]}>Code générique</Text>
+                <Text style={[s.th, { width: 78, textAlign: "center" }]}>
+                  Code constructeur{d.marque ? ` — ${d.marque}` : ""}
+                </Text>
+                <Text style={[s.th, { width: 58, textAlign: "right" }]}>Tarif</Text>
+              </View>
+              {d.adjonctions.map((a, i) => (
+                <View key={a.codeGenerique} style={[s.tRow, ...(i % 2 ? [s.tRowAlt] : [])]} wrap={false}>
+                  <Text style={[s.td, { flex: 1, fontWeight: 600 }]}>{a.name}</Text>
+                  <Text style={[s.td, s.tdMono, { width: 66, textAlign: "center" }]}>{a.codeGenerique}</Text>
+                  <Text style={[s.td, s.tdMono, { width: 78, textAlign: "center", color: a.codeMarque ? C.ink : C.inkSoft }]}>
+                    {a.codeMarque ?? "—"}
+                  </Text>
+                  <Text style={[s.td, s.tdMono, { width: 58, textAlign: "right", color: a.open ? C.amber : C.ink }]}>
+                    {a.price}
+                  </Text>
+                </View>
+              ))}
+            </View>
+            <Text style={{ fontSize: 7, color: C.inkSoft, marginTop: 3 }}>
+              Le code facturé est le code constructeur lorsqu&apos;il existe pour la marque retenue,
+              sinon le code de la ligne générique.
+            </Text>
+            {d.adjonctions.some((a) => a.open) && (
+              <Text style={{ fontSize: 7.5, color: C.amber, marginTop: 4 }}>
+                Adjonction « sur devis » : demande d&apos;accord préalable au service médical,
+                mention manuscrite obligatoire du prescripteur sur l&apos;ordonnance, essai en
+                conditions réelles (7 jours, 48 h minimum) et confirmation écrite du patient
+                (arrêté du 06/02/2025, §7).
+              </Text>
+            )}
+          </Section>
+        )}
+
+        {/* synthèse de facturation */}
+        {hasSynthese && (
+          <Section title="Synthèse — codes LPP &amp; tarifs" wrap>
             <Text style={s.indicative}>Tarifs de responsabilité LPPR, affichés à titre indicatif.</Text>
             {d.vph && (
               <CodeRow
@@ -515,7 +699,7 @@ function FicheDocument({ d }: { d: FicheData }) {
             {(d.adjonctions.length > 0 || d.forfaits.length > 0) && (
               <View style={s.subtotalRow}>
                 <Text style={{ fontWeight: 600, color: C.petrolDeep }}>
-                  Sous-total{d.totals.hasOpen ? " (hors devis / à préciser)" : ""}
+                  Sous-total adjonctions &amp; PAP{d.totals.hasOpen ? " (hors devis / à préciser)" : ""}
                 </Text>
                 <Text style={{ fontFamily: "JetBrains Mono", fontWeight: 600, color: C.petrolDeep }}>
                   {eur(d.totals.subtotal)}
@@ -533,14 +717,6 @@ function FicheDocument({ d }: { d: FicheData }) {
                   {eur(d.totals.total)}
                 </Text>
               </View>
-            )}
-            {d.adjonctions.some((a) => a.open) && (
-              <Text style={{ fontSize: 7.5, color: C.amber, marginTop: 5 }}>
-                Adjonction « sur devis » : demande d&apos;accord préalable au service médical,
-                mention manuscrite obligatoire du prescripteur sur l&apos;ordonnance, essai en
-                conditions réelles (7 jours, 48 h minimum) et confirmation écrite du patient
-                (arrêté du 06/02/2025, §7).
-              </Text>
             )}
           </Section>
         )}
@@ -579,42 +755,6 @@ function FicheDocument({ d }: { d: FicheData }) {
                 [ ] {n}
               </Text>
             ))}
-          </Section>
-        )}
-
-        {/* positionnement (PAP) retenu + descriptions */}
-        {d.pap.length > 0 && (
-          <Section title="Positionnement (PAP) retenu" wrap>
-            {d.pap.map((p) => (
-              <View key={p.name} style={s.papItem} wrap={false}>
-                <View style={s.papHead}>
-                  <Text style={s.papName}>{p.name}</Text>
-                  <Text style={s.papForfait}>
-                    {p.code} · Forfait {p.forfait}
-                  </Text>
-                </View>
-                {p.info ? <Text style={s.papInfo}>{p.info}</Text> : null}
-              </View>
-            ))}
-            {d.forfaits.map((f) =>
-              f.definition.length > 0 || f.technique.length > 0 ? (
-                <View key={f.code} style={{ marginTop: 8 }} wrap={false}>
-                  <Text style={{ fontSize: 9, fontWeight: 600, color: C.petrolDeep, marginBottom: 2 }}>
-                    {f.label}
-                  </Text>
-                  {f.definition.map((line, i) => (
-                    <Text key={`d${i}`} style={s.papInfo}>
-                      • {line}
-                    </Text>
-                  ))}
-                  {f.technique.map((line, i) => (
-                    <Text key={`t${i}`} style={s.papInfo}>
-                      • {line}
-                    </Text>
-                  ))}
-                </View>
-              ) : null,
-            )}
           </Section>
         )}
 

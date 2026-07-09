@@ -18,6 +18,7 @@ import {
   deviceIndicationsByCode,
   deviceLppByType,
   devices,
+  ficheTechniqueByCode,
   lcdForfaits,
   lldForfaits,
   madLcd,
@@ -406,7 +407,7 @@ export function WalkerShell() {
   // Survol de l'adjonction « Supplément appui-tête réglable » → animation à droite du walker.
   const [showAppuiTete, setShowAppuiTete] = useState(false);
 
-  // ---- Export PDF de la fiche de préconisation ----
+  // ---- Export PDF de la fiche récapitulative ----
   // Construit un objet purement sérialisable depuis l'état courant (aucune logique dans le PDF).
   const buildFicheData = (): FicheData => {
     const dev = device!;
@@ -490,22 +491,35 @@ export function WalkerShell() {
           : null;
 
     // En LCD : adjonctions/PAP inclus au forfait hebdomadaire, aucune ligne facturable.
+    // Chaque ligne porte le code générique (ligne mère de la nomenclature) ET, si la marque
+    // choisie a une variante inscrite, son code constructeur (le code facturé).
     const forfaitsData = billAdj
-      ? forfaits.map((f) => ({
-          code: adaptedCode(papForfaits[f].code, brand, adjBrandMap),
-          label: papForfaits[f].label,
-          price: papForfaits[f].price,
-          definition: papForfaits[f].definition,
-          technique: papForfaits[f].technique,
-        }))
+      ? forfaits.map((f) => {
+          const gen = papForfaits[f].code;
+          const hit = hasBrandVariant(gen, brand, adjBrandMap);
+          return {
+            code: hit ? adaptedCode(gen, brand, adjBrandMap) : gen,
+            codeGenerique: gen,
+            codeMarque: hit ? adaptedCode(gen, brand, adjBrandMap) : null,
+            label: papForfaits[f].label,
+            price: papForfaits[f].price,
+            definition: papForfaits[f].definition,
+            technique: papForfaits[f].technique,
+          };
+        })
       : [];
 
-    const adjData = (billAdj ? selectedAdjBill : []).map((a) => ({
-      code: adaptedCode(a.code, brand, adjBrandMap),
-      name: a.name,
-      price: priceLabel(a),
-      open: !!(a.devis || a.tbd),
-    }));
+    const adjData = (billAdj ? selectedAdjBill : []).map((a) => {
+      const hit = hasBrandVariant(a.code, brand, adjBrandMap);
+      return {
+        code: hit ? adaptedCode(a.code, brand, adjBrandMap) : a.code,
+        codeGenerique: a.code,
+        codeMarque: hit ? adaptedCode(a.code, brand, adjBrandMap) : null,
+        name: a.name,
+        price: priceLabel(a),
+        open: !!(a.devis || a.tbd),
+      };
+    });
 
     const papData = billAdj
       ? papRegions.flatMap((r) =>
@@ -562,6 +576,8 @@ export function WalkerShell() {
       profile,
       flags,
       vph,
+      marque: brand,
+      technique: ficheTechniqueByCode[dev.code]?.rows ?? [],
       forfaits: forfaitsData,
       adjonctions: adjData,
       pap: papData,
@@ -595,7 +611,7 @@ export function WalkerShell() {
     // Onglet ouvert dans le geste de clic (sinon bloqué comme pop-up après l'await).
     const win = window.open("", "_blank");
     if (win) {
-      win.document.title = `Préconisation ${device.code}`;
+      win.document.title = `Récapitulatif ${device.code}`;
       win.document.body.style.cssText = "margin:0;font-family:sans-serif;color:#4c5c68";
       win.document.body.innerHTML =
         '<p style="padding:24px">Génération de la fiche PDF…</p>';
@@ -1984,7 +2000,7 @@ export function WalkerShell() {
                   onClick={exportPdf}
                   disabled={pdfBusy}
                 >
-                  {pdfBusy ? "Génération…" : "Aperçu PDF ↗"}
+                  {pdfBusy ? "Génération…" : "Fiche récapitulative (PDF) ↗"}
                 </button>
               </div>
             </>

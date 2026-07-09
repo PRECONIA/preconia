@@ -16,6 +16,7 @@ import prestationsRaw from "@/data/lppr-prestations.json";
 import madForfaitsRaw from "@/data/mad-forfaits.json";
 import locationForfaitsRaw from "@/data/location-forfaits.json";
 import metaRaw from "@/data/meta.json";
+import fichesTechRaw from "@/data/fiches-techniques.json";
 
 import {
   DevicesFileSchema,
@@ -29,6 +30,7 @@ import {
   DeviceModelsFileSchema,
   DeviceOptionSheetsFileSchema,
   DeviceIndicationsFileSchema,
+  FichesTechniquesFileSchema,
   CumulFileSchema,
   PrestationsFileSchema,
   MadForfaitsFileSchema,
@@ -118,6 +120,16 @@ export const deviceOptionSheetsMeta = {
   source: deviceOptionSheetsFile.source,
   lastUpdated: deviceOptionSheetsFile.lastUpdated,
 };
+
+const fichesTechFile = FichesTechniquesFileSchema.parse(fichesTechRaw);
+/** spécifications techniques minimales (arrêté 06/02/2025) : code dispositif → lignes {k, v}
+    du tableau officiel — affichées sur la fiche récapitulative PDF. */
+export const ficheTechniqueByCode: Record<string, { rows: { k: string; v: string }[] }> =
+  fichesTechFile.byCode;
+// cohérence : chaque dispositif du walker doit avoir sa fiche technique (et réciproquement).
+for (const d of devices)
+  if (!fichesTechFile.byCode[d.code])
+    throw new Error(`fiches-techniques.json : fiche manquante pour ${d.code}`);
 
 const deviceIndicationsFile = DeviceIndicationsFileSchema.parse(deviceIndicationsRaw);
 /** indications officielles de prise en charge : code → { mode → texte } (survol écran VPH). */

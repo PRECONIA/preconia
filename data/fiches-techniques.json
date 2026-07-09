@@ -1,0 +1,702 @@
+{
+  "source": "Arrêté du 6 février 2025 (JORF n°0037, texte 15), spécifications techniques minimales par catégorie de VPH — transcription depuis le document de travail « VPH .docx » (Dr Bredel, 26/06/2026), extraction automatique du 2026-07-09 ; seules corrections : artefacts typographiques de copie (césures, mots collés).",
+  "lastUpdated": "2026-07-09",
+  "byCode": {
+    "FMP": {
+      "rows": [
+        {
+          "k": "Mode de propulsion",
+          "v": "Le fauteuil est équipé d’un dispositif de poussée pour l’accompagnant et, dans le cas d’une propulsion manuelle bilatérale, de mains courantes"
+        },
+        {
+          "k": "Châssis",
+          "v": "Le châssis est pliant et équipé d’un appui pour le pied de l’accompagnant lui permettant de basculer le fauteuil ou tout autre système permettant le franchissement d’obstacles"
+        },
+        {
+          "k": "Dossier",
+          "v": "Le dossier est inclinable ou non. Il est équipé d’une toile souple, rembourrée ou non et démontable"
+        },
+        {
+          "k": "Siège",
+          "v": "Le siège est équipé d’une toile souple, rembourrée ou non et démontable. Il peut être équipé d’un coussin fixé à la toile et amovible"
+        },
+        {
+          "k": "Repose-pieds",
+          "v": "L’ensemble repose-pieds comprend deux potences escamotables et/ou amovibles, deux palettes repose-pieds réglables en hauteur, relevables et équipées de cale-talonnières ou d’une sangle appui-mollets. Il peut être équipé de deux potences inclinables, escamotables et/ou amovibles, et d’appui-mollets réglables en hauteur et pivotants"
+        },
+        {
+          "k": "Accoudoir",
+          "v": "Les accoudoirs sont escamotables et/ou amovibles. Ils sont équipés d’appui-bras démontables et de protège-vêtements"
+        },
+        {
+          "k": "Système de soutien du corps",
+          "v": "Dans le cas d’une propulsion manuelle bilatérale, le système de soutien du corps est réglable en inclinaison par déplacement vertical de la position des roues motrices sur au moins 4 positions afin de stabiliser la position assise, d’incliner légèrement le dossier pour stabiliser le tronc et d’adapter la hauteur sol/siège aux besoins de la personne. Cette exigence ne concerne pas les fauteuils conçus pour transporter des personnes de plus de 150 kg"
+        },
+        {
+          "k": "Roues",
+          "v": "Les roues motrices et directrices sont équipées soit de bandage soit de pneumatique (un seul type de valve). Dans le cas d’une propulsion manuelle bilatérale, les roues motrices sont à démontage rapide (sans outil)."
+        },
+        {
+          "k": "Systèmes d’immobilisation",
+          "v": "Ils agissent sur les roues d’un même essieu et sont réglables pour garantir leur efficacité"
+        },
+        {
+          "k": "Système de conduite",
+          "v": "Dans le cas d’une propulsion manuelle bilatérale, les mains courantes sont démontables et de section supérieure à 200 mm²."
+        }
+      ]
+    },
+    "FMPR": {
+      "rows": [
+        {
+          "k": "Mode de propulsion",
+          "v": "Le fauteuil est équipé d’un dispositif de poussée pour l’accompagnant. Le bon de commande doit proposer une propulsion manuelle bilatérale par mains courantes"
+        },
+        {
+          "k": "Châssis",
+          "v": "Le châssis est pliant ou non pliant et équipé d’un appui pour le pied de l’accompagnant lui permettant de basculer le fauteuil ou tout autre système permettant le franchissement d’obstacles"
+        },
+        {
+          "k": "Dossier",
+          "v": "Le dossier est inclinable et équipé d’une structure rigide (support rigide recouvert d’un coussin fixé au support et amovible). Il est amovible ou rabattable et équipé d’un appui-tête réglable en hauteur et amovible"
+        },
+        {
+          "k": "Siège",
+          "v": "Le siège est équipé d’une structure rigide (support rigide recouvert d’un coussin fixé au support et amovible)"
+        },
+        {
+          "k": "Repose-pieds",
+          "v": "L’ensemble comprend deux potences escamotables et/ou amovibles, inclinables, deux repose-jambes réglables en hauteur et pivotants, deux palettes repose-pieds réglables en hauteur et relevables et équipées de cale-talonnières ou d’une sangle appui mollets."
+        },
+        {
+          "k": "Accoudoir",
+          "v": "Les accoudoirs permettent le bon positionnement des membres supérieurs et contribuent au maintien du tronc. Ils sont escamotables et/ou amovibles. Ils sont équipés d’appui-bras démontables et de protège-vêtements"
+        },
+        {
+          "k": "Système de soutien du corps",
+          "v": "Le système de soutien du corps est inclinable par un système « mécanique assisté » (comme des vérins pneumatiques)."
+        },
+        {
+          "k": "Roues",
+          "v": "Les roues motrices et directrices sont équipées soit de bandage soit de pneumatique (un seul type de valve). Dans le cas d’une propulsion manuelle bilatérale, les roues motrices sont à démontage rapide (sans outil). Le diamètre des roues arrière doit être au minimum de 300 mm. Le diamètre des roues avant doit être au minimum de 150 mm."
+        },
+        {
+          "k": "Systèmes d’immobilisation",
+          "v": "Les systèmes d’immobilisation agissent sur les roues d'un même essieu et sont réglables pour garantir leur efficacité"
+        },
+        {
+          "k": "Système de conduite",
+          "v": "Dans le cas d’une propulsion manuelle bilatérale, les mains courantes sont démontables et de section supérieure à 200 mm²"
+        }
+      ]
+    },
+    "FRM": {
+      "rows": [
+        {
+          "k": "Mode de propulsion",
+          "v": "Propulsion uniquement par l’accompagnant, le fauteuil est équipé d’un dispositif de poussée adaptée ; - Ou propulsion manuelle bilatérale par main courante : le bon de commande propose plusieurs matériaux différents pour la main courante (par exemple aluminium, acier inoxydable, titane) ainsi que des revêtements antidérapants adaptés (par exemple grip, picots ou plots de propulsion) ; - Ou propulsion manuelle unilatérale par double main courante : le bon de commande peut proposer un choix de plusieurs matériaux différents pour la main courante (par exemple aluminium, acier inoxydable, titane) ainsi que des revêtements antidérapants adaptés (grip). Ce mode de propulsion remplit 3 fonctions : la propulsion, la direction et le freinage ; - Ou propulsion podale ; - Ou propulsion unilatérale par levier pendulaire"
+        },
+        {
+          "k": "Châssis",
+          "v": "Le châssis est pliant ou non pliant. Si le véhicule est destiné à des activités physiques et/ou de loisirs, le châssis doit être non pliant. Cette destination est clairement indiquée dans la documentation publicitaire et dans la notice d’utilisation. Le bon de commande doit proposer : - un appui pour le pied de l’accompagnant lui permettant de basculer le fauteuil ou tout autre système permettant le franchissement d’obstacles ; - un dispositif anti-basculement escamotable ou non dans le cas d’une stabilité arrière inférieure à 10°."
+        },
+        {
+          "k": "Dossier",
+          "v": "Le dossier est équipé, au minimum, d’une toile souple, rembourrée ou non et démontable."
+        },
+        {
+          "k": "Siège",
+          "v": "Le siège est équipé, au minimum, d’une toile souple, rembourrée ou non et démontable. Le bon de commande doit proposer : - au minimum 3 largeurs (indépendamment des largeurs entre accoudoirs) ; - au minimum 2 profondeurs. L’amplitude minimale entre les positions extrêmes est de 5 cm."
+        },
+        {
+          "k": "Repose-pieds",
+          "v": "L’ensemble repose-pied comprend au minimum : - soit deux potences escamotables et/ou amovibles équipées chacune d’une palette repose-pied réglable en hauteur et relevable et de cales talonnières ou d’une sangle appui-mollets ; - soit deux potences fixes équipées d’une ou deux palettes repose-pied réglables en hauteur et relevables (le caractère relevable n’est pas obligatoire dans le cas d’un châssis non pliant), de cale-talonnières ou d’une sangle appui-mollets ; - soit d’une potence centrale équipée d’une palette monobloc, réglable en hauteur et relevable et de cales talonnières ou d’une sangle appui-mollet"
+        },
+        {
+          "k": "Accoudoir",
+          "v": "Les accoudoirs sont, au minimum, escamotables et/ou amovibles. Ils sont équipés d’appui-bras démontables et de protège-vêtements."
+        },
+        {
+          "k": "Système de soutien du corps",
+          "v": "Dans le cas d’une propulsion manuelle bilatérale, le système de soutien du corps est réglable en inclinaison (indépendamment du choix des diamètres des roues avant et arrières) par déplacement vertical de la position des roues motrices sur au moins 4 positions, afin de stabiliser la position assise, d’incliner légèrement le dossier pour stabiliser le tronc et d’adapter la hauteur sol/siège aux besoins de la personne. Cette exigence ne concerne pas les fauteuils conçus pour transporter des personnes de plus de 150 kg."
+        },
+        {
+          "k": "Roues",
+          "v": "Les roues motrices et directrices sont équipées de bandage ou de pneumatique (un seul type de valve). Le diamètre des roues motrices doit être au minimum de 300 mm. Le diamètre des roues directrices doit être au minimum de 150 mm. Dans le cas d’une propulsion manuelle bilatérale, les roues motrices sont à démontage rapide (sans outil) et peuvent être fixes pour les fauteuils roulants bariatriques (>150 kg). Le bon de commande doit proposer plusieurs types de roues (exemple : bandage, pneumatique avec des rayons ou bâtons) ainsi que plusieurs diamètres de roues"
+        },
+        {
+          "k": "Systèmes d’immobilisation",
+          "v": "Les systèmes d’immobilisation agissent sur les roues d'un même essieu et sont réglables pour garantir leur efficacité"
+        },
+        {
+          "k": "Système de conduite",
+          "v": "Dans le cas d’une propulsion manuelle bilatérale, les mains courantes sont démontables"
+        }
+      ]
+    },
+    "FRMA": {
+      "rows": [
+        {
+          "k": "Mode de propulsion",
+          "v": "Propulsion manuelle bilatérale par main courante : le bon de commande propose plusieurs matériaux différents pour la main courante (par exemple aluminium, acier inoxydable, titane) ainsi que des revêtements antidérapants adaptés (par exemple grip, picots ou plots de propulsion)."
+        },
+        {
+          "k": "Châssis",
+          "v": "Le châssis est non pliant et à cadre rigide. Le fauteuil doit pouvoir être utilisé dans toutes les activités de la vie au quotidien et n’est pas destiné à des activités sportives. Le bon de commande doit proposer : différentes longueurs de châssis et/ou différents angles de potences ; un dispositif anti-basculement escamotable ou non dans le cas d’une stabilité arrière inférieure à 10°"
+        },
+        {
+          "k": "Dossier",
+          "v": "Le dossier est équipé, au minimum, d’une toile souple, rembourrée et démontable. Le bon de commande doit proposer : une toile réglable en tension ; un dossier réglable en hauteur sur au moins 4 positions ou disponible en plusieurs hauteurs (4 choix minimum). Le bon de commande doit proposer un dossier rabattable ou non. Quelle que soit la solution adoptée, l’amplitude minimale entre les positions extrêmes est de 10 cm."
+        },
+        {
+          "k": "Siège",
+          "v": "Le siège est équipé, au minimum, d’une toile souple, rembourrée ou non et démontable. Le bon de commande doit proposer : au minimum 6 largeurs (indépendamment des largeurs entre accoudoirs ; au minimum 4 profondeurs et/ou une toile réglable en profondeur et en continu : quelle que soit la solution technique adoptée, l’amplitude minimale entre les positions extrêmes est de 5 cm. une toile réglable en tension ; une plaque en option"
+        },
+        {
+          "k": "Repose-pieds",
+          "v": "L’ensemble repose-pied comprend au minimum : Soit deux potences fixes, équipées d’une ou deux palettes repose-pieds réglables en hauteur et de cales talonnières ou d’une sangle appui-mollets soit d’une potence centrale équipée d’une palette monobloc, réglable en hauteur et relevable et de cales talonnières ou d’une sangle appui mollet. Le bon de commande doit proposer : une palette monobloc ; en cas de 2 palettes séparées : possibilités d’un réglage en angle dans le plan sagittal et d’un réglage en profondeur ; plusieurs angles de potences et/ou différentes longueurs de châssis"
+        },
+        {
+          "k": "Accoudoir",
+          "v": "Le bon de commande doit proposer : des protège-vêtements rigides ; des protège-vêtements garde-boue rigides"
+        },
+        {
+          "k": "Roues",
+          "v": "Les roues motrices et directrices sont équipées soit de bandage soit de pneumatique (un seul type de valve). Dans le cas d’une propulsion manuelle bilatérale, les roues motrices sont à démontage rapide (sans outil). La position des roues motrices est adaptable aux besoins de la personne soit : par un réglage longitudinal (4 positions minimales) de la position des roues motrices et/ou du système de soutien du corps ; par différentes positions disponibles sur le bon de commande. Le carrossage est ajustable sur au moins 3 positions ou défini lors de la commande. Cette exigence ne concerne pas les fauteuils conçus pour transporter des personnes de plus de 150 kg. Le bon de commande doit proposer : plusieurs types et diamètres de roues (par exemple : bandage, pneumatique, rayon, bâton) ; des flasques de protection. En fonction de la compatibilité de la roue, le bon de commande doit proposer des flasques de protection adaptées."
+        },
+        {
+          "k": "Systèmes d’immobilisation",
+          "v": "Ils agissent sur les roues d’un même essieu et sont réglables pour garantir leur efficacité."
+        },
+        {
+          "k": "Système de conduite",
+          "v": "Dans le cas d’une propulsion manuelle bilatérale, les mains courantes sont fixées en 6 points minimum, démontables. L’éloignement de la main courante par rapport à la jante doit pouvoir être ajustable et/ou le bon de commande doit proposer plusieurs éloignements de la main courante."
+        },
+        {
+          "k": "Poids total maximal du VPH",
+          "v": "10 kg"
+        }
+      ]
+    },
+    "FRMS": {
+      "rows": [
+        {
+          "k": "Mode de propulsion",
+          "v": "La propulsion est manuelle bilatérale par main courante. Le bon de commande propose un choix de matériel de la main courante (aluminium, acier inoxydable, titane) ainsi que des revêtements antidérapants adaptés (grip)."
+        },
+        {
+          "k": "Châssis",
+          "v": "Le châssis est non pliant. Le bon de commande doit proposer : différentes longueurs de châssis et/ou différents angles de potences ; différentes hauteurs sol/siège à l’avant ; différentes hauteurs sol/siège à l’arrière ; un dispositif anti basculement escamotable ou non dans le cas d’une stabilité arrière inférieure à 10°."
+        },
+        {
+          "k": "Dossier",
+          "v": "Le dossier est équipé, au minimum, d’une toile souple, rembourrée ou non, démontable et d’un tendeur de dossier. Le bon de commande doit proposer : une toile réglable en tension ; un dossier réglable en hauteur sur au moins 4 positions ou disponible en plusieurs hauteurs (4 choix minimum) ou réglable en continue. Quelle que soit la solution adoptée, l’amplitude minimale entre les positions extrêmes est de 10 cm."
+        },
+        {
+          "k": "Siège",
+          "v": "Le siège est équipé, au minimum, d’une toile souple, rembourrée ou non et démontable. Le bon de commande doit proposer : au minimum 6 largeurs (indépendamment des largeurs entre accoudoirs) ; au minimum 4 profondeurs ; Quelle que soit la solution adoptée, l’amplitude minimale entre les positions extrêmes est de 5 cm une toile réglable en tension."
+        },
+        {
+          "k": "Repose-pieds",
+          "v": "L’ensemble repose-pieds est équipé de potences fixes, d’une palette monobloc réglable en hauteur et d’une sangle appui-mollets. Le bon de commande doit proposer : une palette monobloc réglable en angle dans le plan sagittal ; une palette monobloc réglable en profondeur ; plusieurs angles de potences et/ou différentes longueurs de châssis."
+        },
+        {
+          "k": "Accoudoir",
+          "v": "Dans le cadre d’une pratique sportive nécessitant leur utilisation, le bon de commande doit proposer : des protège-vêtements rigides ; des protège-vêtements garde-boue rigides"
+        },
+        {
+          "k": "Système de soutien du corps",
+          "v": "Le bon de commande doit proposer des systèmes de maintien de la personne (exemple : ceinture)."
+        },
+        {
+          "k": "Roues motrices",
+          "v": "Les roues motrices sont à démontage rapide (sans outil). La position des roues motrices est adaptable aux besoins de la personne soit : par un réglage longitudinal et vertical (4 positions minimales dans chaque direction) de la position des roues motrices et/ou du système de soutien du corps ; par différentes positions disponibles sur le bon de commande. Le carrossage est adapté au(x) sport(s) revendiqué(s) par le fabricant. Ceux-ci devant être clairement identifiés dans la documentation du VPH. Le bon de commande doit proposer : plusieurs types de roues (pneumatique 7 bars minimum, à rayons) ; plusieurs diamètres de roues ; dans le cadre d’une pratique sportive nécessitant leur utilisation : des flasques de protection"
+        },
+        {
+          "k": "Roues directrices",
+          "v": "Le bon de commande doit proposer plusieurs diamètres de roues"
+        },
+        {
+          "k": "Système de conduite",
+          "v": "Les mains courantes sont fixées en 6 points minimum, démontables. L’éloignement de la main courante par rapport à la jante doit pouvoir être ajustable. Le bon de commande doit proposer différents types de mains courantes."
+        }
+      ]
+    },
+    "FRMC": {
+      "rows": [
+        {
+          "k": "Mode de propulsion",
+          "v": "Propulsion manuelle bilatérale par main courante : le bon de commande propose plusieurs matériaux différents pour la main courante (par exemple aluminium, acier inoxydable, titane) ainsi que des revêtements antidérapants adaptés (par exemple grip, picots ou plots de propulsion). - Ou propulsion manuelle unilatérale par double main courante : le bon de commande peut proposer un choix de plusieurs matériaux différents pour la main courante (par exemple aluminium, acier inoxydable, titane) ainsi que des revêtements antidérapants adaptés (grip). Ce mode de propulsion remplit 3 fonctions : la propulsion, la direction et le freinage - Ou propulsion podale Quel que soit le mode de propulsion, le bon de commande doit proposer un dispositif de poussée pour l'accompagnant."
+        },
+        {
+          "k": "Châssis",
+          "v": "Le châssis est pliant ou non pliant. Le bon de commande doit proposer : - un appui pour le pied de l’accompagnant lui permettant de basculer le fauteuil ou tout autre système permettant le franchissement d’obstacles ; - différentes longueurs de châssis et/ou différents angles de potences ; - un dispositif anti-basculement escamotable ou non dans le cas d’une stabilité arrière inférieure à 10°."
+        },
+        {
+          "k": "Dossier",
+          "v": "Le dossier est équipé, au minimum, d’une toile souple, rembourrée ou non et démontable. Le bon de commande doit proposer : - une toile réglable en tension ; - un dossier réglable en hauteur sur au moins 4 positions ou disponible en plusieurs hauteurs (4 choix minimum) ou réglable en continu. Quelle que soit la solution adoptée, l’amplitude minimale entre les positions extrêmes est de 10 cm."
+        },
+        {
+          "k": "Siège",
+          "v": "Le siège est équipé, au minimum, d’une toile souple, rembourrée ou non et démontable. Le bon de commande doit proposer : - au minimum 6 largeurs (indépendamment des largeurs entre accoudoirs ; - au minimum 4 profondeurs et/ou une toile réglable en profondeur et en continu : quelle que soit la solution technique adoptée, l’amplitude minimale entre les positions extrêmes est de 5 cm. - une toile réglable en tension ; - pour les châssis non pliants : une plaque en option"
+        },
+        {
+          "k": "Repose-pieds",
+          "v": "L’ensemble repose-pied comprend au minimum : - soit deux potences escamotables et/ou amovibles équipées chacune d’une palette repose-pied réglable en hauteur et relevable et de cales talonnières ou d’une sangle appui-mollets ; - soit deux potences fixes équipées d’une ou deux palettes repose-pied réglables en hauteur et relevables (le caractère relevable n’est pas obligatoire dans le cas d’un châssis non pliant), de cale-talonnières ou d’une sangle appui-mollets ; - soit d’une potence centrale équipée d’une palette monobloc, réglable en hauteur et relevable et de cales talonnières ou d’une sangle appui mollet. Le bon de commande doit proposer : - une palette monobloc ; - en cas de 2 palettes séparées : possibilités d’un réglage en angle dans le plan sagittal et d’un réglage en profondeur ; - plusieurs angles de potences et/ou différentes longueurs de châssis."
+        },
+        {
+          "k": "Accoudoir",
+          "v": "Le bon de commande doit proposer : - des protège-vêtements rigides ; - des protège-vêtements garde-boue rigides ; - des accoudoirs escamotables et/ou amovibles."
+        },
+        {
+          "k": "Système de soutien du corps",
+          "v": "Dans le cas d’une propulsion manuelle bilatérale, le système de soutien du corps est réglable en inclinaison sur au moins 4 positions (indépendamment du choix des diamètres des roues avant et arrière) par exemple par déplacement de la position des roues motrices ou par tout autre système, afin de stabiliser la position assise, d’incliner légèrement le dossier pour stabiliser le tronc et d’adapter la hauteur sol/siège aux besoins de la personne. Cette exigence ne concerne pas les fauteuils conçus pour transporter des personnes de plus de 150 kg."
+        },
+        {
+          "k": "Roues",
+          "v": "Les roues motrices et directrices sont équipées soit de bandage soit de pneumatique (un seul type de valve). Dans le cas d’une propulsion manuelle bilatérale, les roues motrices sont à démontage rapide (sans outil). La position des roues motrices est adaptable aux besoins de la personne soit : - par un réglage longitudinal (4 positions minimales) de la position des roues motrices et/ou du système de soutien du corps ; - par différentes positions disponibles sur le bon de commande. Le carrossage est ajustable sur au moins 3 positions ou défini lors de la commande. Cette exigence ne concerne pas les fauteuils conçus pour transporter des personnes de plus de 150 kg. Le bon de commande doit proposer : - plusieurs types et diamètres de roues (par exemple : bandage, pneumatique, rayon, bâton) ; - des flasques de protection."
+        },
+        {
+          "k": "Systèmes d’immobilisation",
+          "v": "Ils agissent sur les roues d’un même essieu et sont réglables pour garantir leur efficacité."
+        },
+        {
+          "k": "Système de conduite",
+          "v": "Dans le cas d’une propulsion manuelle bilatérale, les mains courantes sont fixées en 6 points minimum, démontables. L’éloignement de la main courante par rapport à la jante doit pouvoir être ajustable et/ou le bon de commande doit proposer plusieurs éloignements de la main courante."
+        }
+      ]
+    },
+    "FRMP": {
+      "rows": [
+        {
+          "k": "Mode de propulsion",
+          "v": "Propulsion uniquement par l’accompagnant, le fauteuil est équipé d’un dispositif de poussée adaptée. - Ou propulsion manuelle bilatérale par main courante : le bon de commande propose plusieurs matériaux différents pour la main courante (par exemple aluminium, acier inoxydable, titane) ainsi que des revêtements antidérapants adaptés (par exemple grip, picots ou plots de propulsion). - Ou propulsion manuelle unilatérale par double main courante : le bon de commande peut proposer un choix de plusieurs matériaux différents pour la main courante (par exemple aluminium, acier inoxydable, titane) ainsi que des revêtements antidérapants adaptés (grip). Le mode de propulsion remplit 3 fonctions : la propulsion, la direction et le freinage. - Ou propulsion unilatérale par levier pendulaire"
+        },
+        {
+          "k": "Châssis",
+          "v": "Le châssis est pliant ou non pliant. Le bon de commande doit proposer : - un appui pour le pied de l’accompagnant lui permettant de basculer le fauteuil ou tout autre système permettant le franchissement d’obstacles ; - un dispositif anti-basculement escamotable ou non dans le cas d’une stabilité arrière inférieure à 10°"
+        },
+        {
+          "k": "Dossier",
+          "v": "Le dossier est équipé, au minimum, d’une toile souple, démontable, réglable en tension et pourvue d’un coussin amovible. Le FRMP peut être constitué d’un dossier à structure rigide sur lequel est fixé un coussin amovible. Le bon de commande doit proposer : - différents types de coussins (matière et forme) ; - un tendeur de dossier pour les structures non rigides ; - un dossier réglable en hauteur sur au moins 4 positions ou disponible en plusieurs hauteurs (4 choix minimum) ou réglable en continu. Quelle que soit la solution technique adoptée, l’amplitude minimale entre les positions extrêmes est de 10 cm ; - un dossier rabattable et/ou amovible ; - un dossier inclinable par un système \"mécanique assisté » (vérin pneumatique) ; - des supports latéraux du tronc, amovibles, escamotables, réglables en hauteur et en profondeur, orientables (rotation dans l’axe vertical) ; - un appui tête enveloppant, réglable en hauteur, en profondeur, en largeur et pivotant"
+        },
+        {
+          "k": "Siège",
+          "v": "Le siège est équipé d’une structure rigide (support rigide sur lequel est fixé un coussin amovible). Le bon de commande doit proposer : - au minimum 3 largeurs (indépendamment des largeurs entre accoudoirs) ; - différents types de coussins (matière et forme) ; - un siège réglable en profondeur sur au moins 4 positions ou disponible en plusieurs profondeurs (4 choix minimum) ou réglable en continu. Quelle que soit la solution technique adoptée, l’amplitude minimale entre les positions extrêmes est de 5 cm."
+        },
+        {
+          "k": "Repose-pieds",
+          "v": "L’ensemble repose-pieds comprend au minimum : - soit deux potences escamotables et/ou amovibles équipées chacune d’une palette repose-pied réglable en hauteur et relevable et de cales talonnières ou d’une sangle appui-mollets ; - soit deux potences fixes équipées d’une ou deux palettes repose-pied réglables en hauteur et relevables (le caractère relevable n’est pas obligatoire dans le cas d’un châssis non pliant), de cale-talonnières ou d’une sangle appui-mollets ; - soit une potence centrale équipée d’une palette monobloc, réglable en hauteur et relevable et de cales talonnières ou d’une sangle appui mollet ou de coussins appuis-mollets. Le bon de commande doit proposer : - des palettes repose-pieds réglables en angle dans le plan sagittal ; - des potences inclinables ; - un réglage de la position de l’axe d’inclinaison de la potence au minimum dans le plan frontal ; - des appuis-mollets réglables en hauteur, en profondeur et pivotants"
+        },
+        {
+          "k": "Accoudoir",
+          "v": "Les accoudoirs sont, au minimum, escamotables et/ou amovibles. Ils sont équipés d’appui-bras démontables et de protège-vêtements. Le bon de commande doit proposer : - des accoudoirs de différentes formes (crantés, inclinés) ou de différentes longueurs (courts ou longs) ; - des accoudoirs réglables en largeur ; - des accoudoirs ou manchettes réglables en profondeur ; - des accoudoirs ou manchettes réglables en hauteur"
+        },
+        {
+          "k": "Système de soutien du corps",
+          "v": "Le système de soutien du corps est inclinable par un système (ou dispositif) « assisté » (comme des vérins pneumatiques ou électriques). Le bon de commande doit proposer : un ou plusieurs systèmes de maintien (exemple : ceinture)"
+        },
+        {
+          "k": "Roues",
+          "v": "Les roues motrices et directrices sont équipées soit de bandage soit de pneumatique (un seul type de valve). Dans le cas d’une propulsion manuelle bilatérale, les roues motrices sont à démontage rapide (sans outil) et peuvent être fixes pour les châssis conçus pour un poids maximum transportable supérieur à 150 kg. La position du centre de gravité de la personne est réglable : - soit par un réglage de la position des roues motrices ; - soit par un réglage de la position du système de soutien du corps ; - soit par différentes positions disponibles sur le bon de commande. Le bon de commande doit proposer : - plusieurs types de roues (par exemple: bandage, pneumatique, à rayon, à bâton) ; - plusieurs diamètres de roues."
+        },
+        {
+          "k": "Systèmes d’immobilisation",
+          "v": "Les systèmes d’immobilisation agissent sur les roues d'un même essieu et sont réglables pour garantir leur efficacité."
+        },
+        {
+          "k": "Système de conduite",
+          "v": "Dans le cas où le bon de commande propose une propulsion manuelle bilatérale, il propose également : - des mains courantes démontables. Le bon de commande doit proposer différents types de mains courantes."
+        }
+      ]
+    },
+    "FRMV": {
+      "rows": [
+        {
+          "k": "Mode de propulsion",
+          "v": "Propulsion uniquement par l’accompagnant, le fauteuil est équipé d’un dispositif de poussée adaptée. - Ou propulsion manuelle bilatérale par main courante : le bon de commande propose un choix de plusieurs matériaux différents pour la main courante (par exemple aluminium, acier inoxydable, titane) ainsi que des revêtements antidérapants adaptés (par exemple grip, picots ou plots de propulsion). - Ou propulsion manuelle unilatérale par double main courante : le bon de commande peut proposer un choix de plusieurs matériaux différents pour la main courante (par exemple aluminium, acier inoxydable, titane) ainsi que des revêtements antidérapants adaptés (grip). Le mode de propulsion remplit 3 fonctions : la propulsion, la direction et le freinage"
+        },
+        {
+          "k": "Châssis",
+          "v": "Le châssis est pliant ou non pliant. Le bon de commande doit proposer : - un appui pour le pied de l’accompagnant lui permettant de basculer le fauteuil ou tout autre système permettant le franchissement d’obstacles ; - un dispositif anti-basculement escamotable ou non dans le cas d’une stabilité arrière inférieure à 10°."
+        },
+        {
+          "k": "Dossier",
+          "v": "Le dossier est équipé, au minimum, d’une toile souple, rembourrée ou non et démontable. Le bon de commande doit proposer : - une toile réglable en tension ; - un dossier réglable en hauteur sur au moins 4 positions ou disponible en plusieurs hauteurs (4 choix minimum) ou réglable en continu. Quelle que soit la solution technique adoptée, l’amplitude minimale entre les positions extrêmes est de 10 cm"
+        },
+        {
+          "k": "Siège",
+          "v": "Le siège est équipé, au minimum, d’une toile souple, rembourrée ou non et démontable. Le bon de commande doit proposer : - au minimum 4 largeurs ; - au minimum 4 profondeurs, et/ ou un réglage en continu de la profondeur ; Quelle que soit la solution technique adoptée, l’amplitude minimale entre les positions extrêmes est de 5cm. - une toile réglable en tension."
+        },
+        {
+          "k": "Repose-pieds",
+          "v": "L’ensemble repose-pied comprend au minimum : - soit deux potences escamotables et/ou amovibles équipées d’une ou de deux palettes repose-pied réglables en hauteur et relevables et de cales talonnières ou d’une sangle appui-mollets ; - soit deux potences fixes équipées d’une ou deux palettes repose-pied réglables en hauteur et relevables (le caractère relevable n’est pas obligatoire dans le cas d’un châssis non pliant), de cale-talonnières ou d’une sangle appui-mollets ; - soit d’une potence centrale équipée d’une ou de deux palettes, réglables en hauteur et relevables et de cales talonnières ou d’une sangle appui mollet. Le bon de commande doit proposer : des palettes réglables en angle dans le plan sagittal"
+        },
+        {
+          "k": "Accoudoir",
+          "v": "Les accoudoirs permettent le bon positionnement des membres supérieurs et contribuent au maintien du tronc. Le bon de commande doit proposer : des accoudoirs escamotables et/ou amovibles"
+        },
+        {
+          "k": "Système de soutien du corps",
+          "v": "Le système de soutien du corps en association avec des dispositifs de maintien thoraciques et sous-rotuliens est verticalisable. La verticalisation est progressive et /ou par paliers intermédiaires. Les roues immobilisées doivent toujours être en contact au sol, quelle que soit la position du système de soutien du corps (assise ou verticalisée). La mesure de la distance maximale entre l’axe de verticalisation et l’axe d’intersection plan siège / plan jambes, mesurée en position assise doit être contrôlée au cours de l’essai avec le patient, afin d’éviter tout sur-appui sous-rotulien. Dans le cas d’une propulsion manuelle bilatérale, le système de soutien du corps est réglable en inclinaison sur au moins 4 positions (indépendamment du choix des diamètres des roues avant et arrière) par exemple par déplacement de la position des roues motrices ou par tout autre système, ou, à défaut d’un réglage d’inclinaison, différentes hauteurs sol/siège avant et arrière sont proposées sur le bon de commande permettant le choix de différents angles d’inclinaison du système de soutien du corps afin de stabiliser la position assise, d’incliner légèrement le dossier pour stabiliser le tronc et d’adapter la hauteur sol/siège aux besoins de la personne"
+        },
+        {
+          "k": "Système de maintien du corps",
+          "v": "Les appuis sur le corps doivent prévenir les risques de chutes antérieures et latérales et doivent permettre une flexion des membres inférieurs. Ils sont réglables pour s’adapter à la morphologie de la personne dans les limites fixées par le fabricant. Le système de maintien du corps est constitué par : - les appuis thoraciques : accoudoirs pivotants ou ceinture. Leur fixation doit être réglable en hauteur. L’appui antérieur doit pouvoir être réglable en profondeur et doit avoir une hauteur minimum de 5 cm. Cet appui peut être rigide ou souple rembourré. - les appuis sous-rotuliens. Ils doivent pouvoir être réglables en hauteur et en profondeur, amovibles et/ ou escamotables. Ils sont rigides ou semi-rigides. Dans le cas de la verticalisation manuelle ou électrique, un dispositif de sécurité doit empêcher d’actionner la/les commande(s) de verticalisation sans action volontaire de l’utilisateur"
+        },
+        {
+          "k": "Roues",
+          "v": "Les roues motrices et directrices sont équipées soit de bandage soit de pneumatique (un seul type de valve). Dans le cas d’une propulsion manuelle bilatérale, les roues motrices sont à démontage rapide (sans outil). La position des roues motrices est adaptable aux besoins de la personne soit : par un réglage longitudinal (3 positions minimales) de la position des roues motrices et/ou du système de soutien du corps ; par différentes positions disponibles sur le bon de commande. Le bon de commande peut proposer : plusieurs types de roues (par exemple : bandage, pneumatique, à rayon, à bâton) ; plusieurs diamètres de roues; des flasques de protection."
+        },
+        {
+          "k": "Systèmes d’immobilisation",
+          "v": "Les systèmes d’immobilisation agissent sur les roues d’un même essieu et sont réglables pour garantir leur efficacité."
+        },
+        {
+          "k": "Système de conduite",
+          "v": "Dans le cas d’une propulsion manuelle bilatérale, les mains courantes sont fixées en 6 points minimum, démontables. L’éloignement de la main courante par rapport à la jante doit pouvoir être ajustable"
+        }
+      ]
+    },
+    "FRE": {
+      "rows": [
+        {
+          "k": "CLASSE",
+          "v": "– Classe A : fauteuils roulants compacts et manœuvrables, n'étant pas nécessairement capables de franchir des obstacles extérieurs ; – Classe B : fauteuils roulants suffisamment compacts et manœuvrables pour certains environnements domestiques et capables de franchir certains obstacles extérieurs ; – Classe C : fauteuils roulants de taille généralement importante, pas nécessairement prévus pour un usage domestique, mais capables de se déplacer sur d’assez longues distances et de franchir des obstacles extérieurs. Pour les fauteuils roulants électriques soumis au code de la route (classe B et C), la ceinture, le dispositif d’éclairage, bandes réfléchissantes ainsi que l’ensemble des éléments indispensables pour être conforme au code de la route sont obligatoires et ne doivent pas être facturés en sus."
+        },
+        {
+          "k": "Mode de propulsion",
+          "v": "Le mode de propulsion est assuré par un ou plusieurs moteurs électriques. En cas de panne du groupe moteur, l’accompagnant doit pouvoir débrayer et déplacer aisément le fauteuil roulant. Si le débrayage annihile le frein automatique à coupure de courant (dit \"frein électromagnétique\"), il ne doit pas être possible de déplacer le véhicule à l’aide du boîtier de commande. La charge des batteries, alimentant ce groupe moteur, s’effectue en 12 heures maximum au moyen d’un chargeur, livré avec le fauteuil. Lors de la charge, le circuit motorisation doit être annihilé. Le chargeur est conçu pour empêcher la surcharge des batteries et comporte un indicateur de charge. Le raccordement du chargeur au secteur doit s’effectuer par une prise mâle répondant aux normes de l'Union Technique de l'Electricité. Le fauteuil est équipé d’un dispositif de poussée pour l’accompagnant."
+        },
+        {
+          "k": "Châssis",
+          "v": "Dans le cas d’un fauteuil de classe C, ce dernier est équipé d'un dispositif d’éclairage conforme au code de la route (lumière, feux de position arrière, clignotants et feux de détresse). Le bon de commande doit proposer un dispositif d’éclairage conforme au code de la route (lumière, feux de position arrière, clignotants et feux de détresse) pour les fauteuils roulants de classe B."
+        },
+        {
+          "k": "Dossier",
+          "v": "Le dossier est équipé soit d’une toile souple, rembourrée ou non et démontable, soit d’une structure rigide. Dans le cas d’un dossier sans structure rigide, les montants sont reliés par un tendeur"
+        },
+        {
+          "k": "Siège",
+          "v": "Le siège est équipé soit d’une toile souple, rembourrée ou non et démontable, soit d’une structure rigide (support rigide sur lequel est fixé un coussin amovible ou système rigide capitonné). Le bon de commande doit proposer au minimum 4 largeurs indépendamment du réglage possible des accoudoirs."
+        },
+        {
+          "k": "Repose-pieds",
+          "v": "L’ensemble repose-pied comprend au minimum : - soit deux potences escamotables et/ou amovibles équipées d’une ou de deux palettes repose-pied réglables en hauteur et relevables et de cales talonnières ou d’une sangle appui-mollets ; - soit deux potences fixes équipées d’une ou deux palettes repose-pied réglables en hauteur et relevables (le caractère relevable n’est pas obligatoire dans le cas d’un châssis non pliant), de cale-talonnières ou d’une sangle appui-mollets ; - soit d’une potence centrale équipée d’une ou de deux palettes, réglables en hauteur et relevables et de cales talonnières ou d’une sangle appui mollet."
+        },
+        {
+          "k": "Accoudoir",
+          "v": "Les accoudoirs sont, au minimum, escamotables et/ou amovibles. Ils sont équipés d’appui-bras démontables. Ils sont également équipés de protège-vêtements ou d’un autre système de protection similaire (ex : carénage des roues). Le bon de commande doit proposer des protège-vêtements"
+        },
+        {
+          "k": "Système de soutien du corps",
+          "v": "Le bon de commande doit proposer un ou plusieurs systèmes de maintien de la personne (exemple : ceinture, harnais …)."
+        },
+        {
+          "k": "Roues",
+          "v": "Les roues motrices et directrices sont équipées soit de bandage soit de pneumatique (un seul type de valve)."
+        },
+        {
+          "k": "Système de conduite",
+          "v": "Le boîtier de commande est réglable en antéropostérieur, en hauteur et amovible. Il doit pouvoir être positionné à droite ou à gauche. Si le boîtier est solidaire de l’accoudoir ou de l’appui-bras, ce sont ces derniers qui peuvent être réglables. Il comprend au minimum un levier de commande avec rappel automatique, un interrupteur marche-arrêt, un sélecteur permettant le réglage ou la sélection de la vitesse maximale, ainsi qu’un indicateur du niveau de charge de la ou des batteries. L’interrupteur marche/arrêt ne doit pas être à l’arrière du levier de commande. Les paramètres de conduite du fauteuil roulant sont programmables (vitesse maximale, accélération, décélération en marche avant, arrière et en virage à droite et à gauche). La programmation des paramètres de conduite du fauteuil roulant n’est accessible qu’aux personnes responsables et autorisées par le fabricant. Le bon de commande doit proposer : - un système de protection de la main, sur le boîtier de commande, afin d’éviter tout pincement de la main (en voulant accéder à une table par exemple) ; - un dispositif d’escamotage latéral du boitier de commande de l’utilisateur."
+        }
+      ]
+    },
+    "FREP": {
+      "rows": [
+        {
+          "k": "CLASSE",
+          "v": "– Classe A : fauteuils roulants compacts et manœuvrables, n'étant pas nécessairement capables de franchir des obstacles extérieurs ; – Classe B : fauteuils roulants suffisamment compacts et manœuvrables pour certains environnements domestiques et capables de franchir certains obstacles extérieurs ; – Classe C : fauteuils roulants de taille généralement importante, pas nécessairement prévus pour un usage domestique, mais capables de se déplacer sur d’assez longues distances et de franchir des obstacles extérieurs. Pour les fauteuils roulants électriques soumis au code de la route (classe B et C), la ceinture, le dispositif d’éclairage, bandes réfléchissantes ainsi que l’ensemble des éléments indispensables pour être conforme au code de la route sont obligatoires et ne doivent pas être facturés en sus."
+        },
+        {
+          "k": "Mode de propulsion",
+          "v": "Le mode de propulsion est assuré par un ou plusieurs moteurs électriques. En cas de panne du groupe moteur, l’accompagnant doit pouvoir débrayer et déplacer aisément le fauteuil roulant. Si le débrayage annihile le frein automatique à coupure de courant (dit \"frein électromagnétique\"), il ne doit pas être possible de déplacer le véhicule à l’aide du boîtier de commande. La charge des batteries, alimentant ce groupe moteur, s’effectue en 12 heures maximum au moyen d’un chargeur, livré avec le fauteuil. Lors de la charge, le circuit motorisation doit être annihilé. Le chargeur est conçu pour empêcher la surcharge des batteries et comporte un indicateur de charge. Le raccordement du chargeur au secteur doit s’effectuer par une prise mâle répondant aux normes de l'Union Technique de l'Electricité. Le fauteuil est équipé d’un dispositif de poussée pour l’accompagnant."
+        },
+        {
+          "k": "Châssis",
+          "v": "Dans le cas d’un fauteuil de classe C, ce dernier est équipé d'un dispositif d’éclairage conforme au code de la route (lumière, feux de position arrière, clignotants et feux de détresse). Le bon de commande doit proposer un dispositif d’éclairage conforme au code de la route (lumière, feux de position arrière, clignotants et feux de détresse) pour les fauteuils roulants de classe B."
+        },
+        {
+          "k": "Dossier",
+          "v": "Le dossier est équipé, soit d’une toile souple, démontable, réglable en tension et pourvue d’un coussin amovible ; soit d’une structure rigide. Dans le cas d’un dossier sans structure rigide, les montants sont reliés par un tendeur. Dans le cas d’un dossier à structure rigide, ce dernier est composé d’un support rigide sur lequel est fixé un coussin amovible ou d’un système rigide capitonné. Le dossier est au minimum un dossier inclinable par un système « mécanique assisté (vérin pneumatique) ». Le bon de commande doit proposer : - différents types de coussins (matière et forme) ; - un dossier réglable en hauteur sur au moins 4 positions ou disponible en plusieurs hauteurs (4 choix minimum) ou réglable en continu. Quelle que soit la solution technique adoptée, l’amplitude minimale entre les positions extrêmes est de 10 cm ; - un dossier inclinable par un système « électrique » ; - des supports latéraux du tronc, amovibles, escamotables, réglables en hauteur et en profondeur ; - un appui tête enveloppant, réglable en hauteur, en profondeur, en largeur et pivotant."
+        },
+        {
+          "k": "Siège",
+          "v": "Le siège équipé d’une structure rigide (support rigide sur lequel est fixé un coussin amovible). Le bon de commande doit proposer : - différents types de coussins (matière et forme) ; - au minimum 5 largeurs de siège indépendamment du réglage possible des accoudoirs. un siège réglable en profondeur sur au moins 4 positions ou disponible en plusieurs profondeurs (4 choix minimum) ou réglable en continu. Quelle que soit la solution technique adoptée, l’amplitude minimale entre les positions extrêmes est de 5 cm."
+        },
+        {
+          "k": "Repose-pieds",
+          "v": "L’ensemble repose-pieds comprend au minimum : - soit deux potences escamotables et/ou amovibles équipées chacune d’une palette repose-pied réglable en hauteur et relevable et de cales talonnières ou d’une sangle appui-mollets ; - soit deux potences fixes équipées d’une ou deux palettes repose-pied réglables en hauteur et relevables (le caractère relevable n’est pas obligatoire dans le cas d’un châssis non pliant), de cale-talonnières ou d’une sangle appui-mollets ou de coussins appui-mollets ; - soit d’une potence centrale équipée d’une palette monobloc, réglable en hauteur et relevable et de cales talonnières ou d’une sangle appui-mollets. – Cette exigence ne concerne pas les fauteuils conçus pour transporter des personnes de plus de 150 kg. Le bon de commande doit proposer : - des palettes repose-pieds réglables en angle dans le plan sagittal ; - deux potences ou une potence centrale inclinables « électriquement » ; - un réglage de la position de l’axe d’inclinaison de la potence dans le plan sagittal et le plan frontal ; - des appui-mollets réglables en hauteur, en profondeur et pivotants"
+        },
+        {
+          "k": "Accoudoir",
+          "v": "Les accoudoirs sont, au minimum, escamotables et/ou amovibles. Ils sont équipés d’appui-bras démontables. Ils sont équipés également de protège-vêtements ou d’un autre système de protection similaire (ex : carénage des roues). Le bon de commande doit proposer : - des accoudoirs réglables en largeur ; - des accoudoirs ou manchettes réglables en profondeur ; - des accoudoirs ou manchettes réglables en hauteur ; - des protège-vêtements."
+        },
+        {
+          "k": "Système de soutien du corps",
+          "v": "Le bon de commande doit proposer : un système de soutien du corps inclinable « électriquement » ; un ou plusieurs systèmes de maintien de la personne (exemple : ceinture, harnais…)."
+        },
+        {
+          "k": "Roues",
+          "v": "Les roues motrices et directrices sont équipées soit de bandage soit de pneumatique (un seul type de valve)."
+        },
+        {
+          "k": "Système de conduite",
+          "v": "Le boîtier de commande est réglable en antéropostérieur, en hauteur et amovible. Il doit pouvoir être positionné à droite ou à gauche. Si le boîtier est solidaire de l’accoudoir ou de l’appui-bras, ce sont ces derniers qui peuvent être réglables. Il comprend au minimum un levier de commande avec rappel automatique, un interrupteur marche-arrêt, un sélecteur permettant le réglage ou la sélection de la vitesse maximale, ainsi qu’un indicateur du niveau de charge de la ou des batteries. L’interrupteur marche/arrêt ne doit pas être à l’arrière du levier de commande. Les paramètres de conduite du fauteuil roulant sont programmables (vitesse maximale, accélération, décélération en marche avant, arrière et en virage à droite et à gauche). La programmation des paramètres de conduite du fauteuil roulant n’est accessible qu’aux personnes responsables et autorisées par le fabricant. Le bon de commande doit proposer : - un système de protection de la main, sur le boîtier de commande, afin d’éviter tout pincement de la main (en voulant accéder à une table par exemple) ; - un dispositif d’escamotage latéral du boitier de commande de l’utilisateur. - différents types de commande pour la personne (par exemple commande au menton occipitale, au pied)"
+        }
+      ]
+    },
+    "FREV": {
+      "rows": [
+        {
+          "k": "CLASSE",
+          "v": "– Classe A : fauteuils roulants compacts et manœuvrables, n'étant pas nécessairement capables de franchir des obstacles extérieurs ; – Classe B : fauteuils roulants suffisamment compacts et manœuvrables pour certains environnements domestiques et capables de franchir certains obstacles extérieurs ; – Classe C : fauteuils roulants de taille généralement importante, pas nécessairement prévus pour un usage domestique, mais capables de se déplacer sur d’assez longues distances et de franchir des obstacles extérieurs. Pour les fauteuils roulants électriques soumis au code de la route (classe B et C), la ceinture, le dispositif d’éclairage, bandes réfléchissantes ainsi que l’ensemble des éléments indispensables pour être conforme au code de la route sont obligatoires et ne doivent pas être facturés en sus."
+        },
+        {
+          "k": "Mode de propulsion",
+          "v": "Le mode de propulsion est assuré par un ou plusieurs moteurs électriques. En cas de panne du groupe moteur, l’accompagnant doit pouvoir débrayer et déplacer aisément le fauteuil roulant. Si le débrayage annihile le frein automatique à coupure de courant (dit \"frein électromagnétique\"), il ne doit pas être possible de déplacer le véhicule à l’aide du boîtier de commande. La charge des batteries, alimentant ce groupe moteur, s’effectue en 12 heures maximum au moyen d’un chargeur, livré avec le fauteuil. Lors de la charge, le circuit motorisation doit être annihilé. Le chargeur est conçu pour empêcher la surcharge des batteries et comporte un indicateur de charge. Le raccordement du chargeur au secteur doit s’effectuer par une prise mâle répondant aux normes de l'Union Technique de l'Electricité. Le fauteuil est équipé d’un dispositif de poussée pour l’accompagnant."
+        },
+        {
+          "k": "Châssis",
+          "v": "Dans le cas d’un fauteuil de classe C, ce dernier est équipé d'un dispositif d’éclairage conforme au code de la route (lumière, feux de position arrière, clignotants et feux de détresse). Le bon de commande doit proposer un dispositif d’éclairage conforme au code de la route (lumière, feux de position arrière, clignotants et feux de détresse) pour les fauteuils roulants de classe B."
+        },
+        {
+          "k": "Dossier",
+          "v": "Le dossier est équipé, soit d’une toile souple, démontable, réglable en tension pourvue d’un coussin amovible ; soit d’une structure rigide. Dans le cas d’un dossier sans structure rigide, les montants sont reliés par un tendeur. Dans le cas d’un dossier à structure rigide, ce dernier est composé d’un support rigide sur lequel est fixé un coussin amovible ou d’un système rigide capitonné. Le bon de commande doit proposer : différents types de coussins ; - un dossier réglable en hauteur en continu ou sur au moins 4 positions ou disponible en plusieurs hauteurs (4 choix minimum). Quelle que soit la solution technique adoptée, l’amplitude minimale entre les positions extrêmes est de 10 cm ; - des supports latéraux du tronc ; - un appui tête enveloppant, réglable en hauteur, en profondeur en largeur et pivotant"
+        },
+        {
+          "k": "Siège",
+          "v": "Le siège est équipé soit d’une toile souple, démontable, réglable en tension pourvue d’un coussin amovible ; soit d’une structure rigide. Dans le cas d’un dispositif de type assis / couché / debout, le siège est équipé d’une structure rigide sur laquelle est fixée un coussin amovible. Le bon de commande doit proposer un siège réglable en profondeur sur au moins 4 positions ou disponible en plusieurs profondeurs (4 choix minimum) réglable en continu. Quelle que soit la solution technique adoptée, l’amplitude minimale entre les positions extrêmes est de 5 cm"
+        },
+        {
+          "k": "Repose-pieds",
+          "v": "L’ensemble repose-pied d’un véhicule permet le maintien des jambes et des pieds notamment en position assise et les protège des roues avant du véhicule (chocs, frottements…). L’ensemble repose-pied comprend au minimum : - soit deux potences escamotables et/ou amovibles équipées chacune d’une palette repose-pied réglable en hauteur et relevable et de cales talonnières ou d’une sangle appui-mollets ; - soit deux potences fixes équipées d’une ou deux palettes repose-pied réglables en hauteur et relevables (le caractère relevable n’est pas obligatoire dans le cas d’un châssis non pliant), de cale-talonnières ou d’une sangle appui-mollets ; - soit d’une potence centrale équipée d’une palette monobloc, réglable en hauteur et relevable et de cales talonnières ou d’une sangle appui-mollets. Le bon de commande doit proposer : - des palettes repose-pieds réglables en angle dans le plan sagittal ; - des appui-mollets réglables en hauteur ; - des appui-mollets réglables en hauteur pour les potences centrales."
+        },
+        {
+          "k": "Accoudoir",
+          "v": "Les accoudoirs sont, au minimum, escamotables et/ou amovibles. Ils sont équipés d’appui-bras démontables. Ils sont équipés également de protège-vêtements ou d’un autre système de protection similaire (exemple carénage des roues). Le bon de commande doit proposer : - des accoudoirs réglables en largeur ; - des accoudoirs ou manchettes réglables en profondeur ; - des accoudoirs ou manchettes réglables en hauteur ; - des protège-vêtements."
+        },
+        {
+          "k": "Système de soutien du corps",
+          "v": "Le système de soutien du corps est verticalisable. La verticalisation est progressive et /ou par paliers intermédiaires. La mesure de la distance maximale entre l’axe de verticalisation et l’axe d’intersection plan siège / plan jambes, mesurée en position assise, doit être contrôlée au cours de l’essai avec le patient, afin d’éviter tout sur-appui sous-rotulien"
+        },
+        {
+          "k": "Système de maintien du corps",
+          "v": "Les appuis sur le corps doivent prévenir les risques de chutes antérieures et latérales ainsi que la flexion des membres inférieurs. Ils sont réglables pour s’adapter à la morphologie de la personne dans les limites fixées par le fabricant. Le système de maintien du corps est constitué par : - les appuis thoraciques : accoudoirs pivotants ou ceinture. Leur fixation doit être réglable en hauteur. L’appui antérieur doit pouvoir être réglable en profondeur et doit avoir une hauteur minimum de 5 cm. Cet appui peut être rigide ou souple rembourré. - les appuis sous-rotuliens : réglables en hauteur et en profondeur, escamotables et / ou amovibles. Ils sont rigides ou semi-rigides. Dans le cas de la verticalisation manuelle ou électrique, un dispositif de sécurité doit empêcher d’actionner la/les commande(s) de verticalisation sans action volontaire de l’utilisateur."
+        },
+        {
+          "k": "Roues",
+          "v": "Les roues motrices et directrices sont équipées soit de bandage soit de pneumatique (un seul type de valve)."
+        },
+        {
+          "k": "Systèmes d’immobilisation",
+          "v": "Les systèmes d’immobilisation agissent sur les roues d'un même essieu"
+        },
+        {
+          "k": "Système de conduite",
+          "v": "Le boîtier de commande est réglable en antéropostérieur, en hauteur et amovible. Il doit pouvoir être positionné à droite ou à gauche. Si le boîtier est solidaire de l’accoudoir ou de l’appui-bras, ce sont ces derniers qui peuvent être réglables. Il comprend au minimum un levier de commande avec rappel automatique, un interrupteur marche-arrêt, un sélecteur permettant le réglage ou la sélection de la vitesse maximale, ainsi qu’un indicateur du niveau de charge de la ou des batteries. L’interrupteur marche/arrêt ne doit pas être à l’arrière du levier de commande. Les paramètres de conduite du fauteuil roulant sont programmables (vitesse maximale, accélération, décélération en marche avant, arrière et en virage à droite et à gauche). La programmation des paramètres de conduite du fauteuil roulant n’est accessible qu’aux personnes responsables et autorisées par le fabricant. Le bon de commande doit proposer : - un système de protection de la main, sur le boîtier de commande, afin d’éviter tout pincement de la main (en voulant accéder à une table par exemple) ;"
+        }
+      ]
+    },
+    "POU_S": {
+      "rows": [
+        {
+          "k": "Mode de propulsion",
+          "v": "La poussette est équipée d’un dispositif de poussée pour l’accompagnant"
+        },
+        {
+          "k": "Châssis",
+          "v": "Le châssis est pliant ou non pliant et équipé d’un dispositif réfléchissant à l’avant et à l’arrière. Le bon de commande doit proposer un dispositif anti-basculement escamotable dans le cas d’une stabilité arrière inférieure à 10°."
+        },
+        {
+          "k": "Dossier",
+          "v": "Le dossier est équipé, au minimum, d’une toile souple, rembourrée ou non, démontable et d’un tendeur de dossier. Il peut être inclinable ou non"
+        },
+        {
+          "k": "Siège",
+          "v": "Le siège est équipé, au minimum, d’une toile souple, rembourrée ou non et démontable. Il peut être inclinable ou non"
+        },
+        {
+          "k": "Repose-pieds",
+          "v": "L’ensemble repose-pieds comprend, au minimum une ou deux palettes repose-pieds réglables en hauteur et équipées de cale-talonnières ou d’une sangle appui-mollets."
+        },
+        {
+          "k": "Système de soutien du corps",
+          "v": "Le bon de commande doit proposer une ceinture de maintien et un harnais"
+        },
+        {
+          "k": "Roues",
+          "v": "Les roues motrices et directrices, d’un diamètre compris entre 100 et 500 mm, sont équipées soit de bandage soit de pneumatique (un seul type de valve)."
+        },
+        {
+          "k": "Systèmes d’immobilisation",
+          "v": "Les systèmes d’immobilisation agissent sur les roues d'un même essieu et sont réglables, dans certains cas, pour garantir leur efficacité."
+        },
+        {
+          "k": "Système de conduite",
+          "v": "La poussette est équipée d’un dispositif de poussée pour l’accompagnant"
+        },
+        {
+          "k": "Poids total maximal du VPH",
+          "v": "POU_S : 20 kg ; POU_MRE : 25 kg"
+        },
+        {
+          "k": "Particularité POU MRE",
+          "v": "Les poussettes multi-réglables et évolutives doivent avoir les mêmes spécifications techniques que les poussettes standards, excepté pour le siège et le dossier qui doivent être équipés d’une structure rigide (support rigide sur lequel est fixé un coussin amovible). Les poussettes multi-réglables et évolutives comprennent des spécifications techniques supplémentaires qui sont les suivantes : – un dossier réglable en inclinaison (indépendamment du réglage de l’inclinaison du siège) et en hauteur, conformément avec la définition du dossier inclinable apportée dans le lexique ; – un siège réglable en inclinaison (indépendamment du réglage de l’inclinaison du dossier) en largeur et en profondeur ; – et un repose-pied réglable en hauteur et en inclinaison. Le bon de commande doit proposer des supports latéraux du tronc."
+        }
+      ]
+    },
+    "POU_MRE": {
+      "rows": [
+        {
+          "k": "Mode de propulsion",
+          "v": "La poussette est équipée d’un dispositif de poussée pour l’accompagnant"
+        },
+        {
+          "k": "Châssis",
+          "v": "Le châssis est pliant ou non pliant et équipé d’un dispositif réfléchissant à l’avant et à l’arrière. Le bon de commande doit proposer un dispositif anti-basculement escamotable dans le cas d’une stabilité arrière inférieure à 10°."
+        },
+        {
+          "k": "Dossier",
+          "v": "Le dossier est équipé, au minimum, d’une toile souple, rembourrée ou non, démontable et d’un tendeur de dossier. Il peut être inclinable ou non"
+        },
+        {
+          "k": "Siège",
+          "v": "Le siège est équipé, au minimum, d’une toile souple, rembourrée ou non et démontable. Il peut être inclinable ou non"
+        },
+        {
+          "k": "Repose-pieds",
+          "v": "L’ensemble repose-pieds comprend, au minimum une ou deux palettes repose-pieds réglables en hauteur et équipées de cale-talonnières ou d’une sangle appui-mollets."
+        },
+        {
+          "k": "Système de soutien du corps",
+          "v": "Le bon de commande doit proposer une ceinture de maintien et un harnais"
+        },
+        {
+          "k": "Roues",
+          "v": "Les roues motrices et directrices, d’un diamètre compris entre 100 et 500 mm, sont équipées soit de bandage soit de pneumatique (un seul type de valve)."
+        },
+        {
+          "k": "Systèmes d’immobilisation",
+          "v": "Les systèmes d’immobilisation agissent sur les roues d'un même essieu et sont réglables, dans certains cas, pour garantir leur efficacité."
+        },
+        {
+          "k": "Système de conduite",
+          "v": "La poussette est équipée d’un dispositif de poussée pour l’accompagnant"
+        },
+        {
+          "k": "Poids total maximal du VPH",
+          "v": "POU_S : 20 kg ; POU_MRE : 25 kg"
+        },
+        {
+          "k": "Particularité POU MRE",
+          "v": "Les poussettes multi-réglables et évolutives doivent avoir les mêmes spécifications techniques que les poussettes standards, excepté pour le siège et le dossier qui doivent être équipés d’une structure rigide (support rigide sur lequel est fixé un coussin amovible). Les poussettes multi-réglables et évolutives comprennent des spécifications techniques supplémentaires qui sont les suivantes : – un dossier réglable en inclinaison (indépendamment du réglage de l’inclinaison du siège) et en hauteur, conformément avec la définition du dossier inclinable apportée dans le lexique ; – un siège réglable en inclinaison (indépendamment du réglage de l’inclinaison du dossier) en largeur et en profondeur ; – et un repose-pied réglable en hauteur et en inclinaison. Le bon de commande doit proposer des supports latéraux du tronc."
+        }
+      ]
+    },
+    "SCO": {
+      "rows": [
+        {
+          "k": "CLASSE",
+          "v": "Un scooter est un véhicule, muni de 3 roues au minimum, avec un plancher sur lequel est fixée une assise. L’assise est composée d’un siège, d’un dossier et de 2 accoudoirs. Le plancher assure la fonction de repose pied. La propulsion est assurée par un ou plusieurs moteurs électriques. L’utilisateur dispose d’une commande électronique de la vitesse et contrôle manuellement la direction du véhicule. Les classes d’usage des scooters sont réparties en 3 catégories : – classe d’usage intérieur : classe A+. Ce sont des scooters compacts, manœuvrables et démontables pour des environnements domestiques et capables de franchir certains environnements extérieurs ; – classe d’usage mixte : classe B. Ce sont des scooters suffisamment compacts et manœuvrables pour certains environnements domestiques et capables de franchir certains environnements extérieurs ; – classe d’usage d’extérieur : classe C. Ce sont des scooters de taille généralement importante et capables de se déplacer sur d’assez longue distance et de franchir des obstacles extérieurs."
+        },
+        {
+          "k": "Mode de propulsion",
+          "v": "Le mode de propulsion est assuré par un ou plusieurs moteurs électriques. En cas de panne du groupe moteur, l’accompagnant doit pouvoir débrayer et déplacer aisément le fauteuil roulant. Si le débrayage annihile le frein automatique à coupure de courant (dit \"frein électromagnétique\"), il ne doit pas être possible de déplacer le véhicule à l’aide du boîtier de commande. La charge des batteries, alimentant ce groupe moteur, s’effectue en 12 heures maximum au moyen d’un chargeur, livré avec le fauteuil. Lors de la charge, le circuit motorisation doit être annihilé. Le chargeur est conçu pour empêcher la surcharge des batteries et comporte un indicateur de charge. Le raccordement du chargeur au secteur doit s’effectuer par une prise mâle répondant aux normes de l'Union Technique de l'Electricité. Le fauteuil est équipé d’un dispositif de poussée pour l’accompagnant. De plus, l’environnement d’utilisation du scooter peut être : - adapté à un usage mixte intérieur/extérieur (classe A+ et classe B) ; - plus spécialement adapté à un usage extérieur (classe C)."
+        },
+        {
+          "k": "Châssis",
+          "v": "Pour les scooters de classe A+ et de classe B, le bon de commande doit proposer un dispositif d’éclairage conforme au code de la route. Dans le cas d’un scooter de classe C, ce dernier est équipé d’un dispositif d’éclairage conforme au code de la route"
+        },
+        {
+          "k": "Dossier",
+          "v": "Le dossier est à structure rigide"
+        },
+        {
+          "k": "Siège",
+          "v": "Le siège est à structure rigide. Assise : ensemble formé par le dossier, le siège et les accoudoirs. L’assise est au minimum réglable en hauteur (adaptation de la distance siège plateforme à la longueur du segment jambier de l’utilisateur tout en garantissant une facilité de transfert lorsque l’assise est pivotée)."
+        },
+        {
+          "k": "Accoudoir",
+          "v": "Les accoudoirs sont au minimum escamotables (pivotant). Ils sont équipés d’appui-bras démontables."
+        },
+        {
+          "k": "Système de conduite",
+          "v": "La colonne de direction est au minimum inclinable sans l’utilisation d’outil afin de s’adapter aux besoins de l’utilisateur et de faciliter les transferts et le stockage. La commande de cette fonction est accessible à l’utilisateur. Les paramètres de conduite du scooter sont programmables (au minimum la vitesse maximale, l’accélération, la décélération en marche avant, arrière)."
+        }
+      ]
+    },
+    "BASE": {
+      "rows": [
+        {
+          "k": "Mode de propulsion",
+          "v": "Dans le cas d’une propulsion manuelle bilatérale, la base roulante est équipée de mains courantes Dans les autres cas de mode de propulsion, le bon de commande doit proposer un dispositif de poussée."
+        },
+        {
+          "k": "Châssis",
+          "v": "La base est pliante ou non pliante et équipée d’un dispositif réfléchissant à l’avant et à l’arrière. Le fabricant doit indiquer la position du centre de gravité du SSC par rapport à la structure de sa base roulante. Le fabricant doit indiquer quel type de SSC peut être adapté sur sa base roulante. Le fabricant doit indiquer les modalités de fixation du SSC sur sa base roulante. Le bon de commande doit proposer : - un appui pour le pied de l’accompagnant lui permettant de basculer la base roulante (usage mixte) ; - un dispositif anti-basculement escamotable dans le cas d’une stabilité arrière inférieure à 10° (usage mixte)."
+        },
+        {
+          "k": "Système de soutien du corps",
+          "v": "La base roulante est équipée d’un support permettant la fixation du système de soutien du corps revendiqué par le fabricant. Le système de soutien du corps est réglable en hauteur, en continu ou par palier, sur une hauteur minimale de 25 cm (usage intérieur). Le bon de commande doit proposer un système de soutien du corps inclinable par « mécanique assistée » (vérin pneumatique) du système de soutien du corps"
+        },
+        {
+          "k": "Roues",
+          "v": "Les roues motrices et directrices sont équipées soit de bandage soit de pneumatique (un seul type de valve). Dans le cas d’une propulsion manuelle bilatérale (usage mixte), les roues motrices sont à démontage rapide (sans outil). Dans le cas d’une propulsion par l’accompagnant, les roues motrices sont d’un diamètre compris entre 100 et 500 mm (usage mixte)."
+        },
+        {
+          "k": "Systèmes d’immobilisation",
+          "v": "Les systèmes d’immobilisation agissent sur les roues d'un même essieu et sont réglables, dans certains cas, pour garantir leur efficacité. Un système d’immobilisation centralisé ou plusieurs systèmes d’immobilisation indépendants sont capables d’immobiliser la base roulante sur une pente de 7°"
+        },
+        {
+          "k": "Système de conduite",
+          "v": "Dans le cas d’une propulsion manuelle bilatérale, les mains courantes sont démontables et de section supérieure à 200 mm². Dans le cas d’une propulsion par l’accompagnant, le système de poussée est réglable en hauteur, escamotable et/ou amovible. Le système de poussée n’est pas forcément fixé sur la base. Il peut être sur le dossier. Dans tous les cas, le système de poussée sera exigé sur le bon de commande. Le système de poussée réglable en hauteur, escamotable et/ou amovible est systématique s’il n’y a pas de mains courantes. Le bon de commande doit proposer un système de poussée réglable en angle pour les bases roulantes à usage mixte."
+        }
+      ]
+    },
+    "CYC": {
+      "rows": [
+        {
+          "k": "Mode de propulsion",
+          "v": "Deux modes de propulsion sont possibles : - une propulsion podale avec direction manuelle ; - une propulsion et direction manuelles."
+        },
+        {
+          "k": "Châssis",
+          "v": "Pliant ou non pliant, il est équipé d’un dispositif réfléchissant à l’avant et à l’arrière. Le bon de commande doit proposer un dispositif d’éclairage avant et arrière conforme à la réglementation."
+        },
+        {
+          "k": "Dossier",
+          "v": "Dans le cas d’un cycle à roues multiples pourvu d’un dossier, ce dernier est équipé, au minimum, d’une toile souple démontable. Dans le cas d’un cycle à roues multiples pourvu d’une selle, le bon de commande doit proposer un ou plusieurs systèmes de maintien de la stabilité du tronc (exemple : tuteur dorsal simple ou double, enveloppant ou non …)."
+        },
+        {
+          "k": "Siège",
+          "v": "Dans le cas d’un cycle à roues multiples pourvu d’un siège, ce dernier est équipé, au minimum, d’une toile souple, rembourrée ou non et facilement démontable. Dans le cas d’un cycle à roues multiples pourvu d’une selle, cette dernière est réglable en hauteur. Le bon de commande doit proposer un réglage antéropostérieur de la selle et différents types de selles"
+        },
+        {
+          "k": "Repose-pieds",
+          "v": "Le bon de commande doit proposer : - des fixations de pieds (exemple : sabot …) ; - des systèmes de maintien des jambes (exemple : tuteur jambier …)."
+        },
+        {
+          "k": "Accoudoir",
+          "v": "Dans le cas d’un cycle à roues multiples pourvu d’un ensemble siège/dossier, le siège est équipé de protections latérales pour les vêtements."
+        },
+        {
+          "k": "Système de soutien du corps",
+          "v": "Le bon de commande doit proposer un système de maintien de la personne."
+        },
+        {
+          "k": "Roues",
+          "v": "La ou les roues motrices et directrices sont équipées soit de bandage soit de pneumatique (un seul type de valve)"
+        },
+        {
+          "k": "Systèmes d’immobilisation",
+          "v": "Le cycle à roues multiples est équipé d’un dispositif de freinage et d’immobilisation indépendant de la pression de gonflage du pneumatique."
+        },
+        {
+          "k": "Système de conduite",
+          "v": "Le système de conduite (propulsion, direction et freinage) est adaptable en hauteur par rapport à la morphologie de la personne. Ce réglable s’effectue au niveau du système de conduite et/ou au niveau du système de soutien du corps. Dans le cas d’un cycle à roues multiples à propulsion podale et direction manuelle, le bon de commande doit proposer différents types de guidons."
+        }
+      ]
+    }
+  }
+}
