@@ -59,6 +59,17 @@ async function telecharger(url) {
   return Buffer.from(await rep.arrayBuffer());
 }
 
+/** Télécharge, ou renvoie null si le fichier n'est pas disponible (404…) — sans lever. */
+async function telechargerOuNull(url) {
+  try {
+    const rep = await fetch(url, { headers: { "User-Agent": "PRECONIA-verificateur" } });
+    if (!rep.ok) return null;
+    return Buffer.from(await rep.arrayBuffer());
+  } catch {
+    return null;
+  }
+}
+
 /** Extrait la première entrée d'un ZIP dont le nom matche `nomRe` (lecture du répertoire
  *  central — suffisant pour l'archive mono-fichier de la CNAMTS). */
 function dezipper(buf, nomRe) {
@@ -115,13 +126,26 @@ async function obtenirBase() {
   }
   console.log(`Téléchargement de la page officielle : ${PAGE_TELECHARGEMENT}`);
   const page = (await telecharger(PAGE_TELECHARGEMENT)).toString("latin1");
-  const m = page.match(/([^\s"']*download_file\.php\?filename=tips\/(LPPTOT\d+)\.zip)/);
+  const m = page.match(/([^\s"']*download_file\.php\?filename=tips\/LPPTOT(\d+)\.zip)/);
   if (!m) throw new Error("lien LPPTOT introuvable sur la page de téléchargement CNAMTS");
-  const url = m[1].startsWith("http") ? m[1] : `${HOTE_CNAMTS}${m[1]}`;
-  console.log(`Base courante publiée : ${m[2]} — téléchargement de ${url}`);
-  const zip = await telecharger(url);
-  const { contenu } = dezipper(zip, /^LPPTOT/i);
-  return { texte: contenu.toString("latin1"), version: m[2], sha256: sha(contenu) };
+  const annonce = parseInt(m[2], 10);
+  // La CNAM annonce parfois une version dont le ZIP n'est pas encore publié (404, publication
+  // en cours) : on essaie la version annoncée puis les précédentes jusqu'à un ZIP téléchargeable,
+  // pour utiliser toujours la dernière base RÉELLEMENT disponible (et ne pas faire échouer le CI).
+  for (let v = annonce; v > annonce - 8 && v > 0; v--) {
+    const path = m[1].replace(/LPPTOT\d+/, `LPPTOT${v}`);
+    const url = path.startsWith("http") ? path : `${HOTE_CNAMTS}${path}`;
+    const zip = await telechargerOuNull(url);
+    if (!zip) continue;
+    if (v !== annonce)
+      console.log(
+        `⚠ LPPTOT${annonce} annoncée mais indisponible (404, publication en cours) — repli sur LPPTOT${v}, dernière version publiée.`,
+      );
+    console.log(`Base utilisée : LPPTOT${v} — ${url}`);
+    const { contenu } = dezipper(zip, /^LPPTOT/i);
+    return { texte: contenu.toString("latin1"), version: `LPPTOT${v}`, sha256: sha(contenu) };
+  }
+  throw new Error(`aucune base LPPTOT téléchargeable (version annoncée : LPPTOT${annonce})`);
 }
 
 const sha = (buf) => createHash("sha256").update(buf).digest("hex");
