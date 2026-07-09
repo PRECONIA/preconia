@@ -7,11 +7,16 @@
    `FicheData` purement sérialisable — aucune logique métier ici, seulement la mise en page. */
 
 import {
+  Circle,
   Document,
   Font,
   Image,
+  Line,
   Page,
+  Path,
+  Rect,
   StyleSheet,
+  Svg,
   Text,
   View,
   pdf,
@@ -103,10 +108,9 @@ export interface FicheData {
     code: string;
     codeGenerique: string;
     codeMarque: string | null;
+    forfait: "A" | "B";
     label: string;
     price: number;
-    definition: string[];
-    technique: string[];
   }[];
   adjonctions: {
     /** code facturé (variante constructeur si elle existe, sinon générique). */
@@ -194,18 +198,25 @@ const s = StyleSheet.create({
   headerRight: { textAlign: "right" },
   headerTitle: { fontSize: 10, fontWeight: 600, color: C.white },
   headerMeta: { fontSize: 8, color: "#cde9e6", marginTop: 2 },
-  /* sections */
+  /* sections : bandeau de titre orange, texte blanc, icône de repérage */
   section: { marginTop: 16 },
+  sectionHead: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+    backgroundColor: "#ea580c",
+    borderRadius: 5,
+    paddingVertical: 4.5,
+    paddingHorizontal: 8,
+    marginBottom: 7,
+  },
   sectionTitle: {
+    flex: 1,
     fontSize: 8,
     fontWeight: 700,
     letterSpacing: 0.8,
     textTransform: "uppercase",
-    color: C.petrol,
-    borderBottomWidth: 1,
-    borderBottomColor: C.lineSoft,
-    paddingBottom: 3,
-    marginBottom: 7,
+    color: C.white,
   },
   /* bandeau dispositif */
   deviceBar: { flexDirection: "row", alignItems: "center", gap: 8, marginBottom: 8 },
@@ -376,7 +387,6 @@ const s = StyleSheet.create({
     marginTop: 6,
   },
   indicative: { fontSize: 7.5, color: C.inkSoft, marginBottom: 5 },
-  papInfo: { fontSize: 8.5, color: C.inkSoft },
   /* pied de page */
   footer: {
     position: "absolute",
@@ -391,12 +401,96 @@ const s = StyleSheet.create({
   },
 });
 
+/* Icônes de section : tracés vectoriels minimalistes (blanc sur bandeau orange),
+   dessinés aux primitives react-pdf — pas de police d'emoji dans le PDF. */
+type IcoName =
+  | "user"
+  | "check"
+  | "sliders"
+  | "seat"
+  | "plus"
+  | "euro"
+  | "box"
+  | "clipboard"
+  | "folder";
+const ICO = {
+  stroke: C.white,
+  strokeWidth: 2,
+  strokeLinecap: "round",
+  strokeLinejoin: "round",
+  fill: "none",
+} as const;
+function Ico({ name }: { name: IcoName }) {
+  return (
+    <Svg width={10} height={10} viewBox="0 0 24 24">
+      {name === "user" && (
+        <>
+          <Circle cx={12} cy={7.5} r={4} {...ICO} />
+          <Path d="M4.5 20.5c1.6-4.2 5.5-5.5 7.5-5.5s5.9 1.3 7.5 5.5" {...ICO} />
+        </>
+      )}
+      {name === "check" && (
+        <>
+          <Circle cx={12} cy={12} r={9} {...ICO} />
+          <Path d="M8 12.5l2.8 2.8L16 9" {...ICO} />
+        </>
+      )}
+      {name === "sliders" && (
+        <>
+          <Line x1={4} y1={7} x2={20} y2={7} {...ICO} />
+          <Line x1={4} y1={12} x2={20} y2={12} {...ICO} />
+          <Line x1={4} y1={17} x2={20} y2={17} {...ICO} />
+          <Circle cx={9} cy={7} r={2} {...ICO} fill={C.white} />
+          <Circle cx={15} cy={12} r={2} {...ICO} fill={C.white} />
+          <Circle cx={7} cy={17} r={2} {...ICO} fill={C.white} />
+        </>
+      )}
+      {name === "seat" && (
+        <>
+          <Path d="M8 4v16" {...ICO} />
+          <Path d="M8 14h8v6" {...ICO} />
+        </>
+      )}
+      {name === "plus" && (
+        <>
+          <Circle cx={12} cy={12} r={9} {...ICO} />
+          <Line x1={12} y1={8} x2={12} y2={16} {...ICO} />
+          <Line x1={8} y1={12} x2={16} y2={12} {...ICO} />
+        </>
+      )}
+      {name === "euro" && (
+        <>
+          <Path d="M18 6.5A7.5 7.5 0 1 0 18 17.5" {...ICO} />
+          <Line x1={4.5} y1={10} x2={13} y2={10} {...ICO} />
+          <Line x1={4.5} y1={14} x2={13} y2={14} {...ICO} />
+        </>
+      )}
+      {name === "box" && (
+        <>
+          <Path d="M3.5 8L12 3.5 20.5 8v8L12 20.5 3.5 16z" {...ICO} />
+          <Path d="M3.5 8L12 12.5 20.5 8M12 12.5V20.5" {...ICO} />
+        </>
+      )}
+      {name === "clipboard" && (
+        <>
+          <Rect x={5.5} y={4.5} width={13} height={17} rx={2} {...ICO} />
+          <Rect x={9} y={2.5} width={6} height={4} rx={1} {...ICO} />
+          <Path d="M8.5 13.5l2.4 2.4 4.6-5.4" {...ICO} />
+        </>
+      )}
+      {name === "folder" && <Path d="M3.5 6.5h6l2 2.5h9v10h-17z" {...ICO} />}
+    </Svg>
+  );
+}
+
 function Section({
   title,
+  icon,
   children,
   wrap = false,
 }: {
   title: string;
+  icon: IcoName;
   children: React.ReactNode;
   /** true pour les sections longues (tableaux) : elles peuvent s'étendre sur la page suivante
       au lieu d'être renvoyées en bloc, ce qui évite une page à moitié vide. */
@@ -404,7 +498,10 @@ function Section({
 }) {
   return (
     <View style={s.section} wrap={wrap}>
-      <Text style={s.sectionTitle}>{title}</Text>
+      <View style={s.sectionHead}>
+        <Ico name={icon} />
+        <Text style={s.sectionTitle}>{title}</Text>
+      </View>
       {children}
     </View>
   );
@@ -500,7 +597,7 @@ function FicheDocument({ d }: { d: FicheData }) {
         </View>
 
         {/* profil du VPH — vignettes */}
-        <Section title="Profil du VPH">
+        <Section title="Profil du VPH" icon="user">
           <View style={s.tiles}>
             {d.profile.map((p) => (
               <View key={p.k} style={s.tile}>
@@ -513,7 +610,7 @@ function FicheDocument({ d }: { d: FicheData }) {
 
         {/* indications officielles du VPH */}
         {d.vph && d.vph.indications.length > 0 && (
-          <Section title="Indication officielle de prise en charge — VPH">
+          <Section title="Indication officielle de prise en charge — VPH" icon="check">
             <View style={s.indicBox}>
               {d.vph.indications.map((ind) => (
                 <View key={ind.mode} style={s.indicLine}>
@@ -529,6 +626,7 @@ function FicheDocument({ d }: { d: FicheData }) {
         {d.technique.length > 0 && (
           <Section
             title={`Caractéristiques techniques du VPH (${d.device.code}) — spécifications minimales, arrêté du 6 février 2025`}
+            icon="sliders"
             wrap
           >
             <View style={s.table}>
@@ -544,7 +642,7 @@ function FicheDocument({ d }: { d: FicheData }) {
 
         {/* produits d'assistance à la posture — tableau façon fiche officielle */}
         {(d.pap.length > 0 || d.forfaits.length > 0) && (
-          <Section title="Produits d'assistance à la posture (PAP) sélectionnés" wrap>
+          <Section title="Produits d'assistance à la posture (PAP) sélectionnés" icon="seat" wrap>
             {d.pap.length > 0 && (
               <View style={s.table}>
                 <View style={s.thRow}>
@@ -571,7 +669,9 @@ function FicheDocument({ d }: { d: FicheData }) {
             {d.forfaits.map((f) => (
               <View key={f.code} style={s.forfaitRow} wrap={false}>
                 <View style={{ flex: 1, paddingRight: 8 }}>
-                  <Text style={{ fontSize: 8.5, fontWeight: 700, color: C.petrolDeep }}>{f.label}</Text>
+                  <Text style={{ fontSize: 8.5, fontWeight: 700, color: C.petrolDeep }}>
+                    Forfait PAP {f.forfait}
+                  </Text>
                   <Text style={{ fontFamily: "JetBrains Mono", fontSize: 7.5, color: C.petrolDeep, marginTop: 1.5 }}>
                     Code générique {f.codeGenerique}
                     {f.codeMarque ? `  ·  code constructeur${d.marque ? ` (${d.marque})` : ""} ${f.codeMarque}` : ""}
@@ -582,31 +682,12 @@ function FicheDocument({ d }: { d: FicheData }) {
                 </Text>
               </View>
             ))}
-            {d.forfaits.map((f) =>
-              f.definition.length > 0 || f.technique.length > 0 ? (
-                <View key={`info-${f.code}`} style={{ marginTop: 8 }} wrap={false}>
-                  <Text style={{ fontSize: 9, fontWeight: 600, color: C.petrolDeep, marginBottom: 2 }}>
-                    {f.label}
-                  </Text>
-                  {f.definition.map((line, i) => (
-                    <Text key={`d${i}`} style={s.papInfo}>
-                      • {line}
-                    </Text>
-                  ))}
-                  {f.technique.map((line, i) => (
-                    <Text key={`t${i}`} style={s.papInfo}>
-                      • {line}
-                    </Text>
-                  ))}
-                </View>
-              ) : null,
-            )}
           </Section>
         )}
 
         {/* adjonctions — code générique ET code constructeur */}
         {d.adjonctions.length > 0 && (
-          <Section title="Adjonctions sélectionnées" wrap>
+          <Section title="Adjonctions sélectionnées" icon="plus" wrap>
             <View style={s.table}>
               <View style={s.thRow}>
                 <Text style={[s.th, { flex: 1 }]}>Adjonction</Text>
@@ -646,7 +727,7 @@ function FicheDocument({ d }: { d: FicheData }) {
 
         {/* synthèse de facturation */}
         {hasSynthese && (
-          <Section title="Synthèse — codes LPP &amp; tarifs" wrap>
+          <Section title="Synthèse — codes LPP &amp; tarifs" icon="euro" wrap>
             <Text style={s.indicative}>Tarifs de responsabilité LPPR, affichés à titre indicatif.</Text>
             {d.vph && (
               <CodeRow
@@ -739,7 +820,7 @@ function FicheDocument({ d }: { d: FicheData }) {
 
         {/* LCD : sélections incluses au forfait hebdomadaire — à fournir par le prestataire */}
         {d.incluses.length > 0 && (
-          <Section title="À fournir par le prestataire — inclus au forfait de location">
+          <Section title="À fournir par le prestataire — inclus au forfait de location" icon="box">
             <Text style={{ fontSize: 8, color: C.cyan800, marginBottom: 4 }}>
               En location courte durée, adjonctions et PAP sont couverts par le forfait
               hebdomadaire et ne peuvent pas être facturés séparément (arrêté du 06/02/2025, §7).
@@ -754,7 +835,7 @@ function FicheDocument({ d }: { d: FicheData }) {
 
         {/* parcours d'essais requis */}
         {d.essais.length > 0 && (
-          <Section title="Essais requis avant prise en charge" wrap>
+          <Section title="Essais requis avant prise en charge" icon="clipboard" wrap>
             {d.essais.map((n, i) => (
               <Text key={i} style={{ fontSize: 9, color: C.inkSoft, marginBottom: 3 }}>
                 • {n}
@@ -765,7 +846,7 @@ function FicheDocument({ d }: { d: FicheData }) {
 
         {/* pièces conditionnant le remboursement (achat modulaire / LLD) */}
         {d.documents.length > 0 && (
-          <Section title="Pièces à transmettre à la CPAM (remboursement)" wrap>
+          <Section title="Pièces à transmettre à la CPAM (remboursement)" icon="folder" wrap>
             {d.documents.map((n, i) => (
               <Text key={i} style={{ fontSize: 9, marginBottom: 2 }}>
                 [ ] {n}

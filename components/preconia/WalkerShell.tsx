@@ -501,10 +501,9 @@ export function WalkerShell() {
             code: hit ? adaptedCode(gen, brand, adjBrandMap) : gen,
             codeGenerique: gen,
             codeMarque: hit ? adaptedCode(gen, brand, adjBrandMap) : null,
+            forfait: f,
             label: papForfaits[f].label,
             price: papForfaits[f].price,
-            definition: papForfaits[f].definition,
-            technique: papForfaits[f].technique,
           };
         })
       : [];
