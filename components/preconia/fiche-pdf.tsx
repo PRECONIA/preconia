@@ -498,7 +498,9 @@ function Section({
 }) {
   return (
     <View style={s.section} wrap={wrap}>
-      <View style={s.sectionHead}>
+      {/* bandeau insécable, et jamais orphelin en bas de page : s'il reste moins de ~40 pt
+          sous lui, il bascule entier sur la page suivante avec son contenu. */}
+      <View style={s.sectionHead} wrap={false} minPresenceAhead={40}>
         <Ico name={icon} />
         <Text style={s.sectionTitle}>{title}</Text>
       </View>
@@ -645,7 +647,7 @@ function FicheDocument({ d }: { d: FicheData }) {
           <Section title="Produits d'assistance à la posture (PAP) sélectionnés" icon="seat" wrap>
             {d.pap.length > 0 && (
               <View style={s.table}>
-                <View style={s.thRow}>
+                <View style={s.thRow} wrap={false} minPresenceAhead={30}>
                   <Text style={[s.th, { flex: 1 }]}>Produit d&apos;assistance à la posture</Text>
                   <Text style={[s.th, { width: 44, textAlign: "center" }]}>Forfait</Text>
                   <Text style={[s.th, { width: 64, textAlign: "center" }]}>Code LPP</Text>
@@ -689,7 +691,7 @@ function FicheDocument({ d }: { d: FicheData }) {
         {d.adjonctions.length > 0 && (
           <Section title="Adjonctions sélectionnées" icon="plus" wrap>
             <View style={s.table}>
-              <View style={s.thRow}>
+              <View style={s.thRow} wrap={false} minPresenceAhead={30}>
                 <Text style={[s.th, { flex: 1 }]}>Adjonction</Text>
                 <Text style={[s.th, { width: 66, textAlign: "center" }]}>Code générique</Text>
                 <Text style={[s.th, { width: 78, textAlign: "center" }]}>
