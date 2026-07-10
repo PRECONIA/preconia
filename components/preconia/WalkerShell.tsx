@@ -59,7 +59,6 @@ import { RechercheLpp } from "@/components/preconia/RechercheLpp";
 import { ModuleCumul } from "@/components/preconia/ModuleCumul";
 import { RechercheVph } from "@/components/preconia/RechercheVph";
 import { SpecificitesPrescription } from "@/components/preconia/SpecificitesPrescription";
-import { AppuiTeteAnimation } from "@/components/preconia/AppuiTeteAnimation";
 import { ContactToast } from "@/components/preconia/ContactToast";
 import { Logo } from "@/components/preconia/Logo";
 import type { FicheData } from "@/components/preconia/fiche-pdf";
@@ -404,8 +403,6 @@ export function WalkerShell() {
       setConnSource(e.currentTarget.getBoundingClientRect());
   };
   const onHoverLeave = () => setConnSource(null);
-  // Survol de l'adjonction « Supplément appui-tête réglable » → animation à droite du walker.
-  const [showAppuiTete, setShowAppuiTete] = useState(false);
 
   // ---- Export PDF de la fiche récapitulative ----
   // Construit un objet purement sérialisable depuis l'état courant (aucune logique dans le PDF).
@@ -1317,7 +1314,6 @@ export function WalkerShell() {
                       // tant que le forfait A est déclenché par une sélection PAP.
                       const blocked =
                         billAdj && item.code === APPUI_TETE_CODE && forfaitAActive;
-                      const isAppuiTete = item.code === APPUI_TETE_CODE;
                       const btn = (
                         <button
                           disabled={blocked}
@@ -1362,29 +1358,7 @@ export function WalkerShell() {
                           )}
                         </button>
                       );
-                      if (!isAppuiTete) return <div key={item.code}>{btn}</div>;
-                      // Appui-tête : au survol, animation du mécanisme à droite du walker (sans texte).
-                      return (
-                        <div
-                          key={item.code}
-                          className="group relative"
-                          onMouseEnter={(e) => {
-                            setShowAppuiTete(true);
-                            onHoverEnter(e);
-                          }}
-                          onMouseLeave={() => {
-                            setShowAppuiTete(false);
-                            onHoverLeave();
-                          }}
-                        >
-                          {btn}
-                          {showAppuiTete && (
-                            <div className="pointer-events-none absolute left-0 top-full z-30 mt-2 w-full lg:fixed lg:left-[calc(50%+399px)] lg:right-4 lg:top-16 lg:z-50 lg:mt-0 lg:w-auto lg:max-w-[26rem]">
-                              <AppuiTeteAnimation />
-                            </div>
-                          )}
-                        </div>
-                      );
+                      return <div key={item.code}>{btn}</div>;
                     })}
                   </div>
                 ))}
