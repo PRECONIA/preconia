@@ -140,6 +140,28 @@ export interface FicheData {
   lastUpdated: string;
 }
 
+/* Prise de mesures du patient (projet Claude Design « Schéma Prise de Mesures ») :
+   repères A–L/N du schéma public/schema-mesures.png, colonne « cm » à remplir à la main. */
+const MESURES: { k: string; label: string }[][] = [
+  [
+    { k: "A", label: "Largeur bassin" },
+    { k: "B", label: "Longueur cuisses" },
+    { k: "C", label: "Longueur creux poplité / pied" },
+    { k: "D", label: "Longueur pied" },
+    { k: "E", label: "Hauteur omoplate" },
+    { k: "F", label: "Hauteur épaule" },
+  ],
+  [
+    { k: "H", label: "Hauteur tête / siège" },
+    { k: "N", label: "Hauteur occiput / siège" },
+    { k: "I", label: "Hauteur coude 90° / siège" },
+    { k: "J", label: "Largeur buste" },
+    { k: "K", label: "Profondeur buste" },
+    { k: "L", label: "Longueur bras" },
+  ],
+];
+const IDENTITE_MESURES = ["Taille", "Poids", "Latéralité"];
+
 function eur(n: number): string {
   // séparateur de milliers : espace normale — l'espace fine insécable (U+202F) produite par
   // toLocaleString n'a pas de glyphe dans JetBrains Mono (carré barré dans le PDF).
@@ -408,6 +430,7 @@ type IcoName =
   | "check"
   | "sliders"
   | "seat"
+  | "mesure"
   | "plus"
   | "euro"
   | "box"
@@ -449,6 +472,12 @@ function Ico({ name }: { name: IcoName }) {
         <>
           <Path d="M8 4v16" {...ICO} />
           <Path d="M8 14h8v6" {...ICO} />
+        </>
+      )}
+      {name === "mesure" && (
+        <>
+          <Circle cx={12} cy={12} r={9} {...ICO} />
+          <Path d="M12 7.5 L16.5 12 L12 16.5 L7.5 12 Z" {...ICO} fill={C.white} />
         </>
       )}
       {name === "plus" && (
@@ -498,11 +527,17 @@ function Section({
 }) {
   return (
     <View style={s.section} wrap={wrap}>
-      {/* bandeau insécable, et jamais orphelin en bas de page : s'il reste moins de ~40 pt
-          sous lui, il bascule entier sur la page suivante avec son contenu. */}
-      <View style={s.sectionHead} wrap={false} minPresenceAhead={40}>
-        <Ico name={icon} />
-        <Text style={s.sectionTitle}>{title}</Text>
+      {/* Bandeau jamais coupé ni orphelin : il est rendu atomique avec une réserve de
+          50 pt (annulée par la marge négative, donc invisible). S'il reste moins de
+          ~72 pt en bas de page, le bloc — donc le bandeau et le début du contenu —
+          bascule entier sur la page suivante. (minPresenceAhead est ignoré dans ce
+          contexte par @react-pdf 4.x, d'où cette réserve mécanique.) */}
+      <View wrap={false} style={{ marginBottom: -50 }}>
+        <View style={s.sectionHead}>
+          <Ico name={icon} />
+          <Text style={s.sectionTitle}>{title}</Text>
+        </View>
+        <View style={{ height: 50 }} />
       </View>
       {children}
     </View>
@@ -641,6 +676,71 @@ function FicheDocument({ d }: { d: FicheData }) {
             </View>
           </Section>
         )}
+
+        {/* prise de mesures du patient — formulaire à remplir, bloc entier sur une page
+            (fiche officielle : les mesures anthropométriques suivent les caractéristiques) */}
+        <Section title="Prise de mesures du patient" icon="mesure">
+          <View style={{ flexDirection: "row", borderWidth: 1, borderColor: C.lineSoft, borderRadius: 4 }}>
+            {IDENTITE_MESURES.map((f, i) => (
+              <View
+                key={f}
+                style={{
+                  flex: 1,
+                  flexDirection: "row",
+                  alignItems: "flex-end",
+                  gap: 6,
+                  paddingVertical: 8,
+                  paddingHorizontal: 10,
+                  borderLeftWidth: i ? 1 : 0,
+                  borderLeftColor: C.lineSoft,
+                }}
+              >
+                <Text style={{ fontSize: 7, fontWeight: 700, letterSpacing: 0.5, textTransform: "uppercase", color: C.petrol }}>
+                  {f}
+                </Text>
+                <View style={{ flex: 1, borderBottomWidth: 1, borderBottomColor: "#c4c4c4", borderStyle: "dotted", height: 10 }} />
+              </View>
+            ))}
+          </View>
+          <View style={{ flexDirection: "row", gap: 10, marginTop: 8 }}>
+            {MESURES.map((col, ci) => (
+              <View key={ci} style={[s.table, { flex: 1 }]}>
+                <View style={s.thRow}>
+                  <Text style={[s.th, { flex: 1 }]}>Mesure</Text>
+                  <Text style={[s.th, { width: 40, textAlign: "center" }]}>cm</Text>
+                </View>
+                {col.map((m, i) => (
+                  <View key={m.k} style={[s.tRow, ...(i % 2 ? [s.tRowAlt] : [])]}>
+                    <View style={{ flex: 1, flexDirection: "row", alignItems: "center", gap: 6, paddingVertical: 5, paddingHorizontal: 6 }}>
+                      <View
+                        style={{
+                          width: 13,
+                          height: 13,
+                          backgroundColor: C.petrol,
+                          borderRadius: 2,
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <Text style={{ color: C.white, fontSize: 8, fontWeight: 700, lineHeight: 1 }}>
+                          {m.k}
+                        </Text>
+                      </View>
+                      <Text style={{ flex: 1, fontSize: 8 }}>{m.label}</Text>
+                    </View>
+                    <View style={{ width: 40, borderLeftWidth: 1, borderLeftColor: C.lineSoft }} />
+                  </View>
+                ))}
+              </View>
+            ))}
+          </View>
+          {/* eslint-disable-next-line jsx-a11y/alt-text */}
+          <Image src="/schema-mesures.png" style={{ width: 420, height: 338, alignSelf: "center", marginTop: 10 }} />
+          <Text style={{ fontSize: 7.5, color: C.inkSoft, marginTop: 4 }}>
+            Repères de mesure du patient assis (profil &amp; dos). Prise de mesures obligatoire à
+            joindre à la fiche d&apos;évaluation des besoins.
+          </Text>
+        </Section>
 
         {/* produits d'assistance à la posture — tableau façon fiche officielle */}
         {(d.pap.length > 0 || d.forfaits.length > 0) && (
