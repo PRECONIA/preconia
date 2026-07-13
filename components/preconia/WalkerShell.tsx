@@ -390,13 +390,12 @@ export function WalkerShell() {
     lcdOption && copyToClipboard(`${lcdOption.code}\t${lcdOption.label}`, setCopiedOption);
   // Encart « définition + spécificités techniques » du forfait PAP A ou B.
   const [papInfo, setPapInfo] = useState<"A" | "B" | null>(null);
-  // Connecteur animé : trace une ligne du bouton survolé vers l'encart info orange (grand écran).
-  const [connSource, setConnSource] = useState<DOMRect | null>(null);
-  const onHoverEnter = (e: React.MouseEvent<HTMLElement>) => {
-    if (typeof window !== "undefined" && window.innerWidth >= 1024)
-      setConnSource(e.currentTarget.getBoundingClientRect());
-  };
-  const onHoverLeave = () => setConnSource(null);
+  // Encart d'information au survol (indication officielle d'un dispositif, définition
+  // d'un PAP) : hissé hors du panneau en verre — backdrop-filter fait du panneau le
+  // conteneur des position:fixed, qui seraient sinon projetés hors cadre et rognés.
+  const [hoverInfo, setHoverInfo] = useState<{ title: string; body: React.ReactNode } | null>(
+    null,
+  );
 
   // ---- Export PDF de la fiche récapitulative ----
   // Construit un objet purement sérialisable depuis l'état courant (aucune logique dans le PDF).
@@ -672,7 +671,7 @@ export function WalkerShell() {
         className="scroll-mt-4 overflow-hidden pc-panel"
       >
         <div className="h-[3px] bg-gradient-to-r from-petrol-deep via-petrol to-orange-500" />
-        <div className="px-6 py-6">
+        <div key={stage} className="pc-step-in px-6 py-6">
           {/* ---------------- HOME ---------------- */}
           {stage === "home" && (
             <>
@@ -958,8 +957,7 @@ export function WalkerShell() {
               duree={answers.duree}
               acquisition={answers.acquisition}
               dispatch={dispatch}
-              onEnter={onHoverEnter}
-              onLeave={onHoverLeave}
+              onInfo={setHoverInfo}
             />
           )}
           {stage === "cfg_elec" && (
@@ -973,8 +971,7 @@ export function WalkerShell() {
               duree={answers.duree}
               acquisition={answers.acquisition}
               dispatch={dispatch}
-              onEnter={onHoverEnter}
-              onLeave={onHoverLeave}
+              onInfo={setHoverInfo}
             />
           )}
 
@@ -1412,9 +1409,11 @@ export function WalkerShell() {
                     {region.items.map((it) => (
                       <div
                         key={it.name}
-                        className="group relative border-t border-line-soft"
-                        onMouseEnter={it.info ? onHoverEnter : undefined}
-                        onMouseLeave={it.info ? onHoverLeave : undefined}
+                        className="border-t border-line-soft"
+                        onMouseEnter={
+                          it.info ? () => setHoverInfo({ title: it.name, body: it.info }) : undefined
+                        }
+                        onMouseLeave={it.info ? () => setHoverInfo(null) : undefined}
                       >
                         <button
                           className="flex w-full items-start gap-2 px-3 py-2 text-left hover:bg-white"
@@ -1430,14 +1429,6 @@ export function WalkerShell() {
                             <span className="block text-xs text-ink-soft">{it.desc}</span>
                           </span>
                         </button>
-                        {it.info && (
-                          <div className="pointer-events-none absolute left-0 top-full z-30 mt-1 hidden w-full rounded-xl border-2 border-orange-400 bg-orange-50 p-4 text-[13px] leading-relaxed text-orange-900 shadow-xl group-hover:block lg:fixed lg:left-[calc(50%+399px)] lg:right-4 lg:top-16 lg:z-50 lg:mt-0 lg:w-auto lg:max-w-[34rem]">
-                            <div className="mb-1.5 text-[11px] font-bold uppercase tracking-wide text-orange-700">
-                              {it.name}
-                            </div>
-                            {it.info}
-                          </div>
-                        )}
                       </div>
                     ))}
                   </details>
@@ -2010,6 +2001,17 @@ export function WalkerShell() {
           </div>
         </aside>
       )}
+      {hoverInfo && (
+        <div
+          aria-hidden
+          className="pc-fade-side pointer-events-none hidden rounded-xl border-2 border-orange-400 bg-orange-50 p-4 text-[13px] leading-relaxed text-orange-900 shadow-xl lg:absolute lg:left-[calc(100%+16px)] lg:top-0 lg:block lg:w-[min(26rem,calc((100vw-790px)/2-32px))]"
+        >
+          <div className="mb-1.5 text-[11px] font-bold uppercase tracking-wide text-orange-700">
+            {hoverInfo.title}
+          </div>
+          {hoverInfo.body}
+        </div>
+      )}
       </div>
 
       <div id="recherche-lppr" className="scroll-mt-4">
@@ -2029,8 +2031,6 @@ export function WalkerShell() {
       </div>
 
 
-      {connSource && <InfoConnector source={connSource} />}
-
       <ContactToast />
     </div>
     </>
@@ -2039,32 +2039,6 @@ export function WalkerShell() {
 
 /* ---------------- petits composants utilitaires ---------------- */
 
-/** Ligne SVG animée du bouton survolé (dispositif ou PAP) vers l'encart d'information orange.
- *  L'encart est en position fixe à droite (grand écran) ; on relie sa gauche au bord droit du bouton. */
-function InfoConnector({ source }: { source: DOMRect }) {
-  const vw = typeof window !== "undefined" ? window.innerWidth : 1280;
-  const x1 = source.right; // bord droit exact du bouton
-  const y1 = source.top + source.height / 2;
-  const x2 = vw / 2 + 401; // bord gauche de l'encart : lg:left-[calc(50%+399px)]
-  const y2 = 96; // sous le haut de l'encart : lg:top-16
-  const mx = (x1 + x2) / 2;
-  const d = `M${x1},${y1} C${mx},${y1} ${mx},${y2} ${x2},${y2}`;
-  return (
-    <svg aria-hidden className="pointer-events-none fixed inset-0 z-[45] h-full w-full">
-      <path
-        d={d}
-        fill="none"
-        stroke="#F59E42"
-        strokeWidth="2.25"
-        strokeLinecap="round"
-        strokeDasharray="640"
-        strokeDashoffset="640"
-      >
-        <animate attributeName="stroke-dashoffset" from="640" to="0" dur="0.4s" fill="freeze" />
-      </path>
-    </svg>
-  );
-}
 
 function Step({ title, hint, children }: { title: string; hint?: string; children: React.ReactNode }) {
   return (
@@ -2116,16 +2090,15 @@ function DeviceChoice({
   duree,
   acquisition,
   dispatch,
-  onEnter,
-  onLeave,
+  onInfo,
 }: {
   title: string;
   list: Device[];
   duree: Answers["duree"];
   acquisition: Answers["acquisition"];
   dispatch: ReturnType<typeof useWalker>["dispatch"];
-  onEnter?: (e: React.MouseEvent<HTMLElement>) => void;
-  onLeave?: () => void;
+  /** encart latéral « indication officielle » au survol (null = masquer). */
+  onInfo: (info: { title: string; body: React.ReactNode } | null) => void;
 }) {
   const allowed = modesForDuree(duree, acquisition);
   const restriction =
@@ -2148,17 +2121,32 @@ function DeviceChoice({
         const modes = d.modes.filter((m) => allowed.includes(m));
         const ind = deviceIndicationsByCode[d.code] ?? {};
         const entries = modes.map((m) => [m, ind[m]] as const).filter(([, t]) => t);
+        const info =
+          entries.length > 0
+            ? {
+                title: "Indication officielle de prise en charge",
+                body: (
+                  <>
+                    {entries.map(([m, t]) => (
+                      <p key={m} className="mb-2 last:mb-0">
+                        <span className="font-semibold">{m} — </span>
+                        {t}
+                      </p>
+                    ))}
+                  </>
+                ),
+              }
+            : null;
         return (
           <div
             key={d.code}
-            className="group relative"
-            onMouseEnter={entries.length > 0 ? onEnter : undefined}
-            onMouseLeave={entries.length > 0 ? onLeave : undefined}
+            onMouseEnter={info ? () => onInfo(info) : undefined}
+            onMouseLeave={info ? () => onInfo(null) : undefined}
           >
             <button
               className={btn}
               onClick={() => {
-                onLeave?.();
+                onInfo(null);
                 dispatch({ type: "CHOOSE_DEVICE", code: d.code });
               }}
             >
@@ -2169,19 +2157,6 @@ function DeviceChoice({
                 Prise en charge : {modes.join(" · ")}
               </span>
             </button>
-            {entries.length > 0 && (
-              <div className="pointer-events-none absolute left-0 top-full z-30 mt-2 hidden w-full rounded-xl border-2 border-orange-400 bg-orange-50 p-4 text-[13px] leading-relaxed text-orange-900 shadow-xl group-hover:block lg:fixed lg:left-[calc(50%+399px)] lg:right-4 lg:top-16 lg:z-50 lg:mt-0 lg:w-auto lg:max-w-[34rem]">
-                <div className="mb-1.5 text-[11px] font-bold uppercase tracking-wide text-orange-700">
-                  Indication officielle de prise en charge
-                </div>
-                {entries.map(([m, t]) => (
-                  <p key={m} className="mb-2 last:mb-0">
-                    <span className="font-semibold">{m} — </span>
-                    {t}
-                  </p>
-                ))}
-              </div>
-            )}
           </div>
         );
       })}

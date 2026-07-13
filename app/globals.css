@@ -180,19 +180,55 @@ body {
     rgba(244, 115, 44, 0)
   );
   transform: skewX(-22deg);
-  animation: pc-sweep 3s cubic-bezier(0.6, 0, 0.3, 1) infinite;
+  opacity: 0;
   pointer-events: none;
+}
+.pc-btn-sweep:hover::after {
+  opacity: 1;
+  animation: pc-sweep 1.4s cubic-bezier(0.6, 0, 0.3, 1) infinite;
 }
 @keyframes pc-sweep {
   0% {
     left: -12%;
   }
-  38% {
+  55% {
     left: 108%;
   }
   100% {
     left: 108%;
   }
+}
+
+/* transition d'étape du walker : le contenu arrive en défloutage montant */
+@keyframes pc-step {
+  from {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: none;
+  }
+}
+.pc-step-in {
+  animation: pc-step 0.45s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+/* encart d'information (indications officielles, PAP) : fondu entrant latéral */
+@keyframes pc-fade-side {
+  from {
+    opacity: 0;
+    transform: translateX(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.pc-fade-side {
+  animation: pc-fade-side 0.3s cubic-bezier(0.22, 0.61, 0.36, 1) both;
 }
 
 /* point d'état « vérifié » : pulsation douce (header, footer) */
@@ -235,9 +271,14 @@ body {
   .pc-dot {
     animation: none;
   }
-  .pc-btn-sweep::after {
+  .pc-btn-sweep::after,
+  .pc-btn-sweep:hover::after {
     animation: none;
     opacity: 0;
+  }
+  .pc-step-in,
+  .pc-fade-side {
+    animation: none;
   }
 }
 
