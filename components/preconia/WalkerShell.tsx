@@ -5,7 +5,7 @@
    de bout en bout. Le rendu riche par étape (QuestionStep, BesoinsForm, AdjonctionsPanel,
    PapPanel, ResultCard, synthèse copiable) est volontairement reporté à la session UI. */
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Link from "next/link";
 import {
   adjBrandMap,
@@ -393,9 +393,25 @@ export function WalkerShell() {
   // Encart d'information au survol (indication officielle d'un dispositif, définition
   // d'un PAP) : hissé hors du panneau en verre — backdrop-filter fait du panneau le
   // conteneur des position:fixed, qui seraient sinon projetés hors cadre et rognés.
-  const [hoverInfo, setHoverInfo] = useState<{ title: string; body: React.ReactNode } | null>(
-    null,
-  );
+  const [hoverInfo, setHoverInfo] = useState<{
+    title: string;
+    body: React.ReactNode;
+    top: number;
+  } | null>(null);
+  const walkerWrapRef = useRef<HTMLDivElement | null>(null);
+  /** affiche l'encart en regard du bouton survolé (top aligné sur l'ancre). */
+  const showHoverInfo = (
+    info: { title: string; body: React.ReactNode } | null,
+    anchor?: HTMLElement,
+  ) => {
+    if (!info) return setHoverInfo(null);
+    const wrap = walkerWrapRef.current;
+    const top =
+      wrap && anchor
+        ? Math.max(0, anchor.getBoundingClientRect().top - wrap.getBoundingClientRect().top)
+        : 0;
+    setHoverInfo({ ...info, top });
+  };
 
   // ---- Export PDF de la fiche récapitulative ----
   // Construit un objet purement sérialisable depuis l'état courant (aucune logique dans le PDF).
@@ -665,7 +681,7 @@ export function WalkerShell() {
 
       {/* wrapper relatif : l'encart « Sources officielles » (absolu à droite) s'aligne
           sur le sommet du panneau du walker et défile avec la page. */}
-      <div className="relative">
+      <div className="relative" ref={walkerWrapRef}>
       <div
         id="preconisation"
         className="scroll-mt-4 overflow-hidden pc-panel"
@@ -957,7 +973,7 @@ export function WalkerShell() {
               duree={answers.duree}
               acquisition={answers.acquisition}
               dispatch={dispatch}
-              onInfo={setHoverInfo}
+              onInfo={showHoverInfo}
             />
           )}
           {stage === "cfg_elec" && (
@@ -971,7 +987,7 @@ export function WalkerShell() {
               duree={answers.duree}
               acquisition={answers.acquisition}
               dispatch={dispatch}
-              onInfo={setHoverInfo}
+              onInfo={showHoverInfo}
             />
           )}
 
@@ -1411,9 +1427,11 @@ export function WalkerShell() {
                         key={it.name}
                         className="border-t border-line-soft"
                         onMouseEnter={
-                          it.info ? () => setHoverInfo({ title: it.name, body: it.info }) : undefined
+                          it.info
+                            ? (e) => showHoverInfo({ title: it.name, body: it.info }, e.currentTarget)
+                            : undefined
                         }
-                        onMouseLeave={it.info ? () => setHoverInfo(null) : undefined}
+                        onMouseLeave={it.info ? () => showHoverInfo(null) : undefined}
                       >
                         <button
                           className="flex w-full items-start gap-2 px-3 py-2 text-left hover:bg-white"
@@ -2004,7 +2022,8 @@ export function WalkerShell() {
       {hoverInfo && (
         <div
           aria-hidden
-          className="pc-fade-side pointer-events-none hidden rounded-xl border-2 border-orange-400 bg-orange-50 p-4 text-[13px] leading-relaxed text-orange-900 shadow-xl lg:absolute lg:left-[calc(100%+16px)] lg:top-0 lg:block lg:w-[min(26rem,calc((100vw-790px)/2-32px))]"
+          className="pc-fade-side pointer-events-none hidden rounded-xl border-2 border-orange-400 bg-orange-50 p-4 text-[13px] leading-relaxed text-orange-900 shadow-xl lg:absolute lg:left-[calc(100%+16px)] lg:block lg:w-[min(26rem,calc((100vw-790px)/2-32px))]"
+          style={{ top: hoverInfo.top }}
         >
           <div className="mb-1.5 text-[11px] font-bold uppercase tracking-wide text-orange-700">
             {hoverInfo.title}
@@ -2097,8 +2116,8 @@ function DeviceChoice({
   duree: Answers["duree"];
   acquisition: Answers["acquisition"];
   dispatch: ReturnType<typeof useWalker>["dispatch"];
-  /** encart latéral « indication officielle » au survol (null = masquer). */
-  onInfo: (info: { title: string; body: React.ReactNode } | null) => void;
+  /** encart latéral « indication officielle » au survol, en regard de l'ancre (null = masquer). */
+  onInfo: (info: { title: string; body: React.ReactNode } | null, anchor?: HTMLElement) => void;
 }) {
   const allowed = modesForDuree(duree, acquisition);
   const restriction =
@@ -2140,7 +2159,7 @@ function DeviceChoice({
         return (
           <div
             key={d.code}
-            onMouseEnter={info ? () => onInfo(info) : undefined}
+            onMouseEnter={info ? (e) => onInfo(info, e.currentTarget) : undefined}
             onMouseLeave={info ? () => onInfo(null) : undefined}
           >
             <button
