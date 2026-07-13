@@ -8,9 +8,11 @@ import Link from "next/link";
 import { Logo } from "@/components/preconia/Logo";
 
 /* Pont vers Mediculus (calculateur médical, second outil de Thomas).
-   URL à renseigner au déploiement de Mediculus — null = volet visible mais
-   marqué « bientôt » (le domaine mediculus.vercel.app appartient à un tiers). */
-const MEDICULUS_URL: string | null = null;
+   Branché sur l'instance LOCALE pour commencer (npx next start -p 3200 dans
+   /Users/thomas/mediculus) — remplacer par l'URL publique au déploiement.
+   null = volet visible mais marqué « bientôt » (mediculus.vercel.app appartient
+   à un tiers, ne pas l'utiliser). */
+const MEDICULUS_URL: string | null = "http://localhost:3200";
 
 /* Logo Mediculus : boulier minimaliste — copie fidèle de components/Logo.tsx
    du projet Mediculus (3 rails encre, 3 billes bleu accent). */
