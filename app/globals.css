@@ -217,7 +217,7 @@ body {
   background: linear-gradient(115deg, #073f3c, #0c6b66 55%, #11837c);
   box-shadow: 0 0 34px rgba(12, 107, 102, 0.35);
   transform: translateX(-160vw) skewX(-18deg);
-  animation: pc-wipe-sweep 1.15s cubic-bezier(0.65, 0.05, 0.35, 0.95) both;
+  animation: pc-wipe-sweep 1.9s cubic-bezier(0.6, 0.02, 0.32, 1) both;
 }
 @keyframes pc-wipe-sweep {
   0% {
@@ -321,6 +321,69 @@ body {
   animation: pc-progress-breathe 2.4s ease-in-out infinite;
 }
 
+/* Boîte à outils du parcours : dock vertical d'accès aux modules (superposition). */
+.pc-tool-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  width: 100%;
+  padding: 9px 4px;
+  border-radius: 12px;
+  color: var(--color-ink-soft);
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    transform 0.15s ease;
+}
+.pc-tool-btn:hover {
+  background: rgba(12, 107, 102, 0.1);
+  color: var(--color-petrol-deep);
+  transform: translateY(-1px);
+}
+.pc-tool-btn svg {
+  width: 20px;
+  height: 20px;
+}
+.pc-tool-label {
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.1;
+  text-align: center;
+}
+
+/* Superposition d'un module par-dessus le parcours : fond flouté + panneau. */
+.pc-tool-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 84px 16px 32px;
+  overflow-y: auto;
+  background: rgba(7, 63, 60, 0.28);
+  -webkit-backdrop-filter: blur(8px) saturate(1.05);
+  backdrop-filter: blur(8px) saturate(1.05);
+  animation: pc-fade 0.2s ease both;
+}
+.pc-tool-modal {
+  width: min(840px, 100%);
+  animation: pc-tool-in 0.28s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+@keyframes pc-tool-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 /* mode parcours : masque le contenu éditorial (FAQ, footer) hors du walker */
 body[data-walker="on"] .pc-hide-in-walk {
   display: none;
@@ -413,6 +476,10 @@ body[data-walker="on"] .pc-hide-in-walk {
   }
   .pc-progress-fill {
     transition: none;
+  }
+  .pc-tool-overlay,
+  .pc-tool-modal {
+    animation: none;
   }
 }
 

@@ -103,6 +103,65 @@ function priceLabel(a: Adjonction): string {
 // Propulsion manuelle / podale : fauteuils manuels + cycle (propulsion podale).
 const MAN_FAMILIES = ["Manuel non modulaire", "Manuel modulaire", "Cycle"];
 
+/* Boîte à outils du parcours : les modules accessibles en superposition, avec
+   leur icône vectorielle (tracés minimalistes, cohérents avec la fiche PDF). */
+const ico = {
+  stroke: "currentColor",
+  strokeWidth: 1.8,
+  strokeLinecap: "round" as const,
+  strokeLinejoin: "round" as const,
+  fill: "none",
+};
+const TOOLS: { id: "lppr" | "cumul" | "vph" | "spec"; label: string; title: string; icon: React.ReactNode }[] = [
+  {
+    id: "lppr",
+    label: "LPPR",
+    title: "Recherche nomenclature LPPR",
+    icon: (
+      <svg viewBox="0 0 24 24" aria-hidden>
+        <circle cx="11" cy="11" r="6.5" {...ico} />
+        <line x1="16" y1="16" x2="20.5" y2="20.5" {...ico} />
+      </svg>
+    ),
+  },
+  {
+    id: "cumul",
+    label: "Cumul",
+    title: "Évaluation de cumul VPH",
+    icon: (
+      <svg viewBox="0 0 24 24" aria-hidden>
+        <path d="M12 3.5 20.5 8 12 12.5 3.5 8 Z" {...ico} />
+        <path d="M3.5 12 12 16.5 20.5 12" {...ico} />
+        <path d="M3.5 16 12 20.5 20.5 16" {...ico} />
+      </svg>
+    ),
+  },
+  {
+    id: "vph",
+    label: "VPH",
+    title: "Recherche de VPH par fabricant et catégorie",
+    icon: (
+      <svg viewBox="0 0 24 24" aria-hidden>
+        <circle cx="8.5" cy="18" r="3" {...ico} />
+        <circle cx="17.5" cy="18" r="2" {...ico} />
+        <path d="M6.5 5.5h3l2.2 8.5H15" {...ico} />
+        <path d="M9.6 9.5h6.4l-1.4 4.5" {...ico} />
+      </svg>
+    ),
+  },
+  {
+    id: "spec",
+    label: "Spéc.",
+    title: "Spécificités de prescription par VPH",
+    icon: (
+      <svg viewBox="0 0 24 24" aria-hidden>
+        <rect x="5.5" y="4" width="13" height="16.5" rx="2" {...ico} />
+        <path d="M9 9h6M9 12.5h6M9 16h3.5" {...ico} />
+      </svg>
+    ),
+  },
+];
+
 /** Supplément appui-tête réglable — non cumulable avec le forfait PAP A (arrêté 06/02/2025, §7). */
 const APPUI_TETE_CODE = "4954630";
 
@@ -244,9 +303,27 @@ export function WalkerShell() {
   const startWalk = () => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return go("age");
     setWiping(true);
-    window.setTimeout(() => go("age"), 700);
-    window.setTimeout(() => setWiping(false), 1700);
+    window.setTimeout(() => go("age"), 1050);
+    window.setTimeout(() => setWiping(false), 2650);
   };
+
+  // Boîte à outils : un module (recherche LPPR, cumul…) ouvert en superposition
+  // floutée par-dessus le parcours ; fermeture par Échap ou clic sur le fond, on
+  // revient exactement là où on en était (le walker n'est jamais démonté).
+  const [activeTool, setActiveTool] = useState<null | "lppr" | "cumul" | "vph" | "spec">(null);
+  useEffect(() => {
+    if (!activeTool) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setActiveTool(null);
+    };
+    window.addEventListener("keydown", onKey);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [activeTool]);
 
   // Mode parcours : masque le contenu éditorial rendu hors du walker (FAQ, footer)
   // via body[data-walker="on"] (les modules, eux, sont conditionnés par stage).
@@ -2122,14 +2199,74 @@ export function WalkerShell() {
       )}
 
 
+      {/* Boîte à outils — pendant le parcours : accès aux modules en superposition.
+          Dock vertical dans la gouttière gauche (grand écran) ou collé au bord droit. */}
+      {stage !== "home" && !wiping && (
+        <aside
+          aria-label="Outils"
+          className="pc-panel fixed right-3 top-1/2 z-40 flex w-[62px] -translate-y-1/2 flex-col gap-1 p-1.5 lg:left-auto lg:right-[calc(50%+411px)] lg:top-[128px] lg:translate-y-0"
+        >
+          <span className="px-1 pb-0.5 pt-1 text-center font-mono text-[7.5px] font-bold uppercase tracking-[0.12em] text-petrol">
+            Outils
+          </span>
+          {TOOLS.map((t) => (
+            <button
+              key={t.id}
+              type="button"
+              className="pc-tool-btn"
+              onClick={() => setActiveTool(t.id)}
+              title={t.title}
+            >
+              {t.icon}
+              <span className="pc-tool-label">{t.label}</span>
+            </button>
+          ))}
+        </aside>
+      )}
+
       <ContactToast />
     </div>
+
+    {/* Module ouvert en superposition floutée par-dessus le parcours (Échap pour revenir). */}
+    {activeTool && (
+      <div
+        className="pc-tool-overlay"
+        role="dialog"
+        aria-modal="true"
+        onClick={(e) => {
+          if (e.target === e.currentTarget) setActiveTool(null);
+        }}
+      >
+        <div className="pc-tool-modal">
+          <div className="mb-2 flex items-center justify-between gap-3">
+            <span className="rounded-full border border-white/40 bg-white/70 px-3 py-1 font-mono text-[11px] font-semibold text-petrol-deep backdrop-blur">
+              Outil — le parcours reste en place derrière
+            </span>
+            <button
+              type="button"
+              onClick={() => setActiveTool(null)}
+              className="inline-flex items-center gap-1.5 rounded-full border border-white/40 bg-white/70 px-3 py-1 text-[12px] font-semibold text-ink-soft backdrop-blur transition-colors hover:border-petrol hover:text-petrol-deep"
+            >
+              Fermer
+              <kbd className="rounded border border-line bg-white px-1 py-0.5 font-mono text-[10px]">
+                Échap
+              </kbd>
+            </button>
+          </div>
+          {activeTool === "lppr" && <RechercheLpp />}
+          {activeTool === "cumul" && <ModuleCumul />}
+          {activeTool === "vph" && <RechercheVph />}
+          {activeTool === "spec" && <SpecificitesPrescription />}
+        </div>
+      </div>
+    )}
+
     {wiping && (
       <div className="pc-wipe" aria-hidden>
-        {Array.from({ length: 6 }, (_, i) => (
+        {Array.from({ length: 7 }, (_, i) => (
           <span
             key={i}
-            style={{ left: `${i * 16}%`, animationDelay: `${i * 75}ms`, opacity: 1 - i * 0.06 }}
+            style={{ left: `${i * 14}%`, animationDelay: `${i * 130}ms`, opacity: 1 - i * 0.05 }}
           />
         ))}
       </div>
