@@ -342,13 +342,13 @@ body {
   transform: translateY(-1px);
 }
 .pc-tool-btn svg {
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
 }
 .pc-tool-label {
-  font-size: 8.5px;
+  font-size: 9.5px;
   font-weight: 700;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   line-height: 1.1;
   text-align: center;
@@ -372,6 +372,14 @@ body {
 .pc-tool-modal {
   width: min(840px, 100%);
   animation: pc-tool-in 0.28s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+/* Le module ouvert dans l'overlay est rendu OPAQUE : sinon son panneau en
+   verre (backdrop-filter) ré-échantillonne le fond teinté de l'overlay et sa
+   teinte change à chaque fois que sa hauteur varie (résultats, filtres). */
+.pc-tool-modal .pc-panel {
+  background: #fff;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
 @keyframes pc-tool-in {
   from {

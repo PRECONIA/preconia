@@ -2204,9 +2204,9 @@ export function WalkerShell() {
       {stage !== "home" && !wiping && (
         <aside
           aria-label="Outils"
-          className="pc-panel fixed right-3 top-1/2 z-40 flex w-[62px] -translate-y-1/2 flex-col gap-1 p-1.5 lg:left-auto lg:right-[calc(50%+411px)] lg:top-[128px] lg:translate-y-0"
+          className="pc-panel fixed right-3 top-1/2 z-40 flex w-[92px] -translate-y-1/2 flex-col gap-1 p-2 lg:left-auto lg:right-[calc(50%+404px)] lg:top-[200px] lg:translate-y-0"
         >
-          <span className="px-1 pb-0.5 pt-1 text-center font-mono text-[7.5px] font-bold uppercase tracking-[0.12em] text-petrol">
+          <span className="px-1 pb-1 pt-1 text-center font-mono text-[8px] font-bold uppercase tracking-[0.14em] text-petrol">
             Outils
           </span>
           {TOOLS.map((t) => (
