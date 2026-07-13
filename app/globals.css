@@ -199,6 +199,212 @@ body {
   }
 }
 
+/* Balayage d'entrée dans le parcours : des « / » verts (dégradé des bandeaux)
+   traversent l'écran sous la barre d'ancrage (z-40 < header z-50). */
+.pc-wipe {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  overflow: hidden;
+  pointer-events: none;
+}
+.pc-wipe span {
+  position: absolute;
+  top: -22%;
+  bottom: -22%;
+  width: 11vw;
+  border-radius: 999px;
+  background: linear-gradient(115deg, #073f3c, #0c6b66 55%, #11837c);
+  box-shadow: 0 0 34px rgba(12, 107, 102, 0.35);
+  transform: translateX(-160vw) skewX(-18deg);
+  animation: pc-wipe-sweep 1.9s cubic-bezier(0.6, 0.02, 0.32, 1) both;
+}
+@keyframes pc-wipe-sweep {
+  0% {
+    transform: translateX(-160vw) skewX(-18deg);
+  }
+  100% {
+    transform: translateX(160vw) skewX(-18deg);
+  }
+}
+
+/* Barre de progression du parcours : piste fine + reflet passant, cellules d'étape */
+.pc-progress-track {
+  height: 5px;
+  border-radius: 999px;
+  background: rgba(12, 107, 102, 0.12);
+  overflow: hidden;
+  margin-bottom: 7px;
+}
+.pc-progress-fill {
+  position: relative;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #073f3c, #0c6b66 60%, #11837c);
+  transition: width 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+  overflow: hidden;
+}
+.pc-progress-fill::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 46px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.45),
+    rgba(255, 255, 255, 0)
+  );
+  transform: skewX(-20deg);
+  animation: pc-progress-sheen 3.2s ease-in-out infinite;
+}
+@keyframes pc-progress-sheen {
+  0% {
+    left: -15%;
+  }
+  55% {
+    left: 108%;
+  }
+  100% {
+    left: 108%;
+  }
+}
+/* languette « Finalisé » : glisse hors du bord droit de la cellule Configuration */
+.pc-finalise-wrap {
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 5;
+}
+.pc-finalise {
+  display: inline-block;
+  background: linear-gradient(135deg, #f4732c, #dd4f0b);
+  color: #fff;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1;
+  padding: 5px 10px 5px 8px;
+  border-radius: 0 999px 999px 0;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.25),
+    0 6px 16px -6px rgba(234, 88, 12, 0.6);
+  animation: pc-tab-out 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) 0.4s both;
+}
+@keyframes pc-tab-out {
+  from {
+    transform: translateX(-100%);
+    opacity: 0.4;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+/* cellule d'étape en cours : halo doux qui respire */
+@keyframes pc-progress-breathe {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(12, 107, 102, 0.28);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(12, 107, 102, 0);
+  }
+}
+.pc-progress-current {
+  animation: pc-progress-breathe 2.4s ease-in-out infinite;
+}
+
+/* Boîte à outils du parcours : dock vertical d'accès aux modules (superposition). */
+.pc-tool-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  width: 100%;
+  padding: 9px 4px;
+  border-radius: 12px;
+  color: var(--color-ink-soft);
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    transform 0.15s ease;
+}
+.pc-tool-btn:hover {
+  background: rgba(12, 107, 102, 0.1);
+  color: var(--color-petrol-deep);
+  transform: translateY(-1px);
+}
+.pc-tool-btn svg {
+  width: 22px;
+  height: 22px;
+}
+.pc-tool-label {
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  line-height: 1.1;
+  text-align: center;
+}
+
+/* Superposition d'un module par-dessus le parcours : fond flouté + panneau. */
+.pc-tool-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 84px 16px 32px;
+  overflow-y: auto;
+  /* le flou est porté par le contenu du parcours (.pc-blurable) — ici, seulement
+     une teinte translucide, sans backdrop-filter (pas de flou imbriqué). */
+  background: rgba(7, 63, 60, 0.22);
+  animation: pc-fade 0.2s ease both;
+}
+
+/* Contenu du parcours flouté tant qu'un module est ouvert (Échap pour revenir). */
+.pc-blurable {
+  transition: filter 0.22s ease;
+}
+body[data-tool="on"] .pc-blurable {
+  filter: blur(7px);
+}
+.pc-tool-modal {
+  width: min(840px, 100%);
+  animation: pc-tool-in 0.28s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+/* Le module ouvert dans l'overlay est rendu OPAQUE : sinon son panneau en
+   verre (backdrop-filter) ré-échantillonne le fond teinté de l'overlay et sa
+   teinte change à chaque fois que sa hauteur varie (résultats, filtres). */
+.pc-tool-modal .pc-panel {
+  background: #fff;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+@keyframes pc-tool-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* mode parcours : masque le contenu éditorial (FAQ, footer) hors du walker */
+body[data-walker="on"] .pc-hide-in-walk {
+  display: none;
+}
+
 /* transition d'étape du walker : le contenu arrive en défloutage montant */
 @keyframes pc-step {
   from {
@@ -277,8 +483,22 @@ body {
     opacity: 0;
   }
   .pc-step-in,
-  .pc-fade-side {
+  .pc-fade-side,
+  .pc-finalise,
+  .pc-wipe span,
+  .pc-progress-fill::after,
+  .pc-progress-current {
     animation: none;
+  }
+  .pc-progress-fill {
+    transition: none;
+  }
+  .pc-tool-overlay,
+  .pc-tool-modal {
+    animation: none;
+  }
+  .pc-blurable {
+    transition: none;
   }
 }
 

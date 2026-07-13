@@ -16,9 +16,12 @@ export default function PreconiaPage() {
         <WheelchairBackground />
         <WalkerShell />
       </WalkerProvider>
-      {/* Contenu éditorial indexable (présentation + FAQ + JSON-LD) — rendu serveur. */}
-      <SeoContent />
-      <SiteFooter />
+      {/* Contenu éditorial indexable (présentation + FAQ + JSON-LD) — rendu serveur.
+          Masqué pendant le parcours (body[data-walker="on"], posé par WalkerShell). */}
+      <div className="pc-hide-in-walk">
+        <SeoContent />
+        <SiteFooter />
+      </div>
     </>
   );
 }

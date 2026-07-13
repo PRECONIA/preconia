@@ -21,9 +21,11 @@ function scrollToSection(e: React.MouseEvent<HTMLAnchorElement>, id: string) {
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
-export function SiteHeader() {
+export function SiteHeader({ className = "" }: { className?: string }) {
   return (
-    <header className="sticky top-0 z-50 border-b border-white/60 bg-white/70 shadow-[0_10px_34px_-20px_rgba(7,63,60,0.5)] backdrop-blur-xl">
+    <header
+      className={`sticky top-0 z-50 border-b border-white/60 bg-white/70 shadow-[0_10px_34px_-20px_rgba(7,63,60,0.5)] backdrop-blur-xl ${className}`}
+    >
       {/* liseré signature */}
       <div className="h-[3px] bg-gradient-to-r from-petrol-deep via-petrol to-orange-500" />
       <div className="mx-auto flex max-w-[1240px] items-center gap-5 px-5 py-4">

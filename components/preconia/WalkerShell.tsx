@@ -5,7 +5,7 @@
    de bout en bout. Le rendu riche par étape (QuestionStep, BesoinsForm, AdjonctionsPanel,
    PapPanel, ResultCard, synthèse copiable) est volontairement reporté à la session UI. */
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import {
   adjBrandMap,
@@ -102,6 +102,65 @@ function priceLabel(a: Adjonction): string {
 
 // Propulsion manuelle / podale : fauteuils manuels + cycle (propulsion podale).
 const MAN_FAMILIES = ["Manuel non modulaire", "Manuel modulaire", "Cycle"];
+
+/* Boîte à outils du parcours : les modules accessibles en superposition, avec
+   leur icône vectorielle (tracés minimalistes, cohérents avec la fiche PDF). */
+const ico = {
+  stroke: "currentColor",
+  strokeWidth: 1.8,
+  strokeLinecap: "round" as const,
+  strokeLinejoin: "round" as const,
+  fill: "none",
+};
+const TOOLS: { id: "lppr" | "cumul" | "vph" | "spec"; label: string; title: string; icon: React.ReactNode }[] = [
+  {
+    id: "lppr",
+    label: "LPPR",
+    title: "Recherche nomenclature LPPR",
+    icon: (
+      <svg viewBox="0 0 24 24" aria-hidden>
+        <circle cx="11" cy="11" r="6.5" {...ico} />
+        <line x1="16" y1="16" x2="20.5" y2="20.5" {...ico} />
+      </svg>
+    ),
+  },
+  {
+    id: "cumul",
+    label: "Cumul",
+    title: "Évaluation de cumul VPH",
+    icon: (
+      <svg viewBox="0 0 24 24" aria-hidden>
+        <path d="M12 3.5 20.5 8 12 12.5 3.5 8 Z" {...ico} />
+        <path d="M3.5 12 12 16.5 20.5 12" {...ico} />
+        <path d="M3.5 16 12 20.5 20.5 16" {...ico} />
+      </svg>
+    ),
+  },
+  {
+    id: "vph",
+    label: "VPH",
+    title: "Recherche de VPH par fabricant et catégorie",
+    icon: (
+      <svg viewBox="0 0 24 24" aria-hidden>
+        <circle cx="8.5" cy="18" r="3" {...ico} />
+        <circle cx="17.5" cy="18" r="2" {...ico} />
+        <path d="M6.5 5.5h3l2.2 8.5H15" {...ico} />
+        <path d="M9.6 9.5h6.4l-1.4 4.5" {...ico} />
+      </svg>
+    ),
+  },
+  {
+    id: "spec",
+    label: "Spéc.",
+    title: "Spécificités de prescription par VPH",
+    icon: (
+      <svg viewBox="0 0 24 24" aria-hidden>
+        <rect x="5.5" y="4" width="13" height="16.5" rx="2" {...ico} />
+        <path d="M9 9h6M9 12.5h6M9 16h3.5" {...ico} />
+      </svg>
+    ),
+  },
+];
 
 /** Supplément appui-tête réglable — non cumulable avec le forfait PAP A (arrêté 06/02/2025, §7). */
 const APPUI_TETE_CODE = "4954630";
@@ -237,6 +296,56 @@ export function WalkerShell() {
   const device = selectDevice(state);
 
   const go = (s: Stage) => dispatch({ type: "GO", stage: s });
+
+  // Entrée dans le parcours : balayage de « / » verts sous la barre d'ancrage,
+  // le changement d'étape se fait à couvert, au cœur du passage des barres.
+  const [wiping, setWiping] = useState(false);
+  const startWalk = () => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return go("age");
+    setWiping(true);
+    window.setTimeout(() => go("age"), 1050);
+    window.setTimeout(() => setWiping(false), 2650);
+  };
+
+  // Boîte à outils : un module (recherche LPPR, cumul…) ouvert en superposition
+  // floutée par-dessus le parcours ; fermeture par Échap ou clic sur le fond, on
+  // revient exactement là où on en était (le walker n'est jamais démonté).
+  const [activeTool, setActiveTool] = useState<null | "lppr" | "cumul" | "vph" | "spec">(null);
+  useEffect(() => {
+    if (!activeTool) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setActiveTool(null);
+    };
+    window.addEventListener("keydown", onKey);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    // Floute directement le contenu du parcours (filter: blur sur .pc-blurable) plutôt
+    // que via un backdrop-filter sur l'overlay : évite l'empilement de flous (header +
+    // toolbox en verre) qui se recalcule à chaque repaint et fait varier la teinte.
+    document.body.setAttribute("data-tool", "on");
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prevOverflow;
+      document.body.removeAttribute("data-tool");
+    };
+  }, [activeTool]);
+
+  // Mode parcours : masque le contenu éditorial rendu hors du walker (FAQ, footer)
+  // via body[data-walker="on"] (les modules, eux, sont conditionnés par stage).
+  useEffect(() => {
+    if (stage !== "home") document.body.setAttribute("data-walker", "on");
+    else document.body.removeAttribute("data-walker");
+    return () => document.body.removeAttribute("data-walker");
+  }, [stage]);
+
+  // À chaque changement d'étape, on remonte en haut de page.
+  const prevStage = useRef(stage);
+  useEffect(() => {
+    if (prevStage.current === stage) return;
+    prevStage.current = stage;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+  }, [stage]);
   const setAnswer = <K extends keyof Answers>(field: K, value: Answers[K]) =>
     dispatch({ type: "SET_ANSWER", field, value });
 
@@ -623,8 +732,8 @@ export function WalkerShell() {
 
   return (
     <>
-    <SiteHeader />
-    <div className="relative z-10 mx-auto max-w-[790px] px-5 pb-16 pt-7">
+    <SiteHeader className="pc-blurable" />
+    <div className="pc-blurable relative z-10 mx-auto max-w-[790px] px-5 pb-16 pt-7">
       {/* Hero éditorial — accueil uniquement : identité, promesse, preuves d'officialité.
           En cours de parcours, l'écran reste compact (header fixe + fil des réponses). */}
       {stage === "home" && (
@@ -647,22 +756,81 @@ export function WalkerShell() {
         </section>
       )}
 
-      {stage !== "home" && (
-        <div className="my-5 flex flex-wrap items-center gap-2">
-          {facets(answers).map((f) => (
-            <span
-              key={f.k}
-              className={`rounded-full border px-3 py-1 text-xs ${
-                f.v ? "border-line bg-card text-ink-soft" : "border-dashed border-line text-ink-soft/60"
-              }`}
+      {stage !== "home" &&
+        (() => {
+          const byK = Object.fromEntries(facets(answers).map((f) => [f.k, f.v]));
+          // Cellules dans l'ordre réel du parcours : âge → mise à dispo → cumul →
+          // durée → prise en charge → mobilité → dispositif → configuration
+          // (besoins + adjonctions + PAP, sans détail — coche à la finalisation).
+          const steps: { k: string; v: string | null }[] = [
+            { k: "Âge", v: byK["Âge"] ?? null },
+            { k: "Mise à dispo", v: byK["Mise à dispo"] ?? null },
+            {
+              k: "Cumul",
+              v: answers.cumul ? (answers.cumul === "oui" ? "VPH possédé" : "Aucun VPH") : null,
+            },
+            { k: "Durée", v: byK["Durée"] ?? null },
+            { k: "Prise en charge", v: byK["Prise en charge"] ?? null },
+            { k: "Mobilité", v: byK["Mobilité"] ?? null },
+            { k: "Dispositif", v: byK["Dispositif"] ?? null },
+            { k: "Configuration", v: stage === "result" ? "✓" : null },
+          ];
+          const done = steps.filter((f) => f.v).length;
+          const currentIdx = steps.findIndex((f) => !f.v);
+          return (
+            <div
+              className="my-5 lg:-mx-10"
+              role="progressbar"
+              aria-valuemin={0}
+              aria-valuemax={steps.length}
+              aria-valuenow={done}
+              aria-label="Progression du parcours"
             >
-              {f.k}
-              {f.v ? " : " : ""}
-              {f.v && <b className="text-ink">{f.v}</b>}
-            </span>
-          ))}
-        </div>
-      )}
+              <div className="pc-progress-track">
+                <div
+                  className="pc-progress-fill"
+                  style={{ width: `${Math.max(5, (done / steps.length) * 100)}%` }}
+                />
+              </div>
+              <div className="grid grid-cols-4 gap-1.5 sm:grid-cols-8">
+                {steps.map((f, i) => (
+                  <div
+                    key={f.k}
+                    className={`relative rounded-lg px-1.5 py-1.5 text-center ${
+                      f.v
+                        ? "pc-band text-white"
+                        : i === currentIdx
+                          ? "pc-progress-current border border-petrol/60 bg-white/70"
+                          : "border border-dashed border-line bg-white/40"
+                    }`}
+                  >
+                    <span
+                      className={`block truncate font-mono text-[8px] font-semibold uppercase tracking-[0.1em] ${
+                        f.v ? "text-white/65" : "text-ink-soft/70"
+                      }`}
+                    >
+                      {f.k}
+                    </span>
+                    <span
+                      className={`block truncate text-[11px] font-semibold leading-tight ${
+                        f.v ? "text-white" : i === currentIdx ? "text-petrol-deep" : "text-ink-soft/50"
+                      }`}
+                      title={f.v ?? undefined}
+                    >
+                      {f.v ?? "…"}
+                    </span>
+                    {/* languette « Finalisé » : sort de la droite de Configuration à la fin */}
+                    {f.k === "Configuration" && stage === "result" && (
+                      <span className="pc-finalise-wrap" aria-hidden>
+                        <span className="pc-finalise">Finalisé</span>
+                      </span>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          );
+        })()}
 
       {/* wrapper relatif : l'encart « Sources officielles » (absolu à droite) s'aligne
           sur le sommet du panneau du walker et défile avec la page. */}
@@ -685,7 +853,7 @@ export function WalkerShell() {
                   Un parcours guidé pour la sélection d&apos;un VPH, étape par étape.
                 </p>
               </div>
-              <button className={`${primary} pc-btn-sweep w-full justify-center`} onClick={() => go("age")}>
+              <button className={`${primary} pc-btn-sweep w-full justify-center`} onClick={startWalk}>
                 Débuter le parcours guidé
               </button>
               <div className="mt-4 rounded-xl border border-line bg-paper/40 p-3.5 text-[11.5px] leading-relaxed text-ink-soft">
@@ -2015,6 +2183,8 @@ export function WalkerShell() {
       )}
       </div>
 
+      {stage === "home" && (
+      <>
       <div id="recherche-lppr" className="scroll-mt-4">
         <RechercheLpp />
       </div>
@@ -2030,10 +2200,82 @@ export function WalkerShell() {
       <div id="specificites-prescription" className="scroll-mt-4">
         <SpecificitesPrescription />
       </div>
+      </>
+      )}
 
+
+      {/* Boîte à outils — pendant le parcours : accès aux modules en superposition.
+          Dock vertical dans la gouttière gauche (grand écran) ou collé au bord droit. */}
+      {stage !== "home" && !wiping && !activeTool && (
+        <aside
+          aria-label="Outils"
+          className="pc-panel fixed right-3 top-1/2 z-40 flex w-[92px] -translate-y-1/2 flex-col gap-1 p-2 lg:left-auto lg:right-[calc(50%+404px)] lg:top-[200px] lg:translate-y-0"
+        >
+          <span className="px-1 pb-1 pt-1 text-center font-mono text-[8px] font-bold uppercase tracking-[0.14em] text-petrol">
+            Outils
+          </span>
+          {TOOLS.map((t) => (
+            <button
+              key={t.id}
+              type="button"
+              className="pc-tool-btn"
+              onClick={() => setActiveTool(t.id)}
+              title={t.title}
+            >
+              {t.icon}
+              <span className="pc-tool-label">{t.label}</span>
+            </button>
+          ))}
+        </aside>
+      )}
 
       <ContactToast />
     </div>
+
+    {/* Module ouvert en superposition floutée par-dessus le parcours (Échap pour revenir). */}
+    {activeTool && (
+      <div
+        className="pc-tool-overlay"
+        role="dialog"
+        aria-modal="true"
+        onClick={(e) => {
+          if (e.target === e.currentTarget) setActiveTool(null);
+        }}
+      >
+        <div className="pc-tool-modal">
+          <div className="mb-2 flex items-center justify-between gap-3">
+            <span className="rounded-full border border-white/40 bg-white/70 px-3 py-1 font-mono text-[11px] font-semibold text-petrol-deep backdrop-blur">
+              Outil — le parcours reste en place derrière
+            </span>
+            <button
+              type="button"
+              onClick={() => setActiveTool(null)}
+              className="inline-flex items-center gap-1.5 rounded-full border border-white/40 bg-white/70 px-3 py-1 text-[12px] font-semibold text-ink-soft backdrop-blur transition-colors hover:border-petrol hover:text-petrol-deep"
+            >
+              Fermer
+              <kbd className="rounded border border-line bg-white px-1 py-0.5 font-mono text-[10px]">
+                Échap
+              </kbd>
+            </button>
+          </div>
+          {activeTool === "lppr" && <RechercheLpp />}
+          {activeTool === "cumul" && <ModuleCumul />}
+          {activeTool === "vph" && <RechercheVph />}
+          {activeTool === "spec" && <SpecificitesPrescription />}
+        </div>
+      </div>
+    )}
+
+    {wiping && (
+      <div className="pc-wipe" aria-hidden>
+        {Array.from({ length: 7 }, (_, i) => (
+          <span
+            key={i}
+            style={{ left: `${i * 14}%`, animationDelay: `${i * 130}ms`, opacity: 1 - i * 0.05 }}
+          />
+        ))}
+      </div>
+    )}
     </>
   );
 }
