@@ -632,8 +632,9 @@ export function WalkerShell() {
           <div className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-petrol">
             ▸ Nomenclature VPH 2025 — arrêté du 6 février 2025
           </div>
-          <h1 className="mt-3 max-w-[24ch] text-[32px] font-bold leading-[1.06] tracking-tight sm:text-[40px]">
-            La prescription des fauteuils roulants,{" "}
+          <h1 className="mt-3 text-[28px] font-bold leading-[1.12] tracking-tight sm:text-[38px]">
+            La prescription des fauteuils roulants,
+            <br />
             <span className="pc-accent-breathe inline-block text-petrol">
               de l&apos;évaluation à la facturation.
             </span>
