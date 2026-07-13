@@ -90,7 +90,7 @@ export function SeoContent() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <div className="overflow-hidden rounded-2xl border border-line bg-card shadow-sm">
+      <div className="overflow-hidden pc-panel">
         <div className="h-[3px] bg-gradient-to-r from-petrol to-petrol-deep" />
         <div className="px-6 py-6">
           <h2 className="text-lg font-semibold tracking-tight">
@@ -140,7 +140,7 @@ export function SeoContent() {
       </div>
 
       {/* Encart signature — à l'origine du projet. */}
-      <div className="mt-5 overflow-hidden rounded-2xl border border-line bg-card shadow-sm">
+      <div className="mt-5 overflow-hidden pc-panel">
         <div className="h-[3px] bg-gradient-to-r from-petrol to-petrol-deep" />
         <div className="px-6 py-5 text-center">
           <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-petrol">

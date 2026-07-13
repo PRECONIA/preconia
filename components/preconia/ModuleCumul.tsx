@@ -58,7 +58,7 @@ function CategoryPicker({
         id={selectId}
         value={code ?? ""}
         onChange={(e) => setCode(e.target.value || null)}
-        className="w-full rounded-lg border-2 border-orange-300 bg-card px-3 py-2.5 text-sm outline-none transition-colors focus:border-orange-500"
+        className="w-full rounded-xl border border-orange-300/90 bg-white/75 px-3.5 py-2.5 text-sm shadow-[inset_0_1px_2px_rgba(7,63,60,0.05)] outline-none backdrop-blur transition-all focus:border-orange-500 focus:bg-white focus:shadow-[0_0_0_3px_rgba(234,88,12,0.15)]"
       >
         <option value="">— Choisir une catégorie de VPH —</option>
         {cumulCategories.map((c) => (
@@ -194,9 +194,9 @@ export function ModuleCumul({
   if (embedded) return <div className="rounded-xl border border-line bg-paper/30 p-4">{inner}</div>;
 
   return (
-    <section className="mt-5 overflow-hidden rounded-2xl border border-line bg-card shadow-sm">
+    <section className="mt-5 overflow-hidden pc-panel">
       {/* bandeau de titre vert : distingue les modules outils du walker (encart blanc) */}
-      <div className="flex flex-wrap items-baseline justify-between gap-2 bg-petrol px-6 py-3">
+      <div className="flex flex-wrap items-baseline justify-between gap-2 pc-band px-6 py-3">
         <h2 className="text-base font-semibold text-white">Évaluation de cumul VPH</h2>
         <span className="text-[11px] font-semibold text-petrol-tint">
           Règles à jour le {frDate(cumulMeta.lastUpdated)}

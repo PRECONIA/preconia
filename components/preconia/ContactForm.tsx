@@ -8,7 +8,7 @@ import { useState } from "react";
 
 const CONTACT_EMAIL = "preconia@outlook.fr";
 const input =
-  "w-full rounded-lg border-2 border-orange-300 bg-card px-3 py-2.5 text-sm outline-none transition-colors focus:border-orange-500";
+  "w-full rounded-xl border border-orange-300/90 bg-white/75 px-3.5 py-2.5 text-sm shadow-[inset_0_1px_2px_rgba(7,63,60,0.05)] outline-none backdrop-blur transition-all focus:border-orange-500 focus:bg-white focus:shadow-[0_0_0_3px_rgba(234,88,12,0.15)]";
 
 export function ContactForm() {
   const [nom, setNom] = useState("");
@@ -76,7 +76,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={!ready}
-        className="mt-5 inline-flex w-full items-center justify-center rounded-lg bg-orange-600 px-5 py-3 font-semibold text-white transition-colors hover:bg-orange-700 disabled:cursor-not-allowed disabled:opacity-50"
+        className="pc-btn-accent mt-5 inline-flex w-full items-center justify-center rounded-xl px-5 py-3 font-semibold text-white disabled:cursor-not-allowed disabled:opacity-50"
       >
         Envoyer le message
       </button>

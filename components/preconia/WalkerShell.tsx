@@ -76,20 +76,22 @@ import {
 import type { Answers, Stage } from "@/lib/walker/types";
 
 const btn =
-  "block w-full text-left rounded-lg border border-line bg-card px-4 py-3 mb-2 transition-colors hover:border-petrol hover:bg-white";
+  "block w-full text-left rounded-xl border border-line bg-white/70 px-4 py-3 mb-2 transition-all hover:border-petrol hover:bg-white hover:shadow-[0_8px_20px_-12px_rgba(7,63,60,0.35)]";
 /** Bouton de choix : l'état sélectionné remplace le hover (sinon le bouton cliqué restait
     blanc tant que la souris ne quittait pas le bouton — le hover l'emportait sur la sélection). */
 const choice = (on: boolean, extra = "") =>
-  `block w-full text-left rounded-lg border px-4 py-3 mb-2 transition-colors ${extra} ${
-    on ? "border-petrol bg-petrol-tint" : "border-line bg-card hover:border-petrol hover:bg-white"
+  `block w-full text-left rounded-xl border px-4 py-3 mb-2 transition-all ${extra} ${
+    on
+      ? "border-petrol bg-petrol-tint/80 shadow-[inset_0_0_0_1px_rgba(12,107,102,0.35),0_8px_20px_-12px_rgba(7,63,60,0.3)]"
+      : "border-line bg-white/70 hover:border-petrol hover:bg-white hover:shadow-[0_8px_20px_-12px_rgba(7,63,60,0.35)]"
   }`;
 const link = "text-ink-soft hover:text-petrol-deep text-sm";
 const navBtn =
-  "inline-flex items-center gap-1.5 rounded-lg border-2 border-petrol bg-petrol-tint/50 px-4 py-2 text-sm font-semibold text-petrol-deep hover:bg-petrol-tint";
+  "inline-flex items-center gap-1.5 rounded-xl border border-petrol/40 bg-white/60 px-4 py-2 text-sm font-semibold text-petrol-deep backdrop-blur transition-colors hover:border-petrol hover:bg-petrol-tint/70";
 const primary =
-  "inline-flex items-center gap-2 rounded-lg bg-petrol px-5 py-3 font-semibold text-white hover:bg-petrol-deep";
+  "pc-btn-primary inline-flex items-center gap-2 rounded-xl px-5 py-3 font-semibold text-white";
 const finish =
-  "inline-flex items-center gap-2 rounded-lg bg-orange-600 px-5 py-2.5 font-semibold text-white hover:bg-orange-700";
+  "pc-btn-accent inline-flex items-center gap-2 rounded-xl px-5 py-2.5 font-semibold text-white";
 
 function priceLabel(a: Adjonction): string {
   if (a.devis) return "Sur devis";
@@ -652,7 +654,7 @@ export function WalkerShell() {
             lisibles, plus de chevauchement), rang unique de 7 dès sm (paysage / desktop). */}
         <nav
           aria-label="Accès rapide aux sections"
-          className="mb-8 grid grid-cols-2 gap-px overflow-hidden rounded-xl bg-white/30 shadow-sm sm:grid-cols-7"
+          className="mb-8 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/50 bg-white/30 shadow-[0_10px_30px_-14px_rgba(7,63,60,0.35)] backdrop-blur sm:grid-cols-7"
         >
           {SECTIONS.map((s) => (
             <a
@@ -662,7 +664,7 @@ export function WalkerShell() {
                 e.preventDefault();
                 document.getElementById(s.id)?.scrollIntoView({ behavior: "smooth", block: "start" });
               }}
-              className="flex items-center justify-center bg-petrol px-2 py-3 text-center text-[13px] font-semibold leading-tight text-white transition-colors hover:bg-petrol-deep sm:px-3 sm:py-3.5 sm:text-[15px]"
+              className="pc-seg flex items-center justify-center px-2 py-3 text-center text-[13px] font-semibold leading-tight text-white sm:px-3 sm:py-3.5 sm:text-[15px]"
             >
               {s.label}
             </a>
@@ -670,7 +672,7 @@ export function WalkerShell() {
           {/* bouton Contact — orange ; pleine largeur en portrait mobile, dernier segment sinon. */}
           <Link
             href="/contact"
-            className="col-span-2 flex items-center justify-center bg-orange-500 px-2 py-3 text-center text-[13px] font-semibold leading-tight text-white transition-colors hover:bg-orange-600 sm:col-span-1 sm:px-3 sm:py-3.5 sm:text-[15px]"
+            className="pc-seg-accent col-span-2 flex items-center justify-center px-2 py-3 text-center text-[13px] font-semibold leading-tight text-white sm:col-span-1 sm:px-3 sm:py-3.5 sm:text-[15px]"
           >
             Contact
           </Link>
@@ -696,14 +698,14 @@ export function WalkerShell() {
 
       <div
         id="preconisation"
-        className="scroll-mt-4 overflow-hidden rounded-2xl border border-line bg-card shadow-sm"
+        className="scroll-mt-4 overflow-hidden pc-panel"
       >
-        <div className="h-[3px] bg-gradient-to-r from-petrol to-petrol-deep" />
+        <div className="h-[3px] bg-gradient-to-r from-petrol-deep via-petrol to-orange-500" />
         <div className="px-6 py-6">
           {/* ---------------- HOME ---------------- */}
           {stage === "home" && (
             <>
-              <div className="-mx-6 -mt-6 mb-5 bg-petrol px-6 py-4">
+              <div className="pc-band -mx-6 -mt-6 mb-5 px-6 py-4">
                 <h1 className="text-lg font-semibold text-white">
                   Prescription &amp; préconisation d&apos;un fauteuil roulant (VPH)
                 </h1>
@@ -1987,9 +1989,9 @@ export function WalkerShell() {
       {stage === "home" && (
         <aside
           aria-label="Sources officielles"
-          className="mt-5 overflow-hidden rounded-2xl border border-line bg-card shadow-sm lg:fixed lg:left-[calc(50%+399px)] lg:right-4 lg:top-[184px] lg:z-40 lg:mt-0 lg:max-w-[26rem]"
+          className="mt-5 overflow-hidden pc-panel lg:fixed lg:left-[calc(50%+399px)] lg:right-4 lg:top-[184px] lg:z-40 lg:mt-0 lg:max-w-[26rem]"
         >
-          <div className="bg-orange-600 px-5 py-3">
+          <div className="pc-band-accent px-5 py-3">
             <h2 className="text-base font-semibold text-white">Sources officielles</h2>
           </div>
           <div className="p-4">
@@ -2105,7 +2107,7 @@ function Step({ title, hint, children }: { title: string; hint?: string; childre
     <>
       {/* bandeau de titre vert pleine largeur (déborde du padding de la carte via -mx/-mt),
           cohérent avec les moteurs de recherche. */}
-      <div className="-mx-6 -mt-6 mb-5 bg-petrol px-6 py-4">
+      <div className="pc-band -mx-6 -mt-6 mb-5 px-6 py-4">
         <h2 className="text-lg font-semibold text-white">{title}</h2>
         {hint && <p className="mt-1 text-sm leading-relaxed text-petrol-tint">{hint}</p>}
       </div>

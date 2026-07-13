@@ -132,9 +132,9 @@ export function RechercheLpp() {
   };
 
   return (
-    <section className="mt-5 overflow-hidden rounded-2xl border border-line bg-card shadow-sm">
+    <section className="mt-5 overflow-hidden pc-panel">
       {/* bandeau de titre vert : distingue les modules outils du walker (encart blanc) */}
-      <div className="flex flex-wrap items-baseline justify-between gap-2 bg-petrol px-6 py-3">
+      <div className="flex flex-wrap items-baseline justify-between gap-2 pc-band px-6 py-3">
         <h2 className="text-base font-semibold text-white">Recherche nomenclature LPPR</h2>
         <span className="flex items-center gap-2 text-[11px] font-semibold text-petrol-tint">
           <span className="rounded-full bg-white/15 px-2 py-0.5 text-white">
@@ -153,7 +153,7 @@ export function RechercheLpp() {
           value={q}
           onChange={(e) => setQ(e.target.value)}
           placeholder={`Rechercher… ${typed}▌`}
-          className="w-full rounded-lg border-2 border-orange-300 bg-card px-3 py-2.5 text-sm outline-none transition-colors focus:border-orange-500"
+          className="w-full rounded-xl border border-orange-300/90 bg-white/75 px-3.5 py-2.5 text-sm shadow-[inset_0_1px_2px_rgba(7,63,60,0.05)] outline-none backdrop-blur transition-all focus:border-orange-500 focus:bg-white focus:shadow-[0_0_0_3px_rgba(234,88,12,0.15)]"
           aria-label="Recherche nomenclature LPPR"
         />
 

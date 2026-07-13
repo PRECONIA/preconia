@@ -123,7 +123,7 @@ export function EntryDisclaimer({ children }: { children: React.ReactNode }) {
                 type="button"
                 onClick={accept}
                 disabled={!profession}
-                className="mt-5 w-full rounded-lg bg-petrol px-5 py-3 font-semibold text-white transition-colors hover:bg-petrol-deep disabled:cursor-not-allowed disabled:opacity-50"
+                className="pc-btn-primary mt-5 w-full rounded-xl px-5 py-3 font-semibold text-white disabled:cursor-not-allowed disabled:opacity-50"
               >
                 Je comprends et j&apos;accepte
               </button>

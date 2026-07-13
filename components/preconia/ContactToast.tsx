@@ -47,7 +47,7 @@ export function ContactToast() {
       </p>
       <Link
         href="/contact"
-        className="mt-3 inline-flex w-full items-center justify-center rounded-lg bg-orange-500 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-orange-600"
+        className="pc-btn-accent mt-3 inline-flex w-full items-center justify-center rounded-xl px-4 py-2 text-sm font-semibold text-white"
       >
         Écrivez-nous
       </Link>

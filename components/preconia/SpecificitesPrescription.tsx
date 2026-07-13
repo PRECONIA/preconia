@@ -48,9 +48,9 @@ export function SpecificitesPrescription() {
   const presc = device ? prescriberFor(device, PEC[mode], "premiere", prescribers) : "";
 
   return (
-    <section className="mt-5 overflow-hidden rounded-2xl border border-line bg-card shadow-sm">
+    <section className="mt-5 overflow-hidden pc-panel">
       {/* bandeau de titre vert : distingue les modules outils du walker */}
-      <div className="bg-petrol px-6 py-3">
+      <div className="pc-band px-6 py-3">
         <h2 className="text-base font-semibold text-white">Spécificités de prescription par VPH</h2>
       </div>
       <div className="px-6 pb-5 pt-4">
@@ -67,7 +67,7 @@ export function SpecificitesPrescription() {
           id="spec-cat"
           value={code ?? ""}
           onChange={(e) => setCode(e.target.value || null)}
-          className="w-full rounded-lg border-2 border-orange-300 bg-card px-3 py-2.5 text-sm outline-none transition-colors focus:border-orange-500"
+          className="w-full rounded-xl border border-orange-300/90 bg-white/75 px-3.5 py-2.5 text-sm shadow-[inset_0_1px_2px_rgba(7,63,60,0.05)] outline-none backdrop-blur transition-all focus:border-orange-500 focus:bg-white focus:shadow-[0_0_0_3px_rgba(234,88,12,0.15)]"
         >
           <option value="">— Choisir une catégorie —</option>
           {CATS.map((d) => (

@@ -25,7 +25,7 @@ export default function ContactPage() {
         </div>
       </header>
 
-      <div className="overflow-hidden rounded-2xl border border-line bg-card shadow-sm">
+      <div className="overflow-hidden pc-panel">
         <div className="bg-petrol px-6 py-4">
           <h1 className="text-lg font-semibold text-white">Nous contacter</h1>
           <p className="mt-1 text-sm leading-relaxed text-petrol-tint">

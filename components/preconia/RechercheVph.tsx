@@ -112,9 +112,9 @@ export function RechercheVph() {
   const visibleBases = useMemo(() => Array.from(new Set(cards.map((c) => c.base))), [cards]);
 
   return (
-    <section className="mt-5 overflow-hidden rounded-2xl border border-line bg-card shadow-sm">
+    <section className="mt-5 overflow-hidden pc-panel">
       {/* bandeau de titre vert : distingue les modules outils du walker (encart blanc) */}
-      <div className="flex flex-wrap items-baseline justify-between gap-2 bg-petrol px-6 py-3">
+      <div className="flex flex-wrap items-baseline justify-between gap-2 pc-band px-6 py-3">
         <h2 className="text-base font-semibold text-white">
           Recherche de VPH par fabricant et catégorie
         </h2>
@@ -140,7 +140,7 @@ export function RechercheVph() {
               id="vph-brand"
               value={brand ?? ""}
               onChange={(e) => setBrand(e.target.value || null)}
-              className="w-full rounded-lg border-2 border-orange-300 bg-card px-3 py-2.5 text-sm outline-none transition-colors focus:border-orange-500"
+              className="w-full rounded-xl border border-orange-300/90 bg-white/75 px-3.5 py-2.5 text-sm shadow-[inset_0_1px_2px_rgba(7,63,60,0.05)] outline-none backdrop-blur transition-all focus:border-orange-500 focus:bg-white focus:shadow-[0_0_0_3px_rgba(234,88,12,0.15)]"
             >
               <option value="">— Tous les fabricants —</option>
               {ALL_BRANDS.map((b) => (
@@ -158,7 +158,7 @@ export function RechercheVph() {
               id="vph-base"
               value={base ?? ""}
               onChange={(e) => setBase(e.target.value || null)}
-              className="w-full rounded-lg border-2 border-orange-300 bg-card px-3 py-2.5 text-sm outline-none transition-colors focus:border-orange-500"
+              className="w-full rounded-xl border border-orange-300/90 bg-white/75 px-3.5 py-2.5 text-sm shadow-[inset_0_1px_2px_rgba(7,63,60,0.05)] outline-none backdrop-blur transition-all focus:border-orange-500 focus:bg-white focus:shadow-[0_0_0_3px_rgba(234,88,12,0.15)]"
             >
               <option value="">— Toutes les catégories —</option>
               {ALL_BASES.map((b) => (
