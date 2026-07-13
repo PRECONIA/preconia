@@ -199,6 +199,96 @@ body {
   }
 }
 
+/* Balayage d'entrée dans le parcours : des « / » verts (dégradé des bandeaux)
+   traversent l'écran sous la barre d'ancrage (z-40 < header z-50). */
+.pc-wipe {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  overflow: hidden;
+  pointer-events: none;
+}
+.pc-wipe span {
+  position: absolute;
+  top: -22%;
+  bottom: -22%;
+  width: 11vw;
+  border-radius: 999px;
+  background: linear-gradient(115deg, #073f3c, #0c6b66 55%, #11837c);
+  box-shadow: 0 0 34px rgba(12, 107, 102, 0.35);
+  transform: translateX(-160vw) skewX(-18deg);
+  animation: pc-wipe-sweep 1.15s cubic-bezier(0.65, 0.05, 0.35, 0.95) both;
+}
+@keyframes pc-wipe-sweep {
+  0% {
+    transform: translateX(-160vw) skewX(-18deg);
+  }
+  100% {
+    transform: translateX(160vw) skewX(-18deg);
+  }
+}
+
+/* Barre de progression du parcours : piste fine + reflet passant, cellules d'étape */
+.pc-progress-track {
+  height: 5px;
+  border-radius: 999px;
+  background: rgba(12, 107, 102, 0.12);
+  overflow: hidden;
+  margin-bottom: 7px;
+}
+.pc-progress-fill {
+  position: relative;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #073f3c, #0c6b66 60%, #11837c);
+  transition: width 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+  overflow: hidden;
+}
+.pc-progress-fill::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 46px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.45),
+    rgba(255, 255, 255, 0)
+  );
+  transform: skewX(-20deg);
+  animation: pc-progress-sheen 3.2s ease-in-out infinite;
+}
+@keyframes pc-progress-sheen {
+  0% {
+    left: -15%;
+  }
+  55% {
+    left: 108%;
+  }
+  100% {
+    left: 108%;
+  }
+}
+/* cellule d'étape en cours : halo doux qui respire */
+@keyframes pc-progress-breathe {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(12, 107, 102, 0.28);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(12, 107, 102, 0);
+  }
+}
+.pc-progress-current {
+  animation: pc-progress-breathe 2.4s ease-in-out infinite;
+}
+
+/* mode parcours : masque le contenu éditorial (FAQ, footer) hors du walker */
+body[data-walker="on"] .pc-hide-in-walk {
+  display: none;
+}
+
 /* transition d'étape du walker : le contenu arrive en défloutage montant */
 @keyframes pc-step {
   from {
@@ -277,8 +367,14 @@ body {
     opacity: 0;
   }
   .pc-step-in,
-  .pc-fade-side {
+  .pc-fade-side,
+  .pc-wipe span,
+  .pc-progress-fill::after,
+  .pc-progress-current {
     animation: none;
+  }
+  .pc-progress-fill {
+    transition: none;
   }
 }
 

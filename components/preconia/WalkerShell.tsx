@@ -5,7 +5,7 @@
    de bout en bout. Le rendu riche par étape (QuestionStep, BesoinsForm, AdjonctionsPanel,
    PapPanel, ResultCard, synthèse copiable) est volontairement reporté à la session UI. */
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import {
   adjBrandMap,
@@ -237,6 +237,33 @@ export function WalkerShell() {
   const device = selectDevice(state);
 
   const go = (s: Stage) => dispatch({ type: "GO", stage: s });
+
+  // Entrée dans le parcours : balayage de « / » verts sous la barre d'ancrage,
+  // le changement d'étape se fait à couvert, au cœur du passage des barres.
+  const [wiping, setWiping] = useState(false);
+  const startWalk = () => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return go("age");
+    setWiping(true);
+    window.setTimeout(() => go("age"), 700);
+    window.setTimeout(() => setWiping(false), 1700);
+  };
+
+  // Mode parcours : masque le contenu éditorial rendu hors du walker (FAQ, footer)
+  // via body[data-walker="on"] (les modules, eux, sont conditionnés par stage).
+  useEffect(() => {
+    if (stage !== "home") document.body.setAttribute("data-walker", "on");
+    else document.body.removeAttribute("data-walker");
+    return () => document.body.removeAttribute("data-walker");
+  }, [stage]);
+
+  // À chaque changement d'étape, on remonte en haut de page.
+  const prevStage = useRef(stage);
+  useEffect(() => {
+    if (prevStage.current === stage) return;
+    prevStage.current = stage;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+  }, [stage]);
   const setAnswer = <K extends keyof Answers>(field: K, value: Answers[K]) =>
     dispatch({ type: "SET_ANSWER", field, value });
 
@@ -647,22 +674,59 @@ export function WalkerShell() {
         </section>
       )}
 
-      {stage !== "home" && (
-        <div className="my-5 flex flex-wrap items-center gap-2">
-          {facets(answers).map((f) => (
-            <span
-              key={f.k}
-              className={`rounded-full border px-3 py-1 text-xs ${
-                f.v ? "border-line bg-card text-ink-soft" : "border-dashed border-line text-ink-soft/60"
-              }`}
+      {stage !== "home" &&
+        (() => {
+          const steps = facets(answers);
+          const done = steps.filter((f) => f.v).length;
+          const currentIdx = steps.findIndex((f) => !f.v);
+          return (
+            <div
+              className="my-5"
+              role="progressbar"
+              aria-valuemin={0}
+              aria-valuemax={steps.length}
+              aria-valuenow={done}
+              aria-label="Progression du parcours"
             >
-              {f.k}
-              {f.v ? " : " : ""}
-              {f.v && <b className="text-ink">{f.v}</b>}
-            </span>
-          ))}
-        </div>
-      )}
+              <div className="pc-progress-track">
+                <div
+                  className="pc-progress-fill"
+                  style={{ width: `${Math.max(6, (done / steps.length) * 100)}%` }}
+                />
+              </div>
+              <div className="grid grid-cols-3 gap-1.5 sm:grid-cols-6">
+                {steps.map((f, i) => (
+                  <div
+                    key={f.k}
+                    className={`rounded-lg px-2 py-1.5 text-center ${
+                      f.v
+                        ? "pc-band text-white"
+                        : i === currentIdx
+                          ? "pc-progress-current border border-petrol/60 bg-white/70"
+                          : "border border-dashed border-line bg-white/40"
+                    }`}
+                  >
+                    <span
+                      className={`block truncate font-mono text-[8.5px] font-semibold uppercase tracking-[0.12em] ${
+                        f.v ? "text-white/65" : "text-ink-soft/70"
+                      }`}
+                    >
+                      {f.k}
+                    </span>
+                    <span
+                      className={`block truncate text-[11.5px] font-semibold leading-tight ${
+                        f.v ? "text-white" : i === currentIdx ? "text-petrol-deep" : "text-ink-soft/50"
+                      }`}
+                      title={f.v ?? undefined}
+                    >
+                      {f.v ?? "…"}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          );
+        })()}
 
       {/* wrapper relatif : l'encart « Sources officielles » (absolu à droite) s'aligne
           sur le sommet du panneau du walker et défile avec la page. */}
@@ -685,7 +749,7 @@ export function WalkerShell() {
                   Un parcours guidé pour la sélection d&apos;un VPH, étape par étape.
                 </p>
               </div>
-              <button className={`${primary} pc-btn-sweep w-full justify-center`} onClick={() => go("age")}>
+              <button className={`${primary} pc-btn-sweep w-full justify-center`} onClick={startWalk}>
                 Débuter le parcours guidé
               </button>
               <div className="mt-4 rounded-xl border border-line bg-paper/40 p-3.5 text-[11.5px] leading-relaxed text-ink-soft">
@@ -2015,6 +2079,8 @@ export function WalkerShell() {
       )}
       </div>
 
+      {stage === "home" && (
+      <>
       <div id="recherche-lppr" className="scroll-mt-4">
         <RechercheLpp />
       </div>
@@ -2030,10 +2096,22 @@ export function WalkerShell() {
       <div id="specificites-prescription" className="scroll-mt-4">
         <SpecificitesPrescription />
       </div>
+      </>
+      )}
 
 
       <ContactToast />
     </div>
+    {wiping && (
+      <div className="pc-wipe" aria-hidden>
+        {Array.from({ length: 6 }, (_, i) => (
+          <span
+            key={i}
+            style={{ left: `${i * 16}%`, animationDelay: `${i * 75}ms`, opacity: 1 - i * 0.06 }}
+          />
+        ))}
+      </div>
+    )}
     </>
   );
 }
