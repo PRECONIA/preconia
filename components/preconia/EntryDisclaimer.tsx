@@ -68,7 +68,7 @@ export function EntryDisclaimer({ children }: { children: React.ReactNode }) {
 
       {!accepted && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-paper/40 p-4 backdrop-blur-md">
-          <div className="pc-fade flex max-h-[92vh] w-full max-w-md flex-col overflow-hidden rounded-2xl border border-line bg-card shadow-xl">
+          <div className="pc-fade flex max-h-[92vh] w-full max-w-md flex-col overflow-hidden pc-panel">
             <div className="h-[3px] shrink-0 bg-gradient-to-r from-petrol to-petrol-deep" />
             <div className="overflow-y-auto px-7 py-8 text-center">
               <Logo className="mx-auto h-16 w-16 drop-shadow-sm" />
@@ -123,7 +123,7 @@ export function EntryDisclaimer({ children }: { children: React.ReactNode }) {
                 type="button"
                 onClick={accept}
                 disabled={!profession}
-                className="mt-5 w-full rounded-lg bg-petrol px-5 py-3 font-semibold text-white transition-colors hover:bg-petrol-deep disabled:cursor-not-allowed disabled:opacity-50"
+                className="pc-btn-primary mt-5 w-full rounded-xl px-5 py-3 font-semibold text-white disabled:cursor-not-allowed disabled:opacity-50"
               >
                 Je comprends et j&apos;accepte
               </button>

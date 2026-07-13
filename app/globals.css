@@ -20,11 +20,266 @@
 }
 
 body {
-  /* no-repeat + couleur de fin : le dégradé ne se répète plus en mosaïque au scroll
-     (au-delà du dégradé, le fond continue dans la couleur d'arrivée, raccord invisible). */
-  background: #e6eced linear-gradient(180deg, #eff3f3, #e6eced) no-repeat;
+  /* Fond « atelier technique » : trame millimetrée très légère + halos pétrole (haut
+     gauche, bas) et orange (haut droit), fixés au viewport — les panneaux en verre
+     dépoli se détachent dessus. Palette inchangée, seulement des alphas. */
   color: var(--color-ink);
   font-family: var(--font-sans);
+  background-color: #e9eef0;
+  background-image:
+    radial-gradient(1100px 520px at 12% -8%, rgba(12, 107, 102, 0.14), transparent 60%),
+    radial-gradient(900px 480px at 88% -12%, rgba(234, 88, 12, 0.07), transparent 55%),
+    radial-gradient(1300px 820px at 50% 118%, rgba(12, 107, 102, 0.1), transparent 62%),
+    linear-gradient(rgba(12, 107, 102, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(12, 107, 102, 0.04) 1px, transparent 1px),
+    linear-gradient(180deg, #f2f6f6, #e9eef0);
+  background-size:
+    auto,
+    auto,
+    auto,
+    44px 44px,
+    44px 44px,
+    auto;
+  background-repeat: no-repeat, no-repeat, no-repeat, repeat, repeat, no-repeat;
+  background-attachment: fixed;
+}
+
+/* sélection de texte et anneau de focus clavier à la couleur de la marque */
+::selection {
+  background: var(--color-petrol);
+  color: #fff;
+}
+:focus-visible {
+  outline: 2px solid rgba(12, 107, 102, 0.55);
+  outline-offset: 2px;
+}
+
+/* --- primitives de la refonte : panneaux, bandeaux, boutons --- */
+
+/* panneau « verre dépoli » : remplace carte blanche + border + shadow-sm */
+.pc-panel {
+  border-radius: 18px;
+  border: 1px solid rgba(12, 107, 102, 0.16);
+  background: rgba(255, 255, 255, 0.78);
+  -webkit-backdrop-filter: blur(14px) saturate(1.15);
+  backdrop-filter: blur(14px) saturate(1.15);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.85),
+    0 1px 2px rgba(7, 63, 60, 0.05),
+    0 18px 44px -18px rgba(7, 63, 60, 0.25);
+}
+
+/* bandeau de section : dégradé pétrole + reflet haut + liseré orange en pied */
+.pc-band {
+  position: relative;
+  background: linear-gradient(115deg, #073f3c, #0c6b66 55%, #11837c);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16);
+}
+.pc-band::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #ea580c, rgba(234, 88, 12, 0) 65%);
+}
+/* variante orange (Sources officielles, Contact) */
+.pc-band-accent {
+  position: relative;
+  background: linear-gradient(115deg, #b4471f, #ea580c 60%, #f4732c);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+.pc-band-accent::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #073f3c, rgba(7, 63, 60, 0) 65%);
+}
+
+/* segments de la barre d'ancrage */
+.pc-seg {
+  background: linear-gradient(165deg, #0d7a72, #095551);
+  transition:
+    filter 0.15s ease,
+    transform 0.15s ease;
+}
+.pc-seg:hover {
+  filter: brightness(1.14);
+}
+.pc-seg-accent {
+  background: linear-gradient(165deg, #f4732c, #d94f08);
+  transition: filter 0.15s ease;
+}
+.pc-seg-accent:hover {
+  filter: brightness(1.1);
+}
+
+/* boutons : dégradé + lueur colorée, micro-élévation au survol */
+.pc-btn-primary {
+  background: linear-gradient(135deg, #0d7a72, #073f3c);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    0 10px 24px -10px rgba(12, 107, 102, 0.55);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    filter 0.15s ease;
+}
+.pc-btn-primary:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.07);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    0 14px 30px -10px rgba(12, 107, 102, 0.6);
+}
+.pc-btn-primary:active {
+  transform: translateY(0);
+}
+.pc-btn-accent {
+  background: linear-gradient(135deg, #f4732c, #dd4f0b);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    0 10px 24px -10px rgba(234, 88, 12, 0.55);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    filter 0.15s ease;
+}
+.pc-btn-accent:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.06);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    0 14px 30px -10px rgba(234, 88, 12, 0.6);
+}
+.pc-btn-accent:active {
+  transform: translateY(0);
+}
+
+/* balayage « / » orange : une barrette oblique traverse rapidement le bouton
+   de gauche à droite, puis marque une pause (bouton « Débuter le parcours guidé ») */
+.pc-btn-sweep {
+  position: relative;
+  overflow: hidden;
+}
+.pc-btn-sweep::after {
+  content: "";
+  position: absolute;
+  top: -30%;
+  bottom: -30%;
+  left: 0;
+  width: 18px;
+  background: linear-gradient(
+    90deg,
+    rgba(244, 115, 44, 0),
+    rgba(244, 115, 44, 0.9),
+    rgba(244, 115, 44, 0)
+  );
+  transform: skewX(-22deg);
+  opacity: 0;
+  pointer-events: none;
+}
+.pc-btn-sweep:hover::after {
+  opacity: 1;
+  animation: pc-sweep 1.4s cubic-bezier(0.6, 0, 0.3, 1) infinite;
+}
+@keyframes pc-sweep {
+  0% {
+    left: -12%;
+  }
+  55% {
+    left: 108%;
+  }
+  100% {
+    left: 108%;
+  }
+}
+
+/* transition d'étape du walker : le contenu arrive en défloutage montant */
+@keyframes pc-step {
+  from {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: none;
+  }
+}
+.pc-step-in {
+  animation: pc-step 0.45s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+/* encart d'information (indications officielles, PAP) : fondu entrant latéral */
+@keyframes pc-fade-side {
+  from {
+    opacity: 0;
+    transform: translateX(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.pc-fade-side {
+  animation: pc-fade-side 0.3s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+/* point d'état « vérifié » : pulsation douce (header, footer) */
+@keyframes pc-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.45);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(22, 163, 74, 0);
+  }
+}
+.pc-dot {
+  animation: pc-pulse 2.4s ease-in-out infinite;
+}
+
+/* barre de défilement discrète (WebKit) */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(12, 107, 102, 0.28);
+  border-radius: 8px;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(12, 107, 102, 0.45);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pc-btn-primary,
+  .pc-btn-accent,
+  .pc-seg {
+    transition: none;
+  }
+  .pc-dot {
+    animation: none;
+  }
+  .pc-btn-sweep::after,
+  .pc-btn-sweep:hover::after {
+    animation: none;
+    opacity: 0;
+  }
+  .pc-step-in,
+  .pc-fade-side {
+    animation: none;
+  }
 }
 
 /* --- animations --- */

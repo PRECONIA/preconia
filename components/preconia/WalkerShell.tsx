@@ -60,6 +60,7 @@ import { ModuleCumul } from "@/components/preconia/ModuleCumul";
 import { RechercheVph } from "@/components/preconia/RechercheVph";
 import { SpecificitesPrescription } from "@/components/preconia/SpecificitesPrescription";
 import { ContactToast } from "@/components/preconia/ContactToast";
+import { SiteHeader } from "@/components/preconia/SiteHeader";
 import { Logo } from "@/components/preconia/Logo";
 import type { FicheData } from "@/components/preconia/fiche-pdf";
 import type { Adjonction, BesoinField, Device } from "@/lib/types";
@@ -76,20 +77,22 @@ import {
 import type { Answers, Stage } from "@/lib/walker/types";
 
 const btn =
-  "block w-full text-left rounded-lg border border-line bg-card px-4 py-3 mb-2 transition-colors hover:border-petrol hover:bg-white";
+  "block w-full text-left rounded-xl border border-line bg-white/70 px-4 py-3 mb-2 transition-all hover:border-petrol hover:bg-white hover:shadow-[0_8px_20px_-12px_rgba(7,63,60,0.35)]";
 /** Bouton de choix : l'état sélectionné remplace le hover (sinon le bouton cliqué restait
     blanc tant que la souris ne quittait pas le bouton — le hover l'emportait sur la sélection). */
 const choice = (on: boolean, extra = "") =>
-  `block w-full text-left rounded-lg border px-4 py-3 mb-2 transition-colors ${extra} ${
-    on ? "border-petrol bg-petrol-tint" : "border-line bg-card hover:border-petrol hover:bg-white"
+  `block w-full text-left rounded-xl border px-4 py-3 mb-2 transition-all ${extra} ${
+    on
+      ? "border-petrol bg-petrol-tint/80 shadow-[inset_0_0_0_1px_rgba(12,107,102,0.35),0_8px_20px_-12px_rgba(7,63,60,0.3)]"
+      : "border-line bg-white/70 hover:border-petrol hover:bg-white hover:shadow-[0_8px_20px_-12px_rgba(7,63,60,0.35)]"
   }`;
 const link = "text-ink-soft hover:text-petrol-deep text-sm";
 const navBtn =
-  "inline-flex items-center gap-1.5 rounded-lg border-2 border-petrol bg-petrol-tint/50 px-4 py-2 text-sm font-semibold text-petrol-deep hover:bg-petrol-tint";
+  "inline-flex items-center gap-1.5 rounded-xl border border-petrol/40 bg-white/60 px-4 py-2 text-sm font-semibold text-petrol-deep backdrop-blur transition-colors hover:border-petrol hover:bg-petrol-tint/70";
 const primary =
-  "inline-flex items-center gap-2 rounded-lg bg-petrol px-5 py-3 font-semibold text-white hover:bg-petrol-deep";
+  "pc-btn-primary inline-flex items-center gap-2 rounded-xl px-5 py-3 font-semibold text-white";
 const finish =
-  "inline-flex items-center gap-2 rounded-lg bg-orange-600 px-5 py-2.5 font-semibold text-white hover:bg-orange-700";
+  "pc-btn-accent inline-flex items-center gap-2 rounded-xl px-5 py-2.5 font-semibold text-white";
 
 function priceLabel(a: Adjonction): string {
   if (a.devis) return "Sur devis";
@@ -228,15 +231,6 @@ const PEC_TINT: Record<
 const perUnit = (u?: string) => (u === "semaine" ? " / semaine" : u === "trimestre" ? " / trimestre" : "");
 
 /** Sections de la page d'accueil, pour la barre d'ancrage sous le titre. */
-const SECTIONS: { id: string; label: string }[] = [
-  { id: "preconisation", label: "Parcours guidé" },
-  { id: "recherche-lppr", label: "Recherche LPPR" },
-  { id: "cumul", label: "Évaluation de cumul" },
-  { id: "recherche-vph", label: "Recherche VPH" },
-  { id: "specificites-prescription", label: "Spécificités de prescription" },
-  { id: "apropos", label: "FAQ" },
-];
-
 export function WalkerShell() {
   const { state, dispatch } = useWalker();
   const { stage, answers } = state;
@@ -396,13 +390,12 @@ export function WalkerShell() {
     lcdOption && copyToClipboard(`${lcdOption.code}\t${lcdOption.label}`, setCopiedOption);
   // Encart « définition + spécificités techniques » du forfait PAP A ou B.
   const [papInfo, setPapInfo] = useState<"A" | "B" | null>(null);
-  // Connecteur animé : trace une ligne du bouton survolé vers l'encart info orange (grand écran).
-  const [connSource, setConnSource] = useState<DOMRect | null>(null);
-  const onHoverEnter = (e: React.MouseEvent<HTMLElement>) => {
-    if (typeof window !== "undefined" && window.innerWidth >= 1024)
-      setConnSource(e.currentTarget.getBoundingClientRect());
-  };
-  const onHoverLeave = () => setConnSource(null);
+  // Encart d'information au survol (indication officielle d'un dispositif, définition
+  // d'un PAP) : hissé hors du panneau en verre — backdrop-filter fait du panneau le
+  // conteneur des position:fixed, qui seraient sinon projetés hors cadre et rognés.
+  const [hoverInfo, setHoverInfo] = useState<{ title: string; body: React.ReactNode } | null>(
+    null,
+  );
 
   // ---- Export PDF de la fiche récapitulative ----
   // Construit un objet purement sérialisable depuis l'état courant (aucune logique dans le PDF).
@@ -629,53 +622,30 @@ export function WalkerShell() {
   };
 
   return (
-    <div className="relative z-10 mx-auto max-w-[790px] px-5 pb-16 pt-8">
-      <header>
-        <div className="pc-wordmark-rise flex items-center gap-3.5">
-          <Logo className="h-12 w-12 shrink-0 drop-shadow-sm sm:h-14 sm:w-14" />
-          <div>
-            <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-petrol">
-              Aide à la préconisation VPH · Médecine physique &amp; réadaptation
-            </div>
-            <div className="text-[30px] font-bold leading-none tracking-tight">
-              PRECON<span className="pc-accent-breathe inline-block text-petrol">IA</span>
-            </div>
+    <>
+    <SiteHeader />
+    <div className="relative z-10 mx-auto max-w-[790px] px-5 pb-16 pt-7">
+      {/* Hero éditorial — accueil uniquement : identité, promesse, preuves d'officialité.
+          En cours de parcours, l'écran reste compact (header fixe + fil des réponses). */}
+      {stage === "home" && (
+        <section className="pc-wordmark-rise pb-9 pt-4">
+          <div className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-petrol">
+            ▸ Nomenclature VPH 2025 — arrêté du 6 février 2025
           </div>
-        </div>
-        <p className="mb-4 mt-3 max-w-[60ch] text-sm leading-relaxed text-ink-soft">
-          Du patient au dispositif, de la classe aux adjonctions facturables et forfaits
-          jusqu&apos;à la mise à disposition et la livraison — D&apos;après la réforme de la
-          nomenclature 2025.
-        </p>
-        {/* Barre d'ancrage : panneau vert segmenté par de fines lignes blanches (gap-px sur
-            fond blanc translucide). Grille responsive : 2 colonnes en portrait mobile (libellés
-            lisibles, plus de chevauchement), rang unique de 7 dès sm (paysage / desktop). */}
-        <nav
-          aria-label="Accès rapide aux sections"
-          className="mb-8 grid grid-cols-2 gap-px overflow-hidden rounded-xl bg-white/30 shadow-sm sm:grid-cols-7"
-        >
-          {SECTIONS.map((s) => (
-            <a
-              key={s.id}
-              href={`#${s.id}`}
-              onClick={(e) => {
-                e.preventDefault();
-                document.getElementById(s.id)?.scrollIntoView({ behavior: "smooth", block: "start" });
-              }}
-              className="flex items-center justify-center bg-petrol px-2 py-3 text-center text-[13px] font-semibold leading-tight text-white transition-colors hover:bg-petrol-deep sm:px-3 sm:py-3.5 sm:text-[15px]"
-            >
-              {s.label}
-            </a>
-          ))}
-          {/* bouton Contact — orange ; pleine largeur en portrait mobile, dernier segment sinon. */}
-          <Link
-            href="/contact"
-            className="col-span-2 flex items-center justify-center bg-orange-500 px-2 py-3 text-center text-[13px] font-semibold leading-tight text-white transition-colors hover:bg-orange-600 sm:col-span-1 sm:px-3 sm:py-3.5 sm:text-[15px]"
-          >
-            Contact
-          </Link>
-        </nav>
-      </header>
+          <h1 className="mt-3 text-[28px] font-bold leading-[1.12] tracking-tight sm:text-[38px]">
+            La prescription des fauteuils roulants,
+            <br />
+            <span className="pc-accent-breathe inline-block text-petrol">
+              de l&apos;évaluation à la facturation.
+            </span>
+          </h1>
+          <p className="mt-4 max-w-[62ch] text-[15px] leading-relaxed text-ink-soft">
+            Du patient au dispositif : catégorie et classe, prescripteur habilité, codes LPP et
+            tarifs, adjonctions et positionnement, forfaits de mise à disposition et de
+            livraison — jusqu&apos;à la fiche récapitulative exportable en PDF.
+          </p>
+        </section>
+      )}
 
       {stage !== "home" && (
         <div className="my-5 flex flex-wrap items-center gap-2">
@@ -694,24 +664,28 @@ export function WalkerShell() {
         </div>
       )}
 
+      {/* wrapper relatif : l'encart « Sources officielles » (absolu à droite) s'aligne
+          sur le sommet du panneau du walker et défile avec la page. */}
+      <div className="relative">
       <div
         id="preconisation"
-        className="scroll-mt-4 overflow-hidden rounded-2xl border border-line bg-card shadow-sm"
+        className="scroll-mt-4 overflow-hidden pc-panel"
       >
-        <div className="h-[3px] bg-gradient-to-r from-petrol to-petrol-deep" />
-        <div className="px-6 py-6">
+        <div className="h-[3px] bg-gradient-to-r from-petrol-deep via-petrol to-orange-500" />
+        <div key={stage} className="pc-step-in px-6 py-6">
           {/* ---------------- HOME ---------------- */}
           {stage === "home" && (
             <>
-              <div className="-mx-6 -mt-6 mb-5 bg-petrol px-6 py-4">
+              <div className="pc-band -mx-6 -mt-6 mb-5 px-6 py-4">
                 <h1 className="text-lg font-semibold text-white">
+                  <span className="mr-2 font-mono text-[13px] font-semibold text-white/55">01</span>
                   Prescription &amp; préconisation d&apos;un fauteuil roulant (VPH)
                 </h1>
                 <p className="mt-1 text-sm leading-relaxed text-petrol-tint">
                   Un parcours guidé pour la sélection d&apos;un VPH, étape par étape.
                 </p>
               </div>
-              <button className={`${primary} w-full justify-center`} onClick={() => go("age")}>
+              <button className={`${primary} pc-btn-sweep w-full justify-center`} onClick={() => go("age")}>
                 Débuter le parcours guidé
               </button>
               <div className="mt-4 rounded-xl border border-line bg-paper/40 p-3.5 text-[11.5px] leading-relaxed text-ink-soft">
@@ -984,8 +958,7 @@ export function WalkerShell() {
               duree={answers.duree}
               acquisition={answers.acquisition}
               dispatch={dispatch}
-              onEnter={onHoverEnter}
-              onLeave={onHoverLeave}
+              onInfo={setHoverInfo}
             />
           )}
           {stage === "cfg_elec" && (
@@ -999,8 +972,7 @@ export function WalkerShell() {
               duree={answers.duree}
               acquisition={answers.acquisition}
               dispatch={dispatch}
-              onEnter={onHoverEnter}
-              onLeave={onHoverLeave}
+              onInfo={setHoverInfo}
             />
           )}
 
@@ -1438,9 +1410,11 @@ export function WalkerShell() {
                     {region.items.map((it) => (
                       <div
                         key={it.name}
-                        className="group relative border-t border-line-soft"
-                        onMouseEnter={it.info ? onHoverEnter : undefined}
-                        onMouseLeave={it.info ? onHoverLeave : undefined}
+                        className="border-t border-line-soft"
+                        onMouseEnter={
+                          it.info ? () => setHoverInfo({ title: it.name, body: it.info }) : undefined
+                        }
+                        onMouseLeave={it.info ? () => setHoverInfo(null) : undefined}
                       >
                         <button
                           className="flex w-full items-start gap-2 px-3 py-2 text-left hover:bg-white"
@@ -1456,14 +1430,6 @@ export function WalkerShell() {
                             <span className="block text-xs text-ink-soft">{it.desc}</span>
                           </span>
                         </button>
-                        {it.info && (
-                          <div className="pointer-events-none absolute left-0 top-full z-30 mt-1 hidden w-full rounded-xl border-2 border-orange-400 bg-orange-50 p-4 text-[13px] leading-relaxed text-orange-900 shadow-xl group-hover:block lg:fixed lg:left-[calc(50%+399px)] lg:right-4 lg:top-16 lg:z-50 lg:mt-0 lg:w-auto lg:max-w-[34rem]">
-                            <div className="mb-1.5 text-[11px] font-bold uppercase tracking-wide text-orange-700">
-                              {it.name}
-                            </div>
-                            {it.info}
-                          </div>
-                        )}
                       </div>
                     ))}
                   </details>
@@ -1987,9 +1953,9 @@ export function WalkerShell() {
       {stage === "home" && (
         <aside
           aria-label="Sources officielles"
-          className="mt-5 overflow-hidden rounded-2xl border border-line bg-card shadow-sm lg:fixed lg:left-[calc(50%+399px)] lg:right-4 lg:top-[184px] lg:z-40 lg:mt-0 lg:max-w-[26rem]"
+          className="mt-5 overflow-hidden pc-panel lg:absolute lg:left-[calc(100%+16px)] lg:top-0 lg:mt-0 lg:w-[min(26rem,calc((100vw-790px)/2-32px))]"
         >
-          <div className="bg-orange-600 px-5 py-3">
+          <div className="pc-band-accent px-5 py-3">
             <h2 className="text-base font-semibold text-white">Sources officielles</h2>
           </div>
           <div className="p-4">
@@ -2036,6 +2002,18 @@ export function WalkerShell() {
           </div>
         </aside>
       )}
+      {hoverInfo && (
+        <div
+          aria-hidden
+          className="pc-fade-side pointer-events-none hidden rounded-xl border-2 border-orange-400 bg-orange-50 p-4 text-[13px] leading-relaxed text-orange-900 shadow-xl lg:fixed lg:left-[calc(50%+411px)] lg:top-[128px] lg:z-40 lg:block lg:w-[min(26rem,calc((100vw-790px)/2-32px))]"
+        >
+          <div className="mb-1.5 text-[11px] font-bold uppercase tracking-wide text-orange-700">
+            {hoverInfo.title}
+          </div>
+          {hoverInfo.body}
+        </div>
+      )}
+      </div>
 
       <div id="recherche-lppr" className="scroll-mt-4">
         <RechercheLpp />
@@ -2053,59 +2031,22 @@ export function WalkerShell() {
         <SpecificitesPrescription />
       </div>
 
-      <footer className="mt-6 border-t border-line pt-4 text-[11.5px] leading-relaxed text-ink-soft/90">
-        <b className="text-ink-soft">{meta.disclaimer}</b> Source : {meta.source}. Dernière mise à
-        jour : {meta.lastUpdated}.{" "}
-        <a
-          href="/conformite"
-          className="font-semibold text-petrol underline-offset-2 hover:underline"
-        >
-          Conformité &amp; traçabilité ↗
-        </a>
-      </footer>
-
-      {connSource && <InfoConnector source={connSource} />}
 
       <ContactToast />
     </div>
+    </>
   );
 }
 
 /* ---------------- petits composants utilitaires ---------------- */
 
-/** Ligne SVG animée du bouton survolé (dispositif ou PAP) vers l'encart d'information orange.
- *  L'encart est en position fixe à droite (grand écran) ; on relie sa gauche au bord droit du bouton. */
-function InfoConnector({ source }: { source: DOMRect }) {
-  const vw = typeof window !== "undefined" ? window.innerWidth : 1280;
-  const x1 = source.right; // bord droit exact du bouton
-  const y1 = source.top + source.height / 2;
-  const x2 = vw / 2 + 401; // bord gauche de l'encart : lg:left-[calc(50%+399px)]
-  const y2 = 96; // sous le haut de l'encart : lg:top-16
-  const mx = (x1 + x2) / 2;
-  const d = `M${x1},${y1} C${mx},${y1} ${mx},${y2} ${x2},${y2}`;
-  return (
-    <svg aria-hidden className="pointer-events-none fixed inset-0 z-[45] h-full w-full">
-      <path
-        d={d}
-        fill="none"
-        stroke="#F59E42"
-        strokeWidth="2.25"
-        strokeLinecap="round"
-        strokeDasharray="640"
-        strokeDashoffset="640"
-      >
-        <animate attributeName="stroke-dashoffset" from="640" to="0" dur="0.4s" fill="freeze" />
-      </path>
-    </svg>
-  );
-}
 
 function Step({ title, hint, children }: { title: string; hint?: string; children: React.ReactNode }) {
   return (
     <>
       {/* bandeau de titre vert pleine largeur (déborde du padding de la carte via -mx/-mt),
           cohérent avec les moteurs de recherche. */}
-      <div className="-mx-6 -mt-6 mb-5 bg-petrol px-6 py-4">
+      <div className="pc-band -mx-6 -mt-6 mb-5 px-6 py-4">
         <h2 className="text-lg font-semibold text-white">{title}</h2>
         {hint && <p className="mt-1 text-sm leading-relaxed text-petrol-tint">{hint}</p>}
       </div>
@@ -2150,16 +2091,15 @@ function DeviceChoice({
   duree,
   acquisition,
   dispatch,
-  onEnter,
-  onLeave,
+  onInfo,
 }: {
   title: string;
   list: Device[];
   duree: Answers["duree"];
   acquisition: Answers["acquisition"];
   dispatch: ReturnType<typeof useWalker>["dispatch"];
-  onEnter?: (e: React.MouseEvent<HTMLElement>) => void;
-  onLeave?: () => void;
+  /** encart latéral « indication officielle » au survol (null = masquer). */
+  onInfo: (info: { title: string; body: React.ReactNode } | null) => void;
 }) {
   const allowed = modesForDuree(duree, acquisition);
   const restriction =
@@ -2182,17 +2122,32 @@ function DeviceChoice({
         const modes = d.modes.filter((m) => allowed.includes(m));
         const ind = deviceIndicationsByCode[d.code] ?? {};
         const entries = modes.map((m) => [m, ind[m]] as const).filter(([, t]) => t);
+        const info =
+          entries.length > 0
+            ? {
+                title: "Indication officielle de prise en charge",
+                body: (
+                  <>
+                    {entries.map(([m, t]) => (
+                      <p key={m} className="mb-2 last:mb-0">
+                        <span className="font-semibold">{m} — </span>
+                        {t}
+                      </p>
+                    ))}
+                  </>
+                ),
+              }
+            : null;
         return (
           <div
             key={d.code}
-            className="group relative"
-            onMouseEnter={entries.length > 0 ? onEnter : undefined}
-            onMouseLeave={entries.length > 0 ? onLeave : undefined}
+            onMouseEnter={info ? () => onInfo(info) : undefined}
+            onMouseLeave={info ? () => onInfo(null) : undefined}
           >
             <button
               className={btn}
               onClick={() => {
-                onLeave?.();
+                onInfo(null);
                 dispatch({ type: "CHOOSE_DEVICE", code: d.code });
               }}
             >
@@ -2203,19 +2158,6 @@ function DeviceChoice({
                 Prise en charge : {modes.join(" · ")}
               </span>
             </button>
-            {entries.length > 0 && (
-              <div className="pointer-events-none absolute left-0 top-full z-30 mt-2 hidden w-full rounded-xl border-2 border-orange-400 bg-orange-50 p-4 text-[13px] leading-relaxed text-orange-900 shadow-xl group-hover:block lg:fixed lg:left-[calc(50%+399px)] lg:right-4 lg:top-16 lg:z-50 lg:mt-0 lg:w-auto lg:max-w-[34rem]">
-                <div className="mb-1.5 text-[11px] font-bold uppercase tracking-wide text-orange-700">
-                  Indication officielle de prise en charge
-                </div>
-                {entries.map(([m, t]) => (
-                  <p key={m} className="mb-2 last:mb-0">
-                    <span className="font-semibold">{m} — </span>
-                    {t}
-                  </p>
-                ))}
-              </div>
-            )}
           </div>
         );
       })}

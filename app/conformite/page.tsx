@@ -303,7 +303,7 @@ const td = "px-3 py-2.5 align-top text-[13px] leading-relaxed";
 
 function Carte({ children }: { children: React.ReactNode }) {
   return (
-    <div className="mt-5 overflow-hidden rounded-2xl border border-line bg-card shadow-sm">
+    <div className="mt-5 overflow-hidden pc-panel">
       <div className="h-[3px] bg-gradient-to-r from-petrol to-petrol-deep" />
       <div className="px-6 py-6">{children}</div>
     </div>
