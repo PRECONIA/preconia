@@ -4,6 +4,7 @@
    LPPR 2025 vérifiée contre la base CNAM). La FAQ visible est doublée en JSON-LD (FAQPage)
    pour les extraits enrichis Google — les deux doivent rester synchronisés. */
 
+import Link from "next/link";
 import { cumulMeta, meta, prestationsMeta } from "@/lib/data";
 
 const FAQ: { q: string; a: string }[] = [
@@ -119,6 +120,37 @@ export function SeoContent() {
             {prestationsMeta.lastUpdated}, règles de cumul à jour du {cumulMeta.lastUpdated}.{" "}
             {meta.disclaimer}
           </p>
+
+          {/* Guides thématiques (maillage interne + ancres de mots-clés vers les pages dédiées). */}
+          <h2 className="mb-3 mt-6 text-lg font-semibold tracking-tight">
+            Guides sur la prescription et la nomenclature VPH
+          </h2>
+          <div className="grid gap-3 sm:grid-cols-2">
+            <Link
+              href="/nomenclature-vph-2025"
+              className="group rounded-xl border border-line-soft bg-white/70 p-4 transition-colors hover:border-petrol"
+            >
+              <div className="text-sm font-semibold text-ink group-hover:text-petrol-deep">
+                Nomenclature VPH 2025 <span className="text-petrol">→</span>
+              </div>
+              <div className="mt-1 text-[12.5px] leading-relaxed text-ink-soft">
+                La réforme du remboursement des fauteuils roulants (arrêté du 6 février 2025) :
+                catégories, modes de prise en charge, forfaits et dispositions transitoires.
+              </div>
+            </Link>
+            <Link
+              href="/prescription-fauteuil-roulant"
+              className="group rounded-xl border border-line-soft bg-white/70 p-4 transition-colors hover:border-petrol"
+            >
+              <div className="text-sm font-semibold text-ink group-hover:text-petrol-deep">
+                Prescription d&apos;un fauteuil roulant <span className="text-petrol">→</span>
+              </div>
+              <div className="mt-1 text-[12.5px] leading-relaxed text-ink-soft">
+                Qui peut prescrire, le parcours d&apos;évaluation et d&apos;essais, achat ou
+                location, la fiche de préconisation et les pièces à transmettre.
+              </div>
+            </Link>
+          </div>
 
           <h2 className="mb-3 mt-6 text-lg font-semibold tracking-tight">
             Questions fréquentes — prescription des VPH

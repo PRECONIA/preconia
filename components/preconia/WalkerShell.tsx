@@ -845,10 +845,10 @@ export function WalkerShell() {
           {stage === "home" && (
             <>
               <div className="pc-band -mx-6 -mt-6 mb-5 px-6 py-4">
-                <h1 className="text-lg font-semibold text-white">
+                <h2 className="text-lg font-semibold text-white">
                   <span className="mr-2 font-mono text-[13px] font-semibold text-white/55">01</span>
                   Prescription &amp; préconisation d&apos;un fauteuil roulant (VPH)
-                </h1>
+                </h2>
                 <p className="mt-1 text-sm leading-relaxed text-petrol-tint">
                   Un parcours guidé pour la sélection d&apos;un VPH, étape par étape.
                 </p>
