@@ -676,12 +676,28 @@ export function WalkerShell() {
 
       {stage !== "home" &&
         (() => {
-          const steps = facets(answers);
+          const byK = Object.fromEntries(facets(answers).map((f) => [f.k, f.v]));
+          // Cellules dans l'ordre réel du parcours : âge → mise à dispo → cumul →
+          // durée → prise en charge → mobilité → dispositif → configuration
+          // (besoins + adjonctions + PAP, sans détail — coche à la finalisation).
+          const steps: { k: string; v: string | null }[] = [
+            { k: "Âge", v: byK["Âge"] ?? null },
+            { k: "Mise à dispo", v: byK["Mise à dispo"] ?? null },
+            {
+              k: "Cumul",
+              v: answers.cumul ? (answers.cumul === "oui" ? "VPH possédé" : "Aucun VPH") : null,
+            },
+            { k: "Durée", v: byK["Durée"] ?? null },
+            { k: "Prise en charge", v: byK["Prise en charge"] ?? null },
+            { k: "Mobilité", v: byK["Mobilité"] ?? null },
+            { k: "Dispositif", v: byK["Dispositif"] ?? null },
+            { k: "Configuration", v: stage === "result" ? "✓" : null },
+          ];
           const done = steps.filter((f) => f.v).length;
           const currentIdx = steps.findIndex((f) => !f.v);
           return (
             <div
-              className="my-5"
+              className="my-5 lg:-mx-10"
               role="progressbar"
               aria-valuemin={0}
               aria-valuemax={steps.length}
@@ -691,14 +707,14 @@ export function WalkerShell() {
               <div className="pc-progress-track">
                 <div
                   className="pc-progress-fill"
-                  style={{ width: `${Math.max(6, (done / steps.length) * 100)}%` }}
+                  style={{ width: `${Math.max(5, (done / steps.length) * 100)}%` }}
                 />
               </div>
-              <div className="grid grid-cols-3 gap-1.5 sm:grid-cols-6">
+              <div className="grid grid-cols-4 gap-1.5 sm:grid-cols-8">
                 {steps.map((f, i) => (
                   <div
                     key={f.k}
-                    className={`rounded-lg px-2 py-1.5 text-center ${
+                    className={`relative rounded-lg px-1.5 py-1.5 text-center ${
                       f.v
                         ? "pc-band text-white"
                         : i === currentIdx
@@ -707,20 +723,26 @@ export function WalkerShell() {
                     }`}
                   >
                     <span
-                      className={`block truncate font-mono text-[8.5px] font-semibold uppercase tracking-[0.12em] ${
+                      className={`block truncate font-mono text-[8px] font-semibold uppercase tracking-[0.1em] ${
                         f.v ? "text-white/65" : "text-ink-soft/70"
                       }`}
                     >
                       {f.k}
                     </span>
                     <span
-                      className={`block truncate text-[11.5px] font-semibold leading-tight ${
+                      className={`block truncate text-[11px] font-semibold leading-tight ${
                         f.v ? "text-white" : i === currentIdx ? "text-petrol-deep" : "text-ink-soft/50"
                       }`}
                       title={f.v ?? undefined}
                     >
                       {f.v ?? "…"}
                     </span>
+                    {/* languette « Finalisé » : sort de la droite de Configuration à la fin */}
+                    {f.k === "Configuration" && stage === "result" && (
+                      <span className="pc-finalise-wrap" aria-hidden>
+                        <span className="pc-finalise">Finalisé</span>
+                      </span>
+                    )}
                   </div>
                 ))}
               </div>
