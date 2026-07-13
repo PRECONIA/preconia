@@ -160,6 +160,20 @@ body {
   transform: translateY(0);
 }
 
+/* point d'état « vérifié » : pulsation douce (header, footer) */
+@keyframes pc-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.45);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(22, 163, 74, 0);
+  }
+}
+.pc-dot {
+  animation: pc-pulse 2.4s ease-in-out infinite;
+}
+
 /* barre de défilement discrète (WebKit) */
 ::-webkit-scrollbar {
   width: 10px;
@@ -182,6 +196,9 @@ body {
   .pc-btn-accent,
   .pc-seg {
     transition: none;
+  }
+  .pc-dot {
+    animation: none;
   }
 }
 

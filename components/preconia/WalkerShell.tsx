@@ -60,6 +60,7 @@ import { ModuleCumul } from "@/components/preconia/ModuleCumul";
 import { RechercheVph } from "@/components/preconia/RechercheVph";
 import { SpecificitesPrescription } from "@/components/preconia/SpecificitesPrescription";
 import { ContactToast } from "@/components/preconia/ContactToast";
+import { SiteHeader } from "@/components/preconia/SiteHeader";
 import { Logo } from "@/components/preconia/Logo";
 import type { FicheData } from "@/components/preconia/fiche-pdf";
 import type { Adjonction, BesoinField, Device } from "@/lib/types";
@@ -230,15 +231,6 @@ const PEC_TINT: Record<
 const perUnit = (u?: string) => (u === "semaine" ? " / semaine" : u === "trimestre" ? " / trimestre" : "");
 
 /** Sections de la page d'accueil, pour la barre d'ancrage sous le titre. */
-const SECTIONS: { id: string; label: string }[] = [
-  { id: "preconisation", label: "Parcours guidé" },
-  { id: "recherche-lppr", label: "Recherche LPPR" },
-  { id: "cumul", label: "Évaluation de cumul" },
-  { id: "recherche-vph", label: "Recherche VPH" },
-  { id: "specificites-prescription", label: "Spécificités de prescription" },
-  { id: "apropos", label: "FAQ" },
-];
-
 export function WalkerShell() {
   const { state, dispatch } = useWalker();
   const { stage, answers } = state;
@@ -631,53 +623,66 @@ export function WalkerShell() {
   };
 
   return (
-    <div className="relative z-10 mx-auto max-w-[790px] px-5 pb-16 pt-8">
-      <header>
-        <div className="pc-wordmark-rise flex items-center gap-3.5">
-          <Logo className="h-12 w-12 shrink-0 drop-shadow-sm sm:h-14 sm:w-14" />
-          <div>
-            <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-petrol">
-              Aide à la préconisation VPH · Médecine physique &amp; réadaptation
-            </div>
-            <div className="text-[30px] font-bold leading-none tracking-tight">
-              PRECON<span className="pc-accent-breathe inline-block text-petrol">IA</span>
-            </div>
+    <>
+    <SiteHeader />
+    <div className="relative z-10 mx-auto max-w-[790px] px-5 pb-16 pt-7">
+      {/* Hero éditorial — accueil uniquement : identité, promesse, preuves d'officialité.
+          En cours de parcours, l'écran reste compact (header fixe + fil des réponses). */}
+      {stage === "home" && (
+        <section className="pc-wordmark-rise pb-9 pt-4">
+          <div className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-petrol">
+            ▸ Nomenclature VPH 2025 — arrêté du 6 février 2025
           </div>
-        </div>
-        <p className="mb-4 mt-3 max-w-[60ch] text-sm leading-relaxed text-ink-soft">
-          Du patient au dispositif, de la classe aux adjonctions facturables et forfaits
-          jusqu&apos;à la mise à disposition et la livraison — D&apos;après la réforme de la
-          nomenclature 2025.
-        </p>
-        {/* Barre d'ancrage : panneau vert segmenté par de fines lignes blanches (gap-px sur
-            fond blanc translucide). Grille responsive : 2 colonnes en portrait mobile (libellés
-            lisibles, plus de chevauchement), rang unique de 7 dès sm (paysage / desktop). */}
-        <nav
-          aria-label="Accès rapide aux sections"
-          className="mb-8 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/50 bg-white/30 shadow-[0_10px_30px_-14px_rgba(7,63,60,0.35)] backdrop-blur sm:grid-cols-7"
-        >
-          {SECTIONS.map((s) => (
+          <h1 className="mt-3 max-w-[24ch] text-[32px] font-bold leading-[1.06] tracking-tight sm:text-[40px]">
+            La prescription des fauteuils roulants,{" "}
+            <span className="pc-accent-breathe inline-block text-petrol">
+              de l&apos;évaluation à la facturation.
+            </span>
+          </h1>
+          <p className="mt-4 max-w-[62ch] text-[15px] leading-relaxed text-ink-soft">
+            Du patient au dispositif : catégorie et classe, prescripteur habilité, codes LPP et
+            tarifs, adjonctions et positionnement, forfaits de mise à disposition et de
+            livraison — jusqu&apos;à la fiche récapitulative exportable en PDF.
+          </p>
+          <div className="mt-5 flex flex-wrap items-center gap-2">
             <a
-              key={s.id}
-              href={`#${s.id}`}
+              href="https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000051141909"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 rounded-full border border-line-soft bg-white/70 px-3.5 py-1.5 text-[12px] font-semibold text-ink-soft backdrop-blur transition-colors hover:border-petrol hover:text-petrol-deep"
+            >
+              <span className="font-mono text-petrol">§</span> Arrêté du 6 février 2025
+            </a>
+            <Link
+              href="/conformite"
+              className="inline-flex items-center gap-1.5 rounded-full border border-line-soft bg-white/70 px-3.5 py-1.5 text-[12px] font-semibold text-ink-soft backdrop-blur transition-colors hover:border-petrol hover:text-petrol-deep"
+            >
+              <span className="pc-dot h-1.5 w-1.5 rounded-full bg-green-600" /> Base CNAMTS
+              vérifiée — conformité tracée
+            </Link>
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-line-soft bg-white/70 px-3.5 py-1.5 text-[12px] font-semibold text-ink-soft backdrop-blur">
+              <span className="font-mono text-petrol">⌀</span> Gratuit — aucune donnée patient
+            </span>
+          </div>
+          <div className="mt-6 flex flex-wrap items-center gap-3">
+            <a
+              href="#preconisation"
               onClick={(e) => {
                 e.preventDefault();
-                document.getElementById(s.id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+                document
+                  .getElementById("preconisation")
+                  ?.scrollIntoView({ behavior: "smooth", block: "start" });
               }}
-              className="pc-seg flex items-center justify-center px-2 py-3 text-center text-[13px] font-semibold leading-tight text-white sm:px-3 sm:py-3.5 sm:text-[15px]"
+              className={`${primary} px-6`}
             >
-              {s.label}
+              Accéder au parcours guidé ↓
             </a>
-          ))}
-          {/* bouton Contact — orange ; pleine largeur en portrait mobile, dernier segment sinon. */}
-          <Link
-            href="/contact"
-            className="pc-seg-accent col-span-2 flex items-center justify-center px-2 py-3 text-center text-[13px] font-semibold leading-tight text-white sm:col-span-1 sm:px-3 sm:py-3.5 sm:text-[15px]"
-          >
-            Contact
-          </Link>
-        </nav>
-      </header>
+            <Link href="/conformite" className={navBtn}>
+              Conformité &amp; traçabilité
+            </Link>
+          </div>
+        </section>
+      )}
 
       {stage !== "home" && (
         <div className="my-5 flex flex-wrap items-center gap-2">
@@ -707,6 +712,7 @@ export function WalkerShell() {
             <>
               <div className="pc-band -mx-6 -mt-6 mb-5 px-6 py-4">
                 <h1 className="text-lg font-semibold text-white">
+                  <span className="mr-2 font-mono text-[13px] font-semibold text-white/55">01</span>
                   Prescription &amp; préconisation d&apos;un fauteuil roulant (VPH)
                 </h1>
                 <p className="mt-1 text-sm leading-relaxed text-petrol-tint">
@@ -2055,21 +2061,12 @@ export function WalkerShell() {
         <SpecificitesPrescription />
       </div>
 
-      <footer className="mt-6 border-t border-line pt-4 text-[11.5px] leading-relaxed text-ink-soft/90">
-        <b className="text-ink-soft">{meta.disclaimer}</b> Source : {meta.source}. Dernière mise à
-        jour : {meta.lastUpdated}.{" "}
-        <a
-          href="/conformite"
-          className="font-semibold text-petrol underline-offset-2 hover:underline"
-        >
-          Conformité &amp; traçabilité ↗
-        </a>
-      </footer>
 
       {connSource && <InfoConnector source={connSource} />}
 
       <ContactToast />
     </div>
+    </>
   );
 }
 

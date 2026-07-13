@@ -51,7 +51,7 @@ export function SpecificitesPrescription() {
     <section className="mt-5 overflow-hidden pc-panel">
       {/* bandeau de titre vert : distingue les modules outils du walker */}
       <div className="pc-band px-6 py-3">
-        <h2 className="text-base font-semibold text-white">Spécificités de prescription par VPH</h2>
+        <h2 className="text-base font-semibold text-white"><span className="mr-2 font-mono text-[13px] font-semibold text-white/55">05</span>Spécificités de prescription par VPH</h2>
       </div>
       <div className="px-6 pb-5 pt-4">
         <p className="mb-3 text-xs text-ink-soft">

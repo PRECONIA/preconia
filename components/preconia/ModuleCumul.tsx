@@ -197,7 +197,7 @@ export function ModuleCumul({
     <section className="mt-5 overflow-hidden pc-panel">
       {/* bandeau de titre vert : distingue les modules outils du walker (encart blanc) */}
       <div className="flex flex-wrap items-baseline justify-between gap-2 pc-band px-6 py-3">
-        <h2 className="text-base font-semibold text-white">Évaluation de cumul VPH</h2>
+        <h2 className="text-base font-semibold text-white"><span className="mr-2 font-mono text-[13px] font-semibold text-white/55">03</span>Évaluation de cumul VPH</h2>
         <span className="text-[11px] font-semibold text-petrol-tint">
           Règles à jour le {frDate(cumulMeta.lastUpdated)}
         </span>

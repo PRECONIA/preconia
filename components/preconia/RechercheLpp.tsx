@@ -135,7 +135,7 @@ export function RechercheLpp() {
     <section className="mt-5 overflow-hidden pc-panel">
       {/* bandeau de titre vert : distingue les modules outils du walker (encart blanc) */}
       <div className="flex flex-wrap items-baseline justify-between gap-2 pc-band px-6 py-3">
-        <h2 className="text-base font-semibold text-white">Recherche nomenclature LPPR</h2>
+        <h2 className="text-base font-semibold text-white"><span className="mr-2 font-mono text-[13px] font-semibold text-white/55">02</span>Recherche nomenclature LPPR</h2>
         <span className="flex items-center gap-2 text-[11px] font-semibold text-petrol-tint">
           <span className="rounded-full bg-white/15 px-2 py-0.5 text-white">
             {catalogSize.toLocaleString("fr-FR")} codes LPP indexés

@@ -3,6 +3,7 @@ import { WalkerProvider } from "@/lib/walker/WalkerProvider";
 import { WalkerShell } from "@/components/preconia/WalkerShell";
 import { WheelchairBackground } from "@/components/preconia/WheelchairBackground";
 import { SeoContent } from "@/components/preconia/SeoContent";
+import { SiteFooter } from "@/components/preconia/SiteFooter";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/preconia" },
@@ -17,6 +18,7 @@ export default function PreconiaPage() {
       </WalkerProvider>
       {/* Contenu éditorial indexable (présentation + FAQ + JSON-LD) — rendu serveur. */}
       <SeoContent />
+      <SiteFooter />
     </>
   );
 }

@@ -115,7 +115,7 @@ export function RechercheVph() {
     <section className="mt-5 overflow-hidden pc-panel">
       {/* bandeau de titre vert : distingue les modules outils du walker (encart blanc) */}
       <div className="flex flex-wrap items-baseline justify-between gap-2 pc-band px-6 py-3">
-        <h2 className="text-base font-semibold text-white">
+        <h2 className="text-base font-semibold text-white"><span className="mr-2 font-mono text-[13px] font-semibold text-white/55">04</span>
           Recherche de VPH par fabricant et catégorie
         </h2>
         <span className="flex items-center gap-2 text-[11px] font-semibold text-petrol-tint">
