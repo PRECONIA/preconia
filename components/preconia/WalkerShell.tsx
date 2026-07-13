@@ -319,9 +319,14 @@ export function WalkerShell() {
     window.addEventListener("keydown", onKey);
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    // Floute directement le contenu du parcours (filter: blur sur .pc-blurable) plutôt
+    // que via un backdrop-filter sur l'overlay : évite l'empilement de flous (header +
+    // toolbox en verre) qui se recalcule à chaque repaint et fait varier la teinte.
+    document.body.setAttribute("data-tool", "on");
     return () => {
       window.removeEventListener("keydown", onKey);
       document.body.style.overflow = prevOverflow;
+      document.body.removeAttribute("data-tool");
     };
   }, [activeTool]);
 
@@ -727,8 +732,8 @@ export function WalkerShell() {
 
   return (
     <>
-    <SiteHeader />
-    <div className="relative z-10 mx-auto max-w-[790px] px-5 pb-16 pt-7">
+    <SiteHeader className="pc-blurable" />
+    <div className="pc-blurable relative z-10 mx-auto max-w-[790px] px-5 pb-16 pt-7">
       {/* Hero éditorial — accueil uniquement : identité, promesse, preuves d'officialité.
           En cours de parcours, l'écran reste compact (header fixe + fil des réponses). */}
       {stage === "home" && (
@@ -2201,7 +2206,7 @@ export function WalkerShell() {
 
       {/* Boîte à outils — pendant le parcours : accès aux modules en superposition.
           Dock vertical dans la gouttière gauche (grand écran) ou collé au bord droit. */}
-      {stage !== "home" && !wiping && (
+      {stage !== "home" && !wiping && !activeTool && (
         <aside
           aria-label="Outils"
           className="pc-panel fixed right-3 top-1/2 z-40 flex w-[92px] -translate-y-1/2 flex-col gap-1 p-2 lg:left-auto lg:right-[calc(50%+404px)] lg:top-[200px] lg:translate-y-0"

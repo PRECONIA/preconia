@@ -364,10 +364,18 @@ body {
   justify-content: center;
   padding: 84px 16px 32px;
   overflow-y: auto;
-  background: rgba(7, 63, 60, 0.28);
-  -webkit-backdrop-filter: blur(8px) saturate(1.05);
-  backdrop-filter: blur(8px) saturate(1.05);
+  /* le flou est porté par le contenu du parcours (.pc-blurable) — ici, seulement
+     une teinte translucide, sans backdrop-filter (pas de flou imbriqué). */
+  background: rgba(7, 63, 60, 0.22);
   animation: pc-fade 0.2s ease both;
+}
+
+/* Contenu du parcours flouté tant qu'un module est ouvert (Échap pour revenir). */
+.pc-blurable {
+  transition: filter 0.22s ease;
+}
+body[data-tool="on"] .pc-blurable {
+  filter: blur(7px);
 }
 .pc-tool-modal {
   width: min(840px, 100%);
@@ -488,6 +496,9 @@ body[data-walker="on"] .pc-hide-in-walk {
   .pc-tool-overlay,
   .pc-tool-modal {
     animation: none;
+  }
+  .pc-blurable {
+    transition: none;
   }
 }
 
