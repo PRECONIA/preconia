@@ -644,43 +644,6 @@ export function WalkerShell() {
             tarifs, adjonctions et positionnement, forfaits de mise à disposition et de
             livraison — jusqu&apos;à la fiche récapitulative exportable en PDF.
           </p>
-          <div className="mt-5 flex flex-wrap items-center gap-2">
-            <a
-              href="https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000051141909"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-full border border-line-soft bg-white/70 px-3.5 py-1.5 text-[12px] font-semibold text-ink-soft backdrop-blur transition-colors hover:border-petrol hover:text-petrol-deep"
-            >
-              <span className="font-mono text-petrol">§</span> Arrêté du 6 février 2025
-            </a>
-            <Link
-              href="/conformite"
-              className="inline-flex items-center gap-1.5 rounded-full border border-line-soft bg-white/70 px-3.5 py-1.5 text-[12px] font-semibold text-ink-soft backdrop-blur transition-colors hover:border-petrol hover:text-petrol-deep"
-            >
-              <span className="pc-dot h-1.5 w-1.5 rounded-full bg-green-600" /> Base CNAMTS
-              vérifiée — conformité tracée
-            </Link>
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-line-soft bg-white/70 px-3.5 py-1.5 text-[12px] font-semibold text-ink-soft backdrop-blur">
-              <span className="font-mono text-petrol">⌀</span> Gratuit — aucune donnée patient
-            </span>
-          </div>
-          <div className="mt-6 flex flex-wrap items-center gap-3">
-            <a
-              href="#preconisation"
-              onClick={(e) => {
-                e.preventDefault();
-                document
-                  .getElementById("preconisation")
-                  ?.scrollIntoView({ behavior: "smooth", block: "start" });
-              }}
-              className={`${primary} px-6`}
-            >
-              Accéder au parcours guidé ↓
-            </a>
-            <Link href="/conformite" className={navBtn}>
-              Conformité &amp; traçabilité
-            </Link>
-          </div>
         </section>
       )}
 
@@ -701,6 +664,9 @@ export function WalkerShell() {
         </div>
       )}
 
+      {/* wrapper relatif : l'encart « Sources officielles » (absolu à droite) s'aligne
+          sur le sommet du panneau du walker et défile avec la page. */}
+      <div className="relative">
       <div
         id="preconisation"
         className="scroll-mt-4 overflow-hidden pc-panel"
@@ -719,7 +685,7 @@ export function WalkerShell() {
                   Un parcours guidé pour la sélection d&apos;un VPH, étape par étape.
                 </p>
               </div>
-              <button className={`${primary} w-full justify-center`} onClick={() => go("age")}>
+              <button className={`${primary} pc-btn-sweep w-full justify-center`} onClick={() => go("age")}>
                 Débuter le parcours guidé
               </button>
               <div className="mt-4 rounded-xl border border-line bg-paper/40 p-3.5 text-[11.5px] leading-relaxed text-ink-soft">
@@ -1995,7 +1961,7 @@ export function WalkerShell() {
       {stage === "home" && (
         <aside
           aria-label="Sources officielles"
-          className="mt-5 overflow-hidden pc-panel lg:fixed lg:left-[calc(50%+399px)] lg:right-4 lg:top-[184px] lg:z-40 lg:mt-0 lg:max-w-[26rem]"
+          className="mt-5 overflow-hidden pc-panel lg:absolute lg:left-[calc(100%+16px)] lg:top-0 lg:mt-0 lg:w-[min(26rem,calc((100vw-790px)/2-32px))]"
         >
           <div className="pc-band-accent px-5 py-3">
             <h2 className="text-base font-semibold text-white">Sources officielles</h2>
@@ -2044,6 +2010,7 @@ export function WalkerShell() {
           </div>
         </aside>
       )}
+      </div>
 
       <div id="recherche-lppr" className="scroll-mt-4">
         <RechercheLpp />

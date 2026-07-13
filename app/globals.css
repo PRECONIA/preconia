@@ -160,6 +160,41 @@ body {
   transform: translateY(0);
 }
 
+/* balayage « / » orange : une barrette oblique traverse rapidement le bouton
+   de gauche à droite, puis marque une pause (bouton « Débuter le parcours guidé ») */
+.pc-btn-sweep {
+  position: relative;
+  overflow: hidden;
+}
+.pc-btn-sweep::after {
+  content: "";
+  position: absolute;
+  top: -30%;
+  bottom: -30%;
+  left: 0;
+  width: 18px;
+  background: linear-gradient(
+    90deg,
+    rgba(244, 115, 44, 0),
+    rgba(244, 115, 44, 0.9),
+    rgba(244, 115, 44, 0)
+  );
+  transform: skewX(-22deg);
+  animation: pc-sweep 3s cubic-bezier(0.6, 0, 0.3, 1) infinite;
+  pointer-events: none;
+}
+@keyframes pc-sweep {
+  0% {
+    left: -12%;
+  }
+  38% {
+    left: 108%;
+  }
+  100% {
+    left: 108%;
+  }
+}
+
 /* point d'état « vérifié » : pulsation douce (header, footer) */
 @keyframes pc-pulse {
   0%,
@@ -199,6 +234,10 @@ body {
   }
   .pc-dot {
     animation: none;
+  }
+  .pc-btn-sweep::after {
+    animation: none;
+    opacity: 0;
   }
 }
 

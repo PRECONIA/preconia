@@ -26,9 +26,9 @@ export function SiteHeader() {
     <header className="sticky top-0 z-50 border-b border-white/60 bg-white/70 shadow-[0_10px_34px_-20px_rgba(7,63,60,0.5)] backdrop-blur-xl">
       {/* liseré signature */}
       <div className="h-[3px] bg-gradient-to-r from-petrol-deep via-petrol to-orange-500" />
-      <div className="mx-auto flex max-w-[1240px] items-center gap-5 px-5 py-2">
+      <div className="mx-auto flex max-w-[1240px] items-center gap-5 px-5 py-4">
         <Link href="/preconia" className="flex shrink-0 items-center gap-2.5">
-          <Logo className="h-9 w-9 drop-shadow-sm" />
+          <Logo className="h-11 w-11 drop-shadow-sm" />
           <span className="leading-none">
             <span className="block text-[17px] font-bold tracking-tight">
               PRECON<span className="text-petrol">IA</span>
@@ -46,7 +46,7 @@ export function SiteHeader() {
               key={s.id}
               href={`#${s.id}`}
               onClick={(e) => scrollToSection(e, s.id)}
-              className="rounded-lg px-2.5 py-1.5 text-[12.5px] font-semibold text-ink-soft transition-colors hover:bg-petrol-tint/60 hover:text-petrol-deep"
+              className="rounded-lg px-3.5 py-3 text-[13.5px] font-semibold text-ink-soft transition-colors hover:bg-petrol hover:text-white"
             >
               {s.label}
             </a>
@@ -54,18 +54,9 @@ export function SiteHeader() {
         </nav>
 
         <div className="ml-auto flex shrink-0 items-center gap-2.5 lg:ml-0">
-          {/* statut de conformité — la preuve d'officialité, toujours visible */}
-          <Link
-            href="/conformite"
-            className="hidden items-center gap-1.5 rounded-full border border-line-soft bg-white/70 px-3 py-1.5 font-mono text-[10.5px] font-semibold text-ink-soft transition-colors hover:border-petrol hover:text-petrol-deep sm:inline-flex"
-            title="Conformité & traçabilité — base vérifiée contre la base officielle CNAMTS"
-          >
-            <span className="pc-dot h-1.5 w-1.5 rounded-full bg-green-600" />
-            Base CNAMTS vérifiée
-          </Link>
-          <Link
+                    <Link
             href="/contact"
-            className="pc-btn-accent inline-flex items-center rounded-xl px-3.5 py-1.5 text-[12.5px] font-semibold text-white"
+            className="pc-btn-accent inline-flex items-center rounded-xl px-5 py-3 text-[13.5px] font-semibold text-white"
           >
             Contact
           </Link>
