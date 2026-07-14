@@ -4,9 +4,9 @@ import { Logo } from "@/components/preconia/Logo";
 import { CodageTabs } from "@/components/preconia/CodageTabs";
 
 const URL = "https://preconia.vercel.app/aide-codage";
-const TITLE = "PRECONIA Aide au codage — CIM-10 (diagnostics) et CCAM (actes)";
+const TITLE = "PRECONIA Aide au codage — CIM-10, CCAM, NGAP et LPP";
 const DESCRIPTION =
-  "Aide au codage médical : recherchez un diagnostic (CIM-10-FR 2026) ou un acte (CCAM) par code, libellé ou mot-clé. Outil search-first pour les professionnels de santé, adossé aux classifications officielles.";
+  "Aide au codage médical : recherchez un diagnostic (CIM-10-FR 2026), un acte technique (CCAM) ou clinique (NGAP), ou un dispositif remboursé (LPP) par code, libellé ou mot-clé. Outil search-first pour les professionnels de santé, adossé aux référentiels officiels.";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -15,11 +15,13 @@ export const metadata: Metadata = {
   keywords: [
     "aide au codage",
     "codage CIM-10",
-    "recherche code CIM-10",
     "CIM-10 FR 2026",
     "codage CCAM",
     "recherche acte CCAM",
-    "classification commune des actes médicaux",
+    "NGAP",
+    "nomenclature générale des actes professionnels",
+    "codage LPP",
+    "liste des produits et prestations",
   ],
   openGraph: { title: TITLE, description: DESCRIPTION, url: URL, siteName: "PRECONIA", type: "website", locale: "fr_FR" },
 };
@@ -81,10 +83,11 @@ export default function AideCodagePage() {
         <h1 className="mt-4 text-center text-[34px] font-bold leading-[1.08] tracking-tight text-[#0c2740] sm:text-[46px]">
           Aide au codage
         </h1>
-        <p className="mt-4 max-w-[58ch] text-center text-[15px] leading-relaxed text-ink-soft">
-          Recherchez un <b className="font-semibold text-[#0c2740]">diagnostic</b> (CIM-10-FR 2026)
-          ou un <b className="font-semibold text-[#0c2740]">acte</b> (CCAM) : saisissez un code, un
-          libellé ou un mot-clé pour retrouver le code correspondant.
+        <p className="mt-4 max-w-[62ch] text-center text-[15px] leading-relaxed text-ink-soft">
+          Recherchez un <b className="font-semibold text-[#0c2740]">diagnostic</b> (CIM-10), un{" "}
+          <b className="font-semibold text-[#0c2740]">acte</b> technique (CCAM) ou clinique (NGAP),
+          ou un <b className="font-semibold text-[#0c2740]">dispositif</b> remboursé (LPP) : code,
+          libellé ou mot-clé.
         </p>
 
         <div className="mt-8 w-full">
