@@ -54,6 +54,121 @@ body {
   outline-offset: 2px;
 }
 
+/* ============================================================================
+   PRECONIA — Aide au codage CCAM : thème bleu marine (predominant) + bleu ciel
+   (accents). Préfixe .cc-* pour ne PAS toucher le thème vert/orange du site.
+   ============================================================================ */
+.cc-page {
+  color: var(--color-ink);
+  min-height: 100vh;
+  /* fond « atelier » décliné en bleu : trame + halos marine (haut-gauche, bas)
+     et bleu ciel (haut-droit), fixés au viewport. */
+  background-color: #e8edf3;
+  background-image:
+    radial-gradient(1100px 520px at 12% -8%, rgba(22, 50, 79, 0.16), transparent 60%),
+    radial-gradient(900px 480px at 88% -12%, rgba(56, 189, 248, 0.12), transparent 55%),
+    radial-gradient(1300px 820px at 50% 118%, rgba(22, 50, 79, 0.12), transparent 62%),
+    linear-gradient(rgba(22, 50, 79, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(22, 50, 79, 0.045) 1px, transparent 1px),
+    linear-gradient(180deg, #eef3f8, #e8edf3);
+  background-size: auto, auto, auto, 44px 44px, 44px 44px, auto;
+  background-repeat: no-repeat, no-repeat, no-repeat, repeat, repeat, no-repeat;
+  background-attachment: fixed;
+}
+.cc-page ::selection {
+  background: #16324f;
+  color: #fff;
+}
+
+/* panneau en verre (bord marine) */
+.cc-panel {
+  border-radius: 18px;
+  border: 1px solid rgba(22, 50, 79, 0.16);
+  background: rgba(255, 255, 255, 0.8);
+  -webkit-backdrop-filter: blur(14px) saturate(1.15);
+  backdrop-filter: blur(14px) saturate(1.15);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.85),
+    0 1px 2px rgba(12, 42, 68, 0.05),
+    0 18px 44px -18px rgba(12, 42, 68, 0.28);
+}
+
+/* bandeau de section : dégradé marine + reflet + liseré bleu ciel en pied */
+.cc-band {
+  position: relative;
+  background: linear-gradient(115deg, #0c2740, #16324f 55%, #1d4e7c);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14);
+}
+.cc-band::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #38bdf8, rgba(56, 189, 248, 0) 65%);
+}
+
+/* en-tête fixe (verre, liseré marine → bleu ciel) */
+.cc-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.7);
+  -webkit-backdrop-filter: blur(18px) saturate(1.15);
+  backdrop-filter: blur(18px) saturate(1.15);
+  box-shadow: 0 10px 34px -20px rgba(12, 42, 68, 0.5);
+}
+.cc-header::before {
+  content: "";
+  display: block;
+  height: 3px;
+  background: linear-gradient(90deg, #0c2740, #1d4e7c 60%, #38bdf8);
+}
+
+/* barre de recherche : bord bleu ciel, halo au focus */
+.cc-search {
+  width: 100%;
+  border: 1px solid rgba(56, 189, 248, 0.6);
+  background: rgba(255, 255, 255, 0.82);
+  -webkit-backdrop-filter: blur(14px) saturate(1.15);
+  backdrop-filter: blur(14px) saturate(1.15);
+  border-radius: 16px;
+  box-shadow:
+    inset 0 1px 2px rgba(12, 42, 68, 0.05),
+    0 12px 34px -18px rgba(12, 42, 68, 0.4);
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s,
+    background 0.15s;
+}
+.cc-search:focus {
+  border-color: #0ea5e9;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.22);
+  outline: none;
+}
+
+/* bouton principal marine à lueur bleu ciel */
+.cc-btn {
+  background: linear-gradient(135deg, #1d4e7c, #0c2740);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    0 10px 24px -10px rgba(22, 50, 79, 0.6);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    filter 0.15s ease;
+}
+.cc-btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.08);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    0 14px 30px -10px rgba(56, 189, 248, 0.55);
+}
+
 /* --- primitives de la refonte : panneaux, bandeaux, boutons --- */
 
 /* panneau « verre dépoli » : remplace carte blanche + border + shadow-sm */
