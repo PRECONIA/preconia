@@ -42,16 +42,15 @@ export function SiteHeader({ className = "" }: { className?: string }) {
               </span>
             </span>
           </Link>
-          {/* le volet descend au survol / focus clavier ; le padding supérieur fait
-              pont pour que le survol ne se rompe pas entre le logo et le volet. */}
-          <div className="invisible absolute left-0 top-full z-50 -translate-y-2 pt-2 opacity-0 transition-all duration-200 ease-out group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
+          {/* le volet descend sous la barre au survol / focus clavier, aligné à gauche
+              (sous le logo) ; le padding supérieur passe sous le bord du header pour que
+              le survol ne se rompe pas et que le volet ne chevauche pas la barre. */}
+          <div className="invisible absolute left-0 top-full z-50 -translate-y-2 pt-[22px] opacity-0 transition-all duration-200 ease-out group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
             <Link
               href="/aide-codage"
               className="flex w-72 items-center gap-3 rounded-2xl border border-[#38bdf8]/40 bg-white/85 px-4 py-3 shadow-[0_18px_44px_-18px_rgba(12,42,68,0.5)] backdrop-blur-xl transition-transform hover:-translate-y-0.5"
             >
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#1d4e7c] to-[#0c2740] text-[15px] font-bold text-white">
-                C
-              </span>
+              <Logo variant="navy" className="h-10 w-10 shrink-0" />
               <span className="leading-tight">
                 <span className="block text-[14.5px] font-bold tracking-tight text-[#0c2740]">
                   PRECONIA <span className="text-[#0ea5e9]">Aide au codage</span>
