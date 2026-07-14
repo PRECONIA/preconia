@@ -53,7 +53,7 @@ export function SeoContent() {
       {
         "@type": "WebApplication",
         name: "PRECONIA",
-        url: "https://preconia.vercel.app/preconia",
+        url: "https://preconia.fr/preconia",
         applicationCategory: "MedicalApplication",
         operatingSystem: "Web",
         inLanguage: "fr",

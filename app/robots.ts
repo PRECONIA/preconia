@@ -1,8 +1,8 @@
 import type { MetadataRoute } from "next";
 
 /* Autorise l'indexation de tout le site et pointe vers le sitemap.
-   À mettre à jour si un domaine propre remplace preconia.vercel.app. */
-const BASE = "https://preconia.vercel.app";
+   Domaine canonique : preconia.fr (l'ancien preconia.vercel.app y redirige). */
+const BASE = "https://preconia.fr";
 
 export default function robots(): MetadataRoute.Robots {
   return {
