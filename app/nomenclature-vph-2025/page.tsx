@@ -8,7 +8,7 @@ import {
   seoPageJsonLd,
 } from "@/components/preconia/SeoPageChrome";
 
-const URL = "https://preconia.vercel.app/nomenclature-vph-2025";
+const URL = "https://preconia.fr/nomenclature-vph-2025";
 const TITLE =
   "Nomenclature VPH 2025 : réforme du remboursement des fauteuils roulants (arrêté du 6 février 2025)";
 const DESCRIPTION =

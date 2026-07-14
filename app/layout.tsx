@@ -22,7 +22,7 @@ const DESCRIPTION =
   "Aide gratuite à la prescription et à la préconisation des fauteuils roulants et VPH (nomenclature VPH 2025) : catégorie LPPR, classe, prescripteur, codes LPP et tarifs, adjonctions, positionnement PAP, forfaits MAD et livraison, location LLD/LCD, cumul. Aide à la décision non opposable (MPR).";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://preconia.vercel.app"),
+  metadataBase: new URL("https://preconia.fr"),
   title: TITLE,
   description: DESCRIPTION,
   keywords: [
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: TITLE,
     description: DESCRIPTION,
-    url: "https://preconia.vercel.app",
+    url: "https://preconia.fr",
     siteName: "PRECONIA",
     locale: "fr_FR",
     type: "website",

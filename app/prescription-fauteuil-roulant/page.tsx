@@ -8,7 +8,7 @@ import {
   seoPageJsonLd,
 } from "@/components/preconia/SeoPageChrome";
 
-const URL = "https://preconia.vercel.app/prescription-fauteuil-roulant";
+const URL = "https://preconia.fr/prescription-fauteuil-roulant";
 const TITLE =
   "Prescription d'un fauteuil roulant : qui prescrit, comment, quel remboursement (2025)";
 const DESCRIPTION =

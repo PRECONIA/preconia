@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Logo } from "@/components/preconia/Logo";
 import { CodageTabs } from "@/components/preconia/CodageTabs";
 
-const URL = "https://preconia.vercel.app/aide-codage";
+const URL = "https://preconia.fr/aide-codage";
 const TITLE = "PRECONIA Aide au codage — CIM-10, CCAM, NGAP et LPP";
 const DESCRIPTION =
   "Aide au codage médical : recherchez un diagnostic (CIM-10-FR 2026), un acte technique (CCAM) ou clinique (NGAP), ou un dispositif remboursé (LPP) par code, libellé ou mot-clé. Outil search-first pour les professionnels de santé, adossé aux référentiels officiels.";
