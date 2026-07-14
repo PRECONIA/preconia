@@ -104,11 +104,11 @@ function useTypewriter(words: string[]): string {
   return reduce ? words[0] : text;
 }
 
+/* Raccourcis en orange à texte blanc (façon bouton « Contact » de la barre d'ancrage).
+   L'état sélectionné se distingue par un anneau clair et un léger assombrissement. */
 const chip = (on: boolean) =>
-  `w-full rounded-full border px-3 py-1.5 text-center text-xs font-medium transition-colors ${
-    on
-      ? "border-petrol bg-petrol text-white"
-      : "border-line bg-card text-ink-soft hover:border-petrol hover:text-petrol-deep"
+  `w-full rounded-full bg-gradient-to-b from-[#f4732c] to-[#d94f08] px-3 py-1.5 text-center text-xs font-semibold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.25),0_4px_12px_-6px_rgba(234,88,12,0.55)] transition-all hover:brightness-105 ${
+    on ? "ring-2 ring-orange-300 ring-offset-1 brightness-90" : ""
   }`;
 
 export function RechercheLpp() {
