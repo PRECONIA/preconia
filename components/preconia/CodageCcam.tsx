@@ -8,6 +8,7 @@
    via useDeferredValue ; rendu plafonné aux meilleurs résultats. Clic = copie du code. */
 
 import { useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
+import { norm, loadAliasMap, expandQuery, type AliasMap } from "@/components/preconia/codageAliases";
 
 const MAX_RESULTS = 60;
 
@@ -29,71 +30,69 @@ interface CcamFile {
   acts: [string, string, number | null, number | null, 0 | 1, string, number, 0 | 1][];
 }
 
-/** minuscules + suppression des accents/diacritiques (é→e, œ→oe partiel). */
-function norm(s: string): string {
-  return s
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
-    .replace(/œ/g, "oe")
-    .replace(/æ/g, "ae");
-}
-
 function eur(n: number): string {
   return n.toLocaleString("fr-FR", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " €";
 }
 
-/* ----- moteur : filtrage + classement par pertinence ----- */
-function runSearch(index: Acte[], q: string): { list: Acte[]; total: number } {
-  const nq = norm(q).trim();
-  if (nq.length < 2) return { list: [], total: 0 };
-  const tokens = nq.split(/\s+/).filter(Boolean);
-  const first = tokens[0];
-  const matches: { a: Acte; score: number }[] = [];
+/* ----- moteur : filtrage + classement par pertinence, avec thésaurus ----- */
+function runSearch(index: Acte[], q: string, aliasMap: AliasMap): { list: Acte[]; total: number } {
+  const nq0 = norm(q).trim();
+  if (nq0.length < 2) return { list: [], total: 0 };
+  // requête d'origine + équivalents du thésaurus (union), chacun recherché puis fusionné.
+  const queries = expandQuery(nq0, aliasMap);
+  const best = new Map<string, { a: Acte; score: number }>();
 
-  for (let i = 0; i < index.length; i++) {
-    const a = index[i];
-    const h = a.norm;
-    let ok = true;
-    for (let t = 0; t < tokens.length; t++) {
-      if (h.indexOf(tokens[t]) === -1) {
-        ok = false;
-        break;
+  queries.forEach((qq, qi) => {
+    const tokens = qq.split(/\s+/).filter(Boolean);
+    const first = tokens[0];
+    const penalty = qi === 0 ? 0 : 1200; // les résultats via synonyme passent après les directs
+    for (let i = 0; i < index.length; i++) {
+      const a = index[i];
+      const h = a.norm;
+      let ok = true;
+      for (let t = 0; t < tokens.length; t++) {
+        if (h.indexOf(tokens[t]) === -1) {
+          ok = false;
+          break;
+        }
       }
+      if (!ok) continue;
+
+      let score = 0;
+      const codeN = a.code.toLowerCase();
+      if (codeN === qq) score += 10000;
+      else if (codeN.startsWith(first)) score += 4000;
+      else if (codeN.indexOf(first) !== -1) score += 800;
+      const labelN = h.slice(a.code.length + 1);
+      if (labelN.startsWith(first)) score += 300;
+      else if (new RegExp("\\b" + first.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).test(labelN))
+        score += 120;
+      const pos = labelN.indexOf(first);
+      if (pos >= 0) score += Math.max(0, 40 - pos);
+      score += Math.max(0, 30 - a.label.length / 6);
+      score -= penalty;
+
+      const prev = best.get(a.code);
+      if (!prev || score > prev.score) best.set(a.code, { a, score });
     }
-    if (!ok) continue;
+  });
 
-    // score de pertinence
-    let score = 0;
-    const codeN = a.code.toLowerCase();
-    if (codeN === nq) score += 10000;
-    else if (codeN.startsWith(first)) score += 4000;
-    else if (codeN.indexOf(first) !== -1) score += 800;
-    // libellé : mot commençant par le 1er terme > présence
-    const labelN = h.slice(a.code.length + 1);
-    if (labelN.startsWith(first)) score += 300;
-    else if (new RegExp("\\b" + first.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).test(labelN))
-      score += 120;
-    // position précoce du 1er terme = léger bonus
-    const pos = labelN.indexOf(first);
-    if (pos >= 0) score += Math.max(0, 40 - pos);
-    // libellé court = acte plus « générique »
-    score += Math.max(0, 30 - a.label.length / 6);
-
-    matches.push({ a, score });
-  }
-
-  matches.sort((x, y) => y.score - x.score || x.a.label.length - y.a.label.length);
-  return { list: matches.slice(0, MAX_RESULTS).map((m) => m.a), total: matches.length };
+  const arr = [...best.values()].sort((x, y) => y.score - x.score || x.a.label.length - y.a.label.length);
+  return { list: arr.slice(0, MAX_RESULTS).map((m) => m.a), total: arr.length };
 }
 
 export function CodageCcam() {
   const [index, setIndex] = useState<Acte[] | null>(null);
+  const [aliasMap, setAliasMap] = useState<AliasMap>(() => new Map());
   const [loadError, setLoadError] = useState(false);
   const [q, setQ] = useState("");
   const [copied, setCopied] = useState<string | null>(null);
   const deferredQ = useDeferredValue(q);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    loadAliasMap().then(setAliasMap);
+  }, []);
 
   // chargement + indexation de la base (une seule fois)
   useEffect(() => {
@@ -129,8 +128,8 @@ export function CodageCcam() {
   }, []);
 
   const { list, total } = useMemo(
-    () => (index ? runSearch(index, deferredQ) : { list: [], total: 0 }),
-    [index, deferredQ],
+    () => (index ? runSearch(index, deferredQ, aliasMap) : { list: [], total: 0 }),
+    [index, deferredQ, aliasMap],
   );
 
   const showResults = deferredQ.trim().length >= 2;

@@ -7,6 +7,7 @@
    chapitre et, pour les sous-codes, sa catégorie parente (3 caractères). Clic = copie. */
 
 import { useDeferredValue, useEffect, useMemo, useState } from "react";
+import { norm, loadAliasMap, expandQuery, type AliasMap } from "@/components/preconia/codageAliases";
 
 const MAX_RESULTS = 60;
 const LEVEL_LABEL: Record<number, string> = { 3: "Catégorie", 4: "Sous-catégorie", 5: "Extension" };
@@ -26,62 +27,64 @@ interface Cim10File {
   acts: [string, string, number, number][];
 }
 
-function norm(s: string): string {
-  return s
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
-    .replace(/œ/g, "oe")
-    .replace(/æ/g, "ae");
-}
+function runSearch(index: Dx[], q: string, aliasMap: AliasMap): { list: Dx[]; total: number } {
+  const nq0 = norm(q).trim();
+  if (nq0.length < 2) return { list: [], total: 0 };
+  // requête d'origine + équivalents du thésaurus (union), chacun recherché puis fusionné.
+  const queries = expandQuery(nq0, aliasMap);
+  const best = new Map<string, { a: Dx; score: number }>();
 
-function runSearch(index: Dx[], q: string): { list: Dx[]; total: number } {
-  const nq = norm(q).trim();
-  if (nq.length < 2) return { list: [], total: 0 };
-  const tokens = nq.split(/\s+/).filter(Boolean);
-  const first = tokens[0];
-  const matches: { a: Dx; score: number }[] = [];
-
-  for (let i = 0; i < index.length; i++) {
-    const a = index[i];
-    const h = a.norm;
-    let ok = true;
-    for (let t = 0; t < tokens.length; t++) {
-      if (h.indexOf(tokens[t]) === -1) {
-        ok = false;
-        break;
+  queries.forEach((qq, qi) => {
+    const tokens = qq.split(/\s+/).filter(Boolean);
+    const first = tokens[0];
+    const penalty = qi === 0 ? 0 : 1200; // les résultats via synonyme passent après les directs
+    for (let i = 0; i < index.length; i++) {
+      const a = index[i];
+      const h = a.norm;
+      let ok = true;
+      for (let t = 0; t < tokens.length; t++) {
+        if (h.indexOf(tokens[t]) === -1) {
+          ok = false;
+          break;
+        }
       }
+      if (!ok) continue;
+
+      let score = 0;
+      const codeN = a.code.toLowerCase();
+      if (codeN === qq) score += 10000;
+      else if (codeN.startsWith(first)) score += 4000;
+      else if (codeN.indexOf(first) !== -1) score += 600;
+      const labelN = h.slice(a.code.length + 1);
+      if (labelN.startsWith(first)) score += 300;
+      else if (new RegExp("\\b" + first.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).test(labelN))
+        score += 120;
+      const pos = labelN.indexOf(first);
+      if (pos >= 0) score += Math.max(0, 40 - pos);
+      if (a.level === 3) score += 25;
+      score += Math.max(0, 30 - a.label.length / 6);
+      score -= penalty;
+
+      const prev = best.get(a.code);
+      if (!prev || score > prev.score) best.set(a.code, { a, score });
     }
-    if (!ok) continue;
+  });
 
-    let score = 0;
-    const codeN = a.code.toLowerCase();
-    if (codeN === nq) score += 10000;
-    else if (codeN.startsWith(first)) score += 4000;
-    else if (codeN.indexOf(first) !== -1) score += 600;
-    const labelN = h.slice(a.code.length + 1);
-    if (labelN.startsWith(first)) score += 300;
-    else if (new RegExp("\\b" + first.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).test(labelN))
-      score += 120;
-    const pos = labelN.indexOf(first);
-    if (pos >= 0) score += Math.max(0, 40 - pos);
-    // les catégories (niveau 3) sont plus générales → léger bonus
-    if (a.level === 3) score += 25;
-    score += Math.max(0, 30 - a.label.length / 6);
-
-    matches.push({ a, score });
-  }
-
-  matches.sort((x, y) => y.score - x.score || x.a.code.localeCompare(y.a.code));
-  return { list: matches.slice(0, MAX_RESULTS).map((m) => m.a), total: matches.length };
+  const arr = [...best.values()].sort((x, y) => y.score - x.score || x.a.code.localeCompare(y.a.code));
+  return { list: arr.slice(0, MAX_RESULTS).map((m) => m.a), total: arr.length };
 }
 
 export function CodageCim10() {
   const [index, setIndex] = useState<Dx[] | null>(null);
+  const [aliasMap, setAliasMap] = useState<AliasMap>(() => new Map());
   const [loadError, setLoadError] = useState(false);
   const [q, setQ] = useState("");
   const [copied, setCopied] = useState<string | null>(null);
   const deferredQ = useDeferredValue(q);
+
+  useEffect(() => {
+    loadAliasMap().then(setAliasMap);
+  }, []);
 
   useEffect(() => {
     let alive = true;
@@ -115,8 +118,8 @@ export function CodageCim10() {
   }, []);
 
   const { list, total } = useMemo(
-    () => (index ? runSearch(index, deferredQ) : { list: [], total: 0 }),
-    [index, deferredQ],
+    () => (index ? runSearch(index, deferredQ, aliasMap) : { list: [], total: 0 }),
+    [index, deferredQ, aliasMap],
   );
   const showResults = deferredQ.trim().length >= 2;
   const loading = !index && !loadError;
