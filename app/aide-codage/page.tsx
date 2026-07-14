@@ -1,22 +1,24 @@
 import type { Metadata, Viewport } from "next";
 import Link from "next/link";
 import { Logo } from "@/components/preconia/Logo";
-import { CodageCcam } from "@/components/preconia/CodageCcam";
+import { CodageTabs } from "@/components/preconia/CodageTabs";
 
 const URL = "https://preconia.vercel.app/aide-codage";
-const TITLE = "PRECONIA Aide au codage CCAM — recherche d'actes et de codes";
+const TITLE = "PRECONIA Aide au codage — CIM-10 (diagnostics) et CCAM (actes)";
 const DESCRIPTION =
-  "Aide au codage CCAM : recherchez un acte médical, son code et son tarif. Outil search-first pour les professionnels de santé, adossé à la Classification Commune des Actes Médicaux.";
+  "Aide au codage médical : recherchez un diagnostic (CIM-10-FR 2026) ou un acte (CCAM) par code, libellé ou mot-clé. Outil search-first pour les professionnels de santé, adossé aux classifications officielles.";
 
 export const metadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,
   alternates: { canonical: "/aide-codage" },
   keywords: [
+    "aide au codage",
+    "codage CIM-10",
+    "recherche code CIM-10",
+    "CIM-10 FR 2026",
     "codage CCAM",
-    "aide au codage CCAM",
     "recherche acte CCAM",
-    "code CCAM",
     "classification commune des actes médicaux",
   ],
   openGraph: { title: TITLE, description: DESCRIPTION, url: URL, siteName: "PRECONIA", type: "website", locale: "fr_FR" },
@@ -40,7 +42,7 @@ export default function AideCodagePage() {
                   PRECONIA <span className="text-[#0ea5e9]">Aide au codage</span>
                 </span>
                 <span className="mt-0.5 hidden text-[8.5px] font-semibold uppercase tracking-[0.18em] text-[#1d4e7c] sm:block">
-                  Classification commune des actes médicaux
+                  Diagnostics CIM-10 · Actes CCAM
                 </span>
               </span>
             </Link>
@@ -77,15 +79,16 @@ export default function AideCodagePage() {
           ▸ PRECONIA · Aide au codage
         </div>
         <h1 className="mt-4 text-center text-[34px] font-bold leading-[1.08] tracking-tight text-[#0c2740] sm:text-[46px]">
-          Aide au codage CCAM
+          Aide au codage
         </h1>
-        <p className="mt-4 max-w-[56ch] text-center text-[15px] leading-relaxed text-ink-soft">
-          Recherchez un acte de la Classification Commune des Actes Médicaux : saisissez un code, un
-          libellé ou une région anatomique pour retrouver l&apos;acte correspondant.
+        <p className="mt-4 max-w-[58ch] text-center text-[15px] leading-relaxed text-ink-soft">
+          Recherchez un <b className="font-semibold text-[#0c2740]">diagnostic</b> (CIM-10-FR 2026)
+          ou un <b className="font-semibold text-[#0c2740]">acte</b> (CCAM) : saisissez un code, un
+          libellé ou un mot-clé pour retrouver le code correspondant.
         </p>
 
         <div className="mt-8 w-full">
-          <CodageCcam />
+          <CodageTabs />
         </div>
 
         <p className="mt-10 max-w-[60ch] text-center text-[11px] leading-relaxed text-ink-soft/70" lang="fr">

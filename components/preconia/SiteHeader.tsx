@@ -56,7 +56,7 @@ export function SiteHeader({ className = "" }: { className?: string }) {
                   PRECONIA <span className="text-[#0ea5e9]">Aide au codage</span>
                 </span>
                 <span className="mt-0.5 block text-[11px] text-ink-soft">
-                  Aide au codage CCAM — ouvrir ↗
+                  Diagnostics CIM-10 &amp; actes CCAM — ouvrir ↗
                 </span>
               </span>
             </Link>
