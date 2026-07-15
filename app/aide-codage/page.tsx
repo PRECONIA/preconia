@@ -77,24 +77,34 @@ export default function AideCodagePage() {
 
       {/* hero centré avec la barre de recherche */}
       <main className="relative z-10 mx-auto flex min-h-[calc(100vh-58px)] max-w-[1080px] flex-col items-center px-5 pb-24 pt-16 sm:pt-24">
-        <div className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-[#0ea5e9]">
+        <div className="cc-rise font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-[#0ea5e9]">
           ▸ PRECONIA · Aide au codage
         </div>
-        <h1 className="mt-4 text-center text-[34px] font-bold leading-[1.08] tracking-tight text-[#0c2740] sm:text-[46px]">
+        <h1
+          className="cc-rise mt-4 text-center text-[34px] font-bold leading-[1.08] tracking-tight text-[#0c2740] sm:text-[46px]"
+          style={{ "--cc-rise-i": 1 } as React.CSSProperties}
+        >
           Aide au codage
         </h1>
-        <p className="mt-4 max-w-[62ch] text-center text-[15px] leading-relaxed text-ink-soft">
+        <p
+          className="cc-rise mt-4 max-w-[62ch] text-center text-[15px] leading-relaxed text-ink-soft"
+          style={{ "--cc-rise-i": 2 } as React.CSSProperties}
+        >
           Recherchez un <b className="font-semibold text-[#0c2740]">diagnostic</b> (CIM-10), un{" "}
           <b className="font-semibold text-[#0c2740]">acte</b> technique (CCAM) ou clinique (NGAP),
           ou un <b className="font-semibold text-[#0c2740]">dispositif</b> remboursé (LPP) : code,
           libellé ou mot-clé.
         </p>
 
-        <div className="mt-8 w-full">
+        <div className="cc-rise mt-8 w-full" style={{ "--cc-rise-i": 3 } as React.CSSProperties}>
           <CodageTabs />
         </div>
 
-        <p className="mt-10 max-w-[60ch] text-center text-[11px] leading-relaxed text-ink-soft/70" lang="fr">
+        <p
+          className="cc-rise mt-10 max-w-[60ch] text-center text-[11px] leading-relaxed text-ink-soft/70"
+          style={{ "--cc-rise-i": 4 } as React.CSSProperties}
+          lang="fr"
+        >
           Aide au codage à destination des professionnels de santé — indicative et non opposable ;
           seuls les référentiels officiels de l&apos;Assurance maladie font foi.
         </p>

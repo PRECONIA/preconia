@@ -169,6 +169,18 @@ body {
     0 14px 30px -10px rgba(56, 189, 248, 0.55);
 }
 
+/* entrée de la page : fondu montant en cascade (mêmes keyframes pc-rise que le
+   héros du site principal), décalage croissant kicker → titre → texte → moteur. */
+.cc-rise {
+  animation: pc-rise 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  animation-delay: calc(var(--cc-rise-i, 0) * 90ms);
+}
+@media (prefers-reduced-motion: reduce) {
+  .cc-rise {
+    animation: none;
+  }
+}
+
 /* --- primitives de la refonte : panneaux, bandeaux, boutons --- */
 
 /* panneau « verre dépoli » : remplace carte blanche + border + shadow-sm */
