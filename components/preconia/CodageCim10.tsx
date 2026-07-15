@@ -7,7 +7,7 @@
    chapitre et, pour les sous-codes, sa catégorie parente (3 caractères). Clic = copie. */
 
 import { useDeferredValue, useEffect, useMemo, useState } from "react";
-import { norm, loadAliasMap, expandQuery, type AliasMap } from "@/components/preconia/codageAliases";
+import { normIndex, loadAliasMap, expandQuery, type AliasMap } from "@/components/preconia/codageAliases";
 
 const MAX_RESULTS = 60;
 const LEVEL_LABEL: Record<number, string> = { 3: "Catégorie", 4: "Sous-catégorie", 5: "Extension" };
@@ -28,7 +28,7 @@ interface Cim10File {
 }
 
 function runSearch(index: Dx[], q: string, aliasMap: AliasMap): { list: Dx[]; total: number } {
-  const nq0 = norm(q).trim();
+  const nq0 = normIndex(q).trim();
   if (nq0.length < 2) return { list: [], total: 0 };
   // requête d'origine + équivalents du thésaurus (union), chacun recherché puis fusionné.
   const queries = expandQuery(nq0, aliasMap);
@@ -106,7 +106,7 @@ export function CodageCim10() {
             level,
             chap: data.chapters[a[3]] ?? "",
             parent: level >= 4 ? labelOf.get(code.slice(0, 3)) ?? null : null,
-            norm: norm(code + " " + a[1]),
+            norm: normIndex(code + " " + a[1]),
           };
         });
         setIndex(items);
@@ -162,7 +162,7 @@ export function CodageCim10() {
       {!showResults && !loadError && (
         <p className="mt-4 text-center text-[13px] text-ink-soft">
           {index
-            ? `${index.length.toLocaleString("fr-FR")} diagnostics indexés — tapez un code (ex. N18) ou un mot du libellé.`
+            ? `${index.length.toLocaleString("fr-FR")} diagnostics indexés — tapez un code (ex. N18), un libellé ou un terme courant (ex. « crise cardiaque »).`
             : "Préparation de la base…"}
         </p>
       )}
