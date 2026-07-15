@@ -8,7 +8,7 @@
    via useDeferredValue ; rendu plafonné aux meilleurs résultats. Clic = copie du code. */
 
 import { useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
-import { norm, loadAliasMap, expandQuery, type AliasMap } from "@/components/preconia/codageAliases";
+import { normIndex, loadAliasMap, expandQuery, type AliasMap } from "@/components/preconia/codageAliases";
 
 const MAX_RESULTS = 60;
 
@@ -36,7 +36,7 @@ function eur(n: number): string {
 
 /* ----- moteur : filtrage + classement par pertinence, avec thésaurus ----- */
 function runSearch(index: Acte[], q: string, aliasMap: AliasMap): { list: Acte[]; total: number } {
-  const nq0 = norm(q).trim();
+  const nq0 = normIndex(q).trim();
   if (nq0.length < 2) return { list: [], total: 0 };
   // requête d'origine + équivalents du thésaurus (union), chacun recherché puis fusionné.
   const queries = expandQuery(nq0, aliasMap);
@@ -116,7 +116,7 @@ export function CodageCcam() {
             regr: a[5],
             chap: data.chapters[a[6]] ?? "",
             npc: a[7],
-            norm: norm(code + " " + label),
+            norm: normIndex(code + " " + label),
           };
         });
         setIndex(acts);
@@ -174,7 +174,7 @@ export function CodageCcam() {
       {!showResults && !loadError && (
         <p className="mt-4 text-center text-[13px] text-ink-soft">
           {index
-            ? `${index.length.toLocaleString("fr-FR")} actes indexés — tapez un code, un mot du libellé ou une région anatomique.`
+            ? `${index.length.toLocaleString("fr-FR")} actes indexés — tapez un code, un libellé ou un terme courant (ex. « infiltration genou »).`
             : loading
               ? "Préparation de la base…"
               : ""}

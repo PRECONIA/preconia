@@ -1,130 +1,790 @@
 {
-  "note": "Thésaurus de recherche PRECONIA : groupes de termes équivalents (langage courant / patient, abréviations cliniques usuelles, synonymes) → étendent la requête vers le vocabulaire officiel des libellés CIM-10 et CCAM. Chaque groupe est une équivalence vérifiée, uniquement destinée à la recherche (aucune donnée clinique inventée).",
-  "groups": [
-    ["crise cardiaque", "attaque cardiaque", "infarctus", "infarctus du myocarde", "idm"],
-    ["avc", "accident vasculaire cerebral", "attaque cerebrale", "ictus cerebral"],
-    ["ait", "accident ischemique transitoire"],
-    ["hta", "hypertension arterielle", "hypertension"],
-    ["acfa", "fibrillation auriculaire", "fibrillation atriale", "arythmie complete par fibrillation auriculaire"],
-    ["insuffisance cardiaque", "decompensation cardiaque"],
-    ["oap", "oedeme aigu du poumon", "oedeme pulmonaire"],
-    ["angor", "angine de poitrine"],
-    ["phlebite", "thrombose veineuse", "tvp", "thrombose veineuse profonde"],
-    ["embolie pulmonaire"],
-    ["coronarographie", "arteriographie coronaire"],
-    ["angioplastie", "dilatation coronaire", "stent coronaire"],
-    ["pacemaker", "stimulateur cardiaque"],
-    ["ecg", "electrocardiogramme"],
-    ["epilepsie", "crise convulsive", "convulsions", "comitialite"],
-    ["migraine"],
-    ["cephalee", "mal de tete", "maux de tete"],
-    ["parkinson", "maladie de parkinson"],
-    ["alzheimer", "maladie d alzheimer"],
-    ["demence"],
-    ["sep", "sclerose en plaques"],
-    ["sla", "sclerose laterale amyotrophique", "maladie de charcot"],
-    ["eeg", "electroencephalogramme"],
-    ["emg", "electromyographie"],
-    ["bpco", "maladie pulmonaire obstructive chronique", "bronchopneumopathie chronique obstructive"],
-    ["asthme"],
-    ["pneumonie", "pneumopathie"],
-    ["covid", "covid-19", "coronavirus", "sars-cov-2"],
-    ["grippe", "syndrome grippal", "influenza"],
-    ["saos", "apnee du sommeil", "apnees du sommeil", "syndrome d apnees"],
-    ["efr", "exploration fonctionnelle respiratoire", "spirometrie"],
-    ["diabete", "diabete sucre"],
-    ["hypothyroidie"],
-    ["hyperthyroidie"],
-    ["obesite", "surpoids"],
-    ["goutte", "hyperuricemie"],
-    ["cholesterol", "hypercholesterolemie", "dyslipidemie"],
-    ["rgo", "reflux gastro-oesophagien", "reflux gastro oesophagien", "reflux acide"],
-    ["ulcere gastrique", "ulcere de l estomac"],
-    ["appendicite"],
-    ["appendicectomie", "ablation de l appendice"],
-    ["calcul biliaire", "lithiase biliaire", "colique hepatique"],
-    ["cholecystectomie", "ablation de la vesicule"],
-    ["hemorroides"],
-    ["gastro-enterite", "gastroenterite", "gastro"],
-    ["hepatite"],
-    ["cirrhose"],
-    ["coloscopie", "colonoscopie"],
-    ["fibroscopie", "gastroscopie", "endoscopie digestive haute"],
-    ["irc", "insuffisance renale chronique", "maladie renale chronique", "mrc"],
-    ["ira", "insuffisance renale aigue"],
-    ["infection urinaire", "cystite"],
-    ["colique nephretique", "calcul renal", "calcul urinaire", "lithiase urinaire"],
-    ["hbp", "adenome de la prostate", "hypertrophie de la prostate", "hyperplasie de la prostate"],
-    ["dialyse", "hemodialyse", "epuration extrarenale"],
-    ["ist", "mst", "infection sexuellement transmissible"],
-    ["vih", "sida"],
-    ["tuberculose"],
-    ["sepsis", "septicemie", "choc septique"],
-    ["angine", "pharyngite", "amygdalite"],
-    ["amygdalectomie", "ablation des amygdales"],
-    ["otite"],
-    ["sinusite"],
-    ["zona"],
-    ["varicelle"],
-    ["cancer", "tumeur maligne", "neoplasie maligne", "carcinome"],
-    ["cancer du sein", "tumeur maligne du sein"],
-    ["cancer du poumon", "tumeur maligne du poumon", "cancer bronchique"],
-    ["cancer de la prostate", "tumeur maligne de la prostate"],
-    ["cancer colorectal", "cancer du colon", "tumeur maligne du colon"],
-    ["leucemie"],
-    ["lymphome"],
-    ["metastase", "tumeur secondaire"],
-    ["arthrose", "gonarthrose", "coxarthrose"],
-    ["polyarthrite rhumatoide"],
-    ["lombalgie", "mal de dos", "lumbago", "dorsalgie"],
-    ["sciatique", "lombosciatique", "sciatalgie", "cruralgie"],
-    ["fracture"],
-    ["entorse"],
-    ["tendinite"],
-    ["osteoporose"],
-    ["hernie discale"],
-    ["prothese de hanche", "arthroplastie de la hanche"],
-    ["prothese de genou", "arthroplastie du genou"],
-    ["depression", "syndrome depressif", "etat depressif", "episode depressif"],
-    ["anxiete", "trouble anxieux", "angoisse"],
-    ["schizophrenie"],
-    ["trouble bipolaire", "bipolaire", "psychose maniaco-depressive"],
-    ["tdah", "hyperactivite", "trouble deficit de l attention"],
-    ["alcoolisme", "ethylisme", "alcoolodependance", "dependance a l alcool"],
-    ["grossesse", "gestation"],
-    ["accouchement"],
-    ["cesarienne"],
-    ["fausse couche", "avortement spontane"],
-    ["endometriose"],
-    ["fibrome", "myome", "fibrome uterin", "myome uterin", "leiomyome de l uterus"],
-    ["menopause"],
-    ["hysterectomie", "ablation de l uterus"],
-    ["cataracte"],
-    ["glaucome"],
-    ["dmla", "degenerescence de la macula", "degenerescence maculaire liee a l age"],
-    ["surdite", "hypoacousie"],
-    ["vertige"],
-    ["eczema", "dermatite"],
-    ["psoriasis"],
-    ["urticaire"],
-    ["melanome"],
-    ["fievre", "hyperthermie", "pyrexie"],
-    ["douleur thoracique", "douleur dans la poitrine"],
-    ["dyspnee", "essoufflement", "difficulte respiratoire", "gene respiratoire"],
-    ["malaise", "syncope", "perte de connaissance", "lipothymie"],
-    ["vomissements", "nausees"],
-    ["toux"],
-    ["asthenie", "fatigue"],
-    ["irm", "remnographie", "imagerie par resonance magnetique"],
-    ["scanner", "tdm", "tomodensitometrie", "scanographie"],
-    ["echographie", "echo"],
-    ["doppler", "echographie doppler", "echodoppler"],
-    ["radiographie", "radio"],
-    ["mammographie"],
-    ["biopsie"],
-    ["ponction"],
-    ["coelioscopie", "laparoscopie"],
-    ["arthroscopie"],
-    ["endoscopie", "fibroscopie"]
+ "note": "Thésaurus de recherche PRECONIA (CIM-10 + CCAM). groups : groupes SYMÉTRIQUES de termes équivalents (langage courant, abréviations, synonymes) — chaque terme renvoie vers les autres. expansions : correspondances DIRIGÉES terme courant → vocabulaire officiel des libellés (anatomie, verbes d’acte), sens unique. Chaque terme cible est validé contre le vocabulaire réel des libellés (test automatique tests/codage.test.ts) ; aucune donnée clinique inventée — équivalences de recherche uniquement.",
+ "groups": [
+  [
+   "crise cardiaque",
+   "attaque cardiaque",
+   "infarctus",
+   "infarctus du myocarde",
+   "idm"
+  ],
+  [
+   "avc",
+   "accident vasculaire cerebral",
+   "attaque cerebrale",
+   "ictus cerebral"
+  ],
+  [
+   "ait",
+   "accident ischemique transitoire"
+  ],
+  [
+   "hta",
+   "hypertension arterielle",
+   "hypertension"
+  ],
+  [
+   "acfa",
+   "fibrillation auriculaire",
+   "fibrillation atriale",
+   "arythmie complete par fibrillation auriculaire"
+  ],
+  [
+   "insuffisance cardiaque",
+   "decompensation cardiaque"
+  ],
+  [
+   "oap",
+   "oedeme aigu du poumon",
+   "oedeme pulmonaire"
+  ],
+  [
+   "angor",
+   "angine de poitrine"
+  ],
+  [
+   "phlebite",
+   "thrombose veineuse",
+   "tvp",
+   "thrombose veineuse profonde"
+  ],
+  [
+   "embolie pulmonaire"
+  ],
+  [
+   "coronarographie",
+   "arteriographie coronaire"
+  ],
+  [
+   "angioplastie",
+   "dilatation coronaire",
+   "stent coronaire"
+  ],
+  [
+   "pacemaker",
+   "stimulateur cardiaque"
+  ],
+  [
+   "ecg",
+   "electrocardiogramme"
+  ],
+  [
+   "epilepsie",
+   "crise convulsive",
+   "convulsions",
+   "comitialite"
+  ],
+  [
+   "migraine"
+  ],
+  [
+   "cephalee",
+   "mal de tete",
+   "maux de tete"
+  ],
+  [
+   "parkinson",
+   "maladie de parkinson"
+  ],
+  [
+   "alzheimer",
+   "maladie d alzheimer"
+  ],
+  [
+   "demence"
+  ],
+  [
+   "sep",
+   "sclerose en plaques"
+  ],
+  [
+   "sla",
+   "sclerose laterale amyotrophique",
+   "maladie de charcot"
+  ],
+  [
+   "eeg",
+   "electroencephalogramme"
+  ],
+  [
+   "emg",
+   "electromyographie"
+  ],
+  [
+   "bpco",
+   "maladie pulmonaire obstructive chronique",
+   "bronchopneumopathie chronique obstructive"
+  ],
+  [
+   "asthme"
+  ],
+  [
+   "pneumonie",
+   "pneumopathie"
+  ],
+  [
+   "covid",
+   "covid-19",
+   "coronavirus",
+   "sars-cov-2"
+  ],
+  [
+   "grippe",
+   "syndrome grippal",
+   "influenza"
+  ],
+  [
+   "saos",
+   "apnee du sommeil",
+   "apnees du sommeil",
+   "syndrome d apnees"
+  ],
+  [
+   "efr",
+   "exploration fonctionnelle respiratoire",
+   "spirometrie"
+  ],
+  [
+   "diabete",
+   "diabete sucre"
+  ],
+  [
+   "hypothyroidie"
+  ],
+  [
+   "hyperthyroidie"
+  ],
+  [
+   "obesite",
+   "surpoids"
+  ],
+  [
+   "goutte",
+   "hyperuricemie"
+  ],
+  [
+   "cholesterol",
+   "hypercholesterolemie",
+   "dyslipidemie"
+  ],
+  [
+   "rgo",
+   "reflux gastro-oesophagien",
+   "reflux gastro oesophagien",
+   "reflux acide"
+  ],
+  [
+   "ulcere gastrique",
+   "ulcere de l estomac"
+  ],
+  [
+   "appendicite"
+  ],
+  [
+   "appendicectomie",
+   "ablation de l appendice"
+  ],
+  [
+   "calcul biliaire",
+   "lithiase biliaire",
+   "colique hepatique"
+  ],
+  [
+   "cholecystectomie",
+   "ablation de la vesicule"
+  ],
+  [
+   "hemorroides"
+  ],
+  [
+   "gastro-enterite",
+   "gastroenterite",
+   "gastro"
+  ],
+  [
+   "hepatite"
+  ],
+  [
+   "cirrhose"
+  ],
+  [
+   "coloscopie",
+   "colonoscopie"
+  ],
+  [
+   "fibroscopie",
+   "gastroscopie",
+   "endoscopie digestive haute"
+  ],
+  [
+   "irc",
+   "insuffisance renale chronique",
+   "maladie renale chronique",
+   "mrc"
+  ],
+  [
+   "ira",
+   "insuffisance renale aigue"
+  ],
+  [
+   "infection urinaire",
+   "cystite"
+  ],
+  [
+   "colique nephretique",
+   "calcul renal",
+   "calcul urinaire",
+   "lithiase urinaire"
+  ],
+  [
+   "hbp",
+   "adenome de la prostate",
+   "hypertrophie de la prostate",
+   "hyperplasie de la prostate"
+  ],
+  [
+   "dialyse",
+   "hemodialyse",
+   "epuration extrarenale"
+  ],
+  [
+   "ist",
+   "mst",
+   "infection sexuellement transmissible"
+  ],
+  [
+   "vih",
+   "sida"
+  ],
+  [
+   "tuberculose"
+  ],
+  [
+   "sepsis",
+   "septicemie",
+   "choc septique"
+  ],
+  [
+   "angine",
+   "pharyngite",
+   "amygdalite"
+  ],
+  [
+   "amygdalectomie",
+   "ablation des amygdales"
+  ],
+  [
+   "otite"
+  ],
+  [
+   "sinusite"
+  ],
+  [
+   "zona"
+  ],
+  [
+   "varicelle"
+  ],
+  [
+   "cancer",
+   "tumeur maligne",
+   "neoplasie maligne",
+   "carcinome"
+  ],
+  [
+   "cancer du sein",
+   "tumeur maligne du sein"
+  ],
+  [
+   "cancer du poumon",
+   "tumeur maligne du poumon",
+   "cancer bronchique"
+  ],
+  [
+   "cancer de la prostate",
+   "tumeur maligne de la prostate"
+  ],
+  [
+   "cancer colorectal",
+   "cancer du colon",
+   "tumeur maligne du colon"
+  ],
+  [
+   "leucemie"
+  ],
+  [
+   "lymphome"
+  ],
+  [
+   "metastase",
+   "tumeur secondaire"
+  ],
+  [
+   "arthrose",
+   "gonarthrose",
+   "coxarthrose"
+  ],
+  [
+   "polyarthrite rhumatoide"
+  ],
+  [
+   "lombalgie",
+   "mal de dos",
+   "lumbago",
+   "dorsalgie"
+  ],
+  [
+   "sciatique",
+   "lombosciatique",
+   "sciatalgie",
+   "cruralgie"
+  ],
+  [
+   "fracture"
+  ],
+  [
+   "entorse"
+  ],
+  [
+   "tendinite"
+  ],
+  [
+   "osteoporose"
+  ],
+  [
+   "hernie discale"
+  ],
+  [
+   "prothese de hanche",
+   "arthroplastie de la hanche"
+  ],
+  [
+   "prothese de genou",
+   "arthroplastie du genou"
+  ],
+  [
+   "depression",
+   "syndrome depressif",
+   "etat depressif",
+   "episode depressif"
+  ],
+  [
+   "anxiete",
+   "trouble anxieux",
+   "angoisse"
+  ],
+  [
+   "schizophrenie"
+  ],
+  [
+   "trouble bipolaire",
+   "bipolaire",
+   "psychose maniaco-depressive"
+  ],
+  [
+   "tdah",
+   "hyperactivite",
+   "trouble deficit de l attention"
+  ],
+  [
+   "alcoolisme",
+   "ethylisme",
+   "alcoolodependance",
+   "dependance a l alcool"
+  ],
+  [
+   "grossesse",
+   "gestation"
+  ],
+  [
+   "accouchement"
+  ],
+  [
+   "cesarienne"
+  ],
+  [
+   "fausse couche",
+   "avortement spontane"
+  ],
+  [
+   "endometriose"
+  ],
+  [
+   "fibrome",
+   "myome",
+   "fibrome uterin",
+   "myome uterin",
+   "leiomyome de l uterus"
+  ],
+  [
+   "menopause"
+  ],
+  [
+   "hysterectomie",
+   "ablation de l uterus"
+  ],
+  [
+   "cataracte"
+  ],
+  [
+   "glaucome"
+  ],
+  [
+   "dmla",
+   "degenerescence de la macula",
+   "degenerescence maculaire liee a l age"
+  ],
+  [
+   "surdite",
+   "hypoacousie"
+  ],
+  [
+   "vertige"
+  ],
+  [
+   "eczema",
+   "dermatite"
+  ],
+  [
+   "psoriasis"
+  ],
+  [
+   "urticaire"
+  ],
+  [
+   "melanome"
+  ],
+  [
+   "fievre",
+   "hyperthermie",
+   "pyrexie"
+  ],
+  [
+   "douleur thoracique",
+   "douleur dans la poitrine"
+  ],
+  [
+   "dyspnee",
+   "essoufflement",
+   "difficulte respiratoire",
+   "gene respiratoire"
+  ],
+  [
+   "malaise",
+   "syncope",
+   "perte de connaissance",
+   "lipothymie"
+  ],
+  [
+   "vomissements",
+   "nausees"
+  ],
+  [
+   "toux"
+  ],
+  [
+   "asthenie",
+   "fatigue"
+  ],
+  [
+   "irm",
+   "remnographie",
+   "imagerie par resonance magnetique"
+  ],
+  [
+   "scanner",
+   "tdm",
+   "tomodensitometrie",
+   "scanographie"
+  ],
+  [
+   "echographie",
+   "echo"
+  ],
+  [
+   "doppler",
+   "echographie doppler",
+   "echodoppler"
+  ],
+  [
+   "radiographie",
+   "radio"
+  ],
+  [
+   "mammographie"
+  ],
+  [
+   "biopsie"
+  ],
+  [
+   "ponction"
+  ],
+  [
+   "coelioscopie",
+   "laparoscopie"
+  ],
+  [
+   "arthroscopie"
+  ],
+  [
+   "endoscopie",
+   "fibroscopie"
   ]
+ ],
+ "expansions": {
+  "infiltration": [
+   "injection"
+  ],
+  "piqure": [
+   "injection"
+  ],
+  "ablation": [
+   "exerese",
+   "resection"
+  ],
+  "retrait": [
+   "ablation"
+  ],
+  "pose": [
+   "implantation"
+  ],
+  "reparation": [
+   "suture",
+   "plastie"
+  ],
+  "platre": [
+   "appareil rigide",
+   "immobilisation"
+  ],
+  "botox": [
+   "toxine botulique"
+  ],
+  "attelle": [
+   "orthese"
+  ],
+  "vaccin": [
+   "vaccination"
+  ],
+  "kine": [
+   "reeducation"
+  ],
+  "genou": [
+   "articulation",
+   "femorotibial"
+  ],
+  "epaule": [
+   "articulation",
+   "scapulohumeral"
+  ],
+  "hanche": [
+   "articulation",
+   "coxofemoral"
+  ],
+  "cheville": [
+   "articulation",
+   "tibiotarsien"
+  ],
+  "poignet": [
+   "articulation",
+   "radiocarpien"
+  ],
+  "coude": [
+   "articulation"
+  ],
+  "machoire": [
+   "mandibule",
+   "temporomandibulaire"
+  ],
+  "colonne": [
+   "rachis",
+   "vertebral"
+  ],
+  "cou": [
+   "cervical"
+  ],
+  "nuque": [
+   "cervical"
+  ],
+  "coeur": [
+   "cardiaque",
+   "intracardiaque"
+  ],
+  "poumon": [
+   "pulmonaire"
+  ],
+  "foie": [
+   "hepatique"
+  ],
+  "rein": [
+   "renal"
+  ],
+  "vessie": [
+   "vesical"
+  ],
+  "estomac": [
+   "gastrique"
+  ],
+  "peau": [
+   "cutane"
+  ],
+  "cerveau": [
+   "cerebral",
+   "encephale",
+   "intracranien"
+  ],
+  "crane": [
+   "cranien"
+  ],
+  "muscle": [
+   "musculaire"
+  ],
+  "artere": [
+   "arteriel"
+  ],
+  "ventre": [
+   "abdomen",
+   "abdominal"
+  ],
+  "bassin": [
+   "pelvien",
+   "pelvis"
+  ],
+  "sein": [
+   "mammaire"
+  ],
+  "uterus": [
+   "uterin"
+  ],
+  "ovaire": [
+   "ovarien"
+  ],
+  "prostate": [
+   "prostatique"
+  ],
+  "testicule": [
+   "testiculaire"
+  ],
+  "gencive": [
+   "gingival"
+  ],
+  "bouche": [
+   "buccal"
+  ],
+  "langue": [
+   "lingual"
+  ],
+  "visage": [
+   "face",
+   "facial"
+  ],
+  "omoplate": [
+   "scapula",
+   "scapulaire"
+  ],
+  "rotule": [
+   "patella",
+   "patellaire"
+  ],
+  "perone": [
+   "fibula"
+  ],
+  "cubitus": [
+   "ulna"
+  ],
+  "cuisse": [
+   "femoral",
+   "crural"
+  ],
+  "jambe": [
+   "membre inferieur"
+  ],
+  "bras": [
+   "membre superieur"
+  ],
+  "mollet": [
+   "sural"
+  ],
+  "talon": [
+   "calcaneus",
+   "calcaneen"
+  ],
+  "aisselle": [
+   "axillaire"
+  ],
+  "aine": [
+   "inguinal"
+  ],
+  "nombril": [
+   "ombilic"
+  ],
+  "fesse": [
+   "fessier"
+  ],
+  "rate": [
+   "splenique"
+  ],
+  "verge": [
+   "penis",
+   "penien"
+  ],
+  "nez": [
+   "nasal"
+  ],
+  "gorge": [
+   "pharynx",
+   "larynx"
+  ],
+  "oeil": [
+   "oculaire"
+  ],
+  "yeux": [
+   "oeil",
+   "oculaire"
+  ],
+  "regles": [
+   "menstruation",
+   "menstruel"
+  ],
+  "mal de gorge": [
+   "pharyngite",
+   "angine"
+  ],
+  "mal de ventre": [
+   "douleur abdominale"
+  ],
+  "mal au ventre": [
+   "douleur abdominale"
+  ],
+  "tour de reins": [
+   "lumbago"
+  ],
+  "grain de beaute": [
+   "naevus"
+  ],
+  "demangeaison": [
+   "prurit"
+  ],
+  "saignement": [
+   "hemorragie"
+  ],
+  "saignement de nez": [
+   "epistaxis"
+  ],
+  "bleu": [
+   "ecchymose",
+   "hematome"
+  ],
+  "fuite urinaire": [
+   "incontinence urinaire"
+  ],
+  "points de suture": [
+   "suture"
+  ],
+  "escarre": [
+   "ulcere de decubitus"
+  ],
+  "semelle": [
+   "orthese plantaire"
+  ]
+ }
 }
