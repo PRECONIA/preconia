@@ -96,9 +96,27 @@ export default function AideCodagePage() {
           libellé ou mot-clé.
         </p>
 
-        <div className="cc-rise mt-8 w-full" style={{ "--cc-rise-i": 3 } as React.CSSProperties}>
-          <CodageTabs />
-        </div>
+        {/* encart « métallisé » du moteur : panneau verre + liseré signature +
+            bandeau dégradé marine → bleu ciel, comme les sections du site principal */}
+        <section
+          aria-label="Moteur de recherche des nomenclatures"
+          className="cc-panel cc-rise mt-8 w-full overflow-hidden"
+          style={{ "--cc-rise-i": 3 } as React.CSSProperties}
+        >
+          <div className="h-[3px] bg-gradient-to-r from-[#0c2740] via-[#1d4e7c] to-[#38bdf8]" />
+          <div className="cc-band-hero px-5 py-4 sm:px-6">
+            <h2 className="text-lg font-semibold text-white">
+              Rechercher dans les nomenclatures officielles
+            </h2>
+            <p className="mt-1 text-sm leading-relaxed text-white/90">
+              CIM-10-FR 2026 · CCAM · NGAP · LPP — recherche instantanée, y compris en termes
+              courants (« infiltration genou », « crise cardiaque »).
+            </p>
+          </div>
+          <div className="px-4 py-6 sm:px-6">
+            <CodageTabs />
+          </div>
+        </section>
 
         <p
           className="cc-rise mt-10 max-w-[60ch] text-center text-[11px] leading-relaxed text-ink-soft/70"
