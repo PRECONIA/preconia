@@ -60,10 +60,10 @@ export default function NomenclatureVph2025() {
             Nomenclature VPH 2025 : la réforme du remboursement des fauteuils roulants
           </h1>
           <p className={P} lang="fr">
-            La <b>nomenclature VPH 2025</b> — issue de l&apos;<b>arrêté du 6 février 2025</b> (Journal
-            officiel du 7 février 2025) et applicable depuis le <b>1er décembre 2025</b> — refond
+            La <b>nomenclature VPH 2025</b>{" "}— issue de l&apos;<b>arrêté du 6 février 2025</b>{" "}(Journal
+            officiel du 7 février 2025) et applicable depuis le <b>1er décembre 2025</b>{" "}— refond
             entièrement l&apos;inscription et le remboursement des <b>véhicules pour personnes
-            handicapées</b> (VPH), c&apos;est-à-dire les fauteuils roulants manuels et électriques,
+            handicapées</b>{" "}(VPH), c&apos;est-à-dire les fauteuils roulants manuels et électriques,
             les poussettes, les scooters, les bases roulantes et les cycles. Cette page en résume
             les principes ; pour appliquer la réforme cas par cas, PRECONIA propose un{" "}
             <Link href="/preconia" className={lien}>
@@ -76,11 +76,11 @@ export default function NomenclatureVph2025() {
         <Carte>
           <h2 className={H2}>Ce que change la nomenclature VPH 2025</h2>
           <p className={P} lang="fr">
-            Le changement structurant est le passage à des <b>lignes génériques</b> : les fauteuils
+            Le changement structurant est le passage à des <b>lignes génériques</b>{" "}: les fauteuils
             ne sont plus inscrits sous un nom de marque mais sous des lignes définies par des
             spécifications techniques minimales, regroupées en <b>catégories désignées par des
             acronymes</b>. En contrepartie de ces exigences, la prise en charge devient{" "}
-            <b>intégrale</b> par l&apos;Assurance maladie pour les dispositifs conformes — sans reste
+            <b>intégrale</b>{" "}par l&apos;Assurance maladie pour les dispositifs conformes — sans reste
             à charge sur le tarif de responsabilité. La réforme définit également, pour chaque
             catégorie : les prescripteurs habilités, le parcours d&apos;évaluation et d&apos;essais,
             les adjonctions facturables, les forfaits associés et les règles de cumul.
@@ -94,20 +94,20 @@ export default function NomenclatureVph2025() {
           </p>
           <ul className="mt-2 space-y-1.5 text-sm leading-relaxed text-ink-soft">
             <li>
-              <b>Fauteuils manuels non modulaires</b> — pliant (FMP), pliant à cadre rigide (FMPR).
+              <b>Fauteuils manuels non modulaires</b>{" "}— pliant (FMP), pliant à cadre rigide (FMPR).
             </li>
             <li>
-              <b>Fauteuils manuels modulaires</b> — modulaire (FRM), multi-configurable (FRMC), actif
+              <b>Fauteuils manuels modulaires</b>{" "}— modulaire (FRM), multi-configurable (FRMC), actif
               (FRMA), de sport (FRMS), multi-position (FRMP), verticalisateur (FRMV).
             </li>
             <li>
-              <b>Fauteuils électriques</b> — standard (FRE, classes A/B/C), multi-position (FREP,
+              <b>Fauteuils électriques</b>{" "}— standard (FRE, classes A/B/C), multi-position (FREP,
               classes A/B/C), verticalisateur (FREV).
             </li>
             <li>
-              <b>Poussettes</b> (POU_S standard, POU_MRE modulaire/évolutive — réservées aux enfants
-              de moins de 16 ans), <b>bases roulantes</b>, <b>cycles</b> à roues multiples et{" "}
-              <b>scooters</b> (classes A+, B, C).
+              <b>Poussettes</b>{" "}(POU_S standard, POU_MRE modulaire/évolutive — réservées aux enfants
+              de moins de 16 ans), <b>bases roulantes</b>, <b>cycles</b>{" "}à roues multiples et{" "}
+              <b>scooters</b>{" "}(classes A+, B, C).
             </li>
           </ul>
         </Carte>
@@ -116,11 +116,11 @@ export default function NomenclatureVph2025() {
           <h2 className={H2}>Trois modes de prise en charge : achat, LCD, LLD</h2>
           <p className={P} lang="fr">
             La nomenclature organise le remboursement selon la durée prévisible du besoin.{" "}
-            L&apos;<b>achat</b> et la <b>location longue durée</b> (LLD) répondent aux incapacités de
+            L&apos;<b>achat</b>{" "}et la <b>location longue durée</b>{" "}(LLD) répondent aux incapacités de
             plus de six mois : l&apos;achat est renouvelable tous les 5 ans (3 ans avant 16 ans) ; la
             LLD — réservée aux FRMP, FRMV, FREP, FREV et POU_MRE — est un forfait trimestriel couvrant
             pendant 5 ans le fauteuil, sa maintenance et ses réparations, sous demande d&apos;accord
-            préalable. La <b>location courte durée</b> (LCD, réservée aux FMP, FMPR, FRM et FRE) couvre
+            préalable. La <b>location courte durée</b>{" "}(LCD, réservée aux FMP, FMPR, FRM et FRE) couvre
             les incapacités temporaires estimées à moins de trois mois : forfait hebdomadaire, réduit
             à partir de la 14e semaine, limité à 26 semaines consécutives par année glissante, avec
             une option d&apos;achat au terme de la location.
@@ -132,13 +132,13 @@ export default function NomenclatureVph2025() {
           <p className={P} lang="fr">
             Pour les catégories complexes (modulaires, électriques, poussettes évolutives, cycles,
             scooters), la prise en charge suit un parcours en trois temps : l&apos;<b>évaluation des
-            besoins</b> selon quatre critères (facteurs personnels, pathologie, usage et activités,
+            besoins</b>{" "}selon quatre critères (facteurs personnels, pathologie, usage et activités,
             facteurs environnementaux) avec prise de mesures obligatoire ; la <b>fiche de
-            préconisation</b> (modèle opposable publié par le ministère de la santé) ; puis la{" "}
-            <b>prescription définitive</b> après la phase d&apos;essai. Le remboursement est
+            préconisation</b>{" "}(modèle opposable publié par le ministère de la santé) ; puis la{" "}
+            <b>prescription définitive</b>{" "}après la phase d&apos;essai. Le remboursement est
             conditionné à cinq pièces (évaluation, préconisation, certificat de validation des essais,
             bon de commande ou devis, prescription définitive) et, pour certaines catégories, à une{" "}
-            <b>demande d&apos;accord préalable</b> (DAP). Le détail par catégorie est disponible dans
+            <b>demande d&apos;accord préalable</b>{" "}(DAP). Le détail par catégorie est disponible dans
             le guide sur la{" "}
             <Link href="/prescription-fauteuil-roulant" className={lien}>
               prescription d&apos;un fauteuil roulant
@@ -152,9 +152,9 @@ export default function NomenclatureVph2025() {
           <p className={P} lang="fr">
             Outre le tarif du fauteuil, la nomenclature prévoit les forfaits de positionnement{" "}
             <b>PAP A et PAP B</b>, les forfaits de mise à disposition <b>MAD1 et MAD2</b>, le forfait
-            de <b>livraison</b> et les forfaits annuels de réparation <b>SAV1 à SAV5</b>. Les{" "}
-            <b>adjonctions</b> se facturent via des lignes génériques dédiées (sauf en LCD, où elles
-            sont incluses dans le forfait hebdomadaire). Enfin, des <b>règles de cumul</b> encadrent
+            de <b>livraison</b>{" "}et les forfaits annuels de réparation <b>SAV1 à SAV5</b>. Les{" "}
+            <b>adjonctions</b>{" "}se facturent via des lignes génériques dédiées (sauf en LCD, où elles
+            sont incluses dans le forfait hebdomadaire). Enfin, des <b>règles de cumul</b>{" "}encadrent
             la possession simultanée de deux VPH : le module d&apos;évaluation de PRECONIA en rend le
             verdict.
           </p>
@@ -164,7 +164,7 @@ export default function NomenclatureVph2025() {
           <h2 className={H2}>Dispositions transitoires</h2>
           <p className={P} lang="fr">
             Les VPH conformes à l&apos;ancienne nomenclature et prescrits avant le 1er décembre 2025
-            restent délivrables jusqu&apos;au <b>1er décembre 2026</b> ; les anciens codes de location
+            restent délivrables jusqu&apos;au <b>1er décembre 2026</b>{" "}; les anciens codes de location
             de 52 semaines et plus restent facturables jusqu&apos;au <b>30 novembre 2027</b>. La prise
             en charge des fauteuils remis en bon état d&apos;usage (RBEU) est annoncée mais son arrêté
             d&apos;application n&apos;est pas encore publié.

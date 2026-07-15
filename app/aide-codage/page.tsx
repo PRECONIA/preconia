@@ -1,7 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import Link from "next/link";
 import { Logo } from "@/components/preconia/Logo";
-import { CodageTabs } from "@/components/preconia/CodageTabs";
+import { CodageEngineCard } from "@/components/preconia/CodageEngineCard";
+import { CodageSeoContent } from "@/components/preconia/CodageSeoContent";
 
 const URL = "https://preconia.fr/aide-codage";
 const TITLE = "PRECONIA Aide au codage — CIM-10, CCAM, NGAP et LPP";
@@ -96,27 +97,16 @@ export default function AideCodagePage() {
           libellé ou mot-clé.
         </p>
 
-        {/* encart « métallisé » du moteur : panneau verre + liseré signature +
-            bandeau dégradé marine → bleu ciel, comme les sections du site principal */}
-        <section
-          aria-label="Moteur de recherche des nomenclatures"
-          className="cc-panel cc-rise mt-8 w-full overflow-hidden"
+        {/* encart « métallisé » du moteur (panneau verre + bandeau marine → bleu ciel) */}
+        <CodageEngineCard
+          className="cc-rise mt-8"
           style={{ "--cc-rise-i": 3 } as React.CSSProperties}
-        >
-          <div className="h-[3px] bg-gradient-to-r from-[#0c2740] via-[#1d4e7c] to-[#38bdf8]" />
-          <div className="cc-band-hero px-5 py-4 sm:px-6">
-            <h2 className="text-lg font-semibold text-white">
-              Rechercher dans les nomenclatures officielles
-            </h2>
-            <p className="mt-1 text-sm leading-relaxed text-white/90">
-              CIM-10-FR 2026 · CCAM · NGAP · LPP — recherche instantanée, y compris en termes
-              courants (« infiltration genou », « crise cardiaque »).
-            </p>
-          </div>
-          <div className="px-4 py-6 sm:px-6">
-            <CodageTabs />
-          </div>
-        </section>
+        />
+
+        {/* contenu éditorial indexable : guides par nomenclature, FAQ, JSON-LD */}
+        <div className="cc-rise w-full" style={{ "--cc-rise-i": 4 } as React.CSSProperties}>
+          <CodageSeoContent />
+        </div>
 
         <p
           className="cc-rise mt-10 max-w-[60ch] text-center text-[11px] leading-relaxed text-ink-soft/70"

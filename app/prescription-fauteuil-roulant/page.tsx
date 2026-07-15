@@ -61,7 +61,7 @@ export default function PrescriptionFauteuilRoulant() {
           </h1>
           <p className={P} lang="fr">
             Depuis la <Link href="/nomenclature-vph-2025" className={lien}>nomenclature VPH 2025</Link>{" "}
-            (arrêté du 6 février 2025), la <b>prescription d&apos;un fauteuil roulant</b> obéit à des
+            (arrêté du 6 février 2025), la <b>prescription d&apos;un fauteuil roulant</b>{" "}obéit à des
             règles précises qui varient selon la catégorie du dispositif et le mode de prise en
             charge. Cette page explique qui peut prescrire, quel est le parcours à suivre et quelles
             pièces conditionnent le remboursement. Pour un cas concret, le{" "}
@@ -78,17 +78,17 @@ export default function PrescriptionFauteuilRoulant() {
           </p>
           <ul className="mt-2 space-y-1.5 text-sm leading-relaxed text-ink-soft">
             <li>
-              <b>Tout médecin ou ergothérapeute</b> pour les fauteuils manuels non modulaires (FMP,
+              <b>Tout médecin ou ergothérapeute</b>{" "}pour les fauteuils manuels non modulaires (FMP,
               FMPR), le fauteuil manuel modulaire (FRM), les bases roulantes et les poussettes
               standards.
             </li>
             <li>
-              <b>Un prescripteur compétent</b> — médecin MPR, titulaire d&apos;un DU d&apos;appareillage
+              <b>Un prescripteur compétent</b>{" "}— médecin MPR, titulaire d&apos;un DU d&apos;appareillage
               ou d&apos;une formation à la compensation du handicap, ou ergothérapeute — pour les FRMC,
               FRMA et FRMP.
             </li>
             <li>
-              <b>Une équipe pluridisciplinaire</b> (au minimum un médecin MPR ou titulaire d&apos;un DU
+              <b>Une équipe pluridisciplinaire</b>{" "}(au minimum un médecin MPR ou titulaire d&apos;un DU
               d&apos;appareillage, et un ergothérapeute ou un kinésithérapeute, indépendants des
               fabricants) pour les FRMS, FRMV, FRE, FREP, FREV, poussettes évolutives, cycles et
               scooters.
@@ -109,15 +109,15 @@ export default function PrescriptionFauteuilRoulant() {
           </p>
           <ol className="mt-2 list-decimal space-y-1.5 pl-5 text-sm leading-relaxed text-ink-soft">
             <li>
-              <b>Évaluation des besoins</b> selon quatre critères (facteurs personnels, pathologie,
-              usage et activités, environnement), avec <b>prise de mesures</b> obligatoire du patient.
+              <b>Évaluation des besoins</b>{" "}selon quatre critères (facteurs personnels, pathologie,
+              usage et activités, environnement), avec <b>prise de mesures</b>{" "}obligatoire du patient.
             </li>
             <li>
-              <b>Fiche de préconisation</b> : catégorie retenue, caractéristiques, options et mesures,
+              <b>Fiche de préconisation</b>{" "}: catégorie retenue, caractéristiques, options et mesures,
               sur le modèle opposable publié par le ministère de la santé.
             </li>
             <li>
-              <b>Essais</b> : proposition de 4 modèles, essai comparatif d&apos;au moins 2, puis, pour
+              <b>Essais</b>{" "}: proposition de 4 modèles, essai comparatif d&apos;au moins 2, puis, pour
               les modulaires, essai de 7 jours en conditions réelles (48 h minimum) ; pour un
               électrique ou un scooter, essai d&apos;aptitude à la conduite attesté par certificat.
             </li>
@@ -131,11 +131,11 @@ export default function PrescriptionFauteuilRoulant() {
         <Carte>
           <h2 className={H2}>Achat ou location : choisir le mode de prise en charge</h2>
           <p className={P} lang="fr">
-            Le mode est décidé selon la durée prévisible du besoin : <b>achat</b> (besoin durable,
-            renouvelable tous les 5 ans), <b>location longue durée</b> (FRMP, FRMV, FREP, FREV,
-            POU_MRE — forfait trimestriel sous DAP) ou <b>location courte durée</b> (besoin de moins
+            Le mode est décidé selon la durée prévisible du besoin : <b>achat</b>{" "}(besoin durable,
+            renouvelable tous les 5 ans), <b>location longue durée</b>{" "}(FRMP, FRMV, FREP, FREV,
+            POU_MRE — forfait trimestriel sous DAP) ou <b>location courte durée</b>{" "}(besoin de moins
             de trois mois — forfait hebdomadaire, 26 semaines maximum, avec option d&apos;achat).
-            Après le dernier forfait de location, un <b>délai de carence</b> d&apos;un an s&apos;applique
+            Après le dernier forfait de location, un <b>délai de carence</b>{" "}d&apos;un an s&apos;applique
             avant toute nouvelle prise en charge, sauf indication différente objectivée. Le détail des
             modes figure dans le guide de la{" "}
             <Link href="/nomenclature-vph-2025" className={lien}>nomenclature VPH 2025</Link>.
@@ -146,10 +146,10 @@ export default function PrescriptionFauteuilRoulant() {
           <h2 className={H2}>Pièces à transmettre et accord préalable</h2>
           <p className={P} lang="fr">
             Le remboursement d&apos;un fauteuil modulaire ou électrique est conditionné à la
-            transmission de <b>cinq pièces</b> : fiche d&apos;évaluation des besoins, fiche de
+            transmission de <b>cinq pièces</b>{" "}: fiche d&apos;évaluation des besoins, fiche de
             préconisation, certificat de validation des essais, bon de commande ou devis du
             distributeur, et prescription définitive. Certaines catégories exigent en plus une{" "}
-            <b>demande d&apos;accord préalable</b> (DAP) auprès du service médical de l&apos;Assurance
+            <b>demande d&apos;accord préalable</b>{" "}(DAP) auprès du service médical de l&apos;Assurance
             maladie. Une adjonction absente de la nomenclature peut être prise en charge sur devis,
             sous conditions strictes (DAP, mention manuscrite, essai et confirmation écrite du
             patient).
