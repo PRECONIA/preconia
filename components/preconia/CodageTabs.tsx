@@ -1,9 +1,10 @@
 "use client";
 
-/* Sélecteur entre les deux nomenclatures de l'aide au codage : diagnostics
-   (CIM-10) et actes (CCAM). Contrôle segmenté bleu marine ; chaque moteur de
-   recherche n'est monté que lorsque son onglet est actif (la base correspondante
-   n'est chargée qu'à ce moment-là). */
+/* Sélecteur entre les quatre nomenclatures de l'aide au codage (CIM-10, CCAM,
+   NGAP, LPP). Contrôle segmenté bleu marine ; chaque moteur de recherche n'est
+   monté que lorsque son onglet est actif (la base correspondante n'est chargée
+   qu'à ce moment-là). `initial` permet aux pages guides d'ouvrir directement
+   leur nomenclature. */
 
 import { useState } from "react";
 import { CodageCim10 } from "@/components/preconia/CodageCim10";
@@ -11,7 +12,8 @@ import { CodageCcam } from "@/components/preconia/CodageCcam";
 import { CodageNgap } from "@/components/preconia/CodageNgap";
 import { CodageLpp } from "@/components/preconia/CodageLpp";
 
-type Tab = "cim10" | "ccam" | "ngap" | "lpp";
+export type CodageTab = "cim10" | "ccam" | "ngap" | "lpp";
+type Tab = CodageTab;
 
 const TABS: { id: Tab; label: string; sub: string }[] = [
   { id: "cim10", label: "Diagnostics", sub: "CIM-10" },
@@ -20,8 +22,8 @@ const TABS: { id: Tab; label: string; sub: string }[] = [
   { id: "lpp", label: "Dispositifs", sub: "LPP" },
 ];
 
-export function CodageTabs() {
-  const [tab, setTab] = useState<Tab>("cim10");
+export function CodageTabs({ initial = "cim10" }: { initial?: Tab }) {
+  const [tab, setTab] = useState<Tab>(initial);
 
   return (
     <div className="w-full">

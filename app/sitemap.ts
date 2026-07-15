@@ -27,8 +27,32 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: `${BASE}/aide-codage`,
       lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
+      url: `${BASE}/aide-codage/cim-10`,
+      lastModified: new Date(),
       changeFrequency: "monthly",
-      priority: 0.7,
+      priority: 0.8,
+    },
+    {
+      url: `${BASE}/aide-codage/ccam`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${BASE}/aide-codage/ngap`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${BASE}/aide-codage/lpp`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
     },
     {
       url: `${BASE}/conformite`,
