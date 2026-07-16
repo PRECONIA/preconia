@@ -70,9 +70,17 @@ export default function AideCodagePage() {
           </div>
           {/* ancres des quatre pages guides — desktop */}
           <CodageNav className="hidden flex-1 items-center justify-center gap-1 lg:flex" />
-          {/* favoris : codes épinglés par l'utilisateur (l'accès à la préconisation
-              VPH passe par le volet roulant du logo) */}
-          <CodageFavoris />
+          {/* favoris (codes épinglés) + contact — l'accès à la préconisation VPH
+              passe par le volet roulant du logo */}
+          <div className="flex shrink-0 items-center gap-2.5">
+            <CodageFavoris />
+            <Link
+              href="/contact"
+              className="cc-btn inline-flex items-center rounded-xl px-5 py-3 text-[13.5px] font-semibold text-white"
+            >
+              Contact
+            </Link>
+          </div>
         </div>
         {/* ancres — mobile : rangée défilante */}
         <CodageNav className="flex gap-1 overflow-x-auto px-4 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] lg:hidden [&::-webkit-scrollbar]:hidden" />
