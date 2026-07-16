@@ -68,23 +68,30 @@ export function CodageSeoContent() {
         ))}
       </div>
 
-      <h2 className="mt-8 text-lg font-semibold tracking-tight text-[#0c2740]">
-        Questions fréquentes — aide au codage
-      </h2>
-      <div className="mt-2 divide-y divide-line-soft">
-        {FAQ.map((f) => (
-          <details key={f.q} className="group py-2.5">
-            <summary className="cursor-pointer list-none text-sm font-semibold text-ink transition-colors hover:text-[#0c2740]">
-              <span className="mr-1.5 inline-block text-[#0ea5e9] transition-transform group-open:rotate-90">
-                ›
-              </span>
-              {f.q}
-            </summary>
-            <p className="mt-1.5 pl-4 text-justify text-[13.5px] leading-relaxed text-ink-soft" lang="fr">
-              {f.a}
-            </p>
-          </details>
-        ))}
+      {/* FAQ : même présentation que sur le site PRECONIA VPH — panneau en verre
+          à liseré, titre dans le panneau, questions dépliables. */}
+      <div className="mt-8 overflow-hidden cc-panel">
+        <div className="h-[3px] bg-gradient-to-r from-[#1d4e7c] to-[#0c2740]" />
+        <div className="px-6 py-6">
+          <h2 className="text-lg font-semibold tracking-tight text-[#0c2740]">
+            Questions fréquentes — aide au codage
+          </h2>
+          <div className="mt-2 divide-y divide-line-soft">
+            {FAQ.map((f) => (
+              <details key={f.q} className="group py-2.5">
+                <summary className="cursor-pointer list-none text-sm font-semibold text-ink transition-colors hover:text-[#0c2740]">
+                  <span className="mr-1.5 inline-block text-[#0ea5e9] transition-transform group-open:rotate-90">
+                    ›
+                  </span>
+                  {f.q}
+                </summary>
+                <p className="mt-1.5 pl-4 text-justify text-[13.5px] leading-relaxed text-ink-soft" lang="fr">
+                  {f.a}
+                </p>
+              </details>
+            ))}
+          </div>
+        </div>
       </div>
 
       <script

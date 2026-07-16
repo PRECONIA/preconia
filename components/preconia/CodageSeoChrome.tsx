@@ -4,6 +4,7 @@
    décliné dans le thème bleu marine. Rendu serveur : tout est dans le HTML initial. */
 
 import Link from "next/link";
+import { CodageFavoris } from "@/components/preconia/CodageFavoris";
 import { Logo } from "@/components/preconia/Logo";
 
 export function CodageTopBar() {
@@ -17,12 +18,9 @@ export function CodageTopBar() {
             PRECONIA <span className="text-[#0ea5e9]">Aide au codage</span>
           </span>
         </Link>
-        <Link
-          href="/aide-codage"
-          className="cc-btn inline-flex items-center rounded-xl px-4 py-2 text-[13px] font-semibold text-white"
-        >
-          Ouvrir le moteur ↗
-        </Link>
+        {/* le moteur est déjà affiché sur chaque page guide : pas de CTA redondant,
+            on donne accès aux codes épinglés */}
+        <CodageFavoris />
       </div>
     </div>
   );

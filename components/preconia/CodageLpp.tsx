@@ -7,6 +7,7 @@
    dans le LPPTOT, pas dans ce fichier descriptif). */
 
 import { useDeferredValue, useEffect, useMemo, useState } from "react";
+import { FavStar, isFaved, toggleFav, useFavs } from "@/components/preconia/codageFavorites";
 
 const MAX_RESULTS = 60;
 
@@ -73,6 +74,7 @@ export function CodageLpp() {
   const [q, setQ] = useState("");
   const [copied, setCopied] = useState<string | null>(null);
   const deferredQ = useDeferredValue(q);
+  const favs = useFavs();
 
   useEffect(() => {
     let alive = true;
@@ -170,12 +172,12 @@ export function CodageLpp() {
           ) : (
             <ul className="cc-panel divide-y divide-line-soft overflow-hidden">
               {list.map((a) => (
-                <li key={a.code}>
+                <li key={a.code} className="flex items-stretch">
                   <button
                     type="button"
                     onClick={() => copy(a.code)}
                     title="Copier le code"
-                    className="flex w-full items-start gap-3 px-3.5 py-3 text-left transition-colors hover:bg-[#e0f2fe]/50"
+                    className="flex min-w-0 flex-1 items-start gap-3 px-3.5 py-3 text-left transition-colors hover:bg-[#e0f2fe]/50"
                   >
                     <span
                       className={`mt-0.5 inline-flex shrink-0 items-center rounded px-1.5 py-0.5 font-mono text-[12px] font-semibold ${
@@ -193,13 +195,17 @@ export function CodageLpp() {
                       )}
                     </span>
                   </button>
+                  <FavStar
+                    on={isFaved(favs, "lpp", a.code)}
+                    onToggle={() => toggleFav({ base: "lpp", code: a.code, label: a.label })}
+                  />
                 </li>
               ))}
             </ul>
           )}
           <p className="mt-2 px-1 text-[11px] text-ink-soft/70">
             LPP au 09-07-2026 — désignations officielles, sans tarif (le LPPTOT fait foi) ; cliquez
-            pour copier le code.
+            pour copier le code, l&apos;étoile l&apos;épingle dans vos favoris.
           </p>
         </div>
       )}
