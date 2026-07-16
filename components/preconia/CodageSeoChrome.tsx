@@ -30,7 +30,7 @@ export function CodageNav({
           key={n.id}
           href={n.href}
           aria-current={current === n.id ? "page" : undefined}
-          className={`shrink-0 rounded-lg px-3.5 py-2.5 text-[13.5px] font-semibold transition-colors ${
+          className={`shrink-0 rounded-lg px-6 py-2.5 text-[14px] font-semibold transition-colors ${
             current === n.id
               ? "bg-[#0c2740] text-white"
               : "text-ink-soft hover:bg-[#1d4e7c] hover:text-white"
@@ -60,8 +60,16 @@ export function CodageTopBar({ current }: { current?: string }) {
           className="hidden flex-1 items-center justify-center gap-1 md:flex"
         />
         {/* le moteur est déjà affiché sur chaque page guide : pas de CTA redondant,
-            on donne accès aux codes épinglés */}
-        <CodageFavoris />
+            on donne accès aux codes épinglés et au contact */}
+        <div className="flex shrink-0 items-center gap-2.5">
+          <CodageFavoris />
+          <Link
+            href="/contact"
+            className="cc-btn inline-flex items-center rounded-xl px-5 py-2.5 text-[13px] font-semibold text-white"
+          >
+            Contact
+          </Link>
+        </div>
       </div>
       {/* ancres — mobile : rangée défilante */}
       <CodageNav
