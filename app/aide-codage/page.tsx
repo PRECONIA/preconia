@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import Link from "next/link";
 import { Logo } from "@/components/preconia/Logo";
 import { CodageEngineCard } from "@/components/preconia/CodageEngineCard";
+import { CodageFavoris } from "@/components/preconia/CodageFavoris";
 import { CodageSeoContent } from "@/components/preconia/CodageSeoContent";
 
 const URL = "https://preconia.fr/aide-codage";
@@ -66,13 +67,9 @@ export default function AideCodagePage() {
               </Link>
             </div>
           </div>
-          <Link
-            href="/preconia"
-            className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-petrol/30 bg-white/70 px-3.5 py-2.5 text-[12.5px] font-semibold text-petrol-deep backdrop-blur transition-colors hover:border-petrol"
-          >
-            <Logo className="h-5 w-5" />
-            Préconisation VPH ↗
-          </Link>
+          {/* favoris : codes épinglés par l'utilisateur (l'accès à la préconisation
+              VPH passe par le volet roulant du logo) */}
+          <CodageFavoris />
         </div>
       </header>
 

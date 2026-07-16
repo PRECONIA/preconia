@@ -9,6 +9,7 @@
 
 import { useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
 import { normIndex, loadAliasMap, expandQuery, type AliasMap } from "@/components/preconia/codageAliases";
+import { FavStar, isFaved, toggleFav, useFavs } from "@/components/preconia/codageFavorites";
 
 const MAX_RESULTS = 60;
 
@@ -89,6 +90,7 @@ export function CodageCcam() {
   const [copied, setCopied] = useState<string | null>(null);
   const deferredQ = useDeferredValue(q);
   const inputRef = useRef<HTMLInputElement>(null);
+  const favs = useFavs();
 
   useEffect(() => {
     loadAliasMap().then(setAliasMap);
@@ -204,12 +206,12 @@ export function CodageCcam() {
           ) : (
             <ul className="cc-panel divide-y divide-line-soft overflow-hidden">
               {list.map((a) => (
-                <li key={a.code}>
+                <li key={a.code} className="flex items-stretch">
                   <button
                     type="button"
                     onClick={() => copy(a.code)}
                     title="Copier le code"
-                    className="flex w-full items-start gap-3 px-3.5 py-3 text-left transition-colors hover:bg-[#e0f2fe]/50"
+                    className="flex min-w-0 flex-1 items-start gap-3 px-3.5 py-3 text-left transition-colors hover:bg-[#e0f2fe]/50"
                   >
                     <span
                       className={`mt-0.5 inline-flex shrink-0 items-center gap-1 rounded px-1.5 py-0.5 font-mono text-[12px] font-semibold ${
@@ -252,12 +254,17 @@ export function CodageCcam() {
                       )}
                     </span>
                   </button>
+                  <FavStar
+                    on={isFaved(favs, "ccam", a.code)}
+                    onToggle={() => toggleFav({ base: "ccam", code: a.code, label: a.label })}
+                  />
                 </li>
               ))}
             </ul>
           )}
           <p className="mt-2 px-1 text-[11px] text-ink-soft/70">
-            Tarifs de la CCAM (secteur 1) à titre indicatif — cliquez un acte pour copier son code.
+            Tarifs de la CCAM (secteur 1) à titre indicatif — cliquez un acte pour copier son code
+            ; l&apos;étoile épingle l&apos;acte dans vos favoris.
           </p>
         </div>
       )}
