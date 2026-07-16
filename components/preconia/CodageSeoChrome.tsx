@@ -7,21 +7,67 @@ import Link from "next/link";
 import { CodageFavoris } from "@/components/preconia/CodageFavoris";
 import { Logo } from "@/components/preconia/Logo";
 
-export function CodageTopBar() {
+/* ancres des quatre pages guides, affichées dans les barres (hub + guides) */
+const NAV: { id: string; href: string; label: string }[] = [
+  { id: "cim10", href: "/aide-codage/cim-10", label: "CIM-10" },
+  { id: "ccam", href: "/aide-codage/ccam", label: "CCAM" },
+  { id: "ngap", href: "/aide-codage/ngap", label: "NGAP" },
+  { id: "lpp", href: "/aide-codage/lpp", label: "LPP" },
+];
+
+/** Liens vers les quatre nomenclatures (page active surlignée via `current`). */
+export function CodageNav({
+  current,
+  className = "",
+}: {
+  current?: string;
+  className?: string;
+}) {
+  return (
+    <nav aria-label="Nomenclatures" className={className}>
+      {NAV.map((n) => (
+        <Link
+          key={n.id}
+          href={n.href}
+          aria-current={current === n.id ? "page" : undefined}
+          className={`shrink-0 rounded-lg px-3.5 py-2.5 text-[13.5px] font-semibold transition-colors ${
+            current === n.id
+              ? "bg-[#0c2740] text-white"
+              : "text-ink-soft hover:bg-[#1d4e7c] hover:text-white"
+          }`}
+        >
+          {n.label}
+        </Link>
+      ))}
+    </nav>
+  );
+}
+
+export function CodageTopBar({ current }: { current?: string }) {
   return (
     <div className="sticky top-0 z-50 border-b border-white/60 bg-white/70 backdrop-blur-xl">
       <div className="h-[3px] bg-gradient-to-r from-[#0c2740] via-[#1d4e7c] to-[#38bdf8]" />
       <div className="mx-auto flex max-w-[880px] items-center justify-between gap-4 px-5 py-3">
-        <Link href="/aide-codage" className="flex items-center gap-2.5">
+        <Link href="/aide-codage" className="flex shrink-0 items-center gap-2.5">
           <Logo variant="navy" className="h-9 w-9 drop-shadow-sm" />
           <span className="text-[16px] font-bold tracking-tight text-[#0c2740]">
             PRECONIA <span className="text-[#0ea5e9]">Aide au codage</span>
           </span>
         </Link>
+        {/* ancres des quatre nomenclatures — desktop */}
+        <CodageNav
+          current={current}
+          className="hidden flex-1 items-center justify-center gap-1 md:flex"
+        />
         {/* le moteur est déjà affiché sur chaque page guide : pas de CTA redondant,
             on donne accès aux codes épinglés */}
         <CodageFavoris />
       </div>
+      {/* ancres — mobile : rangée défilante */}
+      <CodageNav
+        current={current}
+        className="flex gap-1 overflow-x-auto px-4 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] md:hidden [&::-webkit-scrollbar]:hidden"
+      />
     </div>
   );
 }
