@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Logo } from "@/components/preconia/Logo";
 import { CodageEngineCard } from "@/components/preconia/CodageEngineCard";
 import { CodageFavoris } from "@/components/preconia/CodageFavoris";
+import { CodageNav } from "@/components/preconia/CodageSeoChrome";
 import { CodageSeoContent } from "@/components/preconia/CodageSeoContent";
 
 const URL = "https://preconia.fr/aide-codage";
@@ -67,10 +68,14 @@ export default function AideCodagePage() {
               </Link>
             </div>
           </div>
+          {/* ancres des quatre pages guides — desktop */}
+          <CodageNav className="hidden flex-1 items-center justify-center gap-1 lg:flex" />
           {/* favoris : codes épinglés par l'utilisateur (l'accès à la préconisation
               VPH passe par le volet roulant du logo) */}
           <CodageFavoris />
         </div>
+        {/* ancres — mobile : rangée défilante */}
+        <CodageNav className="flex gap-1 overflow-x-auto px-4 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] lg:hidden [&::-webkit-scrollbar]:hidden" />
       </header>
 
       {/* hero centré avec la barre de recherche */}

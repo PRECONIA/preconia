@@ -52,7 +52,7 @@ const FAQ = [
 export default function NgapPage() {
   return (
     <div className="cc-page">
-      <CodageTopBar />
+      <CodageTopBar current="ngap" />
       <main className="mx-auto max-w-[880px] px-5 pb-16 pt-6">
         <CodageBreadcrumb current="NGAP" />
         <h1 className="text-[26px] font-bold leading-[1.15] tracking-tight text-[#0c2740] sm:text-[34px]">
