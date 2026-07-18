@@ -15,9 +15,13 @@ export const SECTIONS: { id: string; label: string }[] = [
   { id: "specificites-prescription", label: "Spécificités de prescription" },
 ];
 
+/* Sur l'accueil, défilement doux vers la section ; ailleurs (pages guides qui
+   partagent la même barre), on laisse la navigation vers /preconia#section. */
 function scrollToSection(e: React.MouseEvent<HTMLAnchorElement>, id: string) {
+  const el = document.getElementById(id);
+  if (!el) return;
   e.preventDefault();
-  document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  el.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 export function SiteHeader({ className = "" }: { className?: string }) {
@@ -67,7 +71,7 @@ export function SiteHeader({ className = "" }: { className?: string }) {
           {SECTIONS.map((s) => (
             <a
               key={s.id}
-              href={`#${s.id}`}
+              href={`/preconia#${s.id}`}
               onClick={(e) => scrollToSection(e, s.id)}
               className="rounded-lg px-3.5 py-3 text-[13.5px] font-semibold text-ink-soft transition-colors hover:bg-petrol hover:text-white"
             >
@@ -131,7 +135,7 @@ export function SiteHeader({ className = "" }: { className?: string }) {
         {SECTIONS.map((s) => (
           <a
             key={s.id}
-            href={`#${s.id}`}
+            href={`/preconia#${s.id}`}
             onClick={(e) => scrollToSection(e, s.id)}
             className="shrink-0 rounded-full border border-line-soft bg-white/70 px-3 py-1 text-[12px] font-semibold text-ink-soft"
           >
