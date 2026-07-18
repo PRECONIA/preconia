@@ -2136,13 +2136,20 @@ export function WalkerShell() {
                 href: "https://nomenclature-fauteuil-roulant.fr",
                 title: "Site officiel FEDEPSAD et UNPDM",
               },
+              /* documents officiels hébergés localement (liens externes morts) —
+                 target _blank : le PDF s'ouvre dans un onglet, pas de
+                 téléchargement forcé. */
               {
-                href: "https://nomenclature-fauteuil-roulant.fr/Fiche-evaluation-des-besoins-VPH.pdf",
+                href: "/docs/Fiche-evaluation-des-besoins-VPH.pdf",
                 title: "Fiche d'évaluation des besoins",
               },
               {
-                href: "https://nomenclature-fauteuil-roulant.fr/Fiche-de-preconisation-VPH.pdf",
+                href: "/docs/Fiche-de-preconisation-VPH.pdf",
                 title: "Fiche de préconisation",
+              },
+              {
+                href: "/docs/Certificat-essai-conditions-reelles-VPH.pdf",
+                title: "Certificat de validation d'essai",
               },
               {
                 href: "https://nomenclature-fauteuil-roulant.fr/PDF_Nomenclature/Documents_Def/Formulaire-engagement-usagers-VPH.pdf",
