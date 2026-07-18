@@ -4,7 +4,7 @@ import {
   CarteNavy,
   CodageBreadcrumb,
   CodageGuideFooter,
-  CodageTopBar,
+  CodageHeader,
   RelatedNavy,
   codageJsonLd,
 } from "@/components/preconia/CodageSeoChrome";
@@ -52,7 +52,7 @@ const FAQ = [
 export default function CodeLppPage() {
   return (
     <div className="cc-page">
-      <CodageTopBar current="lpp" />
+      <CodageHeader current="lpp" />
       <main className="pg-cascade mx-auto max-w-[880px] px-5 pb-16 pt-6">
         <CodageBreadcrumb current="Code LPP" />
         <h1 className="text-[26px] font-bold leading-[1.15] tracking-tight text-[#0c2740] sm:text-[34px]">

@@ -4,9 +4,9 @@ import {
   Breadcrumb,
   Carte,
   RelatedLinks,
-  SeoTopBar,
   seoPageJsonLd,
 } from "@/components/preconia/SeoPageChrome";
+import { SiteHeader } from "@/components/preconia/SiteHeader";
 
 const URL = "https://preconia.fr/prescription-fauteuil-roulant";
 const TITLE =
@@ -44,7 +44,7 @@ export default function PrescriptionFauteuilRoulant() {
 
   return (
     <>
-      <SeoTopBar />
+      <SiteHeader />
       <main className="pg-cascade relative z-10 mx-auto max-w-[880px] px-5 pb-16 pt-8">
         <script
           type="application/ld+json"
