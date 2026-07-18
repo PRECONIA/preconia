@@ -37,7 +37,9 @@ export default function AideCodagePage() {
     <div className="cc-page">
       {/* en-tête bleu marine — même hauteur que la barre d'ancrage du site principal */}
       <header className="cc-header">
-        <div className="mx-auto flex max-w-[1080px] items-center justify-between gap-5 px-5 py-4">
+        {/* même gabarit (1240px) que la barre du site VPH : les logos restent
+            exactement au même endroit quand on bascule d'une partie à l'autre */}
+        <div className="mx-auto flex max-w-[1240px] items-center justify-between gap-5 px-5 py-4">
           {/* marque + volet roulant « Préconisation VPH » au survol du logo (symétrique) */}
           <div className="group relative shrink-0">
             <Link href="/aide-codage" className="flex items-center gap-2.5">
