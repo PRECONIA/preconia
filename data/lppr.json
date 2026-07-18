@@ -1,6 +1,6 @@
 {
-  "source": "Nomenclature LPPR — base CNAM (codage.ext.cnamts.fr), chapitre VPH achat neuf (7 sous-catégories) — MAJ LPPTOT892 (2026-07-09) : FRE-B ERGOFLIX (9502938) ajouté.",
-  "lastUpdated": "2026-07-09",
+  "source": "Nomenclature LPPR — base CNAM (codage.ext.cnamts.fr), chapitre VPH achat neuf (7 sous-catégories) — MAJ LPPTOT892 (2026-07-09) : FRE-B ERGOFLIX (9502938) ajouté ; MAJ LPPTOT893 (2026-07-18) : FRE-A OTTO BOCK (9539918) ajouté.",
+  "lastUpdated": "2026-07-18",
   "products": [
     {
       "code": "4507210",
@@ -515,6 +515,11 @@
     {
       "code": "9539628",
       "label": "VPH, ACHAT NEUF, FRE-B, MODULAIRE PAR MOTEUR ÉLECTRIQUE CLASSE B,LOGO SILVER",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9539918",
+      "label": "VPH, ACHAT NEUF, FRE-A, MODULAIRE PAR MOTEUR ÉLECTRIQUE CLASSE A,OTTO BOCK",
       "category": "VPH modulaires à propulsion électrique"
     },
     {
