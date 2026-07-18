@@ -1,6 +1,6 @@
 {
-  "source": "Nomenclature LPPR — base CNAM (menu 722), regroupement par ordre de page : code mère → variantes de marque — MAJ LPPTOT892 (2026-07-09) : variante Forfait A LOGO SILVER (9989917) ajoutée.",
-  "lastUpdated": "2026-07-09",
+  "source": "Nomenclature LPPR — base CNAM (menu 722), regroupement par ordre de page : code mère → variantes de marque — MAJ LPPTOT892 (2026-07-09) : variante Forfait A LOGO SILVER (9989917) ajoutée ; MAJ LPPTOT893 (2026-07-18) : variante Forfait B LOGO SILVER (9922698) ajoutée.",
+  "lastUpdated": "2026-07-18",
   "groups": [
     {
       "base": "4947601",
@@ -33,7 +33,8 @@
         "PROT VIRGINIE": "9915356",
         "4POWER4": "9949510",
         "VERMEIREN": "9922913",
-        "WINNCARE FRANCE": "9919259"
+        "WINNCARE FRANCE": "9919259",
+        "LOGO SILVER": "9922698"
       }
     },
     {

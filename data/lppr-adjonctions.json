@@ -1,6 +1,6 @@
 {
-  "source": "Nomenclature LPPR — base CNAM (codage.ext.cnamts.fr), chapitre Adjonctions & PAP (6 sous-catégories)",
-  "lastUpdated": "2026-06-25",
+  "source": "Nomenclature LPPR — base CNAM (codage.ext.cnamts.fr), chapitre Adjonctions & PAP (6 sous-catégories) — MAJ LPPTOT893 (2026-07-18) : variante PAP Forfait B LOGO SILVER (9922698) ajoutée.",
+  "lastUpdated": "2026-07-18",
   "products": [
     {
       "code": "4936922",
@@ -665,6 +665,11 @@
     {
       "code": "9990620",
       "label": "VPH, ADJONCTION, PAP FORFAIT B ADJONCTIONS MEMBRE INFÉRIEUR,EUROMOVE",
+      "category": "Adjonctions communes à plusieurs catégories de VPH"
+    },
+    {
+      "code": "9922698",
+      "label": "VPH, ADJONCTION, PAP FORFAIT B ADJONCTIONS MEMBRE INFÉRIEUR,LOGO SILVER",
       "category": "Adjonctions communes à plusieurs catégories de VPH"
     },
     {
