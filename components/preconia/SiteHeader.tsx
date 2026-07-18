@@ -13,7 +13,6 @@ export const SECTIONS: { id: string; label: string }[] = [
   { id: "cumul", label: "Évaluation de cumul" },
   { id: "recherche-vph", label: "Recherche VPH" },
   { id: "specificites-prescription", label: "Spécificités de prescription" },
-  { id: "apropos", label: "FAQ" },
 ];
 
 function scrollToSection(e: React.MouseEvent<HTMLAnchorElement>, id: string) {
@@ -110,36 +109,6 @@ export function SiteHeader({ className = "" }: { className?: string }) {
                     Prescripteurs, parcours d&apos;évaluation et d&apos;essais, fiche de préconisation
                   </span>
                 </Link>
-                <div className="border-b border-t border-line-soft px-4 py-2 text-[10.5px] font-semibold uppercase tracking-[0.14em] text-[#1d4e7c]">
-                  Aide au codage
-                </div>
-                <Link
-                  href="/aide-codage"
-                  className="block px-4 py-2.5 transition-colors hover:bg-[#e0f2fe]/50"
-                >
-                  <span className="block text-[13px] font-semibold text-ink">
-                    Le moteur — 4 nomenclatures
-                  </span>
-                  <span className="block text-[11px] text-ink-soft">
-                    Recherche instantanée : diagnostics, actes, dispositifs
-                  </span>
-                </Link>
-                <div className="flex gap-1.5 px-4 pb-3 pt-1">
-                  {[
-                    { href: "/aide-codage/cim-10", label: "CIM-10" },
-                    { href: "/aide-codage/ccam", label: "CCAM" },
-                    { href: "/aide-codage/ngap", label: "NGAP" },
-                    { href: "/aide-codage/lpp", label: "LPP" },
-                  ].map((g) => (
-                    <Link
-                      key={g.href}
-                      href={g.href}
-                      className="rounded-full border border-[#1d4e7c]/25 bg-white/70 px-2.5 py-1 text-[11px] font-semibold text-[#1d4e7c] transition-colors hover:border-[#0ea5e9] hover:text-[#0c2740]"
-                    >
-                      {g.label}
-                    </Link>
-                  ))}
-                </div>
               </div>
             </div>
           </div>
@@ -169,11 +138,12 @@ export function SiteHeader({ className = "" }: { className?: string }) {
             {s.label}
           </a>
         ))}
-        {/* guides (pages de destination) — le volet roulant n'existe qu'au survol desktop */}
+        {/* guides (pages de destination) — le volet roulant n'existe qu'au survol desktop.
+            L'aide au codage n'apparaît pas : les deux parties du site sont cloisonnées,
+            seul le volet du logo fait la passerelle. */}
         {[
           { href: "/nomenclature-vph-2025", label: "Guide nomenclature" },
           { href: "/prescription-fauteuil-roulant", label: "Guide prescription" },
-          { href: "/aide-codage", label: "Aide au codage" },
         ].map((g) => (
           <Link
             key={g.href}

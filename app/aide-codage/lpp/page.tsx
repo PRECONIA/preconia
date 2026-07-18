@@ -135,19 +135,19 @@ export default function CodeLppPage() {
         <RelatedNavy
           links={[
             {
-              href: "/nomenclature-vph-2025",
-              title: "Nomenclature VPH 2025",
-              desc: "La réforme du remboursement des fauteuils roulants : catégories, modes de prise en charge et forfaits.",
-            },
-            {
-              href: "/prescription-fauteuil-roulant",
-              title: "Prescription d'un fauteuil roulant",
-              desc: "Qui peut prescrire, le parcours d'évaluation et d'essais, la fiche de préconisation.",
-            },
-            {
               href: "/aide-codage/ccam",
               title: "Code CCAM",
               desc: "Les actes techniques médicaux : structure du code, tarifs secteur 1 et accord préalable.",
+            },
+            {
+              href: "/aide-codage/cim-10",
+              title: "Code CIM-10",
+              desc: "Les diagnostics du PMSI : catégories, chapitres et recherche en langage courant.",
+            },
+            {
+              href: "/aide-codage/ngap",
+              title: "NGAP",
+              desc: "Les actes cliniques et les lettres clés : recherche en texte intégral des 150 articles.",
             },
             {
               href: "/aide-codage",
