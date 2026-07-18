@@ -75,6 +75,74 @@ export function SiteHeader({ className = "" }: { className?: string }) {
               {s.label}
             </a>
           ))}
+          {/* volet roulant « Guides » : pages de destination (guides VPH + aide au codage) */}
+          <div className="group relative">
+            <button
+              type="button"
+              className="whitespace-nowrap rounded-lg px-3.5 py-3 text-[13.5px] font-semibold text-ink-soft transition-colors hover:bg-petrol hover:text-white group-focus-within:bg-petrol group-focus-within:text-white group-hover:bg-petrol group-hover:text-white"
+            >
+              Guides <span aria-hidden>▾</span>
+            </button>
+            <div className="invisible absolute left-1/2 top-full z-50 -translate-x-1/2 -translate-y-2 pt-[14px] opacity-0 transition-all duration-200 ease-out group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
+              <div className="w-80 overflow-hidden rounded-2xl border border-line-soft bg-white/90 shadow-[0_18px_44px_-18px_rgba(7,63,60,0.5)] backdrop-blur-xl">
+                <div className="border-b border-line-soft px-4 py-2 text-[10.5px] font-semibold uppercase tracking-[0.14em] text-petrol">
+                  Prescription VPH
+                </div>
+                <Link
+                  href="/nomenclature-vph-2025"
+                  className="block px-4 py-2.5 transition-colors hover:bg-petrol-tint/40"
+                >
+                  <span className="block text-[13px] font-semibold text-ink">
+                    Nomenclature VPH 2025
+                  </span>
+                  <span className="block text-[11px] text-ink-soft">
+                    Catégories, prise en charge, forfaits — arrêté du 6 février 2025
+                  </span>
+                </Link>
+                <Link
+                  href="/prescription-fauteuil-roulant"
+                  className="block px-4 py-2.5 transition-colors hover:bg-petrol-tint/40"
+                >
+                  <span className="block text-[13px] font-semibold text-ink">
+                    Prescription d&apos;un fauteuil roulant
+                  </span>
+                  <span className="block text-[11px] text-ink-soft">
+                    Prescripteurs, parcours d&apos;évaluation et d&apos;essais, fiche de préconisation
+                  </span>
+                </Link>
+                <div className="border-b border-t border-line-soft px-4 py-2 text-[10.5px] font-semibold uppercase tracking-[0.14em] text-[#1d4e7c]">
+                  Aide au codage
+                </div>
+                <Link
+                  href="/aide-codage"
+                  className="block px-4 py-2.5 transition-colors hover:bg-[#e0f2fe]/50"
+                >
+                  <span className="block text-[13px] font-semibold text-ink">
+                    Le moteur — 4 nomenclatures
+                  </span>
+                  <span className="block text-[11px] text-ink-soft">
+                    Recherche instantanée : diagnostics, actes, dispositifs
+                  </span>
+                </Link>
+                <div className="flex gap-1.5 px-4 pb-3 pt-1">
+                  {[
+                    { href: "/aide-codage/cim-10", label: "CIM-10" },
+                    { href: "/aide-codage/ccam", label: "CCAM" },
+                    { href: "/aide-codage/ngap", label: "NGAP" },
+                    { href: "/aide-codage/lpp", label: "LPP" },
+                  ].map((g) => (
+                    <Link
+                      key={g.href}
+                      href={g.href}
+                      className="rounded-full border border-[#1d4e7c]/25 bg-white/70 px-2.5 py-1 text-[11px] font-semibold text-[#1d4e7c] transition-colors hover:border-[#0ea5e9] hover:text-[#0c2740]"
+                    >
+                      {g.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
         </nav>
 
         <div className="ml-auto flex shrink-0 items-center gap-2.5 lg:ml-0">
@@ -100,6 +168,20 @@ export function SiteHeader({ className = "" }: { className?: string }) {
           >
             {s.label}
           </a>
+        ))}
+        {/* guides (pages de destination) — le volet roulant n'existe qu'au survol desktop */}
+        {[
+          { href: "/nomenclature-vph-2025", label: "Guide nomenclature" },
+          { href: "/prescription-fauteuil-roulant", label: "Guide prescription" },
+          { href: "/aide-codage", label: "Aide au codage" },
+        ].map((g) => (
+          <Link
+            key={g.href}
+            href={g.href}
+            className="shrink-0 rounded-full border border-petrol/30 bg-petrol-tint/30 px-3 py-1 text-[12px] font-semibold text-petrol-deep"
+          >
+            {g.label}
+          </Link>
         ))}
       </nav>
     </header>

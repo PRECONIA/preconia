@@ -200,10 +200,10 @@ body {
   );
 }
 
-/* fondu entrant entre les pages de l'aide au codage (template re-monté à chaque
-   navigation). Opacité pure — pas de transform, pour ne pas perturber les barres
-   en position sticky. */
-@keyframes cc-page-fade {
+/* fondu entrant entre les pages (template racine re-monté à chaque navigation).
+   Opacité pure — pas de transform, pour ne pas perturber les barres sticky ni
+   les panneaux fixed. */
+@keyframes pg-page-fade {
   from {
     opacity: 0;
   }
@@ -211,11 +211,11 @@ body {
     opacity: 1;
   }
 }
-.cc-page-fade {
-  animation: cc-page-fade 0.4s ease-out both;
+.pg-page-fade {
+  animation: pg-page-fade 0.4s ease-out both;
 }
 @media (prefers-reduced-motion: reduce) {
-  .cc-page-fade {
+  .pg-page-fade {
     animation: none;
   }
 }
