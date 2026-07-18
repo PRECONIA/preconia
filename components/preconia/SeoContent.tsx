@@ -150,18 +150,6 @@ export function SeoContent() {
                 location, la fiche de préconisation et les pièces à transmettre.
               </div>
             </Link>
-            <Link
-              href="/aide-codage"
-              className="group rounded-xl border border-line-soft bg-white/70 p-4 transition-colors hover:border-petrol"
-            >
-              <div className="text-sm font-semibold text-ink group-hover:text-petrol-deep">
-                Aide au codage — CIM-10, CCAM, NGAP, LPP <span className="text-petrol">→</span>
-              </div>
-              <div className="mt-1 text-[12.5px] leading-relaxed text-ink-soft">
-                Un moteur instantané sur les quatre nomenclatures officielles : diagnostics,
-                actes techniques et cliniques, dispositifs remboursables.
-              </div>
-            </Link>
           </div>
 
           <h2 className="mb-3 mt-6 text-lg font-semibold tracking-tight">
