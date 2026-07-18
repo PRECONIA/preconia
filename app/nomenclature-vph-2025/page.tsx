@@ -45,7 +45,7 @@ export default function NomenclatureVph2025() {
   return (
     <>
       <SeoTopBar />
-      <main className="relative z-10 mx-auto max-w-[880px] px-5 pb-16 pt-8">
+      <main className="pg-cascade relative z-10 mx-auto max-w-[880px] px-5 pb-16 pt-8">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

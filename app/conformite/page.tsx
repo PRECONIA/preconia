@@ -312,7 +312,7 @@ function Carte({ children }: { children: React.ReactNode }) {
 
 export default function ConformitePage() {
   return (
-    <main className="relative z-10 mx-auto max-w-[880px] px-5 pb-16 pt-10">
+    <main className="pg-cascade relative z-10 mx-auto max-w-[880px] px-5 pb-16 pt-10">
       <header>
         <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-petrol">
           PRECONIA · Dossier d&apos;audit public

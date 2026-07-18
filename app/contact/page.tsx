@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <main className="relative z-10 mx-auto max-w-[720px] px-5 pb-16 pt-10">
+    <main className="pg-cascade relative z-10 mx-auto max-w-[720px] px-5 pb-16 pt-10">
       <header className="mb-6 flex items-center gap-3.5">
         <Logo className="h-12 w-12 shrink-0 drop-shadow-sm" />
         <div>
