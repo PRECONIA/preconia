@@ -3,10 +3,13 @@
 /* Aide au codage NGAP — recherche plein-texte dans la Nomenclature Générale des
    Actes Professionnels (texte réglementaire). Base public/ngap.json (150 articles,
    ~98 Ko gzip). Chaque article est indexé verbatim (titre + corps) : la recherche
-   retourne l'article officiel avec un extrait autour du terme, dépliable en entier.
+   retourne l'article officiel avec un extrait autour du terme, et renvoie vers la
+   page dédiée de l'article (/aide-codage/ngap/<slug>) pour la lecture complète.
    Aucune interprétation — le texte officiel fait foi. */
 
+import Link from "next/link";
 import { useDeferredValue, useEffect, useMemo, useState } from "react";
+import { ngapSlug } from "@/lib/ngapSlug";
 
 const MAX_RESULTS = 40;
 
@@ -15,6 +18,7 @@ interface Article {
   title: string;
   text: string;
   part: string;
+  slug: string;
   norm: string;
 }
 
@@ -98,6 +102,7 @@ export function CodageNgap() {
           title: a[1],
           text: a[2],
           part: a[3] >= 0 ? data.parts[a[3]] : "",
+          slug: ngapSlug(a[0], a[1]),
           norm: norm(a[0] + " " + a[1] + " " + a[2]),
         }));
         setIndex(items);
@@ -171,39 +176,37 @@ export function CodageNgap() {
           ) : (
             <div className="space-y-2.5">
               {list.map((a) => (
-                <details key={a.num + a.title} className="cc-panel group overflow-hidden">
-                  <summary className="cursor-pointer list-none px-4 py-3">
-                    <span className="flex items-center gap-2">
-                      <span className="shrink-0 rounded bg-[#e0f2fe] px-1.5 py-0.5 font-mono text-[11px] font-semibold text-[#0c4a6e]">
-                        {a.num}
-                      </span>
-                      <span className="min-w-0 flex-1 text-sm font-semibold text-[#0c2740]">
-                        {a.title || "(sans intitulé)"}
-                      </span>
-                      <span className="shrink-0 text-[11px] text-[#0ea5e9] transition-transform group-open:rotate-90">
-                        ▸
-                      </span>
+                <Link
+                  key={a.slug}
+                  href={`/aide-codage/ngap/${a.slug}`}
+                  className="cc-panel group block px-4 py-3 transition-colors hover:border-[#0ea5e9]"
+                >
+                  <span className="flex items-center gap-2">
+                    <span className="shrink-0 rounded bg-[#e0f2fe] px-1.5 py-0.5 font-mono text-[11px] font-semibold text-[#0c4a6e]">
+                      {a.num}
                     </span>
-                    <span className="mt-1.5 block text-[12.5px] leading-relaxed text-ink-soft">
-                      {excerpt(a.text, first)}
+                    <span className="min-w-0 flex-1 text-sm font-semibold text-[#0c2740]">
+                      {a.title || "(sans intitulé)"}
                     </span>
-                  </summary>
-                  <div className="border-t border-line-soft px-4 py-3">
-                    {a.part && (
-                      <div className="mb-2 font-mono text-[10px] font-semibold uppercase tracking-wide text-[#0ea5e9]">
-                        {a.part}
-                      </div>
-                    )}
-                    <p className="whitespace-pre-wrap text-[13px] leading-relaxed text-ink">
-                      {a.text || "Article sans texte (abrogé ou renvoi)."}
-                    </p>
-                  </div>
-                </details>
+                    <span className="shrink-0 text-[11px] font-semibold text-[#0ea5e9]">
+                      Lire l&apos;article →
+                    </span>
+                  </span>
+                  <span className="mt-1.5 block text-[12.5px] leading-relaxed text-ink-soft">
+                    {excerpt(a.text, first)}
+                  </span>
+                  {a.part && (
+                    <span className="mt-1 block truncate font-mono text-[10px] font-semibold uppercase tracking-wide text-[#0ea5e9]/80">
+                      {a.part}
+                    </span>
+                  )}
+                </Link>
               ))}
             </div>
           )}
           <p className="mt-3 px-1 text-[11px] text-ink-soft/70">
-            NGAP en vigueur du 21/06/2026 — texte officiel intégral, non interprété.
+            NGAP en vigueur du 21/06/2026 — texte officiel intégral, non interprété ; chaque
+            article s&apos;ouvre sur sa propre page.
           </p>
         </div>
       )}

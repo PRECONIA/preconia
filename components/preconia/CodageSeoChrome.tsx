@@ -105,7 +105,14 @@ export function CodageHeader({ current }: { current?: string }) {
   );
 }
 
-export function CodageBreadcrumb({ current }: { current: string }) {
+export function CodageBreadcrumb({
+  current,
+  parent,
+}: {
+  current: string;
+  /** niveau intermédiaire optionnel (ex. NGAP pour les pages d'article) */
+  parent?: { href: string; label: string };
+}) {
   return (
     <nav aria-label="Fil d'Ariane" className="mb-4 text-[12px] text-ink-soft">
       <Link href="/preconia" className="underline-offset-2 hover:text-[#0c2740] hover:underline">
@@ -115,6 +122,14 @@ export function CodageBreadcrumb({ current }: { current: string }) {
       <Link href="/aide-codage" className="underline-offset-2 hover:text-[#0c2740] hover:underline">
         Aide au codage
       </Link>
+      {parent && (
+        <>
+          <span className="mx-1.5 text-ink-soft/50">/</span>
+          <Link href={parent.href} className="underline-offset-2 hover:text-[#0c2740] hover:underline">
+            {parent.label}
+          </Link>
+        </>
+      )}
       <span className="mx-1.5 text-ink-soft/50">/</span>
       <span className="text-ink">{current}</span>
     </nav>

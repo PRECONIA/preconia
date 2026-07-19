@@ -2,6 +2,7 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { buildAliasMap, expandQuery, normIndex } from "@/components/preconia/codageAliases";
+import { ngapSlug } from "@/lib/ngapSlug";
 
 /* ------------------------------------------------------------------ bases */
 
@@ -86,6 +87,25 @@ describe("medical-aliases.json : aucun alias mort (validé contre CIM-10 + CCAM)
       for (const to of tos) if (hits(allLabels, to) === 0) dead.push(`${from} → ${to}`);
     }
     expect(dead).toEqual([]);
+  });
+});
+
+/* ------------------------------------------------------- pages NGAP */
+
+describe("ngapSlug : une page par article", () => {
+  const ngap = pub("ngap.json") as { articles: [string, string, string, number][] };
+
+  it("produit un slug unique pour chacun des 150 articles (numéros seuls dupliqués)", () => {
+    const slugs = ngap.articles.map((a) => ngapSlug(a[0], a[1]));
+    expect(slugs.length).toBe(150);
+    expect(new Set(slugs).size).toBe(slugs.length);
+  });
+  it("produit des slugs propres aux URL (minuscules, sans accents, plafonnés)", () => {
+    for (const a of ngap.articles) {
+      const s = ngapSlug(a[0], a[1]);
+      expect(s).toMatch(/^[a-z0-9]+(-[a-z0-9]+)*$/);
+      expect(s.split("-").length).toBeLessThanOrEqual(10);
+    }
   });
 });
 
