@@ -45,7 +45,7 @@ const FAQ = [
   },
   {
     q: "Pourquoi une recherche en texte intégral plutôt que par code ?",
-    a: "La NGAP est un texte réglementaire organisé en articles, non une liste de codes tarifés : la recherche parcourt donc l'intégralité du texte en vigueur et renvoie les articles pertinents, avec leur contenu complet dépliable.",
+    a: "La NGAP est un texte réglementaire organisé en articles, non une liste de codes tarifés : la recherche parcourt donc l'intégralité du texte en vigueur et renvoie les articles pertinents, chacun consultable en texte intégral sur sa propre page.",
   },
 ];
 

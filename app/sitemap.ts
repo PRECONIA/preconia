@@ -1,10 +1,18 @@
 import type { MetadataRoute } from "next";
+import { getNgap } from "@/lib/ngapArticles";
 
-/* Sitemap minimal : la page de l'outil (la racine « / » y redirige).
-   À enrichir quand des pages SEO par calcul/thème seront ajoutées. */
+/* Sitemap : pages de l'outil, guides SEO, aide au codage et les 150 pages
+   d'articles NGAP (texte officiel indexable). */
 const BASE = "https://preconia.fr";
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  /* une entrée par article NGAP (page statique dédiée) */
+  const ngap: MetadataRoute.Sitemap = getNgap().articles.map((a) => ({
+    url: `${BASE}/aide-codage/ngap/${a.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "yearly",
+    priority: 0.5,
+  }));
   return [
     {
       url: `${BASE}/preconia`,
@@ -66,5 +74,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly",
       priority: 0.3,
     },
+    ...ngap,
   ];
 }
