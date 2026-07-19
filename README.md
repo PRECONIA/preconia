@@ -11,7 +11,7 @@ adjonctions, PAP) par dénomination, type, marque ou code LPP.
 
 > Aide à la décision **non opposable**. Ne remplace ni l'essai réel ni l'évaluation ergothérapique.
 
-- **En ligne :** https://preconia.vercel.app
+- **En ligne :** https://preconia.fr
 - **Stack :** Next.js (App Router) + TypeScript + Tailwind v4, déployé sur Vercel.
 - **Données :** entièrement externalisées dans `data/*.json` (source unique), validées au
   build par des schémas zod. Mettre à jour la nomenclature = éditer les JSON, sans toucher au code.
@@ -25,7 +25,7 @@ Le contrôle est bidirectionnel : il énumère aussi tous les codes « VPH » de
 signale toute ligne en vigueur absente du catalogue (détection des nouveautés). La CI
 l'exécute à chaque modification et chaque semaine. La correspondance règle par règle
 avec l'arrêté du 6 février 2025 (et les tests qui la verrouillent) est documentée sur
-https://preconia.vercel.app/conformite.
+https://preconia.fr/conformite.
 
 ```bash
 npm run verifier:lpptot                          # base courante téléchargée (CNAMTS)
@@ -54,4 +54,4 @@ npm run build    # build de production (échoue si une donnée JSON est invalide
 ## Déploiement
 
 Déploiement automatique sur Vercel : chaque push sur `main` met à jour
-https://preconia.vercel.app.
+https://preconia.fr.
