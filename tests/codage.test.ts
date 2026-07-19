@@ -2,6 +2,7 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { buildAliasMap, expandQuery, normIndex } from "@/components/preconia/codageAliases";
+import { parseNgapText } from "@/components/preconia/NgapArticleBody";
 import { ngapSlug } from "@/lib/ngapSlug";
 
 /* ------------------------------------------------------------------ bases */
@@ -105,6 +106,17 @@ describe("ngapSlug : une page par article", () => {
       const s = ngapSlug(a[0], a[1]);
       expect(s).toMatch(/^[a-z0-9]+(-[a-z0-9]+)*$/);
       expect(s.split("-").length).toBeLessThanOrEqual(10);
+    }
+  });
+  it("la mise en page ne perd ni ne réordonne aucun caractère du texte officiel", () => {
+    // lettres et chiffres, dans l'ordre — la ponctuation de structure (tirets
+    // d'énumération) est portée par la présentation, le contenu reste verbatim.
+    const trace = (s: string) => s.normalize("NFC").replace(/[^\p{L}\p{N}]+/gu, "");
+    for (const a of ngap.articles) {
+      const rendu = parseNgapText(a[2])
+        .map((b) => b.text)
+        .join(" ");
+      expect(trace(rendu)).toBe(trace(a[2]));
     }
   });
 });
