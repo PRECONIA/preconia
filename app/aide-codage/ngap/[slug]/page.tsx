@@ -7,6 +7,7 @@ import {
   CodageGuideFooter,
   CodageHeader,
 } from "@/components/preconia/CodageSeoChrome";
+import { NgapArticleBody } from "@/components/preconia/NgapArticleBody";
 import { getNgap } from "@/lib/ngapArticles";
 
 /* Une page statique par article de la NGAP (150) : le moteur de recherche renvoie
@@ -86,9 +87,13 @@ export default async function NgapArticlePage({
         )}
 
         <CarteNavy>
-          <p className="whitespace-pre-wrap text-[13.5px] leading-relaxed text-ink">
-            {article.text || "Article sans texte (abrogé ou renvoi)."}
-          </p>
+          {article.text ? (
+            <NgapArticleBody text={article.text} />
+          ) : (
+            <p className="text-[13.5px] leading-relaxed text-ink-soft">
+              Article sans texte (abrogé ou renvoi).
+            </p>
+          )}
         </CarteNavy>
 
         {/* navigation entre articles + retour au moteur */}
