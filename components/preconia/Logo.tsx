@@ -2,13 +2,15 @@
    « préconisé » mis en avant (la recommandation). Même dessin que le favicon
    (app/icon.svg). Deux variantes de couleur :
    - "petrol" (défaut) : tuile pétrole, accent orange — identité du site principal ;
-   - "navy" : tuile bleu marine, accent bleu ciel — section « Aide au codage CCAM ». */
+   - "navy" : tuile bleu marine, accent bleu ciel — section « Aide au codage CCAM » ;
+   - "bordeaux" : tuile lie-de-vin, accent rosé — section « Toxine ». */
 
 const SPOKES = [0, 90, 135, 180, 225, 270, 315];
 
 const PALETTES = {
   petrol: { g0: "#0C6B66", g1: "#073F3C", wheel: "#EAF3F1", accent: "#F59E0B" },
   navy: { g0: "#1D4E7C", g1: "#0C2740", wheel: "#EAF2FB", accent: "#38BDF8" },
+  bordeaux: { g0: "#7A1E38", g1: "#4A1024", wheel: "#F8ECF0", accent: "#C86B85" },
 } as const;
 
 export function Logo({
@@ -16,7 +18,7 @@ export function Logo({
   variant = "petrol",
 }: {
   className?: string;
-  variant?: "petrol" | "navy";
+  variant?: "petrol" | "navy" | "bordeaux";
 }) {
   const c = PALETTES[variant];
   const gid = `pc-logo-grad-${variant}`;
