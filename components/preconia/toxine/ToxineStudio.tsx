@@ -9,6 +9,8 @@ import dynamic from "next/dynamic";
 import { useMemo, useRef, useState } from "react";
 import { TOXINE_MUSCLES, searchMuscles, type ToxineMuscle } from "@/data/toxineMuscles";
 import type { PresetView, ToxineController } from "@/components/preconia/toxine/ToxineScene";
+import { AxialSlice } from "@/components/preconia/toxine/AxialSlice";
+import { useForearmSlicer } from "@/components/preconia/toxine/forearmSlicer";
 
 const ToxineScene = dynamic(() => import("@/components/preconia/toxine/ToxineScene"), {
   ssr: false,
@@ -82,7 +84,13 @@ function ViewControls({ ctrl }: { ctrl: React.RefObject<ToxineController | null>
 export function ToxineStudio() {
   const [q, setQ] = useState("");
   const [muscle, setMuscle] = useState<ToxineMuscle>(TOXINE_MUSCLES[0]);
+  const [level, setLevel] = useState(0.5);
   const ctrl = useRef<ToxineController | null>(null);
+  const slicer = useForearmSlicer();
+  const polys = useMemo(
+    () => (slicer.ready ? slicer.slice(level) : []),
+    [slicer.ready, slicer.slice, level],
+  );
   const results = useMemo(() => searchMuscles(q), [q]);
   const showResults = q.trim().length >= 2 && results.length > 0 && results[0].id !== muscle.id;
 
@@ -145,9 +153,25 @@ export function ToxineStudio() {
             </span>
           </div>
           <div className="relative h-[440px] w-full bg-[radial-gradient(120%_120%_at_50%_15%,#fff,#f4e3e9_70%,#eccdd6)]">
-            <ToxineScene muscle={muscle} controller={ctrl} />
+            <ToxineScene muscle={muscle} controller={ctrl} level={level} />
+            {/* ascenseur : déplace le plan de coupe le long du modèle (haut = proximal) */}
+            <div className="absolute right-2 top-4 bottom-14 z-10 flex flex-col items-center">
+              <span className="mb-1 text-[9px] font-semibold uppercase tracking-wide text-[#7A1E38]">Prox.</span>
+              <input
+                type="range"
+                min={0}
+                max={100}
+                value={Math.round(level * 100)}
+                onChange={(e) => setLevel(Number(e.target.value) / 100)}
+                aria-label="Niveau de la coupe axiale"
+                title="Niveau de la coupe (haut = proximal, bas = distal)"
+                className="tx-elevator flex-1"
+                style={{ writingMode: "vertical-lr", direction: "rtl", accentColor: "#7A1E38" }}
+              />
+              <span className="mt-1 text-[9px] font-semibold uppercase tracking-wide text-[#7A1E38]">Dist.</span>
+            </div>
             <p className="pointer-events-none absolute bottom-1 left-0 right-0 text-center text-[10.5px] text-[#a83e5a]">
-              Faites glisser pour pivoter · molette pour zoomer
+              Faites glisser pour pivoter · molette pour zoomer · ascenseur = niveau de coupe
             </p>
             <p className="pointer-events-none absolute bottom-0 right-2 text-[9px] text-[#a83e5a]/70">
               Modèle : BodyParts3D © DBCLS — CC BY-SA 2.1 JP
@@ -158,17 +182,19 @@ export function ToxineStudio() {
 
         <div className="flex flex-col gap-5">
           <div className="tx-panel px-4 py-4">
-            <h3 className="text-[13px] font-semibold text-[#4A1024]">Coupe axiale — tiers moyen</h3>
+            <h3 className="text-[13px] font-semibold text-[#4A1024]">Coupe axiale — temps réel</h3>
             <p className="mt-0.5 text-[11px] text-ink-soft">
-              Coupe réelle calculée à partir du modèle 3D (avant-bras droit), FDS mis en évidence.
+              Calculée en direct depuis le modèle 3D — déplacez l&apos;ascenseur pour changer le
+              niveau ({Math.round(level * 100)} % proximo-distal).
             </p>
             <div className="mt-3">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/models/toxine/axial-fds.svg"
-                alt="Coupe axiale de l'avant-bras droit au niveau du fléchisseur superficiel des doigts"
-                className="mx-auto block w-full max-w-[300px]"
-              />
+              {slicer.ready && slicer.bbox ? (
+                <AxialSlice polys={polys} bbox={slicer.bbox} />
+              ) : (
+                <div className="flex h-[220px] items-center justify-center text-[12px] text-ink-soft">
+                  Préparation de la coupe…
+                </div>
+              )}
             </div>
           </div>
 

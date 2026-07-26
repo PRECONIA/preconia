@@ -63,8 +63,10 @@ function FdsMesh({ geometry }: { geometry: THREE.BufferGeometry }) {
 
 function Anatomy({
   controller,
+  level = 0.5,
 }: {
   controller?: RefObject<ToxineController | null>;
+  level?: number;
 }) {
   const root = useRef<THREE.Group>(null);
   const { scene } = useGLTF(MODEL);
@@ -90,8 +92,24 @@ function Anatomy({
     const center = box.getCenter(new THREE.Vector3());
     const size = box.getSize(new THREE.Vector3());
     const scale = TARGET_SIZE / Math.max(size.x, size.y, size.z);
-    return { bones, ctx, fds, offset: center.multiplyScalar(-scale), scale };
+    // plan de coupe : perpendiculaire au grand axe (z brut), dimensionné sur XY
+    const planeGeo = new THREE.PlaneGeometry(size.x * 1.15, size.y * 1.15);
+    return {
+      bones,
+      ctx,
+      fds,
+      offset: center.clone().multiplyScalar(-scale),
+      scale,
+      cx: center.x,
+      cy: center.y,
+      zmin: box.min.z,
+      zmax: box.max.z,
+      planeGeo,
+      edgeGeo: new THREE.EdgesGeometry(planeGeo),
+    };
   }, [scene]);
+
+  const planeZ = parts.zmin + Math.min(0.98, Math.max(0.02, level)) * (parts.zmax - parts.zmin);
 
   useEffect(() => {
     if (!controller) return;
@@ -127,6 +145,15 @@ function Anatomy({
             <meshStandardMaterial color={MUSCLE_FAINT} roughness={0.7} transparent opacity={0.1} depthWrite={false} />
           </mesh>
         ))}
+        {/* plan de coupe axiale (piloté par l'ascenseur) */}
+        <group position={[parts.cx, parts.cy, planeZ]}>
+          <mesh geometry={parts.planeGeo}>
+            <meshBasicMaterial color={ACCENT} transparent opacity={0.18} side={THREE.DoubleSide} depthWrite={false} />
+          </mesh>
+          <lineSegments geometry={parts.edgeGeo}>
+            <lineBasicMaterial color={ACCENT} />
+          </lineSegments>
+        </group>
       </group>
     </group>
   );
@@ -135,9 +162,11 @@ function Anatomy({
 export default function ToxineScene({
   muscle: _muscle,
   controller,
+  level = 0.5,
 }: {
   muscle: ToxineMuscle;
   controller?: RefObject<ToxineController | null>;
+  level?: number;
 }) {
   return (
     <Canvas camera={{ position: [0, 0, 11], fov: 40 }} gl={{ alpha: true, antialias: true }} dpr={[1, 2]}>
@@ -145,7 +174,7 @@ export default function ToxineScene({
       <directionalLight position={[4, 6, 8]} intensity={1.15} />
       <directionalLight position={[-5, 2, -4]} intensity={0.45} color={ACCENT} />
       <Suspense fallback={null}>
-        <Anatomy controller={controller} />
+        <Anatomy controller={controller} level={level} />
       </Suspense>
       <OrbitControls enablePan={false} minDistance={5} maxDistance={16} target={[0, 0, 0]} />
     </Canvas>

@@ -320,6 +320,13 @@ body {
     0 14px 30px -10px rgba(200, 107, 133, 0.55);
 }
 
+/* ascenseur (slider vertical) du niveau de coupe axiale */
+.tx-elevator {
+  width: 20px;
+  cursor: ns-resize;
+  background: transparent;
+}
+
 /* bandeau d'avertissement prototype (données fictives) */
 .tx-proto {
   border-radius: 14px;
