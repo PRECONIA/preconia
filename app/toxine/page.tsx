@@ -31,10 +31,9 @@ export default function ToxinePage() {
           Repérage des sites d&apos;injection
         </h1>
         <p className="mt-3 max-w-[64ch] text-[15px] leading-relaxed text-ink-soft">
-          Cherchez un muscle (membre supérieur ou inférieur) : le modèle 3D met en évidence le
-          muscle cible, avec sa coupe axiale, une échographie type et une simulation des points
-          d&apos;injection de toxine botulique. Premier muscle prototypé :{" "}
-          <b className="text-[#4A1024]">le fléchisseur superficiel des doigts</b>.
+          Cherchez un muscle du <b className="text-[#4A1024]">membre supérieur</b> : le modèle 3D
+          met en évidence le muscle cible dans son contexte, avec une coupe axiale temps réel et
+          les repères pour l&apos;injection de toxine botulique.
         </p>
 
         <div className="mt-8">
@@ -42,10 +41,10 @@ export default function ToxinePage() {
         </div>
 
         <p className="mt-10 max-w-[62ch] text-[11px] leading-relaxed text-ink-soft/70" lang="fr">
-          Prototype de démonstration destiné aux professionnels de santé. Modèle anatomique
-          schématique ; points d&apos;injection, profondeurs et doses fictifs — aucune valeur
-          clinique, à ne pas utiliser pour un geste. Les données définitives seront transcrites
-          d&apos;ouvrages publiés et validées.
+          Prototype de démonstration destiné aux professionnels de santé. Anatomie 3D réelle
+          (modèle Open3D, CC BY-SA 4.0) ; sites d&apos;injection, profondeurs et doses non
+          renseignés — aucune valeur clinique, à ne pas utiliser pour un geste. Les données
+          définitives seront transcrites d&apos;ouvrages publiés et validées.
         </p>
       </main>
     </div>
