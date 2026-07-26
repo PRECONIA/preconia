@@ -20,27 +20,47 @@ const ToxineScene = dynamic(() => import("@/components/preconia/toxine/ToxineSce
 
 const LIMB_LABEL = { superieur: "Membre supérieur", inferieur: "Membre inférieur" } as const;
 
-/** Coupe axiale schématique de l'avant-bras (démonstration) — os postérieurs, loges
-    musculaires, muscle cible en bordeaux avec repère d'aiguille. */
+/** Coupe axiale schématique du tiers moyen de l'avant-bras DROIT (vue distale,
+    antérieur en haut) : loges antérieure (fléchisseurs) et postérieure (extenseurs)
+    disposées selon l'anatomie, radius (latéral) et ulna (médial) avec membrane
+    interosseuse. Le FDS est mis en évidence dans le plan des fléchisseurs superficiels,
+    les autres muscles restent estompés — comme dans la vue 3D. */
 function AxialDiagram() {
+  const faint = { fill: "#B47487", fillOpacity: 0.16 };
   return (
-    <svg viewBox="0 0 240 240" className="mx-auto block w-full max-w-[260px]" role="img" aria-label="Coupe axiale schématique">
-      <circle cx="120" cy="120" r="96" fill="#f7e3ea" stroke="#a83e5a" strokeOpacity="0.5" strokeWidth="2" />
-      {/* os : radius / ulna (postérieurs) */}
-      <circle cx="96" cy="150" r="20" fill="#e9e1ce" stroke="#c8b48a" strokeWidth="1.5" />
-      <circle cx="150" cy="150" r="16" fill="#e9e1ce" stroke="#c8b48a" strokeWidth="1.5" />
-      {/* quelques loges musculaires neutres */}
-      <ellipse cx="150" cy="92" rx="26" ry="20" fill="#efd7de" />
-      <ellipse cx="86" cy="98" rx="22" ry="18" fill="#efd7de" />
-      {/* muscle cible (FDS) en évidence — antérieur */}
-      <ellipse cx="120" cy="108" rx="30" ry="22" fill="#7A1E38" opacity="0.9" />
-      <ellipse cx="120" cy="108" rx="30" ry="22" fill="none" stroke="#C86B85" strokeWidth="2.5" />
-      {/* aiguille (fictive) vers le centre du muscle */}
-      <line x1="120" y1="24" x2="120" y2="104" stroke="#4A1024" strokeWidth="2.5" strokeDasharray="5 4" />
-      <circle cx="120" cy="108" r="4" fill="#C86B85" />
-      <text x="120" y="18" textAnchor="middle" fontSize="11" fill="#7A1E38" fontWeight="700">
-        aiguille (fictive)
-      </text>
+    <svg viewBox="0 0 300 250" className="mx-auto block w-full max-w-[300px]" role="img" aria-label="Coupe axiale de l'avant-bras droit">
+      {/* repères antérieur / postérieur */}
+      <text x="150" y="12" textAnchor="middle" fontSize="9" fill="#a83e5a" fontWeight="700">ANTÉRIEUR (fléchisseurs)</text>
+      <text x="150" y="245" textAnchor="middle" fontSize="9" fill="#a83e5a" fontWeight="700">POSTÉRIEUR (extenseurs)</text>
+      {/* enveloppe de l'avant-bras */}
+      <ellipse cx="150" cy="128" rx="132" ry="100" fill="#f7e3ea" stroke="#a83e5a" strokeOpacity="0.45" strokeWidth="2" />
+      {/* muscles de contexte — estompés */}
+      {/* loge antérieure superficielle */}
+      <ellipse cx="72" cy="88" rx="24" ry="18" {...faint} />{/* rond pronateur / FCR */}
+      <ellipse cx="228" cy="92" rx="22" ry="17" {...faint} />{/* FCU */}
+      <ellipse cx="40" cy="128" rx="18" ry="20" {...faint} />{/* brachio-radial / long ext. radiaux */}
+      {/* loge antérieure profonde (près des os) */}
+      <ellipse cx="118" cy="150" rx="26" ry="16" {...faint} />{/* FDP */}
+      <ellipse cx="186" cy="150" rx="18" ry="13" {...faint} />{/* FPL */}
+      {/* loge postérieure */}
+      <ellipse cx="96" cy="196" rx="28" ry="18" {...faint} />{/* extenseurs des doigts */}
+      <ellipse cx="176" cy="198" rx="24" ry="16" {...faint} />{/* ECU / EDM */}
+      <ellipse cx="240" cy="160" rx="18" ry="16" {...faint} />{/* ext. radiaux */}
+      <ellipse cx="150" cy="176" rx="20" ry="12" {...faint} />{/* profonds (supinateur/APL…) */}
+      {/* os : ulna (médial, gauche) et radius (latéral, droit), membrane interosseuse */}
+      <path d="M96 128 q-16 -6 -14 14 q2 20 18 14 q14 -6 8 -18 q-4 -10 -12 -10Z" fill="#e9e1ce" stroke="#c8b48a" strokeWidth="1.5" />
+      <path d="M206 124 q16 -4 14 14 q-2 18 -18 12 q-12 -6 -6 -16 q4 -8 10 -10Z" fill="#e9e1ce" stroke="#c8b48a" strokeWidth="1.5" />
+      <line x1="112" y1="132" x2="196" y2="128" stroke="#c8b48a" strokeWidth="1.5" strokeDasharray="3 3" />
+      {/* FDS — mis en évidence (plan des fléchisseurs superficiels) */}
+      <ellipse cx="150" cy="96" rx="34" ry="22" fill="#7A1E38" opacity="0.92" />
+      <ellipse cx="150" cy="96" rx="34" ry="22" fill="none" stroke="#C86B85" strokeWidth="2.5" />
+      {/* points d'injection fictifs */}
+      <circle cx="138" cy="96" r="4" fill="#F4E3E9" />
+      <circle cx="162" cy="96" r="4" fill="#F4E3E9" />
+      {/* étiquettes */}
+      <text x="150" y="99" textAnchor="middle" fontSize="11" fill="#fff" fontWeight="700">FDS</text>
+      <text x="70" y="146" textAnchor="middle" fontSize="8.5" fill="#7A1E38">Ulna</text>
+      <text x="230" y="140" textAnchor="middle" fontSize="8.5" fill="#7A1E38">Radius</text>
     </svg>
   );
 }
@@ -57,8 +77,8 @@ export function ToxineStudio() {
       <div className="tx-proto mb-5 flex items-start gap-3 px-4 py-3">
         <span aria-hidden className="mt-0.5 text-[18px]">⚠️</span>
         <p className="text-[12.5px] leading-relaxed text-[#7A1E38]">
-          <b>Prototype de démonstration.</b>{" "}Le modèle 3D est schématique et les points
-          d&apos;injection sont <b>fictifs</b>{" "}(placés au centre du muscle). Aucune valeur
+          <b>Prototype de démonstration.</b>{" "}L&apos;anatomie 3D est réelle (BodyParts3D), mais les
+          points d&apos;injection sont <b>fictifs</b>{" "}(placés au centre du muscle). Aucune valeur
           clinique : les sites, profondeurs et doses réels seront transcrits d&apos;ouvrages publiés
           et validés.
         </p>
@@ -112,7 +132,7 @@ export function ToxineStudio() {
           <div className="relative h-[440px] w-full bg-[radial-gradient(120%_120%_at_50%_15%,#fff,#f4e3e9_70%,#eccdd6)]">
             <ToxineScene muscle={muscle} />
             <p className="pointer-events-none absolute bottom-2 left-0 right-0 text-center text-[10.5px] text-[#a83e5a]">
-              Faites glisser pour pivoter · molette pour zoomer · seringues = points fictifs
+              Faites glisser pour pivoter · molette pour zoomer · ● = points d&apos;injection fictifs
             </p>
             <p className="pointer-events-none absolute bottom-0 right-2 text-[9px] text-[#a83e5a]/70">
               Modèle : BodyParts3D © DBCLS — CC BY-SA 2.1 JP
@@ -122,9 +142,10 @@ export function ToxineStudio() {
 
         <div className="flex flex-col gap-5">
           <div className="tx-panel px-4 py-4">
-            <h3 className="text-[13px] font-semibold text-[#4A1024]">Coupe axiale — schématique</h3>
+            <h3 className="text-[13px] font-semibold text-[#4A1024]">Coupe axiale — tiers moyen</h3>
             <p className="mt-0.5 text-[11px] text-ink-soft">
-              Générée à titre indicatif ; la coupe réelle sera dérivée du modèle 3D.
+              Schéma anatomique de l&apos;avant-bras droit (loges antérieure/postérieure),
+              FDS mis en évidence.
             </p>
             <div className="mt-3">
               <AxialDiagram />

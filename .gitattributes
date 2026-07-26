@@ -1,2 +1,3 @@
 # maillages anatomiques binaires — pas de diff/merge textuel
 public/models/**/*.stl binary
+public/models/**/*.glb binary
