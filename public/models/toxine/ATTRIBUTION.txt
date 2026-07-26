@@ -1,0 +1,21 @@
+Modèles anatomiques 3D — provenance et licence
+================================================
+Source : BodyParts3D / Anatomography
+  © The Database Center for Life Science (DBCLS), Japon
+  Licence : Creative Commons Attribution-Share Alike 2.1 Japan (CC BY-SA 2.1 JP)
+  https://dbcls.rois.ac.jp/  ·  https://lifesciencedb.jp/bp3d/
+  Récupérés via le clone GitHub Kevin-Mattheus-Moerman/BodyParts3D.
+
+forearm.glb : avant-bras DROIT — 22 maillages segmentés fusionnés puis simplifiés
+(weld + simplification meshopt) en un seul glTF binaire. Nœuds préfixés :
+  fds__  = fléchisseur superficiel des doigts (chefs huméro-ulnaire FMA38638,
+           radial FMA38640) — muscle cible mis en évidence
+  bone__ = radius (FMA23464), ulna (FMA23467)
+  ctx__  = autres muscles de l'avant-bras (contexte, faible opacité) :
+           brachio-radial, long/court extenseurs, fléchisseurs profond/superficiels,
+           rond/carré pronateur, supinateur, etc. (18 muscles, cf. build-glb).
+
+Obligations CC BY-SA 2.1 JP :
+  - créditer : « BodyParts3D, © The Database Center for Life Science,
+    licensed under CC Attribution-Share Alike 2.1 Japan » ;
+  - partage à l'identique des MAILLAGES adaptés (n'affecte pas le code applicatif).
