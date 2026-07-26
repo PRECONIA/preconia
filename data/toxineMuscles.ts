@@ -10,7 +10,8 @@
 export interface InjectionPoint {
   id: string;
   label: string;
-  /** position dans le repère 3D du modèle (unités du modèle), sur la face du muscle. */
+  /** décalage (unités de scène) depuis le centre du corps musculaire — FICTIF (prototype).
+      Sera remplacé par un placement réel dérivé des repères sourcés. */
   position: [number, number, number];
   /** profondeur d'aiguille en mm — null tant que non sourcée. */
   depthMm: number | null;
@@ -54,15 +55,15 @@ export const TOXINE_MUSCLES: ToxineMuscle[] = [
     injectionPoints: [
       {
         id: "fds-p1",
-        label: "Point 1 (fictif — centre du corps musculaire)",
-        position: [0.14, 0.28, 0.9],
+        label: "Point 1 (fictif — corps musculaire, tiers proximal)",
+        position: [0.15, 0.1, 0.7],
         depthMm: null,
         note: "Placement de démonstration au centre du muscle — non clinique.",
       },
       {
         id: "fds-p2",
-        label: "Point 2 (fictif — centre du corps musculaire)",
-        position: [-0.14, -0.26, 0.92],
+        label: "Point 2 (fictif — corps musculaire, tiers distal)",
+        position: [-0.15, 0.1, -0.7],
         depthMm: null,
         note: "Placement de démonstration au centre du muscle — non clinique.",
       },

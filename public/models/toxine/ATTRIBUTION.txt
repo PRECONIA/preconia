@@ -1,0 +1,21 @@
+Modèles anatomiques 3D — provenance et licence
+================================================
+Source : BodyParts3D / Anatomography
+  © The Database Center for Life Science (DBCLS), Japon
+  Licence : Creative Commons Attribution-Share Alike 2.1 Japan (CC BY-SA 2.1 JP)
+  https://dbcls.rois.ac.jp/  ·  https://lifesciencedb.jp/bp3d/
+
+Fichiers (maillages segmentés du modèle corps entier, avant-bras DROIT) :
+  right-radius.stl            = FMA23464 (radius droit)
+  right-ulna.stl              = FMA23467 (ulna droite)
+  fds-head-humeroulnar.stl    = FMA38638 (chef huméro-ulnaire du fléchisseur
+                                 superficiel des doigts droit)
+  fds-head-radial.stl         = FMA38640 (chef radial du fléchisseur
+                                 superficiel des doigts droit)
+  Récupérés via le clone GitHub Kevin-Mattheus-Moerman/BodyParts3D.
+
+Obligations de la licence CC BY-SA 2.1 JP :
+  - créditer : « BodyParts3D, © The Database Center for Life Science,
+    licensed under CC Attribution-Share Alike 2.1 Japan » ;
+  - partage à l'identique : toute adaptation de ces MAILLAGES reste sous
+    CC BY-SA (n'affecte pas le code applicatif ni les autres contenus).

@@ -114,6 +114,9 @@ export function ToxineStudio() {
             <p className="pointer-events-none absolute bottom-2 left-0 right-0 text-center text-[10.5px] text-[#a83e5a]">
               Faites glisser pour pivoter · molette pour zoomer · seringues = points fictifs
             </p>
+            <p className="pointer-events-none absolute bottom-0 right-2 text-[9px] text-[#a83e5a]/70">
+              Modèle : BodyParts3D © DBCLS — CC BY-SA 2.1 JP
+            </p>
           </div>
         </div>
 
