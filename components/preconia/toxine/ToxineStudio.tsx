@@ -184,8 +184,8 @@ export function ToxineStudio() {
           <div className="tx-panel px-4 py-4">
             <h3 className="text-[13px] font-semibold text-[#4A1024]">Coupe axiale — temps réel</h3>
             <p className="mt-0.5 text-[11px] text-ink-soft">
-              Calculée en direct depuis le modèle 3D — déplacez l&apos;ascenseur pour changer le
-              niveau ({Math.round(level * 100)} % proximo-distal).
+              Calculée en direct depuis le modèle 3D, sur le <b>tiers moyen</b> (ventres
+              musculaires injectables) — déplacez l&apos;ascenseur pour changer le niveau.
             </p>
             <div className="mt-3">
               {slicer.ready && slicer.bbox ? (

@@ -13,6 +13,7 @@ import { Suspense, useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 import type { RefObject } from "react";
 import type { ToxineMuscle } from "@/data/toxineMuscles";
+import { BELLY } from "@/components/preconia/toxine/forearmSlicer";
 
 const ACCENT = "#C86B85";
 const BORDEAUX = "#7A1E38";
@@ -109,7 +110,9 @@ function Anatomy({
     };
   }, [scene]);
 
-  const planeZ = parts.zmin + Math.min(0.98, Math.max(0.02, level)) * (parts.zmax - parts.zmin);
+  // plan restreint au tiers moyen (BELLY), aligné sur la coupe axiale
+  const planeZ =
+    parts.zmin + (BELLY[0] + Math.min(1, Math.max(0, level)) * (BELLY[1] - BELLY[0])) * (parts.zmax - parts.zmin);
 
   useEffect(() => {
     if (!controller) return;

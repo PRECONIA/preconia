@@ -3,8 +3,10 @@
 /* Découpe axiale TEMPS RÉEL de l'avant-bras : charge une fois forearm.glb, extrait
    les triangles par structure (nom + rôle), les range en tranches de z (buckets) pour
    n'examiner que les triangles proches du plan, puis calcule à la volée la coupe au
-   niveau demandé (marching-triangles → segments → boucles → polygones). Sert le schéma
-   axial interactif piloté par l'ascenseur. Repère brut BodyParts3D : z = axe long
+   niveau demandé (marching-triangles → segments → boucles → polygones). L'ascenseur ne
+   parcourt que le TIERS MOYEN (BELLY) — les ventres musculaires injectables ; au-dessus
+   = insertions proximales et os, en-dessous = tendons. Le cadre est calculé sur cette
+   plage (coupe recentrée et agrandie). Repère brut BodyParts3D : z = axe long
    (proximal→distal), x = médio-latéral, y = antéro-postérieur. */
 
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -12,30 +14,33 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import type { Mesh, BufferGeometry } from "three";
 
 const MODEL = "/models/toxine/forearm.glb";
-const NB = 72; // nombre de tranches de rangement en z
+const NB = 72;
 
-/** libellés courts affichés sur la coupe (abréviations cliniques usuelles). */
+/** fraction basse/haute de l'axe long parcourue par l'ascenseur (tiers moyen). */
+export const BELLY: [number, number] = [0.34, 0.67];
+
+/** libellés courts affichés sur la coupe. */
 const DISPLAY: Record<string, string> = {
   "fds__fds-humeroulnar": "FDS",
   "fds__fds-radial": "FDS",
   "bone__radius": "Radius",
   "bone__ulna": "Ulna",
-  "ctx__brachioradialis": "Brachio-radial",
+  "ctx__brachioradialis": "Brachio-rad.",
   "ctx__flexor-digitorum-profundus": "FDP",
   "ctx__extensor-digitorum": "Ext. doigts",
-  "ctx__palmaris-longus": "Long palmaire",
+  "ctx__palmaris-longus": "Long palm.",
   "ctx__fcu-humeral-head": "FCU",
   "ctx__fcu-ulnar-head": "FCU",
   "ctx__extensor-carpi-radialis-longus": "LERC",
-  "ctx__supinator": "Supinateur",
-  "ctx__pronator-teres-humeral-head": "Rond pronateur",
-  "ctx__pronator-teres-ulnar-head": "Rond pronateur",
+  "ctx__supinator": "Supin.",
+  "ctx__pronator-teres-humeral-head": "Rond pron.",
+  "ctx__pronator-teres-ulnar-head": "Rond pron.",
   "ctx__abductor-pollicis-longus": "APL",
-  "ctx__extensor-digiti-minimi": "Ext. V",
+  "ctx__extensor-digiti-minimi": "EDM",
   "ctx__flexor-pollicis-longus": "LFP",
   "ctx__flexor-carpi-radialis": "FRC",
   "ctx__extensor-pollicis-longus": "LEP",
-  "ctx__pronator-quadratus": "Carré pronateur",
+  "ctx__pronator-quadratus": "Carré pron.",
   "ctx__extensor-pollicis-brevis": "CEP",
   "ctx__extensor-indicis": "Ext. index",
 };
@@ -61,8 +66,8 @@ export interface Bbox2D {
 interface MeshData {
   label: string;
   role: Role;
-  tris: Float32Array; // [ax,ay,az, bx,by,bz, cx,cy,cz] * n
-  buckets: Int32Array[]; // par tranche : indices de triangle (×9)
+  tris: Float32Array;
+  buckets: Int32Array[];
 }
 interface Data {
   meshes: MeshData[];
@@ -85,9 +90,8 @@ function extract(geom: BufferGeometry): Float32Array {
   return out;
 }
 
-/* --- marching + assemblage de boucles au niveau z --- */
 function loopsAt(tris: Float32Array, cand: Int32Array, z: number): [number, number][][] {
-  const segs: number[] = []; // x1,y1,x2,y2
+  const segs: number[] = [];
   for (let c = 0; c < cand.length; c++) {
     const o = cand[c];
     const zA = tris[o + 2] - z, zB = tris[o + 5] - z, zC = tris[o + 8] - z;
@@ -103,7 +107,6 @@ function loopsAt(tris: Float32Array, cand: Int32Array, z: number): [number, numb
     edge(6, zC, 0, zA);
     if (pts.length === 4) segs.push(pts[0], pts[1], pts[2], pts[3]);
   }
-  // assemblage
   const key = (x: number, y: number) => Math.round(x * 2) + "_" + Math.round(y * 2);
   const pos = new Map<string, [number, number]>();
   const adj = new Map<string, string[]>();
@@ -157,6 +160,13 @@ function polyArea(loop: [number, number][]): number {
   return Math.abs(a) / 2;
 }
 
+const bucketOf = (z: number, zmin: number, zmax: number) =>
+  Math.min(NB - 1, Math.max(0, Math.floor(((z - zmin) / (zmax - zmin)) * NB)));
+
+/** niveau 0..1 (ascenseur) → z brut, restreint au tiers moyen (BELLY). */
+const levelToZ = (level: number, zmin: number, zmax: number) =>
+  zmin + (BELLY[0] + Math.min(1, Math.max(0, level)) * (BELLY[1] - BELLY[0])) * (zmax - zmin);
+
 export function useForearmSlicer() {
   const data = useRef<Data | null>(null);
   const [state, setState] = useState<{ ready: boolean; bbox: Bbox2D | null }>({ ready: false, bbox: null });
@@ -167,16 +177,11 @@ export function useForearmSlicer() {
       if (!alive) return;
       const raw: { label: string; role: Role; tris: Float32Array }[] = [];
       let zmin = Infinity, zmax = -Infinity;
-      const bbox: Bbox2D = { minx: Infinity, miny: Infinity, maxx: -Infinity, maxy: -Infinity };
       gltf.scene.traverse((o) => {
         const m = o as Mesh;
         if (!m.isMesh) return;
         const tris = extract(m.geometry as BufferGeometry);
         for (let i = 0; i < tris.length; i += 3) {
-          if (tris[i] < bbox.minx) bbox.minx = tris[i];
-          if (tris[i] > bbox.maxx) bbox.maxx = tris[i];
-          if (tris[i + 1] < bbox.miny) bbox.miny = tris[i + 1];
-          if (tris[i + 1] > bbox.maxy) bbox.maxy = tris[i + 1];
           if (tris[i + 2] < zmin) zmin = tris[i + 2];
           if (tris[i + 2] > zmax) zmax = tris[i + 2];
         }
@@ -185,14 +190,26 @@ export function useForearmSlicer() {
       const meshes: MeshData[] = raw.map((r) => {
         const lists: number[][] = Array.from({ length: NB }, () => []);
         for (let o = 0; o < r.tris.length; o += 9) {
-          let lo = Math.min(r.tris[o + 2], r.tris[o + 5], r.tris[o + 8]);
-          let hi = Math.max(r.tris[o + 2], r.tris[o + 5], r.tris[o + 8]);
-          const b0 = Math.max(0, Math.floor(((lo - zmin) / (zmax - zmin)) * NB));
-          const b1 = Math.min(NB - 1, Math.floor(((hi - zmin) / (zmax - zmin)) * NB));
-          for (let b = b0; b <= b1; b++) lists[b].push(o);
+          const lo = Math.min(r.tris[o + 2], r.tris[o + 5], r.tris[o + 8]);
+          const hi = Math.max(r.tris[o + 2], r.tris[o + 5], r.tris[o + 8]);
+          for (let b = bucketOf(lo, zmin, zmax); b <= bucketOf(hi, zmin, zmax); b++) lists[b].push(o);
         }
         return { label: r.label, role: r.role, tris: r.tris, buckets: lists.map((l) => Int32Array.from(l)) };
       });
+      // cadre = union XY des coupes sur la plage BELLY (recentre + agrandit)
+      const bbox: Bbox2D = { minx: Infinity, miny: Infinity, maxx: -Infinity, maxy: -Infinity };
+      for (const s of [0, 0.2, 0.4, 0.6, 0.8, 1]) {
+        const z = levelToZ(s, zmin, zmax);
+        const b = bucketOf(z, zmin, zmax);
+        for (const m of meshes)
+          for (const lp of loopsAt(m.tris, m.buckets[b], z))
+            for (const p of lp) {
+              if (p[0] < bbox.minx) bbox.minx = p[0];
+              if (p[0] > bbox.maxx) bbox.maxx = p[0];
+              if (p[1] < bbox.miny) bbox.miny = p[1];
+              if (p[1] > bbox.maxy) bbox.maxy = p[1];
+            }
+      }
       data.current = { meshes, zmin, zmax, bbox };
       setState({ ready: true, bbox });
     });
@@ -201,12 +218,11 @@ export function useForearmSlicer() {
     };
   }, []);
 
-  /** level 0 (distal) → 1 (proximal). Renvoie les polygones coupés à ce niveau. */
   const slice = useCallback((level: number): SlicePolygon[] => {
     const d = data.current;
     if (!d) return [];
-    const z = d.zmin + Math.min(0.98, Math.max(0.02, level)) * (d.zmax - d.zmin);
-    const b = Math.min(NB - 1, Math.max(0, Math.floor(((z - d.zmin) / (d.zmax - d.zmin)) * NB)));
+    const z = levelToZ(level, d.zmin, d.zmax);
+    const b = bucketOf(z, d.zmin, d.zmax);
     const out: SlicePolygon[] = [];
     for (const m of d.meshes) {
       const loops = loopsAt(m.tris, m.buckets[b], z);
