@@ -164,7 +164,8 @@ export function ToxineStudio() {
         )}
       </div>
 
-      <div className="mt-6 grid gap-5 lg:grid-cols-[1.4fr_1fr]">
+      {/* deux grands encarts : modèle 3D et coupe axiale, côte à côte */}
+      <div className="mt-6 grid gap-5 lg:grid-cols-[1.12fr_1fr]">
         <div className="tx-panel overflow-hidden">
           <div className="tx-band-hero flex items-center justify-between px-5 py-3">
             <div>
@@ -175,7 +176,7 @@ export function ToxineStudio() {
               Prototype
             </span>
           </div>
-          <div className="relative h-[460px] w-full bg-[radial-gradient(120%_120%_at_50%_15%,#fff,#f4e3e9_70%,#eccdd6)]">
+          <div className="relative h-[620px] w-full bg-[radial-gradient(120%_120%_at_50%_15%,#fff,#f4e3e9_70%,#eccdd6)]">
             <ToxineScene controller={ctrl} highlight={muscle.nodes} level={level} belly={belly} />
             <div className="absolute right-2 top-4 bottom-14 z-10 flex flex-col items-center">
               <span className="mb-1 text-[9px] font-semibold uppercase tracking-wide text-[#7A1E38]">Prox.</span>
@@ -202,59 +203,59 @@ export function ToxineStudio() {
           <ViewControls ctrl={ctrl} />
         </div>
 
-        <div className="flex flex-col gap-5">
-          <div className="tx-panel px-4 py-4">
-            <h3 className="text-[13px] font-semibold text-[#4A1024]">Coupe axiale — temps réel</h3>
-            <p className="mt-0.5 text-[11px] text-ink-soft">
-              Calculée en direct sur le <b>ventre du muscle sélectionné</b> — déplacez
-              l&apos;ascenseur pour changer le niveau.
-            </p>
-            <div className="mt-3">
-              {slicer.ready ? (
-                <AxialSlice polys={polys} bbox={frame} highlight={muscle.nodes} />
-              ) : (
-                <div className="flex h-[220px] items-center justify-center text-[12px] text-ink-soft">
-                  Préparation de la coupe…
-                </div>
-              )}
-            </div>
-            {/* légende des tissus */}
-            <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-[10px] text-ink-soft">
-              {[
-                ["#7A1E38", "Muscle cible"],
-                ["#E3B23C", "Nerf"],
-                ["#C0392B", "Artère"],
-                ["#3B6CA8", "Veine"],
-                ["#E9E1CE", "Os"],
-                ["#CBBFB4", "Conjonctif"],
-              ].map(([c, l]) => (
-                <span key={l} className="inline-flex items-center gap-1">
-                  <span className="inline-block h-2.5 w-2.5 rounded-full" style={{ background: c }} />
-                  {l}
-                </span>
-              ))}
-            </div>
+        <div className="tx-panel flex flex-col px-5 py-4">
+          <h3 className="text-[14px] font-semibold text-[#4A1024]">Coupe axiale — temps réel</h3>
+          <p className="mt-0.5 text-[11.5px] text-ink-soft">
+            Calculée en direct sur le <b>ventre du muscle sélectionné</b> — déplacez l&apos;ascenseur
+            pour changer le niveau.
+          </p>
+          <div className="mt-3 flex flex-1 items-center justify-center">
+            {slicer.ready ? (
+              <AxialSlice polys={polys} bbox={frame} highlight={muscle.nodes} />
+            ) : (
+              <div className="flex h-[320px] items-center justify-center text-[12px] text-ink-soft">
+                Préparation de la coupe…
+              </div>
+            )}
           </div>
+          {/* légende des tissus */}
+          <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1.5 border-t border-line-soft pt-3 text-[11px] text-ink-soft">
+            {[
+              ["#7A1E38", "Muscle cible"],
+              ["#E3B23C", "Nerf"],
+              ["#C0392B", "Artère"],
+              ["#3B6CA8", "Veine"],
+              ["#E9E1CE", "Os"],
+              ["#CBBFB4", "Conjonctif"],
+            ].map(([c, l]) => (
+              <span key={l} className="inline-flex items-center gap-1.5">
+                <span className="inline-block h-3 w-3 rounded-full" style={{ background: c }} />
+                {l}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
 
-          <div className="tx-panel px-4 py-4">
-            <h3 className="text-[13px] font-semibold text-[#4A1024]">Échographie</h3>
-            <div className="mt-2 flex h-[120px] items-center justify-center rounded-xl border border-dashed border-[#a83e5a]/45 bg-[#faf1f4] text-center text-[12px] text-ink-soft">
-              À venir — images acquises en consultation
-            </div>
+      {/* écho + fiche muscle, en dessous */}
+      <div className="mt-5 grid gap-5 sm:grid-cols-2">
+        <div className="tx-panel px-4 py-4">
+          <h3 className="text-[13px] font-semibold text-[#4A1024]">Échographie</h3>
+          <div className="mt-2 flex h-[140px] items-center justify-center rounded-xl border border-dashed border-[#a83e5a]/45 bg-[#faf1f4] text-center text-[12px] text-ink-soft">
+            À venir — images acquises en consultation
           </div>
-
-          <div className="tx-panel px-4 py-4">
-            <h3 className="text-[13px] font-semibold text-[#4A1024]">{muscle.label}</h3>
-            <p className="mt-1 text-[12px] text-ink-soft">
-              <span className="font-semibold text-[#7A1E38]">Région :</span> {muscle.region}
-            </p>
-            <p className="mt-0.5 text-[12px] text-ink-soft">
-              <span className="font-semibold text-[#7A1E38]">Nom (modèle) :</span> {muscle.english}
-            </p>
-            <p className="mt-2 text-[11px] leading-relaxed text-[#a83e5a]">
-              Sites d&apos;injection, profondeurs et doses : à renseigner (prototype).
-            </p>
-          </div>
+        </div>
+        <div className="tx-panel px-4 py-4">
+          <h3 className="text-[13px] font-semibold text-[#4A1024]">{muscle.label}</h3>
+          <p className="mt-1 text-[12px] text-ink-soft">
+            <span className="font-semibold text-[#7A1E38]">Région :</span> {muscle.region}
+          </p>
+          <p className="mt-0.5 text-[12px] text-ink-soft">
+            <span className="font-semibold text-[#7A1E38]">Nom (modèle) :</span> {muscle.english}
+          </p>
+          <p className="mt-2 text-[11px] leading-relaxed text-[#a83e5a]">
+            Sites d&apos;injection, profondeurs et doses : à renseigner (prototype).
+          </p>
         </div>
       </div>
     </div>

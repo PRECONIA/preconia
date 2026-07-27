@@ -23,7 +23,7 @@ export default function ToxinePage() {
   return (
     <div className="tx-page">
       <ToxineHeader />
-      <main className="pg-cascade relative z-10 mx-auto max-w-[1080px] px-5 pb-24 pt-10">
+      <main className="pg-cascade relative z-10 mx-auto max-w-[1340px] px-5 pb-24 pt-10">
         <div className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-[#C0546E]">
           ▸ PRECONIA · Toxine
         </div>
