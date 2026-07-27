@@ -20,6 +20,18 @@ const MUSCLE_FAINT = "#B47487";
 const TARGET_SIZE = 6.6;
 const MODEL = "/models/toxine/upper-limb.glb";
 
+type Role = "muscle" | "bone" | "nerve" | "artery" | "vein" | "conn";
+const roleOf = (n: string): Role =>
+  n.startsWith("bone__") ? "bone" : n.startsWith("nerve__") ? "nerve" : n.startsWith("artery__") ? "artery" : n.startsWith("vein__") ? "vein" : n.startsWith("conn__") ? "conn" : "muscle";
+const ROLE_MAT: Record<Role, { color: string; op: number; rough: number }> = {
+  bone: { color: BONE, op: 0.24, rough: 0.85 },
+  muscle: { color: MUSCLE_FAINT, op: 0.16, rough: 0.7 },
+  nerve: { color: "#E3B23C", op: 0.72, rough: 0.5 },
+  artery: { color: "#C0392B", op: 0.6, rough: 0.5 },
+  vein: { color: "#3B6CA8", op: 0.55, rough: 0.5 },
+  conn: { color: "#CBBFB4", op: 0.12, rough: 0.9 },
+};
+
 const HALF = Math.PI / 2;
 const STEP = Math.PI / 9;
 const AX = { x: new THREE.Vector3(1, 0, 0), y: new THREE.Vector3(0, 1, 0) };
@@ -73,24 +85,33 @@ function Anatomy({
   const targetQuat = useRef(presets.anterior.clone());
   const hi = useMemo(() => new Set(highlight), [highlight]);
 
-  const parts = useMemo(() => {
-    const items: { g: THREE.BufferGeometry; node: string; role: "muscle" | "bone" }[] = [];
-    const box = new THREE.Box3();
+  const geom = useMemo(() => {
+    const items: { g: THREE.BufferGeometry; node: string; role: Role; box: THREE.Box3 }[] = [];
     scene.traverse((o) => {
       const m = o as THREE.Mesh;
       if (!m.isMesh) return;
       const g = m.geometry as THREE.BufferGeometry;
       g.computeVertexNormals();
       g.computeBoundingBox();
-      box.union(g.boundingBox!);
-      items.push({ g, node: m.name, role: m.name.startsWith("bone__") ? "bone" : "muscle" });
+      items.push({ g, node: m.name, role: roleOf(m.name), box: g.boundingBox!.clone() });
     });
-    const center = box.getCenter(new THREE.Vector3());
-    const size = box.getSize(new THREE.Vector3());
-    const scale = TARGET_SIZE / Math.max(size.x, size.y, size.z);
-    const planeGeo = new THREE.PlaneGeometry(size.x * 1.1, size.y * 1.1);
-    return { items, offset: center.clone().multiplyScalar(-scale), scale, cx: center.x, cy: center.y, planeGeo, edgeGeo: new THREE.EdgesGeometry(planeGeo) };
+    return items;
   }, [scene]);
+
+  // recadrage sur le VOLUME du muscle sélectionné (+ un peu de contexte), centré
+  const view = useMemo(() => {
+    const sel = new THREE.Box3();
+    for (const it of geom) if (hi.has(it.node)) sel.union(it.box);
+    if (sel.isEmpty()) for (const it of geom) sel.union(it.box);
+    const size = sel.getSize(new THREE.Vector3());
+    const region = sel.clone().expandByVector(new THREE.Vector3(size.x * 0.5 + 0.008, size.y * 0.5 + 0.008, size.z * 0.22 + 0.008));
+    const visible = geom.filter((it) => it.box.intersectsBox(region));
+    const center = region.getCenter(new THREE.Vector3());
+    const rs = region.getSize(new THREE.Vector3());
+    const scale = TARGET_SIZE / Math.max(rs.x, rs.y, rs.z);
+    const planeGeo = new THREE.PlaneGeometry(rs.x, rs.y);
+    return { visible, offset: center.clone().multiplyScalar(-scale), scale, cx: center.x, cy: center.y, planeGeo, edgeGeo: new THREE.EdgesGeometry(planeGeo) };
+  }, [geom, hi]);
 
   const planeZ = belly[0] + Math.min(1, Math.max(0, level)) * (belly[1] - belly[0]);
 
@@ -111,28 +132,22 @@ function Anatomy({
 
   return (
     <group ref={root}>
-      <group position={parts.offset} scale={parts.scale}>
-        {parts.items.map((it, i) =>
+      <group position={view.offset} scale={view.scale}>
+        {view.visible.map((it, i) =>
           hi.has(it.node) ? (
             <HighlightMesh key={i} geometry={it.g} />
           ) : (
             <mesh key={i} geometry={it.g}>
-              <meshStandardMaterial
-                color={it.role === "bone" ? BONE : MUSCLE_FAINT}
-                roughness={it.role === "bone" ? 0.85 : 0.7}
-                transparent
-                opacity={it.role === "bone" ? 0.16 : 0.08}
-                depthWrite={false}
-              />
+              <meshStandardMaterial color={ROLE_MAT[it.role].color} roughness={ROLE_MAT[it.role].rough} transparent opacity={ROLE_MAT[it.role].op} depthWrite={false} />
             </mesh>
           ),
         )}
         {/* plan de coupe */}
-        <group position={[parts.cx, parts.cy, planeZ]}>
-          <mesh geometry={parts.planeGeo}>
-            <meshBasicMaterial color={ACCENT} transparent opacity={0.18} side={THREE.DoubleSide} depthWrite={false} />
+        <group position={[view.cx, view.cy, planeZ]}>
+          <mesh geometry={view.planeGeo}>
+            <meshBasicMaterial color={ACCENT} transparent opacity={0.16} side={THREE.DoubleSide} depthWrite={false} />
           </mesh>
-          <lineSegments geometry={parts.edgeGeo}>
+          <lineSegments geometry={view.edgeGeo}>
             <lineBasicMaterial color={ACCENT} />
           </lineSegments>
         </group>

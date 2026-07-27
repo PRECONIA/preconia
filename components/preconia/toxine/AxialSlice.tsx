@@ -34,12 +34,17 @@ export function AxialSlice({
 
   const path = (p: SlicePolygon) =>
     p.loops.map((lp) => "M" + lp.map((pt) => X(pt[0]).toFixed(1) + " " + Y(pt[1]).toFixed(1)).join("L") + "Z").join(" ");
-  const kind = (p: SlicePolygon) => (hi.has(p.node) ? "sel" : p.role === "bone" ? "bone" : "ctx");
+  const kind = (p: SlicePolygon): keyof typeof STY => (hi.has(p.node) ? "sel" : p.role);
   const STY = {
-    sel: { fill: "#7A1E38", op: 0.92, stroke: "#C86B85", sw: 1.4, sop: 1 },
+    conn: { fill: "#CBBFB4", op: 0.28, stroke: "#a89a8c", sw: 0.4, sop: 0.4 },
+    muscle: { fill: "#B47487", op: 0.16, stroke: "#a05a6e", sw: 0.5, sop: 0.3 },
     bone: { fill: "#E9E1CE", op: 1, stroke: "#C8B48A", sw: 1, sop: 1 },
-    ctx: { fill: "#B47487", op: 0.16, stroke: "#a05a6e", sw: 0.5, sop: 0.3 },
+    vein: { fill: "#3B6CA8", op: 0.7, stroke: "#2c527f", sw: 0.4, sop: 0.85 },
+    artery: { fill: "#C0392B", op: 0.82, stroke: "#8f2318", sw: 0.4, sop: 0.9 },
+    nerve: { fill: "#E3B23C", op: 0.92, stroke: "#a97d18", sw: 0.5, sop: 1 },
+    sel: { fill: "#7A1E38", op: 0.92, stroke: "#C86B85", sw: 1.4, sop: 1 },
   } as const;
+  const ORDER = ["conn", "muscle", "bone", "vein", "artery", "nerve", "sel"] as const;
 
   const byShort = new Map<string, { p: SlicePolygon; short: string; sel: boolean }>();
   for (const p of polys) {
@@ -82,7 +87,7 @@ export function AxialSlice({
           <circle cx={it.mx} cy={it.my} r="1.5" fill={it.sel ? "#7A1E38" : "#a05a6e"} />
         </g>
       ))}
-      {(["ctx", "bone", "sel"] as const).map((role) =>
+      {ORDER.map((role) =>
         polys
           .filter((p) => kind(p) === role)
           .map((p, i) => {

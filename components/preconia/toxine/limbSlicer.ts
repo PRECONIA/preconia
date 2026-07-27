@@ -13,7 +13,9 @@ import type { Mesh, BufferGeometry } from "three";
 const MODEL = "/models/toxine/upper-limb.glb";
 const NB = 96;
 
-export type Role = "muscle" | "bone";
+export type Role = "muscle" | "bone" | "nerve" | "artery" | "vein" | "conn";
+const roleOf = (n: string): Role =>
+  n.startsWith("bone__") ? "bone" : n.startsWith("nerve__") ? "nerve" : n.startsWith("artery__") ? "artery" : n.startsWith("vein__") ? "vein" : n.startsWith("conn__") ? "conn" : "muscle";
 export interface SlicePolygon {
   node: string;
   role: Role;
@@ -139,7 +141,7 @@ export function useLimbSlicer() {
           if (tris[i] < zmin) zmin = tris[i];
           if (tris[i] > zmax) zmax = tris[i];
         }
-        raw.push({ node: m.name, role: m.name.startsWith("bone__") ? "bone" : "muscle", tris });
+        raw.push({ node: m.name, role: roleOf(m.name), tris });
       });
       const meshes: MeshData[] = raw.map((r) => {
         const lists: number[][] = Array.from({ length: NB }, () => []);

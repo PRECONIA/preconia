@@ -218,6 +218,22 @@ export function ToxineStudio() {
                 </div>
               )}
             </div>
+            {/* légende des tissus */}
+            <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-[10px] text-ink-soft">
+              {[
+                ["#7A1E38", "Muscle cible"],
+                ["#E3B23C", "Nerf"],
+                ["#C0392B", "Artère"],
+                ["#3B6CA8", "Veine"],
+                ["#E9E1CE", "Os"],
+                ["#CBBFB4", "Conjonctif"],
+              ].map(([c, l]) => (
+                <span key={l} className="inline-flex items-center gap-1">
+                  <span className="inline-block h-2.5 w-2.5 rounded-full" style={{ background: c }} />
+                  {l}
+                </span>
+              ))}
+            </div>
           </div>
 
           <div className="tx-panel px-4 py-4">
