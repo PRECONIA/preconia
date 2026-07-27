@@ -79,7 +79,7 @@ export function AxialSlice({
   ];
 
   return (
-    <svg viewBox={`0 0 ${W.toFixed(1)} ${(H + TOP + BOT).toFixed(1)}`} className="mx-auto block w-full max-w-[400px]" role="img" aria-label="Coupe axiale du membre supérieur — muscles nommés">
+    <svg viewBox={`0 0 ${W.toFixed(1)} ${(H + TOP + BOT).toFixed(1)}`} className="mx-auto block w-full max-w-[640px]" role="img" aria-label="Coupe axiale du membre supérieur — muscles nommés">
       <text x={W / 2} y="13" textAnchor="middle" fontSize="9" fill="#a83e5a" fontWeight="700">ANTÉRIEUR</text>
       {placed.map((it, i) => (
         <g key={"lead" + i}>
