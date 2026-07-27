@@ -1,0 +1,539 @@
+{
+ "source": "Open3D Project (Kooloos, DeRuiter, Arnold, Maat ; modélisation Lee) — CC BY-SA 4.0",
+ "muscles": [
+  {
+   "id": "1st-dorsal-interosseus-of-hand",
+   "name": "1st dorsal interosseus of hand",
+   "region": "Hand and wrist",
+   "node": "muscle__1st-dorsal-interosseus-of-hand"
+  },
+  {
+   "id": "1st-lumbrical-of-hand",
+   "name": "1st lumbrical of hand",
+   "region": "Hand and wrist",
+   "node": "muscle__1st-lumbrical-of-hand"
+  },
+  {
+   "id": "1st-palmar-interosseus-of-hand",
+   "name": "1st palmar interosseus of hand",
+   "region": "Hand and wrist",
+   "node": "muscle__1st-palmar-interosseus-of-hand"
+  },
+  {
+   "id": "2nd-dorsal-interosseus-of-hand",
+   "name": "2nd dorsal interosseus of hand",
+   "region": "Hand and wrist",
+   "node": "muscle__2nd-dorsal-interosseus-of-hand"
+  },
+  {
+   "id": "2nd-lumbrical-of-hand",
+   "name": "2nd lumbrical of hand",
+   "region": "Hand and wrist",
+   "node": "muscle__2nd-lumbrical-of-hand"
+  },
+  {
+   "id": "2nd-palmar-interosseus-of-hand",
+   "name": "2nd palmar interosseus of hand",
+   "region": "Hand and wrist",
+   "node": "muscle__2nd-palmar-interosseus-of-hand"
+  },
+  {
+   "id": "3rd-dorsal-interosseus-of-hand",
+   "name": "3rd dorsal interosseus of hand",
+   "region": "Hand and wrist",
+   "node": "muscle__3rd-dorsal-interosseus-of-hand"
+  },
+  {
+   "id": "3rd-lumbrical-of-hand",
+   "name": "3rd lumbrical of hand",
+   "region": "Hand and wrist",
+   "node": "muscle__3rd-lumbrical-of-hand"
+  },
+  {
+   "id": "3rd-palmar-interosseus-of-hand",
+   "name": "3rd palmar interosseus of hand",
+   "region": "Hand and wrist",
+   "node": "muscle__3rd-palmar-interosseus-of-hand"
+  },
+  {
+   "id": "4th-dorsal-interosseus-of-hand",
+   "name": "4th dorsal interosseus of hand",
+   "region": "Hand and wrist",
+   "node": "muscle__4th-dorsal-interosseus-of-hand"
+  },
+  {
+   "id": "4th-lumbrical-of-hand",
+   "name": "4th lumbrical of hand",
+   "region": "Hand and wrist",
+   "node": "muscle__4th-lumbrical-of-hand"
+  },
+  {
+   "id": "abdominal-head-of-pectoralis-major-muscle",
+   "name": "Abdominal head of pectoralis major muscle",
+   "region": "Pectoral girdle",
+   "node": "muscle__abdominal-head-of-pectoralis-major-muscle"
+  },
+  {
+   "id": "abductor-digiti-minimi",
+   "name": "Abductor digiti minimi",
+   "region": "Hand and wrist",
+   "node": "muscle__abductor-digiti-minimi"
+  },
+  {
+   "id": "abductor-pollicis-brevis",
+   "name": "Abductor pollicis brevis",
+   "region": "Hand and wrist",
+   "node": "muscle__abductor-pollicis-brevis"
+  },
+  {
+   "id": "abductor-pollicis-longus",
+   "name": "Abductor pollicis longus",
+   "region": "Forearm",
+   "node": "muscle__abductor-pollicis-longus"
+  },
+  {
+   "id": "acromial-part-of-deltoid-muscle",
+   "name": "Acromial part of deltoid muscle",
+   "region": "Pectoral girdle",
+   "node": "muscle__acromial-part-of-deltoid-muscle"
+  },
+  {
+   "id": "adductor-pollicis",
+   "name": "Adductor pollicis",
+   "region": "Hand and wrist",
+   "node": "muscle__adductor-pollicis"
+  },
+  {
+   "id": "anconeus-muscle",
+   "name": "Anconeus muscle",
+   "region": "Forearm",
+   "node": "muscle__anconeus-muscle"
+  },
+  {
+   "id": "aponeurosis-palmaris",
+   "name": "Aponeurosis palmaris",
+   "region": "Hand and wrist",
+   "node": "muscle__aponeurosis-palmaris"
+  },
+  {
+   "id": "ascending-part-of-trapezius-muscle",
+   "name": "Ascending part of Trapezius muscle",
+   "region": "Pectoral girdle",
+   "node": "muscle__ascending-part-of-trapezius-muscle"
+  },
+  {
+   "id": "bicipital-aponeurosis",
+   "name": "Bicipital aponeurosis",
+   "region": "Arm",
+   "node": "muscle__bicipital-aponeurosis"
+  },
+  {
+   "id": "brachialis-muscle",
+   "name": "Brachialis muscle",
+   "region": "Arm",
+   "node": "muscle__brachialis-muscle"
+  },
+  {
+   "id": "brachioradialis-muscle",
+   "name": "Brachioradialis muscle",
+   "region": "Forearm",
+   "node": "muscle__brachioradialis-muscle"
+  },
+  {
+   "id": "clavicular-head-of-pectoralis-major-muscle",
+   "name": "Clavicular head of pectoralis major muscle",
+   "region": "Pectoral girdle",
+   "node": "muscle__clavicular-head-of-pectoralis-major-muscle"
+  },
+  {
+   "id": "clavicular-part-of-deltoid-muscle",
+   "name": "Clavicular part of deltoid muscle",
+   "region": "Pectoral girdle",
+   "node": "muscle__clavicular-part-of-deltoid-muscle"
+  },
+  {
+   "id": "common-tendon-of-biceps-brachii",
+   "name": "Common tendon of biceps brachii",
+   "region": "Arm",
+   "node": "muscle__common-tendon-of-biceps-brachii"
+  },
+  {
+   "id": "common-tendon-of-extensor-carpi-ulnaris",
+   "name": "Common tendon of extensor carpi ulnaris",
+   "region": "Forearm",
+   "node": "muscle__common-tendon-of-extensor-carpi-ulnaris"
+  },
+  {
+   "id": "common-tendon-of-flexor-carpi-ulnaris",
+   "name": "Common tendon of flexor carpi ulnaris",
+   "region": "Forearm",
+   "node": "muscle__common-tendon-of-flexor-carpi-ulnaris"
+  },
+  {
+   "id": "common-tendon-of-triceps-brachii",
+   "name": "Common tendon of triceps brachii",
+   "region": "Arm",
+   "node": "muscle__common-tendon-of-triceps-brachii"
+  },
+  {
+   "id": "coracobrachialis-muscle",
+   "name": "Coracobrachialis muscle",
+   "region": "Arm",
+   "node": "muscle__coracobrachialis-muscle"
+  },
+  {
+   "id": "deep-head-of-flexor-pollicis-brevis",
+   "name": "Deep head of flexor pollicis brevis",
+   "region": "Hand and wrist",
+   "node": "muscle__deep-head-of-flexor-pollicis-brevis"
+  },
+  {
+   "id": "deltoid-muscle",
+   "name": "Deltoid muscle",
+   "region": "Pectoral girdle",
+   "node": "muscle__deltoid-muscle"
+  },
+  {
+   "id": "descending-part-of-trapezius-muscle",
+   "name": "Descending part of Trapezius muscle",
+   "region": "Pectoral girdle",
+   "node": "muscle__descending-part-of-trapezius-muscle"
+  },
+  {
+   "id": "extensor-carpi-radialis-brevis",
+   "name": "Extensor carpi radialis brevis",
+   "region": "Forearm",
+   "node": "muscle__extensor-carpi-radialis-brevis"
+  },
+  {
+   "id": "extensor-carpi-radialis-longus",
+   "name": "Extensor carpi radialis longus",
+   "region": "Forearm",
+   "node": "muscle__extensor-carpi-radialis-longus"
+  },
+  {
+   "id": "extensor-digiti-minimi",
+   "name": "Extensor digiti minimi",
+   "region": "Forearm",
+   "node": "muscle__extensor-digiti-minimi"
+  },
+  {
+   "id": "extensor-digitorum",
+   "name": "Extensor digitorum",
+   "region": "Forearm",
+   "node": "muscle__extensor-digitorum"
+  },
+  {
+   "id": "extensor-hood-of-2nd-finger",
+   "name": "Extensor hood of 2nd finger",
+   "region": "Hand and wrist",
+   "node": "muscle__extensor-hood-of-2nd-finger"
+  },
+  {
+   "id": "extensor-hood-of-3rd-finger",
+   "name": "Extensor hood of 3rd finger",
+   "region": "Hand and wrist",
+   "node": "muscle__extensor-hood-of-3rd-finger"
+  },
+  {
+   "id": "extensor-hood-of-4th-finger",
+   "name": "Extensor hood of 4th finger",
+   "region": "Hand and wrist",
+   "node": "muscle__extensor-hood-of-4th-finger"
+  },
+  {
+   "id": "extensor-hood-of-5th-finger",
+   "name": "Extensor hood of 5th finger",
+   "region": "Hand and wrist",
+   "node": "muscle__extensor-hood-of-5th-finger"
+  },
+  {
+   "id": "extensor-indicis",
+   "name": "Extensor indicis",
+   "region": "Forearm",
+   "node": "muscle__extensor-indicis"
+  },
+  {
+   "id": "extensor-pollicis-brevis",
+   "name": "Extensor pollicis brevis",
+   "region": "Forearm",
+   "node": "muscle__extensor-pollicis-brevis"
+  },
+  {
+   "id": "extensor-pollicis-longus",
+   "name": "Extensor pollicis longus",
+   "region": "Forearm",
+   "node": "muscle__extensor-pollicis-longus"
+  },
+  {
+   "id": "flexor-carpi-radialis",
+   "name": "Flexor carpi radialis",
+   "region": "Forearm",
+   "node": "muscle__flexor-carpi-radialis"
+  },
+  {
+   "id": "flexor-digiti-minimi-brevis-of-hand",
+   "name": "Flexor digiti minimi brevis of hand",
+   "region": "Hand and wrist",
+   "node": "muscle__flexor-digiti-minimi-brevis-of-hand"
+  },
+  {
+   "id": "flexor-digitorum-profundus",
+   "name": "Flexor digitorum profundus",
+   "region": "Forearm",
+   "node": "muscle__flexor-digitorum-profundus"
+  },
+  {
+   "id": "flexor-digitorum-superficialis-humero-ulnar-head",
+   "name": "Flexor digitorum superficialis humero-ulnar head",
+   "region": "Forearm",
+   "node": "muscle__flexor-digitorum-superficialis-humero-ulnar-head"
+  },
+  {
+   "id": "flexor-digitorum-superficialis-radial-head",
+   "name": "Flexor digitorum superficialis radial head",
+   "region": "Forearm",
+   "node": "muscle__flexor-digitorum-superficialis-radial-head"
+  },
+  {
+   "id": "flexor-pollicis-longus",
+   "name": "Flexor pollicis longus",
+   "region": "Forearm",
+   "node": "muscle__flexor-pollicis-longus"
+  },
+  {
+   "id": "humeral-head-of-extensor-carpi-ulnaris",
+   "name": "Humeral head of extensor carpi ulnaris",
+   "region": "Forearm",
+   "node": "muscle__humeral-head-of-extensor-carpi-ulnaris"
+  },
+  {
+   "id": "humeral-head-of-flexor-carpi-ulnaris",
+   "name": "Humeral head of flexor carpi ulnaris",
+   "region": "Forearm",
+   "node": "muscle__humeral-head-of-flexor-carpi-ulnaris"
+  },
+  {
+   "id": "humeral-head-of-pronator-teres",
+   "name": "Humeral head of pronator teres",
+   "region": "Forearm",
+   "node": "muscle__humeral-head-of-pronator-teres"
+  },
+  {
+   "id": "infraspinatus-muscle",
+   "name": "Infraspinatus muscle",
+   "region": "Pectoral girdle",
+   "node": "muscle__infraspinatus-muscle"
+  },
+  {
+   "id": "lateral-head-of-triceps-brachii",
+   "name": "Lateral head of triceps brachii",
+   "region": "Arm",
+   "node": "muscle__lateral-head-of-triceps-brachii"
+  },
+  {
+   "id": "latissimus-dorsi",
+   "name": "Latissimus dorsi",
+   "region": "Pectoral girdle",
+   "node": "muscle__latissimus-dorsi"
+  },
+  {
+   "id": "levator-scapulae",
+   "name": "Levator scapulae",
+   "region": "Pectoral girdle",
+   "node": "muscle__levator-scapulae"
+  },
+  {
+   "id": "long-head-of-biceps-brachii",
+   "name": "Long head of biceps brachii",
+   "region": "Arm",
+   "node": "muscle__long-head-of-biceps-brachii"
+  },
+  {
+   "id": "long-head-of-biceps-brachii-tendon-sheath",
+   "name": "Long head of biceps brachii tendon sheath",
+   "region": "Arm",
+   "node": "muscle__long-head-of-biceps-brachii-tendon-sheath"
+  },
+  {
+   "id": "long-head-of-triceps-brachii",
+   "name": "Long head of triceps brachii",
+   "region": "Arm",
+   "node": "muscle__long-head-of-triceps-brachii"
+  },
+  {
+   "id": "medial-head-of-triceps-brachii",
+   "name": "Medial head of triceps brachii",
+   "region": "Arm",
+   "node": "muscle__medial-head-of-triceps-brachii"
+  },
+  {
+   "id": "oblique-head-of-adductor-pollicis",
+   "name": "Oblique head of adductor pollicis",
+   "region": "Hand and wrist",
+   "node": "muscle__oblique-head-of-adductor-pollicis"
+  },
+  {
+   "id": "opponens-digiti-minimi-muscle-of-hand",
+   "name": "Opponens digiti minimi muscle of hand",
+   "region": "Hand and wrist",
+   "node": "muscle__opponens-digiti-minimi-muscle-of-hand"
+  },
+  {
+   "id": "opponens-pollicis-muscle",
+   "name": "Opponens pollicis muscle",
+   "region": "Hand and wrist",
+   "node": "muscle__opponens-pollicis-muscle"
+  },
+  {
+   "id": "palmaris-brevis-muscle",
+   "name": "Palmaris brevis muscle",
+   "region": "Hand and wrist",
+   "node": "muscle__palmaris-brevis-muscle"
+  },
+  {
+   "id": "palmaris-longus-muscle",
+   "name": "Palmaris longus muscle",
+   "region": "Forearm",
+   "node": "muscle__palmaris-longus-muscle"
+  },
+  {
+   "id": "pectoralis-major",
+   "name": "Pectoralis major",
+   "region": "Pectoral girdle",
+   "node": "muscle__pectoralis-major"
+  },
+  {
+   "id": "pectoralis-minor-muscle",
+   "name": "Pectoralis minor muscle",
+   "region": "Pectoral girdle",
+   "node": "muscle__pectoralis-minor-muscle"
+  },
+  {
+   "id": "pronator-quadratus",
+   "name": "Pronator quadratus",
+   "region": "Forearm",
+   "node": "muscle__pronator-quadratus"
+  },
+  {
+   "id": "rhomboid-major-muscle",
+   "name": "Rhomboid major muscle",
+   "region": "Pectoral girdle",
+   "node": "muscle__rhomboid-major-muscle"
+  },
+  {
+   "id": "rhomboid-minor-muscle",
+   "name": "Rhomboid minor muscle",
+   "region": "Pectoral girdle",
+   "node": "muscle__rhomboid-minor-muscle"
+  },
+  {
+   "id": "serratus-anterior-muscle",
+   "name": "Serratus anterior muscle",
+   "region": "Pectoral girdle",
+   "node": "muscle__serratus-anterior-muscle"
+  },
+  {
+   "id": "short-head-of-biceps-brachii",
+   "name": "Short head of biceps brachii",
+   "region": "Arm",
+   "node": "muscle__short-head-of-biceps-brachii"
+  },
+  {
+   "id": "spinal-part-of-deltoid-muscle",
+   "name": "Spinal part of deltoid muscle",
+   "region": "Pectoral girdle",
+   "node": "muscle__spinal-part-of-deltoid-muscle"
+  },
+  {
+   "id": "sternocostal-head-of-pectoralis-major-muscle",
+   "name": "Sternocostal head of pectoralis major muscle",
+   "region": "Pectoral girdle",
+   "node": "muscle__sternocostal-head-of-pectoralis-major-muscle"
+  },
+  {
+   "id": "subclavius-muscle",
+   "name": "Subclavius muscle",
+   "region": "Pectoral girdle",
+   "node": "muscle__subclavius-muscle"
+  },
+  {
+   "id": "subscapularis-muscle",
+   "name": "Subscapularis muscle",
+   "region": "Pectoral girdle",
+   "node": "muscle__subscapularis-muscle"
+  },
+  {
+   "id": "superficial-head-of-flexor-pollicis-brevis",
+   "name": "Superficial head of flexor pollicis brevis",
+   "region": "Hand and wrist",
+   "node": "muscle__superficial-head-of-flexor-pollicis-brevis"
+  },
+  {
+   "id": "superficial-transverse-metacarpal-lig",
+   "name": "Superficial transverse metacarpal lig.",
+   "region": "Hand and wrist",
+   "node": "muscle__superficial-transverse-metacarpal-lig"
+  },
+  {
+   "id": "supinator",
+   "name": "Supinator",
+   "region": "Forearm",
+   "node": "muscle__supinator"
+  },
+  {
+   "id": "supraspinatus-muscle",
+   "name": "Supraspinatus muscle",
+   "region": "Pectoral girdle",
+   "node": "muscle__supraspinatus-muscle"
+  },
+  {
+   "id": "teres-major-muscle",
+   "name": "Teres major muscle",
+   "region": "Pectoral girdle",
+   "node": "muscle__teres-major-muscle"
+  },
+  {
+   "id": "teres-minor-muscle",
+   "name": "Teres minor muscle",
+   "region": "Pectoral girdle",
+   "node": "muscle__teres-minor-muscle"
+  },
+  {
+   "id": "transverse-head-of-adductor-pollicis",
+   "name": "Transverse head of adductor pollicis",
+   "region": "Hand and wrist",
+   "node": "muscle__transverse-head-of-adductor-pollicis"
+  },
+  {
+   "id": "transverse-part-of-trapezius-muscle",
+   "name": "Transverse part of trapezius muscle",
+   "region": "Pectoral girdle",
+   "node": "muscle__transverse-part-of-trapezius-muscle"
+  },
+  {
+   "id": "trapezius-muscle",
+   "name": "Trapezius muscle",
+   "region": "Pectoral girdle",
+   "node": "muscle__trapezius-muscle"
+  },
+  {
+   "id": "ulnar-head-of-extensor-carpi-ulnaris",
+   "name": "Ulnar head of extensor carpi ulnaris",
+   "region": "Forearm",
+   "node": "muscle__ulnar-head-of-extensor-carpi-ulnaris"
+  },
+  {
+   "id": "ulnar-head-of-flexor-carpi-ulnaris",
+   "name": "Ulnar head of flexor carpi ulnaris",
+   "region": "Forearm",
+   "node": "muscle__ulnar-head-of-flexor-carpi-ulnaris"
+  },
+  {
+   "id": "ulnar-head-of-pronator-teres",
+   "name": "Ulnar head of pronator teres",
+   "region": "Forearm",
+   "node": "muscle__ulnar-head-of-pronator-teres"
+  }
+ ]
+}
