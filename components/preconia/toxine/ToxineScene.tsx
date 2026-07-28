@@ -68,16 +68,25 @@ function HighlightMesh({ geometry }: { geometry: THREE.BufferGeometry }) {
   );
 }
 
+export interface Probe {
+  cx: number;
+  y: number;
+  z: number;
+  width: number;
+}
+
 function Anatomy({
   controller,
   highlight,
   level,
   belly,
+  probe,
 }: {
   controller?: RefObject<ToxineController | null>;
   highlight: string[];
   level: number;
   belly: [number, number];
+  probe?: Probe;
 }) {
   const root = useRef<THREE.Group>(null);
   const { scene } = useGLTF(MODEL);
@@ -151,6 +160,19 @@ function Anatomy({
             <lineBasicMaterial color={ACCENT} />
           </lineSegments>
         </group>
+        {/* sonde d'échographie posée sur la surface, à l'aplomb du plan de coupe */}
+        {probe && (
+          <group position={[probe.cx, probe.y - 0.007, probe.z]}>
+            <mesh>
+              <boxGeometry args={[probe.width, 0.012, 0.026]} />
+              <meshStandardMaterial color="#2f343a" roughness={0.5} metalness={0.2} />
+            </mesh>
+            <mesh position={[0, 0.008, 0]}>
+              <boxGeometry args={[probe.width * 0.98, 0.004, 0.024]} />
+              <meshBasicMaterial color={ACCENT} />
+            </mesh>
+          </group>
+        )}
       </group>
     </group>
   );
@@ -161,11 +183,13 @@ export default function ToxineScene({
   highlight,
   level = 0.5,
   belly,
+  probe,
 }: {
   controller?: RefObject<ToxineController | null>;
   highlight: string[];
   level?: number;
   belly: [number, number];
+  probe?: Probe;
 }) {
   return (
     <Canvas camera={{ position: [0, 0, 12], fov: 40 }} gl={{ alpha: true, antialias: true }} dpr={[1, 2]}>
@@ -173,7 +197,7 @@ export default function ToxineScene({
       <directionalLight position={[4, 6, 8]} intensity={1.15} />
       <directionalLight position={[-5, 2, -4]} intensity={0.45} color={ACCENT} />
       <Suspense fallback={null}>
-        <Anatomy controller={controller} highlight={highlight} level={level} belly={belly} />
+        <Anatomy controller={controller} highlight={highlight} level={level} belly={belly} probe={probe} />
       </Suspense>
       <OrbitControls enablePan={false} minDistance={5} maxDistance={20} target={[0, 0, 0]} />
     </Canvas>
