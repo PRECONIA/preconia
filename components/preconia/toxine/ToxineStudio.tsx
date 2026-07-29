@@ -10,6 +10,7 @@ import dynamic from "next/dynamic";
 import { useMemo, useRef, useState } from "react";
 import type { PresetView, ToxineController } from "@/components/preconia/toxine/ToxineScene";
 import { AxialSlice } from "@/components/preconia/toxine/AxialSlice";
+import { ToxineSimulator } from "@/components/preconia/toxine/ToxineSimulator";
 import { useLimbSlicer } from "@/components/preconia/toxine/limbSlicer";
 import { defaultMuscle, searchCatalog, type Muscle } from "@/components/preconia/toxine/toxineCatalog";
 
@@ -80,6 +81,7 @@ export function ToxineStudio() {
   const [q, setQ] = useState("");
   const [muscle, setMuscle] = useState<Muscle>(() => defaultMuscle());
   const [level, setLevel] = useState(0.5);
+  const [sim, setSim] = useState(false);
   const ctrl = useRef<ToxineController | null>(null);
   const slicer = useLimbSlicer();
   const results = useMemo(() => searchCatalog(q), [q]);
@@ -163,6 +165,19 @@ export function ToxineStudio() {
           </ul>
         )}
       </div>
+
+      <div className="mt-3 flex justify-center">
+        <button
+          type="button"
+          onClick={() => setSim(true)}
+          disabled={!slicer.ready}
+          className="tx-btn inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-[13.5px] font-semibold text-white disabled:opacity-50"
+        >
+          ▶ Mode simulation écho-guidée
+        </button>
+      </div>
+
+      {sim && <ToxineSimulator muscle={muscle} slicer={slicer} onClose={() => setSim(false)} />}
 
       {/* deux grands encarts : modèle 3D et coupe axiale, côte à côte */}
       <div className="mt-6 grid gap-5 lg:grid-cols-[1.12fr_1fr]">

@@ -145,8 +145,50 @@ const BONE_FR: Record<string, string> = {
   radius: "Radius",
   ulna: "Ulna",
   humerus: "Humérus",
+  "scapula-r": "Scapula",
   scapula: "Scapula",
   clavicle: "Clavicule",
+};
+
+/* nerfs, artères et veines : libellés français des troncs usuels (les autres sont
+   dérivés du nom du modèle, préfixés N./A./V.). */
+const VESSEL_FR: Record<string, string> = {
+  "median-nerve": "N. médian",
+  "ulnar-nerve": "N. ulnaire",
+  "radial-nerve": "N. radial",
+  "radial-nerve-deep-branch": "N. radial br. prof.",
+  "radial-nerve-superficial-br": "N. radial br. sup.",
+  "radial-nerve-posterior-interosseus-n": "N. inteross. post.",
+  "musculocutaneus-nerve": "N. musculo-cutané",
+  "musculocutaneus-nerve-lateral-antebrachial-cutaneous-nerve": "N. cut. lat. a.-bras",
+  "medial-antebrachial-cutaneous-nerve": "N. cut. méd. a.-bras",
+  "medial-brachial-cutaneous-nerve": "N. cut. méd. bras",
+  "axillary-nerve-superior-lateral-br-cutaneous-nerve": "N. axillaire",
+  "suprascapular-nerve": "N. supra-scapulaire",
+  "brachial-artery": "A. brachiale",
+  "radial-artery": "A. radiale",
+  "ulnar-artery": "A. ulnaire",
+  "axillary-artery": "A. axillaire",
+  "deep-artery-of-arm": "A. brachiale prof.",
+  "anterior-interosseous-artery": "A. inteross. ant.",
+  "posterior-interosseous-artery": "A. inteross. post.",
+  "common-interosseous-artery": "A. inteross. comm.",
+  "arm-superficial-vein-basilic-vein": "V. basilique",
+  "arm-superficial-vein-cephalic-vein": "V. céphalique",
+  "arm-superficial-vein-median-antebrachial-vein": "V. médiane a.-bras",
+  "arm-superficial-vein-median-cubital-vein": "V. médiane du coude",
+  "deep-veins-of-the-arm": "Vv. brachiales",
+  "radial-veins": "Vv. radiales",
+  "ulnar-veins": "Vv. ulnaires",
+  "axillary-vein": "V. axillaire",
+  "superficial-veins-of-upper-limb": "Vv. superficielles",
+  "anterior-interosseous-veins": "Vv. inteross. ant.",
+  "posterior-interosseous-veins": "Vv. inteross. post.",
+  "interosseous-membrane-of-forearm": "Membrane interosseuse",
+  "antebrachial-fascia": "Fascia antébrachial",
+  "brachial-fascia": "Fascia brachial",
+  "medial-intermuscular-septum-of-arm": "Septum interm. méd.",
+  "lateral-intermuscular-septum-of-arm": "Septum interm. lat.",
 };
 
 export function muscleShort(m: Muscle): string {
@@ -156,11 +198,27 @@ export function muscleShort(m: Muscle): string {
   return m.label.replace(/[’']/g, "").split(/[\s-]+/).map((w) => w[0]).join("").toUpperCase();
 }
 
+const PREFIX: Record<string, string> = { nerve: "N.", artery: "A.", vein: "V.", conn: "" };
+
 let nodeShortCache: Map<string, string> | null = null;
 export function nodeShort(node: string): string {
   if (node.startsWith("bone__")) {
     const s = node.slice(6);
     return BONE_FR[s] ?? title(s.replace(/-/g, " "));
+  }
+  const vessel = /^(nerve|artery|vein|conn)__(.+)$/.exec(node);
+  if (vessel) {
+    const [, kind, slug] = vessel;
+    if (VESSEL_FR[slug]) return VESSEL_FR[slug];
+    // branche d'un tronc connu : on garde le nom du tronc (« A. ulnaire br. »)
+    let trunk = "";
+    for (const key of Object.keys(VESSEL_FR)) if (slug.startsWith(key + "-") && key.length > trunk.length) trunk = key;
+    if (trunk) return `${VESSEL_FR[trunk]} br.`;
+    const bare = slug
+      .replace(/-of-(the-)?(upper-limb|arm|forearm|hand)$/, "")
+      .replace(/-(nerve|artery|arteries|vein|veins|n|a|v|br)$/, "")
+      .replace(/-/g, " ");
+    return `${PREFIX[kind]} ${bare}`.trim();
   }
   if (!nodeShortCache) {
     nodeShortCache = new Map();
