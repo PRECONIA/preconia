@@ -1,6 +1,6 @@
 {
-  "source": "Nomenclature LPPR — base CNAM (codage.ext.cnamts.fr), chapitre VPH achat neuf (7 sous-catégories) — MAJ LPPTOT892 (2026-07-09) : FRE-B ERGOFLIX (9502938) ajouté ; MAJ LPPTOT893 (2026-07-18) : FRE-A OTTO BOCK (9539918) ajouté.",
-  "lastUpdated": "2026-07-18",
+  "source": "Nomenclature LPPR — base CNAM (codage.ext.cnamts.fr), chapitre VPH achat neuf (7 sous-catégories) — MAJ LPPTOT892 (2026-07-09) : FRE-B ERGOFLIX (9502938) ajouté ; MAJ LPPTOT893 (2026-07-18) : FRE-A OTTO BOCK (9539918) ajouté. ; MAJ LPPTOT905 (2026-10-12) : FRE-A WISETON INDUS (9508763), FRMS SUNRISE MED (9585522) et SCO-B PRIDE MOBILITY (9595992) ajoutés.",
+  "lastUpdated": "2026-10-12",
   "products": [
     {
       "code": "4507210",
@@ -128,6 +128,11 @@
       "category": "Scooters modulaires"
     },
     {
+      "code": "9595992",
+      "label": "VPH, ACHAT NEUF, SCO-B, SCOOTER CLASSE B,PRIDE MOBILITY",
+      "category": "Scooters modulaires"
+    },
+    {
       "code": "9553373",
       "label": "VPH, ACHAT NEUF, SCO-C, SCOOTER CLASSE C,LIFE MOBILITY",
       "category": "Scooters modulaires"
@@ -220,6 +225,11 @@
     {
       "code": "9517472",
       "label": "VPH, ACHAT NEUF, FRMS, MODULAIRE À PROPULSION MANUELLE DE SPORT,INVACARE",
+      "category": "VPH modulaires à propulsion manuelle ou à pousser"
+    },
+    {
+      "code": "9585522",
+      "label": "VPH, ACHAT NEUF, FRMS, MODULAIRE À PROPULSION MANUELLE DE SPORT,SUNRISE MED",
       "category": "VPH modulaires à propulsion manuelle ou à pousser"
     },
     {
@@ -560,6 +570,11 @@
     {
       "code": "9549182",
       "label": "VPH, ACHAT NEUF, FRE-A, MODULAIRE PAR MOTEUR ÉLECTRIQUE CLASSE A,LOGO SILVER",
+      "category": "VPH modulaires à propulsion électrique"
+    },
+    {
+      "code": "9508763",
+      "label": "VPH, ACHAT NEUF, FRE-A, MODULAIRE PAR MOTEUR ÉLECTRIQUE CLASSE A,WISETON INDUS",
       "category": "VPH modulaires à propulsion électrique"
     },
     {

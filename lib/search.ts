@@ -1,5 +1,6 @@
 import {
   adjBrandGroups,
+  aidesPropulsion,
   deviceLppByType,
   deviceModelsByType,
   lpprAdjProducts,
@@ -9,13 +10,14 @@ import {
 } from "./data";
 
 /* Moteur de recherche du catalogue LPPR — à jour de notre base.
-   Indexe : VPH (achat neuf) + adjonctions + forfaits PAP. Pour chaque VPH on attache le
+   Indexe : VPH (achat neuf) + adjonctions + forfaits PAP + prestations (LLD, LCD, SAV, MAD,
+   RBEU) + aides électriques à la propulsion en nom de marque. Pour chaque VPH on attache le
    token de type (FREP-B…), la marque et les modèles commerciaux (CERAH) issus de device-models.
    Recherche multi-termes (ET) : type + marque + nature + dénomination + code, ex.
    « FREP B otto », « FREPB otto », « PAP otto », « adjonction otto », « repose jambe otto ».
    Filtres pour les boutons rapides (adjonctions, PAP-A, PAP-B, catégorie VPH) et le sélecteur marque. */
 
-export type CatalogKind = "vph" | "adjonction" | "pap" | "prestation";
+export type CatalogKind = "vph" | "adjonction" | "pap" | "prestation" | "aide";
 
 export interface CatalogEntry {
   code: string;
@@ -33,6 +35,7 @@ export const KIND_LABEL: Record<CatalogKind, string> = {
   adjonction: "Adjonction",
   pap: "Forfait PAP",
   prestation: "Forfait / prestation",
+  aide: "Aide à la propulsion",
 };
 
 /** Normalisation FR : minuscules + suppression des diacritiques. */
@@ -143,6 +146,20 @@ for (const p of prestationProducts) {
     token: vphToken(p.label),
     papForfait: null,
     models: [],
+  });
+}
+// aides électriques à la propulsion en nom de marque : libellé = la fonction (2e segment de
+// « VPH, FONCTION, MARQUE, MODÈLE »), le modèle passe en ligne de modèles comme pour les VPH.
+for (const p of aidesPropulsion) {
+  put({
+    code: p.code,
+    label: p.label.split(",")[1].trim(),
+    brand: p.brand,
+    kind: "aide",
+    category: p.category,
+    token: null,
+    papForfait: null,
+    models: [p.model],
   });
 }
 // forfaits PAP de base (notre pap.json) — garantit un résultat pour les boutons PAP-A / PAP-B.

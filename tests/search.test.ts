@@ -26,6 +26,24 @@ describe("catalogue de recherche", () => {
     expect(searchCatalog("1266390").some((e) => e.code === "1266390")).toBe(true);
     expect(searchCatalog("batterie").some((e) => e.code === "4891384")).toBe(true);
   });
+
+  it("RBEU (LPPTOT905) : 22 codes derrière le raccourci, trouvables par type", () => {
+    const rbeu = searchCatalog("", { kind: "prestation", category: "Remise en bon état d'usage (RBEU)" }, 50);
+    expect(rbeu.length).toBe(22);
+    expect(searchCatalog("rbeu frmc").some((e) => e.code === "4604516")).toBe(true);
+  });
+
+  it("aides électriques à la propulsion : nature propre, marque et modèle exploitables", () => {
+    const aides = searchCatalog("", { kind: "aide" }, 50);
+    expect(aides.length).toBe(12);
+    expect(aides.every((e) => e.brand && e.models.length === 1)).toBe(true);
+    // la marque CNAM « SUNRISE MEDICAL » est rangée sous la marque du catalogue
+    expect(searchCatalog("", { kind: "aide", brand: "SUNRISE MED" }, 10).map((e) => e.code)).toEqual(["4952358"]);
+    // trouvable par le nom commercial, coquille « VHP » de la CNAM corrigée
+    expect(searchCatalog("smartdrive").some((e) => e.code === "4371791")).toBe(true);
+    expect(searchCatalog("e-pilot").some((e) => e.code === "4903437")).toBe(true);
+    expect(aides.some((e) => e.label.includes("VHP"))).toBe(false);
+  });
 });
 
 describe("normalize", () => {

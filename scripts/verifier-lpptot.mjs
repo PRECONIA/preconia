@@ -111,6 +111,9 @@ const normaliser = (s) =>
     .replace(/\s+/g, " ")
     .trim();
 
+/** Pour les marques, que la CNAM écrit avec ou sans espace (« SKS ROLTEC » / « SKSROLTEC »). */
+const compacte = (s) => normaliser(s).replace(/ /g, "");
+
 /* ------------------------------- lecture de la base ------------------------------- */
 
 async function obtenirBase() {
@@ -214,7 +217,7 @@ function verifier(lookup, code, { tarif, libelle, devis, marque, contexte }) {
       );
     }
   }
-  if (marque !== undefined && !normaliser(fiche.designation).includes(normaliser(marque)))
+  if (marque !== undefined && !compacte(fiche.designation).includes(compacte(marque)))
     avertissements.push(
       `marque non retrouvée dans la désignation ${code} : « ${marque} » vs « ${fiche.designation.slice(0, 70)} »`,
     );
@@ -231,14 +234,17 @@ function section(titre, fn) {
 /** Balayage inverse (couverture) : énumère TOUS les codes de la base officielle dont la
  *  désignation commence par « VPH » et signale ceux, en vigueur, absents du catalogue
  *  PRECONIA et de la liste d'exclusions documentée — c'est la détection des nouveautés
- *  (nouvelle ligne inscrite, RBEU à venir…). Les codes sans tarif en vigueur (radiés /
+ *  (nouvelle ligne inscrite, nouvelle famille comme le RBEU…). Les codes sans tarif en vigueur (radiés /
  *  éteints) sont ignorés. NB : deux codes du catalogue (variantes LOGOSILVER 4918568 et
  *  4998768) ont une désignation officielle commençant par « ADJONCTION, » et non « VPH, »
  *  (nommage CNAM irrégulier) — ils échappent à ce balayage mais restent couverts par le
  *  contrôle direct, d'où un « portés » inférieur de 2 au total du catalogue. */
 function verifierCouverture(DATA, lookup) {
   const codesBase = new Set();
-  for (const m of DATA.matchAll(/1010101(\d{7}) +VPH\b/g)) codesBase.add(m[1]);
+  // la CNAM inscrit les aides électriques à la propulsion sous « VHP » (coquille historique) :
+  // sans cette seconde forme, toute nouvelle inscription de la famille passerait inaperçue.
+  for (const m of DATA.matchAll(/1010101(\d{7}) +(?:VPH\b|VHP,? ASSISTANCE ELECTRIQUE A LA PROPULSION)/g))
+    codesBase.add(m[1]);
   let horsPerimetre = 0;
   let eteints = 0;
   let nouveautes = 0;
@@ -333,6 +339,12 @@ async function principal() {
       verifier(lookup, p.code, { libelle: p.label, contexte: p.category });
   });
 
+  section("lppr-aides-propulsion.json — aides électriques à la propulsion (nom de marque)", () => {
+    const d = lireJson("lppr-aides-propulsion.json");
+    for (const p of d.products)
+      verifier(lookup, p.code, { tarif: p.tarif, libelle: p.label, contexte: `aide ${p.model}` });
+  });
+
   section("adjonction-brands.json — variantes de marque des adjonctions", () => {
     const d = lireJson("adjonction-brands.json");
     for (const g of d.groups)
@@ -358,7 +370,7 @@ async function principal() {
   /* ----------------------------------- synthèse ----------------------------------- */
   console.log(`\n================================ SYNTHÈSE ================================`);
   console.log(`Base officielle          : ${base.version} (SHA-256 ${base.sha256.slice(0, 16)}…)`);
-  console.log(`Codes LPP contrôlés      : ${nbCodes}`);
+  console.log(`Codes LPP contrôlés      : ${nbCodes} (${codesConnus.size} codes distincts)`);
   console.log(
     `Couverture inverse       : ${couverture.total} codes « VPH » recensés dans la base — ${couverture.total - couverture.horsPerimetre - couverture.eteints - couverture.nouveautes} portés, ${couverture.horsPerimetre} hors périmètre documentés, ${couverture.eteints} éteints ignorés, ${couverture.nouveautes} nouveauté(s) non couverte(s)`,
   );

@@ -1,0 +1,102 @@
+{
+  "source": "Base LPP (LPPTOT905, CNAMTS, 08/10/2026) — dispositifs d'aide électrique à la propulsion inscrits sous nom de marque (Titre IV), en vigueur. Intégrés à la recherche LPPR uniquement, hors walker. La CNAM écrit « VHP » dans la plupart de ces désignations : rétabli en « VPH ». Marques harmonisées avec le reste du catalogue (SUNRISE MEDICAL → SUNRISE MED, BENOIT → BENOIT SYSTEMES). Tarif = prix d'achat LPP en vigueur.",
+  "lastUpdated": "2026-10-12",
+  "products": [
+    {
+      "code": "4329582",
+      "label": "VPH, ASSISTANCE ÉLECTRIQUE À LA PROPULSION, ACEKARE, YOMPER +, AUTO. STANDARD",
+      "category": "Aides électriques à la propulsion (nom de marque)",
+      "brand": "ACEKARE",
+      "model": "YOMPER +, AUTO. STANDARD",
+      "tarif": 3500.0
+    },
+    {
+      "code": "4317107",
+      "label": "VPH, ASSISTANCE ÉLECTRIQUE À LA PROPULSION, ACEKARE, YOMPER +, AUTO. ÉTENDUE",
+      "category": "Aides électriques à la propulsion (nom de marque)",
+      "brand": "ACEKARE",
+      "model": "YOMPER +, AUTO. ÉTENDUE",
+      "tarif": 3700.0
+    },
+    {
+      "code": "4309415",
+      "label": "VPH, ASSISTANCE ÉLECTRIQUE À LA PROPULSION, BENOIT, POUSSEUR",
+      "category": "Aides électriques à la propulsion (nom de marque)",
+      "brand": "BENOIT SYSTEMES",
+      "model": "POUSSEUR",
+      "tarif": 2187.03
+    },
+    {
+      "code": "4321630",
+      "label": "VPH, ASSISTANCE ÉLECTRIQUE À LA PROPULSION, INVACARE, ALBER E MOTION M25",
+      "category": "Aides électriques à la propulsion (nom de marque)",
+      "brand": "INVACARE",
+      "model": "ALBER E MOTION M25",
+      "tarif": 3500.0
+    },
+    {
+      "code": "4903437",
+      "label": "VPH, TRACTION À ENTRAÎNEMENT ÉLECTRIQUE, INVACARE, ALBER E-PILOT P15",
+      "category": "Aides électriques à la propulsion (nom de marque)",
+      "brand": "INVACARE",
+      "model": "ALBER E-PILOT P15",
+      "tarif": 3500.0
+    },
+    {
+      "code": "4353586",
+      "label": "VPH, ASSISTANCE ÉLECTRIQUE À LA PROPULSION, INVACARE, ALBER SMOOV ONE O10.",
+      "category": "Aides électriques à la propulsion (nom de marque)",
+      "brand": "INVACARE",
+      "model": "ALBER SMOOV ONE O10",
+      "tarif": 3500.0
+    },
+    {
+      "code": "4379114",
+      "label": "VPH, ASSISTANCE ÉLECTRIQUE À LA PROPULSION, INVACARE, ALBER VIAMOBIL ECO V14.",
+      "category": "Aides électriques à la propulsion (nom de marque)",
+      "brand": "INVACARE",
+      "model": "ALBER VIAMOBIL ECO V14",
+      "tarif": 2000.0
+    },
+    {
+      "code": "4313760",
+      "label": "VPH, ASSISTANCE ÉLECTRIQUE À LA PROPULSION, INVACARE, ALBER VIAMOBIL V25.",
+      "category": "Aides électriques à la propulsion (nom de marque)",
+      "brand": "INVACARE",
+      "model": "ALBER VIAMOBIL V25",
+      "tarif": 2187.03
+    },
+    {
+      "code": "4390162",
+      "label": "VPH, ASSISTANCE ÉLECTRIQUE À LA PROPULSION, INVACARE, ALBER VIAPLUS V12.",
+      "category": "Aides électriques à la propulsion (nom de marque)",
+      "brand": "INVACARE",
+      "model": "ALBER VIAPLUS V12",
+      "tarif": 2000.0
+    },
+    {
+      "code": "4101821",
+      "label": "VPH, ASSISTANCE ÉLECTRIQUE À LA PROPULSION, MOBITEC, E MOTION",
+      "category": "Aides électriques à la propulsion (nom de marque)",
+      "brand": "MOBITEC",
+      "model": "E MOTION",
+      "tarif": 2187.03
+    },
+    {
+      "code": "4371791",
+      "label": "VPH, ASSISTANCE ÉLECTRIQUE À LA PROPULSION, PERMOBIL, SMARTDRIVE MX2+",
+      "category": "Aides électriques à la propulsion (nom de marque)",
+      "brand": "PERMOBIL",
+      "model": "SMARTDRIVE MX2+",
+      "tarif": 3500.0
+    },
+    {
+      "code": "4952358",
+      "label": "VPH, ASSISTANCE ÉLECTRIQUE À LA PROPULSION, SUNRISE MEDICAL, EMPULSE R90",
+      "category": "Aides électriques à la propulsion (nom de marque)",
+      "brand": "SUNRISE MED",
+      "model": "EMPULSE R90",
+      "tarif": 3500.0
+    }
+  ]
+}

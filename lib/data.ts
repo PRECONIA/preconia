@@ -6,6 +6,7 @@ import classesScoRaw from "@/data/classes-sco.json";
 import besoinsRaw from "@/data/besoins.json";
 import lpprRaw from "@/data/lppr.json";
 import lpprAdjRaw from "@/data/lppr-adjonctions.json";
+import aidesPropulsionRaw from "@/data/lppr-aides-propulsion.json";
 import adjBrandsRaw from "@/data/adjonction-brands.json";
 import deviceLppRaw from "@/data/device-lpp.json";
 import deviceModelsRaw from "@/data/device-models.json";
@@ -25,6 +26,7 @@ import {
   ClassesFileSchema,
   BesoinsFileSchema,
   LpprFileSchema,
+  AidesPropulsionFileSchema,
   AdjonctionBrandsFileSchema,
   DeviceLppFileSchema,
   DeviceModelsFileSchema,
@@ -89,6 +91,9 @@ export const lpprMeta = { source: lpprFile.source, lastUpdated: lpprFile.lastUpd
 
 const lpprAdjFile = LpprFileSchema.parse(lpprAdjRaw);
 export const lpprAdjProducts = lpprAdjFile.products;
+
+/** aides électriques à la propulsion inscrites sous nom de marque — recherche seule, hors walker. */
+export const aidesPropulsion = AidesPropulsionFileSchema.parse(aidesPropulsionRaw).products;
 
 const adjBrandsFile = AdjonctionBrandsFileSchema.parse(adjBrandsRaw);
 export const adjBrandGroups = adjBrandsFile.groups;

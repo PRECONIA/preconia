@@ -47,8 +47,10 @@ La donnée vit dans `/data/*.json` (versionnée), **découplée** de l'UI. Aucun
 ## Données à fiabiliser (TODO connus)
 - Compatibilités inférées à confirmer : appui-tête (4954630), tablette (4970497), oxygénothérapie (4987500) — laissées sur modulaire + électrique.
 - Bariatrique FRM (4922720) codé pour le seul FRM d'après son libellé — à confirmer pour la famille manuelle.
-- Tarifs manquants : 4904626, 4922720, 4936922 (`tbd: true`).
-- Tarifs de base par dispositif : seuls FRMA (6276), FRMC (3303,53), FRMS (2400) connus. Compléter les autres.
+- Tarifs : les anciens « à préciser » (4904626, 4922720, 4936922) et les tarifs de base des 22 types (`device-lpp.json`)
+  sont renseignés et contrôlés par `scripts/verifier-lpptot.mjs` (dernière campagne : LPPTOT905).
+- RBEU (VPH remis en bon état d'usage, en vigueur au 01/09/2026) : présent dans la recherche (`lppr-prestations.json`),
+  pas encore proposé comme mode de prise en charge dans le walker.
 - Le repère « fiche technique » (`ft`) est condensé ; le détail par module (propulsion/châssis/dossier/siège/roues/conduite) est
   dans la nomenclature et peut être enrichi par dispositif.
 

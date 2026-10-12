@@ -1,6 +1,6 @@
 {
-  "source": "Nomenclature LPPR — base CNAM (menu 722), regroupement par ordre de page : code mère → variantes de marque — MAJ LPPTOT892 (2026-07-09) : variante Forfait A LOGO SILVER (9989917) ajoutée ; MAJ LPPTOT893 (2026-07-18) : variante Forfait B LOGO SILVER (9922698) ajoutée.",
-  "lastUpdated": "2026-07-18",
+  "source": "Nomenclature LPPR — base CNAM (menu 722), regroupement par ordre de page : code mère → variantes de marque — MAJ LPPTOT892 (2026-07-09) : variante Forfait A LOGO SILVER (9989917) ajoutée ; MAJ LPPTOT893 (2026-07-18) : variante Forfait B LOGO SILVER (9922698) ajoutée. ; MAJ LPPTOT905 (2026-10-12) : variantes SKS ROLTEC du supplément bariatrique FRE/FREP/FREV/SCO (9925320) et du support d'oxygénothérapie (9985530) ajoutées ; marque SKSROLTEC du supplément bariatrique FRM harmonisée en SKS ROLTEC.",
+  "lastUpdated": "2026-10-12",
   "groups": [
     {
       "base": "4947601",
@@ -157,7 +157,7 @@
         "INVACARE": "9998193",
         "MEYRA NETTI": "9918159",
         "OTTO BOCK": "9904364",
-        "SKSROLTEC": "9943335",
+        "SKS ROLTEC": "9943335",
         "SUNRISE MED": "9986439",
         "VERMEIREN": "9939977"
       }
@@ -277,7 +277,8 @@
         "PRIDE MOBILITY": "9923901",
         "SUNRISE MED": "9973572",
         "VERMEIREN": "9957840",
-        "LOGO SILVER": "9902684"
+        "LOGO SILVER": "9902684",
+        "SKS ROLTEC": "9925320"
       }
     },
     {
@@ -317,7 +318,8 @@
         "PRIDE MOBILITY": "9937381",
         "SCHUCHMANN": "9913096",
         "SUNRISE MED": "9945334",
-        "VERMEIREN": "9903293"
+        "VERMEIREN": "9903293",
+        "SKS ROLTEC": "9985530"
       }
     }
   ]

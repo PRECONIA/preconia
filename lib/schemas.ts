@@ -118,6 +118,19 @@ export const LpprFileSchema = z.object({
   products: z.array(LpprProductSchema),
 });
 
+/* --- lppr-aides-propulsion.json (aides électriques à la propulsion inscrites sous nom de
+   marque : recherche seule, hors walker ; marque et modèle explicites, tarif contrôlé) --- */
+export const AidePropulsionSchema = LpprProductSchema.extend({
+  brand: z.string(),
+  model: z.string(),
+  tarif: z.number().positive(),
+});
+export const AidesPropulsionFileSchema = z.object({
+  source: z.string(),
+  lastUpdated: z.string(),
+  products: z.array(AidePropulsionSchema).nonempty(),
+});
+
 /* --- adjonction-brands.json (correspondance code mère → variantes de marque, dérivée du
    regroupement par ordre de page de la base CNAM ; sert à adapter le code LPP à la marque) --- */
 export const AdjonctionBrandGroupSchema = z.object({
