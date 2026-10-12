@@ -12,7 +12,7 @@ import {
 const URL = "https://preconia.fr/aide-codage/lpp";
 const TITLE = "Code LPP : trouver un dispositif médical remboursable — recherche instantanée";
 const DESCRIPTION =
-  "Recherchez un code LPP par désignation, marque ou code : 5 606 lignes de la Liste des produits et prestations indexées, du pansement au fauteuil roulant (Titre IV — véhicules pour handicapés physiques).";
+  "Recherchez un code LPP par désignation, marque ou code : 17 217 codes en vigueur de la Liste des produits et prestations, indexés du pansement au fauteuil roulant (Titre IV — véhicules pour handicapés physiques).";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -59,7 +59,7 @@ export default function CodeLppPage() {
           Trouver un code LPP : dispositifs médicaux remboursables
         </h1>
         <p className="mt-3 max-w-[70ch] text-[15px] leading-relaxed text-ink-soft">
-          Le moteur ci-dessous indexe <b className="text-ink">5 606 lignes</b>{" "}de la{" "}
+          Le moteur ci-dessous indexe <b className="text-ink">17 217 codes en vigueur</b>{" "}de la{" "}
           <b className="text-ink">Liste des produits et prestations</b>{" "}: tapez un code à 7
           chiffres, une désignation ou une marque — du pansement à l&apos;oxygénothérapie,
           jusqu&apos;aux fauteuils roulants du Titre IV.
@@ -69,7 +69,7 @@ export default function CodeLppPage() {
           className="mt-6"
           initial="lpp"
           title="Rechercher un code LPP"
-          sub="5 606 lignes de la LPP (mise à jour du 09-07-2026) — désignations officielles par titre, recherche par code, produit ou marque."
+          sub="17 217 codes en vigueur de la LPP (base officielle LPPTOT905 du 08/10/2026) — désignations officielles par titre, recherche par code, produit ou marque."
         />
 
         <CarteNavy>

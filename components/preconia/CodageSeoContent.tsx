@@ -23,7 +23,7 @@ const GUIDES = [
   {
     href: "/aide-codage/lpp",
     title: "Code LPP — dispositifs médicaux",
-    desc: "5 606 lignes de la Liste des produits et prestations, du pansement au fauteuil roulant (Titre IV).",
+    desc: "17 217 codes en vigueur de la Liste des produits et prestations, du pansement au fauteuil roulant (Titre IV).",
   },
 ];
 

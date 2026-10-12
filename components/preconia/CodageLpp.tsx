@@ -1,8 +1,8 @@
 "use client";
 
 /* Aide au codage LPP — recherche dans la Liste des Produits et Prestations
-   remboursables (dispositifs médicaux). Base public/lpp.json (5 606 codes,
-   ~81 Ko gzip) chargée à la demande puis indexée. Recherche multi-termes classée,
+   remboursables (dispositifs médicaux). Base public/lpp.json (codes en vigueur de la
+   LPPTOT, ~190 Ko gzip, régénérée par scripts/extraire-lpp.py) chargée à la demande puis indexée. Recherche multi-termes classée,
    frappe non bloquante, copie du code au clic. Sans tarif (les tarifs font foi
    dans le LPPTOT, pas dans ce fichier descriptif). */
 
@@ -204,7 +204,7 @@ export function CodageLpp() {
             </ul>
           )}
           <p className="mt-2 px-1 text-[11px] text-ink-soft/70">
-            LPP au 09-07-2026 — désignations officielles, sans tarif (le LPPTOT fait foi) ; cliquez
+            LPP au 08/10/2026 (LPPTOT905) — désignations officielles, sans tarif (le LPPTOT fait foi) ; cliquez
             pour copier le code, l&apos;étoile l&apos;épingle dans vos favoris.
           </p>
         </div>
