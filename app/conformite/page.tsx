@@ -19,7 +19,7 @@ const VERIF = {
   date: "12 octobre 2026",
   base: "LPPTOT905",
   sha256: "c40f104b38eb9cc4abb1cd16a1b71d52564170ac8afa8d1344955b40558ed1ec",
-  codes: 1137,
+  codes: 1154,
   distincts: 462,
   tarifs: 108,
   libelles: 455,
