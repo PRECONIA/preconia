@@ -863,8 +863,8 @@ export function WalkerShell() {
                 de location ≥ 52 semaines (1255682, 1232988, 1240976) restent facturables
                 jusqu&apos;au <b>30/11/2027</b> ; les spécifications techniques des fauteuils à la
                 location s&apos;appliquent au 01/12/2026 (art. 3). La prise en charge des VPH remis
-                en bon état d&apos;usage (RBEU) est annoncée mais son arrêté d&apos;application
-                n&apos;est pas encore publié.
+                en bon état d&apos;usage (RBEU) est en vigueur depuis le <b>01/09/2026</b> (arrêté du
+                16/07/2026) : codes et tarifs dans la recherche LPPR, bouton « Remis en état RBEU ».
               </div>
             </>
           )}

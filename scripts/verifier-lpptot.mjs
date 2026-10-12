@@ -241,7 +241,10 @@ function section(titre, fn) {
  *  contrôle direct, d'où un « portés » inférieur de 2 au total du catalogue. */
 function verifierCouverture(DATA, lookup) {
   const codesBase = new Set();
-  for (const m of DATA.matchAll(/1010101(\d{7}) +VPH\b/g)) codesBase.add(m[1]);
+  // la CNAM inscrit les aides électriques à la propulsion sous « VHP » (coquille historique) :
+  // sans cette seconde forme, toute nouvelle inscription de la famille passerait inaperçue.
+  for (const m of DATA.matchAll(/1010101(\d{7}) +(?:VPH\b|VHP,? ASSISTANCE ELECTRIQUE A LA PROPULSION)/g))
+    codesBase.add(m[1]);
   let horsPerimetre = 0;
   let eteints = 0;
   let nouveautes = 0;
@@ -334,6 +337,12 @@ async function principal() {
     const d = lireJson("lppr-adjonctions.json");
     for (const p of d.products)
       verifier(lookup, p.code, { libelle: p.label, contexte: p.category });
+  });
+
+  section("lppr-aides-propulsion.json — aides électriques à la propulsion (nom de marque)", () => {
+    const d = lireJson("lppr-aides-propulsion.json");
+    for (const p of d.products)
+      verifier(lookup, p.code, { tarif: p.tarif, libelle: p.label, contexte: `aide ${p.model}` });
   });
 
   section("adjonction-brands.json — variantes de marque des adjonctions", () => {

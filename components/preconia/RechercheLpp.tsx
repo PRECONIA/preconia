@@ -24,6 +24,7 @@ const KIND_STYLE: Record<CatalogKind, string> = {
   adjonction: "bg-paper text-ink-soft",
   pap: "bg-amber-tint text-amber",
   prestation: "bg-petrol text-white",
+  aide: "bg-ink text-white",
 };
 
 /* Libellés courts + ordre des catégories de véhicules. */
@@ -48,6 +49,7 @@ const NATURE_SHORTCUTS: { key: string; label: string }[] = [
   { key: "sav", label: "Réparations SAV" },
   { key: "mad", label: "MAD & livraison" },
   { key: "rbeu", label: "Remis en état RBEU" },
+  { key: "aide", label: "Aides à la propulsion" },
 ];
 
 const TYPE_WORDS = ["FREP-B", "OTTO", "PAP OTTO", "adjonction OTTO", "repose jambe", "Code LPP"];
@@ -60,6 +62,7 @@ function frDate(iso: string): string {
 function quickToFilters(quick: string | null): SearchFilters {
   if (!quick) return {};
   if (quick === "adjonction") return { kind: "adjonction" };
+  if (quick === "aide") return { kind: "aide" };
   if (quick === "pap-a") return { kind: "pap", papForfait: "A" };
   if (quick === "pap-b") return { kind: "pap", papForfait: "B" };
   if (quick === "lld") return { kind: "prestation", category: "Location longue durée (LLD)" };

@@ -16,16 +16,16 @@ export const metadata: Metadata = {
 
 /* Dernière exécution de référence du vérificateur (mise à jour à chaque campagne). */
 const VERIF = {
-  date: "18 juillet 2026",
-  base: "LPPTOT893",
-  sha256: "fbfb0298f4f9139524aae187cc12cac38d55c5a547c422238f7f8bcb6052a7b1",
-  codes: 1095,
-  distincts: 422,
-  tarifs: 74,
-  libelles: 415,
+  date: "12 octobre 2026",
+  base: "LPPTOT905",
+  sha256: "c40f104b38eb9cc4abb1cd16a1b71d52564170ac8afa8d1344955b40558ed1ec",
+  codes: 1137,
+  distincts: 462,
+  tarifs: 108,
+  libelles: 455,
   ecarts: 0,
   /* couverture inverse : codes « VPH » recensés dans la base officielle */
-  couvertureTotal: 429,
+  couvertureTotal: 472,
   couvertureHorsPerimetre: 7,
   couvertureNouveautes: 0,
 };
@@ -387,8 +387,9 @@ export default function ConformitePage() {
         </p>
         <p className="mt-2 text-justify text-xs leading-relaxed text-ink-soft/80 hyphens-auto" lang="fr">
           Le contrôle est <b>bidirectionnel</b> : outre la vérification de chaque code porté par
-          PRECONIA, le script énumère l&apos;intégralité des codes « VPH » de la base officielle
-          ({VERIF.couvertureTotal} recensés) et signale toute ligne en vigueur absente du
+          PRECONIA, le script énumère l&apos;intégralité des codes « VPH » de la base officielle, y
+          compris les aides électriques à la propulsion que la CNAM inscrit sous « VHP »
+          ({VERIF.couvertureTotal} recensés), et signale toute ligne en vigueur absente du
           catalogue — c&apos;est la détection des nouveautés (nouvelle inscription, nouvelle famille
           de codes comme les VPH remis en bon état d&apos;usage, RBEU…). À la dernière campagne : {VERIF.couvertureNouveautes} nouveauté non couverte ;{" "}
           {VERIF.couvertureHorsPerimetre} codes documentés hors périmètre (monte-escaliers
