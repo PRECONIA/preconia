@@ -1,6 +1,6 @@
 {
-  "source": "CERAH (lppr_nn.pdf, MAJ 25/06/2026) : modèles + code individuel par modèle ; nomenclature CNAM (lppr.json) pour token/marque/code des modèles codés. code=null -> repli code générique. Complété (02/07/2026) : scooters SCO-B/SCO-C, FRE-C, FMP Vilgo, FREP-C Logo Silver (CERAH 25/06/2026, croisé base CNAM v890).",
-  "lastUpdated": "2026-07-02",
+  "source": "CERAH (lppr_nn.pdf, MAJ 07/10/2026) : modèles + code individuel par modèle ; nomenclature CNAM (lppr.json) pour token/marque/code des modèles codés. code=null -> repli code générique. Un produit muni d'un code est rangé dans le type de ce code (le CERAH liste parfois un produit codé A dans la section B). Seules les marques ayant un code CNAM pour le type figurent au catalogue. Historique : CERAH 25/06/2026, complété le 02/07/2026 (scooters SCO-B/SCO-C, FRE-C, FMP Vilgo, FREP-C Logo Silver) ; synchronisé le 12/10/2026 sur la liste CERAH du 07/10/2026.",
+  "lastUpdated": "2026-10-12",
   "byToken": {
     "BASE": {
       "INVACARE": {
@@ -12,6 +12,19 @@
           },
           {
             "name": "Rea Dahlia 45° Base",
+            "code": null
+          }
+        ]
+      },
+      "MEYRA": {
+        "code": "9523478",
+        "models": [
+          {
+            "name": "Netti V Base",
+            "code": null
+          },
+          {
+            "name": "Netti 4U Base",
             "code": null
           }
         ]
@@ -80,6 +93,15 @@
           }
         ]
       },
+      "IDENTITES 49": {
+        "code": "9595800",
+        "models": [
+          {
+            "name": "Modulolight",
+            "code": null
+          }
+        ]
+      },
       "INVACARE": {
         "code": "9561616",
         "models": [
@@ -141,6 +163,14 @@
           {
             "name": "POCKET",
             "code": null
+          },
+          {
+            "name": "D200N",
+            "code": null
+          },
+          {
+            "name": "D200N 30°",
+            "code": null
           }
         ]
       },
@@ -150,6 +180,10 @@
           {
             "name": "Fauteuil de transfert CESAR (réf. MA 013)",
             "code": "9571365"
+          },
+          {
+            "name": "HECTOR",
+            "code": null
           }
         ]
       }
@@ -164,6 +198,15 @@
           },
           {
             "name": "Multitec",
+            "code": null
+          }
+        ]
+      },
+      "INNOV S.A.": {
+        "code": "9516544",
+        "models": [
+          {
+            "name": "Eden e",
             "code": null
           }
         ]
@@ -190,7 +233,7 @@
         "code": "9580938",
         "models": [
           {
-            "name": "JIANGSU Start Multi Confort OTTO",
+            "name": "Start Multi Confort",
             "code": "9580938"
           }
         ]
@@ -214,7 +257,7 @@
         "code": "9511417",
         "models": [
           {
-            "name": "KUNSHAN SmartChair Lite",
+            "name": "SmartChair Lite",
             "code": "9511417"
           },
           {
@@ -231,11 +274,11 @@
             "code": "9523082"
           },
           {
-            "name": "CHANGSHU Ergo 07L 2.0",
+            "name": "Ergo 07L 2.0",
             "code": "9523082"
           },
           {
-            "name": "CHANGSHU Ergo 08L 2.0",
+            "name": "Ergo 08L 2.0",
             "code": "9523082"
           },
           {
@@ -287,6 +330,15 @@
           }
         ]
       },
+      "OTTO BOCK": {
+        "code": "9539918",
+        "models": [
+          {
+            "name": "A200",
+            "code": null
+          }
+        ]
+      },
       "PRIDE MOBILITY": {
         "code": "9525916",
         "models": [
@@ -297,6 +349,10 @@
           {
             "name": "Jazzy Air 2",
             "code": "9525916"
+          },
+          {
+            "name": "Jazzy Carbon 27X",
+            "code": null
           }
         ]
       },
@@ -328,6 +384,15 @@
           {
             "name": "Verso 30°",
             "code": "9501962"
+          }
+        ]
+      },
+      "WISETON INDUS": {
+        "code": "9508763",
+        "models": [
+          {
+            "name": "Wizemed C100",
+            "code": null
           }
         ]
       }
@@ -362,8 +427,25 @@
             "code": "9528576"
           },
           {
-            "name": "CHANGSHU Ergo 08L 3.0",
+            "name": "Ergo 08L 3.0",
             "code": "9528576"
+          },
+          {
+            "name": "Ergo 09L 3.0",
+            "code": null
+          }
+        ]
+      },
+      "ERGOFLIX": {
+        "code": "9502938",
+        "models": [
+          {
+            "name": "Ergoflix LX (D09LX)",
+            "code": null
+          },
+          {
+            "name": "Ergoflix Vario (F01)",
+            "code": null
           }
         ]
       },
@@ -423,7 +505,7 @@
         "code": "9566944",
         "models": [
           {
-            "name": "OTTO Juvo B4",
+            "name": "Juvo B4",
             "code": "9566944"
           }
         ]
@@ -449,23 +531,23 @@
         "code": "9549207",
         "models": [
           {
-            "name": "KUNSHAN Eloflex D2",
+            "name": "Eloflex D2",
             "code": null
           },
           {
-            "name": "KUNSHAN Eloflex F",
+            "name": "Eloflex F",
             "code": "9549207"
           },
           {
-            "name": "KUNSHAN Eloflex L",
+            "name": "Eloflex L",
             "code": null
           },
           {
-            "name": "KUNSHAN Eloflex P",
+            "name": "Eloflex P",
             "code": null
           },
           {
-            "name": "KUNSHAN Eloflex R",
+            "name": "Eloflex R",
             "code": null
           }
         ]
@@ -790,19 +872,19 @@
         "code": "9535725",
         "models": [
           {
-            "name": "OTTO Juvo B4",
+            "name": "Juvo B4",
             "code": "9535725"
           },
           {
-            "name": "OTTO Juvo B5",
+            "name": "Juvo B5",
             "code": "9535725"
           },
           {
-            "name": "OTTO Juvo B6",
+            "name": "Juvo B6",
             "code": "9535725"
           },
           {
-            "name": "OTTO Juvo B7",
+            "name": "Juvo B7",
             "code": "9535725"
           }
         ]
@@ -821,6 +903,10 @@
           {
             "name": "M5 Corpus",
             "code": "9591340"
+          },
+          {
+            "name": "F5 Corpus",
+            "code": null
           }
         ]
       },
@@ -863,6 +949,14 @@
           {
             "name": "SR 33R",
             "code": "9527944"
+          },
+          {
+            "name": "SR 50M",
+            "code": null
+          },
+          {
+            "name": "SR 70F",
+            "code": null
           }
         ]
       },
@@ -1132,6 +1226,15 @@
       }
     },
     "FRM": {
+      "AMYMAT": {
+        "code": "9592278",
+        "models": [
+          {
+            "name": "Dolphin",
+            "code": null
+          }
+        ]
+      },
       "DRIVE DEVILBISS": {
         "code": "9584882",
         "models": [
@@ -1186,11 +1289,20 @@
           }
         ]
       },
+      "MEYRA NETTI": {
+        "code": "9568587",
+        "models": [
+          {
+            "name": "Eurochair 1.850",
+            "code": null
+          }
+        ]
+      },
       "OTTO BOCK": {
         "code": "9585433",
         "models": [
           {
-            "name": "OTTO Innov XXL",
+            "name": "Innov XXL",
             "code": "9585433"
           }
         ]
@@ -1236,6 +1348,15 @@
             "code": "9514670"
           }
         ]
+      },
+      "VILGO": {
+        "code": "9548060",
+        "models": [
+          {
+            "name": "HECTOR",
+            "code": null
+          }
+        ]
       }
     },
     "FRMA": {
@@ -1248,6 +1369,19 @@
           },
           {
             "name": "ROGUE XP",
+            "code": null
+          }
+        ]
+      },
+      "AMYMAT": {
+        "code": "9589075",
+        "models": [
+          {
+            "name": "Quasar",
+            "code": null
+          },
+          {
+            "name": "EOS",
             "code": null
           }
         ]
@@ -1325,6 +1459,10 @@
           {
             "name": "W5",
             "code": "9575305"
+          },
+          {
+            "name": "Speciale",
+            "code": "9575305"
           }
         ]
       },
@@ -1371,11 +1509,11 @@
         "code": "9572761",
         "models": [
           {
-            "name": "OTTO Ventus",
+            "name": "Ventus",
             "code": "9572761"
           },
           {
-            "name": "OTTO Zenit R",
+            "name": "Zenit R",
             "code": "9572761"
           }
         ]
@@ -1473,6 +1611,15 @@
           }
         ]
       },
+      "AMYMAT": {
+        "code": "9509231",
+        "models": [
+          {
+            "name": "Freelance",
+            "code": null
+          }
+        ]
+      },
       "DPZ SERVICES": {
         "code": "9548490",
         "models": [
@@ -1548,7 +1695,7 @@
         "code": "9557230",
         "models": [
           {
-            "name": "Panthera S3 Neox (DI)",
+            "name": "Neox (DI)",
             "code": "9557230"
           }
         ]
@@ -1598,24 +1745,32 @@
         "code": "9525371",
         "models": [
           {
-            "name": "OTTO Avantgarde 4 DS",
+            "name": "Avantgarde 4 DS",
             "code": "9525371"
           },
           {
-            "name": "OTTO Avantgarde 4 DV",
+            "name": "Avantgarde 4 DV",
             "code": "9525371"
           },
           {
-            "name": "OTTO Motus 2.0",
+            "name": "Motus 2.0",
             "code": "9525371"
           },
           {
-            "name": "OTTO Motus 2.0 Hemi",
+            "name": "Motus 2.0 Hemi",
             "code": "9525371"
           },
           {
-            "name": "OTTO Zenit",
+            "name": "Zenit",
             "code": "9525371"
+          },
+          {
+            "name": "Avantgarde Teen 2",
+            "code": null
+          },
+          {
+            "name": "Avantgarde Teen 2 VR",
+            "code": null
           }
         ]
       },
@@ -1641,6 +1796,10 @@
           {
             "name": "Progeo Joker",
             "code": "9590598"
+          },
+          {
+            "name": "Panthera S3",
+            "code": null
           }
         ]
       },
@@ -1694,6 +1853,18 @@
           {
             "name": "Youngster 3",
             "code": "9592031"
+          },
+          {
+            "name": "QS3 X",
+            "code": "9592031"
+          },
+          {
+            "name": "QS7 R",
+            "code": null
+          },
+          {
+            "name": "QS7 X",
+            "code": null
           }
         ]
       },
@@ -1774,6 +1945,15 @@
           }
         ]
       },
+      "PRIDE MOBILITY": {
+        "code": "9506675",
+        "models": [
+          {
+            "name": "Enzo",
+            "code": null
+          }
+        ]
+      },
       "RUPIANI": {
         "code": "9510895",
         "models": [
@@ -1804,6 +1984,27 @@
           {
             "name": "Action 5 Rigid",
             "code": "9517472"
+          }
+        ]
+      },
+      "SUNRISE MED": {
+        "code": "9585522",
+        "models": [
+          {
+            "name": "Allstar A2",
+            "code": null
+          },
+          {
+            "name": "Allstar G2",
+            "code": null
+          },
+          {
+            "name": "Elite",
+            "code": null
+          },
+          {
+            "name": "GrandSlam",
+            "code": null
           }
         ]
       }
@@ -1838,6 +2039,10 @@
           {
             "name": "Chilla",
             "code": "9524130"
+          },
+          {
+            "name": "Poussette Stingray",
+            "code": null
           }
         ]
       },
@@ -1858,7 +2063,7 @@
         "code": "9516700",
         "models": [
           {
-            "name": "OTTO Kimba Buggy - 470G71=5_AA04_C",
+            "name": "Kimba Buggy - 470G71=5_AA04_C",
             "code": "9516700"
           }
         ]
@@ -1884,7 +2089,7 @@
             "code": "9501100"
           },
           {
-            "name": "LERADO Rolly Pop",
+            "name": "Rolly Pop",
             "code": "9501100"
           }
         ]
@@ -1915,6 +2120,10 @@
           {
             "name": "Piper",
             "code": "9522846"
+          },
+          {
+            "name": "Corzino",
+            "code": null
           }
         ]
       },
@@ -1922,11 +2131,11 @@
         "code": "9587685",
         "models": [
           {
-            "name": "OTTO Eco-Buggy",
+            "name": "Eco-Buggy",
             "code": "9587685"
           },
           {
-            "name": "OTTO Lisa",
+            "name": "Lisa",
             "code": "9587685"
           }
         ]
@@ -1955,6 +2164,28 @@
           }
         ]
       },
+      "MEDTRADE": {
+        "code": "9525827",
+        "models": [
+          {
+            "name": "Kompact 4 Plus",
+            "code": null
+          },
+          {
+            "name": "MinimX4 Plus",
+            "code": null
+          }
+        ]
+      },
+      "PRIDE MOBILITY": {
+        "code": "9595992",
+        "models": [
+          {
+            "name": "Colt Plus",
+            "code": null
+          }
+        ]
+      },
       "VERMEIREN": {
         "code": "9526672",
         "models": [
@@ -1964,6 +2195,10 @@
           },
           {
             "name": "One+ Air",
+            "code": null
+          },
+          {
+            "name": "Eon",
             "code": null
           }
         ]
