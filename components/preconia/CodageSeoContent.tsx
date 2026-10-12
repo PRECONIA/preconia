@@ -13,7 +13,7 @@ const GUIDES = [
   {
     href: "/aide-codage/ccam",
     title: "Code CCAM — actes techniques",
-    desc: "8 257 actes tarifables : structure du code, tarif secteur 1, accord préalable (« infiltration genou » → injection intraarticulaire).",
+    desc: "8 261 actes tarifables : structure du code, tarif secteur 1, accord préalable (« infiltration genou » → injection intraarticulaire).",
   },
   {
     href: "/aide-codage/ngap",

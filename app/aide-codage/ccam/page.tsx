@@ -12,7 +12,7 @@ import {
 const URL = "https://preconia.fr/aide-codage/ccam";
 const TITLE = "Code CCAM : trouver un acte technique et son tarif — recherche instantanée";
 const DESCRIPTION =
-  "Recherchez un code CCAM par libellé, code ou terme courant (« infiltration genou » → injection intraarticulaire). 8 257 actes tarifables indexés avec tarif secteur 1, accord préalable et chapitre.";
+  "Recherchez un code CCAM par libellé, code ou terme courant (« infiltration genou » → injection intraarticulaire). 8 261 actes tarifables indexés avec tarif secteur 1, accord préalable et chapitre.";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -59,7 +59,7 @@ export default function CodeCcamPage() {
           Trouver un code CCAM : actes techniques et tarifs
         </h1>
         <p className="mt-3 max-w-[70ch] text-[15px] leading-relaxed text-ink-soft">
-          Le moteur ci-dessous indexe <b className="text-ink">8 257 actes tarifables</b>{" "}de la{" "}
+          Le moteur ci-dessous indexe <b className="text-ink">8 261 actes tarifables</b>{" "}de la{" "}
           <b className="text-ink">CCAM</b>{" "}avec leur tarif secteur 1. Tapez un code, un mot du
           libellé ou un terme courant — « infiltration genou » trouve l&apos;injection
           thérapeutique intraarticulaire du membre inférieur.
@@ -69,7 +69,7 @@ export default function CodeCcamPage() {
           className="mt-6"
           initial="ccam"
           title="Rechercher un acte CCAM"
-          sub="8 257 actes tarifables (CCAM v83) — code, libellé ou terme courant, avec tarif secteur 1, accord préalable et chapitre."
+          sub="8 261 actes tarifables (CCAM v84) — code, libellé ou terme courant, avec tarif secteur 1, accord préalable et chapitre."
         />
 
         <CarteNavy>
