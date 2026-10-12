@@ -205,7 +205,7 @@ export function CodageNgap() {
             </div>
           )}
           <p className="mt-3 px-1 text-[11px] text-ink-soft/70">
-            NGAP en vigueur du 21/06/2026 — texte officiel intégral, non interprété ; chaque
+            NGAP en vigueur du 01/09/2026 — texte officiel intégral, non interprété ; chaque
             article s&apos;ouvre sur sa propre page.
           </p>
         </div>

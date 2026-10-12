@@ -69,7 +69,7 @@ export default function NgapPage() {
           className="mt-6"
           initial="ngap"
           title="Rechercher dans la NGAP"
-          sub="150 articles en texte intégral (NGAP en vigueur au 21/06/2026) — actes cliniques, lettres clés, majorations et actes des auxiliaires médicaux."
+          sub="150 articles en texte intégral (NGAP en vigueur au 01/09/2026) — actes cliniques, lettres clés, majorations et actes des auxiliaires médicaux."
         />
 
         <CarteNavy>
