@@ -1,6 +1,6 @@
 {
-  "source": "Nomenclature LPPR — base CNAM (codage.ext.cnamts.fr), chapitre Adjonctions & PAP (6 sous-catégories) — MAJ LPPTOT893 (2026-07-18) : variante PAP Forfait B LOGO SILVER (9922698) ajoutée.",
-  "lastUpdated": "2026-07-18",
+  "source": "Nomenclature LPPR — base CNAM (codage.ext.cnamts.fr), chapitre Adjonctions & PAP (6 sous-catégories) — MAJ LPPTOT893 (2026-07-18) : variante PAP Forfait B LOGO SILVER (9922698) ajoutée. ; MAJ LPPTOT905 (2026-10-12) : variantes SKS ROLTEC du supplément bariatrique FRE/FREP/FREV/SCO (9925320) et du support d'oxygénothérapie (9985530), paire de roues à freinage intégré MOTION SKEED (4918947) ajoutées.",
+  "lastUpdated": "2026-10-12",
   "products": [
     {
       "code": "4936922",
@@ -110,6 +110,11 @@
     {
       "code": "9982186",
       "label": "VPH, ADJ, SUPPORT D OXYGÉNOTHÉRAPIE ET/OU DAPP DE VENTILATION ASSISTÉE,INVACARE",
+      "category": "Adjonctions VPH modulaire"
+    },
+    {
+      "code": "9985530",
+      "label": "VPH, ADJ, SUPPORT D OXYGÉNO. ET/OU D APP DE VENTILATION ASSISTÉE,SKSROLTEC",
       "category": "Adjonctions VPH modulaire"
     },
     {
@@ -723,6 +728,11 @@
       "category": "Adjonctions fauteuil manuel modulaire"
     },
     {
+      "code": "4918947",
+      "label": "VPH, ADJONCTION, PAIRE DE ROUES AVEC DISP. DE FREINAGE INTÉGRÉ, MOTION, SKEED",
+      "category": "Adjonctions fauteuil manuel modulaire"
+    },
+    {
       "code": "4922720",
       "label": "VPH FRM, SUPPLÉMENT POUR FAUTEUIL ROULANT BARIATRIQUE",
       "category": "Adjonctions fauteuil manuel modulaire"
@@ -1135,6 +1145,11 @@
     {
       "code": "9993669",
       "label": "VPH, ADJ, SUPP. FAUTEUIL ROULANT BARIATRIQUE FRE FREP FREV SCO,OTTO BOCK",
+      "category": "Adjonctions fauteuil électrique modulaire"
+    },
+    {
+      "code": "9925320",
+      "label": "VPH, ADJ, SUPP. FAUTEUIL ROULANT BARIATRIQUE FRE FREP FREV SCO,SKSROLTEC",
       "category": "Adjonctions fauteuil électrique modulaire"
     },
     {

@@ -3,6 +3,7 @@ import {
   adjGroups,
   adjonctions,
   deviceByCode,
+  deviceLppByType,
   meta,
   papForfaits,
   papRegions,
@@ -55,8 +56,24 @@ describe("intégrité de la donnée (data/*.json)", () => {
     for (const p of prestationProducts) expect(p.tarif).toBeGreaterThan(0);
     const livraison = prestationProducts.find((p) => p.code === meta.livraison.code);
     expect(livraison?.tarif).toBe(meta.livraison.price);
-    // les 4 familles de prestations sont présentes
+    // les 5 familles de prestations sont présentes (LLD, LCD, SAV, MAD, RBEU)
     const cats = new Set(prestationProducts.map((p) => p.category));
-    expect(cats.size).toBe(4);
+    expect(cats.size).toBe(5);
+  });
+
+  it("RBEU — un code de remise en bon état d'usage par type de VPH, ni plus ni moins", () => {
+    const rbeu = prestationProducts.filter((p) => p.category === "Remise en bon état d'usage (RBEU)");
+    // « VPH, RBEU, FREP, … - CLASSE B » : la classe des FREP n'est donnée qu'en clair
+    const type = (label: string) => {
+      const t = label.split(",")[2].trim();
+      return t === "FREP" ? `FREP-${label.match(/CLASSE ([ABC])\b/)![1]}` : t;
+    };
+    expect(rbeu.map((p) => type(p.label)).sort()).toEqual(Object.keys(deviceLppByType).sort());
+    // un VPH remis en état est toujours pris en charge moins cher que neuf
+    for (const p of rbeu) {
+      const neuf = deviceLppByType[type(p.label)].tarif;
+      expect(neuf).not.toBeNull();
+      expect(p.tarif).toBeLessThan(neuf!);
+    }
   });
 });

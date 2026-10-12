@@ -1,6 +1,6 @@
 {
-  "source": "Nomenclature LPPR — base CNAM (codage.ext.cnamts.fr, fichier LPPTOT v890 du 25/06/2026) : chapitres Titre IV « Location longue durée » et « Réparations des VPH et prestations associées », et Titre I (location courte durée, forfait de livraison). Libellés et tarifs officiels vérifiés code par code. LLD : forfait trimestriel ; LCD : forfait hebdomadaire.",
-  "lastUpdated": "2026-07-02",
+  "source": "Nomenclature LPPR — base CNAM (codage.ext.cnamts.fr, fichier LPPTOT v890 du 25/06/2026) : chapitres Titre IV « Location longue durée » et « Réparations des VPH et prestations associées », et Titre I (location courte durée, forfait de livraison). Libellés et tarifs officiels vérifiés code par code. LLD : forfait trimestriel ; LCD : forfait hebdomadaire. MAJ LPPTOT905 (2026-10-12) : 22 codes RBEU ajoutés (VPH remis en bon état d'usage, un code par type, prix d'achat unitaire — arrêté du 16/07/2026, JO du 31/07/2026, en vigueur au 01/09/2026).",
+  "lastUpdated": "2026-10-12",
   "products": [
     {
       "code": "4723793",
@@ -211,6 +211,139 @@
       "label": "VPH, FORFAIT DE LIVRAISON (SUR PRESCRIPTION, ACHAT, LLD OU LCD)",
       "category": "Mise à disposition & livraison (MAD)",
       "tarif": 50.0
+    },
+
+    {
+      "code": "4696501",
+      "label": "VPH, RBEU, BASE, BASE ROULANTE MODULAIRE",
+      "category": "Remise en bon état d'usage (RBEU)",
+      "tarif": 675.0
+    },
+    {
+      "code": "4619127",
+      "label": "VPH, RBEU, CYC, CYCLES MODULAIRES À ROUES MULTIPLES",
+      "category": "Remise en bon état d'usage (RBEU)",
+      "tarif": 1007.69
+    },
+    {
+      "code": "4640370",
+      "label": "VPH, RBEU, FMP, NON-MODULAIRE À PROPULSION MANUELLE OU À POUSSER",
+      "category": "Remise en bon état d'usage (RBEU)",
+      "tarif": 260.5
+    },
+    {
+      "code": "4662637",
+      "label": "VPH, RBEU, FMPR, NON-MODULAIRE, ASSISE RIGIDE, PROPULSION MANUELLE OU POUSSER",
+      "category": "Remise en bon état d'usage (RBEU)",
+      "tarif": 468.1
+    },
+    {
+      "code": "4617370",
+      "label": "VPH, RBEU, FRE-A, MODULAIRE À PROPULSION PAR MOTEUR ÉLECTRIQUE - CLASSE A",
+      "category": "Remise en bon état d'usage (RBEU)",
+      "tarif": 1896.73
+    },
+    {
+      "code": "4696576",
+      "label": "VPH, RBEU, FRE-B, MODULAIRE À PROPULSION PAR MOTEUR ÉLECTRIQUE - CLASSE B",
+      "category": "Remise en bon état d'usage (RBEU)",
+      "tarif": 2329.25
+    },
+    {
+      "code": "4619417",
+      "label": "VPH, RBEU, FRE-C, MODULAIRE À PROPULSION PAR MOTEUR ÉLECTRIQUE - CLASSE C",
+      "category": "Remise en bon état d'usage (RBEU)",
+      "tarif": 2911.56
+    },
+    {
+      "code": "4646294",
+      "label": "VPH, RBEU, FREP, MODUL À PROPULSION PAR MOTEUR ÉLEC MULTI-POSITION - CLASSE A",
+      "category": "Remise en bon état d'usage (RBEU)",
+      "tarif": 4884.34
+    },
+    {
+      "code": "4636723",
+      "label": "VPH, RBEU, FREP, MODUL À PROPULSION PAR MOTEUR ÉLEC MULTI-POSITION - CLASSE B",
+      "category": "Remise en bon état d'usage (RBEU)",
+      "tarif": 7008.3
+    },
+    {
+      "code": "4625642",
+      "label": "VPH, RBEU, FREP, MODUL À PROPULSION PAR MOTEUR ÉLEC MULTI-POSITION - CLASSE C",
+      "category": "Remise en bon état d'usage (RBEU)",
+      "tarif": 8783.25
+    },
+    {
+      "code": "4654069",
+      "label": "VPH, RBEU, FREV, MODULAIRE À PROPULSION ÉLECTRIQUE DE VERTICALISATION",
+      "category": "Remise en bon état d'usage (RBEU)",
+      "tarif": 12641.55
+    },
+    {
+      "code": "4669250",
+      "label": "VPH, RBEU, FRM, MODULAIRE À PROPULSION MANUELLE OU À POUSSER",
+      "category": "Remise en bon état d'usage (RBEU)",
+      "tarif": 266.18
+    },
+    {
+      "code": "4628149",
+      "label": "VPH, RBEU, FRMA, MODULAIRE À PROPULSION MANUELLE ACTIFS",
+      "category": "Remise en bon état d'usage (RBEU)",
+      "tarif": 3765.6
+    },
+    {
+      "code": "4604516",
+      "label": "VPH, RBEU, FRMC, MODULAIRE À PROPULSION MANUELLE MULTI-CONFIGURABLES",
+      "category": "Remise en bon état d'usage (RBEU)",
+      "tarif": 1982.12
+    },
+    {
+      "code": "4613946",
+      "label": "VPH, RBEU, FRMP, MODULAIRE À PROPULSION MANUELLE OU À POUSSER MULTI-POSITION",
+      "category": "Remise en bon état d'usage (RBEU)",
+      "tarif": 1651.8
+    },
+    {
+      "code": "4637438",
+      "label": "VPH, RBEU, FRMS, MODULAIRE À PROPULSION MANUELLE DE SPORT",
+      "category": "Remise en bon état d'usage (RBEU)",
+      "tarif": 1440.0
+    },
+    {
+      "code": "4647230",
+      "label": "VPH, RBEU, FRMV, MODULAIRE À PROPULSION MANUELLE DE VERTICALISATION",
+      "category": "Remise en bon état d'usage (RBEU)",
+      "tarif": 6646.5
+    },
+    {
+      "code": "4662904",
+      "label": "VPH, RBEU, POU_MRE, POUSSETTE MODULAIRE MULTIRÉGLABLE ET ÉVOLUTIVE",
+      "category": "Remise en bon état d'usage (RBEU)",
+      "tarif": 1552.2
+    },
+    {
+      "code": "4670660",
+      "label": "VPH, RBEU, POU_S, POUSSETTE STANDARD",
+      "category": "Remise en bon état d'usage (RBEU)",
+      "tarif": 780.0
+    },
+    {
+      "code": "4622112",
+      "label": "VPH, RBEU, SCO-A, SCOOTER CLASSE A+",
+      "category": "Remise en bon état d'usage (RBEU)",
+      "tarif": 780.0
+    },
+    {
+      "code": "4680167",
+      "label": "VPH, RBEU, SCO-B, SCOOTER CLASSE B",
+      "category": "Remise en bon état d'usage (RBEU)",
+      "tarif": 1260.0
+    },
+    {
+      "code": "4698693",
+      "label": "VPH, RBEU, SCO-C, SCOOTER CLASSE C",
+      "category": "Remise en bon état d'usage (RBEU)",
+      "tarif": 2280.0
     }
   ]
 }

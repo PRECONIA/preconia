@@ -389,8 +389,8 @@ export default function ConformitePage() {
           Le contrôle est <b>bidirectionnel</b> : outre la vérification de chaque code porté par
           PRECONIA, le script énumère l&apos;intégralité des codes « VPH » de la base officielle
           ({VERIF.couvertureTotal} recensés) et signale toute ligne en vigueur absente du
-          catalogue — c&apos;est la détection des nouveautés (nouvelle inscription, lignes RBEU à
-          venir…). À la dernière campagne : {VERIF.couvertureNouveautes} nouveauté non couverte ;{" "}
+          catalogue — c&apos;est la détection des nouveautés (nouvelle inscription, nouvelle famille
+          de codes comme les VPH remis en bon état d&apos;usage, RBEU…). À la dernière campagne : {VERIF.couvertureNouveautes} nouveauté non couverte ;{" "}
           {VERIF.couvertureHorsPerimetre} codes documentés hors périmètre (monte-escaliers
           transportables, anciens codes en nom de marque transitoires — liste justifiée dans le
           script).

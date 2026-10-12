@@ -47,6 +47,7 @@ const NATURE_SHORTCUTS: { key: string; label: string }[] = [
   { key: "lcd", label: "Location LCD" },
   { key: "sav", label: "Réparations SAV" },
   { key: "mad", label: "MAD & livraison" },
+  { key: "rbeu", label: "Remis en état RBEU" },
 ];
 
 const TYPE_WORDS = ["FREP-B", "OTTO", "PAP OTTO", "adjonction OTTO", "repose jambe", "Code LPP"];
@@ -66,6 +67,8 @@ function quickToFilters(quick: string | null): SearchFilters {
   if (quick === "sav") return { kind: "prestation", category: "Réparations & batteries (SAV)" };
   if (quick === "mad")
     return { kind: "prestation", category: "Mise à disposition & livraison (MAD)" };
+  if (quick === "rbeu")
+    return { kind: "prestation", category: "Remise en bon état d'usage (RBEU)" };
   return { category: quick }; // catégorie VPH
 }
 function quickLabel(quick: string): string {
