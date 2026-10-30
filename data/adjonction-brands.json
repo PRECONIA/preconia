@@ -1,6 +1,6 @@
 {
-  "source": "Nomenclature LPPR — base CNAM (menu 722), regroupement par ordre de page : code mère → variantes de marque — MAJ LPPTOT892 (2026-07-09) : variante Forfait A LOGO SILVER (9989917) ajoutée ; MAJ LPPTOT893 (2026-07-18) : variante Forfait B LOGO SILVER (9922698) ajoutée. ; MAJ LPPTOT905 (2026-10-12) : variantes SKS ROLTEC du supplément bariatrique FRE/FREP/FREV/SCO (9925320) et du support d'oxygénothérapie (9985530) ajoutées ; marque SKSROLTEC du supplément bariatrique FRM harmonisée en SKS ROLTEC.",
-  "lastUpdated": "2026-10-12",
+  "source": "Nomenclature LPPR — base CNAM (menu 722), regroupement par ordre de page : code mère → variantes de marque — MAJ LPPTOT892 (2026-07-09) : variante Forfait A LOGO SILVER (9989917) ajoutée ; MAJ LPPTOT893 (2026-07-18) : variante Forfait B LOGO SILVER (9922698) ajoutée. ; MAJ LPPTOT905 (2026-10-12) : variantes SKS ROLTEC du supplément bariatrique FRE/FREP/FREV/SCO (9925320) et du support d'oxygénothérapie (9985530) ajoutées ; marque SKSROLTEC du supplément bariatrique FRM harmonisée en SKS ROLTEC. ; MAJ LPPTOT908 (2026-10-30) : variantes SCHUCHMANN de la ceinture 2 points POU (9951369) et du harnais 4 points POU_MRE (9963958) ajoutées.",
+  "lastUpdated": "2026-10-30",
   "groups": [
     {
       "base": "4947601",
@@ -287,7 +287,8 @@
       "byBrand": {
         "CREE": "9986273",
         "JOHN GMBH": "9946807",
-        "OTTO BOCK": "9991653"
+        "OTTO BOCK": "9991653",
+        "SCHUCHMANN": "9951369"
       }
     },
     {
@@ -299,6 +300,7 @@
         "OTTO BOCK": "9963450",
         "PRIDE MOBILITY": "9939693",
         "RUPIANI": "9947089",
+        "SCHUCHMANN": "9963958",
         "SUNRISE MED": "9915675",
         "VERMEIREN": "9985718"
       }

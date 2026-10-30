@@ -16,16 +16,16 @@ export const metadata: Metadata = {
 
 /* Dernière exécution de référence du vérificateur (mise à jour à chaque campagne). */
 const VERIF = {
-  date: "12 octobre 2026",
-  base: "LPPTOT905",
-  sha256: "c40f104b38eb9cc4abb1cd16a1b71d52564170ac8afa8d1344955b40558ed1ec",
-  codes: 1154,
-  distincts: 462,
+  date: "30 octobre 2026",
+  base: "LPPTOT908",
+  sha256: "f5c232157078e5bcc8feadb7ce786cc595771939327a1ed9e9dc15ac8cdeeb85",
+  codes: 1158,
+  distincts: 464,
   tarifs: 108,
-  libelles: 455,
+  libelles: 457,
   ecarts: 0,
   /* couverture inverse : codes « VPH » recensés dans la base officielle */
-  couvertureTotal: 472,
+  couvertureTotal: 474,
   couvertureHorsPerimetre: 7,
   couvertureNouveautes: 0,
 };
