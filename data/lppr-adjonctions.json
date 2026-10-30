@@ -1,6 +1,6 @@
 {
-  "source": "Nomenclature LPPR — base CNAM (codage.ext.cnamts.fr), chapitre Adjonctions & PAP (6 sous-catégories) — MAJ LPPTOT893 (2026-07-18) : variante PAP Forfait B LOGO SILVER (9922698) ajoutée. ; MAJ LPPTOT905 (2026-10-12) : variantes SKS ROLTEC du supplément bariatrique FRE/FREP/FREV/SCO (9925320) et du support d'oxygénothérapie (9985530), paire de roues à freinage intégré MOTION SKEED (4918947) ajoutées.",
-  "lastUpdated": "2026-10-12",
+  "source": "Nomenclature LPPR — base CNAM (codage.ext.cnamts.fr), chapitre Adjonctions & PAP (6 sous-catégories) — MAJ LPPTOT893 (2026-07-18) : variante PAP Forfait B LOGO SILVER (9922698) ajoutée. ; MAJ LPPTOT905 (2026-10-12) : variantes SKS ROLTEC du supplément bariatrique FRE/FREP/FREV/SCO (9925320) et du support d'oxygénothérapie (9985530), paire de roues à freinage intégré MOTION SKEED (4918947) ajoutées. ; MAJ LPPTOT908 (2026-10-30) : variantes SCHUCHMANN de la ceinture de maintien 2 points POU (9951369) et du harnais 4 points POU_MRE (9963958) ajoutées.",
+  "lastUpdated": "2026-10-30",
   "products": [
     {
       "code": "4936922",
@@ -83,6 +83,11 @@
       "category": "Adjonctions VPH modulaire"
     },
     {
+      "code": "9951369",
+      "label": "VPH, ADJONCTION, CEINTURE DE MAINTIEN 2 POINTS POUR POU,SCHUCHMANN",
+      "category": "Adjonctions VPH modulaire"
+    },
+    {
       "code": "9962344",
       "label": "VPH, ADJ, SUPPORT D OXYGÉNO. ET/OU D APP DE VENTILATION ASSISTÉE,PERMOBIL",
       "category": "Adjonctions VPH modulaire"
@@ -95,6 +100,11 @@
     {
       "code": "9963450",
       "label": "VPH, ADJONCTION, HARNAIS 4 POINTS OU PLUS POUR POU_MRE,OTTO BOCK",
+      "category": "Adjonctions VPH modulaire"
+    },
+    {
+      "code": "9963958",
+      "label": "VPH, ADJONCTION, HARNAIS 4 POINTS OU PLUS POUR POU_MRE,SCHUCHMANN",
       "category": "Adjonctions VPH modulaire"
     },
     {
